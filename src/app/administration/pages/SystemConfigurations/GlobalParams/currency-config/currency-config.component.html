@@ -1,0 +1,87 @@
+<mat-card>
+  <mat-card-header  class="breadcrumb">
+    <div>Home/Configuration/Event_id</div>
+</mat-card-header>
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+      <h4>Function</h4>
+      <p>{{this.function_type}}</p>
+  </div>
+  <div class="col-md-6 col-sm-12">
+      <h4>Currency</h4>
+      <p>{{this.ccy_name}}</p> 
+  </div>
+
+</div>
+<mat-divider></mat-divider>
+<br>
+
+<div class="container-fluid">
+  <form
+  class="form"
+  [formGroup]="formData"
+  (ngSubmit)="onSubmit()"
+  #resetRequestsForm="ngForm"
+  novalidate
+>
+<div class="row">
+<div class="col-md-6 col-sm-12">
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+     <label class="start pull-left">CCY</label>
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <input type="text" formControlName="ccy" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy.errors }" />
+    </div>
+ </div>            
+</div>
+<div class="col-md-6 col-sm-12">
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+     <label class="start pull-left">Country</label>
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <input type="text" formControlName="country" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+    </div>
+ </div>   
+</div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">CCY Name</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+            <input type="text" formControlName="ccy_name" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
+          </div>
+       </div>           
+  </div>
+  <div class="col-md-6 col-sm-12">
+    <div class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+       <label class="start pull-left">Operations</label>
+      </div>
+      <div class="col-md-6 col-sm-12 form-column">
+        <mat-checkbox class="example-margin" formControlName="is_verified">Verified.</mat-checkbox>
+        <mat-checkbox class="example-margin" formControlName="is_deleted">Del.</mat-checkbox>
+      </div>
+   </div>  
+  </div>
+</div>
+  <br />
+  <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+    <span
+      *ngIf="loading"
+      class="spinner-border spinner-border-sm mr-1"
+    ></span>
+    Submit
+  </button>
+  <br />
+</form>
+  </div>
+</mat-card>
+
+
+
+

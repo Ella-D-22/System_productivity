@@ -1,0 +1,291 @@
+<mat-card>
+    <mat-card-header class="breadcrump">
+        <div>Home/Collateral</div>
+    </mat-card-header>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h4>Function</h4>
+            <p>{{this.function_type}}</p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h4>Collateral Code</h4>
+            <p>{{this.collateralCode}}</p>
+        </div>
+    </div>
+    
+   
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form action="" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab class="mat-tab" label="Collateral">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Collateral Type<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <!-- <input type="text" formControlName="collateralType" class="pull-right form-control"> -->
+                                    <select name="" id="" class="form-control form-select" formControlName="collateralType" 
+                                    [ngClass]="{'is-invalid':submitted && f['collateralType'].errors}">
+                                        <!-- <option value="" disabled>-- Collateral Type --</option> -->
+                                        <option *ngFor="let flag of collateralTypeArray" [value]="flag">{{flag}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Collateral Description<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="description" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left" required maxLength="6">Collateral Code<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="collateralCode"  class="pull-right form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Face Value(Ksh)<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="faceValue" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left" maxLength="6">Customer Code<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="customerCode" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Market Value(Ksh)<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="marketValue" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Drawing Power(%)<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="percentageDrawingPower" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Loan To Take(%)<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="percentageLoanToTake" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" >Lodging Fees<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" [value]="this.LodgingDesc" formControlName="chargeEventForLodging" class="pull-right form-control" 
+                                    [ngClass]="{'is-invalid':submitted && f['collateralCode'].errors}">
+                                    <mat-icon (click)="LodgingLookup()">search</mat-icon>
+                                </div>
+                            </div>
+        
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" >Withdrawal Fees<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" [value]="this.with_description" formControlName="chargeEventForWithdrawal" class="pull-right form-control" 
+                                    [ngClass]="{'is-invalid':submitted && f['collateralCode'].errors}">
+                                    <mat-icon (click)="withdrawalLookup()">search</mat-icon>
+
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Other Details<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="otherDetails" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Margin<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="margin" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="">Contact Details<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="contactDetails" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-tab>
+                <mat-tab class="mat-tab" label="Company">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Company Code<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="companyCode" class="pull-right form-control">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Company Details<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="companyDetails" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Share Capital<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="shareCapital" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Shares Issued<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="sharesIssued" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+  
+
+                </mat-tab>
+
+            </mat-tab-group>
+              <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Confirm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <p>Do you wish to delete the data ?</p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                        
+                    <div class="row mt-4" > 
+                        <div class="col-md-1 offset-md-9">
+                        <button mat-raised-button color="warn" type="reset">
+                            Reset
+                            </button>
+                        </div>
+                        <div class="col-md-1">
+                        <button *ngIf="this.function_type != 'D-Delete'" mat-raised-button color="primary" type="submit">
+                            <span
+                
+                            ></span>
+                            Submit
+                            </button>
+                            <button *ngIf="this.function_type == 'D-Delete'" mat-raised-button color="primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+                                <span
+                    
+                                ></span>
+                                Delete
+                                </button>
+                               
+                        </div>
+                    </div>
+                </div>
+        </form>
+
+    </div>
+</mat-card>

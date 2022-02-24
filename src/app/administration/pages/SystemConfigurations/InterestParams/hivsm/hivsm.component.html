@@ -1,0 +1,399 @@
+
+  <mat-card>
+    <mat-card-header  class="breadcrumb">
+      <div>Home/Configuration/Interest/Hivsm/</div>
+  </mat-card-header>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+        <h4>Function</h4>
+        <p>{{this.function_type}}</p>
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <h4>Int.Tbl.Code</h4>
+        <p>{{this.int_tbl_code}}</p> 
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <h4>Int.Tbl.CCY</h4>
+        <p>{{ this.int_tbl_ccy}}</p>
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-sm-12">
+      <h4>Base Indicator</h4>
+      <p>{{this.base_indicator}}</p>
+  </div>
+  <div class="col-md-4 col-sm-12">
+      <h4>Version</h4>
+      <p>{{this.version}}</p> 
+  </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  
+  <div class="container-fluid">
+    
+    <form
+    class="form"
+    [formGroup]="formData"
+    (ngSubmit)="onSubmit()"
+    #resetRequestsForm="ngForm"
+    novalidate
+  >
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab class="mat-tab" label="General Details">
+        <br>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+                 <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Start Date <span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column "> 
+                       <input matInput [matDatepicker]="spicker" formControlName="start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }"  />
+                      <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="spicker"></mat-datepicker-toggle>
+                      <mat-datepicker #spicker></mat-datepicker>
+                   </div>
+                </div>        
+          </div>
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">End Date <span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input  matInput [matDatepicker]="epicker" formControlName="end_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.end_date.errors }"  />
+                 <mat-datepicker-toggle *ngIf="isEnabled"  matSuffix [for]="epicker"></mat-datepicker-toggle>
+                 <mat-datepicker   #epicker></mat-datepicker>
+                </div>
+             </div> 
+          </div>
+      </div> 
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+               <label class="start pull-left">Base Int Code<span class="warning">*</span></label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+               <input type="text" formControlName="base_int_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.base_int_code.errors }" />
+               <!-- <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon> -->
+            </div>
+           </div> 
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Base Int Pcnt Cr<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="base_int_pcnt_cr" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.base_int_pcnt_cr.errors }" />
+                </div>
+             </div>   
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Base Int Pcnt Dr<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="base_int_pcnt_dr" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.base_int_pcnt_dr.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Version Desc</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <textarea formControlName="version_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc.errors }"></textarea>
+                </div>
+             </div>    
+            </div>
+          </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Version Desc. For Reports<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Additional Version Info.</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <textarea formControlName="add_version_info" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.add_version_info.errors }"></textarea>
+                  </div>
+               </div>     
+            </div>
+          </div>
+       
+    </mat-tab>
+    <!-- end of General Details -- Begining of Credit Details -->
+    <mat-tab label="Credit Details">
+        <mat-checkbox class="example-margin" formControlName="have_credit">Have Credit</mat-checkbox>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                   <div class="form-group">
+                     <div class="col-md-6 col-sm-12 form-column ">
+                      <label class="start pull-left">Begin Slab Amt <span class="warning">*</span></label>
+                     </div>
+                     <div class="col-md-6 col-sm-12 form-column ">
+                      <input  type="text" formControlName="cr_begin_slap_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cr_begin_slap_amt.errors }" />
+                     </div>
+                  </div>           
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">End Slab Amt <span class="warning">*</span></label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <input  type="text"  formControlName="cr_end_slab_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cr_end_slab_amt.errors }" />
+                  </div>
+               </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Normal Int.</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                        <mat-radio-button value="None">None.</mat-radio-button>
+                        <mat-radio-button value="Full">Full.</mat-radio-button>
+                        <mat-radio-button value="Differential">Differential.</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <!-- <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Record</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-checkbox class="example-margin" formControlName="have_debit">Del</mat-checkbox>
+                  </div>
+               </div>  -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                    <input  type="text"  formControlName="cr_normal_int_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cr_normal_int_amt.errors }" />
+                    </div>
+
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+            </div>
+        </div>
+    </mat-tab>
+    <!-- end of Credit Details -- Begining of Debit Details -->
+
+    <mat-tab label="Debit Details">
+      <mat-checkbox class="example-margin" formControlName="have_debit">Have Debit</mat-checkbox>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                   <div class="form-group">
+                     <div class="col-md-6 col-sm-12 form-column ">
+                      <label class="start pull-left">Begin Slab Amt <span class="warning">*</span></label>
+                     </div>
+                     <div class="col-md-6 col-sm-12 form-column ">
+                      <input  type="text" formControlName="db_begin_slap_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.db_begin_slap_amt.errors }" />
+                     </div>
+                  </div>           
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">End Slab Amt <span class="warning">*</span></label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <input  type="text" formControlName="db_end_slab_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.db_end_slab_amt.errors }" />
+                  </div>
+               </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Normal Int.</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="db_normal_int">
+                        <mat-radio-button value="None">None.</mat-radio-button>
+                        <mat-radio-button value="Differential">Differential.</mat-radio-button>
+                        <mat-radio-button value="Full">Full.</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Penal Int.</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="db_penal_int">
+                        <mat-radio-button value="None">None.</mat-radio-button>
+                        <mat-radio-button value="Differential">Differential.</mat-radio-button>
+                        <mat-radio-button value="Full">Full.</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                 </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                     <input  type="text" formControlName="db_normal_int_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.db_normal_int_amt.errors }" />
+                    </div>
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                     <input  type="text"  formControlName="db_penal_int_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.db_penal_int_amt.errors }" />
+                    </div>
+                 </div>  
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Additional Int.</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="db_additional_int">
+                        <mat-radio-button value="Y">None.</mat-radio-button>
+                        <mat-radio-button value="N">Differential.</mat-radio-button>
+                        <mat-radio-button value="N">Full.</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Stock Statement Int.</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="db_stock_stmt_int">
+                        <mat-radio-button value="None">None.</mat-radio-button>
+                        <mat-radio-button value="Differential">Differential.</mat-radio-button>
+                        <mat-radio-button value="Full">Full.</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                 </div> 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                     <input  type="text" formControlName="db_additional_int_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.db_additional_int_amt.errors }" />
+                    </div>
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                     <input  type="text" formControlName="db_stock_stmt_int_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.db_stock_stmt_int_amt.errors }" />
+                    </div>
+                 </div>  
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">QIS Int.</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="db_qis_int">
+                        <mat-radio-button value="None">None.</mat-radio-button>
+                        <mat-radio-button value="Differential">Differential.</mat-radio-button>
+                        <mat-radio-button value="Full">Full.</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Record</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-checkbox formControlName="db_del" class="example-margin">Del</mat-checkbox>
+                  </div>
+               </div> 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                     <input  type="text"  formControlName="db_qis_int_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.db_qis_int_amt.errors }" />
+                    </div>
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+            </div>
+        </div>
+       
+    </mat-tab>
+  </mat-tab-group>
+    <br />
+    <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Submit
+    </button>
+    <br />
+  </form>
+    </div>
+  </mat-card>
+  
+  
+  
+  
+  

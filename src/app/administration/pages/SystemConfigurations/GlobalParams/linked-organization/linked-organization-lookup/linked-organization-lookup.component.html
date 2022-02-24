@@ -1,0 +1,24 @@
+
+<div class="breadcrumb">
+    <h4 >List of Registared Organizations</h4>
+</div>
+    <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Organization Name</th>
+                <th>Organization Mail</th>
+                <th>Organization Address</th>
+                <th>Organization Country</th>
+                <th>Organization Office</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr (click)="onSelect(item)"  *ngFor="let item of organizationData">
+                <td><a class="update btn btn-sm" color="accent">{{item.organization_name}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.organization_mail}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.organization_address}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.organization_country}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.organization_main_office}}</a></td>
+            </tr>
+        </tbody>
+    </table>

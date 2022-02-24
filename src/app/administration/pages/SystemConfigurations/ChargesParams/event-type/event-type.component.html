@@ -1,0 +1,86 @@
+<mat-card>
+    <mat-card-header  class="breadcrumb">
+      <div>Home/Configuration/Event_Type</div>
+  </mat-card-header>
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+        <h4>Function</h4>
+        <p>{{this.function_type}}</p>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <h4>Event Type</h4>
+        <p>{{this.event_description}}</p> 
+    </div>
+  
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  
+  <div class="container-fluid">
+    <form
+    class="form"
+    [formGroup]="formData"
+    (ngSubmit)="onSubmit()"
+    #resetRequestsForm="ngForm"
+    novalidate
+  >
+  <div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+       <label class="start pull-left">Code</label>
+      </div>
+      <div class="col-md-6 col-sm-12 form-column">
+        <input type="text" formControlName="code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+      </div>
+   </div>            
+  </div>
+  <div class="col-md-6 col-sm-12">
+    <div class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+       <label class="start pull-left">Description</label>
+      </div>
+      <div class="col-md-6 col-sm-12 form-column">
+        <input type="text" formControlName="description" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+      </div>
+   </div>   
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Verified</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+            <mat-checkbox class="example-margin" formControlName="is_verified">Verified.</mat-checkbox>
+          </div>
+       </div>          
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+             <label class="start pull-left">Delete</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+            <mat-checkbox class="example-margin" formControlName="is_deleted"></mat-checkbox>
+            </div>
+         </div>   
+    </div>
+  </div>
+    <br />
+    <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Submit
+    </button>
+    <br />
+  </form>
+    </div>
+  </mat-card>
+  
+  
+  
+  

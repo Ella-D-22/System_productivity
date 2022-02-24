@@ -1,0 +1,24 @@
+
+<div class="breadcrumb">
+    <h4 >List of Registared Currencies</h4>
+</div>
+    <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th>CCY</th>
+                <th>Country</th>
+                <th>CCY Name</th>
+                <th>Del</th>
+                <th>Verified</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr (click)="onSelect(item)" *ngFor="let item of currencyData">
+                <td><a class="update btn btn-sm" color="accent">{{item.ccy}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.country}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.ccy_name}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.del}}</a></td>
+                <td><a class="update btn btn-sm" color="accent" >{{item.verified}}</a></td>
+            </tr>
+        </tbody>
+    </table>

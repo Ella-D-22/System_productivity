@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.green-snackbar {
+  background: rgb(65, 252, 134);
+  color: black;
+}
+.green-snackbar button {
+  background-color: rgb(65, 252, 134);
+  color: white;
+  border: none;
+}
+.red-snackbar {
+  background: #ff766d;
+  color: white;
+}
+.red-snackbar button {
+  background-color: #ff766d;;
+  color: white !important;
+  border: none;
+}
+
+@media screen and (max-width: 1440px) and (max-height: 810px) {
+  html {
+    //  transform: scale(.9);   
+    zoom: 80% !important;
+     // or simply zoom: 90%
+  }
+}
+
+td{
+  color: black !important;
+}
+

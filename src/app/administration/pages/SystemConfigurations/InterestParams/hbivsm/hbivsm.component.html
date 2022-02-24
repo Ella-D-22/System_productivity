@@ -1,0 +1,208 @@
+
+  <mat-card>
+    <mat-card-header  class="breadcrumb">
+      <div>Home/Configuration/Interest/Hbivsm/</div>
+  </mat-card-header>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+        <h4>Function</h4>
+        <p>{{this.function_type}}</p>
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <h4>Int.Tbl.Code</h4>
+        <p>{{this.int_tbl_code}}</p> 
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <h4>Int.Tbl.CCY</h4>
+        <p>{{ this.int_tbl_ccy_name}}</p>
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-sm-12">
+      <h4>Base Indicator</h4>
+      <p>{{this.base_indicator}}</p>
+  </div>
+  <div class="col-md-4 col-sm-12">
+      <h4>Version</h4>
+      <p>{{this.version}}</p> 
+  </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  
+  <div class="container-fluid">
+    
+    <form
+    class="form"
+    [formGroup]="formData"
+    (ngSubmit)="onSubmit()"
+    #resetRequestsForm="ngForm"
+    novalidate
+  >
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab class="mat-tab" label="General Details">
+        <br>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+                 <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Start Date <span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column "> 
+                       <input  [matDatepicker]="spicker" formControlName="hv_start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.hv_start_date.errors }"  />
+                      <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="spicker"></mat-datepicker-toggle>
+                      <mat-datepicker #spicker></mat-datepicker>
+                   </div>
+                </div>        
+          </div>
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">End Date <span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input  matInput [matDatepicker]="epicker" formControlName="hv_end_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.hv_end_date.errors }"  />
+                 <mat-datepicker-toggle *ngIf="isEnabled"  matSuffix [for]="epicker"></mat-datepicker-toggle>
+                 <mat-datepicker   #epicker></mat-datepicker>
+                </div>
+             </div> 
+          </div>
+      </div> 
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+               <label class="start pull-left">Base Int Pcnt Cr<span class="warning">*</span></label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+               <input type="number" formControlName="base_int_pcnt_cr" placeholder="0.000000" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.base_int_pcnt_cr.errors }" />
+               <!-- <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon> -->
+            </div>
+           </div> 
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Base Int Pcnt Dr<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="number" formControlName="base_int_pcnt_dr" placeholder="0.000000" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.base_int_pcnt_dr.errors }" />
+                </div>
+             </div>   
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Vesrion Desc<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                    <textarea formControlName="version_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc.errors }"></textarea>
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Version Desc. For Reports</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <textarea formControlName="version_desc_for_reports" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_for_reports.errors }"></textarea>
+                </div>
+             </div>    
+            </div>
+          </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Additional Version Info.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                    <textarea formControlName="add_vers_info" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.add_vers_info.errors }"></textarea>
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+               
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Verify</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-checkbox class="example-margin" formControlName="is_verified"></mat-checkbox>
+                  </div>
+               </div>          
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Delete</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                    <mat-checkbox class="example-margin" formControlName="is_deleted"></mat-checkbox>
+                    </div>
+                 </div>   
+            </div>
+          </div>
+       
+    </mat-tab>
+    <!-- end of General Details -- Begining of Credit Details -->
+    <mat-tab label="Period Slab">
+      <br>
+      
+        <div  *ngFor="let dyForm of t.controls; let i = index" class="list-group list-group-flush">
+          <div [formGroup]="dyForm">
+        <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column ">
+                          <label class="start pull-left">{{i + 1}} - Int.Rate Period(MMM/DDD) <span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column ">
+                          <mat-icon class="info" (click)="onAddField()" *ngIf="this.showDynamicFrmBtns" >add_circle</mat-icon>
+                        <input  type="number" formControlName="int_rate_prd_mmm" class="form-control form-control-sub" [ngClass]="{ 'is-invalid': submitted && dyForm.controls.int_rate_prd_mmm.errors }" />
+                        <input  type="number" formControlName="int_rate_prd_ddd" class="form-control form-control-sub" [ngClass]="{ 'is-invalid': submitted && dyForm.controls.int_rate_prd_ddd.errors }" />
+                       </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column ">
+                          <label>Rate <span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column ">
+                   <input  type="number"  formControlName="rate" class="form-control" [ngClass]="{ 'is-invalid': submitted && dyForm.controls.rate.errors }" />
+                          <mat-icon  class="warning" (click)="onRemoveField(i)" *ngIf="this.showDynamicFrmBtns">remove_circle</mat-icon>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+    </mat-tab>
+  </mat-tab-group>
+    <br />
+    <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Submit
+    </button>
+    <br />
+  </form>
+    </div>
+  </mat-card>
+  
+  
+  
+  
+  

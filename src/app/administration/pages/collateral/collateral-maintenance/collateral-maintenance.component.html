@@ -1,0 +1,57 @@
+<mat-card>
+    <mat-card-header>
+        <div>Collateral/Maintenance</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form action="" [formGroup]="formData" novalidate class="form"
+         (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" (change)="onSelectionFunction($event)">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="">Function<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <select name="" id="" class="form-control" formControlName="function_type" 
+                            [ngClass]="{'is-invalid':submitted && f['function_type'].errors}">
+                                <option value="" disabled>-- Choose Function --</option>
+                                <option *ngFor="let flag of functionArray" [value]="flag">{{flag}}</option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="" >Collateral Code<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" [value]="this.collateralCode" formControlName="collateralCode" class="pull-right form-control" 
+                            [ngClass]="{'is-invalid':submitted && f['collateralCode'].errors}">
+                            <mat-icon *ngIf="function_type!='A-Add'" (click)="collateralLookup()">search</mat-icon>
+                            <br>
+                            <span *ngIf="this.show==true && this.function_type == 'A-Add'" style="color: red; font: size 6px;;">*Colletaral Code already exists!!</span> 
+                            <span *ngIf="this.showCode==true && this.function_type !='A-Add' " style="color: red; font: size 6px;">Collateral Code doesn't exists</span> 
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="col-md-1 offset-md-9">
+                      <button class="pull-right " mat-raised-button color="primary" type="submit">
+                    <span
+                      *ngIf="loading"
+                      class="spinner-border spinner-border-sm mr-1"
+                    ></span>
+                    Submit
+                  </button>
+                </div>
+              
+            </div>
+        </form>
+    </div>
+</mat-card>

@@ -1,0 +1,161 @@
+<mat-card>
+    <mat-card-header  class="breadcrumb">
+      <div>Home/Configuration/Exception-Code</div>
+  </mat-card-header>
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+        <h4>Function</h4>
+        <p>{{this.function_type}}</p>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <h4>Exception Code</h4>
+        <p>{{this.exception_code}}</p> 
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  
+  <div class="container-fluid">
+    <form
+    class="form"
+    [formGroup]="formData"
+    (ngSubmit)="onSubmit()"
+    #resetRequestsForm="ngForm"
+    novalidate
+  >
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+       <label class="start pull-left">Description</label>
+      </div>
+      <div class="col-md-6 col-sm-12 form-column">
+        <input type="text" formControlName="exce_description" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_description.errors }" />
+      </div>
+   </div>            
+  </div>
+  <div class="col-md-6 col-sm-12">
+    <div class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+       <label class="start pull-left">Code Type</label>
+      </div>
+      <div class="col-md-6 col-sm-12 form-column">
+        <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="exce_code_type" [ngClass]="{ 'is-invalid': submitted && f.exce_code_type.errors }">
+            <mat-radio-button value="Exception">Exception.</mat-radio-button>
+            <mat-radio-button value="Error">Error.</mat-radio-button>
+            <mat-radio-button value="Warning">Warning.</mat-radio-button>
+          </mat-radio-group>
+       </div>
+   </div>   
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+             <label class="start pull-left">Working Class Exception</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" formControlName="exce_working_class" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_working_class.errors }" />
+            </div>
+         </div>           
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+             <label class="start pull-left">Work Class Min.</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" formControlName="exce_work_class_min" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_work_class_min.errors }" />
+            </div>
+         </div>   
+    </div>
+  </div>
+
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Authorization Matrix ID.</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+            <input type="text" formControlName="exce_authorization_matrix_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_authorization_matrix_id.errors }" />
+          </div>
+       </div>           
+  </div>
+  <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">General Ledger Classification Type</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+            <input type="text" formControlName="exce_gen_ledger_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_gen_ledger_type.errors }" />
+          </div>
+       </div>   
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Ignore Exception in Exception Overriding Events</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+            <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="exce_ignore_exce_overriding_events" [ngClass]="{ 'is-invalid': submitted && f.exce_ignore_exce_overriding_events.errors }">
+                <mat-radio-button value="Yes">Yes</mat-radio-button>
+                <mat-radio-button value="No">No.</mat-radio-button>
+              </mat-radio-group>
+          </div>
+       </div>           
+  </div>
+  <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Channel Exception</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+            <input type="text" formControlName="exce_channel_exce" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_channel_exce.errors }" />
+          </div>
+       </div>   
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Verified</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+            <mat-checkbox [disabled]="this.canVerify" class="example-margin" formControlName="exce_is_verified">Verified.</mat-checkbox>
+          </div>
+       </div>           
+  </div>
+  <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Deleted</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+           <mat-checkbox [disabled]="this.canDeleted"  class="example-margin" formControlName="exce_is_deleted">Deleted.</mat-checkbox>
+          </div>
+       </div>   
+  </div>
+</div>
+    <br />
+    <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Submit
+    </button>
+    <br/>
+  </form>
+    </div>
+  </mat-card>
+  
+  
+  
+  

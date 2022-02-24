@@ -1,0 +1,1214 @@
+
+  <mat-card>
+    <mat-card-header  class="breadcrumb">
+      <div>Home/Configuration/Product/Loan-Product/</div>
+  </mat-card-header>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+        <h4>Function</h4>
+        <p>{{this.function_type}}</p>
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+      <h4>Scheme Code</h4>
+      <p>{{this.base_indicator}}</p>
+  </div>
+  <div class="col-md-6 col-sm-12">
+      <h4>Scheme Type</h4>
+      <p>{{this.version}}</p> 
+  </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  
+  <div class="container-fluid">
+    
+    <form
+    class="form"
+    [formGroup]="formData"
+    (ngSubmit)="onSubmit()"
+    #resetRequestsForm="ngForm"
+    novalidate
+  >
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab class="mat-tab" label="General Details">
+        <br>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+               <label class="start pull-left">Set ID<span class="warning">*</span></label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+               <input type="text" formControlName="base_int_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.base_int_code.errors }" />
+               <!-- <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon> -->
+            </div>
+           </div> 
+          </div>
+          <!-- <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Base Int Pcnt Cr<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="base_int_pcnt_cr" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.base_int_pcnt_cr.errors }" />
+                </div>
+             </div>   
+          </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Nature of Scheme</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                        <mat-radio-button value="Conventional">Conventional</mat-radio-button>
+                        <mat-radio-button value="Islamic">Islamic</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+
+                 </div>            
+            </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Islamic Product Type<span class="warning">*</span></label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column ">
+            <select  class="form-control" formControlName="version_desc" [ngClass]="{ 'is-invalid': submitted && f.version_desc.errors }" >
+              <option value="" disabled>-- Choose Function --</option>
+              <option *ngFor="let flag of islamicProductArray" [value]="flag">{{ flag }}</option>
+            </select>
+          </div>
+       </div>
+      </div>
+
+          </div>
+
+        <div class="row">
+             <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Additional Calender Base</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                        <mat-radio-button value="Hijir">Hijir</mat-radio-button>
+                        <mat-radio-button value="None">None</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                 </div>            
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Effective Date <span class="warning">*</span></label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column "> 
+                      <input matInput [matDatepicker]="spicker" formControlName="start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }"  />
+                     <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="spicker"></mat-datepicker-toggle>
+                     <mat-datepicker #spicker></mat-datepicker>
+                  </div>
+               </div>        
+         </div>
+          </div>
+
+          <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+               <label class="start pull-left">Expiry Date <span class="warning">*</span></label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column "> 
+                  <input matInput [matDatepicker]="spicker" formControlName="start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }"  />
+                 <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="spicker"></mat-datepicker-toggle>
+                 <mat-datepicker #spicker></mat-datepicker>
+              </div>
+           </div>        
+     </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Scheme Name</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Tran.Restriction<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Short Name</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">A/c. ID Generation</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                        <mat-radio-button value="Yes">Yes</mat-radio-button>
+                        <mat-radio-button value="No">No</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                 </div>            
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">A/c. Prefix</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Sequence<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Non Resident</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                        <mat-radio-button value="Yes">Yes</mat-radio-button>
+                        <mat-radio-button value="No">No</mat-radio-button>
+                        <mat-radio-button value="Both">Both</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                 </div>            
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Min. POst. Work Class<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Product Group</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Product Concept<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">PD GL Subhead</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Scheme Supervisor ID<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                <label class="start pull-left">Product Type<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                    <select  class="form-control" formControlName="version_desc" [ngClass]="{ 'is-invalid': submitted && f.version_desc.errors }" >
+                    <option value="" disabled>-- Select --</option>
+                    <option *ngFor="let flag of productTypeArray" [value]="flag">{{ flag }}</option>
+                    </select>
+                </div>
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">A/c. Details<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">FCNR</mat-checkbox>
+                    <mat-checkbox class="example-margin" formControlName="have_credit">EEFC</mat-checkbox>
+                    <mat-checkbox class="example-margin" formControlName="have_credit">Staff Scheme</mat-checkbox>
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Tran. Details</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">A/c. Closure Across SOL</mat-checkbox>
+                </div>
+             </div> 
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">Secured</mat-checkbox>
+                </div>
+             </div> 
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Product Eligibility Criteria Details Min.Age<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Max.Age</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+
+ 
+    </mat-tab>
+   
+<!-- Scheme -->
+    <mat-tab label="Scheme">
+  <mat-tab-group mat-align-tabs="end">
+      <mat-tab label="1" class="child">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+               <label class="start pull-left">CCY</label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+                :---
+              </div>
+           </div> 
+          </div>
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Del.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  :---
+                </div>
+             </div>     
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Amt. Min.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Loan Amt. Max.</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Period(MM/DD) Min.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Period (MM/DD) Max.</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Max Allowed Age Limit For Payment<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <!-- <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Max.Age</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div> -->
+          </div>
+          <mat-divider></mat-divider>
+          <h3>Repayment Details</h3>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Repayment Method<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">Hold Operative A/c. For AMt. Due</mat-checkbox>
+                  
+                  </div>
+               </div>     
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <!-- <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Repayment Method<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div>  -->
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">Upfront Installment Collection</mat-checkbox>
+                  
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <h3>Interest Details</h3>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Int. Base</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Daily.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Monthly. </mat-radio-button>
+                      <mat-radio-button value="Islamic">None. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+               </div>            
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Int. Product</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                    <mat-radio-button value="Conventional">End of Day Bal.</mat-radio-button>
+                    <mat-radio-button value="Islamic">Scheduled Bal. </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+             </div>            
+        </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Int. Routed Through</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Loan A/c.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Loan Int. A/c. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+               </div>            
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Fee Routed Through</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                    <mat-radio-button value="Conventional">Loan A/c.</mat-radio-button>
+                    <mat-radio-button value="Islamic">LOan Int. A/c. </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+             </div>            
+        </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Int. A/c. Placeholderss<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+               <mat-icon>search</mat-icon>
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Penal Int Recognition Method</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Accrued Basis.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Cash Basis. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+  
+               </div>            
+          </div>
+          </div>
+        </mat-tab>
+
+        <!-- Second Scheme Tab -->
+      <mat-tab label="2" class="child">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+               <label class="start pull-left">CCY</label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+                :---
+              </div>
+           </div> 
+          </div>
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Del.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  :---
+                </div>
+             </div>     
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <h3>Equated Installment</h3>
+
+        <div class="row">
+           
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Equated Installment</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Yes">Yes.</mat-radio-button>
+                      <mat-radio-button value="No">No. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+               </div>            
+          </div>
+
+
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">EI in</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Advance">Advance.</mat-radio-button>
+                      <mat-radio-button value="Arrears">Arrears. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">EI Formula<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">EI Round Off</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Int. Compounding Freq.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">EI Payment Freq.</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <!-- <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Int. Compounding Freq.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div>  -->
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <!-- <label class="start pull-left">EI Payment Freq.</label> -->
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Int. Compounding Freq<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">EI Payment Freq<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Int. Rest Freq<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">EI Rest Basis<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Shift Installment For Holiday<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Include Maturity Date In Case of Holiday<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+          <h3>Pre- EMI Details</h3>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Holiday Period In<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <!-- <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">Hold Operative A/c. For AMt. Due</mat-checkbox>
+                  
+                  </div>
+               </div>     
+            </div> -->
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <!-- <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Repayment Method<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div>  -->
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">Upfront Installment Collection</mat-checkbox>
+                  
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <h3>Interest Details</h3>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Int. Base</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Daily.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Monthly. </mat-radio-button>
+                      <mat-radio-button value="Islamic">None. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+               </div>            
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Int. Product</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                    <mat-radio-button value="Conventional">End of Day Bal.</mat-radio-button>
+                    <mat-radio-button value="Islamic">Scheduled Bal. </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+             </div>            
+        </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Int. Routed Through</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Loan A/c.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Loan Int. A/c. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+               </div>            
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Fee Routed Through</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                    <mat-radio-button value="Conventional">Loan A/c.</mat-radio-button>
+                    <mat-radio-button value="Islamic">LOan Int. A/c. </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+             </div>            
+        </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Int. A/c. Placeholderss<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+               <mat-icon>search</mat-icon>
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Penal Int Recognition Method</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Accrued Basis.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Cash Basis. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+  
+               </div>            
+          </div>
+          </div>
+        </mat-tab>
+  
+        <!-- Third Scheme Tab -->
+      <mat-tab label="3" class="child">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+               <label class="start pull-left">CCY</label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+                :---
+              </div>
+           </div> 
+          </div>
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Del.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  :---
+                </div>
+             </div>     
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Amt. Min.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Loan Amt. Max.</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Period(MM/DD) Min.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Period (MM/DD) Max.</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Max Allowed Age Limit For Payment<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <!-- <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Max.Age</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                  </div>
+               </div>     
+            </div> -->
+          </div>
+          <mat-divider></mat-divider>
+          <h3>Repayment Details</h3>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Repayment Method<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">Hold Operative A/c. For AMt. Due</mat-checkbox>
+                  
+                  </div>
+               </div>     
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <!-- <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Repayment Method<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+                </div>
+             </div>  -->
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-checkbox class="example-margin" formControlName="have_credit">Upfront Installment Collection</mat-checkbox>
+                  
+                  </div>
+               </div>     
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <h3>Interest Details</h3>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Int. Base</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Daily.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Monthly. </mat-radio-button>
+                      <mat-radio-button value="Islamic">None. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+               </div>            
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Int. Product</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                    <mat-radio-button value="Conventional">End of Day Bal.</mat-radio-button>
+                    <mat-radio-button value="Islamic">Scheduled Bal. </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+             </div>            
+        </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Int. Routed Through</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Loan A/c.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Loan Int. A/c. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+               </div>            
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Fee Routed Through</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                    <mat-radio-button value="Conventional">Loan A/c.</mat-radio-button>
+                    <mat-radio-button value="Islamic">LOan Int. A/c. </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+             </div>            
+        </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Loan Int. A/c. Placeholderss<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
+               <mat-icon>search</mat-icon>
+                </div>
+             </div> 
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Penal Int Recognition Method</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="cr_normal_int">
+                      <mat-radio-button value="Conventional">Accrued Basis.</mat-radio-button>
+                      <mat-radio-button value="Islamic">Cash Basis. </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+  
+               </div>            
+          </div>
+          </div>
+        </mat-tab>
+    </mat-tab-group>
+        </mat-tab>
+    <!-- Currency -->
+    <mat-tab label="Currency">
+  <mat-tab-group mat-align-tabs="end">
+
+    <mat-tab label="1" class="child">
+      <h1>Valid CCY Form</h1> 
+      </mat-tab>
+
+    <mat-tab label="2" class="child">
+      <h1>Valid CCY Form</h1> 
+      </mat-tab>
+
+    <mat-tab label="3" class="child">
+      <h1>Valid CCY Form</h1> 
+      </mat-tab>
+    </mat-tab-group>
+
+
+        </mat-tab>
+<!-- Interest -->
+    <mat-tab label="Interest">
+        <h1>Valid CCY Form</h1> 
+        </mat-tab>
+    <!-- GL Subhead -->
+    <mat-tab label="GL Sub Head">
+        <h1>GL Subhead Form</h1> 
+        </mat-tab>
+        <!-- Assets Classification -->
+    <mat-tab label="Asset Classification">
+        <h1>Assets Classification Form</h1> 
+        </mat-tab>
+        <!-- Repayment Cycle -->
+    <mat-tab label="Repayment Cycle">
+        <h1>Valid CCY Form</h1> 
+        </mat-tab>
+        <!-- Loan Fee -->
+
+    <mat-tab label="Loan Fee">
+        <h1>Loan Fee Form</h1> 
+        </mat-tab>
+  </mat-tab-group>
+    <br />
+    <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Submit
+    </button>
+    <br />
+  </form>
+  
+
+    </div>
+  </mat-card>
+  
+  
+  
+  
+  
