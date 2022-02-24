@@ -11,6 +11,7 @@ export const environment = {
   collateralAPI:'http://localhost:9103',
   productAPI:'http://localhost:9100',
   // accountsAPI: 'http://localhost:9191'
+  branchsAPI:'http://localhost:8000'
 };
 
 /*

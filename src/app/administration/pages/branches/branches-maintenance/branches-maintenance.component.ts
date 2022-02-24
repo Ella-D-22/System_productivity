@@ -32,7 +32,7 @@ export class BranchesMaintenanceComponent implements OnInit {
   code = 0;
   glCode: any;
   glDescription: any;
-  solcode: any;
+  solCode: any;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -52,7 +52,7 @@ export class BranchesMaintenanceComponent implements OnInit {
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
-    solcode: [''],
+    solCode: [''],
   });
   branchesCodeLookup(): void {
     const dialogRef = this.dialog.open(BranchesLookupComponent, {
@@ -60,20 +60,20 @@ export class BranchesMaintenanceComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
-      this.solcode = this.lookupData.solcode;
+      this.solCode = this.lookupData.solCode;
       this.glDescription = this.lookupData.glDescription;
-      this.formData.controls.solcode.setValue(this.solcode);
+      this.formData.controls.solCode.setValue(this.solCode);
     });
   }
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.existingData = true;
-      this.formData.controls.solcode.setValue("")
-      this.formData.controls.solcode.setValidators([Validators.required])
+      this.formData.controls.solCode.setValue("")
+      this.formData.controls.solCode.setValidators([Validators.required])
     }else if(event.target.value == "A-Add"){
       this.existingData = false;;
-      this.formData.controls.solcode.setValidators([])
-      this.formData.controls.solcode.setValue("");
+      this.formData.controls.solCode.setValidators([])
+      this.formData.controls.solCode.setValue("");
     }
   }
       // convenience getter for easy access to form fields
