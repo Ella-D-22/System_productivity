@@ -826,12 +826,16 @@
         </button>
         <br>
      <!-- Button trigger modal -->
-      <button type="button"  *ngIf="deleting" class="pull-right" mat-raised-button color="warn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <button type="button"  *ngIf="deleting" class="pull-right" 
+      mat-raised-button color="warn" data-bs-toggle="modal"
+       data-bs-target="#staticBackdrop">
         Delete
       </button>
      <br>
       <!-- Modal -->
-          <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+          <div class="modal fade"  role="dialog" id="staticBackdrop" data-bs-backdrop="static" 
+          data-bs-keyboard="false" tabindex="-1" 
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">

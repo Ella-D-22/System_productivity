@@ -9,6 +9,7 @@ import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { SchemeTypeLookupComponent } from '../../../SystemConfigurations/GlobalParams/scheme-type/scheme-type-lookup/scheme-type-lookup.component';
 import { LoanproductLookupComponent } from '../../loanproduct/loanproduct-lookup/loanproduct-lookup.component';
 import { LoanproductService } from '../../loanproduct/loanproduct.service';
+import { CurrentSchemeLookupComponent } from '../current-scheme-lookup/current-scheme-lookup.component';
 import { CurrentSchemeService } from '../current-scheme.service';
 
 @Component({
@@ -63,22 +64,27 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   });
 
   schemeCodeLookup(): void {
-    const dialogRef = this.dialog.open(LoanproductLookupComponent, {
+    const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
+      height:'400px',
+      width:'600px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupdata= result.data;
-      this.scheme_code = this.lookupdata.scheme_code;
+      console.log(this.lookupData);
+      
+      this.scheme_code = this.lookupdata.caa_scheme_code;
       this.formData.controls.scheme_code.setValue(this.scheme_code);
     });
   }
 
   schemeTypeLookup(): void {
-    const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-      // height: '400px',
+    const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
+      height:'400px',
+      width:'600px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
-      this.scheme_type = this.lookupData.scheme_type;
+      this.scheme_type = this.lookupData.caa_scheme_type;
       this.formData.controls.scheme_type.setValue(this.scheme_type);
     });
   }
