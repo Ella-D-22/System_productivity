@@ -253,6 +253,7 @@ export class CurrentSchemeComponent implements OnInit {
 
     caa_max_sanction_limit:[''],
     caa_norm_int_product_method:[''],
+    caa_ac_statement_charged_by:[''],
     // caa_max_sanction_limit:[''],
     caa_dr_bal_limit:[''],
     caa_max_penal_int:[''],
@@ -467,32 +468,57 @@ export class CurrentSchemeComponent implements OnInit {
 
 
   disabledFormControll() {
-    this.formData.controls.start_date.disable();
-    this.formData.controls.end_date.disable();
-    this.formData.controls.base_int_code.disable();
-    this.formData.controls.base_int_pcnt_cr.disable();
-    this.formData.controls.base_int_pcnt_dr.disable();
-    this.formData.controls.version_desc.disable();
-    this.formData.controls.version_desc_repo.disable();
-    this.formData.controls.add_version_info.disable();
-
-    this.formData.controls.cr_normal_int.disable();
-    this.formData.controls.ac_ccy.disable();
-    this.formData.controls.home_ccy.disable();
-    this.formData.controls.int_receivale_app.disable();
-    this.formData.controls.norm_int_rec_ac.disable();
-    this.formData.controls.penal_int_rec_ac.disable();
-    this.formData.controls.loan_rep_method.disable();
-    this.formData.controls.hold_opertaive_ac.disable();
-    this.formData.controls.upfront_inst_coll.disable();
-    this.formData.controls.int_base.disable();
-    this.formData.controls.int_product.disable();
-    this.formData.controls.int_routed_thr.disable();
-    this.formData.controls.cr_placeholder.disable();
-    this.formData.controls.apr.disable();
-    this.formData.controls.eir.disable();
-    this.formData.controls.amort_tenor.disable();
-    this.formData.controls.max_no_of_assesment.disable();
+ 
+       //General Details
+       this.formData.controls.caa_effective_from_date.disable(),
+       this.formData.controls.caa_effective_to_date.disable(),
+       this.formData.controls.caa_system_generated_no.disable(),
+       this.formData.controls.caa_principal_lossline_ac.disable(),
+       this.formData.controls.caa_recovery_lossline_ac.disable();
+       this.formData.controls.caa_charge_off_ac.disable();
+       this.formData.controls.caa_number_generation.disable();
+       this.formData.controls.caa_system_gen_no.disable();
+       this.formData.controls.caa_number_generation_code.disable();
+      //interest details
+       this.formData.controls.caa_pl_ac_ccy.disable();
+       this.formData.controls.caa_int_receivale_applicable.disable();
+       this.formData.controls.caa_normal_int_receivable_ac.disable();
+      this.formData.controls.caa_penal_int_receivable_ac.disable();
+      this.formData.controls.caa_normal_int_received_ac.disable();
+      this.formData.controls.caa_penal_int_received_ac.disable();
+      this.formData.controls.caa_advance_int_ac.disable();
+      this.formData.controls.caa_dr_int_compounding_freq.disable();
+      this.formData.controls.caa_int_cal_freq_dr_week.disable();
+      this.formData.controls.caa_app_discounted_int_rate.disable();
+      this.formData.controls.caa_int_cal_freq_dr_day.disable();
+      this.formData.controls.caa_int_cal_freq_dr_date.disable();
+      this.formData.controls.caa_int_cal_freq_dr_holiday.disable();
+  
+      // end of interest details
+  
+      this.formData.controls.caa_max_sanction_limit.disable();
+      this.formData.controls.caa_norm_int_product_method.disable();
+      this.formData.controls.caa_ac_statement_charged_by.disable();
+      // caa_max_sanction_limit:[''],
+      this.formData.controls.caa_dr_bal_limit.disable();
+      this.formData.controls.caa_max_penal_int.disable();
+      this.formData.controls.caa_ledger_follio_fee.disable();
+      this.formData.controls.caa_inactive_ac_abnormal_trans_limit.disable();
+      this.formData.controls.caa_dormant_ac_abnormal_trans_limit.disable();
+      this.formData.controls.caa_duration_to_mark_ac_inactive.disable();
+      this.formData.controls.caa_duration_from_inactive_to_dormant.disable()
+      this.formData.controls.caa_dormant_fee.disable();
+      this.formData.controls.caa_inactive_fee.disable();
+      // caa_norm_int_product_method:[''],
+      this.formData.controls.caa_calc_freq_dr_week.disable();
+      // caa_calc_freq_dr_week:[''],
+      // caa_calc_freq_dr_week:[''],
+      this.formData.controls.caa_allow_sweeps.disable();
+      this.formData.controls.caa_allow_debit_against_unclear_bal.disable();
+      // caa_calc_freq_dr_week:[''],
+      this.formData.controls.caa_calc_freq_dr_day.disable()
+      this.formData.controls.caa_calc_freq_dr_date.disable()
+      this.formData.controls.caa_calc_freq_dr_holiday.disable()
 
   }
   getPage() {
@@ -502,19 +528,22 @@ export class CurrentSchemeComponent implements OnInit {
       this.scheme_code = this.message.scheme_code;
       this.scheme_type = this.message.scheme_type;
       this.scheme_code_desc = this.message.scheme_code_desc;
-
+       
+      console.log(this.message);
+      
       if (this.function_type == "A-Add") {
         // open empty forms
         this.formData = this.fb.group({
 
 
-          caa_function_type: [''],
-          caa_scheme_code: [''],
-          caa_scheme_type: [''],
-          caa_scheme_code_desc: [''],
-      
-          caa_effective_from_date:[''],
-          caa_effective_to_date:[''],
+      caa_function_type: [''],
+      caa_scheme_code: [this.scheme_code],
+      caa_scheme_type: [this.scheme_type],
+      caa_scheme_code_desc: [this.scheme_code_desc], 
+
+      //General Details
+     caa_effective_from_date:[''],
+     caa_effective_to_date:[''],
     caa_system_generated_no:[''],
     caa_principal_lossline_ac:[''],
     caa_recovery_lossline_ac:[''],
@@ -541,6 +570,7 @@ export class CurrentSchemeComponent implements OnInit {
 
     caa_max_sanction_limit:[''],
     caa_norm_int_product_method:[''],
+    caa_ac_statement_charged_by:[''],
     // caa_max_sanction_limit:[''],
     caa_dr_bal_limit:[''],
     caa_max_penal_int:[''],
@@ -579,91 +609,82 @@ export class CurrentSchemeComponent implements OnInit {
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
-        this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentscheme(this.int_tbl_code).subscribe(res => {
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentschemeCode(params).subscribe(res=>{
+
           this.results = res;
+
+          console.log(this.results);
+          
           this.formData = this.fb.group({
 
-            function_type: [this.function_type],
-            scheme_code: [this.int_tbl_code],
-            scheme_type: [this.scheme_type],
-            scheme_code_desc: [this.scheme_code_desc],
+            caa_function_type: [this.function_type],
+            caa_scheme_code: [this.scheme_code],
+            caa_scheme_type: [this.scheme_type],
+            caa_scheme_code_desc: [this.scheme_code_desc], 
 
-            cr_normal_int: [this.results.cr_normal_int],
-            ac_ccy: [this.results.ac_ccy],
-            home_ccy: [this.results.home_ccy],
-            int_receivale_app: [this.results.int_receivale_app],
-            norm_int_rec_ac: [this.results.norm_int_rec_ac],
-            penal_int_rec_ac: [this.results.penal_int_rec_ac],
-            adv_int_ac: [this.results.adv_int_ac],
-            dr_int_comp_freq: [this.results.dr_int_comp_freq],
-            booking_tran_scrpt: [this.results.booking_tran_scrpt],
-            app_dic_int_rate: [this.results.app_dic_int_rate],
-            int_cal_freq_dr: [this.results.int_cal_freq_dr],
-            int_cal_freq_dr_week: [this.results.int_cal_freq_dr_week],
-            int_cal_freq_dr_day: [this.results.int_cal_freq_dr_day],
-            int_cal_freq_dr_date: [this.results.int_cal_freq_dr_date],
-            int_cal_freq_dr_holiday: [this.results.int_cal_freq_dr_holiday],
-            loan_amt_min: [this.results.loan_amt_min],
-            loan_amt_max: [this.results.loan_amt_max],
-            period_mm_dd_min: [this.results.period_mm_dd_min],
-            period_mm_dd_max: [this.results.period_mm_dd_max],
-            max_all_age_limit: [this.results.max_all_age_limit],
-            loan_rep_method: [this.results.loan_rep_method],
-            hold_opertaive_ac: [this.results.hold_opertaive_ac],
-            upfront_inst_coll: [this.results.upfront_inst_coll],
-            int_base: [this.results.int_base],
-            int_product: [this.results.int_product],
-            int_routed_thr: [this.results.int_routed_thr],
-            fee_routed_thr: [this.results.fee_routed_thr],
-            loan_int_ac: [this.results.loan_int_ac],
-            penal_int_reco: [this.results.penal_int_reco],
-            equated_installment: [this.results.equated_installment],
-            ei_in: [this.results.ei_in],
-            ei_formula: [this.results.ei_formula],
-            ei_round_off: [this.results.ei_round_off],
-            int_comp_freq: [this.results.int_comp_freq],
-            ei_payment_freq: [this.results.ei_payment_freq],
-            int_rest_freq: [this.results.int_rest_freq],
-            ei_rest_basis: [this.results.ei_rest_basis],
-            shift_inst_for_holiday: [this.results.shift_inst_for_holiday],
-            maturity_date: [this.results.maturity_date],
-            holiday_period_in: [this.results.holiday_period_in],
-            upfrnt_inst_coll: [this.results.upfrnt_inst_coll],
-            int_prod: [this.results.int_prod],
-            penal_int_rec: [this.results.penal_int_rec],
-            max_all_age_lmt: [this.results.max_all_age_lmt],
-            hold_operative_ac: [this.results.hold_operative_ac],
-            int_routed_thrgh: [this.results.int_routed_thrgh],
-            fee_routed_thrgh: [this.results.fee_routed_thrgh],
-            penal_int_recognition: [this.results.penal_int_recognition],
-            dpd: [this.results.dpd],
-            class_main: [this.results.class_main],
-            class_sub: [this.results.class_sub],
-            int_accrue: [this.results.int_accrue],
-            int_book: [this.results.int_book],
-            int_aply: [this.results.int_aply],
-            past_due: [this.results.past_due],
-            manual: [this.results.manual],
-            ac_int_suspense: [this.results.ac_int_suspense],
-            ac_penal_int_suspense: [this.results.ac_penal_int_suspense],
-            prov_dr: [this.results.prov_dr],
-            prov_cr: [this.results.prov_cr],
-            record_del: [this.results.record_del],
-            fee_type: [this.results.fee_type],
-            fee_event: [this.results.fee_event],
-            method: [this.results.method],
-            deductable: [this.results.deductable],
-            multiple: [this.results.multiple],
-            amortize: [this.results.amortize],
-            demand_flow: [this.results.demand_flow],
-            dr_placeholder: [this.results.dr_placeholder],
-            cr_placeholder: [this.results.cr_placeholder],
-            apr: [this.results.apr],
-            eir: [this.results.eir],
-            amort_tenor: [this.results.amort_tenor],
-            max_no_of_assesment: [this.results.max_no_of_assesment],
+            id:[this.results.id],
+                    //General Details
+            caa_effective_from_date:[this.results.caa_effective_from_date],
+            caa_effective_to_date:[this.results.caa_effective_to_date],
+            caa_system_generated_no:[this.results.caa_system_generated_no],
+            caa_principal_lossline_ac:[this.results.caa_principal_lossline_ac],
+            caa_recovery_lossline_ac:[this.results.caa_recovery_lossline_ac],
+            caa_charge_off_ac:[this.results.caa_charge_off_ac],
+            caa_number_generation:[this.results.caa_number_generation],
+            caa_system_gen_no:[this.results.caa_system_gen_no],
+            caa_number_generation_code:[this.results.caa_number_generation_code],
+            //interest details
+            caa_pl_ac_ccy:[this.results.caa_pl_ac_ccy],
+            caa_int_receivale_applicable:[this.results.caa_int_receivale_applicable],
+            caa_normal_int_receivable_ac:[this.results.caa_normal_int_receivable_ac],
+            caa_penal_int_receivable_ac:[this.results.caa_penal_int_receivable_ac],
+            caa_normal_int_received_ac:[this.results.caa_normal_int_received_ac],
+            caa_penal_int_received_ac:[this.results.caa_penal_int_received_ac],
+            caa_advance_int_ac:[this.results.caa_advance_int_ac],
+            caa_dr_int_compounding_freq:[this.results.caa_dr_int_compounding_freq],
+            caa_int_cal_freq_dr_week:[this.results.caa_int_cal_freq_dr_week],
+            caa_app_discounted_int_rate:[this.results.caa_app_discounted_int_rate],
+            caa_int_cal_freq_dr_day:[this.results.caa_int_cal_freq_dr_day],
+            caa_int_cal_freq_dr_date:[this.results.caa_int_cal_freq_dr_date],
+            caa_int_cal_freq_dr_holiday:[this.results.caa_int_cal_freq_dr_holiday],
+
+            // end of interest details
+
+            caa_max_sanction_limit:[this.results.caa_max_sanction_limit],
+            caa_norm_int_product_method:[this.results.caa_norm_int_product_method],
+            caa_ac_statement_charged_by:[this.results.caa_ac_statement_charged_by],
+            // caa_max_sanction_limit:[''],
+            caa_dr_bal_limit:[this.results.caa_dr_bal_limit],
+            caa_max_penal_int:[this.results.caa_max_penal_int],
+            caa_ledger_follio_fee:[this.results.caa_ledger_follio_fee],
+            caa_inactive_ac_abnormal_trans_limit:[this.results.caa_inactive_ac_abnormal_trans_limit],
+            caa_dormant_ac_abnormal_trans_limit:[this.results.caa_dormant_ac_abnormal_trans_limit],
+            caa_duration_to_mark_ac_inactive:[this.results.caa_duration_to_mark_ac_inactive],
+            caa_duration_from_inactive_to_dormant:[this.results.caa_duration_from_inactive_to_dormant],
+            caa_dormant_fee:[this.results.caa_dormant_fee],
+            caa_inactive_fee:[this.results.caa_inactive_fee],
+            // caa_norm_int_product_method:[''],
+            caa_calc_freq_dr_week:[this.results.caa_calc_freq_dr_week],
+            // caa_calc_freq_dr_week:[''],
+            // caa_calc_freq_dr_week:[''],
+            caa_allow_sweeps:[this.results.caa_allow_sweeps],
+            caa_allow_debit_against_unclear_bal:[this.results.caa_allow_debit_against_unclear_bal],
+            // caa_calc_freq_dr_week:[''],
+            caa_calc_freq_dr_day:[this.results.caa_calc_freq_dr_day],
+            caa_calc_freq_dr_date:[this.results.caa_calc_freq_dr_date],
+            caa_calc_freq_dr_holiday:[this.results.caa_calc_freq_dr_holiday],
+            // caa_calc_freq_dr_week:[''],
+            // caa_calc_freq_dr_day:[''],
+            // caa_calc_freq_dr_date:[''],
+            // caa_calc_freq_dr_holiday:[''],
+                  
+                  caa_fees: new FormArray([]),
+                  caa_glsubheads: new FormArray([])
 
           });
+          // this.disabledFormControll();
         }, err => {
           this.error = err;
           this._snackBar.open(this.error, "Try again!", {
@@ -672,7 +693,7 @@ export class CurrentSchemeComponent implements OnInit {
             duration: 3000,
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
-          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+          // this.ngZone.run(() => this.router.navigateByUrl(''));
         })
       }
       else if (this.function_type == "M-Modify") {
@@ -680,98 +701,84 @@ export class CurrentSchemeComponent implements OnInit {
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
-        this.params = new HttpParams()
-          .set('event_id', this.event_id)
-          .set('event_type', this.event_type);
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
         // call to disable edit
-        this.subscription = this.currentSchemeAPI.getCurrentschemeId(this.params).subscribe(res => {
+        this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentschemeCode(params).subscribe(res => {
 
           this.results = res;
+          console.log("modifying data",this.results);
+          
           this.formData = this.fb.group({
 
-            function_type: [this.function_type],
-            scheme_code: [this.scheme_code],
-            scheme_type: [this.scheme_type],
-            scheme_code_desc: [this.scheme_code_desc],
+            
+            caa_function_type: [this.function_type],
+            caa_scheme_code: [this.scheme_code],
+            caa_scheme_type: [this.scheme_type],
+            caa_scheme_code_desc: [this.scheme_code_desc], 
 
-            cr_normal_int: [this.results.cr_normal_int],
-            ac_ccy: [this.results.ac_ccy],
-            home_ccy: [this.results.home_ccy],
-            int_receivale_app: [this.results.int_receivale_app],
-            norm_int_rec_ac: [this.results.norm_int_rec_ac],
-            penal_int_rec_ac: [this.results.penal_int_rec_ac],
-            adv_int_ac: [this.results.adv_int_ac],
-            dr_int_comp_freq: [this.results.dr_int_comp_freq],
-            booking_tran_scrpt: [this.results.booking_tran_scrpt],
-            app_dic_int_rate: [this.results.app_dic_int_rate],
-            int_cal_freq_dr: [this.results.int_cal_freq_dr],
-            int_cal_freq_dr_week: [this.results.int_cal_freq_dr_week],
-            int_cal_freq_dr_day: [this.results.int_cal_freq_dr_day],
-            int_cal_freq_dr_date: [this.results.int_cal_freq_dr_date],
-            int_cal_freq_dr_holiday: [this.results.int_cal_freq_dr_holiday],
-            loan_amt_min: [this.results.loan_amt_min],
-            loan_amt_max: [this.results.loan_amt_max],
-            period_mm_dd_min: [this.results.period_mm_dd_min],
-            period_mm_dd_max: [this.results.period_mm_dd_max],
-            max_all_age_limit: [this.results.max_all_age_limit],
-            loan_rep_method: [this.results.loan_rep_method],
-            hold_opertaive_ac: [this.results.hold_opertaive_ac],
-            upfront_inst_coll: [this.results.upfront_inst_coll],
-            int_base: [this.results.int_base],
-            int_product: [this.results.int_product],
-            int_routed_thr: [this.results.int_routed_thr],
-            fee_routed_thr: [this.results.fee_routed_thr],
-            loan_int_ac: [this.results.loan_int_ac],
-            penal_int_reco: [this.results.penal_int_reco],
-            equated_installment: [this.results.equated_installment],
-            ei_in: [this.results.ei_in],
-            ei_formula: [this.results.ei_formula],
-            ei_round_off: [this.results.ei_round_off],
-            int_comp_freq: [this.results.int_comp_freq],
-            ei_payment_freq: [this.results.ei_payment_freq],
-            int_rest_freq: [this.results.int_rest_freq],
-            ei_rest_basis: [this.results.ei_rest_basis],
-            shift_inst_for_holiday: [this.results.shift_inst_for_holiday],
-            maturity_date: [this.results.maturity_date],
-            holiday_period_in: [this.results.holiday_period_in],
-            upfrnt_inst_coll: [this.results.upfrnt_inst_coll],
-            int_prod: [this.results.int_prod],
-            penal_int_rec: [this.results.penal_int_rec],
-            max_all_age_lmt: [this.results.max_all_age_lmt],
-            hold_operative_ac: [this.results.hold_operative_ac],
-            int_routed_thrgh: [this.results.int_routed_thrgh],
-            fee_routed_thrgh: [this.results.fee_routed_thrgh],
-            penal_int_recognition: [this.results.penal_int_recognition],
-            dpd: [this.results.dpd],
-            class_main: [this.results.class_main],
-            class_sub: [this.results.class_sub],
-            int_accrue: [this.results.int_accrue],
-            int_book: [this.results.int_book],
-            int_aply: [this.results.int_aply],
-            past_due: [this.results.past_due],
-            manual: [this.results.manual],
-            ac_int_suspense: [this.results.ac_int_suspense],
-            ac_penal_int_suspense: [this.results.ac_penal_int_suspense],
-            prov_dr: [this.results.prov_dr],
-            prov_cr: [this.results.prov_cr],
-            record_del: [this.results.record_del],
-            fee_type: [this.results.fee_type],
-            fee_event: [this.results.fee_event],
-            method: [this.results.method],
-            deductable: [this.results.deductable],
-            multiple: [this.results.multiple],
-            amortize: [this.results.amortize],
-            demand_flow: [this.results.demand_flow],
-            dr_placeholder: [this.results.dr_placeholder],
-            cr_placeholder: [this.results.cr_placeholder],
-            apr: [this.results.apr],
-            eir: [this.results.eir],
-            amort_tenor: [this.results.amort_tenor],
-            max_no_of_assesment: [this.results.max_no_of_assesment],
+            id:[this.results.id],
+                    //General Details
+            caa_effective_from_date:[this.results.caa_effective_from_date],
+            caa_effective_to_date:[this.results.caa_effective_to_date],
+            caa_system_generated_no:[this.results.caa_system_generated_no],
+            caa_principal_lossline_ac:[this.results.caa_principal_lossline_ac],
+            caa_recovery_lossline_ac:[this.results.caa_recovery_lossline_ac],
+            caa_charge_off_ac:[this.results.caa_charge_off_ac],
+            caa_number_generation:[this.results.caa_number_generation],
+            caa_system_gen_no:[this.results.caa_system_gen_no],
+            caa_number_generation_code:[this.results.caa_number_generation_code],
+            //interest details
+            caa_pl_ac_ccy:[this.results.caa_pl_ac_ccy],
+            caa_int_receivale_applicable:[this.results.caa_int_receivale_applicable],
+            caa_normal_int_receivable_ac:[this.results.caa_normal_int_receivable_ac],
+            caa_penal_int_receivable_ac:[this.results.caa_penal_int_receivable_ac],
+            caa_normal_int_received_ac:[this.results.caa_normal_int_received_ac],
+            caa_penal_int_received_ac:[this.results.caa_penal_int_received_ac],
+            caa_advance_int_ac:[this.results.caa_advance_int_ac],
+            caa_dr_int_compounding_freq:[this.results.caa_dr_int_compounding_freq],
+            caa_int_cal_freq_dr_week:[this.results.caa_int_cal_freq_dr_week],
+            caa_app_discounted_int_rate:[this.results.caa_app_discounted_int_rate],
+            caa_int_cal_freq_dr_day:[this.results.caa_int_cal_freq_dr_day],
+            caa_int_cal_freq_dr_date:[this.results.caa_int_cal_freq_dr_date],
+            caa_int_cal_freq_dr_holiday:[this.results.caa_int_cal_freq_dr_holiday],
+
+            // end of interest details
+
+            caa_max_sanction_limit:[this.results.caa_max_sanction_limit],
+            caa_norm_int_product_method:[this.results.caa_norm_int_product_method],
+            caa_ac_statement_charged_by:[this.results.caa_ac_statement_charged_by],
+            // caa_max_sanction_limit:[''],
+            caa_dr_bal_limit:[this.results.caa_dr_bal_limit],
+            caa_max_penal_int:[this.results.caa_max_penal_int],
+            caa_ledger_follio_fee:[this.results.caa_ledger_follio_fee],
+            caa_inactive_ac_abnormal_trans_limit:[this.results.caa_inactive_ac_abnormal_trans_limit],
+            caa_dormant_ac_abnormal_trans_limit:[this.results.caa_dormant_ac_abnormal_trans_limit],
+            caa_duration_to_mark_ac_inactive:[this.results.caa_duration_to_mark_ac_inactive],
+            caa_duration_from_inactive_to_dormant:[this.results.caa_duration_from_inactive_to_dormant],
+            caa_dormant_fee:[this.results.caa_dormant_fee],
+            caa_inactive_fee:[this.results.caa_inactive_fee],
+            // caa_norm_int_product_method:[''],
+            caa_calc_freq_dr_week:[this.results.caa_calc_freq_dr_week],
+            // caa_calc_freq_dr_week:[''],
+            // caa_calc_freq_dr_week:[''],
+            caa_allow_sweeps:[this.results.caa_allow_sweeps],
+            caa_allow_debit_against_unclear_bal:[this.results.caa_allow_debit_against_unclear_bal],
+            // caa_calc_freq_dr_week:[''],
+            caa_calc_freq_dr_day:[this.results.caa_calc_freq_dr_day],
+            caa_calc_freq_dr_date:[this.results.caa_calc_freq_dr_date],
+            caa_calc_freq_dr_holiday:[this.results.caa_calc_freq_dr_holiday],
+            // caa_calc_freq_dr_week:[''],
+            // caa_calc_freq_dr_day:[''],
+            // caa_calc_freq_dr_date:[''],
+            // caa_calc_freq_dr_holiday:[''],
+                  
+                  caa_fees: new FormArray([]),
+                  caa_glsubheads: new FormArray([])
           });
         }, err => {
           this.error = err;
-          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+          // this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
           this._snackBar.open(this.error, "Try again!", {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
@@ -783,9 +790,194 @@ export class CurrentSchemeComponent implements OnInit {
       }
       else if (this.function_type == "V-Verify") {
         // Populate data with rotected fileds only verification is enabled
+        // find by event id
+        this.showContractInput = true;
+        // call to disable edit
+        this.disabledFormControll();
+        // hide Buttons
+        this.isEnabled = false;
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentschemeCode(params).subscribe(res=>{
+
+          this.results = res;
+
+          console.log(this.results);
+          
+          this.formData = this.fb.group({
+
+            caa_function_type: [this.function_type],
+            caa_scheme_code: [this.scheme_code],
+            caa_scheme_type: [this.scheme_type],
+            caa_scheme_code_desc: [this.scheme_code_desc], 
+
+            id:[this.results.id],
+                    //General Details
+            caa_effective_from_date:[this.results.caa_effective_from_date],
+            caa_effective_to_date:[this.results.caa_effective_to_date],
+            caa_system_generated_no:[this.results.caa_system_generated_no],
+            caa_principal_lossline_ac:[this.results.caa_principal_lossline_ac],
+            caa_recovery_lossline_ac:[this.results.caa_recovery_lossline_ac],
+            caa_charge_off_ac:[this.results.caa_charge_off_ac],
+            caa_number_generation:[this.results.caa_number_generation],
+            caa_system_gen_no:[this.results.caa_system_gen_no],
+            caa_number_generation_code:[this.results.caa_number_generation_code],
+            //interest details
+            caa_pl_ac_ccy:[this.results.caa_pl_ac_ccy],
+            caa_int_receivale_applicable:[this.results.caa_int_receivale_applicable],
+            caa_normal_int_receivable_ac:[this.results.caa_normal_int_receivable_ac],
+            caa_penal_int_receivable_ac:[this.results.caa_penal_int_receivable_ac],
+            caa_normal_int_received_ac:[this.results.caa_normal_int_received_ac],
+            caa_penal_int_received_ac:[this.results.caa_penal_int_received_ac],
+            caa_advance_int_ac:[this.results.caa_advance_int_ac],
+            caa_dr_int_compounding_freq:[this.results.caa_dr_int_compounding_freq],
+            caa_int_cal_freq_dr_week:[this.results.caa_int_cal_freq_dr_week],
+            caa_app_discounted_int_rate:[this.results.caa_app_discounted_int_rate],
+            caa_int_cal_freq_dr_day:[this.results.caa_int_cal_freq_dr_day],
+            caa_int_cal_freq_dr_date:[this.results.caa_int_cal_freq_dr_date],
+            caa_int_cal_freq_dr_holiday:[this.results.caa_int_cal_freq_dr_holiday],
+
+            // end of interest details
+
+            caa_max_sanction_limit:[this.results.caa_max_sanction_limit],
+            caa_norm_int_product_method:[this.results.caa_norm_int_product_method],
+            caa_ac_statement_charged_by:[this.results.caa_ac_statement_charged_by],
+            // caa_max_sanction_limit:[''],
+            caa_dr_bal_limit:[this.results.caa_dr_bal_limit],
+            caa_max_penal_int:[this.results.caa_max_penal_int],
+            caa_ledger_follio_fee:[this.results.caa_ledger_follio_fee],
+            caa_inactive_ac_abnormal_trans_limit:[this.results.caa_inactive_ac_abnormal_trans_limit],
+            caa_dormant_ac_abnormal_trans_limit:[this.results.caa_dormant_ac_abnormal_trans_limit],
+            caa_duration_to_mark_ac_inactive:[this.results.caa_duration_to_mark_ac_inactive],
+            caa_duration_from_inactive_to_dormant:[this.results.caa_duration_from_inactive_to_dormant],
+            caa_dormant_fee:[this.results.caa_dormant_fee],
+            caa_inactive_fee:[this.results.caa_inactive_fee],
+            // caa_norm_int_product_method:[''],
+            caa_calc_freq_dr_week:[this.results.caa_calc_freq_dr_week],
+            // caa_calc_freq_dr_week:[''],
+            // caa_calc_freq_dr_week:[''],
+            caa_allow_sweeps:[this.results.caa_allow_sweeps],
+            caa_allow_debit_against_unclear_bal:[this.results.caa_allow_debit_against_unclear_bal],
+            // caa_calc_freq_dr_week:[''],
+            caa_calc_freq_dr_day:[this.results.caa_calc_freq_dr_day],
+            caa_calc_freq_dr_date:[this.results.caa_calc_freq_dr_date],
+            caa_calc_freq_dr_holiday:[this.results.caa_calc_freq_dr_holiday],
+            // caa_calc_freq_dr_week:[''],
+            // caa_calc_freq_dr_day:[''],
+            // caa_calc_freq_dr_date:[''],
+            // caa_calc_freq_dr_holiday:[''],
+                  
+                  caa_fees: new FormArray([]),
+                  caa_glsubheads: new FormArray([])
+
+          });
+          // this.disabledFormControll();
+        }, err => {
+          this.error = err;
+          this._snackBar.open(this.error, "Try again!", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 3000,
+            panelClass: ['red-snackbar', 'login-snackbar'],
+          });
+          // this.ngZone.run(() => this.router.navigateByUrl(''));
+        })
+        
       }
-      else if (this.function_type == "C-Cancle") {
+      else if (this.function_type == "X-Delete") {
         // should open a page with data and show remove button
+         // find by event id
+         this.showContractInput = true;
+         // call to disable edit
+         this.disabledFormControll();
+         // hide Buttons
+         this.isEnabled = false;
+         let params = new HttpParams()
+         .set("scheme_code", this.scheme_code);     
+         this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentschemeCode(params).subscribe(res=>{
+ 
+           this.results = res;
+ 
+           console.log(this.results);
+           
+           this.formData = this.fb.group({
+ 
+             caa_function_type: [this.function_type],
+             caa_scheme_code: [this.scheme_code],
+             caa_scheme_type: [this.scheme_type],
+             caa_scheme_code_desc: [this.scheme_code_desc], 
+ 
+             id:[this.results.id],
+                     //General Details
+             caa_effective_from_date:[this.results.caa_effective_from_date],
+             caa_effective_to_date:[this.results.caa_effective_to_date],
+             caa_system_generated_no:[this.results.caa_system_generated_no],
+             caa_principal_lossline_ac:[this.results.caa_principal_lossline_ac],
+             caa_recovery_lossline_ac:[this.results.caa_recovery_lossline_ac],
+             caa_charge_off_ac:[this.results.caa_charge_off_ac],
+             caa_number_generation:[this.results.caa_number_generation],
+             caa_system_gen_no:[this.results.caa_system_gen_no],
+             caa_number_generation_code:[this.results.caa_number_generation_code],
+             //interest details
+             caa_pl_ac_ccy:[this.results.caa_pl_ac_ccy],
+             caa_int_receivale_applicable:[this.results.caa_int_receivale_applicable],
+             caa_normal_int_receivable_ac:[this.results.caa_normal_int_receivable_ac],
+             caa_penal_int_receivable_ac:[this.results.caa_penal_int_receivable_ac],
+             caa_normal_int_received_ac:[this.results.caa_normal_int_received_ac],
+             caa_penal_int_received_ac:[this.results.caa_penal_int_received_ac],
+             caa_advance_int_ac:[this.results.caa_advance_int_ac],
+             caa_dr_int_compounding_freq:[this.results.caa_dr_int_compounding_freq],
+             caa_int_cal_freq_dr_week:[this.results.caa_int_cal_freq_dr_week],
+             caa_app_discounted_int_rate:[this.results.caa_app_discounted_int_rate],
+             caa_int_cal_freq_dr_day:[this.results.caa_int_cal_freq_dr_day],
+             caa_int_cal_freq_dr_date:[this.results.caa_int_cal_freq_dr_date],
+             caa_int_cal_freq_dr_holiday:[this.results.caa_int_cal_freq_dr_holiday],
+ 
+             // end of interest details
+ 
+             caa_max_sanction_limit:[this.results.caa_max_sanction_limit],
+             caa_norm_int_product_method:[this.results.caa_norm_int_product_method],
+             caa_ac_statement_charged_by:[this.results.caa_ac_statement_charged_by],
+             // caa_max_sanction_limit:[''],
+             caa_dr_bal_limit:[this.results.caa_dr_bal_limit],
+             caa_max_penal_int:[this.results.caa_max_penal_int],
+             caa_ledger_follio_fee:[this.results.caa_ledger_follio_fee],
+             caa_inactive_ac_abnormal_trans_limit:[this.results.caa_inactive_ac_abnormal_trans_limit],
+             caa_dormant_ac_abnormal_trans_limit:[this.results.caa_dormant_ac_abnormal_trans_limit],
+             caa_duration_to_mark_ac_inactive:[this.results.caa_duration_to_mark_ac_inactive],
+             caa_duration_from_inactive_to_dormant:[this.results.caa_duration_from_inactive_to_dormant],
+             caa_dormant_fee:[this.results.caa_dormant_fee],
+             caa_inactive_fee:[this.results.caa_inactive_fee],
+             // caa_norm_int_product_method:[''],
+             caa_calc_freq_dr_week:[this.results.caa_calc_freq_dr_week],
+             // caa_calc_freq_dr_week:[''],
+             // caa_calc_freq_dr_week:[''],
+             caa_allow_sweeps:[this.results.caa_allow_sweeps],
+             caa_allow_debit_against_unclear_bal:[this.results.caa_allow_debit_against_unclear_bal],
+             // caa_calc_freq_dr_week:[''],
+             caa_calc_freq_dr_day:[this.results.caa_calc_freq_dr_day],
+             caa_calc_freq_dr_date:[this.results.caa_calc_freq_dr_date],
+             caa_calc_freq_dr_holiday:[this.results.caa_calc_freq_dr_holiday],
+             // caa_calc_freq_dr_week:[''],
+             // caa_calc_freq_dr_day:[''],
+             // caa_calc_freq_dr_date:[''],
+             // caa_calc_freq_dr_holiday:[''],
+                   
+                   caa_fees: new FormArray([]),
+                   caa_glsubheads: new FormArray([])
+ 
+           });
+           // this.disabledFormControll();
+         }, err => {
+           this.error = err;
+           this._snackBar.open(this.error, "Try again!", {
+             horizontalPosition: this.horizontalPosition,
+             verticalPosition: this.verticalPosition,
+             duration: 3000,
+             panelClass: ['red-snackbar', 'login-snackbar'],
+           });
+           // this.ngZone.run(() => this.router.navigateByUrl(''));
+         })
       }
     })
   }
@@ -814,14 +1006,9 @@ export class CurrentSchemeComponent implements OnInit {
 
   onSubmit() {
 
-    this.selecteddateFrom =  this.f.caa_effective_from_date.value.toLocaleDateString(),
-    this.fomartedFromDate  =this.datepipe.transform(this.selecteddateFrom, 'yyyy-MM-ddTHH:mm:ss');
 
-    this.selecteddateTo =  this.f.caa_effective_to_date.value.toLocaleDateString(),
-    this.fomartedToDate  =this.datepipe.transform(this.selecteddateTo, 'yyyy-MM-ddTHH:mm:ss');
-    
-    this.formData.controls.caa_effective_from_date.setValue(this.fomartedFromDate)
-    this.formData.controls.caa_effective_to_date.setValue(this.fomartedToDate)
+    this.formData.controls.caa_effective_from_date.setValue(this.datepipe.transform(this.f.caa_effective_from_date.value, 'yyyy-MM-ddTHH:mm:ss'));
+    this.formData.controls.caa_effective_to_date.setValue(this.datepipe.transform(this.f.caa_effective_to_date.value, 'yyyy-MM-ddTHH:mm:ss'));
 
     console.log(this.formData.value);
 
@@ -848,7 +1035,7 @@ export class CurrentSchemeComponent implements OnInit {
         })
       } else if (this.function_type == "M-Modify") {
         this.eventId = this.actRoute.snapshot.paramMap.get('event_id');
-        this.subscription = this.currentSchemeAPI.updateCurrentscheme(this.eventId, this.formData.value).subscribe(res => {
+        this.subscription = this.currentSchemeAPI.updateCurrentScheme(this.formData.value).subscribe(res => {
           this.results = res;
           this._snackBar.open("Executed Successfully!", "X", {
             horizontalPosition: this.horizontalPosition,
@@ -865,6 +1052,8 @@ export class CurrentSchemeComponent implements OnInit {
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
         })
+      } else if (this.function_type == "V-Verify"){
+
       }
     } else {
       this._snackBar.open("Invalid Form Data", "Try again!", {

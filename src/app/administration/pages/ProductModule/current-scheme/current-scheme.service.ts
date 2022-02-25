@@ -60,6 +60,19 @@ export class CurrentSchemeService {
         catchError(this.errorMgmt)
       )
   }
+  getCurrentschemeByCurrentschemeCode(params:any): Observable<any> {
+    console.log("Server",params);
+    
+    let API_URL = `${this.baseURL}/find/by/`;
+    return this.http.get(API_URL, { params:params, withCredentials: false })
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
+  }
+                                         
   checkEntryIfExist(params:any): Observable<any> {
     let API_URL = `${this.baseURL}/check/entry/if/exist`;
     return this.http.get(API_URL, { params:params, withCredentials: false })
@@ -80,13 +93,22 @@ export class CurrentSchemeService {
         catchError(this.errorMgmt)
       )
   }
-  updateCurrentscheme(Currentscheme: string | null, data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/update/${Currentscheme}`;
+  // updateCurrentscheme(Currentscheme: string | null, data: any): Observable<any> {
+  //   let API_URL = `${this.baseURL}/update/${Currentscheme}`;
+  //   return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
+  //     .pipe(
+  //       catchError(this.errorMgmt)
+  //     )
+  // }
+
+  updateCurrentScheme( data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/update/`;
     return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
       .pipe(
         catchError(this.errorMgmt)
       )
   }
+
   deleteCurrentscheme(id: any): Observable<any> {
     var API_URL = `${this.baseURL}/delete/${id}`;
     return this.http.delete(API_URL, { withCredentials: false })

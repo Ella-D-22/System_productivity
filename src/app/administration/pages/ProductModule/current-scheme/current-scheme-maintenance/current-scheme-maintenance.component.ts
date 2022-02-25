@@ -53,7 +53,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   scheme_code: any; 
   scheme_type: any;
   functionArray: any = [
-    'A-Add','I-Inquire','M-Modify','V-Verify','X-Cancel'
+    'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
@@ -120,12 +120,6 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/current-scheme/data/view'));
               }, err=>{
 
-                // TODO:
-                //Remove
-              // this.currentSchemeAPI.changeMessage(this.formData.value)
-              // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
-
-                // exist else show error
                 this.error = err;
                   this.loading = false;
                   this._snackBar.open(this.error, "Try again!", {
@@ -138,13 +132,12 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
               })
             }else{
               this.currentSchemeAPI.changeMessage(this.formData.value)
-              // this.dialogRef.close({ event: 'close', data:this.formData.value });
-            //  this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
+             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/current-scheme/data/view'));
+
+              
             }
       
-            // checkHitcm
-      
-            // check if adding 
+           
         }else{
           this.loading = false;
           this._snackBar.open("Invalid Form Data", "Try again!", {

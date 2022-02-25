@@ -81,7 +81,7 @@ export class BranchesMaintenanceComponent implements OnInit {
   onSubmit(){
     this.loading = true;
     this.submitted = true;
-    if(this.formData.valid){
+    if(this.formData.valid){   
     this.branchAPI.changeMessage(this.formData.value)
     this.ngZone.run(() => this.router.navigateByUrl('system/branches/data/view'));
   }else{
