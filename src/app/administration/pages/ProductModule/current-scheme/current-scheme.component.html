@@ -825,18 +825,13 @@
           Submit
         </button>
         <br>
-        <!-- <button *ngIf="deleting" class="pull-right" mat-raised-button color="warn" type="submit">
-          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-          Delete
-        </button> -->
-        <br />
-              <!-- Button trigger modal -->
+     <!-- Button trigger modal -->
       <button type="button"  *ngIf="deleting" class="pull-right" mat-raised-button color="warn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Delete
-         </button>
-    
+      </button>
+     <br>
       <!-- Modal -->
-          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -853,6 +848,7 @@
               </div>
             </div>
           </div>
+          <br>
       </form>
   
   
