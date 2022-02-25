@@ -1053,7 +1053,7 @@ export class CurrentSchemeComponent implements OnInit {
           });
         })
       } else if (this.function_type == "V-Verify"){
-
+       
       }
     } else {
       this._snackBar.open("Invalid Form Data", "Try again!", {
