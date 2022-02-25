@@ -27,6 +27,7 @@ export class CurrentSchemeComponent implements OnInit {
   loading = false;
   isDisabled = false;
   isEnabled = true;
+  deleting = false;
   flagArray: any = [
 
     'Y', 'N'
@@ -700,6 +701,7 @@ export class CurrentSchemeComponent implements OnInit {
         // Populate fields with data and allow modifications
         //load the page with form data submit disabled
         // find by event id
+        this.isEnabled = true;
         this.showContractInput = true;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
@@ -795,7 +797,7 @@ export class CurrentSchemeComponent implements OnInit {
         // call to disable edit
         this.disabledFormControll();
         // hide Buttons
-        this.isEnabled = false;
+        this.isEnabled = true;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
         this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentschemeCode(params).subscribe(res=>{
@@ -892,6 +894,7 @@ export class CurrentSchemeComponent implements OnInit {
          this.disabledFormControll();
          // hide Buttons
          this.isEnabled = false;
+         this.deleting = true;
          let params = new HttpParams()
          .set("scheme_code", this.scheme_code);     
          this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentschemeCode(params).subscribe(res=>{
@@ -1033,7 +1036,7 @@ export class CurrentSchemeComponent implements OnInit {
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
         })
-      } else if (this.function_type == "M-Modify") {
+      } else if (this.function_type != "A-Add") {
         this.eventId = this.actRoute.snapshot.paramMap.get('event_id');
         this.subscription = this.currentSchemeAPI.updateCurrentScheme(this.formData.value).subscribe(res => {
           this.results = res;
@@ -1052,8 +1055,6 @@ export class CurrentSchemeComponent implements OnInit {
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
         })
-      } else if (this.function_type == "V-Verify"){
-       
       }
     } else {
       this._snackBar.open("Invalid Form Data", "Try again!", {
