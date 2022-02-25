@@ -831,7 +831,7 @@
         </button> -->
         <br />
               <!-- Button trigger modal -->
-      <button type="button"  *ngIf="deleting" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <button type="button"  *ngIf="deleting" class="pull-right" mat-raised-button color="warn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Delete
          </button>
     
@@ -841,7 +841,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="staticBackdropLabel">Confirm</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close"></button>
                 </div>
                 <div class="modal-body">
                   <p>Do you wish to delete the data ?</p>
