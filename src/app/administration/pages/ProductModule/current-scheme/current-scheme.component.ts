@@ -328,13 +328,13 @@ export class CurrentSchemeComponent implements OnInit {
     });
   }
 
-  initGlSUbheadForm() {
+  initGlSubheadForm() {
     this.newData = true;
     this.glSubheadData = this.fb.group({
-      gl_subhead: [''],
-      gl_subhead_description: [''],
-      gl_subhead_deafault: [''],
-      is_gl_subhead_deleted: ['']
+    caa_gl_subhead: [''],
+    caa_gl_subhead_description: [''],
+    caa_gl_subhead_deafault: [''],
+    caa_is_gl_subhead_deleted: ['']
     })
   }
 
@@ -394,11 +394,6 @@ export class CurrentSchemeComponent implements OnInit {
     });
     const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
     this.glSubheadArray.splice(index, i);
-
-
-
-    
-
   }
 
   get g() { return this.formData.controls; }
@@ -417,8 +412,6 @@ export class CurrentSchemeComponent implements OnInit {
     }
   }
 
-
-  
   previewGlSubheads(){
     if(this.glSubheadData.valid){
       if(this.glSubheadArray.length<1){
@@ -430,7 +423,7 @@ export class CurrentSchemeComponent implements OnInit {
         this.glSubheadData.value
         ));
         this.glSubheadArray.push(this.glSubheadData.value);
-        this.initGlSUbheadForm();
+        this.initGlSubheadForm();
      }
    }
   
