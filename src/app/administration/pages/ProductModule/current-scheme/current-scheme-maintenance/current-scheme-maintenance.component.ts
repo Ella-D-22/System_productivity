@@ -9,6 +9,7 @@ import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { SchemeTypeLookupComponent } from '../../../SystemConfigurations/GlobalParams/scheme-type/scheme-type-lookup/scheme-type-lookup.component';
 import { LoanproductLookupComponent } from '../../loanproduct/loanproduct-lookup/loanproduct-lookup.component';
 import { LoanproductService } from '../../loanproduct/loanproduct.service';
+import { CurrentSchemeLookupComponent } from '../current-scheme-lookup/current-scheme-lookup.component';
 import { CurrentSchemeService } from '../current-scheme.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   lookupdata: any;
   lookupData: any;
   scheme_type_id: any;
+  existingData = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -53,7 +55,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   scheme_code: any; 
   scheme_type: any;
   functionArray: any = [
-    'A-Add','I-Inquire','M-Modify','V-Verify','X-Cancel'
+    'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
@@ -63,11 +65,15 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   });
 
   schemeCodeLookup(): void {
-    const dialogRef = this.dialog.open(LoanproductLookupComponent, {
+    const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
+      height:'400px',
+      width:'600px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupdata= result.data;
-      this.scheme_code = this.lookupdata.scheme_code;
+      console.log(this.lookupData);
+      
+      this.scheme_code = this.lookupdata.caa_scheme_code;
       this.formData.controls.scheme_code.setValue(this.scheme_code);
     });
   }
@@ -83,19 +89,15 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
     });
   }
 
-
-  onChange(state:any){
-    this.function_type = state.target.value;
-    switch(this.function_type){
-      case "1: add":
-        // this.addEventId();
-        break;
-      case "2: enquire":
-          break;
-      case "3: update":
-            break;
-      case "4: remove":
-          break;
+  onSelectFunction(event:any){
+    if(event.target.value != "A-Add"){
+      this.existingData = true;
+      // this.formData.controls.scheme_code.setValue("")
+      // this.formData.controls.scheme_code.setValidators([Validators.required])
+    }else if(event.target.value == "A-Add"){
+      // this.formData.controls.scheme_code.setValidators([])
+      // this.formData.controls.scheme_code.setValue("");
+      this.existingData = false;
     }
   }
  
@@ -120,12 +122,6 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/current-scheme/data/view'));
               }, err=>{
 
-                // TODO:
-                //Remove
-              // this.currentSchemeAPI.changeMessage(this.formData.value)
-              // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
-
-                // exist else show error
                 this.error = err;
                   this.loading = false;
                   this._snackBar.open(this.error, "Try again!", {
@@ -138,13 +134,9 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
               })
             }else{
               this.currentSchemeAPI.changeMessage(this.formData.value)
-              // this.dialogRef.close({ event: 'close', data:this.formData.value });
-            //  this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
+             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/current-scheme/data/view'));
+              
             }
-      
-            // checkHitcm
-      
-            // check if adding 
         }else{
           this.loading = false;
           this._snackBar.open("Invalid Form Data", "Try again!", {

@@ -68,7 +68,7 @@ export class SavingsSchemeComponent implements OnInit {
    //  debitIntCompFreqArray: any = [
   //   'Daily','Monthly', 'Quarterly','No compounding'
   //  ]
-  
+
    daysArray: any = [
      'Moday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
    ]
@@ -165,18 +165,14 @@ export class SavingsSchemeComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("Gl Subhead data", result);
       this.gl_subhead = result.data;
-      this.gl_subhead_description =  result.data.subhead_description;
-      this.gl_subhead_code =  result.data.subhead_code;
+      this.gl_subhead_description =  result.data.glSubheadDescription;
+      this.gl_subhead_code =  result.data.glSubheadCode;  
        // this.eventtypedata = result.data;
       this.glsubheadFormData.controls.sba_gl_subhead.setValue(this.gl_subhead_code);
       this.glsubheadFormData.controls.sba_gl_subhead_description.setValue(this.gl_subhead_description);
     });
   }
-
-  
-  
   dt = new Date();
   month = this.dt.getMonth();
   year = this.dt.getFullYear();
@@ -395,6 +391,7 @@ BackdatedTransactionLookup(): void {
 
         sba_no__of_withdrawals:[''],
         sba_no_int_if_withdwl_exceeded:[''],
+        sba_ac_statement_charged_by:[''],
         sba_min_balance_with_chq:[''],
         sba_dr_bal_limit:[''],
         sba_ledger_folio_fee:[''],
@@ -553,14 +550,29 @@ BackdatedTransactionLookup(): void {
            }
          }
 
+        //  previewGlSubheads(){
+        //   if(this.glsubheadFormData.valid){
+        //     this.l.push(this.fb.group(
+        //       this.glsubheadFormData.value
+        //       ));
+        //       this.glSubheadArray.push(this.glsubheadFormData.value);
+        //       console.log("Gl Subheads", this.glSubheadArray);
+        //       this.initLoanForm();
+        //    }
+        //  }
+
          previewGlSubheads(){
           if(this.glsubheadFormData.valid){
+            if(this.glSubheadArray.length<1){
+              this.glsubheadFormData.controls.sba_gl_subhead_deafault.setValue("Yes");
+            }else{
+              this.glsubheadFormData.controls.sba_gl_subhead_deafault.setValue("No");
+            }
             this.l.push(this.fb.group(
               this.glsubheadFormData.value
               ));
               this.glSubheadArray.push(this.glsubheadFormData.value);
-              console.log("Gl Subheads", this.glSubheadArray);
-              this.initLoanForm();
+              this.initGlSUbheadForm();
            }
          }
          
@@ -755,11 +767,16 @@ BackdatedTransactionLookup(): void {
           // find by event id
           this.showContractInput = true;
           // call to disable edit
-          this.disabledFormControll();
+          // this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
-          this.subscription = this.sbaAPI.getSavingschemeBySavingscheme(this.int_tbl_code).subscribe(res=>{
+
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+          this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
+            console.log("This is the respond from the database",res);
+            
             this.formData = this.fb.group({
 
               function_type: [this.function_type],

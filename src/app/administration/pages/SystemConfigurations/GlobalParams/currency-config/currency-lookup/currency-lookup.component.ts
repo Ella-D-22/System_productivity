@@ -22,7 +22,9 @@ export class CurrencyLookupComponent implements OnInit {
     this.getData();
   }
   getData(){
-    this.subscription = this.currencyAPI.getAllActiveCurrencys().subscribe(res=>{
+    this.subscription = this.currencyAPI.getCurrencys().subscribe(res=>{
+      console.log("Hey data responded", res);
+      
       this.currencyData = res;
     })
   }

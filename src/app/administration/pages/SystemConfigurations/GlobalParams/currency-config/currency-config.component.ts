@@ -71,8 +71,6 @@ export class CurrencyConfigComponent implements OnInit {
         }
       })
     }
-
-
       ac_placeholder = "";
       min_amt_ccy = "";
       max_amt_ccy = "";
@@ -106,11 +104,12 @@ export class CurrencyConfigComponent implements OnInit {
           this.formData.controls.is_verified.disable();
           // open empty forms
           this.formData = this.fb.group({
+            id:[''],
             ccy: ['', [Validators.required]],
             country: ['', [Validators.required]],
             ccy_name: ['', [Validators.required]],
-            is_deleted: [''],
-            is_verified: [''],
+            is_deleted: [false],
+            is_verified: [false],
           });
         }
         else if(this.function_type == "I-Inquire"){
@@ -121,6 +120,7 @@ export class CurrencyConfigComponent implements OnInit {
           this.subscription = this.currencyAPI.getCurrencyId(this.ccy_id).subscribe(res=>{
             this.results = res;
             this.formData = this.fb.group({
+              id:[this.results.id],
               ccy: [this.results.ccy, [Validators.required]],
               country: [this.results.country, [Validators.required]],
               ccy_name: [this.results.ccy_name, [Validators.required]],
@@ -139,7 +139,6 @@ export class CurrencyConfigComponent implements OnInit {
           })
         }
         else if(this.function_type == "M-Modify"){
-
           this.formData.controls.is_deleted.disable();
           this.formData.controls.is_verified.disable();
 
@@ -147,6 +146,7 @@ export class CurrencyConfigComponent implements OnInit {
             this.results = res;
             this.currency_id = this.results.id;
             this.formData = this.fb.group({
+              id:[this.results.id],
               ccy: [this.results.ccy, [Validators.required]],
               country: [this.results.country, [Validators.required]],
               ccy_name: [this.results.ccy_name, [Validators.required]],
@@ -165,19 +165,16 @@ export class CurrencyConfigComponent implements OnInit {
           })
         }
         else if(this.function_type == "V-Verify"){
-          // call to disable edit
-          this.disabledFormControll();
-        this.formData.controls.is_verified.enable();
-          // show Buttons
           this.subscription = this.currencyAPI.getCurrencyId(this.ccy_id).subscribe(res=>{
             this.results = res;
             this.currency_id = this.results.id;
             this.formData = this.fb.group({
+              id:[this.results.id],
               ccy: [this.results.ccy, [Validators.required]],
               country: [this.results.country, [Validators.required]],
               ccy_name: [this.results.ccy_name, [Validators.required]],
               is_deleted: [this.results.is_deleted],
-              is_verified: [this.results.is_verified],
+              is_verified: [true],
             });
           }, err=>{
             this.error = err;
@@ -191,19 +188,15 @@ export class CurrencyConfigComponent implements OnInit {
           })
         }
         else if(this.function_type == "X-Delete"){
-
-          // call to disable edit
-          this.disabledFormControll();
-        this.formData.controls.is_deleted.enable();
-          // show Buttons
           this.subscription = this.currencyAPI.getCurrencyId(this.ccy_id).subscribe(res=>{
             this.results = res;
             this.currency_id = this.results.id;
             this.formData = this.fb.group({
+              id:[this.results.id],
               ccy: [this.results.ccy, [Validators.required]],
               country: [this.results.country, [Validators.required]],
               ccy_name: [this.results.ccy_name, [Validators.required]],
-              is_deleted: [this.results.is_deleted],
+              is_deleted: [true],
               is_verified: [this.results.is_verified],
             });
           }, err=>{
@@ -216,7 +209,7 @@ export class CurrencyConfigComponent implements OnInit {
                 panelClass: ['red-snackbar','login-snackbar'],
               });
           })
-        }     
+        }    
       })
       }
       // convenience getter for easy access to form fields

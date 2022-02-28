@@ -116,8 +116,13 @@ export class GlCodeComponent implements OnInit {
           this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
+          console.log("this is the code", this.glCode);
+          
           this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res=>{
+            
             this.results = res;
+            console.log("this is the res", res);
+            
             this.formData = this.fb.group({
               glCode:[this.glCode, [Validators.required]],
               glDescription:[this.results.entity.glDescription],

@@ -66,7 +66,9 @@
                     <label class="start pull-left">Principal Lossline A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" formControlName="oda_principal_lossline_ac" class="form-control" />
+                    <input  type="text" formControlName="oda_principal_lossline_ac" class="form-control" />
+                    <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+
                     <!-- <input  type="number" formControlName="oda_cr_int_prcnt_max" class="form-control-sub"/> -->
                     </div>
                 </div>
@@ -77,7 +79,8 @@
                     <label class="start pull-left">Recovery Lossline A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input  type="number" formControlName="oda_recovery_lossline_ac" class="form-control" />
+                    <input  type="text" formControlName="oda_recovery_lossline_ac" class="form-control" />
+                    <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
                     <!-- <input  type="number" formControlName="oda_dr_int_prcnt_max" class="form-control form-control-sub"/> -->
                   </div>
                 </div>
@@ -90,7 +93,8 @@
                     <label class="start pull-left">Charge Off A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" formControlName="oda_charge_off_ac" class="form-control" />
+                    <input  type="text" formControlName="oda_charge_off_ac" class="form-control" />
+                    <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
                     <!-- <input  type="number" formControlName="oda_cr_int_prcnt_max" class="form-control-sub"/> -->
                     </div>
                 </div>
@@ -122,7 +126,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12">
-                <div class="form-group" *ngIf="this.showNumber_gen_code">
+                <div class="form-group" *ngIf="this.showSystem_gen_no">
                   <div class="col-md-6 col-sm-12 form-column ">
                     <label class="start pull-left">System Generated No.</label>
                   </div>
@@ -130,7 +134,7 @@
                     <input  type="number" formControlName="oda_system_gen_no" class="form-control" />
                     </div>
                 </div>
-                <div class="form-group" *ngIf="this.showSystem_gen_no">
+                <div class="form-group" *ngIf="this.showNumber_gen_code">
                   <div class="col-md-6 col-sm-12 form-column ">
                     <label class="start pull-left">Number Generation Code</label>
                   </div>
@@ -621,7 +625,7 @@
             </div> 
            </div>
            <div class="col-md-6 col-sm-12">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="col-md-6 col-sm-12 form-column ">
                <label class="start pull-left">Default</label>
               </div>
@@ -632,7 +636,7 @@
                 </mat-radio-group>
                 <mat-checkbox class="example-margin" formControlName="oda_is_gl_subhead_deleted">Del Record</mat-checkbox>
               </div>
-           </div>              
+           </div>               -->
          </div>
          </div>
   

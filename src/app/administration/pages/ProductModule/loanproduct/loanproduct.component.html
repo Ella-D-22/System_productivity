@@ -467,7 +467,7 @@
                     <label class="start pull-left">Flow Offset based on</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="laa_fee_amortize">
+                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="laa_flow_offset_based_on">
                       <mat-radio-button (change)="onChronologicalOrder($event)" value="Chronological order">Chronological order.</mat-radio-button>
                       <mat-radio-button (change)="onOffsetSequence($event)" value="Offset sequence">Offset sequence.</mat-radio-button>
                     </mat-radio-group>
@@ -1359,7 +1359,7 @@
           </div> 
          </div>
          <div class="col-md-6 col-sm-12">
-          <div class="form-group">
+          <!-- <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
              <label class="start pull-left">Default</label>
             </div>
@@ -1370,7 +1370,7 @@
               </mat-radio-group>
               <mat-checkbox class="example-margin" formControlName="laa_is_gl_subhead_deleted">Del Record</mat-checkbox>
             </div>
-         </div>              
+         </div>               -->
        </div>
        </div>
 
@@ -1785,7 +1785,7 @@
 
   </mat-tab-group>
       <br />
-      <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+      <button class="pull-right" mat-raised-button color="primary" type="submit">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Submit
       </button>

@@ -62,20 +62,6 @@ export class CurrencyMaintenanceComponent implements OnInit {
     });
   }
 
-  onChange(state:any){
-    this.function_type = state.target.value;
-    switch(this.function_type){
-      case "1: add":
-        this.addEventId();
-        break;
-      case "2: enquire":
-          break;
-      case "3: update":
-            break;
-      case "4: remove":
-          break;
-    }
-  }
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.showCurrencyId = true;

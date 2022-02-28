@@ -83,15 +83,18 @@ import { ExceptionsCodesComponent } from './pages/SystemConfigurations/GlobalPar
 import { ExceptionsCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-maintenance/exceptions-codes-maintenance.component';
 import { ExceptionsCodesLookupComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-lookup/exceptions-codes-lookup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AccountModuleComponent } from './pages/account-module/account-module.component';
-import { AccountMaintenanceComponent } from './pages/account-module/account-maintenance/account-maintenance.component';
-import { AccountLookupComponent } from './pages/account-module/account-lookup/account-lookup.component';
 import { CollateralComponent } from './pages/collateral/collateral.component';
 import { CollateralMaintenanceComponent } from './pages/collateral/collateral-maintenance/collateral-maintenance.component';
 import { CollateralLookupComponent } from './pages/collateral/collateral-lookup/collateral-lookup.component';
 import { BranchesComponent } from './pages/branches/branches.component';
 import { BranchesLookupComponent } from './pages/branches/branches-lookup/branches-lookup.component';
 import { BranchesMaintenanceComponent } from './pages/branches/branches-maintenance/branches-maintenance.component';
+import { CashTransactionsComponent } from './pages/transactions/transactions/cash-transactions/cash-transactions.component';
+import { TransactionMaintainanceComponent } from './pages/transactions/transactions/transaction-maintainance/transaction-maintainance.component';
+import { AccountComponent } from './pages/transactions/lookup/account/account.component';
+import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
+import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
+import { LoanAccountLookupComponent } from './pages/loan-account/loan-account-lookup/loan-account-lookup.component';
 
 
 @NgModule({
@@ -171,15 +174,23 @@ import { BranchesMaintenanceComponent } from './pages/branches/branches-maintena
     ExceptionsCodesComponent,
     ExceptionsCodesMaintenanceComponent,
     ExceptionsCodesLookupComponent,
-    AccountModuleComponent,
-    AccountMaintenanceComponent,
-    AccountLookupComponent,
+    // AccountModuleComponent,
+    // AccountMaintenanceComponent,
+    // AccountLookupComponent,
     CollateralComponent,
     CollateralMaintenanceComponent,
     CollateralLookupComponent,
     BranchesComponent,
     BranchesLookupComponent,
     BranchesMaintenanceComponent,
+
+    CashTransactionsComponent,
+    TransactionMaintainanceComponent,
+    AccountComponent,
+
+    LoanAccountComponent,
+    LoanAccountMaintainanceComponent,
+    LoanAccountLookupComponent
     
   ],
   imports: [

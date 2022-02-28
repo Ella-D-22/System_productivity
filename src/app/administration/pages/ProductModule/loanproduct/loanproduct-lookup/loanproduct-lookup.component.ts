@@ -66,8 +66,6 @@ export class LoanproductLookupComponent implements OnInit, OnDestroy {
     getData() {
       this.subscription = this.loanProductAPi.getLoanproducts().subscribe(res => {
        this.data = res;
-       console.log("these are products",res);
-       
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;

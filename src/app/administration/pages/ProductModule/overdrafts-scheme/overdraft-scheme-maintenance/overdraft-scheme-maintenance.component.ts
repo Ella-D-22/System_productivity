@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { SchemeTypeLookupComponent } from '../../../SystemConfigurations/GlobalParams/scheme-type/scheme-type-lookup/scheme-type-lookup.component';
 import { LoanproductLookupComponent } from '../../loanproduct/loanproduct-lookup/loanproduct-lookup.component';
+import {OverdraftSchemeLookupComponent} from '../overdraft-scheme-lookup/overdraft-scheme-lookup.component'
 import { LoanproductService } from '../../loanproduct/loanproduct.service';
 import { OverdraftService } from '../overdraft.service';
 
@@ -62,11 +63,12 @@ export class OverdraftSchemeMaintenanceComponent implements OnInit {
   });
 
   schemeCodeLookup(): void {
-    const dialogRef = this.dialog.open(LoanproductLookupComponent, {
+    const dialogRef = this.dialog.open(OverdraftSchemeLookupComponent, {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupdata= result.data;
-      this.scheme_code = this.lookupdata.scheme_code;
+      console.log(result)
+      this.scheme_code = this.lookupdata.oda_scheme_code;
       this.formData.controls.scheme_code.setValue(this.scheme_code);
     });
   }
@@ -108,41 +110,9 @@ export class OverdraftSchemeMaintenanceComponent implements OnInit {
           if(this.formData.valid){
             // this.int_tbl_code = this.f.int_tbl_code.value;
             this.function_type =  this.f.function_type.value;
-            if(this.function_type == "A-Add"){
-              // console.log("found here", this.int_tbl_code)
-              // check if code exists
-              this.params = new HttpParams()
-              .set('scheme_code', this.f.scheme_code.value);
-
-              console.log("data value",  this.f.scheme_code.value);
-              
-              this.subscription = this.odaAPI.checkEntryIfExist(this.params).subscribe(res=>{
-                // not available else proceed
-              this.odaAPI.changeMessage(this.formData.value)
-             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/overdraft-scheme/data/view'));
-              }, err=>{
-
-                // TODO:
-                //Remove
-              // this.odaAPI.changeMessage(this.formData.value)
-              // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
-
-                // exist else show error
-                this.error = err;
-                  this.loading = false;
-                  this._snackBar.open(this.error, "Try again!", {
-                    horizontalPosition: this.horizontalPosition,
-                    verticalPosition: this.verticalPosition,
-                    duration: 3000,
-                    panelClass: ['red-snackbar','login-snackbar'],
-                  });
       
-              })
-            }else{
-              this.odaAPI.changeMessage(this.formData.value)
-              // this.dialogRef.close({ event: 'close', data:this.formData.value });
-            //  this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
-            }
+            this.odaAPI.changeMessage(this.formData.value)
+            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/overdraft-scheme/data/view'));
       
             // checkHitcm
       

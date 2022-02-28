@@ -1,0 +1,32 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Type Text To Search">
+  </mat-form-field> 
+       <div *ngIf="isLoadingResults">
+      <mat-spinner style="margin:0 auto;" [diameter]="40"></mat-spinner>
+    </div>
+  <div class="mat-elevation-z8">
+  
+  <table mat-table [dataSource]="dataSource" matSort>
+  
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Code </th>
+      <td mat-cell *matCellDef="let account"> {{account.acid}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Description </th>
+      <td mat-cell *matCellDef="let account"> {{account.accountName}} </td>
+    </ng-container>
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr (click)="onSelect(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  </div>
+  
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

@@ -66,6 +66,28 @@ export class TermDepositServiceService {
         catchError(this.errorMgmt)
       )
   }
+
+
+  getproductBySchemeCode(params:any): Observable<any> {
+    // console.log("Server",params);
+    let API_URL = `${this.baseURL}/find/by/`;
+    return this.http.get(API_URL, { params:params, withCredentials: false })
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
+  }
+
+  updateproduct( data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/update/`;
+    return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
+      .pipe(
+        catchError(this.errorMgmt)
+      )
+  }
+
   checkEntryIfExist(params:any): Observable<any> {
     let API_URL = `${this.baseURL}/check/entry/if/exist`;
     return this.http.get(API_URL, { params:params, withCredentials: false })
