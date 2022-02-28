@@ -52,6 +52,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   loading = false;
   submitted = false;
   scheme_code: any; 
+  scheme_code_desc: any;
   scheme_type: any;
   functionArray: any = [
     'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
@@ -65,27 +66,30 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
 
   schemeCodeLookup(): void {
     const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
-      height:'400px',
-      width:'600px'
+      // height:'400px',
+      // width:'700px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupdata= result.data;
       console.log(this.lookupData);
       
       this.scheme_code = this.lookupdata.caa_scheme_code;
+      this.scheme_code_desc = this.lookupData.caa_scheme_code_desc;
       this.formData.controls.scheme_code.setValue(this.scheme_code);
+      this.formData.controls.scheme_code_desc.setValue(this.scheme_code_desc)
     });
   }
 
   schemeTypeLookup(): void {
     const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
-      height:'400px',
-      width:'600px'
+      // height:'400px',
+      // width:'700px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
       this.scheme_type = this.lookupData.caa_scheme_type;
       this.formData.controls.scheme_type.setValue(this.scheme_type);
+      
     });
   }
 

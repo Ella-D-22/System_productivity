@@ -128,6 +128,7 @@ export class CurrentSchemeComponent implements OnInit {
       this.event_type_code = result.data.code;
       this.event_type_desc = result.data.description;
       this.feeFormData.controls.caa_fee_type.setValue(this.event_type_code);
+      // this.feeFormData.controls.caa_scheme_code_desc.setValue(this.event_type_desc);
     });
   }
 
@@ -352,21 +353,6 @@ export class CurrentSchemeComponent implements OnInit {
   editLoanFeeForm(i: any) {
     this.newData = false;
     this.arrayIndex = this.feeArray[i];
-    this.feeFormData = this.fb.group({
-      fee_type: [this.feeArray[i].fee_type],
-      fee_event: [this.feeArray[i].fee_event],
-      method: [this.feeArray[i].method],
-      deductable: [this.feeArray[i].deductable],
-      multiple: [this.feeArray[i].multiple],
-      amortize: [this.feeArray[i].amortize],
-      demand_flow: [this.feeArray[i].demand_flow],
-      dr_placeholder: [this.feeArray[i].dr_placeholder],
-      cr_placeholder: [this.feeArray[i].cr_placeholder],
-      apr: [this.feeArray[i].apr],
-      eir: [this.feeArray[i].eir],
-      amort_tenor: [this.feeArray[i].amort_tenor],
-      max_no_of_assesment: [this.feeArray[i].max_no],
-    });
 
     this.feeFormData = this.fb.group({
       caa_fee_type:[this.feeArray[i].caa_fee_type],
@@ -388,8 +374,30 @@ export class CurrentSchemeComponent implements OnInit {
       
     });
 
+    
+
     const index: number = this.feeArray.indexOf(this.feeArray.values);
     this.feeArray.splice(index, i);
+
+  }
+
+  editGlSubhead(i: any){
+    this.newData = false;
+    this.arrayIndex = this.glSubheadArray[i];
+
+    this.glSubheadData = this.fb.group({
+      caa_gl_subhead:[this.glSubheadArray[i].caa_gl_subhead],
+      caa_gl_subhead_description:[this.glSubheadArray[i].caa_gl_subhead_description],
+      caa_gl_subhead_deafault:[this.glSubheadArray[i].caa_gl_subhead_deafault],
+      caa_is_gl_subhead_deleted:[this.glSubheadArray[i].caa_is_gl_subhead_deleted]
+
+    });
+    const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
+    this.glSubheadArray.splice(index, i);
+
+
+
+    
 
   }
 
@@ -409,16 +417,22 @@ export class CurrentSchemeComponent implements OnInit {
     }
   }
 
-  previewGlSubheads() {
-    if (this.glSubheadData.valid) {
+
+  
+  previewGlSubheads(){
+    if(this.glSubheadData.valid){
+      if(this.glSubheadArray.length<1){
+        this.glSubheadData.controls.caa_gl_subhead_deafault.setValue("Yes");
+      }else{
+        this.glSubheadData.controls.caa_gl_subhead_deafault.setValue("No");
+      }
       this.l.push(this.fb.group(
         this.glSubheadData.value
-      ));
-      this.glSubheadArray.push(this.glSubheadData.value);
-      console.log("Gl Subheads", this.glSubheadArray);
-      this.initLoanForm();
-    }
-  }
+        ));
+        this.glSubheadArray.push(this.glSubheadData.value);
+        this.initGlSUbheadForm();
+     }
+   }
   
 
   updateLoanFee(i: any) {
@@ -529,11 +543,12 @@ export class CurrentSchemeComponent implements OnInit {
       this.function_type = this.message.function_type;
       this.scheme_code = this.message.scheme_code;
       this.scheme_type = this.message.scheme_type;
-      this.scheme_code_desc = this.message.scheme_code_desc;
        
       console.log(this.message);
       
       if (this.function_type == "A-Add") {
+      this.scheme_code_desc = this.message.scheme_code_desc;
+
         // open empty forms
         this.formData = this.fb.group({
 
@@ -690,8 +705,8 @@ export class CurrentSchemeComponent implements OnInit {
             // caa_calc_freq_dr_date:[''],
             // caa_calc_freq_dr_holiday:[''],
                   
-                  caa_fees: new FormArray([]),
-                  caa_glsubheads: new FormArray([])
+                  // caa_fees: new FormArray([]),
+                  // caa_glsubheads: new FormArray([])
 
           });
           // this.disabledFormControll();
@@ -719,14 +734,17 @@ export class CurrentSchemeComponent implements OnInit {
 
           this.results = res;
           console.log("modifying data",this.results);
-          
+          this.feeArray = this.results.caa_fees;
+          this.glSubheadArray = this.results.caa_glsubheads;
+
+              
           this.formData = this.fb.group({
 
             
             caa_function_type: [this.function_type],
             caa_scheme_code: [this.scheme_code],
             caa_scheme_type: [this.scheme_type],
-            caa_scheme_code_desc: [this.scheme_code_desc], 
+            caa_scheme_code_desc: [this.results.scheme_code_desc], 
 
             id:[this.results.id],
                     //General Details
@@ -784,8 +802,8 @@ export class CurrentSchemeComponent implements OnInit {
             // caa_calc_freq_dr_date:[''],
             // caa_calc_freq_dr_holiday:[''],
                   
-                  caa_fees: new FormArray([]),
-                  caa_glsubheads: new FormArray([])
+             caa_fees:[this.feeArray],
+            caa_glsubheads:[this.glSubheadArray]
           });
         }, err => {
           this.error = err;
@@ -814,6 +832,8 @@ export class CurrentSchemeComponent implements OnInit {
           this.results = res;
 
           console.log(this.results);
+          this.feeArray = this.results.caa_fees;
+          this.glSubheadArray = this.results.caa_glsubheads;
           
           this.formData = this.fb.group({
 
@@ -911,6 +931,8 @@ export class CurrentSchemeComponent implements OnInit {
          this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentschemeCode(params).subscribe(res=>{
  
            this.results = res;
+           this.feeArray = this.results.caa_fees;
+          this.glSubheadArray = this.results.caa_glsubheads;
  
            console.log(this.results);
            
@@ -1079,3 +1101,5 @@ export class CurrentSchemeComponent implements OnInit {
     }
   }
 }
+
+

@@ -133,7 +133,7 @@ export class GlSubheadComponent implements OnInit {
             deletedBy: [""],
             deletedTime: [""],
             glCode: [""],
-            glSubheadCode: ["45789"],
+            glSubheadCode: [""],
             glSubheadDescription: [""],
             modifiedBy: [""],
             modifiedTime: [""],
