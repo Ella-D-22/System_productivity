@@ -140,8 +140,8 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log("Gl Subhead data", result);
       this.gl_subhead = result.data;
-      this.gl_subhead_description = result.data.subhead_description;
-      this.gl_subhead_code = result.data.subhead_code;
+      this.gl_subhead_description = result.data.glSubheadDescription;
+      this.gl_subhead_code = result.data.glSubheadCode;
 
 
       // this.eventtypedata = result.data;
@@ -419,6 +419,7 @@ export class CurrentSchemeComponent implements OnInit {
       this.initLoanForm();
     }
   }
+  
 
   updateLoanFee(i: any) {
     this.t.push(this.fb.group(
@@ -572,6 +573,9 @@ export class CurrentSchemeComponent implements OnInit {
     caa_max_sanction_limit:[''],
     caa_norm_int_product_method:[''],
     caa_ac_statement_charged_by:[''],
+    caa_ac_stmt_chrg_fixed_amt:[''],
+    caa_ac_stmt_chrg_per_page:[''],
+
     // caa_max_sanction_limit:[''],
     caa_dr_bal_limit:[''],
     caa_max_penal_int:[''],
@@ -617,6 +621,11 @@ export class CurrentSchemeComponent implements OnInit {
           this.results = res;
 
           console.log(this.results);
+
+          this.feeArray = this.results.caa_fees;
+          this.glSubheadArray = this.results.caa_glsubheads;
+          
+
           
           this.formData = this.fb.group({
 
