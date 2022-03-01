@@ -52,6 +52,8 @@ import { BranchesMaintenanceComponent } from './pages/branches/branches-maintena
 import { BranchesComponent } from './pages/branches/branches.component';
 import { CashTransactionsComponent } from './pages/transactions/transactions/cash-transactions/cash-transactions.component';
 import { TransactionMaintainanceComponent } from './pages/transactions/transactions/transaction-maintainance/transaction-maintainance.component';
+import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
+import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 
 const routes: Routes = [{
   path: '',
@@ -296,14 +298,14 @@ const routes: Routes = [{
       // *******************************************************************************************
 
       // Loan Product
-      // {
-      //   path: 'account/maintenance',
-      //   component:AccountMaintenanceComponent,
-      // },
-      // {
-      //   path: 'accounts/data/view',
-      //   component:AccountModuleComponent,
-      // },
+      {
+        path: 'account/maintenance',
+        component:LoanAccountMaintainanceComponent,
+      },
+      {
+        path: 'accounts/data/view',
+        component:LoanAccountComponent,
+      },
       // collateral
       {
         path: 'collateral/maintenance',

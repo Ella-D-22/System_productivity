@@ -10,6 +10,8 @@ export const environment = {
   accountsAPI: 'http://localhost:9099',
   collateralAPI:'http://localhost:9103',
   productAPI:'http://localhost:9100',
+
+
   // accountsAPI: 'http://localhost:9191'
 
   // AWS Server

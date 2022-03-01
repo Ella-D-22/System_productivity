@@ -81,7 +81,7 @@ export class BranchesComponent implements OnInit {
       
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+          this.ngZone.run(() => this.router.navigateByUrl('system/system/branches/maintenance'));
         }else{
           null;
         }
@@ -108,15 +108,22 @@ export class BranchesComponent implements OnInit {
       }
 
       getPage(){
+        console.log("got called");
+        
         this.subscription = this.branchAPI.currentMessage.subscribe(message =>{
           this.messageData = message;      
           this.function_type = this.messageData.function_type
-          this.solCode = this.messageData.solcode
+          this.solecode = this.messageData.solcode
+
+          console.log(this.solecode);
+          console.log("this are then code", this.message);
+          
+          
           
         if(this.function_type == "A-Add"){
           
           // open empty forms
-          this.formData.controls.solecode.setValue(this.solecode)
+          // this.formData.controls.solecode.setValue(this.solecode)
           
           this.formData = this.fb.group({
             solecode:[this.solecode, [Validators.required]],

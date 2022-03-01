@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1645718530893,
+  "timestamp": 1646111285446,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -12,13 +12,13 @@
       },
       "urls": [
         "/168.25d984add6566943c322.js",
-        "/9.1b287d6e4a6886481756.js",
+        "/9.e5e8f8e5702e202711fa.js",
         "/favicon.ico",
         "/index.html",
-        "/main.f0537cc8ea0cfe3d02e5.js",
+        "/main.e69298d52f5dc401c036.js",
         "/manifest.webmanifest",
         "/polyfills.9bbd2efa6e67618ec1e4.js",
-        "/runtime.97fdc5de44442e18e1c3.js",
+        "/runtime.48109cce9aeb7a1d5e09.js",
         "/scripts.07f07bb105d67525811c.js",
         "/styles.27061e1356407e87dc57.css"
       ],
@@ -1943,7 +1943,7 @@
   "dataGroups": [],
   "hashTable": {
     "/168.25d984add6566943c322.js": "308aee5af3fa32904bf1d189e501c83e6a54d999",
-    "/9.1b287d6e4a6886481756.js": "ab74014e1aac365db725eaa4f34c8cab992664d8",
+    "/9.e5e8f8e5702e202711fa.js": "8b715ec8d0434bbdf00f7ebf6b69091c349b38d9",
     "/assets/Images/Angular 8 - Role Based Authorization Tutorial with Example _ Jason Watmore's Blog.html": "f59919179b6c3aa29a94dc65fea86a86bbbcf00c",
     "/assets/Images/Angular 8 - Role Based Authorization Tutorial with Example _ Jason Watmore's Blog_files/4082908072-idpiframe.js.download": "45a7d89034dae5bc18c40bc0407918c9a57196ff",
     "/assets/Images/Angular 8 - Role Based Authorization Tutorial with Example _ Jason Watmore's Blog_files/6292180984": "58884fb0e24a399213205ad35db27e6011bd149c",
@@ -3844,11 +3844,11 @@
     "/assets/user2.png": "acf4acee2e41cf541ff93594bf4f6ba9a072ce8d",
     "/favicon.ico": "1d37bdf33ceea7337dd9d11d0dc638d7a0f98fac",
     "/hdbc.06c9cc8bacffaaf706c5.jpg": "209c2289f99788c8252531c283ea2a779c43dbd4",
-    "/index.html": "c4302339adaa63c59e4ee169e48e4e64d8b3cbb7",
-    "/main.f0537cc8ea0cfe3d02e5.js": "f55d2a5d5e1b8fdb44a1c6d1b6f130bf234f593b",
+    "/index.html": "7806502962d8365ebb525c3fb192893f6bbe94e8",
+    "/main.e69298d52f5dc401c036.js": "063b52e75a3c940745c17571b2dfa0594387cfdf",
     "/manifest.webmanifest": "fbcc9ab449c6cc27ace602959f6f66d9fac2e281",
     "/polyfills.9bbd2efa6e67618ec1e4.js": "6de5dc3f656ee9d5cb491a10eb8eeb6e0365cd1b",
-    "/runtime.97fdc5de44442e18e1c3.js": "d9c3d263d5898229f2571971c025e27b79fae89e",
+    "/runtime.48109cce9aeb7a1d5e09.js": "c91c93c364eabb64729ad8077fa1da1af568ed13",
     "/scripts.07f07bb105d67525811c.js": "126e8f981acf989f26ea06226e796ad7aa9ae747",
     "/sort_asc.4bba59196d7ce2619696.png": "4ed7eba22e4258db81fd79761ed5fc6d00c7dab7",
     "/sort_asc_disabled.07c018ae0160704a3290.png": "960aafb94a313744af3b6b5cfaced54024a429bf",

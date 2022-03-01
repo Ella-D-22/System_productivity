@@ -129,23 +129,21 @@ export class GlSubheadComponent implements OnInit {
           // open empty forms
           this.formData.controls.glSubheadCode.setValue(this.glSubheadCode)
           this.formData = this.fb.group({
-            deleteFlag: [""],
-            deletedBy: [""],
-            deletedTime: [""],
+            deleteFlag: ["N"],
+            deletedBy: ["N"],
+            deletedTime: [new Date()],
             glCode: [""],
-            glSubheadCode: ["45789"],
+            glSubheadCode: [this.glSubheadCode],
             glSubheadDescription: [""],
-            modifiedBy: [""],
-            modifiedTime: [""],
-            postedBy: ["AAA"],
+            modifiedBy: ["N"],
+            modifiedTime: [new Date()],
+            postedBy: ["USER"],
             postedFlag:["Y"],
             postedTime: [new Date()],
-            verifiedBy: ["AAA"],
-            verifiedFlag: ["Y"],
+            verifiedBy: ["N"],
+            verifiedFlag: ["N"],
             verifiedTime: [new Date()],
           });
-          console.log("This results",);
-          
           // this.formData.controls.code.disable();
         }
         else if(this.function_type == "I-Inquire"){
@@ -156,13 +154,20 @@ export class GlSubheadComponent implements OnInit {
           this.subscription = this.glSubheadCodeAPI.getGlSubheadCodeByCode(this.glSubheadCode).subscribe(res=>{
             this.results = res;
             this.formData = this.fb.group({
-              glCode:[this.results.entity.glCode],
-              glSubheadCode: [this.results.entity.glSubheadCode, [Validators.required]],
-              glSubheadDescription:[this.results.entity.glSubheadDescription],
-              postedBy:["User"],
-              modifiedBy:["User"]
-              
-
+            deleteFlag: [this.results.entity.deleteFlag],
+            deletedBy: [this.results.entity.deleteBy],
+            deletedTime: [this.results.entity.deletedTime],
+            glCode: [this.results.entity.glCode],
+            glSubheadCode: [this.results.entity.glSubheadCode],
+            glSubheadDescription: [this.results.entity.glSubheadDescription],
+            modifiedBy: [this.results.entity.modifiedBy],
+            modifiedTime: [this.results.entity.modifiedTime],
+            postedBy: [this.results.entity.postedBy],
+            postedFlag:[this.results.entity.postedFlag],
+            postedTime: [this.results.entity.postedTime],
+            verifiedBy: [this.results.entityverifiedBy],
+            verifiedFlag: [this.results.entity.verifiedFlag],
+            verifiedTime: [this.results.entity.verifiedTime],
             });
           }, err=>{
             this.error = err;
@@ -172,24 +177,32 @@ export class GlSubheadComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+            // this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
           })
         }
         else if(this.function_type == "M-Modify"){          
           this.subscription = this.glSubheadCodeAPI.getGlSubheadCodeByCode(this.glSubheadCode).subscribe(res=>{
             this.results = res;
             this.formData = this.fb.group({
-              sn:[this.results.entity.sn],
-              glCode:[this.results.entity.glCode],
-              glSubheadCode: [this.results.entity.glSubheadCode, [Validators.required]],
-              glSubheadDescription:[this.results.entity.glSubheadDescription],
-              postedBy:["User"],
-              modifiedBy:["User"]
+            deleteFlag: [this.results.entity.deleteFlag],
+            deletedBy: [this.results.entity.deletedBy],
+            deletedTime: [this.results.entity.deletedTime],
+            glCode: [this.results.entity.glCode],
+            glSubheadCode: [this.results.entity.glSubheadCode],
+            glSubheadDescription: [this.results.entity.glSubheadDescription],
+            modifiedBy: ["USER"],
+            modifiedTime: [this.results.entity.modifiedTime],
+            postedBy: [this.results.entity.postedBy],
+            postedFlag:[this.results.entity.postedFlag],
+            postedTime: [this.results.entity.postedTime],
+            verifiedBy: [this.results.entity.verifiedBy],
+            verifiedFlag: [this.results.entity.verifiedFlag],
+            verifiedTime: [this.results.entity.verifiedTime], 
             });
             this.formData.controls.glCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -198,12 +211,68 @@ export class GlSubheadComponent implements OnInit {
               });
           })
         }
-        else if(this.function_type == "V-Verify"){
-          // Populate data with rotected fileds only verification is enabled
+        else if(this.function_type == "V-Verify"){     
+          this.subscription = this.glSubheadCodeAPI.getGlSubheadCodeByCode(this.glSubheadCode).subscribe(res=>{
+            this.results = res;
+            this.formData = this.fb.group({
+            deleteFlag: [this.results.entity.deleteFlag],
+            deletedBy: [this.results.entity.deletedBy],
+            deletedTime: [this.results.entity.deletedTime],
+            glCode: [this.results.entity.glCode],
+            glSubheadCode: [this.results.entity.glSubheadCode],
+            glSubheadDescription: [this.results.entity.glSubheadDescription],
+            modifiedBy: [this.results.entity.modifiedBy],
+            modifiedTime: [this.results.entity.modifiedTime],
+            postedBy: [this.results.entity.postedBy],
+            postedFlag:[this.results.entity.postedFlag],
+            postedTime: [this.results.entity.postedTime],
+            verifiedBy: ["USER"],
+            verifiedFlag: ["Y"],
+            verifiedTime: [new Date()], 
+            });
+            this.formData.controls.glCode.disable();
+          }, err=>{
+            this.error = err;
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
+              this._snackBar.open(this.error, "Try again!", {
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+                duration: 3000,
+                panelClass: ['red-snackbar','login-snackbar'],
+              });
+          })
         }
-        else if(this.function_type == "C-Cancle"){
-          // should open a page with data and show remove button
-        } 
+        else if(this.function_type == "X-Delete"){     
+          this.subscription = this.glSubheadCodeAPI.getGlSubheadCodeByCode(this.glSubheadCode).subscribe(res=>{
+            this.results = res;
+            this.formData = this.fb.group({
+            deleteFlag: ["Y"],
+            deletedBy: ["USER"],
+            deletedTime: [new Date()],
+            glCode: [this.results.entity.glCode],
+            glSubheadCode: [this.results.entity.glSubheadCode],
+            glSubheadDescription: [this.results.entity.glSubheadDescription],
+            modifiedBy: [this.results.entity.modifiedBy],
+            modifiedTime: [this.results.entity.modifiedTime],
+            postedBy: [this.results.entity.postedBy],
+            postedFlag:[this.results.entity.postedFlag],
+            postedTime: [this.results.entity.postedTime],
+            verifiedBy: [this.results.entityverifiedBy],
+            verifiedFlag: [this.results.entity.verifiedFlag],
+            verifiedTime: [this.results.entity.verifiedTime], 
+            });
+            this.formData.controls.glCode.disable();
+          }, err=>{
+            this.error = err;
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
+              this._snackBar.open(this.error, "Try again!", {
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+                duration: 3000,
+                panelClass: ['red-snackbar','login-snackbar'],
+              });
+          })
+        }
       })
       }
       // convenience getter for easy access to form fields
@@ -224,7 +293,7 @@ export class GlSubheadComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -243,7 +312,7 @@ export class GlSubheadComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/linked/organization/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
                   // system/configurations/global/linked/organization/maintenance
               },err=>{
                 this.error = err;
