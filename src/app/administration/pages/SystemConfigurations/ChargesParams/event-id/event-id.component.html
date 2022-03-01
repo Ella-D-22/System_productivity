@@ -90,7 +90,7 @@
    <label class="start pull-left">File Name<span class="warning">*</span></label>
   </div>
   <div class="col-md-6 col-sm-12 form-column ">
-    <input type="text" formControlName="file_name" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.file_name.errors }" />
+    <input type="text" formControlName="file_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.file_name.errors }" />
   </div>
 </div> 
 <div *ngIf="showFilenameDerivationInput" class="form-group">
@@ -98,7 +98,7 @@
    <label class="start pull-left">File Name<span class="warning">*</span></label>
   </div>
   <div class="col-md-6 col-sm-12 form-column ">
-    <input type="text" formControlName="file_name" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.file_name.errors }" />
+    <input type="text" formControlName="file_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.file_name.errors }" />
   </div>
 </div> 
 
@@ -166,7 +166,7 @@
        <label class="start pull-left">Fee Report Code</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="fee_report_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.fee_report_code.errors }" />
+        <input type="text" formControlName="fee_report_code" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.fee_report_code.errors }" />
         <mat-icon>search</mat-icon>
       </div>
    </div>            
@@ -177,7 +177,7 @@
        <label class="start pull-left">Rate Code</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="rate_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.rate_code.errors }" />
+        <input type="text" formControlName="rate_code" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.rate_code.errors }" />
         <mat-icon *ngIf="isEnabled"  >search</mat-icon>
       </div>
    </div>   
@@ -204,7 +204,7 @@
        <label class="start pull-left">Tran.Remarks</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <textarea formControlName="tran_remarks" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.tran_remarks.errors }"></textarea>
+        <textarea formControlName="tran_remarks" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.tran_remarks.errors }"></textarea>
       </div>
    </div>    
   </div>
@@ -230,7 +230,7 @@
        <label class="start pull-left">Tran.Particulars.Remarks</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <textarea formControlName="tran_particulars" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.tran_particulars.errors }"></textarea>
+        <textarea formControlName="tran_particulars" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.tran_particulars.errors }"></textarea>
       </div>
    </div>   
   </div>
@@ -257,7 +257,7 @@
        <label class="start pull-left">Round Off Value</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="round_off_value" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.round_off_value.errors }" />   
+        <input type="text" formControlName="round_off_value" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.round_off_value.errors }" />   
       </div>
    </div>  
   </div>
@@ -278,29 +278,10 @@
       </div>
    </div> 
 
-    <!-- <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Exercise Duty</label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column">
-        <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tran_particulars_state">
-          <mat-radio-button value="Y">Yes.</mat-radio-button>
-          <mat-radio-button value="N">No.</mat-radio-button>
-        </mat-radio-group>
-        <input type="text" formControlName="round_off_value" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.round_off_value.errors }" />   
-      </div>
-   </div>   -->
    
   </div>
   <div class="col-md-6 col-sm-12">
-    <!-- <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Record</label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column">
-        <mat-checkbox class="example-margin" formControlName="record_del">Del.</mat-checkbox>
-      </div>
-   </div>        -->
+  
   </div>
 </div>
 <div class="row">

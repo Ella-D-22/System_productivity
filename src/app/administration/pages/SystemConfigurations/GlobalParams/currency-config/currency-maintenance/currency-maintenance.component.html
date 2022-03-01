@@ -33,7 +33,7 @@
          <label class="start pull-left">Currency Id<span class="warning">*</span></label>
         </div>
         <div class="col-md-6 col-sm-12 form-column ">
-          <input type="text" [value]="this.ccy_name.toUpperCase()" formControlName="currency_ccy" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.currency_ccy.errors }" />
+          <input type="text" [value]="this.ccy_name" formControlName="currency_ccy" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.currency_ccy.errors }" />
             <mat-icon (click)="currencyLookup()">search</mat-icon>
         </div>
      </div>  

@@ -49,7 +49,7 @@
                   <label class="start pull-left">Expiry Date.</label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column">
-                  <input  [matDatepicker]="kpickerm" formControlName="laa_effective_to_date" class="form-control" />
+                  <input  [matDatepicker]="kpickerm" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_effective_to_date" class="form-control" />
                  <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="kpickerm"></mat-datepicker-toggle>
                  <mat-datepicker #kpickerm></mat-datepicker>
                 </div>
