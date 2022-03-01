@@ -15,19 +15,7 @@ export const environment = {
 
 
   // accountsAPI: 'http://localhost:9191'
-<<<<<<< HEAD
-  branchsAPI:'http://localhost:8000'
-=======
-
-  // AWS Server
-  // apiUrl: 'http://52.15.152.26:9191',
-  // systemAPI: 'http://52.15.152.26:9093',
-  // accountsAPI: 'http://52.15.152.26:9099',
-  // collateralAPI:'http://52.15.152.26:9103',
-  // productAPI:'http://52.15.152.26:9100',
-    // branchsAPI:'http://localhost:8000'
-
->>>>>>> 70e7bfa5032dd3866b5460a7aeba9623807eaf0c
+  // branchsAPI:'http://localhost:8000'
 };
 
 /*
