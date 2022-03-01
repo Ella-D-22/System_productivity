@@ -34,6 +34,7 @@ export class SavingschemeMaintenanceComponent implements OnInit {
   scheme_type_id: any;
   sba_scheme_code: any;
   sba_scheme_code_desc: any;
+  existingData = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -55,7 +56,7 @@ export class SavingschemeMaintenanceComponent implements OnInit {
   scheme_code: any; 
   scheme_type: any;
   functionArray: any = [
-    'A-Add','I-Inquire','M-Modify','V-Verify','X-Cancel'
+    'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
@@ -63,6 +64,15 @@ export class SavingschemeMaintenanceComponent implements OnInit {
     scheme_type:[''],
     scheme_code_desc:['']
   });
+
+
+  onSelectFunction(event:any){
+    if(event.target.value != "A-Add"){
+      this.existingData = true;
+    }else if(event.target.value == "A-Add"){
+      this.existingData = false;
+    }
+  }
 
   schemeCodeLookup(): void {
     const dialogRef = this.dialog.open(SavingschemeLookupComponent, {
@@ -89,23 +99,6 @@ export class SavingschemeMaintenanceComponent implements OnInit {
       this.formData.controls.scheme_type.setValue(this.scheme_type);
     });
   }
-
-
-  onChange(state:any){
-    this.function_type = state.target.value;
-    switch(this.function_type){
-      case "1: add":
-        // this.addEventId();
-        break;
-      case "2: enquire":
-          break;
-      case "3: update":
-            break;
-      case "4: remove":
-          break;
-    }
-  }
- 
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
 
@@ -117,20 +110,9 @@ export class SavingschemeMaintenanceComponent implements OnInit {
           if(this.formData.valid){
             // this.int_tbl_code = this.f.int_tbl_code.value;
             this.function_type =  this.f.function_type.value;
-            if(this.function_type == "A-Add"){
-              // console.log("found here", this.int_tbl_code)
-
-                // not available else proceed
-                this.sbaAPI.changeMessage(this.formData.value)
-                this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/saving-scheme/data/view'));
        
-            }else{
-              // not available else proceed
             this.sbaAPI.changeMessage(this.formData.value)
-           this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/saving-scheme/data/view'));
-              // this.dialogRef.close({ event: 'close', data:this.formData.value });
-            //  this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
-            }
+            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/saving-scheme/data/view'));
       
             // checkHitcm
       

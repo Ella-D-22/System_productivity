@@ -50,7 +50,11 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
   loading = false;
   submitted = false;
   functionArray: any = [
+<<<<<<< HEAD
     'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
+=======
+    'A-Add','I-Inquire','M-Modify','V-Verify','X-Deleted'
+>>>>>>> 70e7bfa5032dd3866b5460a7aeba9623807eaf0c
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],

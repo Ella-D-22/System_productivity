@@ -81,8 +81,22 @@ export class SavingschemeService {
       )
   }
   
-  updateSavingscheme(Savingscheme: string | null, data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/update/${Savingscheme}`;
+  getproductBySchemeCode(params:any): Observable<any> {
+    // console.log("Server",params);
+    console.log("this is the params", params);
+    
+    let API_URL = `${this.baseURL}/find/by/`;
+    return this.http.get(API_URL, { params:params, withCredentials: false })
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
+  }
+  
+  updateSavingscheme(data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/update/`;
     return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
       .pipe(
         catchError(this.errorMgmt)

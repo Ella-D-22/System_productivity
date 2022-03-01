@@ -9,7 +9,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "generate": "node ./generateData.js > ./server/database.json",
-    "server": "json-server --watch ./server/database.json"
+    "server": "json-server --watch ./server/database.json",
+    "aws-deploy":"aws s3 sync dist/clientside/ s3://sacco-solution"
+
   },
   "private": true,
   "dependencies": {

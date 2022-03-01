@@ -13,7 +13,7 @@ export class OverdraftService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
     // API endpoint
   // baseURL = `${environment.apiUrl}/api/v1/parameters/configurations/product/term/deposit/`;
-  baseURL = `${environment.productAPI}/api/v1/product/oda`;
+  baseURL = `${environment.productAPI}/api/v1/product/oda`; 
 
   
     constructor(private http: HttpClient) { }
@@ -46,16 +46,20 @@ export class OverdraftService {
     )
   }
   // Get all
-  getOverdrafts() {
-    let API_URL = `${this.baseURL}/all`;
-    return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
-    .pipe(
-      map((res) => {
-        return res || {}
-      }),
-      catchError(this.errorMgmt)
-    )
-  }
+  // getOverdrafts() {
+  //   let API_URL = `${this.baseURL}/all`;
+  //   return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
+  //   .pipe(
+  //     map((res) => {
+  //       return res || {}
+  //     }),
+  //     catchError(this.errorMgmt)
+  //   )
+  // }
+  getOverdrafts(): Observable<any> {
+    return this.http.get<any>(this.baseURL+'/all/');
+   }
+
   // Get by id
   getOverdraftId(id: any): Observable<any> {
     let API_URL = `${this.baseURL}/find/${id}`;
@@ -79,9 +83,9 @@ export class OverdraftService {
         catchError(this.errorMgmt)
       )
   }
-  getOverdraftByOverdraft(params:any): Observable<any> {
-    let API_URL = `${this.baseURL}/find/by/Overdraft/`;
-    return this.http.get(API_URL, { params:params, withCredentials: false })
+  getOverdraftByOverdraft(code:any): Observable<any> {
+    let API_URL = `${this.baseURL}/find/by/${code}`;
+    return this.http.get(API_URL)
       .pipe(
         map((res) => {
           return res || {}
@@ -90,8 +94,8 @@ export class OverdraftService {
       )
   }
   
-  updateOverdraft(Overdraft: string | null, data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/update/${Overdraft}`;
+  updateOverdraft(data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/update`;
     return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
       .pipe(
         catchError(this.errorMgmt)

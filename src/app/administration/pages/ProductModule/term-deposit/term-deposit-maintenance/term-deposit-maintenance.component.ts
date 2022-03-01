@@ -9,6 +9,7 @@ import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { SchemeTypeLookupComponent } from '../../../SystemConfigurations/GlobalParams/scheme-type/scheme-type-lookup/scheme-type-lookup.component';
 import { LoanproductLookupComponent } from '../../loanproduct/loanproduct-lookup/loanproduct-lookup.component';
 import { LoanproductService } from '../../loanproduct/loanproduct.service';
+import { TermDepositLookupComponent } from '../term-deposit-lookup/term-deposit-lookup.component';
 import { TermDepositServiceService } from '../term-deposit-service.service';
 
 @Component({
@@ -31,6 +32,8 @@ export class TermDepositMaintenanceComponent implements OnInit {
   lookupdata: any;
   lookupData: any;
   scheme_type_id: any;
+  scheme_code_desc: any;
+  existingData = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -53,7 +56,7 @@ export class TermDepositMaintenanceComponent implements OnInit {
   scheme_code: any; 
   scheme_type: any;
   functionArray: any = [
-    'A-Add','I-Inquire','M-Modify','V-Verify','X-Cancel'
+    'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
@@ -62,12 +65,27 @@ export class TermDepositMaintenanceComponent implements OnInit {
     scheme_code_desc:['']
   });
 
+  onSelectFunction(event:any){
+    if(event.target.value != "A-Add"){
+      this.existingData = true;
+      this.formData.controls.scheme_code.setValue("")
+      this.formData.controls.scheme_code.setValidators([Validators.required])
+    }else if(event.target.value == "A-Add"){
+      this.formData.controls.scheme_code.setValidators([])
+      this.formData.controls.scheme_code.setValue("");
+      this.existingData = false;
+    }
+  }
+  
   schemeCodeLookup(): void {
-    const dialogRef = this.dialog.open(LoanproductLookupComponent, {
+    const dialogRef = this.dialog.open(TermDepositLookupComponent, {
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log("lookup results", result);
+      
       this.lookupdata= result.data;
       this.scheme_code = this.lookupdata.scheme_code;
+      this.scheme_code_desc= this.lookupdata.scheme_code_desc;
       this.formData.controls.scheme_code.setValue(this.scheme_code);
     });
   }
@@ -82,23 +100,6 @@ export class TermDepositMaintenanceComponent implements OnInit {
       this.formData.controls.scheme_type.setValue(this.scheme_type);
     });
   }
-
-
-  onChange(state:any){
-    this.function_type = state.target.value;
-    switch(this.function_type){
-      case "1: add":
-        // this.addEventId();
-        break;
-      case "2: enquire":
-          break;
-      case "3: update":
-            break;
-      case "4: remove":
-          break;
-    }
-  }
- 
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
 
@@ -139,6 +140,7 @@ export class TermDepositMaintenanceComponent implements OnInit {
               })
             }else{
               this.tdaAPI.changeMessage(this.formData.value)
+             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/term-deposit/data/view'));
               // this.dialogRef.close({ event: 'close', data:this.formData.value });
             //  this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
             }

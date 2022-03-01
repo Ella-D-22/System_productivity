@@ -72,8 +72,9 @@ export class LoanproductService {
         catchError(this.errorMgmt)
       )
   }
-  getLoanproductByLoanproduct(params:any): Observable<any> {
-    let API_URL = `${this.baseURL}/find/by/event_id`;
+  getLoanproductBySchemeCode(params:any): Observable<any> {
+    // console.log("Server",params);
+    let API_URL = `${this.baseURL}/find/by/`;
     return this.http.get(API_URL, { params:params, withCredentials: false })
       .pipe(
         map((res) => {
@@ -82,9 +83,9 @@ export class LoanproductService {
         catchError(this.errorMgmt)
       )
   }
-  
-  updateLoanproduct(Loanproduct: string | null, data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/update/${Loanproduct}`;
+
+  updateLoanproduct( data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/update/`;
     return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
       .pipe(
         catchError(this.errorMgmt)

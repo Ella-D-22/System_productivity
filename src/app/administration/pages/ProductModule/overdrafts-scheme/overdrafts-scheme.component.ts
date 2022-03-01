@@ -15,6 +15,8 @@ import { GlSubheadLookupComponent } from '../../SystemConfigurations/GlobalParam
 import { LoanproductService } from '../loanproduct/loanproduct.service';
 import { OverdraftService } from './overdraft.service';
 
+import {} from 'src/app/administration/pages/ProductModule/Accounts/office-accounts/office-accounts-lookup/office-accounts-lookup.component'
+
 @Component({
   selector: 'app-overdrafts-scheme',
   templateUrl: './overdrafts-scheme.component.html',
@@ -232,8 +234,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log("Gl Subhead data", result);
       this.gl_subhead = result.data;
-      this.gl_subhead_description = result.data.subhead_description;
-      this.gl_subhead_code = result.data.subhead_code;
+      this.gl_subhead_description = result.data.glSubheadDescription;
+      this.gl_subhead_code = result.data.glSubheadCode;
 
 
       // this.eventtypedata = result.data;
@@ -273,7 +275,7 @@ export class OverdraftsSchemeComponent implements OnInit {
   event_id: any;
   subscription!: Subscription;
   error: any;
-  results: any;
+  results:any;
   showContractInput = false;
   showDerivationInput = false;
   showAmtDerivationInput = false;
@@ -483,16 +485,21 @@ export class OverdraftsSchemeComponent implements OnInit {
     }
   }
 
-  previewGlSubheads() {
-    if (this.glSubheadData.valid) {
+  previewGlSubheads(){
+    if(this.glSubheadData.valid){
+      if(this.glSubheadArray.length<1){
+        this.glSubheadData.controls.oda_gl_subhead_deafault.setValue("Yes");
+      }else{
+        this.glSubheadData.controls.oda_gl_subhead_deafault.setValue("No");
+      }
       this.l.push(this.fb.group(
         this.glSubheadData.value
-      ));
-      this.glSubheadArray.push(this.glSubheadData.value);
-      console.log("Gl Subheads", this.glSubheadArray);
-      this.initLoanForm();
-    }
-  }
+        ));
+        this.glSubheadArray.push(this.glSubheadData.value);
+        this.initGlSUbheadForm();
+     }
+   }
+
 
   updateLoanFee(i: any) {
     this.t.push(this.fb.group(
@@ -544,19 +551,19 @@ export class OverdraftsSchemeComponent implements OnInit {
     this.showSystem_gen_no = false;;
   }
   disabledFormControll() {
-    this.formData.controls.start_date.disable();
-    this.formData.controls.end_date.disable();
-    this.formData.controls.base_int_code.disable();
-    this.formData.controls.base_int_pcnt_cr.disable();
-    this.formData.controls.base_int_pcnt_dr.disable();
-    this.formData.controls.version_desc.disable();
-    this.formData.controls.version_desc_repo.disable();
-    this.formData.controls.add_version_info.disable();
+    // this.formData.controls.start_date.disable();
+    // this.formData.controls.end_date.disable();
+    // this.formData.controls.base_int_code.disable();
+    // this.formData.controls.base_int_pcnt_cr.disable();
+    // this.formData.controls.base_int_pcnt_dr.disable();
+    // this.formData.controls.version_desc.disable();
+    // this.formData.controls.version_desc_repo.disable();
+    // this.formData.controls.add_version_info.disable();
 
-    this.formData.controls.cr_normal_int.disable();
-    this.formData.controls.ac_ccy.disable();
-    this.formData.controls.home_ccy.disable();
-    this.formData.controls.max_no_of_assesment.disable();
+    // this.formData.controls.cr_normal_int.disable();
+    // this.formData.controls.ac_ccy.disable();
+    // this.formData.controls.home_ccy.disable();
+    // this.formData.controls.max_no_of_assesment.disable();
 
   }
   getPage() {
@@ -567,7 +574,12 @@ export class OverdraftsSchemeComponent implements OnInit {
       this.scheme_type = this.message.scheme_type;
       this.scheme_code_desc = this.message.scheme_code_desc;
 
+
+      console.log(message);
+      
+
       if (this.function_type == "A-Add") {
+        console.log("test")
         // open empty forms
         this.formData = this.fb.group({
           oda_function_type: [this.function_type],
@@ -636,6 +648,7 @@ export class OverdraftsSchemeComponent implements OnInit {
         });
       }
       else if (this.function_type == "I-Inquire") {
+        console.log("testing")
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
@@ -643,89 +656,71 @@ export class OverdraftsSchemeComponent implements OnInit {
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.int_tbl_code).subscribe(res => {
+        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
           this.results = res;
           this.formData = this.fb.group({
 
-            function_type: [this.function_type],
-            scheme_code: [this.int_tbl_code],
-            scheme_type: [this.scheme_type],
-            scheme_code_desc: [this.scheme_code_desc],
+            oda_scheme_code: [this.results.oda_scheme_code],
+            oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
 
-            cr_normal_int: [this.results.cr_normal_int],
-            ac_ccy: [this.results.ac_ccy],
-            home_ccy: [this.results.home_ccy],
-            int_receivale_app: [this.results.int_receivale_app],
-            norm_int_rec_ac: [this.results.norm_int_rec_ac],
-            penal_int_rec_ac: [this.results.penal_int_rec_ac],
-            adv_int_ac: [this.results.adv_int_ac],
-            dr_int_comp_freq: [this.results.dr_int_comp_freq],
-            booking_tran_scrpt: [this.results.booking_tran_scrpt],
-            app_dic_int_rate: [this.results.app_dic_int_rate],
-            int_cal_freq_dr: [this.results.int_cal_freq_dr],
-            int_cal_freq_dr_week: [this.results.int_cal_freq_dr_week],
-            int_cal_freq_dr_day: [this.results.int_cal_freq_dr_day],
-            int_cal_freq_dr_date: [this.results.int_cal_freq_dr_date],
-            int_cal_freq_dr_holiday: [this.results.int_cal_freq_dr_holiday],
-            loan_amt_min: [this.results.loan_amt_min],
-            loan_amt_max: [this.results.loan_amt_max],
-            period_mm_dd_min: [this.results.period_mm_dd_min],
-            period_mm_dd_max: [this.results.period_mm_dd_max],
-            max_all_age_limit: [this.results.max_all_age_limit],
-            loan_rep_method: [this.results.loan_rep_method],
-            hold_opertaive_ac: [this.results.hold_opertaive_ac],
-            upfront_inst_coll: [this.results.upfront_inst_coll],
-            int_base: [this.results.int_base],
-            int_product: [this.results.int_product],
-            int_routed_thr: [this.results.int_routed_thr],
-            fee_routed_thr: [this.results.fee_routed_thr],
-            loan_int_ac: [this.results.loan_int_ac],
-            penal_int_reco: [this.results.penal_int_reco],
-            equated_installment: [this.results.equated_installment],
-            ei_in: [this.results.ei_in],
-            ei_formula: [this.results.ei_formula],
-            ei_round_off: [this.results.ei_round_off],
-            int_comp_freq: [this.results.int_comp_freq],
-            ei_payment_freq: [this.results.ei_payment_freq],
-            int_rest_freq: [this.results.int_rest_freq],
-            ei_rest_basis: [this.results.ei_rest_basis],
-            shift_inst_for_holiday: [this.results.shift_inst_for_holiday],
-            maturity_date: [this.results.maturity_date],
-            holiday_period_in: [this.results.holiday_period_in],
-            upfrnt_inst_coll: [this.results.upfrnt_inst_coll],
-            int_prod: [this.results.int_prod],
-            penal_int_rec: [this.results.penal_int_rec],
-            max_all_age_lmt: [this.results.max_all_age_lmt],
-            hold_operative_ac: [this.results.hold_operative_ac],
-            int_routed_thrgh: [this.results.int_routed_thrgh],
-            fee_routed_thrgh: [this.results.fee_routed_thrgh],
-            penal_int_recognition: [this.results.penal_int_recognition],
-            dpd: [this.results.dpd],
-            class_main: [this.results.class_main],
-            class_sub: [this.results.class_sub],
-            int_accrue: [this.results.int_accrue],
-            int_book: [this.results.int_book],
-            int_aply: [this.results.int_aply],
-            past_due: [this.results.past_due],
-            manual: [this.results.manual],
-            ac_int_suspense: [this.results.ac_int_suspense],
-            ac_penal_int_suspense: [this.results.ac_penal_int_suspense],
-            prov_dr: [this.results.prov_dr],
-            prov_cr: [this.results.prov_cr],
-            record_del: [this.results.record_del],
-            fee_type: [this.results.fee_type],
-            fee_event: [this.results.fee_event],
-            method: [this.results.method],
-            deductable: [this.results.deductable],
-            multiple: [this.results.multiple],
-            amortize: [this.results.amortize],
-            demand_flow: [this.results.demand_flow],
-            dr_placeholder: [this.results.dr_placeholder],
-            cr_placeholder: [this.results.cr_placeholder],
-            apr: [this.results.apr],
-            eir: [this.results.eir],
-            amort_tenor: [this.results.amort_tenor],
-            max_no_of_assesment: [this.results.max_no_of_assesment],
+            id: [this.results.id],
+            oda_effective_to_date: [this.results.oda_effective_to_date],
+            oda_effective_from_date: [this.results.oda_effective_from_date],
+            oda_system_generated_no: [this.results.oda_system_generated_no],
+            oda_principal_lossline_ac: [this.results.oda_principal_lossline_ac],
+            oda_recovery_lossline_ac: [this.results.oda_recovery_lossline_ac],
+            oda_charge_off_ac: [this.results.oda_charge_off_ac],
+            oda_number_generation:[this.results.oda_number_generation],
+            oda_system_gen_no:[this.results.oda_system_gen_no],
+            oda_number_generation_code:[this.results.oda_number_generation_code],
+            // Interest Details
+      
+        
+            oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
+            oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
+            oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
+            oda_penal_int_receivable_ac:[this.results.oda_penal_int_receivable_ac],
+            oda_normal_int_received_ac:[this.results.oda_normal_int_received_ac],
+            oda_penal_int_received_ac:[this.results.oda_penal_int_received_ac],
+            oda_advance_int_ac:[this.results.oda_advance_int_ac],
+            oda_dr_int_compounding_freq:[this.results.oda_dr_int_compounding_freq],
+            oda_int_cal_freq_dr_week:[this.results.oda_int_cal_freq_dr_week],
+            oda_app_discounted_int_rate:[this.results.oda_app_discounted_int_rate],
+            oda_int_cal_freq_dr_day:[this.results.oda_int_cal_freq_dr_day],
+            oda_int_cal_freq_dr_date:[this.results.oda_int_cal_freq_dr_date],
+            oda_int_cal_freq_dr_holiday:[this.results.oda_int_cal_freq_dr_holiday],
+        
+        // end of interest details
+            oda_max_sanction_limit: [this.results.oda_max_sanction_limit],
+            oda_dr_bal_limit: [this.results.oda_dr_bal_limit],
+            // oda_max_sanction_limit: [this.results.],
+            // oda_dr_bal_limit: [this.results.],
+            oda_max_penal_int: [this.results.oda_max_penal_int],
+            ac_statement_charged_by: [this.results.ac_statement_charged_by],
+            oda_inactive_ac_abnormal_trans_limit: [this.results.oda_inactive_ac_abnormal_trans_limit],
+            oda_dormant_ac_abnormal_trans_limit: [this.results.oda_dormant_ac_abnormal_trans_limit],
+            oda_duration_to_mark_ac_inactive: [this.results.oda_duration_to_mark_ac_inactive],
+            oda_duration_from_inactive_to_dormant: [this.results.oda_duration_from_inactive_to_dormant],
+            oda_dormant_fee: [this.results.oda_dormant_fee],
+            oda_inactive_fee: [this.results.oda_inactive_fee],
+            oda_allow_sweeps: [this.results.oda_allow_sweeps],
+            oda_allow_debit_against_unclear_bal: [this.results.oda_allow_debit_against_unclear_bal],
+            oda_allow_rollover: [this.results.oda_allow_rollover],
+            oda_dft_delink_ac_ph: [this.results.oda_dft_delink_ac_ph],
+            oda_dflt_delink_rate_code: [this.results.oda_dflt_delink_rate_code],
+            oda_revolving_od: [this.results.oda_revolving_od],
+            oda_calc_freq_dr_week: [this.results.oda_calc_freq_dr_week],
+            oda_calc_freq_dr_day: [this.results.oda_calc_freq_dr_day],
+            oda_calc_freq_dr_date: [this.results.oda_calc_freq_dr_date],
+            oda_calc_freq_dr_holiday: [this.results.oda_calc_freq_dr_holiday],
+            // oda_calc_freq_dr_week: [this.results.],
+            // oda_calc_freq_dr_day: [this.results.],
+            // oda_calc_freq_dr_date: [this.results.],
+            // oda_calc_freq_dr_holiday: [this.results.],
+            oda_norm_int_product_method: [this.results.oda_norm_int_product_method],
+            oda_penal_int_rate_method: [this.results.oda_penal_int_rate_method],
+           // oda_fees: new FormArray([]),
+           // oda_glsubheads: new FormArray([])
 
           });
         }, err => {
@@ -748,90 +743,84 @@ export class OverdraftsSchemeComponent implements OnInit {
           .set('event_id', this.event_id)
           .set('event_type', this.event_type);
         // call to disable edit
-        this.subscription = this.odaAPI.getOverdraftId(this.params).subscribe(res => {
+        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
 
-          this.results = res;
+          this.results= res;
           this.formData = this.fb.group({
 
-            function_type: [this.function_type],
-            scheme_code: [this.scheme_code],
-            scheme_type: [this.scheme_type],
-            scheme_code_desc: [this.scheme_code_desc],
+            // oda_function_type: [this.function_type],
+            // oda_scheme_code: [this.int_tbl_code],
+            // oda_scheme_type: [this.scheme_type],
+            // oda_scheme_code_desc: [this.scheme_code_desc],
 
-            cr_normal_int: [this.results.cr_normal_int],
-            ac_ccy: [this.results.ac_ccy],
-            home_ccy: [this.results.home_ccy],
-            int_receivale_app: [this.results.int_receivale_app],
-            norm_int_rec_ac: [this.results.norm_int_rec_ac],
-            penal_int_rec_ac: [this.results.penal_int_rec_ac],
-            adv_int_ac: [this.results.adv_int_ac],
-            dr_int_comp_freq: [this.results.dr_int_comp_freq],
-            booking_tran_scrpt: [this.results.booking_tran_scrpt],
-            app_dic_int_rate: [this.results.app_dic_int_rate],
-            int_cal_freq_dr: [this.results.int_cal_freq_dr],
-            int_cal_freq_dr_week: [this.results.int_cal_freq_dr_week],
-            int_cal_freq_dr_day: [this.results.int_cal_freq_dr_day],
-            int_cal_freq_dr_date: [this.results.int_cal_freq_dr_date],
-            int_cal_freq_dr_holiday: [this.results.int_cal_freq_dr_holiday],
-            loan_amt_min: [this.results.loan_amt_min],
-            loan_amt_max: [this.results.loan_amt_max],
-            period_mm_dd_min: [this.results.period_mm_dd_min],
-            period_mm_dd_max: [this.results.period_mm_dd_max],
-            max_all_age_limit: [this.results.max_all_age_limit],
-            loan_rep_method: [this.results.loan_rep_method],
-            hold_opertaive_ac: [this.results.hold_opertaive_ac],
-            upfront_inst_coll: [this.results.upfront_inst_coll],
-            int_base: [this.results.int_base],
-            int_product: [this.results.int_product],
-            int_routed_thr: [this.results.int_routed_thr],
-            fee_routed_thr: [this.results.fee_routed_thr],
-            loan_int_ac: [this.results.loan_int_ac],
-            penal_int_reco: [this.results.penal_int_reco],
-            equated_installment: [this.results.equated_installment],
-            ei_in: [this.results.ei_in],
-            ei_formula: [this.results.ei_formula],
-            ei_round_off: [this.results.ei_round_off],
-            int_comp_freq: [this.results.int_comp_freq],
-            ei_payment_freq: [this.results.ei_payment_freq],
-            int_rest_freq: [this.results.int_rest_freq],
-            ei_rest_basis: [this.results.ei_rest_basis],
-            shift_inst_for_holiday: [this.results.shift_inst_for_holiday],
-            maturity_date: [this.results.maturity_date],
-            holiday_period_in: [this.results.holiday_period_in],
-            upfrnt_inst_coll: [this.results.upfrnt_inst_coll],
-            int_prod: [this.results.int_prod],
-            penal_int_rec: [this.results.penal_int_rec],
-            max_all_age_lmt: [this.results.max_all_age_lmt],
-            hold_operative_ac: [this.results.hold_operative_ac],
-            int_routed_thrgh: [this.results.int_routed_thrgh],
-            fee_routed_thrgh: [this.results.fee_routed_thrgh],
-            penal_int_recognition: [this.results.penal_int_recognition],
-            dpd: [this.results.dpd],
-            class_main: [this.results.class_main],
-            class_sub: [this.results.class_sub],
-            int_accrue: [this.results.int_accrue],
-            int_book: [this.results.int_book],
-            int_aply: [this.results.int_aply],
-            past_due: [this.results.past_due],
-            manual: [this.results.manual],
-            ac_int_suspense: [this.results.ac_int_suspense],
-            ac_penal_int_suspense: [this.results.ac_penal_int_suspense],
-            prov_dr: [this.results.prov_dr],
-            prov_cr: [this.results.prov_cr],
-            record_del: [this.results.record_del],
-            fee_type: [this.results.fee_type],
-            fee_event: [this.results.fee_event],
-            method: [this.results.method],
-            deductable: [this.results.deductable],
-            multiple: [this.results.multiple],
-            amortize: [this.results.amortize],
-            demand_flow: [this.results.demand_flow],
-            dr_placeholder: [this.results.dr_placeholder],
-            cr_placeholder: [this.results.cr_placeholder],
-            apr: [this.results.apr],
-            eir: [this.results.eir],
-            amort_tenor: [this.results.amort_tenor],
-            max_no_of_assesment: [this.results.max_no_of_assesment],
+                        // oda_function_type: [this.function_type],
+            // oda_scheme_code: [this.int_tbl_code],
+            // oda_scheme_type: [this.scheme_type],
+            // oda_scheme_code_desc: [this.scheme_code_desc],
+
+
+            oda_scheme_code: [this.results.oda_scheme_code],
+            oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
+
+            id: [this.results.id],
+            oda_effective_to_date: [this.results.oda_effective_to_date],
+            oda_effective_from_date: [this.results.oda_effective_from_date],
+            oda_system_generated_no: [this.results.oda_system_generated_no],
+            oda_principal_lossline_ac: [this.results.oda_principal_lossline_ac],
+            oda_recovery_lossline_ac: [this.results.oda_recovery_lossline_ac],
+            oda_charge_off_ac: [this.results.oda_charge_off_ac],
+            oda_number_generation:[this.results.oda_number_generation],
+            oda_system_gen_no:[this.results.oda_system_gen_no],
+            oda_number_generation_code:[this.results.oda_number_generation_code],
+            // Interest Details
+      
+        
+            oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
+            oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
+            oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
+            oda_penal_int_receivable_ac:[this.results.oda_penal_int_receivable_ac],
+            oda_normal_int_received_ac:[this.results.oda_normal_int_received_ac],
+            oda_penal_int_received_ac:[this.results.oda_penal_int_received_ac],
+            oda_advance_int_ac:[this.results.oda_advance_int_ac],
+            oda_dr_int_compounding_freq:[this.results.oda_dr_int_compounding_freq],
+            oda_int_cal_freq_dr_week:[this.results.oda_int_cal_freq_dr_week],
+            oda_app_discounted_int_rate:[this.results.oda_app_discounted_int_rate],
+            oda_int_cal_freq_dr_day:[this.results.oda_int_cal_freq_dr_day],
+            oda_int_cal_freq_dr_date:[this.results.oda_int_cal_freq_dr_date],
+            oda_int_cal_freq_dr_holiday:[this.results.oda_int_cal_freq_dr_holiday],
+        
+        // end of interest details
+            oda_max_sanction_limit: [this.results.oda_max_sanction_limit],
+            oda_dr_bal_limit: [this.results.oda_dr_bal_limit],
+            // oda_max_sanction_limit: [this.results.],
+            // oda_dr_bal_limit: [this.results.],
+            oda_max_penal_int: [this.results.oda_max_penal_int],
+            ac_statement_charged_by: [this.results.ac_statement_charged_by],
+            oda_inactive_ac_abnormal_trans_limit: [this.results.oda_inactive_ac_abnormal_trans_limit],
+            oda_dormant_ac_abnormal_trans_limit: [this.results.oda_dormant_ac_abnormal_trans_limit],
+            oda_duration_to_mark_ac_inactive: [this.results.oda_duration_to_mark_ac_inactive],
+            oda_duration_from_inactive_to_dormant: [this.results.oda_duration_from_inactive_to_dormant],
+            oda_dormant_fee: [this.results.oda_dormant_fee],
+            oda_inactive_fee: [this.results.oda_inactive_fee],
+            oda_allow_sweeps: [this.results.oda_allow_sweeps],
+            oda_allow_debit_against_unclear_bal: [this.results.oda_allow_debit_against_unclear_bal],
+            oda_allow_rollover: [this.results.oda_allow_rollover],
+            oda_dft_delink_ac_ph: [this.results.oda_dft_delink_ac_ph],
+            oda_dflt_delink_rate_code: [this.results.oda_dflt_delink_rate_code],
+            oda_revolving_od: [this.results.oda_revolving_od],
+            oda_calc_freq_dr_week: [this.results.oda_calc_freq_dr_week],
+            oda_calc_freq_dr_day: [this.results.oda_calc_freq_dr_day],
+            oda_calc_freq_dr_date: [this.results.oda_calc_freq_dr_date],
+            oda_calc_freq_dr_holiday: [this.results.oda_calc_freq_dr_holiday],
+            // oda_calc_freq_dr_week: [this.results.],
+            // oda_calc_freq_dr_day: [this.results.],
+            // oda_calc_freq_dr_date: [this.results.],
+            // oda_calc_freq_dr_holiday: [this.results.],
+            oda_norm_int_product_method: [this.results.oda_norm_int_product_method],
+            oda_penal_int_rate_method: [this.results.oda_penal_int_rate_method],
+           // oda_fees: new FormArray([]),
+           // oda_glsubheads: new FormArray([])
+
           });
         }, err => {
           this.error = err;
@@ -847,9 +836,190 @@ export class OverdraftsSchemeComponent implements OnInit {
       }
       else if (this.function_type == "V-Verify") {
         // Populate data with rotected fileds only verification is enabled
+        console.log("testing")
+        //load the page with form data submit disabled
+        // find by event id
+        this.showContractInput = true;
+        // call to disable edit
+        this.disabledFormControll();
+        // hide Buttons
+        this.isEnabled = false;
+        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+          this.results = res;
+          this.formData = this.fb.group({
+
+            // oda_function_type: [this.function_type],
+            // oda_scheme_code: [this.int_tbl_code],
+            // oda_scheme_type: [this.scheme_type],
+            // oda_scheme_code_desc: [this.scheme_code_desc],
+
+            oda_scheme_code: [this.results.oda_scheme_code],
+            oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
+
+            id: [this.results.id],
+            oda_effective_to_date: [this.results.oda_effective_to_date],
+            oda_effective_from_date: [this.results.oda_effective_from_date],
+            oda_system_generated_no: [this.results.oda_system_generated_no],
+            oda_principal_lossline_ac: [this.results.oda_principal_lossline_ac],
+            oda_recovery_lossline_ac: [this.results.oda_recovery_lossline_ac],
+            oda_charge_off_ac: [this.results.oda_charge_off_ac],
+            oda_number_generation:[this.results.oda_number_generation],
+            oda_system_gen_no:[this.results.oda_system_gen_no],
+            oda_number_generation_code:[this.results.oda_number_generation_code],
+            // Interest Details
+      
+        
+            oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
+            oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
+            oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
+            oda_penal_int_receivable_ac:[this.results.oda_penal_int_receivable_ac],
+            oda_normal_int_received_ac:[this.results.oda_normal_int_received_ac],
+            oda_penal_int_received_ac:[this.results.oda_penal_int_received_ac],
+            oda_advance_int_ac:[this.results.oda_advance_int_ac],
+            oda_dr_int_compounding_freq:[this.results.oda_dr_int_compounding_freq],
+            oda_int_cal_freq_dr_week:[this.results.oda_int_cal_freq_dr_week],
+            oda_app_discounted_int_rate:[this.results.oda_app_discounted_int_rate],
+            oda_int_cal_freq_dr_day:[this.results.oda_int_cal_freq_dr_day],
+            oda_int_cal_freq_dr_date:[this.results.oda_int_cal_freq_dr_date],
+            oda_int_cal_freq_dr_holiday:[this.results.oda_int_cal_freq_dr_holiday],
+        
+        // end of interest details
+            oda_max_sanction_limit: [this.results.oda_max_sanction_limit],
+            oda_dr_bal_limit: [this.results.oda_dr_bal_limit],
+            // oda_max_sanction_limit: [this.results.],
+            // oda_dr_bal_limit: [this.results.],
+            oda_max_penal_int: [this.results.oda_max_penal_int],
+            ac_statement_charged_by: [this.results.ac_statement_charged_by],
+            oda_inactive_ac_abnormal_trans_limit: [this.results.oda_inactive_ac_abnormal_trans_limit],
+            oda_dormant_ac_abnormal_trans_limit: [this.results.oda_dormant_ac_abnormal_trans_limit],
+            oda_duration_to_mark_ac_inactive: [this.results.oda_duration_to_mark_ac_inactive],
+            oda_duration_from_inactive_to_dormant: [this.results.oda_duration_from_inactive_to_dormant],
+            oda_dormant_fee: [this.results.oda_dormant_fee],
+            oda_inactive_fee: [this.results.oda_inactive_fee],
+            oda_allow_sweeps: [this.results.oda_allow_sweeps],
+            oda_allow_debit_against_unclear_bal: [this.results.oda_allow_debit_against_unclear_bal],
+            oda_allow_rollover: [this.results.oda_allow_rollover],
+            oda_dft_delink_ac_ph: [this.results.oda_dft_delink_ac_ph],
+            oda_dflt_delink_rate_code: [this.results.oda_dflt_delink_rate_code],
+            oda_revolving_od: [this.results.oda_revolving_od],
+            oda_calc_freq_dr_week: [this.results.oda_calc_freq_dr_week],
+            oda_calc_freq_dr_day: [this.results.oda_calc_freq_dr_day],
+            oda_calc_freq_dr_date: [this.results.oda_calc_freq_dr_date],
+            oda_calc_freq_dr_holiday: [this.results.oda_calc_freq_dr_holiday],
+            // oda_calc_freq_dr_week: [this.results.],
+            // oda_calc_freq_dr_day: [this.results.],
+            // oda_calc_freq_dr_date: [this.results.],
+            // oda_calc_freq_dr_holiday: [this.results.],
+            oda_norm_int_product_method: [this.results.oda_norm_int_product_method],
+            oda_penal_int_rate_method: [this.results.oda_penal_int_rate_method],
+           // oda_fees: new FormArray([]),
+           // oda_glsubheads: new FormArray([])
+              
+
+
+          });
+        }, err => {
+          this.error = err;
+          this._snackBar.open(this.error, "Try again!", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 3000,
+            panelClass: ['red-snackbar', 'login-snackbar'],
+          });
+          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+        })
       }
       else if (this.function_type == "C-Cancle") {
         // should open a page with data and show remove button
+        console.log("testing")
+        //load the page with form data submit disabled
+        // find by event id
+        this.showContractInput = true;
+        // call to disable edit
+        this.disabledFormControll();
+        // hide Buttons
+        this.isEnabled = false;
+        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+          this.results = res;
+          this.formData = this.fb.group({
+
+            // oda_function_type: [this.function_type],
+            // oda_scheme_code: [this.int_tbl_code],
+            // oda_scheme_type: [this.scheme_type],
+            // oda_scheme_code_desc: [this.scheme_code_desc],
+
+            oda_scheme_code: [this.results.oda_scheme_code],
+            oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
+
+            id: [this.results.id],
+            oda_effective_to_date: [this.results.oda_effective_to_date],
+            oda_effective_from_date: [this.results.oda_effective_from_date],
+            oda_system_generated_no: [this.results.oda_system_generated_no],
+            oda_principal_lossline_ac: [this.results.oda_principal_lossline_ac],
+            oda_recovery_lossline_ac: [this.results.oda_recovery_lossline_ac],
+            oda_charge_off_ac: [this.results.oda_charge_off_ac],
+            oda_number_generation:[this.results.oda_number_generation],
+            oda_system_gen_no:[this.results.oda_system_gen_no],
+            oda_number_generation_code:[this.results.oda_number_generation_code],
+            // Interest Details
+      
+        
+            oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
+            oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
+            oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
+            oda_penal_int_receivable_ac:[this.results.oda_penal_int_receivable_ac],
+            oda_normal_int_received_ac:[this.results.oda_normal_int_received_ac],
+            oda_penal_int_received_ac:[this.results.oda_penal_int_received_ac],
+            oda_advance_int_ac:[this.results.oda_advance_int_ac],
+            oda_dr_int_compounding_freq:[this.results.oda_dr_int_compounding_freq],
+            oda_int_cal_freq_dr_week:[this.results.oda_int_cal_freq_dr_week],
+            oda_app_discounted_int_rate:[this.results.oda_app_discounted_int_rate],
+            oda_int_cal_freq_dr_day:[this.results.oda_int_cal_freq_dr_day],
+            oda_int_cal_freq_dr_date:[this.results.oda_int_cal_freq_dr_date],
+            oda_int_cal_freq_dr_holiday:[this.results.oda_int_cal_freq_dr_holiday],
+        
+        // end of interest details
+            oda_max_sanction_limit: [this.results.oda_max_sanction_limit],
+            oda_dr_bal_limit: [this.results.oda_dr_bal_limit],
+            // oda_max_sanction_limit: [this.results.],
+            // oda_dr_bal_limit: [this.results.],
+            oda_max_penal_int: [this.results.oda_max_penal_int],
+            ac_statement_charged_by: [this.results.ac_statement_charged_by],
+            oda_inactive_ac_abnormal_trans_limit: [this.results.oda_inactive_ac_abnormal_trans_limit],
+            oda_dormant_ac_abnormal_trans_limit: [this.results.oda_dormant_ac_abnormal_trans_limit],
+            oda_duration_to_mark_ac_inactive: [this.results.oda_duration_to_mark_ac_inactive],
+            oda_duration_from_inactive_to_dormant: [this.results.oda_duration_from_inactive_to_dormant],
+            oda_dormant_fee: [this.results.oda_dormant_fee],
+            oda_inactive_fee: [this.results.oda_inactive_fee],
+            oda_allow_sweeps: [this.results.oda_allow_sweeps],
+            oda_allow_debit_against_unclear_bal: [this.results.oda_allow_debit_against_unclear_bal],
+            oda_allow_rollover: [this.results.oda_allow_rollover],
+            oda_dft_delink_ac_ph: [this.results.oda_dft_delink_ac_ph],
+            oda_dflt_delink_rate_code: [this.results.oda_dflt_delink_rate_code],
+            oda_revolving_od: [this.results.oda_revolving_od],
+            oda_calc_freq_dr_week: [this.results.oda_calc_freq_dr_week],
+            oda_calc_freq_dr_day: [this.results.oda_calc_freq_dr_day],
+            oda_calc_freq_dr_date: [this.results.oda_calc_freq_dr_date],
+            oda_calc_freq_dr_holiday: [this.results.oda_calc_freq_dr_holiday],
+            // oda_calc_freq_dr_week: [this.results.],
+            // oda_calc_freq_dr_day: [this.results.],
+            // oda_calc_freq_dr_date: [this.results.],
+            // oda_calc_freq_dr_holiday: [this.results.],
+            oda_norm_int_product_method: [this.results.oda_norm_int_product_method],
+            oda_penal_int_rate_method: [this.results.oda_penal_int_rate_method],
+           // oda_fees: new FormArray([]),
+           // oda_glsubheads: new FormArray([])
+          });
+        }, err => {
+          this.error = err;
+          this._snackBar.open(this.error, "Try again!", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 3000,
+            panelClass: ['red-snackbar', 'login-snackbar'],
+          });
+          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+        })
       }
     })
   }
@@ -878,16 +1048,8 @@ export class OverdraftsSchemeComponent implements OnInit {
 
   onSubmit() {
                     
-    this.selecteddateFrom =  this.f.oda_effective_from_date.value.toLocaleDateString(),
-    this.fomartedFromDate  =this.datepipe.transform(this.selecteddateFrom, 'yyyy-MM-ddTHH:mm:ss');
-
-    this.selecteddateTo =  this.f.oda_effective_to_date.value.toLocaleDateString(),
-    this.fomartedToDate  =this.datepipe.transform(this.selecteddateTo, 'yyyy-MM-ddTHH:mm:ss');
-    
-    this.formData.controls.oda_effective_from_date.setValue(this.fomartedFromDate)
-    this.formData.controls.oda_effective_to_date.setValue(this.fomartedToDate)
-
-    console.log(this.formData.value);
+    this.formData.controls.oda_effective_from_date.setValue(this.datepipe.transform(this.f.oda_effective_from_date.value, 'yyyy-MM-ddTHH:mm:ss'));
+    this.formData.controls.oda_effective_to_date.setValue(this.datepipe.transform(this.f.oda_effective_to_date.value, 'yyyy-MM-ddTHH:mm:ss'));
 
     this.submitted = true;
     // stop here if form is invalid
@@ -910,9 +1072,9 @@ export class OverdraftsSchemeComponent implements OnInit {
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
         })
-      } else if (this.function_type == "M-Modify") {
-        this.eventId = this.actRoute.snapshot.paramMap.get('event_id');
-        this.subscription = this.odaAPI.updateOverdraft(this.eventId, this.formData.value).subscribe(res => {
+      } else if (this.function_type != "A-Add") {
+        //this.eventId = this.actRoute.snapshot.paramMap.get('event_id');
+        this.subscription = this.odaAPI.updateOverdraft(this.formData.value).subscribe(res => {
           this.results = res;
           this._snackBar.open("Executed Successfully!", "X", {
             horizontalPosition: this.horizontalPosition,
@@ -939,4 +1101,6 @@ export class OverdraftsSchemeComponent implements OnInit {
       });
     }
   }
+
+
 }

@@ -68,7 +68,7 @@ export class SavingsSchemeComponent implements OnInit {
    //  debitIntCompFreqArray: any = [
   //   'Daily','Monthly', 'Quarterly','No compounding'
   //  ]
-  
+
    daysArray: any = [
      'Moday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
    ]
@@ -165,18 +165,14 @@ export class SavingsSchemeComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("Gl Subhead data", result);
       this.gl_subhead = result.data;
-      this.gl_subhead_description =  result.data.subhead_description;
-      this.gl_subhead_code =  result.data.subhead_code;
+      this.gl_subhead_description =  result.data.glSubheadDescription;
+      this.gl_subhead_code =  result.data.glSubheadCode;  
        // this.eventtypedata = result.data;
       this.glsubheadFormData.controls.sba_gl_subhead.setValue(this.gl_subhead_code);
       this.glsubheadFormData.controls.sba_gl_subhead_description.setValue(this.gl_subhead_description);
     });
   }
-
-  
-  
   dt = new Date();
   month = this.dt.getMonth();
   year = this.dt.getFullYear();
@@ -395,6 +391,7 @@ BackdatedTransactionLookup(): void {
 
         sba_no__of_withdrawals:[''],
         sba_no_int_if_withdwl_exceeded:[''],
+        sba_ac_statement_charged_by:[''],
         sba_min_balance_with_chq:[''],
         sba_dr_bal_limit:[''],
         sba_ledger_folio_fee:[''],
@@ -553,14 +550,29 @@ BackdatedTransactionLookup(): void {
            }
          }
 
+        //  previewGlSubheads(){
+        //   if(this.glsubheadFormData.valid){
+        //     this.l.push(this.fb.group(
+        //       this.glsubheadFormData.value
+        //       ));
+        //       this.glSubheadArray.push(this.glsubheadFormData.value);
+        //       console.log("Gl Subheads", this.glSubheadArray);
+        //       this.initLoanForm();
+        //    }
+        //  }
+
          previewGlSubheads(){
           if(this.glsubheadFormData.valid){
+            if(this.glSubheadArray.length<1){
+              this.glsubheadFormData.controls.sba_gl_subhead_deafault.setValue("Yes");
+            }else{
+              this.glsubheadFormData.controls.sba_gl_subhead_deafault.setValue("No");
+            }
             this.l.push(this.fb.group(
               this.glsubheadFormData.value
               ));
               this.glSubheadArray.push(this.glsubheadFormData.value);
-              console.log("Gl Subheads", this.glSubheadArray);
-              this.initLoanForm();
+              this.initGlSUbheadForm();
            }
          }
          
@@ -632,18 +644,7 @@ BackdatedTransactionLookup(): void {
        
 
       disabledFormControll(){
-        this.formData.controls.start_date.disable();
-        this.formData.controls.end_date.disable();
-        this.formData.controls.base_int_code.disable();
-        this.formData.controls.base_int_pcnt_cr.disable();
-        this.formData.controls.base_int_pcnt_dr.disable();
-        this.formData.controls.version_desc.disable();
-        this.formData.controls.version_desc_repo.disable();
-        this.formData.controls.add_version_info.disable();
-
-        this.formData.controls.cr_normal_int.disable();
-         this.formData.controls.ac_ccy.disable();
-
+        this.formData.disable();
       }
       getPage(){
         this.subscription = this.sbaAPI.currentMessage.subscribe(message =>{
@@ -758,91 +759,95 @@ BackdatedTransactionLookup(): void {
           this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
-          this.subscription = this.sbaAPI.getSavingschemeBySavingscheme(this.int_tbl_code).subscribe(res=>{
+
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+          this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
+
+            this.feeArray = this.results.sba_fees
+            this.glSubheadArray = this.results.sba_glsubheads
+
             this.formData = this.fb.group({
+              id:[this.results.id],
+              sba_function_type: [this.function_type],
+              sba_scheme_code: [this.results.sba_scheme_code],
+              sba_scheme_type:[this.results. sba_scheme_type],
+              sba_scheme_code_desc:[this.results.sba_scheme_code_desc],
+                  
+              sba_effective_from_date:[this.results.sba_effective_from_date],
+              sba_effective_to_date:[this.results.sba_effective_to_date],
+              sba_system_generated_no:[this.results.sba_system_generated_no],
+              sba_principal_lossline_ac:[this.results.sba_principal_lossline_ac],
+              sba_recovery_lossline_ac:[this.results.sba_recovery_lossline_ac],
+              sba_charge_off_ac:[this.results.sba_charge_off_ac],
+              sba_number_generation:[this.results.sba_number_generation],
+              sba_system_gen_no:[this.results.sba_system_gen_no],
+              sba_number_generation_code:[this.results.sba_number_generation_code],
 
-              function_type: [this.function_type],
-              scheme_code: [this.int_tbl_code],
-              scheme_type:[this.scheme_type],
-              scheme_code_desc:[this.scheme_code_desc],
-  
-              cr_normal_int:[this.results.cr_normal_int],
-              ac_ccy:[this.results.ac_ccy],
-              home_ccy:[this.results.home_ccy],
-              int_receivale_app:[this.results.int_receivale_app],
-              norm_int_rec_ac:[this.results.norm_int_rec_ac],
-              penal_int_rec_ac:[this.results.penal_int_rec_ac],
-              adv_int_ac:[this.results.adv_int_ac],
-              dr_int_comp_freq:[this.results.dr_int_comp_freq],
-              booking_tran_scrpt:[this.results.booking_tran_scrpt],
-              app_dic_int_rate:[this.results.app_dic_int_rate],
-              int_cal_freq_dr:[this.results.int_cal_freq_dr],
-              int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-              int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
-              int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
+              sba_pl_ac_ccy:[this.results.sba_pl_ac_ccy],
+              sba_int_receivale_applicable:[this.results.sba_int_receivale_applicable],
+              sba_normal_int_receivable_ac:[this.results.sba_normal_int_receivable_ac],
+              sba_penal_int_receivable_ac:[this.results.sba_penal_int_receivable_ac],
+              sba_normal_int_received_ac:[this.results.sba_normal_int_received_ac],
+              sba_penal_int_received_ac:[this.results.sba_penal_int_received_ac],
+              sba_advance_int_ac:[this.results.sba_advance_int_ac],
+              sba_dr_int_compounding_freq:[this.results.sba_dr_int_compounding_freq],
+              sba_int_cal_freq_dr_week:[this.results.sba_int_cal_freq_dr_week],
+              sba_app_discounted_int_rate:[this.results.sba_app_discounted_int_rate],
+              sba_int_cal_freq_dr_day:[this.results.sba_int_cal_freq_dr_day],
+              sba_int_cal_freq_dr_date:[this.results.sba_int_cal_freq_dr_date],
+              sba_int_cal_freq_dr_holiday:[this.results.sba_int_cal_freq_dr_holiday],
+
+              sba_no__of_withdrawals:[this.results.sba_no__of_withdrawals],
+              sba_no_int_if_withdwl_exceeded:[this.results.sba_no_int_if_withdwl_exceeded],
+              sba_ac_statement_charged_by:[this.results.sba_ac_statement_charged_by],
+              sba_min_balance_with_chq:[this.results.sba_min_balance_with_chq],
+              sba_dr_bal_limit:[this.results.sba_dr_bal_limit],
+              sba_ledger_folio_fee:[this.results.sba_ledger_folio_fee],
+              sba_fee_withrawal:[this.results.sba_fee_withrawal],
+              sba_inactive_ac_abnormal_tran_limit:[this.results.sba_inactive_ac_abnormal_tran_limit],
+              sba_dormant_ac_abnormal_trans_limit:[this.results.sba_dormant_ac_abnormal_trans_limit],
+              sba_duration_to_mark_ac_as_inactive:[this.results.sba_duration_to_mark_ac_as_inactive],
+              sba_duration_from_inactive_to_dormant:[this.results.sba_duration_from_inactive_to_dormant],
+              sba_dormant_fee:[this.results.sba_dormant_fee],
+              sba_inactive_fee:[this.results.sba_inactive_fee],
+              sba_int_calc_based_local_calender:[this.results.sba_int_calc_based_local_calender],
+              sba_int_method:[this.results.sba_int_method],
+              sba_bal_frm_date:[this.results.sba_bal_frm_date],
+              sba_bal_to_date:[this.results.sba_bal_to_date],
+              sba_allow_sweeps:[this.results.sba_allow_sweeps],
+              sba_allow_debit_against_unclear_bal:[this.results.sba_allow_debit_against_unclear_bal],
+              sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
+              sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
+              sba_dormant_calc_freq_dr_date:[this.results.sba_dormant_calc_freq_dr_date],
+              sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
+
+              sba_chq_allowed:[this.results.sba_chq_allowed],
+              sba_nomination:[this.results.sba_nomination],
+              sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
+              // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
+              sba_return_paid_chq:[this.results.sba_return_paid_chq],
+              sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
+              sba_sanction_limit:[this.results.sba_sanction_limit],
+              sba_expiry_date:[this.results.sba_expiry_date],
+              sba_credit_file_no:[this.results.sba_credit_file_no],
+              sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
+              sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
+              sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
+              sba_paid_chq_return_freq_holiday:[this.results.sba_paid_chq_return_freq_holiday],
+              // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
+              // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
               int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-              loan_amt_min:[this.results.loan_amt_min],
-              loan_amt_max:[this.results.loan_amt_max],
-              period_mm_dd_min:[this.results.period_mm_dd_min],
-              period_mm_dd_max:[this.results.period_mm_dd_max],
-              max_all_age_limit:[this.results.max_all_age_limit],
-              loan_rep_method:[this.results.loan_rep_method],
-              hold_opertaive_ac:[this.results.hold_opertaive_ac],
-              upfront_inst_coll:[this.results.upfront_inst_coll],
-              int_base:[this.results.int_base],
-              int_product:[this.results.int_product],
-              int_routed_thr:[this.results.int_routed_thr],
-              fee_routed_thr:[this.results.fee_routed_thr],
-              loan_int_ac:[this.results.loan_int_ac],
-              penal_int_reco:[this.results.penal_int_reco],
-              equated_installment:[this.results.equated_installment],
-              ei_in:[this.results.ei_in],
-              ei_formula:[this.results.ei_formula],
-              ei_round_off: [this.results.ei_round_off],
-              int_comp_freq:[this.results.int_comp_freq],
-              ei_payment_freq:[this.results.ei_payment_freq],
-              int_rest_freq:[this.results.int_rest_freq],
-              ei_rest_basis:[this.results.ei_rest_basis],
-              shift_inst_for_holiday:[this.results.shift_inst_for_holiday],
-              maturity_date:[this.results.maturity_date],
-              holiday_period_in:[this.results.holiday_period_in],
-              upfrnt_inst_coll:[this.results.upfrnt_inst_coll],
-              int_prod:[this.results.int_prod],
-              penal_int_rec:[this.results.penal_int_rec],
-              max_all_age_lmt:[this.results.max_all_age_lmt],
-              hold_operative_ac:[this.results.hold_operative_ac],
-              int_routed_thrgh:[this.results.int_routed_thrgh],
-              fee_routed_thrgh:[this.results.fee_routed_thrgh],
-              penal_int_recognition:[this.results.penal_int_recognition],
-              dpd:[this.results.dpd],
-              class_main:[this.results.class_main],
-              class_sub:[this.results.class_sub],
-              int_accrue:[this.results.int_accrue],
-              int_book:[this.results.int_book],
-              int_aply:[this.results.int_aply],
-              past_due:[this.results.past_due],
-              manual:[this.results.manual],
-              ac_int_suspense:[this.results.ac_int_suspense],
-              ac_penal_int_suspense:[this.results.ac_penal_int_suspense],
-              prov_dr:[this.results.prov_dr],
-              prov_cr:[this.results.prov_cr],
-              record_del:[this.results.record_del],
-              fee_type:[this.results.fee_type],
-              fee_event:[this.results.fee_event],
-              method:[this.results.method],
-              deductable:[this.results.deductable],
-              multiple:[this.results.multiple],
-              amortize:[this.results.amortize],
-              demand_flow:[this.results.demand_flow],
-              dr_placeholder:[this.results.dr_placeholder],
-              cr_placeholder:[this.results.cr_placeholder],
-              apr:[this.results.apr],
-              eir:[this.results.eir],
-              amort_tenor:[this.results.amort_tenor],
-              max_no_of_assesment:[this.results.max_no_of_assesment], 
-
-              // Exceptions 
+              sba_ac_health_code:[this.results.sba_ac_health_code],
+              sba_debt_ack_date:[this.results.sba_debt_ack_date],
+              sba_int_amt:[this.results.sba_int_amt],
+              sba_dr_or_cr:[this.results.sba_dr_or_cr],
+              sba_min_bal:[this.results.sba_min_bal],
+              sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
+              sba_provision_amt:[this.results.sba_provision_amt],
+              sba_adhoc_provisioned_amt:[this.results.sba_adhoc_provisioned_amt],
+              // Exceptithis.results.              // Exceptithis.results.s s 
               sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
               sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
               sba_exc_liability_exceeds_group_limit:[this.results.sba_exc_liability_exceeds_group_limit],
@@ -851,7 +856,6 @@ BackdatedTransactionLookup(): void {
               sba_exc_int_cal_not_upto_date:[this.results.sba_exc_int_cal_not_upto_date],
               sba_exc_insufficient_available_bal:[this.results.sba_exc_insufficient_available_bal],
               sba_exc_backdated_transaction:[this.results.sba_exc_backdated_transaction],
-
             });
           }, err=>{
             this.error = err;
@@ -860,116 +864,114 @@ BackdatedTransactionLookup(): void {
               verticalPosition: this.verticalPosition,
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
-            });
-            this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+            })
           })
         }
         else if(this.function_type == "M-Modify"){
-          // Populate fields with data and allow modifications
-                    //load the page with form data submit disabled
-          // find by event id
-          this.showContractInput = true;
-          this.params = new HttpParams()
-          .set('event_id',this.event_id)
-          .set('event_type', this.event_type);
-          // call to disable edit
-          this.subscription = this.sbaAPI.getSavingschemeId(this.params).subscribe(res=>{
+          let params = new HttpParams()
+          .set("scheme_code", this.scheme_code);     
+            this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
+              this.results = res;
 
-            this.results = res;
-            this.formData = this.fb.group({
-              
-              function_type: [this.function_type],
-              scheme_code: [this.scheme_code],
-              scheme_type:[this.scheme_type],
-              scheme_code_desc:[this.scheme_code_desc],
+              this.formData = this.fb.group({
+
+                id:[this.results.id],
+                sba_function_type: [this.function_type],
+                sba_scheme_code: [this.results.sba_scheme_code],
+                sba_scheme_type:[this.results. sba_scheme_type],
+                sba_scheme_code_desc:[this.results.sba_scheme_code_desc],
+                    
+                sba_effective_from_date:[this.results.sba_effective_from_date],
+                sba_effective_to_date:[this.results.sba_effective_to_date],
+                sba_system_generated_no:[this.results.sba_system_generated_no],
+                sba_principal_lossline_ac:[this.results.sba_principal_lossline_ac],
+                sba_recovery_lossline_ac:[this.results.sba_recovery_lossline_ac],
+                sba_charge_off_ac:[this.results.sba_charge_off_ac],
+                sba_number_generation:[this.results.sba_number_generation],
+                sba_system_gen_no:[this.results.sba_system_gen_no],
+                sba_number_generation_code:[this.results.sba_number_generation_code],
   
-              cr_normal_int:[this.results.cr_normal_int],
-              ac_ccy:[this.results.ac_ccy],
-              home_ccy:[this.results.home_ccy],
-              int_receivale_app:[this.results.int_receivale_app],
-              norm_int_rec_ac:[this.results.norm_int_rec_ac],
-              penal_int_rec_ac:[this.results.penal_int_rec_ac],
-              adv_int_ac:[this.results.adv_int_ac],
-              dr_int_comp_freq:[this.results.dr_int_comp_freq],
-              booking_tran_scrpt:[this.results.booking_tran_scrpt],
-              app_dic_int_rate:[this.results.app_dic_int_rate],
-              int_cal_freq_dr:[this.results.int_cal_freq_dr],
-              int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-              int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
-              int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
-              int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-              loan_amt_min:[this.results.loan_amt_min],
-              loan_amt_max:[this.results.loan_amt_max],
-              period_mm_dd_min:[this.results.period_mm_dd_min],
-              period_mm_dd_max:[this.results.period_mm_dd_max],
-              max_all_age_limit:[this.results.max_all_age_limit],
-              loan_rep_method:[this.results.loan_rep_method],
-              hold_opertaive_ac:[this.results.hold_opertaive_ac],
-              upfront_inst_coll:[this.results.upfront_inst_coll],
-              int_base:[this.results.int_base],
-              int_product:[this.results.int_product],
-              int_routed_thr:[this.results.int_routed_thr],
-              fee_routed_thr:[this.results.fee_routed_thr],
-              loan_int_ac:[this.results.loan_int_ac],
-              penal_int_reco:[this.results.penal_int_reco],
-              equated_installment:[this.results.equated_installment],
-              ei_in:[this.results.ei_in],
-              ei_formula:[this.results.ei_formula],
-              ei_round_off: [this.results.ei_round_off],
-              int_comp_freq:[this.results.int_comp_freq],
-              ei_payment_freq:[this.results.ei_payment_freq],
-              int_rest_freq:[this.results.int_rest_freq],
-              ei_rest_basis:[this.results.ei_rest_basis],
-              shift_inst_for_holiday:[this.results.shift_inst_for_holiday],
-              maturity_date:[this.results.maturity_date],
-              holiday_period_in:[this.results.holiday_period_in],
-              upfrnt_inst_coll:[this.results.upfrnt_inst_coll],
-              int_prod:[this.results.int_prod],
-              penal_int_rec:[this.results.penal_int_rec],
-              max_all_age_lmt:[this.results.max_all_age_lmt],
-              hold_operative_ac:[this.results.hold_operative_ac],
-              int_routed_thrgh:[this.results.int_routed_thrgh],
-              fee_routed_thrgh:[this.results.fee_routed_thrgh],
-              penal_int_recognition:[this.results.penal_int_recognition],
-              dpd:[this.results.dpd],
-              class_main:[this.results.class_main],
-              class_sub:[this.results.class_sub],
-              int_accrue:[this.results.int_accrue],
-              int_book:[this.results.int_book],
-              int_aply:[this.results.int_aply],
-              past_due:[this.results.past_due],
-              manual:[this.results.manual],
-              ac_int_suspense:[this.results.ac_int_suspense],
-              ac_penal_int_suspense:[this.results.ac_penal_int_suspense],
-              prov_dr:[this.results.prov_dr],
-              prov_cr:[this.results.prov_cr],
-              record_del:[this.results.record_del],
-              fee_type:[this.results.fee_type],
-              fee_event:[this.results.fee_event],
-              method:[this.results.method],
-              deductable:[this.results.deductable],
-              multiple:[this.results.multiple],
-              amortize:[this.results.amortize],
-              demand_flow:[this.results.demand_flow],
-              dr_placeholder:[this.results.dr_placeholder],
-              cr_placeholder:[this.results.cr_placeholder],
-              apr:[this.results.apr],
-              eir:[this.results.eir],
-              amort_tenor:[this.results.amort_tenor],
-              max_no_of_assesment:[this.results.max_no_of_assesment], 
-              // Exceptions 
-              sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
-              sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
-              sba_exc_liability_exceeds_group_limit:[this.results.sba_exc_liability_exceeds_group_limit],
-              sba_exc_ac_if_frozed:[this.results.sba_exc_ac_if_frozed],
-              sba_exc_sanction_limit_expired:[this.results.sba_exc_sanction_limit_expired],
-              sba_exc_int_cal_not_upto_date:[this.results.sba_exc_int_cal_not_upto_date],
-              sba_exc_insufficient_available_bal:[this.results.sba_exc_insufficient_available_bal],
-              sba_exc_backdated_transaction:[this.results.sba_exc_backdated_transaction],
+                sba_pl_ac_ccy:[this.results.sba_pl_ac_ccy],
+                sba_int_receivale_applicable:[this.results.sba_int_receivale_applicable],
+                sba_normal_int_receivable_ac:[this.results.sba_normal_int_receivable_ac],
+                sba_penal_int_receivable_ac:[this.results.sba_penal_int_receivable_ac],
+                sba_normal_int_received_ac:[this.results.sba_normal_int_received_ac],
+                sba_penal_int_received_ac:[this.results.sba_penal_int_received_ac],
+                sba_advance_int_ac:[this.results.sba_advance_int_ac],
+                sba_dr_int_compounding_freq:[this.results.sba_dr_int_compounding_freq],
+                sba_int_cal_freq_dr_week:[this.results.sba_int_cal_freq_dr_week],
+                sba_app_discounted_int_rate:[this.results.sba_app_discounted_int_rate],
+                sba_int_cal_freq_dr_day:[this.results.sba_int_cal_freq_dr_day],
+                sba_int_cal_freq_dr_date:[this.results.sba_int_cal_freq_dr_date],
+                sba_int_cal_freq_dr_holiday:[this.results.sba_int_cal_freq_dr_holiday],
+  
+                sba_no__of_withdrawals:[this.results.sba_no__of_withdrawals],
+                sba_no_int_if_withdwl_exceeded:[this.results.sba_no_int_if_withdwl_exceeded],
+                sba_ac_statement_charged_by:[this.results.sba_ac_statement_charged_by],
+                sba_min_balance_with_chq:[this.results.sba_min_balance_with_chq],
+                sba_dr_bal_limit:[this.results.sba_dr_bal_limit],
+                sba_ledger_folio_fee:[this.results.sba_ledger_folio_fee],
+                sba_fee_withrawal:[this.results.sba_fee_withrawal],
+                sba_inactive_ac_abnormal_tran_limit:[this.results.sba_inactive_ac_abnormal_tran_limit],
+                sba_dormant_ac_abnormal_trans_limit:[this.results.sba_dormant_ac_abnormal_trans_limit],
+                sba_duration_to_mark_ac_as_inactive:[this.results.sba_duration_to_mark_ac_as_inactive],
+                sba_duration_from_inactive_to_dormant:[this.results.sba_duration_from_inactive_to_dormant],
+                sba_dormant_fee:[this.results.sba_dormant_fee],
+                sba_inactive_fee:[this.results.sba_inactive_fee],
+                sba_int_calc_based_local_calender:[this.results.sba_int_calc_based_local_calender],
+                sba_int_method:[this.results.sba_int_method],
+                sba_bal_frm_date:[this.results.sba_bal_frm_date],
+                sba_bal_to_date:[this.results.sba_bal_to_date],
+                sba_allow_sweeps:[this.results.sba_allow_sweeps],
+                sba_allow_debit_against_unclear_bal:[this.results.sba_allow_debit_against_unclear_bal],
+                sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
+                sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
+                sba_dormant_calc_freq_dr_date:[this.results.sba_dormant_calc_freq_dr_date],
+                sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
+  
+                sba_chq_allowed:[this.results.sba_chq_allowed],
+                sba_nomination:[this.results.sba_nomination],
+                sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
+                // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
+                sba_return_paid_chq:[this.results.sba_return_paid_chq],
+                sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
+                sba_sanction_limit:[this.results.sba_sanction_limit],
+                sba_expiry_date:[this.results.sba_expiry_date],
+                sba_credit_file_no:[this.results.sba_credit_file_no],
+                sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
+                sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
+                sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
+                sba_paid_chq_return_freq_holiday:[this.results.sba_paid_chq_return_freq_holiday],
+                // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
+                // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
+                int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
+                sba_ac_health_code:[this.results.sba_ac_health_code],
+                sba_debt_ack_date:[this.results.sba_debt_ack_date],
+                sba_int_amt:[this.results.sba_int_amt],
+                sba_dr_or_cr:[this.results.sba_dr_or_cr],
+                sba_min_bal:[this.results.sba_min_bal],
+                sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
+                sba_provision_amt:[this.results.sba_provision_amt],
+                sba_adhoc_provisioned_amt:[this.results.sba_adhoc_provisioned_amt],
+                // Exceptithis.results.              // Exceptithis.results.s s 
+                sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
+                sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
+                sba_exc_liability_exceeds_group_limit:[this.results.sba_exc_liability_exceeds_group_limit],
+                sba_exc_ac_if_frozed:[this.results.sba_exc_ac_if_frozed],
+                sba_exc_sanction_limit_expired:[this.results.sba_exc_sanction_limit_expired],
+                sba_exc_int_cal_not_upto_date:[this.results.sba_exc_int_cal_not_upto_date],
+                sba_exc_insufficient_available_bal:[this.results.sba_exc_insufficient_available_bal],
+                sba_exc_backdated_transaction:[this.results.sba_exc_backdated_transaction],
+
+                sba_fees:[this.results.sba_fees],
+                sba_glsubheads:[ this.results.sba_glsubheads]
             });
-          }, err=>{
+
+            this.feeArray = this.results.sba_fees
+            this.glSubheadArray = this.results.sba_glsubheads
+            
+            }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -977,14 +979,245 @@ BackdatedTransactionLookup(): void {
                 panelClass: ['red-snackbar','login-snackbar'],
               });
           })
-
         }
+        
         else if(this.function_type == "V-Verify"){
-          // Populate data with rotected fileds only verification is enabled
+          let params = new HttpParams()
+          .set("scheme_code", this.scheme_code);     
+            this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
+              this.results = res;
+
+              this.disabledFormControll();
+
+            this.feeArray = this.results.sba_fees
+            this.glSubheadArray = this.results.sba_glsubheads
+
+              this.formData = this.fb.group({
+
+                id:[this.results.id],
+                sba_function_type: [this.function_type],
+                sba_scheme_code: [this.results.sba_scheme_code],
+                sba_scheme_type:[this.results. sba_scheme_type],
+                sba_scheme_code_desc:[this.results.sba_scheme_code_desc],
+                    
+                sba_effective_from_date:[this.results.sba_effective_from_date],
+                sba_effective_to_date:[this.results.sba_effective_to_date],
+                sba_system_generated_no:[this.results.sba_system_generated_no],
+                sba_principal_lossline_ac:[this.results.sba_principal_lossline_ac],
+                sba_recovery_lossline_ac:[this.results.sba_recovery_lossline_ac],
+                sba_charge_off_ac:[this.results.sba_charge_off_ac],
+                sba_number_generation:[this.results.sba_number_generation],
+                sba_system_gen_no:[this.results.sba_system_gen_no],
+                sba_number_generation_code:[this.results.sba_number_generation_code],
+  
+                sba_pl_ac_ccy:[this.results.sba_pl_ac_ccy],
+                sba_int_receivale_applicable:[this.results.sba_int_receivale_applicable],
+                sba_normal_int_receivable_ac:[this.results.sba_normal_int_receivable_ac],
+                sba_penal_int_receivable_ac:[this.results.sba_penal_int_receivable_ac],
+                sba_normal_int_received_ac:[this.results.sba_normal_int_received_ac],
+                sba_penal_int_received_ac:[this.results.sba_penal_int_received_ac],
+                sba_advance_int_ac:[this.results.sba_advance_int_ac],
+                sba_dr_int_compounding_freq:[this.results.sba_dr_int_compounding_freq],
+                sba_int_cal_freq_dr_week:[this.results.sba_int_cal_freq_dr_week],
+                sba_app_discounted_int_rate:[this.results.sba_app_discounted_int_rate],
+                sba_int_cal_freq_dr_day:[this.results.sba_int_cal_freq_dr_day],
+                sba_int_cal_freq_dr_date:[this.results.sba_int_cal_freq_dr_date],
+                sba_int_cal_freq_dr_holiday:[this.results.sba_int_cal_freq_dr_holiday],
+  
+                sba_no__of_withdrawals:[this.results.sba_no__of_withdrawals],
+                sba_no_int_if_withdwl_exceeded:[this.results.sba_no_int_if_withdwl_exceeded],
+                sba_ac_statement_charged_by:[this.results.sba_ac_statement_charged_by],
+                sba_min_balance_with_chq:[this.results.sba_min_balance_with_chq],
+                sba_dr_bal_limit:[this.results.sba_dr_bal_limit],
+                sba_ledger_folio_fee:[this.results.sba_ledger_folio_fee],
+                sba_fee_withrawal:[this.results.sba_fee_withrawal],
+                sba_inactive_ac_abnormal_tran_limit:[this.results.sba_inactive_ac_abnormal_tran_limit],
+                sba_dormant_ac_abnormal_trans_limit:[this.results.sba_dormant_ac_abnormal_trans_limit],
+                sba_duration_to_mark_ac_as_inactive:[this.results.sba_duration_to_mark_ac_as_inactive],
+                sba_duration_from_inactive_to_dormant:[this.results.sba_duration_from_inactive_to_dormant],
+                sba_dormant_fee:[this.results.sba_dormant_fee],
+                sba_inactive_fee:[this.results.sba_inactive_fee],
+                sba_int_calc_based_local_calender:[this.results.sba_int_calc_based_local_calender],
+                sba_int_method:[this.results.sba_int_method],
+                sba_bal_frm_date:[this.results.sba_bal_frm_date],
+                sba_bal_to_date:[this.results.sba_bal_to_date],
+                sba_allow_sweeps:[this.results.sba_allow_sweeps],
+                sba_allow_debit_against_unclear_bal:[this.results.sba_allow_debit_against_unclear_bal],
+                sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
+                sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
+                sba_dormant_calc_freq_dr_date:[this.results.sba_dormant_calc_freq_dr_date],
+                sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
+  
+                sba_chq_allowed:[this.results.sba_chq_allowed],
+                sba_nomination:[this.results.sba_nomination],
+                sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
+                // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
+                sba_return_paid_chq:[this.results.sba_return_paid_chq],
+                sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
+                sba_sanction_limit:[this.results.sba_sanction_limit],
+                sba_expiry_date:[this.results.sba_expiry_date],
+                sba_credit_file_no:[this.results.sba_credit_file_no],
+                sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
+                sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
+                sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
+                sba_paid_chq_return_freq_holiday:[this.results.sba_paid_chq_return_freq_holiday],
+                // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
+                // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
+                int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
+                sba_ac_health_code:[this.results.sba_ac_health_code],
+                sba_debt_ack_date:[this.results.sba_debt_ack_date],
+                sba_int_amt:[this.results.sba_int_amt],
+                sba_dr_or_cr:[this.results.sba_dr_or_cr],
+                sba_min_bal:[this.results.sba_min_bal],
+                sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
+                sba_provision_amt:[this.results.sba_provision_amt],
+                sba_adhoc_provisioned_amt:[this.results.sba_adhoc_provisioned_amt],
+                // Exceptithis.results.              // Exceptithis.results.s s 
+                sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
+                sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
+                sba_exc_liability_exceeds_group_limit:[this.results.sba_exc_liability_exceeds_group_limit],
+                sba_exc_ac_if_frozed:[this.results.sba_exc_ac_if_frozed],
+                sba_exc_sanction_limit_expired:[this.results.sba_exc_sanction_limit_expired],
+                sba_exc_int_cal_not_upto_date:[this.results.sba_exc_int_cal_not_upto_date],
+                sba_exc_insufficient_available_bal:[this.results.sba_exc_insufficient_available_bal],
+                sba_exc_backdated_transaction:[this.results.sba_exc_backdated_transaction],
+                is_verified:[true],
+                is_deleted:[this.results.is_deleted],
+
+
+                sba_fees:[this.results.sba_fees],
+                sba_glsubheads:[ this.results.sba_glsubheads]
+
+              });
+            }, err=>{
+            this.error = err;
+              this._snackBar.open(this.error, "Try again!", {
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+                duration: 3000,
+                panelClass: ['red-snackbar','login-snackbar'],
+              });
+          })
         }
-        else if(this.function_type == "C-Cancle"){
-          // should open a page with data and show remove button
-        } 
+        
+        else if(this.function_type == "X-Delete"){
+          let params = new HttpParams()
+          .set("scheme_code", this.scheme_code);     
+            this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
+              this.results = res;
+
+              this.disabledFormControll();
+
+            this.feeArray = this.results.sba_fees
+            this.glSubheadArray = this.results.sba_glsubheads
+
+              this.formData = this.fb.group({
+
+                id:[this.results.id],
+                sba_function_type: [this.function_type],
+                sba_scheme_code: [this.results.sba_scheme_code],
+                sba_scheme_type:[this.results. sba_scheme_type],
+                sba_scheme_code_desc:[this.results.sba_scheme_code_desc],
+                    
+                sba_effective_from_date:[this.results.sba_effective_from_date],
+                sba_effective_to_date:[this.results.sba_effective_to_date],
+                sba_system_generated_no:[this.results.sba_system_generated_no],
+                sba_principal_lossline_ac:[this.results.sba_principal_lossline_ac],
+                sba_recovery_lossline_ac:[this.results.sba_recovery_lossline_ac],
+                sba_charge_off_ac:[this.results.sba_charge_off_ac],
+                sba_number_generation:[this.results.sba_number_generation],
+                sba_system_gen_no:[this.results.sba_system_gen_no],
+                sba_number_generation_code:[this.results.sba_number_generation_code],
+  
+                sba_pl_ac_ccy:[this.results.sba_pl_ac_ccy],
+                sba_int_receivale_applicable:[this.results.sba_int_receivale_applicable],
+                sba_normal_int_receivable_ac:[this.results.sba_normal_int_receivable_ac],
+                sba_penal_int_receivable_ac:[this.results.sba_penal_int_receivable_ac],
+                sba_normal_int_received_ac:[this.results.sba_normal_int_received_ac],
+                sba_penal_int_received_ac:[this.results.sba_penal_int_received_ac],
+                sba_advance_int_ac:[this.results.sba_advance_int_ac],
+                sba_dr_int_compounding_freq:[this.results.sba_dr_int_compounding_freq],
+                sba_int_cal_freq_dr_week:[this.results.sba_int_cal_freq_dr_week],
+                sba_app_discounted_int_rate:[this.results.sba_app_discounted_int_rate],
+                sba_int_cal_freq_dr_day:[this.results.sba_int_cal_freq_dr_day],
+                sba_int_cal_freq_dr_date:[this.results.sba_int_cal_freq_dr_date],
+                sba_int_cal_freq_dr_holiday:[this.results.sba_int_cal_freq_dr_holiday],
+  
+                sba_no__of_withdrawals:[this.results.sba_no__of_withdrawals],
+                sba_no_int_if_withdwl_exceeded:[this.results.sba_no_int_if_withdwl_exceeded],
+                sba_ac_statement_charged_by:[this.results.sba_ac_statement_charged_by],
+                sba_min_balance_with_chq:[this.results.sba_min_balance_with_chq],
+                sba_dr_bal_limit:[this.results.sba_dr_bal_limit],
+                sba_ledger_folio_fee:[this.results.sba_ledger_folio_fee],
+                sba_fee_withrawal:[this.results.sba_fee_withrawal],
+                sba_inactive_ac_abnormal_tran_limit:[this.results.sba_inactive_ac_abnormal_tran_limit],
+                sba_dormant_ac_abnormal_trans_limit:[this.results.sba_dormant_ac_abnormal_trans_limit],
+                sba_duration_to_mark_ac_as_inactive:[this.results.sba_duration_to_mark_ac_as_inactive],
+                sba_duration_from_inactive_to_dormant:[this.results.sba_duration_from_inactive_to_dormant],
+                sba_dormant_fee:[this.results.sba_dormant_fee],
+                sba_inactive_fee:[this.results.sba_inactive_fee],
+                sba_int_calc_based_local_calender:[this.results.sba_int_calc_based_local_calender],
+                sba_int_method:[this.results.sba_int_method],
+                sba_bal_frm_date:[this.results.sba_bal_frm_date],
+                sba_bal_to_date:[this.results.sba_bal_to_date],
+                sba_allow_sweeps:[this.results.sba_allow_sweeps],
+                sba_allow_debit_against_unclear_bal:[this.results.sba_allow_debit_against_unclear_bal],
+                sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
+                sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
+                sba_dormant_calc_freq_dr_date:[this.results.sba_dormant_calc_freq_dr_date],
+                sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
+  
+                sba_chq_allowed:[this.results.sba_chq_allowed],
+                sba_nomination:[this.results.sba_nomination],
+                sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
+                // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
+                sba_return_paid_chq:[this.results.sba_return_paid_chq],
+                sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
+                sba_sanction_limit:[this.results.sba_sanction_limit],
+                sba_expiry_date:[this.results.sba_expiry_date],
+                sba_credit_file_no:[this.results.sba_credit_file_no],
+                sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
+                sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
+                sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
+                sba_paid_chq_return_freq_holiday:[this.results.sba_paid_chq_return_freq_holiday],
+                // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
+                // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
+                int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
+                sba_ac_health_code:[this.results.sba_ac_health_code],
+                sba_debt_ack_date:[this.results.sba_debt_ack_date],
+                sba_int_amt:[this.results.sba_int_amt],
+                sba_dr_or_cr:[this.results.sba_dr_or_cr],
+                sba_min_bal:[this.results.sba_min_bal],
+                sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
+                sba_provision_amt:[this.results.sba_provision_amt],
+                sba_adhoc_provisioned_amt:[this.results.sba_adhoc_provisioned_amt],
+                // Exceptithis.results.              // Exceptithis.results.s s 
+                sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
+                sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
+                sba_exc_liability_exceeds_group_limit:[this.results.sba_exc_liability_exceeds_group_limit],
+                sba_exc_ac_if_frozed:[this.results.sba_exc_ac_if_frozed],
+                sba_exc_sanction_limit_expired:[this.results.sba_exc_sanction_limit_expired],
+                sba_exc_int_cal_not_upto_date:[this.results.sba_exc_int_cal_not_upto_date],
+                sba_exc_insufficient_available_bal:[this.results.sba_exc_insufficient_available_bal],
+                sba_exc_backdated_transaction:[this.results.sba_exc_backdated_transaction],
+                is_verified:[this.results.is_verified],
+                is_deleted:[true],
+
+
+                sba_fees:[this.results.sba_fees],
+                sba_glsubheads:[ this.results.sba_glsubheads]
+
+              });
+            }, err=>{
+            this.error = err;
+              this._snackBar.open(this.error, "Try again!", {
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+                duration: 3000,
+                panelClass: ['red-snackbar','login-snackbar'],
+              });
+          })
+        }
       })    
       }
       chrgCalcCrncyLookup(): void {
@@ -1012,14 +1245,9 @@ BackdatedTransactionLookup(): void {
 
       onSubmit() {
                 
-      this.selecteddateFrom =  this.f.sba_effective_from_date.value.toLocaleDateString(),
-      this.fomartedFromDate  =this.datepipe.transform(this.selecteddateFrom, 'yyyy-MM-ddTHH:mm:ss');
-
-      this.selecteddateTo =  this.f.sba_effective_to_date.value.toLocaleDateString(),
-      this.fomartedToDate  =this.datepipe.transform(this.selecteddateTo, 'yyyy-MM-ddTHH:mm:ss');
-      
-      this.formData.controls.sba_effective_from_date.setValue(this.fomartedFromDate)
-      this.formData.controls.sba_effective_to_date.setValue(this.fomartedToDate)
+        this.formData.controls.sba_effective_from_date.setValue(this.datepipe.transform(this.f.sba_effective_from_date.value, 'yyyy-MM-ddTHH:mm:ss'));
+        this.formData.controls.sba_effective_to_date.setValue(this.datepipe.transform(this.f.sba_effective_to_date.value, 'yyyy-MM-ddTHH:mm:ss'));
+  
 
         console.log(this.formData.value);
         
@@ -1044,9 +1272,8 @@ BackdatedTransactionLookup(): void {
                 panelClass: ['red-snackbar','login-snackbar'],
               });
             })
-            }else if(this.function_type == "M-Modify"){
-              this.eventId = this.actRoute.snapshot.paramMap.get('event_id');
-              this.subscription = this.sbaAPI.updateSavingscheme(this.eventId, this.formData.value).subscribe(res=>{
+            }else if(this.function_type != "A-Add"){
+              this.subscription = this.sbaAPI.updateSavingscheme(this.formData.value).subscribe(res=>{
                 this.results = res;
                   this._snackBar.open("Executed Successfully!", "X", {
                     horizontalPosition: this.horizontalPosition,

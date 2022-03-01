@@ -108,6 +108,7 @@ export class LoanproductComponent implements OnInit {
   fomartedFromDate: any;
   selecteddateTo: any;
   fomartedToDate: any;
+  newfomartedFromDate: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
@@ -150,12 +151,9 @@ export class LoanproductComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("Gl Subhead data", result);
       this.gl_subhead = result.data;
-      this.gl_subhead_description =  result.data.subhead_description;
-      this.gl_subhead_code =  result.data.subhead_code;
-      
-
+      this.gl_subhead_description =  result.data.glSubheadDescription;
+      this.gl_subhead_code =  result.data.glSubheadCode;     
        // this.eventtypedata = result.data;
       this.glSubheadData.controls.laa_gl_subhead.setValue(this.gl_subhead_code);
       this.glSubheadData.controls.laa_gl_subhead_description.setValue(this.gl_subhead_description);
@@ -232,11 +230,9 @@ export class LoanproductComponent implements OnInit {
       ngOnInit() {
         this.getPage();
       }
-
       feeArray= new Array();
-     glSubheadArray = new Array();
+      glSubheadArray = new Array();
     //  this.feeArray
-     
       formData = this.fb.group({
         laa_function_type: [''],
         laa_scheme_code: [''],
@@ -277,6 +273,7 @@ export class LoanproductComponent implements OnInit {
         laa_loan_repayment_method:[''],
         laa_hold_operataive_ac:[''],
         laa_upfront_inst_coll:[''],
+        laa_flow_offset_based_on:[''],
         laa_int_base:[''],
         laa_int_product:[''],
         laa_int_routed_through:[''],
@@ -346,7 +343,6 @@ export class LoanproductComponent implements OnInit {
         laa_loanfees: new FormArray([]),
         laa_glsubheads: new FormArray([])
                });
-
               //  Form ends
 
          feeFormData = this.fb.group({
@@ -368,7 +364,7 @@ export class LoanproductComponent implements OnInit {
          });
 
          glSubheadData = this.fb.group({
-           laa_gl_subhead:[''],
+           laa_gl_subhead:['', [Validators.required]],
            laa_gl_subhead_description:[''],
            laa_gl_subhead_deafault:[''],
            laa_is_gl_subhead_deleted:['']
@@ -432,33 +428,38 @@ export class LoanproductComponent implements OnInit {
 
          }
 
+
+
      get g() { return this.formData.controls; }
     get t() { return this.g.laa_loanfees as FormArray; }
     get l() {return this.g.laa_glsubheads as FormArray;}
 
 
-    newFormDkkata = this.fb.group({
-      org_lnk_event_id: ['', Validators.required],
-    });
+    // newFormDkkata = this.fb.group({
+    //   org_lnk_event_id: ['', Validators.required],
+    // });
          preview(){
            if(this.feeFormData.valid){
             this.t.push(this.fb.group(
               this.feeFormData.value
               ));
              this.feeArray.push(this.feeFormData.value);
-             console.log("form fee", this.feeArray);
              this.initLoanForm();
            }
          }
 
          previewGlSubheads(){
           if(this.glSubheadData.valid){
+            if(this.glSubheadArray.length<1){
+              this.glSubheadData.controls.laa_gl_subhead_deafault.setValue("Yes");
+            }else{
+              this.glSubheadData.controls.laa_gl_subhead_deafault.setValue("No");
+            }
             this.l.push(this.fb.group(
               this.glSubheadData.value
               ));
               this.glSubheadArray.push(this.glSubheadData.value);
-              console.log("Gl Subheads", this.glSubheadArray);
-              this.initLoanForm();
+              this.initGlSUbheadForm();
            }
          }
          
@@ -498,18 +499,7 @@ export class LoanproductComponent implements OnInit {
         }
          
       disabledFormControll(){
-        this.formData.controls.start_date.disable();
-        this.formData.controls.end_date.disable();
-        this.formData.controls.base_int_code.disable();
-        this.formData.controls.base_int_pcnt_cr.disable();
-        this.formData.controls.base_int_pcnt_dr.disable();
-        this.formData.controls.version_desc.disable();
-        this.formData.controls.version_desc_repo.disable();
-        this.formData.controls.add_version_info.disable();
-
-        this.formData.controls.cr_normal_int.disable();
-         this.formData.controls.ac_ccy.disable();
-
+        this.formData.disable();
       }
       getPage(){
         this.subscription = this.loanproductAPI.currentMessage.subscribe(message =>{
@@ -527,6 +517,7 @@ export class LoanproductComponent implements OnInit {
             laa_scheme_type:[this.scheme_type],
             laa_scheme_code_desc:[this.scheme_code_desc],
           
+            id:[''],
             laa_effective_from_date:[''],
             laa_effective_to_date:[''],
             laa_num_gen_code:[''],
@@ -561,6 +552,7 @@ export class LoanproductComponent implements OnInit {
             laa_loan_repayment_method:[''],
             laa_hold_operataive_ac:[''],
             laa_upfront_inst_coll:[''],
+            laa_flow_offset_based_on:[''],
             laa_int_base:[''],
             laa_int_product:[''],
             laa_int_routed_through:[''],
@@ -633,96 +625,127 @@ export class LoanproductComponent implements OnInit {
           });
         }
         else if(this.function_type == "I-Inquire"){
-          //load the page with form data submit disabled
-          // find by event id
+          
           this.showContractInput = true;
-          // call to disable edit
           this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
-          this.subscription = this.loanproductAPI.getLoanproductByLoanproduct(this.int_tbl_code).subscribe(res=>{
+          let params = new HttpParams()
+          .set("scheme_code", this.scheme_code);     
+          this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
+
+            this.feeArray = this.results.laa_loanfees;
+            this.glSubheadArray = this.results.laa_glsubheads;
+            
             this.formData = this.fb.group({
 
               function_type: [this.function_type],
-              scheme_code: [this.int_tbl_code],
-              scheme_type:[this.scheme_type],
-              scheme_code_desc:[this.scheme_code_desc],
-  
-              cr_normal_int:[this.results.cr_normal_int],
-              ac_ccy:[this.results.ac_ccy],
-              home_ccy:[this.results.home_ccy],
-              int_receivale_app:[this.results.int_receivale_app],
-              norm_int_rec_ac:[this.results.norm_int_rec_ac],
-              penal_int_rec_ac:[this.results.penal_int_rec_ac],
-              adv_int_ac:[this.results.adv_int_ac],
-              dr_int_comp_freq:[this.results.dr_int_comp_freq],
-              booking_tran_scrpt:[this.results.booking_tran_scrpt],
-              app_dic_int_rate:[this.results.app_dic_int_rate],
-              int_cal_freq_dr:[this.results.int_cal_freq_dr],
-              int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-              int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
-              int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
-              int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-              loan_amt_min:[this.results.loan_amt_min],
-              loan_amt_max:[this.results.loan_amt_max],
-              period_mm_dd_min:[this.results.period_mm_dd_min],
-              period_mm_dd_max:[this.results.period_mm_dd_max],
-              max_all_age_limit:[this.results.max_all_age_limit],
-              loan_rep_method:[this.results.loan_rep_method],
-              hold_opertaive_ac:[this.results.hold_opertaive_ac],
-              upfront_inst_coll:[this.results.upfront_inst_coll],
-              int_base:[this.results.int_base],
-              int_product:[this.results.int_product],
-              int_routed_thr:[this.results.int_routed_thr],
-              fee_routed_thr:[this.results.fee_routed_thr],
-              loan_int_ac:[this.results.loan_int_ac],
-              penal_int_reco:[this.results.penal_int_reco],
-              equated_installment:[this.results.equated_installment],
-              ei_in:[this.results.ei_in],
-              ei_formula:[this.results.ei_formula],
-              ei_round_off: [this.results.ei_round_off],
-              int_comp_freq:[this.results.int_comp_freq],
-              ei_payment_freq:[this.results.ei_payment_freq],
-              int_rest_freq:[this.results.int_rest_freq],
-              ei_rest_basis:[this.results.ei_rest_basis],
-              shift_inst_for_holiday:[this.results.shift_inst_for_holiday],
-              maturity_date:[this.results.maturity_date],
-              holiday_period_in:[this.results.holiday_period_in],
-              upfrnt_inst_coll:[this.results.upfrnt_inst_coll],
-              int_prod:[this.results.int_prod],
-              penal_int_rec:[this.results.penal_int_rec],
-              max_all_age_lmt:[this.results.max_all_age_lmt],
-              hold_operative_ac:[this.results.hold_operative_ac],
-              int_routed_thrgh:[this.results.int_routed_thrgh],
-              fee_routed_thrgh:[this.results.fee_routed_thrgh],
-              penal_int_recognition:[this.results.penal_int_recognition],
-              dpd:[this.results.dpd],
-              class_main:[this.results.class_main],
-              class_sub:[this.results.class_sub],
-              int_accrue:[this.results.int_accrue],
-              int_book:[this.results.int_book],
-              int_aply:[this.results.int_aply],
-              past_due:[this.results.past_due],
-              manual:[this.results.manual],
-              ac_int_suspense:[this.results.ac_int_suspense],
-              ac_penal_int_suspense:[this.results.ac_penal_int_suspense],
-              prov_dr:[this.results.prov_dr],
-              prov_cr:[this.results.prov_cr],
-              record_del:[this.results.record_del],
-              fee_type:[this.results.fee_type],
-              fee_event:[this.results.fee_event],
-              method:[this.results.method],
-              deductable:[this.results.deductable],
-              multiple:[this.results.multiple],
-              amortize:[this.results.amortize],
-              demand_flow:[this.results.demand_flow],
-              dr_placeholder:[this.results.dr_placeholder],
-              cr_placeholder:[this.results.cr_placeholder],
-              apr:[this.results.apr],
-              eir:[this.results.eir],
-              amort_tenor:[this.results.amort_tenor],
-              max_no_of_assesment:[this.results.max_no_of_assesment], 
+
+              id:[this.results.id],
+              laa_scheme_code: [this.results.laa_int_tbl_code],
+              laa_scheme_type:[this.results.laa_scheme_type],
+              laa_scheme_code_desc:[this.results.laa_scheme_code_desc],
+              
+              laa_effective_from_date:[this.results.laa_effective_from_date],
+              laa_effective_to_date:[this.results.laa_effective_to_date],
+              laa_num_gen_code:[this.results.laa_num_gen_code],
+              laa_principal_lossline_ac:[this.results.laa_principal_lossline_ac],
+              laa_recovery_lossline_ac:[this.results.laa_recovery_lossline_ac],
+              laa_charge_off_ac:[this.results.laa_charge_off_ac],
+              laa_number_generation:[this.results.laa_number_generation],
+              laa_system_gen_no:[this.results.laa_system_gen_no],
+              laa_number_generation_code:[this.results.onNumber_generation_code],
+
+              laa_pl_ac_ccy:[this.results.laa_pl_ac_ccy],
+              laa_int_receivale_applicable:[this.results.laa_int_receivale_applicable],
+              laa_normal_int_receivable_ac:[this.results.laa_normal_int_receivable_ac],
+              laa_penal_int_receivable_ac:[this.results.laa_penal_int_receivable_ac],
+              laa_normal_int_received_ac:[this.results.laa_normal_int_receivable_ac],
+              laa_penal_int_received_ac:[this.results.laa_penal_int_received_ac],
+              laa_advance_int_ac:[this.results.laa_advance_int_ac],
+              laa_dr_int_compounding_freq:[this.results.laa_dr_int_compounding_freq],
+              laa_int_cal_freq_dr_week:[this.results.laa_int_cal_freq_dr_week],
+              laa_app_discounted_int_rate:[this.results.laa_app_discounted_int_rate],
+              laa_int_cal_freq_dr_day:[this.results.laa_int_cal_freq_dr_day],
+              laa_int_cal_freq_dr_date:[this.results.laa_int_cal_freq_dr_date],
+              laa_int_cal_freq_dr_holiday:[this.results.laa_int_cal_freq_dr_holiday],
+              laa_loan_amt_min:[this.results.laa_loan_amt_min],
+              laa_loan_amt_max:[this.results.laa_loan_amt_max],
+              laa_period_mm_min:[this.results.laa_period_mm_min],
+              laa_period_dd_min:[this.results.laa_period_dd_min],
+              laa_period_mm_max:[this.results.laa_period_mm_max],
+              laa_period_dd_max:[this.results.laa_period_dd_max],
+              laa_max_allowed_age_limit_for_pymnt:[this.results.laa_max_allowed_age_limit_for_pymnt],
+              laa_loan_repayment_method:[this.results.laa_loan_repayment_method],
+              laa_hold_operataive_ac:[this.results.laa_hold_operataive_ac],
+              laa_upfront_inst_coll:[this.results.laa_upfront_inst_coll],
+              laa_flow_offset_based_on:[this.results.laa_flow_offset_based_on],
+              laa_int_base:[this.results.laa_int_base],
+              laa_int_product:[this.results.laa_int_product],
+              laa_int_routed_through:[this.results.laa_int_routed_through],
+              laa_fee_routed_through:[this.results.laa_fee_routed_through],
+              laa_loan_int_ac:[this.results.laa_loan_int_ac],
+              laa_penal_int_reco_method:[this.results.laa_penal_int_reco_method],
+              laa_int_on_principal:[this.results.laa_int_on_principal],
+              laa_prnc_dmd_overdue_endmonth:[this.results.laa_prnc_dmd_overdue_endmonth],
+              laa_prncpl_overdue_after_mmm:[this.results.laa_prncpl_overdue_after_mmm],
+              laa_prncpl_overdue_after_ddd:[this.results.laa_prncpl_overdue_after_ddd],
+              laa_int_overdue_after_mmm:[this.results.laa_int_overdue_after_ddd],
+              laa_int_overdue_after_ddd:[this.results.laa_int_overdue_after_ddd],
+              laa_chrg_overdue_after_mmm:[this.results.laa_chrg_overdue_after_mmm],
+              laa_chrg_overdue_after_ddd:[this.results.laa_chrg_overdue_after_ddd],
+              laa_int_on_int_demand:[this.results.laa_int_on_int_demand],
+              laa_overdue_int_on_principal:[this.results.laa_overdue_int_on_principal],
+              laa_int_dmnd_ovdue_at_endmonth:[this.results.laa_int_dmnd_ovdue_at_endmonth],
+              laa_apply_pref_int_for_overdue_int:[this.results.laa_apply_pref_int_for_overdue_int],
+              laa_chrg_demand_overdue_at_endmonth:[this.results.laa_chrg_demand_overdue_at_endmonth],
+              laa_int_rate_based_on_loan_amt:[this.results.laa_int_rate_based_on_loan_amt],
+              laa_apply_late_fee_for_delayed_pymnt:[this.results.laa_apply_late_fee_for_delayed_pymnt],
+              laa_grace_prd_for_late_fee_mmm:[this.results.laa_grace_prd_for_late_fee_mmm],
+              laa_grace_prd_for_late_fee_ddd:[this.results.laa_grace_prd_for_late_fee_ddd],
+              laa_tolerance_limit_for_dpd_cycle:[this.results.laa_tolerance_limit_for_dpd_cycle],
+              laa_consdr_tolerance_for_late_fee:[this.results.laa_consdr_tolerance_for_late_fee],
+              laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
+              laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
+              laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
+              laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
+              laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
+              laa_consider_tolerance_for_late_fee:[this.results.laa_consider_tolerance_for_late_fee],
+              laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
+              laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
+              laa_penal_int_rate_mthd:[this.results.laa_penal_int_rate_mthd],
+              laa_grace_prd_for_penal_int_mmm:[this.results.laa_grace_prd_for_penal_int_mmm],
+              laa_grace_prd_for_penal_int_ddd:[this.results.laa_grace_prd_for_penal_int_ddd],
+              laa_equated_installment:[this.results.laa_equated_installment],
+              laa_equated_inst:[this.results.laa_equated_inst],
+              laa_ei_formula:[this.results.laa_ei_formula],
+              laa_ei_round_off:[this.results.laa_ei_round_off],
+              laa_int_comp_freq:[this.results.laa_int_comp_freq],
+              laa_ei_payment_freq:[this.results.laa_ei_payment_freq],
+              laa_int_rest_freq:[this.results.laa_int_rest_freq],
+              laa_ei_rest_basis:[this.results.laa_ei_rest_basis],
+              laa_outstanding_amt_aft_lst_inst:[this.results.laa_outstanding_amt_aft_lst_inst],
+              laa_ipr_based_apportioning:[this.results.laa_ipr_based_apportioning],
+              laa_savings_home_loan:[this.results.laa_savings_home_loan],
+              laa_differential_rate_loans:[this.results.laa_differential_rate_loans],
+              laa_shift_inst_for_holiday:[this.results.laa_shift_inst_for_holiday],
+              laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
+              laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
+              laa_discounted_int:[this.results.laa_discounted_int],
+              laa_int_amort_rule_78:[this.results.laa_int_amort_rule_78],
+              laa_dpd:[this.results.laa_dpd],
+              laa_class_main:[this.results.laa_class_main],
+              laa_class_sub:[this.results.laa_class_sub],
+              laa_int_accrue:[this.results.laa_int_accrue],
+              laa_int_book:[this.results.laa_int_book],
+              laa_int_apply:[this.results.laa_int_apply],
+              laa_past_due:[this.results.laa_past_due],
+              laa_manual:[this.results.laa_manual],
+              laa_ac_int_suspense:[this.results.laa_ac_int_suspense],
+              laa_ac_penal_int_suspense:[this.results.laa_ac_penal_int_suspense],
+              laa_prov_dr:[this.results.laa_prov_dr],
+              laa_prov_cr:[this.results.laa_prov_cr],
 
             });
           }, err=>{
@@ -733,121 +756,424 @@ export class LoanproductComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
           })
         }
         else if(this.function_type == "M-Modify"){
-          // Populate fields with data and allow modifications
-                    //load the page with form data submit disabled
-          // find by event id
+          
           this.showContractInput = true;
-          this.params = new HttpParams()
-          .set('event_id',this.event_id)
-          .set('event_type', this.event_type);
-          // call to disable edit
-          this.subscription = this.loanproductAPI.getLoanproductId(this.params).subscribe(res=>{
-
+          this.isEnabled = false;
+          let params = new HttpParams()
+          .set("scheme_code", this.scheme_code);     
+          this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
+            
+            this.feeArray = this.results.laa_loanfees;
+            this.glSubheadArray = this.results.laa_glsubheads;
+
             this.formData = this.fb.group({
-              
-              function_type: [this.function_type],
-              scheme_code: [this.scheme_code],
-              scheme_type:[this.scheme_type],
-              scheme_code_desc:[this.scheme_code_desc],
-  
-              cr_normal_int:[this.results.cr_normal_int],
-              ac_ccy:[this.results.ac_ccy],
-              home_ccy:[this.results.home_ccy],
-              int_receivale_app:[this.results.int_receivale_app],
-              norm_int_rec_ac:[this.results.norm_int_rec_ac],
-              penal_int_rec_ac:[this.results.penal_int_rec_ac],
-              adv_int_ac:[this.results.adv_int_ac],
-              dr_int_comp_freq:[this.results.dr_int_comp_freq],
-              booking_tran_scrpt:[this.results.booking_tran_scrpt],
-              app_dic_int_rate:[this.results.app_dic_int_rate],
-              int_cal_freq_dr:[this.results.int_cal_freq_dr],
-              int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-              int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
-              int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
-              int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-              loan_amt_min:[this.results.loan_amt_min],
-              loan_amt_max:[this.results.loan_amt_max],
-              period_mm_dd_min:[this.results.period_mm_dd_min],
-              period_mm_dd_max:[this.results.period_mm_dd_max],
-              max_all_age_limit:[this.results.max_all_age_limit],
-              loan_rep_method:[this.results.loan_rep_method],
-              hold_opertaive_ac:[this.results.hold_opertaive_ac],
-              upfront_inst_coll:[this.results.upfront_inst_coll],
-              int_base:[this.results.int_base],
-              int_product:[this.results.int_product],
-              int_routed_thr:[this.results.int_routed_thr],
-              fee_routed_thr:[this.results.fee_routed_thr],
-              loan_int_ac:[this.results.loan_int_ac],
-              penal_int_reco:[this.results.penal_int_reco],
-              equated_installment:[this.results.equated_installment],
-              ei_in:[this.results.ei_in],
-              ei_formula:[this.results.ei_formula],
-              ei_round_off: [this.results.ei_round_off],
-              int_comp_freq:[this.results.int_comp_freq],
-              ei_payment_freq:[this.results.ei_payment_freq],
-              int_rest_freq:[this.results.int_rest_freq],
-              ei_rest_basis:[this.results.ei_rest_basis],
-              shift_inst_for_holiday:[this.results.shift_inst_for_holiday],
-              maturity_date:[this.results.maturity_date],
-              holiday_period_in:[this.results.holiday_period_in],
-              upfrnt_inst_coll:[this.results.upfrnt_inst_coll],
-              int_prod:[this.results.int_prod],
-              penal_int_rec:[this.results.penal_int_rec],
-              max_all_age_lmt:[this.results.max_all_age_lmt],
-              hold_operative_ac:[this.results.hold_operative_ac],
-              int_routed_thrgh:[this.results.int_routed_thrgh],
-              fee_routed_thrgh:[this.results.fee_routed_thrgh],
-              penal_int_recognition:[this.results.penal_int_recognition],
-              dpd:[this.results.dpd],
-              class_main:[this.results.class_main],
-              class_sub:[this.results.class_sub],
-              int_accrue:[this.results.int_accrue],
-              int_book:[this.results.int_book],
-              int_aply:[this.results.int_aply],
-              past_due:[this.results.past_due],
-              manual:[this.results.manual],
-              ac_int_suspense:[this.results.ac_int_suspense],
-              ac_penal_int_suspense:[this.results.ac_penal_int_suspense],
-              prov_dr:[this.results.prov_dr],
-              prov_cr:[this.results.prov_cr],
-              record_del:[this.results.record_del],
-              fee_type:[this.results.fee_type],
-              fee_event:[this.results.fee_event],
-              method:[this.results.method],
-              deductable:[this.results.deductable],
-              multiple:[this.results.multiple],
-              amortize:[this.results.amortize],
-              demand_flow:[this.results.demand_flow],
-              dr_placeholder:[this.results.dr_placeholder],
-              cr_placeholder:[this.results.cr_placeholder],
-              apr:[this.results.apr],
-              eir:[this.results.eir],
-              amort_tenor:[this.results.amort_tenor],
-              max_no_of_assesment:[this.results.max_no_of_assesment], 
+              // cr_normal_int:[this.results.cr_normal_int],
+              id:[this.results.id],
+              laa_scheme_code: [this.results.laa_int_tbl_code],
+              laa_scheme_type:[this.results.laa_scheme_type],
+              laa_scheme_code_desc:[this.results.laa_scheme_code_desc],
+
+              laa_effective_from_date:[this.results.laa_effective_from_date],
+              laa_effective_to_date:[this.results.laa_effective_to_date],
+              laa_num_gen_code:[this.results.laa_num_gen_code],
+              laa_principal_lossline_ac:[this.results.laa_principal_lossline_ac],
+              laa_recovery_lossline_ac:[this.results.laa_recovery_lossline_ac],
+              laa_charge_off_ac:[this.results.laa_charge_off_ac],
+              laa_number_generation:[this.results.laa_number_generation],
+              laa_system_gen_no:[this.results.laa_system_gen_no],
+              laa_number_generation_code:[this.results.onNumber_generation_code],
+
+
+              laa_pl_ac_ccy:[this.results.laa_pl_ac_ccy],
+              laa_int_receivale_applicable:[this.results.laa_int_receivale_applicable],
+              laa_normal_int_receivable_ac:[this.results.laa_normal_int_receivable_ac],
+              laa_penal_int_receivable_ac:[this.results.laa_penal_int_receivable_ac],
+              laa_normal_int_received_ac:[this.results.laa_normal_int_receivable_ac],
+              laa_penal_int_received_ac:[this.results.laa_penal_int_received_ac],
+              laa_advance_int_ac:[this.results.laa_advance_int_ac],
+              laa_dr_int_compounding_freq:[this.results.laa_dr_int_compounding_freq],
+              laa_int_cal_freq_dr_week:[this.results.laa_int_cal_freq_dr_week],
+              laa_app_discounted_int_rate:[this.results.laa_app_discounted_int_rate],
+              laa_int_cal_freq_dr_day:[this.results.laa_int_cal_freq_dr_day],
+              laa_int_cal_freq_dr_date:[this.results.laa_int_cal_freq_dr_date],
+              laa_int_cal_freq_dr_holiday:[this.results.laa_int_cal_freq_dr_holiday],
+              laa_loan_amt_min:[this.results.laa_loan_amt_min],
+              laa_loan_amt_max:[this.results.laa_loan_amt_max],
+              laa_period_mm_min:[this.results.laa_period_mm_min],
+              laa_period_dd_min:[this.results.laa_period_dd_min],
+              laa_period_mm_max:[this.results.laa_period_mm_max],
+              laa_period_dd_max:[this.results.laa_period_dd_max],
+              laa_max_allowed_age_limit_for_pymnt:[this.results.laa_max_allowed_age_limit_for_pymnt],
+              laa_loan_repayment_method:[this.results.laa_loan_repayment_method],
+              laa_hold_operataive_ac:[this.results.laa_hold_operataive_ac],
+              laa_upfront_inst_coll:[this.results.laa_upfront_inst_coll],
+              laa_flow_offset_based_on:[this.results.laa_flow_offset_based_on],
+              laa_int_base:[this.results.laa_int_base],
+              laa_int_product:[this.results.laa_int_product],
+              laa_int_routed_through:[this.results.laa_int_routed_through],
+              laa_fee_routed_through:[this.results.laa_fee_routed_through],
+              laa_loan_int_ac:[this.results.laa_loan_int_ac],
+              laa_penal_int_reco_method:[this.results.laa_penal_int_reco_method],
+              laa_int_on_principal:[this.results.laa_int_on_principal],
+              laa_prnc_dmd_overdue_endmonth:[this.results.laa_prnc_dmd_overdue_endmonth],
+              laa_prncpl_overdue_after_mmm:[this.results.laa_prncpl_overdue_after_mmm],
+              laa_prncpl_overdue_after_ddd:[this.results.laa_prncpl_overdue_after_ddd],
+              laa_int_overdue_after_mmm:[this.results.laa_int_overdue_after_ddd],
+              laa_int_overdue_after_ddd:[this.results.laa_int_overdue_after_ddd],
+              laa_chrg_overdue_after_mmm:[this.results.laa_chrg_overdue_after_mmm],
+              laa_chrg_overdue_after_ddd:[this.results.laa_chrg_overdue_after_ddd],
+              laa_int_on_int_demand:[this.results.laa_int_on_int_demand],
+              laa_overdue_int_on_principal:[this.results.laa_overdue_int_on_principal],
+              laa_int_dmnd_ovdue_at_endmonth:[this.results.laa_int_dmnd_ovdue_at_endmonth],
+              laa_apply_pref_int_for_overdue_int:[this.results.laa_apply_pref_int_for_overdue_int],
+              laa_chrg_demand_overdue_at_endmonth:[this.results.laa_chrg_demand_overdue_at_endmonth],
+              laa_int_rate_based_on_loan_amt:[this.results.laa_int_rate_based_on_loan_amt],
+              laa_apply_late_fee_for_delayed_pymnt:[this.results.laa_apply_late_fee_for_delayed_pymnt],
+              laa_grace_prd_for_late_fee_mmm:[this.results.laa_grace_prd_for_late_fee_mmm],
+              laa_grace_prd_for_late_fee_ddd:[this.results.laa_grace_prd_for_late_fee_ddd],
+              laa_tolerance_limit_for_dpd_cycle:[this.results.laa_tolerance_limit_for_dpd_cycle],
+              laa_consdr_tolerance_for_late_fee:[this.results.laa_consdr_tolerance_for_late_fee],
+              laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
+              laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
+              laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
+              laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
+              laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
+              laa_consider_tolerance_for_late_fee:[this.results.laa_consider_tolerance_for_late_fee],
+              laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
+              laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
+              laa_penal_int_rate_mthd:[this.results.laa_penal_int_rate_mthd],
+              laa_grace_prd_for_penal_int_mmm:[this.results.laa_grace_prd_for_penal_int_mmm],
+              laa_grace_prd_for_penal_int_ddd:[this.results.laa_grace_prd_for_penal_int_ddd],
+              laa_equated_installment:[this.results.laa_equated_installment],
+              laa_equated_inst:[this.results.laa_equated_inst],
+              laa_ei_formula:[this.results.laa_ei_formula],
+              laa_ei_round_off:[this.results.laa_ei_round_off],
+              laa_int_comp_freq:[this.results.laa_int_comp_freq],
+              laa_ei_payment_freq:[this.results.laa_ei_payment_freq],
+              laa_int_rest_freq:[this.results.laa_int_rest_freq],
+              laa_ei_rest_basis:[this.results.laa_ei_rest_basis],
+              laa_outstanding_amt_aft_lst_inst:[this.results.laa_outstanding_amt_aft_lst_inst],
+              laa_ipr_based_apportioning:[this.results.laa_ipr_based_apportioning],
+              laa_savings_home_loan:[this.results.laa_savings_home_loan],
+              laa_differential_rate_loans:[this.results.laa_differential_rate_loans],
+              laa_shift_inst_for_holiday:[this.results.laa_shift_inst_for_holiday],
+              laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
+              laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
+              laa_discounted_int:[this.results.laa_discounted_int],
+              laa_int_amort_rule_78:[this.results.laa_int_amort_rule_78],
+              laa_dpd:[this.results.laa_dpd],
+              laa_class_main:[this.results.laa_class_main],
+              laa_class_sub:[this.results.laa_class_sub],
+              laa_int_accrue:[this.results.laa_int_accrue],
+              laa_int_book:[this.results.laa_int_book],
+              laa_int_apply:[this.results.laa_int_apply],
+              laa_past_due:[this.results.laa_past_due],
+              laa_manual:[this.results.laa_manual],
+              laa_ac_int_suspense:[this.results.laa_ac_int_suspense],
+              laa_ac_penal_int_suspense:[this.results.laa_ac_penal_int_suspense],
+              laa_prov_dr:[this.results.laa_prov_dr],
+              laa_prov_cr:[this.results.laa_prov_cr],
+              is_verified:[this.results.is_verified],
+              is_deleted:[this.results.is_deleted],
+
+              laa_loanfees:[this.results.laa_loanfees],
+              laa_glsubheads: [this.results.laa_glsubheads]
+
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
-              this._snackBar.open(this.error, "Try again!", {
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-                duration: 3000,
-                panelClass: ['red-snackbar','login-snackbar'],
-              });
+            this._snackBar.open(this.error, "Try again!", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000,
+              panelClass: ['red-snackbar','login-snackbar'],
+            });
           })
-
         }
         else if(this.function_type == "V-Verify"){
-          // Populate data with rotected fileds only verification is enabled
+          this.disabledFormControll();
+          
+          //load the page with form data submit disabled
+          // find by event id
+          this.showContractInput = true;
+          // call to disable edit
+          // this.disabledFormControll();
+          // hide Buttons
+          this.isEnabled = false;
+          let params = new HttpParams()
+          .set("scheme_code", this.scheme_code);     
+          this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
+            this.results = res;
+            console.log("Got Called!");
+            console.log("Data from Backend", this.results);
+            
+            this.formData = this.fb.group({
+              // cr_normal_int:[this.results.cr_normal_int],
+              id:[this.results.id],
+              laa_scheme_code: [this.results.laa_int_tbl_code],
+              laa_scheme_type:[this.results.laa_scheme_type],
+              laa_scheme_code_desc:[this.results.laa_scheme_code_desc],
+
+              laa_effective_from_date:[this.results.laa_effective_from_date],
+              laa_effective_to_date:[this.results.laa_effective_to_date],
+              laa_num_gen_code:[this.results.laa_num_gen_code],
+              laa_principal_lossline_ac:[this.results.laa_principal_lossline_ac],
+              laa_recovery_lossline_ac:[this.results.laa_recovery_lossline_ac],
+              laa_charge_off_ac:[this.results.laa_charge_off_ac],
+              laa_number_generation:[this.results.laa_number_generation],
+              laa_system_gen_no:[this.results.laa_system_gen_no],
+              laa_number_generation_code:[this.results.onNumber_generation_code],
+
+
+              laa_pl_ac_ccy:[this.results.laa_pl_ac_ccy],
+              laa_int_receivale_applicable:[this.results.laa_int_receivale_applicable],
+              laa_normal_int_receivable_ac:[this.results.laa_normal_int_receivable_ac],
+              laa_penal_int_receivable_ac:[this.results.laa_penal_int_receivable_ac],
+              laa_normal_int_received_ac:[this.results.laa_normal_int_receivable_ac],
+              laa_penal_int_received_ac:[this.results.laa_penal_int_received_ac],
+              laa_advance_int_ac:[this.results.laa_advance_int_ac],
+              laa_dr_int_compounding_freq:[this.results.laa_dr_int_compounding_freq],
+              laa_int_cal_freq_dr_week:[this.results.laa_int_cal_freq_dr_week],
+              laa_app_discounted_int_rate:[this.results.laa_app_discounted_int_rate],
+              laa_int_cal_freq_dr_day:[this.results.laa_int_cal_freq_dr_day],
+              laa_int_cal_freq_dr_date:[this.results.laa_int_cal_freq_dr_date],
+              laa_int_cal_freq_dr_holiday:[this.results.laa_int_cal_freq_dr_holiday],
+              laa_loan_amt_min:[this.results.laa_loan_amt_min],
+              laa_loan_amt_max:[this.results.laa_loan_amt_max],
+              laa_period_mm_min:[this.results.laa_period_mm_min],
+              laa_period_dd_min:[this.results.laa_period_dd_min],
+              laa_period_mm_max:[this.results.laa_period_mm_max],
+              laa_period_dd_max:[this.results.laa_period_dd_max],
+              laa_max_allowed_age_limit_for_pymnt:[this.results.laa_max_allowed_age_limit_for_pymnt],
+              laa_loan_repayment_method:[this.results.laa_loan_repayment_method],
+              laa_hold_operataive_ac:[this.results.laa_hold_operataive_ac],
+              laa_upfront_inst_coll:[this.results.laa_upfront_inst_coll],
+              laa_flow_offset_based_on:[this.results.laa_flow_offset_based_on],
+              laa_int_base:[this.results.laa_int_base],
+              laa_int_product:[this.results.laa_int_product],
+              laa_int_routed_through:[this.results.laa_int_routed_through],
+              laa_fee_routed_through:[this.results.laa_fee_routed_through],
+              laa_loan_int_ac:[this.results.laa_loan_int_ac],
+              laa_penal_int_reco_method:[this.results.laa_penal_int_reco_method],
+              laa_int_on_principal:[this.results.laa_int_on_principal],
+              laa_prnc_dmd_overdue_endmonth:[this.results.laa_prnc_dmd_overdue_endmonth],
+              laa_prncpl_overdue_after_mmm:[this.results.laa_prncpl_overdue_after_mmm],
+              laa_prncpl_overdue_after_ddd:[this.results.laa_prncpl_overdue_after_ddd],
+              laa_int_overdue_after_mmm:[this.results.laa_int_overdue_after_ddd],
+              laa_int_overdue_after_ddd:[this.results.laa_int_overdue_after_ddd],
+              laa_chrg_overdue_after_mmm:[this.results.laa_chrg_overdue_after_mmm],
+              laa_chrg_overdue_after_ddd:[this.results.laa_chrg_overdue_after_ddd],
+              laa_int_on_int_demand:[this.results.laa_int_on_int_demand],
+              laa_overdue_int_on_principal:[this.results.laa_overdue_int_on_principal],
+              laa_int_dmnd_ovdue_at_endmonth:[this.results.laa_int_dmnd_ovdue_at_endmonth],
+              laa_apply_pref_int_for_overdue_int:[this.results.laa_apply_pref_int_for_overdue_int],
+              laa_chrg_demand_overdue_at_endmonth:[this.results.laa_chrg_demand_overdue_at_endmonth],
+              laa_int_rate_based_on_loan_amt:[this.results.laa_int_rate_based_on_loan_amt],
+              laa_apply_late_fee_for_delayed_pymnt:[this.results.laa_apply_late_fee_for_delayed_pymnt],
+              laa_grace_prd_for_late_fee_mmm:[this.results.laa_grace_prd_for_late_fee_mmm],
+              laa_grace_prd_for_late_fee_ddd:[this.results.laa_grace_prd_for_late_fee_ddd],
+              laa_tolerance_limit_for_dpd_cycle:[this.results.laa_tolerance_limit_for_dpd_cycle],
+              laa_consdr_tolerance_for_late_fee:[this.results.laa_consdr_tolerance_for_late_fee],
+              laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
+              laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
+              laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
+              laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
+              laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
+              laa_consider_tolerance_for_late_fee:[this.results.laa_consider_tolerance_for_late_fee],
+              laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
+              laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
+              laa_penal_int_rate_mthd:[this.results.laa_penal_int_rate_mthd],
+              laa_grace_prd_for_penal_int_mmm:[this.results.laa_grace_prd_for_penal_int_mmm],
+              laa_grace_prd_for_penal_int_ddd:[this.results.laa_grace_prd_for_penal_int_ddd],
+              laa_equated_installment:[this.results.laa_equated_installment],
+              laa_equated_inst:[this.results.laa_equated_inst],
+              laa_ei_formula:[this.results.laa_ei_formula],
+              laa_ei_round_off:[this.results.laa_ei_round_off],
+              laa_int_comp_freq:[this.results.laa_int_comp_freq],
+              laa_ei_payment_freq:[this.results.laa_ei_payment_freq],
+              laa_int_rest_freq:[this.results.laa_int_rest_freq],
+              laa_ei_rest_basis:[this.results.laa_ei_rest_basis],
+              laa_outstanding_amt_aft_lst_inst:[this.results.laa_outstanding_amt_aft_lst_inst],
+              laa_ipr_based_apportioning:[this.results.laa_ipr_based_apportioning],
+              laa_savings_home_loan:[this.results.laa_savings_home_loan],
+              laa_differential_rate_loans:[this.results.laa_differential_rate_loans],
+              laa_shift_inst_for_holiday:[this.results.laa_shift_inst_for_holiday],
+              laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
+              laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
+              laa_discounted_int:[this.results.laa_discounted_int],
+              laa_int_amort_rule_78:[this.results.laa_int_amort_rule_78],
+              laa_dpd:[this.results.laa_dpd],
+              laa_class_main:[this.results.laa_class_main],
+              laa_class_sub:[this.results.laa_class_sub],
+              laa_int_accrue:[this.results.laa_int_accrue],
+              laa_int_book:[this.results.laa_int_book],
+              laa_int_apply:[this.results.laa_int_apply],
+              laa_past_due:[this.results.laa_past_due],
+              laa_manual:[this.results.laa_manual],
+              laa_ac_int_suspense:[this.results.laa_ac_int_suspense],
+              laa_ac_penal_int_suspense:[this.results.laa_ac_penal_int_suspense],
+              laa_prov_dr:[this.results.laa_prov_dr],
+              laa_prov_cr:[this.results.laa_prov_cr],
+              is_verified:[true],
+              is_deleted:[this.results.is_deleted],
+
+              laa_loanfees:[this.results.laa_loanfees],
+              laa_glsubheads: [this.results.laa_glsubheads]
+            });
+          }, err=>{
+            this.error = err;
+            this._snackBar.open(this.error, "Try again!", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000,
+              panelClass: ['red-snackbar','login-snackbar'],
+            });
+          })
         }
-        else if(this.function_type == "C-Cancle"){
-          // should open a page with data and show remove button
-        } 
+        else if(this.function_type == "X-Delete"){
+          this.disabledFormControll();
+        
+          //load the page with form data submit disabled
+          // find by event id
+          this.showContractInput = true;
+          // call to disable edit
+          // this.disabledFormControll();
+          // hide Buttons
+          this.isEnabled = false;
+          let params = new HttpParams()
+          .set("scheme_code", this.scheme_code);     
+          this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
+            this.results = res;
+            console.log("Got Called!");
+            console.log("Data from Backend", this.results);
+            
+            this.formData = this.fb.group({
+              // cr_normal_int:[this.results.cr_normal_int],
+              id:[this.results.id],
+              laa_scheme_code: [this.results.laa_int_tbl_code],
+              laa_scheme_type:[this.results.laa_scheme_type],
+              laa_scheme_code_desc:[this.results.laa_scheme_code_desc],
+
+              laa_effective_from_date:[this.results.laa_effective_from_date],
+              laa_effective_to_date:[this.results.laa_effective_to_date],
+              laa_num_gen_code:[this.results.laa_num_gen_code],
+              laa_principal_lossline_ac:[this.results.laa_principal_lossline_ac],
+              laa_recovery_lossline_ac:[this.results.laa_recovery_lossline_ac],
+              laa_charge_off_ac:[this.results.laa_charge_off_ac],
+              laa_number_generation:[this.results.laa_number_generation],
+              laa_system_gen_no:[this.results.laa_system_gen_no],
+              laa_number_generation_code:[this.results.onNumber_generation_code],
+
+
+              laa_pl_ac_ccy:[this.results.laa_pl_ac_ccy],
+              laa_int_receivale_applicable:[this.results.laa_int_receivale_applicable],
+              laa_normal_int_receivable_ac:[this.results.laa_normal_int_receivable_ac],
+              laa_penal_int_receivable_ac:[this.results.laa_penal_int_receivable_ac],
+              laa_normal_int_received_ac:[this.results.laa_normal_int_receivable_ac],
+              laa_penal_int_received_ac:[this.results.laa_penal_int_received_ac],
+              laa_advance_int_ac:[this.results.laa_advance_int_ac],
+              laa_dr_int_compounding_freq:[this.results.laa_dr_int_compounding_freq],
+              laa_int_cal_freq_dr_week:[this.results.laa_int_cal_freq_dr_week],
+              laa_app_discounted_int_rate:[this.results.laa_app_discounted_int_rate],
+              laa_int_cal_freq_dr_day:[this.results.laa_int_cal_freq_dr_day],
+              laa_int_cal_freq_dr_date:[this.results.laa_int_cal_freq_dr_date],
+              laa_int_cal_freq_dr_holiday:[this.results.laa_int_cal_freq_dr_holiday],
+              laa_loan_amt_min:[this.results.laa_loan_amt_min],
+              laa_loan_amt_max:[this.results.laa_loan_amt_max],
+              laa_period_mm_min:[this.results.laa_period_mm_min],
+              laa_period_dd_min:[this.results.laa_period_dd_min],
+              laa_period_mm_max:[this.results.laa_period_mm_max],
+              laa_period_dd_max:[this.results.laa_period_dd_max],
+              laa_max_allowed_age_limit_for_pymnt:[this.results.laa_max_allowed_age_limit_for_pymnt],
+              laa_loan_repayment_method:[this.results.laa_loan_repayment_method],
+              laa_hold_operataive_ac:[this.results.laa_hold_operataive_ac],
+              laa_upfront_inst_coll:[this.results.laa_upfront_inst_coll],
+              laa_flow_offset_based_on:[this.results.laa_flow_offset_based_on],
+              laa_int_base:[this.results.laa_int_base],
+              laa_int_product:[this.results.laa_int_product],
+              laa_int_routed_through:[this.results.laa_int_routed_through],
+              laa_fee_routed_through:[this.results.laa_fee_routed_through],
+              laa_loan_int_ac:[this.results.laa_loan_int_ac],
+              laa_penal_int_reco_method:[this.results.laa_penal_int_reco_method],
+              laa_int_on_principal:[this.results.laa_int_on_principal],
+              laa_prnc_dmd_overdue_endmonth:[this.results.laa_prnc_dmd_overdue_endmonth],
+              laa_prncpl_overdue_after_mmm:[this.results.laa_prncpl_overdue_after_mmm],
+              laa_prncpl_overdue_after_ddd:[this.results.laa_prncpl_overdue_after_ddd],
+              laa_int_overdue_after_mmm:[this.results.laa_int_overdue_after_ddd],
+              laa_int_overdue_after_ddd:[this.results.laa_int_overdue_after_ddd],
+              laa_chrg_overdue_after_mmm:[this.results.laa_chrg_overdue_after_mmm],
+              laa_chrg_overdue_after_ddd:[this.results.laa_chrg_overdue_after_ddd],
+              laa_int_on_int_demand:[this.results.laa_int_on_int_demand],
+              laa_overdue_int_on_principal:[this.results.laa_overdue_int_on_principal],
+              laa_int_dmnd_ovdue_at_endmonth:[this.results.laa_int_dmnd_ovdue_at_endmonth],
+              laa_apply_pref_int_for_overdue_int:[this.results.laa_apply_pref_int_for_overdue_int],
+              laa_chrg_demand_overdue_at_endmonth:[this.results.laa_chrg_demand_overdue_at_endmonth],
+              laa_int_rate_based_on_loan_amt:[this.results.laa_int_rate_based_on_loan_amt],
+              laa_apply_late_fee_for_delayed_pymnt:[this.results.laa_apply_late_fee_for_delayed_pymnt],
+              laa_grace_prd_for_late_fee_mmm:[this.results.laa_grace_prd_for_late_fee_mmm],
+              laa_grace_prd_for_late_fee_ddd:[this.results.laa_grace_prd_for_late_fee_ddd],
+              laa_tolerance_limit_for_dpd_cycle:[this.results.laa_tolerance_limit_for_dpd_cycle],
+              laa_consdr_tolerance_for_late_fee:[this.results.laa_consdr_tolerance_for_late_fee],
+              laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
+              laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
+              laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
+              laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
+              laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
+              laa_consider_tolerance_for_late_fee:[this.results.laa_consider_tolerance_for_late_fee],
+              laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
+              laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
+              laa_penal_int_rate_mthd:[this.results.laa_penal_int_rate_mthd],
+              laa_grace_prd_for_penal_int_mmm:[this.results.laa_grace_prd_for_penal_int_mmm],
+              laa_grace_prd_for_penal_int_ddd:[this.results.laa_grace_prd_for_penal_int_ddd],
+              laa_equated_installment:[this.results.laa_equated_installment],
+              laa_equated_inst:[this.results.laa_equated_inst],
+              laa_ei_formula:[this.results.laa_ei_formula],
+              laa_ei_round_off:[this.results.laa_ei_round_off],
+              laa_int_comp_freq:[this.results.laa_int_comp_freq],
+              laa_ei_payment_freq:[this.results.laa_ei_payment_freq],
+              laa_int_rest_freq:[this.results.laa_int_rest_freq],
+              laa_ei_rest_basis:[this.results.laa_ei_rest_basis],
+              laa_outstanding_amt_aft_lst_inst:[this.results.laa_outstanding_amt_aft_lst_inst],
+              laa_ipr_based_apportioning:[this.results.laa_ipr_based_apportioning],
+              laa_savings_home_loan:[this.results.laa_savings_home_loan],
+              laa_differential_rate_loans:[this.results.laa_differential_rate_loans],
+              laa_shift_inst_for_holiday:[this.results.laa_shift_inst_for_holiday],
+              laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
+              laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
+              laa_discounted_int:[this.results.laa_discounted_int],
+              laa_int_amort_rule_78:[this.results.laa_int_amort_rule_78],
+              laa_dpd:[this.results.laa_dpd],
+              laa_class_main:[this.results.laa_class_main],
+              laa_class_sub:[this.results.laa_class_sub],
+              laa_int_accrue:[this.results.laa_int_accrue],
+              laa_int_book:[this.results.laa_int_book],
+              laa_int_apply:[this.results.laa_int_apply],
+              laa_past_due:[this.results.laa_past_due],
+              laa_manual:[this.results.laa_manual],
+              laa_ac_int_suspense:[this.results.laa_ac_int_suspense],
+              laa_ac_penal_int_suspense:[this.results.laa_ac_penal_int_suspense],
+              laa_prov_dr:[this.results.laa_prov_dr],
+              laa_prov_cr:[this.results.laa_prov_cr],
+              is_deleted:[true],
+              is_verified:[this.results.is_verified],
+
+              laa_loanfees:[this.results.laa_loanfees],
+              laa_glsubheads: [this.results.laa_glsubheads]
+            });
+          }, err=>{
+            this.error = err;
+            this._snackBar.open(this.error, "Try again!", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000,
+              panelClass: ['red-snackbar','login-snackbar'],
+            });
+          })
+        }
       })    
       }
       chrgCalcCrncyLookup(): void {
@@ -874,15 +1200,8 @@ export class LoanproductComponent implements OnInit {
       get f() { return this.formData.controls; }
 
       onSubmit() {
-      this.selecteddateFrom =  this.f.laa_effective_from_date.value.toLocaleDateString(),
-      this.fomartedFromDate  =this.datepipe.transform(this.selecteddateFrom, 'yyyy-MM-ddTHH:mm:ss');
-
-      this.selecteddateTo =  this.f.laa_effective_to_date.value.toLocaleDateString(),
-      this.fomartedToDate  =this.datepipe.transform(this.selecteddateTo, 'yyyy-MM-ddTHH:mm:ss');
-      
-      this.formData.controls.laa_effective_from_date.setValue(this.fomartedFromDate)
-      this.formData.controls.laa_effective_to_date.setValue(this.fomartedToDate)
-
+      this.formData.controls.laa_effective_from_date.setValue(this.datepipe.transform(this.f.laa_effective_from_date.value, 'yyyy-MM-ddTHH:mm:ss'));
+      this.formData.controls.laa_effective_to_date.setValue(this.datepipe.transform(this.f.laa_effective_to_date.value, 'yyyy-MM-ddTHH:mm:ss'));
 
         console.log("huge form data",this.formData.value);
         
@@ -907,9 +1226,9 @@ export class LoanproductComponent implements OnInit {
                 panelClass: ['red-snackbar','login-snackbar'],
               });
             })
-            }else if(this.function_type == "M-Modify"){
-              this.eventId = this.actRoute.snapshot.paramMap.get('event_id');
-              this.subscription = this.loanproductAPI.updateLoanproduct(this.eventId, this.formData.value).subscribe(res=>{
+            }else if(this.function_type  != "A-Add"){
+              this.isEnabled = true;
+              this.subscription = this.loanproductAPI.updateLoanproduct(this.formData.value).subscribe(res=>{
                 this.results = res;
                   this._snackBar.open("Executed Successfully!", "X", {
                     horizontalPosition: this.horizontalPosition,

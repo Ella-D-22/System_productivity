@@ -1,0 +1,283 @@
+<!-- <p>loan-account works!</p>
+<p>{{this.message.scheme_code}}</p> -->
+
+<mat-card>
+    <mat-card-header class="breadcrumb">
+      <div>Home/Configuration/Accounts/Accounts/</div>
+    </mat-card-header>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <h4>Function</h4>
+        <p>{{message.function_type}}</p>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <h4>Account Code</h4>
+        <p>{{message.account_code}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <h4>Account Type</h4>
+        <p>{{message.account_type}}</p>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <h4>Customer Type</h4>
+        <p>{{message.customer_type}}</p>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  
+    <div class="container-fluid">
+
+  
+      <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+
+        <mat-tab-group mat-align-tabs="center">
+
+          <mat-tab class="mat-tab container-fluid" label="General Details">
+            <br>
+            <div class="row">
+
+              <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                      <label class="start pull-left">Account Manager</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <input type="text" formControlName="accountManager" class="pull-right form-control"/>
+                       <mat-icon>search</mat-icon>
+                    </div>
+                  </div>
+                </div>
+  
+              <div class="col-md-6 col-sm-12" *ngIf="message.account_type!='Office'">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Customer Code</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input formControlName="customerCode" type="text" class="pull-right form-control"/>
+                     <mat-icon>search</mat-icon>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+  
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                      <label class="start pull-left">Scheme Code</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <input type="text" formControlName="schemeCode" class="pull-right form-control"/>
+                       <mat-icon>search</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">GL-Subhead Code</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <input type="text" formControlName="glSubhead" class="pull-right form-control" />
+                   <mat-icon>search</mat-icon>
+                  </div>
+               </div> 
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Currency</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <input type="text" formControlName="currency" class="pull-right form-control" />
+                  </div>
+               </div> 
+              </div>
+              <div class="col-md-6 col-sm-12" *ngIf="message.account_type!='Office'">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Reffered BY</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <input type="text" formControlName="referredBy" class="pull-right form-control" />
+                  </div>
+               </div> 
+              </div>
+            </div>
+  
+            <div class="row" *ngIf="message.account_type=='Loan'">
+              
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Disbursment Amount</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <input type="number" formControlName="amountDisbursed" class="pull-right form-control" />
+                    </div>
+                 </div> 
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <label class="start pull-left">Repayment Period (Months)</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column ">
+                     <input type="number" formControlName="repaymentPeriod" class="pull-right form-control" />
+                    </div>
+                 </div> 
+                </div>
+            
+
+  
+            </div>
+  
+            <div class="row mb-2">
+  
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Lien Amount</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <input type="number" formControlName="lienAmount" class="pull-right form-control" />
+                  </div>
+               </div> 
+              </div>
+  
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Branch Code</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <input type="text" formControlName="solCode" class="pull-right form-control" />
+                   <mat-icon>search</mat-icon>
+                  </div>
+               </div> 
+              </div>
+            </div>
+            <div class="row mb-2" *ngIf="message.account_type!='Loan'">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Withholding Tax</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-radio-group name="citizen" formControlName="withholdingTax">
+                      <mat-radio-button color="primary" value=True
+                        >Yes</mat-radio-button
+                      >
+                      <mat-radio-button color="primary" value=False
+                        >No</mat-radio-button
+                      >
+                    </mat-radio-group>
+                  </div>
+               </div> 
+              </div>
+              <!-- <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <label class="start pull-left">Branch Code</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                   <input type="text" formControlName="solCode" class="pull-right form-control" />
+                  </div>
+               </div> 
+              </div> -->
+            </div>
+          </mat-tab>
+
+          <mat-tab class="mat-tab" label="Loan Documents" *ngIf="message.account_type=='Loan'">
+            <br/>
+
+            <div class="container-fluid row mt-4">
+              <div  class="col-md-3">
+                <input  class="form-control" type="file" required 
+                        (change)="onPhotoChange($event)"
+                        >
+                <p>Loan Application Form</p>
+                
+              </div>
+            
+              
+                <img [src]="customerImage" class="col-md-6"/>
+            
+            </div>
+            <div class="container-fluid row mt-4">
+              <div  class="col-md-3">
+                <input class="form-control" type="file" required 
+                
+                        (change)="onSignatureChange($event)"
+                        >
+                <p>Extra Document</p>
+            
+              </div>
+              
+                <img [src]="signatureImage" class="col-md-6"/>
+            
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+       
+<br>
+          <div class="row mt-4" *ngIf="message.function_type!='I-Inquire'"> 
+              <div class="col-md-1 offset-md-9">
+                <button mat-raised-button color="warn" type="reset">
+                    Reset
+                  </button>
+              </div>
+              <div class="col-md-1">
+                <button mat-raised-button color="primary" type="submit" *ngIf="message.function_type!='X-Cancel'">
+                    <span
+                      *ngIf="loading"
+                      class="spinner-border spinner-border-sm mr-1"
+                    ></span>
+                    Submit
+                  </button>
+
+                  <button type="button" mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="message.function_type=='X-Cancel'">
+                    Delete
+                  </button>
+
+              </div>
+          </div>
+
+      </form>
+    </div>
+</mat-card>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 

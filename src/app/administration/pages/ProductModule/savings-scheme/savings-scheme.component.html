@@ -676,7 +676,7 @@
             </div> 
            </div>
            <div class="col-md-6 col-sm-12">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="col-md-6 col-sm-12 form-column ">
                <label class="start pull-left">Default</label>
               </div>
@@ -687,7 +687,7 @@
                 </mat-radio-group>
                 <mat-checkbox class="example-margin" formControlName="sba_is_gl_subhead_deleted">Del Record</mat-checkbox>
               </div>
-           </div>              
+           </div>               -->
          </div>
          </div>
   
@@ -943,7 +943,6 @@
                     <th>demand_flow</th>
                     <th>dr_placeholder</th>
                     <th>cr_placeholder</th>
-                    <th>amort_tenor</th>
                     <th>max_no_of_assesment</th>     
                     <th>Operation</th>
                 </tr>
@@ -962,7 +961,6 @@
                     <td>{{item.sba_fee_demand_flow}}</td>
                     <td>{{item.sba_fee_dr_placeholder}}</td>
                     <td>{{item.sba_fee_cr_placeholder}}</td>
-                    <td>{{item.sba_fee_amort_tenor}}</td>
                     <td>{{item.sba_fee_max_no_of_assesment}}</td> 
                     <td><a class="update btn btn-sm" color="accent" (click)="onRemove(i)">X</a>
                       <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a>

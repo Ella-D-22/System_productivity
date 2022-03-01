@@ -46,12 +46,14 @@ import { CurrentSchemeMaintenanceComponent } from './pages/ProductModule/current
 import { CurrentSchemeComponent } from './pages/ProductModule/current-scheme/current-scheme.component';
 import { ExceptionsCodesComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes.component';
 import { ExceptionsCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-maintenance/exceptions-codes-maintenance.component';
-import { AccountMaintenanceComponent } from './pages/account-module/account-maintenance/account-maintenance.component';
-import { AccountModuleComponent } from './pages/account-module/account-module.component';
 import { CollateralMaintenanceComponent } from './pages/collateral/collateral-maintenance/collateral-maintenance.component';
 import { CollateralComponent } from './pages/collateral/collateral.component';
 import { BranchesMaintenanceComponent } from './pages/branches/branches-maintenance/branches-maintenance.component';
 import { BranchesComponent } from './pages/branches/branches.component';
+import { CashTransactionsComponent } from './pages/transactions/transactions/cash-transactions/cash-transactions.component';
+import { TransactionMaintainanceComponent } from './pages/transactions/transactions/transaction-maintainance/transaction-maintainance.component';
+import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
+import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 
 const routes: Routes = [{
   path: '',
@@ -298,11 +300,11 @@ const routes: Routes = [{
       // Loan Product
       {
         path: 'account/maintenance',
-        component:AccountMaintenanceComponent,
+        component:LoanAccountMaintainanceComponent,
       },
       {
         path: 'accounts/data/view',
-        component:AccountModuleComponent,
+        component:LoanAccountComponent,
       },
       // collateral
       {
@@ -325,7 +327,19 @@ const routes: Routes = [{
         component:BranchesComponent,
       },
       
+      {
+        path: 'transactions/maintenance',
+        component:TransactionMaintainanceComponent,
+      },
+      {
+        path: 'transactions/cash/data/view',
+        component:CashTransactionsComponent,
+      },
+      
 
+
+      
+    
       
 
 

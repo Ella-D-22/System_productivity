@@ -4,14 +4,30 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'http://3.13.214.62:8200'
+  
   apiUrl: 'http://localhost:9191',
   systemAPI: 'http://localhost:9093',
   accountsAPI: 'http://localhost:9099',
   collateralAPI:'http://localhost:9103',
   productAPI:'http://localhost:9100',
-  // accountsAPI: 'http://localhost:9191'
   branchsAPI:'http://localhost:8000'
+
+
+
+  // accountsAPI: 'http://localhost:9191'
+<<<<<<< HEAD
+  branchsAPI:'http://localhost:8000'
+=======
+
+  // AWS Server
+  // apiUrl: 'http://52.15.152.26:9191',
+  // systemAPI: 'http://52.15.152.26:9093',
+  // accountsAPI: 'http://52.15.152.26:9099',
+  // collateralAPI:'http://52.15.152.26:9103',
+  // productAPI:'http://52.15.152.26:9100',
+    // branchsAPI:'http://localhost:8000'
+
+>>>>>>> 70e7bfa5032dd3866b5460a7aeba9623807eaf0c
 };
 
 /*
