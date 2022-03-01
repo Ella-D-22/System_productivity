@@ -95,8 +95,8 @@ export class SavingschemeService {
       )
   }
   
-  updateSavingscheme(Savingscheme: string | null, data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/update/${Savingscheme}`;
+  updateSavingscheme(data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/update/`;
     return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
       .pipe(
         catchError(this.errorMgmt)

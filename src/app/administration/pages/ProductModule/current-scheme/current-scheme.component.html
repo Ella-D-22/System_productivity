@@ -484,15 +484,6 @@
                </div>            
         </div>
         </div>
-     
-          
-
-
-
-
-
-
-
       </mat-tab>
  
   
@@ -520,7 +511,7 @@
             </div> 
            </div>
            <div class="col-md-6 col-sm-12">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="col-md-6 col-sm-12 form-column ">
                <label class="start pull-left">Default</label>
               </div>
@@ -531,7 +522,7 @@
                 </mat-radio-group>
                 <mat-checkbox class="example-margin" formControlName="caa_is_gl_subhead_deleted">Del Record</mat-checkbox>
               </div>
-           </div>              
+           </div>               -->
          </div>
          </div>
   
@@ -581,7 +572,8 @@
                  <td>{{item.caa_gl_subhead_deafault}}</td>
                  <td>{{item.caa_is_gl_subhead_deleted}}</td>
                  <td><a class="update btn btn-sm" color="accent" (click)="onRemoveGLSubhead(i)">X</a>
-                   <!-- <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a> -->
+                   <a class="update btn btn-sm" color="accent" (click)="editGlSubhead(i)">Edit</a>
+                   
                  </td>
              </tr>
          </tbody>
@@ -826,14 +818,13 @@
         </button>
         <br>
      <!-- Button trigger modal -->
-      <button type="button"  *ngIf="deleting" class="pull-right" 
-      mat-raised-button color="warn" data-bs-toggle="modal"
-       data-bs-target="#staticBackdrop">
+      <button type="submit"  *ngIf="deleting" class="pull-right" 
+      mat-raised-button color="warn">
         Delete
       </button>
      <br>
       <!-- Modal -->
-          <div class="modal fade"  role="dialog" id="staticBackdrop" data-bs-backdrop="static" 
+          <!-- <div class="modal"  role="dialog" id="staticBackdrop" data-bs-backdrop="static" 
           data-bs-keyboard="false" tabindex="-1" 
           aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -846,12 +837,12 @@
                   <p>Do you wish to delete the data ?</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <button type="submit" class="btn btn-primary" data-dismiss="modal">Yes</button>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <br>
       </form>
   

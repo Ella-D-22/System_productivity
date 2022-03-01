@@ -32,7 +32,6 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   lookupdata: any;
   lookupData: any;
   scheme_type_id: any;
-  existingData = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -53,6 +52,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   loading = false;
   submitted = false;
   scheme_code: any; 
+  scheme_code_desc: any;
   scheme_type: any;
   functionArray: any = [
     'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
@@ -66,38 +66,46 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
 
   schemeCodeLookup(): void {
     const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
-      height:'400px',
-      width:'600px'
+      // height:'400px',
+      // width:'700px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupdata= result.data;
       console.log(this.lookupData);
       
       this.scheme_code = this.lookupdata.caa_scheme_code;
+      this.scheme_code_desc = this.lookupData.caa_scheme_code_desc;
       this.formData.controls.scheme_code.setValue(this.scheme_code);
+      this.formData.controls.scheme_code_desc.setValue(this.scheme_code_desc)
     });
   }
 
   schemeTypeLookup(): void {
-    const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-      // height: '400px',
+    const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
+      // height:'400px',
+      // width:'700px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
-      this.scheme_type = this.lookupData.scheme_type;
+      this.scheme_type = this.lookupData.caa_scheme_type;
       this.formData.controls.scheme_type.setValue(this.scheme_type);
+      
     });
   }
 
-  onSelectFunction(event:any){
-    if(event.target.value != "A-Add"){
-      this.existingData = true;
-      // this.formData.controls.scheme_code.setValue("")
-      // this.formData.controls.scheme_code.setValidators([Validators.required])
-    }else if(event.target.value == "A-Add"){
-      // this.formData.controls.scheme_code.setValidators([])
-      // this.formData.controls.scheme_code.setValue("");
-      this.existingData = false;
+
+  onChange(state:any){
+    this.function_type = state.target.value;
+    switch(this.function_type){
+      case "1: add":
+        // this.addEventId();
+        break;
+      case "2: enquire":
+          break;
+      case "3: update":
+            break;
+      case "4: remove":
+          break;
     }
   }
  
@@ -135,8 +143,11 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
             }else{
               this.currentSchemeAPI.changeMessage(this.formData.value)
              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/current-scheme/data/view'));
+
               
             }
+      
+           
         }else{
           this.loading = false;
           this._snackBar.open("Invalid Form Data", "Try again!", {
@@ -148,53 +159,6 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
         }
         }
 
-        // onSubmit(){
-        //   console.log(this.formData.value)
-        //   this.loading = true;
-        //   this.submitted = true;
-        //   if(this.formData.valid){
-        //     // this.int_tbl_code = this.f.int_tbl_code.value;
-        //     this.function_type =  this.f.function_type.value;
-        //     if(this.function_type == "A-Add"){
-        //       // console.log("found here", this.int_tbl_code)
-        //       // check if code exists
-        //       // this.params = new HttpParams()
-        //       // .set('int_tbl_code',this.int_tbl_code);
-        //       this.subscription = this.currentSchemeAPI.checkExistence(this.formData.value).subscribe(res=>{
-        //         // not available else proceed
-        //       this.currentSchemeAPI.changeMessage(this.formData.value)
-        //      this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
-        //       }, err=>{
-        //         // exist else show error
-        //         this.error = err;
-        //           this.loading = false;
-        //           this._snackBar.open(this.error, "Try again!", {
-        //             horizontalPosition: this.horizontalPosition,
-        //             verticalPosition: this.verticalPosition,
-        //             duration: 3000,
-        //             panelClass: ['red-snackbar','login-snackbar'],
-        //           });
       
-        //       })
-        //     }else{
-        //       this.currentSchemeAPI.changeMessage(this.formData.value)
-        //       // this.dialogRef.close({ event: 'close', data:this.formData.value });
-        //      this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
-        //     }
-      
-        //     // checkHitcm
-      
-        //     // check if adding 
-        // }else{
-        //   this.loading = false;
-        //   this._snackBar.open("Invalid Form Data", "Try again!", {
-        //     horizontalPosition: this.horizontalPosition,
-        //     verticalPosition: this.verticalPosition,
-        //     duration: 3000,
-        //     panelClass: ['red-snackbar','login-snackbar'],
-        //   });
-        // }
-        // }
-
 }
 

@@ -128,6 +128,7 @@ export class CurrentSchemeComponent implements OnInit {
       this.event_type_code = result.data.code;
       this.event_type_desc = result.data.description;
       this.feeFormData.controls.caa_fee_type.setValue(this.event_type_code);
+      // this.feeFormData.controls.caa_scheme_code_desc.setValue(this.event_type_desc);
     });
   }
 
@@ -138,9 +139,10 @@ export class CurrentSchemeComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log("Gl Subhead data", result);
       this.gl_subhead = result.data;
-      this.gl_subhead_description =  result.data.glSubheadDescription;
-      this.gl_subhead_code =  result.data.glSubheadCode;  
+      this.gl_subhead_description = result.data.glSubheadDescription;
+      this.gl_subhead_code = result.data.glSubheadCode;
 
 
       // this.eventtypedata = result.data;
@@ -326,13 +328,13 @@ export class CurrentSchemeComponent implements OnInit {
     });
   }
 
-  initGlSUbheadForm() {
+  initGlSubheadForm() {
     this.newData = true;
     this.glSubheadData = this.fb.group({
-      gl_subhead: [''],
-      gl_subhead_description: [''],
-      gl_subhead_deafault: [''],
-      is_gl_subhead_deleted: ['']
+    caa_gl_subhead: [''],
+    caa_gl_subhead_description: [''],
+    caa_gl_subhead_deafault: [''],
+    caa_is_gl_subhead_deleted: ['']
     })
   }
 
@@ -351,6 +353,7 @@ export class CurrentSchemeComponent implements OnInit {
   editLoanFeeForm(i: any) {
     this.newData = false;
     this.arrayIndex = this.feeArray[i];
+
     this.feeFormData = this.fb.group({
       caa_fee_type:[this.feeArray[i].caa_fee_type],
       caa_fee_event:[this.feeArray[i].caa_fee_event],
@@ -371,9 +374,26 @@ export class CurrentSchemeComponent implements OnInit {
       
     });
 
+    
+
     const index: number = this.feeArray.indexOf(this.feeArray.values);
     this.feeArray.splice(index, i);
 
+  }
+
+  editGlSubhead(i: any){
+    this.newData = false;
+    this.arrayIndex = this.glSubheadArray[i];
+
+    this.glSubheadData = this.fb.group({
+      caa_gl_subhead:[this.glSubheadArray[i].caa_gl_subhead],
+      caa_gl_subhead_description:[this.glSubheadArray[i].caa_gl_subhead_description],
+      caa_gl_subhead_deafault:[this.glSubheadArray[i].caa_gl_subhead_deafault],
+      caa_is_gl_subhead_deleted:[this.glSubheadArray[i].caa_is_gl_subhead_deleted]
+
+    });
+    const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
+    this.glSubheadArray.splice(index, i);
   }
 
   get g() { return this.formData.controls; }
@@ -392,16 +412,21 @@ export class CurrentSchemeComponent implements OnInit {
     }
   }
 
-  previewGlSubheads() {
-    if (this.glSubheadData.valid) {
+  previewGlSubheads(){
+    if(this.glSubheadData.valid){
+      if(this.glSubheadArray.length<1){
+        this.glSubheadData.controls.caa_gl_subhead_deafault.setValue("Yes");
+      }else{
+        this.glSubheadData.controls.caa_gl_subhead_deafault.setValue("No");
+      }
       this.l.push(this.fb.group(
         this.glSubheadData.value
-      ));
-      this.glSubheadArray.push(this.glSubheadData.value);
-      console.log("Gl Subheads", this.glSubheadArray);
-      this.initLoanForm();
-    }
-  }
+        ));
+        this.glSubheadArray.push(this.glSubheadData.value);
+        this.initGlSubheadForm();
+     }
+   }
+  
 
   updateLoanFee(i: any) {
     this.t.push(this.fb.group(
@@ -511,11 +536,12 @@ export class CurrentSchemeComponent implements OnInit {
       this.function_type = this.message.function_type;
       this.scheme_code = this.message.scheme_code;
       this.scheme_type = this.message.scheme_type;
-      this.scheme_code_desc = this.message.scheme_code_desc;
        
       console.log(this.message);
       
       if (this.function_type == "A-Add") {
+      this.scheme_code_desc = this.message.scheme_code_desc;
+
         // open empty forms
         this.formData = this.fb.group({
 
@@ -555,6 +581,9 @@ export class CurrentSchemeComponent implements OnInit {
     caa_max_sanction_limit:[''],
     caa_norm_int_product_method:[''],
     caa_ac_statement_charged_by:[''],
+    caa_ac_stmt_chrg_fixed_amt:[''],
+    caa_ac_stmt_chrg_per_page:[''],
+
     // caa_max_sanction_limit:[''],
     caa_dr_bal_limit:[''],
     caa_max_penal_int:[''],
@@ -600,6 +629,11 @@ export class CurrentSchemeComponent implements OnInit {
           this.results = res;
 
           console.log(this.results);
+
+          this.feeArray = this.results.caa_fees;
+          this.glSubheadArray = this.results.caa_glsubheads;
+          
+
           
           this.formData = this.fb.group({
 
@@ -664,8 +698,8 @@ export class CurrentSchemeComponent implements OnInit {
             // caa_calc_freq_dr_date:[''],
             // caa_calc_freq_dr_holiday:[''],
                   
-                  caa_fees: new FormArray([]),
-                  caa_glsubheads: new FormArray([])
+                  // caa_fees: new FormArray([]),
+                  // caa_glsubheads: new FormArray([])
 
           });
           // this.disabledFormControll();
@@ -693,14 +727,17 @@ export class CurrentSchemeComponent implements OnInit {
 
           this.results = res;
           console.log("modifying data",this.results);
-          
+          this.feeArray = this.results.caa_fees;
+          this.glSubheadArray = this.results.caa_glsubheads;
+
+              
           this.formData = this.fb.group({
 
             
             caa_function_type: [this.function_type],
             caa_scheme_code: [this.scheme_code],
             caa_scheme_type: [this.scheme_type],
-            caa_scheme_code_desc: [this.scheme_code_desc], 
+            caa_scheme_code_desc: [this.results.scheme_code_desc], 
 
             id:[this.results.id],
                     //General Details
@@ -758,8 +795,8 @@ export class CurrentSchemeComponent implements OnInit {
             // caa_calc_freq_dr_date:[''],
             // caa_calc_freq_dr_holiday:[''],
                   
-                  caa_fees: new FormArray([]),
-                  caa_glsubheads: new FormArray([])
+             caa_fees:[this.feeArray],
+            caa_glsubheads:[this.glSubheadArray]
           });
         }, err => {
           this.error = err;
@@ -788,6 +825,8 @@ export class CurrentSchemeComponent implements OnInit {
           this.results = res;
 
           console.log(this.results);
+          this.feeArray = this.results.caa_fees;
+          this.glSubheadArray = this.results.caa_glsubheads;
           
           this.formData = this.fb.group({
 
@@ -885,6 +924,8 @@ export class CurrentSchemeComponent implements OnInit {
          this.subscription = this.currentSchemeAPI.getCurrentschemeByCurrentschemeCode(params).subscribe(res=>{
  
            this.results = res;
+           this.feeArray = this.results.caa_fees;
+          this.glSubheadArray = this.results.caa_glsubheads;
  
            console.log(this.results);
            
@@ -1053,3 +1094,5 @@ export class CurrentSchemeComponent implements OnInit {
     }
   }
 }
+
+
