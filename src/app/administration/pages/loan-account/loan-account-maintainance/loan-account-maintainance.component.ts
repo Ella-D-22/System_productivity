@@ -111,7 +111,7 @@ export class LoanAccountMaintainanceComponent implements OnInit {
             this.function_type =  this.f.function_type.value;
             this.account_code=this.f.account_code.value;
             if(this.function_type == "A-Add"){
-              this.router.navigate(['loan-account'], {
+              this.router.navigate(['system/accounts/data/view'], {
                 state: this.formData.value
                   
                 ,
@@ -119,7 +119,7 @@ export class LoanAccountMaintainanceComponent implements OnInit {
             
            }
            else{
-            this.router.navigate(['loan-account'], {
+            this.router.navigate(['system/accounts/data/view'], {
               state: this.formData.value   
               ,
             });
