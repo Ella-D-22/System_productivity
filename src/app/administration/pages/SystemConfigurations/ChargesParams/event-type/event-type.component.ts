@@ -22,6 +22,7 @@ export class EventTypeComponent implements OnInit {
   loading = false;
   isDisabled = false;
   isEnabled = true;
+  isDeleting = false;
   dialogValue: any;
   dialogData: any;
   function_type: any;
@@ -186,7 +187,7 @@ export class EventTypeComponent implements OnInit {
         else if(this.function_type == "X-Delete"){
 
           this.disabledFormControll();
-
+         
         this.formData.controls.is_deleted.enable();
 
           this.subscription = this.eventtypeAPI.getEventTypeId(this.event_type_id).subscribe(res=>{
@@ -239,10 +240,10 @@ export class EventTypeComponent implements OnInit {
             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-type/maintenance'));
             })
             }
-            else if(this.function_type != "A-Add"){
+            else if(this.function_type == "M-Modify"){
               this.subscription = this.eventtypeAPI.updateEventType(this.event_type_id, this.formData.value).subscribe(res=>{
                 this.results = res;
-                  this._snackBar.open("Executed Successfully!", "X", {
+                  this._snackBar.open("Record Updated Successfully!", "X", {
                     horizontalPosition: this.horizontalPosition,
                     verticalPosition: this.verticalPosition,
                     duration: 3000,
@@ -259,6 +260,29 @@ export class EventTypeComponent implements OnInit {
                 });
               })  
             }
+          else if(this.function_type == "X-Delete"){
+            this.isEnabled = false;
+            this.isDeleting = true;
+            this.subscription = this.eventtypeAPI.updateEventType(this.event_type_id, this.formData.value).subscribe(res=>{
+              this.results = res;
+                this._snackBar.open("Recorded Deleted Successfully!", "X", {
+                  horizontalPosition: this.horizontalPosition,
+                  verticalPosition: this.verticalPosition,
+                  duration: 3000,
+                  panelClass: ['green-snackbar','login-snackbar'],
+                });
+          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-type/maintenance'));
+            },err=>{
+              this.error = err;
+              this._snackBar.open(this.error, "Try again!", {
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+                duration: 3000,
+                panelClass: ['red-snackbar','login-snackbar'],
+              });
+            })  
+          }
+          
           }else{
             this._snackBar.open("Invalid Form Data", "Try again!", {
               horizontalPosition: this.horizontalPosition,
