@@ -30,7 +30,7 @@
        <label class="start pull-left">Description</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="exce_description" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_description.errors }" />
+        <input type="text" formControlName="exce_description" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_description.errors }" />
       </div>
    </div>            
   </div>
@@ -56,7 +56,7 @@
              <label class="start pull-left">Working Class Exception</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" formControlName="exce_working_class" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_working_class.errors }" />
+              <input type="text" formControlName="exce_working_class" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_working_class.errors }" />
             </div>
          </div>           
     </div>
@@ -66,7 +66,7 @@
              <label class="start pull-left">Work Class Min.</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" formControlName="exce_work_class_min" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_work_class_min.errors }" />
+              <input type="text" formControlName="exce_work_class_min" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_work_class_min.errors }" />
             </div>
          </div>   
     </div>
@@ -79,7 +79,7 @@
            <label class="start pull-left">Authorization Matrix ID.</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column">
-            <input type="text" formControlName="exce_authorization_matrix_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_authorization_matrix_id.errors }" />
+            <input type="text" formControlName="exce_authorization_matrix_id" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_authorization_matrix_id.errors }" />
           </div>
        </div>           
   </div>
@@ -89,7 +89,7 @@
            <label class="start pull-left">General Ledger Classification Type</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column">
-            <input type="text" formControlName="exce_gen_ledger_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_gen_ledger_type.errors }" />
+            <input type="text" formControlName="exce_gen_ledger_type" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_gen_ledger_type.errors }" />
           </div>
        </div>   
   </div>
@@ -115,13 +115,13 @@
            <label class="start pull-left">Channel Exception</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column">
-            <input type="text" formControlName="exce_channel_exce" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_channel_exce.errors }" />
+            <input type="text" formControlName="exce_channel_exce" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.exce_channel_exce.errors }" />
           </div>
        </div>   
   </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-6 col-sm-12">
       <div class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
@@ -142,7 +142,7 @@
           </div>
        </div>   
   </div>
-</div>
+</div> -->
     <br />
     <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
       <span
@@ -150,6 +150,13 @@
         class="spinner-border spinner-border-sm mr-1"
       ></span>
       Submit
+    </button>
+    <button *ngIf="isDeleting" class="pull-right" mat-raised-button color="warn" type="submit">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Delete
     </button>
     <br/>
   </form>

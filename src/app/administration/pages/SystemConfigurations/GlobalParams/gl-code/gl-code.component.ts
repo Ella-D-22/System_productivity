@@ -84,7 +84,17 @@ export class GlCodeComponent implements OnInit {
       formData = this.fb.group({
         glCode:['', [Validators.required]],
         glDescription:[''],
-        modifiedBy:[]
+        modifiedBy:[''],
+        modifiedTime:[''],
+        postedBy:[''],
+        postedTime:[''],
+        postedFlag:[''],
+        verifiedBy:[''],
+        verifiedTime:[''],
+        verifiedFlag:[''],
+        deletedBy:[''],
+        deletedFlag:[''],
+        deletedTime:['']
       });
 
     get f() { return this.formData.controls; }
@@ -106,8 +116,17 @@ export class GlCodeComponent implements OnInit {
           this.formData = this.fb.group({
             glCode:[this.glCode, [Validators.required]],
             glDescription:[''],
+            modifiedBy:[''],
+            modifiedTime:[''],
             postedBy:['Collins'],
-            modifiedBy:['Collins']
+            postedTime:[new Date()],
+            postedFlag:[''],
+            verifiedBy:[''],
+            verifiedTime:[''],
+            verifiedFlag:[''],
+            deletedBy:[''],
+            deletedFlag:[''],
+            deletedTime:['']
           });
           // this.formData.controls.code.disable();
         }

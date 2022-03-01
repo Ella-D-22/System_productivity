@@ -35,7 +35,7 @@
            <label class="start pull-left">Event Type<span class="warning">*</span></label>
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
-            <input type="text" [value]="this.event_description" formControlName="event_type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
+            <input type="text" [value]="this.event_description" oninput ="this.value=this.value.toUpperCase()" formControlName="event_type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
               <mat-icon (click)="eventType()">search</mat-icon>
           </div>
        </div>    

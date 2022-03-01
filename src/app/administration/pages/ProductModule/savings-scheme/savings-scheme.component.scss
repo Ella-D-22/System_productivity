@@ -228,3 +228,6 @@ width: 10px !important;
 display: block !important;
 flex-direction: column;
 }
+input, textarea{
+  text-transform: uppercase !important;
+}
