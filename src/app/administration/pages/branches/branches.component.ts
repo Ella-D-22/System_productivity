@@ -90,7 +90,7 @@ export class BranchesComponent implements OnInit {
     }
       formData = this.fb.group({
         solCode:['', [Validators.required]],
-        branchDescription:['', [Validators.required]],
+        solDescription:['', [Validators.required]],
         email:['', [Validators.email]],
         phoneNumber:['', [Validators.required]],
         location:['', [Validators.required]],
@@ -113,7 +113,7 @@ export class BranchesComponent implements OnInit {
 
       disabledFormControl(){
         this.formData.controls.solCode.disable();
-        this.formData.controls.branchDescription.disable();
+        this.formData.controls.solDescription.disable();
         this.formData.controls.email.disable();
         this.formData.controls.phoneNumber.disable();
         this.formData.controls.location.disable();
@@ -132,7 +132,7 @@ export class BranchesComponent implements OnInit {
         
           this.formData = this.fb.group({
             solCode:[this.solCode],
-            branchDescription:['', [Validators.required]],
+            solDescription:['', [Validators.required]],
             email:['', [Validators.email,Validators.required]],
             phoneNumber:['', [Validators.required]],
             location:['', [Validators.required]],
@@ -163,7 +163,7 @@ export class BranchesComponent implements OnInit {
             
             this.formData = this.fb.group({
               solCode:[this.solCode],
-              branchDescription:[this.results.entity.branchDescription, [Validators.required]],
+              solDescription:[this.results.entity.solDescription, [Validators.required]],
               email:[this.results.entity.email, [Validators.required]],
               phoneNumber:[this.results.entity.phoneNumber, [Validators.required]],
               location:[this.results.entity.location, [Validators.required]],
@@ -189,7 +189,7 @@ export class BranchesComponent implements OnInit {
             this.formData = this.fb.group({
               // sn:[this.results.entity.sn],
               solCode:[this.solCode],
-              branchDescription:[this.results.entity.branchDescription],
+              solDescription:[this.results.entity.solDescription],
               email:[this.results.entity.email, [Validators.required]],
               phoneNumber:[this.results.entity.phoneNumber, [Validators.required]],
               location:[this.results.entity.location, [Validators.required]],
@@ -225,7 +225,7 @@ export class BranchesComponent implements OnInit {
 
             this.formData = this.fb.group({
               solCode:[this.results.entity.solCode],
-              branchDescription:[this.results.entity.branchDescription],
+              solDescription:[this.results.entity.solDescription],
               email:[this.results.entity.email],
               location:[this.results.entity.location],
               phoneNumber:[this.results.entity.phoneNumber],
@@ -253,7 +253,7 @@ export class BranchesComponent implements OnInit {
             
             this.formData = this.fb.group({
               solCode:[this.results.entity.solCode],
-              branchDescription:[this.results.entity.branchDescription],
+              solDescription:[this.results.entity.solDescription],
               email:[this.results.entity.email],
               location:[this.results.entity.location],
               phoneNumber:[this.results.entity.phoneNumber],

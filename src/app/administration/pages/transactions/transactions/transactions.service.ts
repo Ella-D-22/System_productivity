@@ -8,9 +8,14 @@ import {Response} from 'src/app/administration/pages/transactions/interfaces/res
   providedIn: 'root'
 })
 export class TransactionsService {
-  private baseUrl: string = 'http://127.0.0.1:9105/transaction/';
+  private baseUrl: string = `${environment.transactionAPI}/transaction/`;
 
-  private AccountBaseUrl: string = 'http://127.0.0.1:9099/accounts/';
+  baseURL = `${environment.productAPI}/api/v1/product/caa`;
+
+
+  private AccountBaseUrl: string = `${environment.accountsAPI}/accounts/`;
+
+  transactionAPI
 
   constructor(private http: HttpClient) { }
 

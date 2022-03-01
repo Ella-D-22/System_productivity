@@ -80,18 +80,31 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
     });
   }
 
+  // schemeTypeLookup(): void {
+  //   const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
+  //     // height:'400px',
+  //     // width:'700px'
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.lookupData = result.data;
+  //     this.scheme_type = this.lookupData.caa_scheme_type;
+  //     this.formData.controls.scheme_type.setValue(this.scheme_type);
+      
+  //   });
+  // }
+
   schemeTypeLookup(): void {
-    const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
-      // height:'400px',
-      // width:'700px'
+    const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
+      // height: '400px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
-      this.scheme_type = this.lookupData.caa_scheme_type;
+      this.scheme_type = this.lookupData.scheme_type;
       this.formData.controls.scheme_type.setValue(this.scheme_type);
-      
     });
   }
+
+  
 
 
   onChange(state:any){

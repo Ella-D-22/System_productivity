@@ -9,7 +9,9 @@ import {Response} from './interfaces/response'
   providedIn: 'root'
 })
 export class LoanAccountService {
-  private baseUrl: string = 'http://127.0.0.1:9099/accounts/';
+  // private baseUrl: string = 'http://127.0.0.1:9099/accounts/';
+  private baseUrl: string = `${environment.accountsAPI}/accounts/`;
+
 
   constructor(private http: HttpClient) { }
 

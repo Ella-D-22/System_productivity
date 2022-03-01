@@ -10,7 +10,9 @@ export const environment = {
   accountsAPI: 'http://localhost:9099',
   collateralAPI:'http://localhost:9103',
   productAPI:'http://localhost:9100',
-  branchsAPI:'http://localhost:8000'
+  branchsAPI:'http://localhost:8000',
+  transactionAPI:'http://localhost:9105',
+
 
 
 

@@ -31,7 +31,7 @@
          <label class="start pull-left">Gl Code</label>
         </div>
         <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" [value]="this.glCode" disabled formControlName="glCode" class="pull-right form-control"/>
+          <input type="text" [value]="this.glCode" oninput ="this.value=this.value.toUpperCase()" disabled formControlName="glCode" class="pull-right form-control"/>
         </div>
      </div>           
 </div>
@@ -41,7 +41,7 @@
        <label class="start pull-left">Description</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <textarea type="text" formControlName="glDescription" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.glDescription.errors }"></textarea>
+        <textarea type="text" formControlName="glDescription" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.glDescription.errors }"></textarea>
       </div>
    </div>  
   </div>

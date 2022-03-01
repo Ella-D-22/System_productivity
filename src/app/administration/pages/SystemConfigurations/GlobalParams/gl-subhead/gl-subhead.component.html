@@ -31,7 +31,7 @@
          <label class="start pull-left">Gl Subhead Code</label>
         </div>
         <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" [value]="this.glSubheadCode" disabled formControlName="glSubheadCode" class="pull-right form-control"/>
+          <input type="text" [value]="this.glSubheadCode" oninput ="this.value=this.value.toUpperCase()" disabled formControlName="glSubheadCode" class="pull-right form-control"/>
         </div>
      </div>           
   </div>
@@ -41,7 +41,7 @@
        <label class="start pull-left">Gl Subhead Description</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <textarea type="text" formControlName="glSubheadDescription"  class="pull-right form-control"></textarea>
+        <textarea type="text" formControlName="glSubheadDescription" oninput ="this.value=this.value.toUpperCase()"  class="pull-right form-control"></textarea>
       </div>
    </div>  
   </div>

@@ -80,8 +80,8 @@ export class EventTypeComponent implements OnInit {
       formData = this.fb.group({
         code: ['', [Validators.required]],
         description: ['', [Validators.required]],
-        is_verified: [''],
-        is_deleted: [''],
+        is_verified: [false],
+        is_deleted: [false],
       });
       disabledFormControll(){
         this.formData.controls.code.disable();
@@ -105,8 +105,8 @@ export class EventTypeComponent implements OnInit {
           this.formData = this.fb.group({
             code: ['', [Validators.required]],
             description: ['', [Validators.required]],
-            is_verified: [''],
-            is_deleted: [''],
+            is_verified: [false],
+            is_deleted: [false],
           });
         }
         else if(this.function_type == "I-Inquire"){
@@ -169,7 +169,7 @@ export class EventTypeComponent implements OnInit {
           this.formData = this.fb.group({
             code: [this.results.code, [Validators.required]],
             description: [this.results.description, [Validators.required]],
-            is_verified: [this.results.is_verified],
+            is_verified: [true],
             is_deleted: [this.results.is_deleted],
           });
         }, err=>{
@@ -196,7 +196,7 @@ export class EventTypeComponent implements OnInit {
               code: [this.results.code, [Validators.required]],
               description: [this.results.description, [Validators.required]],
               is_verified: [this.results.is_verified],
-              is_deleted: [this.results.is_deleted],
+              is_deleted: [true],
             });
           }, err=>{
             this.error = err;
