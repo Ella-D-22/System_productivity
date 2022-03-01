@@ -20,7 +20,7 @@
          <label class="start pull-left">Function<span class="warning">*</span></label>
         </div>
         <div class="col-md-6 col-sm-12 form-column ">
-          <select (change)="onSelectFunction($event)"   class="form-control" formControlName="function_type" [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
+          <select  class="form-control" formControlName="function_type" [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
             <option value="" disabled>-- Choose Function --</option>
             <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
           </select>
@@ -28,7 +28,7 @@
      </div>
     </div>
     <div class="col-md-6 col-sm-12">
-      <div *ngIf="!this.existingData" class="form-group">
+      <div class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
            <label class="start pull-left">Scheme Type</label>
           </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
               <input type="text" [value]="this.scheme_code" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
-              <mat-icon *ngIf="this.existingData"(click)="schemeCodeLookup()">search</mat-icon>
+              <mat-icon (click)="schemeCodeLookup()">search</mat-icon>
             </div>
          </div>            
     </div>

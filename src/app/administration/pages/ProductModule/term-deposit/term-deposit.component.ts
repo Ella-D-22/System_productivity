@@ -706,6 +706,7 @@ export class TermDepositComponent implements OnInit {
           // int_cal_freq_dr_holiday:[''],
           tda_fees: new FormArray([]),
           tda_glsubheads: new FormArray([])
+          
 
         });
       }
@@ -726,6 +727,8 @@ export class TermDepositComponent implements OnInit {
           console.log("this are the results from the form", res);
 // Initialise the glsubheads
           this.glSubheadArray = this.results.tda_glsubheads;
+          console.log("Hey these are tds gl subhead",this.glSubheadArray);
+          
           this.feeArray = this.results.tda_fees;
           
           this.formData = this.fb.group({

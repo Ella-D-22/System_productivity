@@ -49,6 +49,7 @@ export class BranchesComponent implements OnInit {
   formn: any;
   formcontrOrg: any;
   infosecdes: any;
+  invalid:any;
 
 
   messageData: any;
@@ -81,26 +82,37 @@ export class BranchesComponent implements OnInit {
       
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/system/branches/maintenance'));
+          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
         }else{
           null;
         }
       })
     }
       formData = this.fb.group({
-        solecode:['', [Validators.required]],
+        solCode:['', [Validators.required]],
         branchDescription:['', [Validators.required]],
-        email:['', [Validators.required]],
+        email:['', [Validators.email]],
         phoneNumber:['', [Validators.required]],
         location:['', [Validators.required]],
+        // modifiedBy:[this.auth_user],
+        // postedBy:[this.auth_user]
+        deletedBy:[this.auth_user],
+        deletedTime:[new Date()],
+        deletedFlag:['N'],
+        verifiedBy:[this.auth_user],
+        verifiedTime:[new Date()],
+        verifiedFlag:['Y'],
+        postedBy:[this.auth_user],
+        postedTime:[new Date()],
+        postedFlag:['Y'],
         modifiedBy:[this.auth_user],
-        postedBy:[this.auth_user]
+        modifiedTime:[new Date()],
       });
 
     get f() { return this.formData.controls; }
 
-      disabledFormControll(){
-        this.formData.controls.solecode.disable();
+      disabledFormControl(){
+        this.formData.controls.solCode.disable();
         this.formData.controls.branchDescription.disable();
         this.formData.controls.email.disable();
         this.formData.controls.phoneNumber.disable();
@@ -108,43 +120,49 @@ export class BranchesComponent implements OnInit {
       }
 
       getPage(){
-        console.log("got called");
-        
         this.subscription = this.branchAPI.currentMessage.subscribe(message =>{
           this.messageData = message;      
           this.function_type = this.messageData.function_type
-          this.solecode = this.messageData.solcode
-
-          console.log(this.solecode);
-          console.log("this are then code", this.message);
-          
-          
+          this.solCode = this.messageData.solCode
+          console.log(this.solCode);
+          console.log(this.messageData);
           
         if(this.function_type == "A-Add"){
           
-          // open empty forms
-          // this.formData.controls.solecode.setValue(this.solecode)
-          
+        
           this.formData = this.fb.group({
-            solecode:[this.solecode, [Validators.required]],
+            solCode:[this.solCode],
             branchDescription:['', [Validators.required]],
-            email:['', [Validators.required]],
+            email:['', [Validators.email,Validators.required]],
             phoneNumber:['', [Validators.required]],
             location:['', [Validators.required]],
+            // modifiedBy:[this.auth_user],
+            // postedBy:[this.auth_user]
+            deletedBy:[this.auth_user],
+            deletedTime:[new Date()],
+            deletedFlag:['N'],
+            verifiedBy:[this.auth_user],
+            verifiedTime:[new Date()],
+            verifiedFlag:['Y'],
+            postedBy:[this.auth_user],
+            postedTime:[new Date()],
+            postedFlag:['Y'],
             modifiedBy:[this.auth_user],
-            postedBy:[this.auth_user]
+            modifiedTime:[new Date()],
           });
           // this.formData.controls.code.disable();
         }
         else if(this.function_type == "I-Inquire"){
           // call to disable edit
-          this.disabledFormControll();
+          this.disabledFormControl();
           // hide Buttons
           this.isEnabled = false;
-          this.subscription = this.branchAPI.getBranchBySolCode(this.solCode).subscribe(res=>{
+          this.subscription = this.branchAPI.getBranchBySolCode(this.message.solCode).subscribe(res=>{
             this.results = res;
+            console.log("this all", this.results);
+            
             this.formData = this.fb.group({
-              solecode:[this.solecode, [Validators.required]],
+              solCode:[this.solCode],
               branchDescription:[this.results.entity.branchDescription, [Validators.required]],
               email:[this.results.entity.email, [Validators.required]],
               phoneNumber:[this.results.entity.phoneNumber, [Validators.required]],
@@ -160,26 +178,38 @@ export class BranchesComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+            this.ngZone.run(() => this.router.navigateByUrl('system/branches/maintenance'));
           })
         }
         else if(this.function_type == "M-Modify"){          
-          this.subscription = this.branchAPI.getBranchBySolCode(this.solCode).subscribe(res=>{
+          this.subscription = this.branchAPI.getBranchBySolCode(this.message.solCode).subscribe(res=>{
             this.results = res;
+            console.log(this.results);
+            
             this.formData = this.fb.group({
-              sn:[this.results.entity.sn],
-              solecode:[this.solecode, [Validators.required]],
-              branchDescription:[this.results.entity.branchDescription, [Validators.required]],
+              // sn:[this.results.entity.sn],
+              solCode:[this.solCode],
+              branchDescription:[this.results.entity.branchDescription],
               email:[this.results.entity.email, [Validators.required]],
               phoneNumber:[this.results.entity.phoneNumber, [Validators.required]],
               location:[this.results.entity.location, [Validators.required]],
               modifiedBy:[this.auth_user],
-              postedBy:[this.auth_user]
+              modifiedTime:[new Date()],
+              postedBy:[this.results.entity.postedBy],
+              postedTime:[this.results.entity.postedTime],
+              postedFlag:[this.results.entity.postedFlag],
+              verifiedBy:[this.results.entity.verifiedBy],
+              verifiedTime:[this.results.entity.verifiedTime],
+              verifiedFlag:[this.results.entity.verifiedFlag],
+              deletedFlag:['N'],
+              deletedTime:[this.results.entity.deletedTime],
+              deletedBy:[''],
+              sn:[this.results.entity.sn]
             });
-            this.formData.controls.glCode.disable();
+            // this.formData.controls.solCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/branches/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -190,9 +220,60 @@ export class BranchesComponent implements OnInit {
         }
         else if(this.function_type == "V-Verify"){
           // Populate data with rotected fileds only verification is enabled
+          this.branchAPI.getBranchBySolCode(this.message.solCode).subscribe(res=>{
+            this.results = res;
+
+            this.formData = this.fb.group({
+              solCode:[this.results.entity.solCode],
+              branchDescription:[this.results.entity.branchDescription],
+              email:[this.results.entity.email],
+              location:[this.results.entity.location],
+              phoneNumber:[this.results.entity.phoneNumber],
+              postedBy:[this.results.entity.postedBy],
+              postedFlag:[this.results.entity.postedFlag],
+              postedTime:[this.results.entity.postedTime],
+              modifiedBy:[this.results.entity.modifiedBy],
+              modifiedTime:[this.results.entity.modifiedTime],
+              deletedBy:[this.results.entity.deletedBy],
+              deletedTime:[this.results.entity.deletedTime],
+              deletedFlag:[this.results.entity.deletedFlag],
+              verifiedBy:[this.auth_user],
+              verifiedTime:[new Date()],
+              verifiedFlag:["Y"],
+              sn:[this.results.entity.sn]
+            })
+          })
+          this.disabledFormControl();
         }
-        else if(this.function_type == "C-Cancle"){
+        else if(this.function_type == "X-Delete"){
           // should open a page with data and show remove button
+          this.branchAPI.getBranchBySolCode(this.message.solCode).subscribe(res=>{
+            this.results = res;
+            console.log("deleting results", this.results);
+            
+            this.formData = this.fb.group({
+              solCode:[this.results.entity.solCode],
+              branchDescription:[this.results.entity.branchDescription],
+              email:[this.results.entity.email],
+              location:[this.results.entity.location],
+              phoneNumber:[this.results.entity.phoneNumber],
+              postedBy:[this.results.entity.postedBy],
+              postedFlag:[this.results.entity.postedFlag],
+              postedTime:[this.results.entity.postedTime],
+              modifiedBy:[this.results.entity.modifiedBy],
+              modifiedTime:[this.results.entity.modifiedTime],
+              deletedBy:[this.auth_user],
+              deletedTime:[new Date()],
+              deletedFlag:['Y'],
+              verifiedBy:[this.results.entity.verifiedBy],
+              verifiedTime:[this.results.entity.verifiedTime],
+              verifiedFlag:[this.results.entity.verifiedFlag],
+              sn:[this.results.entity.sn]
+
+
+            });
+          })
+          this.disabledFormControl();
         } 
       })
       }
@@ -206,13 +287,15 @@ export class BranchesComponent implements OnInit {
             if(this.function_type == "A-Add"){
             this.subscription = this.branchAPI.createBranch(this.formData.value).subscribe(res=>{
               this.results = res;
+              console.log(this.results);
+              
                 this._snackBar.open("Executed Successfully!", "X", {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/branches/maintenance'));
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -231,7 +314,7 @@ export class BranchesComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/linked/organization/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/branches/maintenance'));
                   // system/configurations/global/linked/organization/maintenance
               },err=>{
                 this.error = err;

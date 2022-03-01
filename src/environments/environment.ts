@@ -10,6 +10,8 @@ export const environment = {
   accountsAPI: 'http://localhost:9099',
   collateralAPI:'http://localhost:9103',
   productAPI:'http://localhost:9100',
+  branchsAPI:'http://localhost:8000'
+
 
 
   // accountsAPI: 'http://localhost:9191'
@@ -20,6 +22,8 @@ export const environment = {
   // accountsAPI: 'http://52.15.152.26:9099',
   // collateralAPI:'http://52.15.152.26:9103',
   // productAPI:'http://52.15.152.26:9100',
+    // branchsAPI:'http://localhost:8000'
+
 };
 
 /*
