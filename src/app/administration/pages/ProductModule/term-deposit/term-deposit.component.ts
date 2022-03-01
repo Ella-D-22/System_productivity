@@ -456,7 +456,7 @@ export class TermDepositComponent implements OnInit {
   initGlSUbheadForm() {
     this.newData = true;
     this.glSubheadData = this.fb.group({
-      tad_gl_subhead: [''],
+      tda_gl_subhead: [''],
       tda_gl_subhead_description: [''],
       tda_gl_subhead_deafault: [''],
       tda_is_gl_subhead_deleted: ['']
@@ -494,9 +494,7 @@ export class TermDepositComponent implements OnInit {
   get l() { return this.g.tda_glsubheads as FormArray; }
 
 
-  newFormDkkata = this.fb.group({
-    org_lnk_event_id: ['', Validators.required],
-  });
+
   preview() {
     if (this.feeFormData.valid) {
       this.t.push(this.fb.group(
@@ -508,16 +506,6 @@ export class TermDepositComponent implements OnInit {
     }
   }
 
-  // previewGlSubheads() {
-  //   if (this.glSubheadData.valid) {
-  //     this.l.push(this.fb.group(
-  //       this.glSubheadData.value
-  //     ));
-  //     this.glSubheadArray.push(this.glSubheadData.value);
-  //     console.log("Gl Subheads", this.glSubheadArray);
-  //     this.initLoanForm();
-  //   }
-  // }
 
   
   previewGlSubheads(){
@@ -569,9 +557,6 @@ export class TermDepositComponent implements OnInit {
     this.showNumber_gen_code = true;
     this.showSystem_gen_no = false;;
   }
-
-
-
 
   disabledFormControll() {
       
