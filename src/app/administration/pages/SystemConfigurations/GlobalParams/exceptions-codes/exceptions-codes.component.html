@@ -121,7 +121,7 @@
   </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-6 col-sm-12">
       <div class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
@@ -142,7 +142,7 @@
           </div>
        </div>   
   </div>
-</div>
+</div> -->
     <br />
     <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
       <span
@@ -150,6 +150,13 @@
         class="spinner-border spinner-border-sm mr-1"
       ></span>
       Submit
+    </button>
+    <button *ngIf="isDeleting" class="pull-right" mat-raised-button color="warn" type="submit">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Delete
     </button>
     <br/>
   </form>

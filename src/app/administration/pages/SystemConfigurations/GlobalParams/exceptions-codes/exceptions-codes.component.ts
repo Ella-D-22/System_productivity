@@ -36,6 +36,7 @@ export class ExceptionsCodesComponent implements OnInit {
   error: any;
   isLookupDisabled = false;
   submitted = false;
+  isDeleting = false;
 
   constructor(
     public fb: FormBuilder,
@@ -186,14 +187,15 @@ export class ExceptionsCodesComponent implements OnInit {
           this.isLookupDisabled = false;
           // Populate data with rotected fileds only verification is enabled
         }
-        else if(this.function_type == "X-Cancel"){
-          this.canVerify = false;
-          this.canDeleted = false;
+        else if(this.function_type == "X-Delete"){
+          this.isDeleting = true;
           this.isLookupDisabled = false;
           this.disabledFormControll()
           // should open a page with data and show remove button
           this.subscription = this.exceptionCodeApi.getException_codeId(this.exception_code).subscribe(res=>{
             this.results = res;
+            console.log("deleting", this.results);
+            
             this.formData = this.fb.group({
               id:[this.results.id],
               exception_code:[this.exception_code],
@@ -250,7 +252,7 @@ export class ExceptionsCodesComponent implements OnInit {
             }else if(this.function_type == "M-Modify"){
               this.subscription = this.exceptionCodeApi.updateException_code(this.exception_code, this.formData.value).subscribe(res=>{
                 this.results = res;
-                  this._snackBar.open("Executed Successfully!", "X", {
+                  this._snackBar.open("Record Updated Successfully!", "X", {
                     horizontalPosition: this.horizontalPosition,
                     verticalPosition: this.verticalPosition,
                     duration: 3000,
@@ -267,7 +269,31 @@ export class ExceptionsCodesComponent implements OnInit {
                   panelClass: ['red-snackbar','login-snackbar'],
                 });
               })  
+            } else if(this.function_type == "X-Delete"){
+               this.isDeleting = true;
+               this.isEnabled = false;
+                this.subscription = this.exceptionCodeApi.updateException_code(this.exception_code, this.formData.value).subscribe(res=>{
+                  this.results = res;
+                    this._snackBar.open("Record Deleted Successfully!", "X", {
+                      horizontalPosition: this.horizontalPosition,
+                      verticalPosition: this.verticalPosition,
+                      duration: 3000,
+                      panelClass: ['green-snackbar','login-snackbar'],
+                    });
+                this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/exceptions-codes/maintenance'));
+                    // system/configurations/global/linked/organization/maintenance
+                },err=>{
+                  this.error = err;
+                  this._snackBar.open(this.error, "Try again!", {
+                    horizontalPosition: this.horizontalPosition,
+                    verticalPosition: this.verticalPosition,
+                    duration: 3000,
+                    panelClass: ['red-snackbar','login-snackbar'],
+                  });
+                })  
+              
             }
+            
           }else{
             this._snackBar.open("Invalid Form Data", "Try again!", {
               horizontalPosition: this.horizontalPosition,
