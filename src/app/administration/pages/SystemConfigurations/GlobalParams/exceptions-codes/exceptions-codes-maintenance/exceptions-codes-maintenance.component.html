@@ -33,7 +33,9 @@
          <label class="start pull-left">Exception Code<span class="warning">*</span></label>
         </div>
         <div class="col-md-6 col-sm-12 form-column ">
-          <input type="text" [value]="this.exception_code_value" formControlName="exception_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.exception_code.errors }" />
+          <input type="text" [value]="this.exception_code_value" maxlength="6"
+           oninput ="this.value=this.value.toUpperCase()" 
+           formControlName="exception_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.exception_code.errors }" />
             <mat-icon *ngIf="this.newData" (click)="exception_codeLookup()">search</mat-icon>
         </div>
      </div>    

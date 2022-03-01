@@ -31,7 +31,7 @@
      <label class="start pull-left">CCY</label>
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-      <input type="text" formControlName="ccy" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy.errors }" />
+      <input type="text" formControlName="ccy" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy.errors }" />
     </div>
  </div>            
 </div>
@@ -41,7 +41,7 @@
      <label class="start pull-left">Country</label>
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-      <input type="text" formControlName="country" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+      <input type="text" formControlName="country" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
     </div>
  </div>   
 </div>
@@ -53,7 +53,7 @@
            <label class="start pull-left">CCY Name</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column">
-            <input type="text" formControlName="ccy_name" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
+            <input type="text" formControlName="ccy_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
           </div>
        </div>           
   </div>
