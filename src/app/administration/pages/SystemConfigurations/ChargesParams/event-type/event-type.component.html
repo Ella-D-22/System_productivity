@@ -31,7 +31,7 @@
        <label class="start pull-left">Code</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+        <input type="text" formControlName="code" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
       </div>
    </div>            
   </div>
@@ -41,7 +41,7 @@
        <label class="start pull-left">Description</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="description" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+        <input type="text" formControlName="description" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
       </div>
    </div>   
   </div>
@@ -75,6 +75,13 @@
         class="spinner-border spinner-border-sm mr-1"
       ></span>
       Submit
+    </button>
+    <button *ngIf="isDeleting" class="pull-right" mat-raised-button color="warn" type="submit">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Delete
     </button>
     <br />
   </form>
