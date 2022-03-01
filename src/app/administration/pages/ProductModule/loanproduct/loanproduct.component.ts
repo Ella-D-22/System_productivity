@@ -877,6 +877,12 @@ export class LoanproductComponent implements OnInit {
               laa_ac_penal_int_suspense:[this.results.laa_ac_penal_int_suspense],
               laa_prov_dr:[this.results.laa_prov_dr],
               laa_prov_cr:[this.results.laa_prov_cr],
+              is_verified:[this.results.is_verified],
+              is_deleted:[this.results.is_deleted],
+
+              laa_loanfees:[this.results.laa_loanfees],
+              laa_glsubheads: [this.results.laa_glsubheads]
+
             });
           }, err=>{
             this.error = err;
@@ -889,7 +895,7 @@ export class LoanproductComponent implements OnInit {
           })
         }
         else if(this.function_type == "V-Verify"){
-          console.log("Got Called!");
+          this.disabledFormControll();
           
           //load the page with form data submit disabled
           // find by event id
@@ -1012,7 +1018,11 @@ export class LoanproductComponent implements OnInit {
               laa_ac_penal_int_suspense:[this.results.laa_ac_penal_int_suspense],
               laa_prov_dr:[this.results.laa_prov_dr],
               laa_prov_cr:[this.results.laa_prov_cr],
-              is_verified:[true]
+              is_verified:[true],
+              is_deleted:[this.results.is_deleted],
+
+              laa_loanfees:[this.results.laa_loanfees],
+              laa_glsubheads: [this.results.laa_glsubheads]
             });
           }, err=>{
             this.error = err;
@@ -1024,9 +1034,9 @@ export class LoanproductComponent implements OnInit {
             });
           })
         }
-        else if(this.function_type == "D-Deleted"){
-          console.log("Got Called!");
-          
+        else if(this.function_type == "X-Delete"){
+          this.disabledFormControll();
+        
           //load the page with form data submit disabled
           // find by event id
           this.showContractInput = true;
@@ -1148,7 +1158,11 @@ export class LoanproductComponent implements OnInit {
               laa_ac_penal_int_suspense:[this.results.laa_ac_penal_int_suspense],
               laa_prov_dr:[this.results.laa_prov_dr],
               laa_prov_cr:[this.results.laa_prov_cr],
-              is_deleted:[true]
+              is_deleted:[true],
+              is_verified:[this.results.is_verified],
+
+              laa_loanfees:[this.results.laa_loanfees],
+              laa_glsubheads: [this.results.laa_glsubheads]
             });
           }, err=>{
             this.error = err;
@@ -1212,7 +1226,7 @@ export class LoanproductComponent implements OnInit {
                 panelClass: ['red-snackbar','login-snackbar'],
               });
             })
-            }else if(this.function_type == "M-Modify"){
+            }else if(this.function_type  != "A-Add"){
               this.isEnabled = true;
               this.subscription = this.loanproductAPI.updateLoanproduct(this.formData.value).subscribe(res=>{
                 this.results = res;

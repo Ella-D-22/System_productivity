@@ -95,6 +95,11 @@ import { AccountComponent } from './pages/transactions/lookup/account/account.co
 import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
 import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 import { LoanAccountLookupComponent } from './pages/loan-account/loan-account-lookup/loan-account-lookup.component';
+import { BranchComponent } from './pages/loan-account/lookup/branch/branch.component';
+import { CustomerComponent } from './pages/loan-account/lookup/customer/customer.component';
+import { GlSubheadLookup2Component } from './pages/loan-account/lookup/gl-subhead/gl-subhead.component';
+import { ProductComponent } from './pages/loan-account/lookup/product/product.component';
+import { UserComponent } from './pages/loan-account/lookup/user/user.component';
 
 
 @NgModule({
@@ -190,7 +195,14 @@ import { LoanAccountLookupComponent } from './pages/loan-account/loan-account-lo
 
     LoanAccountComponent,
     LoanAccountMaintainanceComponent,
-    LoanAccountLookupComponent
+    LoanAccountLookupComponent,
+
+    BranchComponent,
+    CustomerComponent,
+    GlSubheadLookup2Component,
+    ProductComponent,
+    UserComponent
+
     
   ],
   imports: [
