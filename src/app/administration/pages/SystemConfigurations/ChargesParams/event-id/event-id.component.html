@@ -35,7 +35,7 @@
               <label class="start pull-left">A/c.Placeholder <span class="warning">*</span></label>
              </div>
              <div class="col-md-6 col-sm-12 form-column ">
-              <input  type="text" [value]="this.ac_placeholder" formControlName="ac_placeholder" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ac_placeholder.errors }" />
+              <input  type="text" [value]="this.ac_placeholder" oninput ="this.value=this.value.toUpperCase()" formControlName="ac_placeholder" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ac_placeholder.errors }" />
               <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
              </div>
           </div>           
@@ -82,7 +82,7 @@
    <label class="start pull-left">Charge Code<span class="warning">*</span></label>
   </div>
   <div class="col-md-6 col-sm-12 form-column ">
-   <input type="text" formControlName="chrg_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.chrg_code.errors }" />
+   <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="chrg_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.chrg_code.errors }" />
   </div>
 </div> 
 <div *ngIf="showMrtFilenameDerivationInput" class="form-group">
@@ -98,7 +98,7 @@
    <label class="start pull-left">File Name<span class="warning">*</span></label>
   </div>
   <div class="col-md-6 col-sm-12 form-column ">
-    <input type="text" formControlName="file_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.file_name.errors }" />
+    <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="file_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.file_name.errors }" />
   </div>
 </div> 
 
@@ -114,7 +114,7 @@
        <label class="start pull-left">Chrg. Calc. Crncy</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-        <input type="text" [value]="this.chrg_calc_crncy" formControlName="chrg_calc_crncy" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.chrg_calc_crncy.errors }" />
+        <input type="text" [value]="this.chrg_calc_crncy" oninput ="this.value=this.value.toUpperCase()" formControlName="chrg_calc_crncy" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.chrg_calc_crncy.errors }" />
         <mat-icon *ngIf="isEnabled"  (click)="chrgCalcCrncyLookup()">search</mat-icon>
       </div>
    </div> 
@@ -125,7 +125,7 @@
        <label class="start pull-left">Chrg. Coll. Crncy</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-        <input type="text" [value]="this.chrg_coll_crncy" formControlName="chrg_coll_crncy" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.chrg_coll_crncy.errors }" />
+        <input type="text" [value]="this.chrg_coll_crncy" oninput ="this.value=this.value.toUpperCase()" formControlName="chrg_coll_crncy" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.chrg_coll_crncy.errors }" />
         <mat-icon *ngIf="isEnabled"  (click)="chrgCollCrncyLookup()">search</mat-icon>
       </div>
    </div> 
@@ -138,7 +138,7 @@
        <label class="start pull-left">Min.Amt.</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" [value]="this.min_amt_ccy" formControlName="min_amt_ccy" class="currency pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.min_amt_ccy.errors }" />
+        <input type="text" [value]="this.min_amt_ccy" oninput ="this.value=this.value.toUpperCase()" formControlName="min_amt_ccy" class="currency pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.min_amt_ccy.errors }" />
         <mat-icon *ngIf="isEnabled"  (click)="minAmtCurrencyLookup()">search</mat-icon>
         <input type="number" formControlName="min_amt" class="currency-value pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.min_amt.errors }" />
       </div>
@@ -150,7 +150,7 @@
        <label class="start pull-left">Max.Amt.<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" [value]="this.max_amt_ccy" formControlName="max_amt_ccy" class="currency pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.max_amt_ccy.errors }" />
+        <input type="text" [value]="this.max_amt_ccy" oninput ="this.value=this.value.toUpperCase()" formControlName="max_amt_ccy" class="currency pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.max_amt_ccy.errors }" />
         <mat-icon *ngIf="isEnabled"  (click)="maxAmtCurrencyLookup()">search</mat-icon>
         <input type="number" formControlName="max_amt" class="currency-value pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.max_amt.errors }" />
            
@@ -166,7 +166,7 @@
        <label class="start pull-left">Fee Report Code</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="fee_report_code" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.fee_report_code.errors }" />
+        <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="fee_report_code" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.fee_report_code.errors }" />
         <mat-icon>search</mat-icon>
       </div>
    </div>            
