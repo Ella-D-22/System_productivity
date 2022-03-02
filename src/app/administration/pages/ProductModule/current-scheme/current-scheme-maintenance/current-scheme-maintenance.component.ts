@@ -69,7 +69,6 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
     const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("This are the lookup data",result);
       this.lookupdata= result.data;
       this.scheme_code = this.lookupdata.caa_scheme_code;
       this.scheme_code_desc = result.data.caa_scheme_code_desc;
@@ -77,7 +76,6 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
       this.formData.controls.scheme_code.setValue(this.scheme_code);
     });
   }
-
   schemeTypeLookup(): void {
     const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
       // height: '400px',
@@ -130,11 +128,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
             }else{
               this.currentSchemeAPI.changeMessage(this.formData.value)
              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/current-scheme/data/view'));
-
-              
             }
-      
-           
         }else{
           this.loading = false;
           this._snackBar.open("Invalid Form Data", "Try again!", {
