@@ -583,7 +583,7 @@ export class OverdraftsSchemeComponent implements OnInit {
         // open empty forms
         this.formData = this.fb.group({
           oda_function_type: [this.function_type],
-          oda_scheme_code: [this.int_tbl_code],
+          oda_scheme_code: [this.scheme_code],
           oda_scheme_type: [this.scheme_type],
           oda_scheme_code_desc: [this.scheme_code_desc],
       

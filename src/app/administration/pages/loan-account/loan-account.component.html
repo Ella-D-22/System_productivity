@@ -44,7 +44,7 @@
                       <label class="start pull-left">Account Manager</label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                      <input type="text" formControlName="accountManager" class="pull-right form-control"/>
+                      <input type="text" formControlName="accountManager" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
                        <mat-icon>search</mat-icon>
                     </div>
                   </div>
@@ -56,7 +56,7 @@
                     <label class="start pull-left">Customer Code</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input formControlName="customerCode" type="text" class="pull-right form-control"/>
+                    <input formControlName="customerCode" type="text" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
                      <mat-icon>search</mat-icon>
                   </div>
                 </div>
@@ -71,8 +71,8 @@
                       <label class="start pull-left">Scheme Code</label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                      <input type="text" formControlName="schemeCode" class="pull-right form-control"/>
-                       <mat-icon>search</mat-icon>
+                      <input type="text" formControlName="schemeCode" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
+                       <mat-icon (click)="productLookup()">search</mat-icon>
                     </div>
                   </div>
                 </div>
@@ -82,8 +82,8 @@
                    <label class="start pull-left">GL-Subhead Code</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="glSubhead" class="pull-right form-control" />
-                   <mat-icon>search</mat-icon>
+                   <input type="text" formControlName="glSubhead" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
+                   <mat-icon (click)="glSubheadLookup()">search</mat-icon>
                   </div>
                </div> 
               </div>
@@ -96,7 +96,7 @@
                    <label class="start pull-left">Currency</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="currency" class="pull-right form-control" />
+                   <input type="text" formControlName="currency" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
                   </div>
                </div> 
               </div>
@@ -106,7 +106,7 @@
                    <label class="start pull-left">Reffered BY</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="referredBy" class="pull-right form-control" />
+                   <input type="text" formControlName="referredBy" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
                   </div>
                </div> 
               </div>
@@ -158,8 +158,8 @@
                    <label class="start pull-left">Branch Code</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="solCode" class="pull-right form-control" />
-                   <mat-icon>search</mat-icon>
+                   <input type="text" formControlName="solCode" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
+                   <mat-icon (click)="branchSubheadLookup()">search</mat-icon>
                   </div>
                </div> 
               </div>
