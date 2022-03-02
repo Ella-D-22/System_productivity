@@ -733,13 +733,11 @@ export class CurrentSchemeComponent implements OnInit {
               
           this.formData = this.fb.group({
 
-            
-            caa_function_type: [this.function_type],
-            caa_scheme_code: [this.scheme_code],
-            caa_scheme_type: [this.scheme_type],
-            caa_scheme_code_desc: [this.results.scheme_code_desc], 
-
             id:[this.results.id],
+            caa_function_type: [this.results.caa_function_type],
+            caa_scheme_code: [this.results.caa_scheme_code],
+            caa_scheme_type: [this.results.caa_scheme_type],
+            caa_scheme_code_desc: [this.results.caa_scheme_code_desc], 
                     //General Details
             caa_effective_from_date:[this.results.caa_effective_from_date],
             caa_effective_to_date:[this.results.caa_effective_to_date],
@@ -830,13 +828,12 @@ export class CurrentSchemeComponent implements OnInit {
           
           this.formData = this.fb.group({
 
-            caa_function_type: [this.function_type],
-            caa_scheme_code: [this.scheme_code],
-            caa_scheme_type: [this.scheme_type],
-            caa_scheme_code_desc: [this.scheme_code_desc], 
-
             id:[this.results.id],
-                    //General Details
+            caa_function_type: [this.results.caa_function_type],
+            caa_scheme_code: [this.results.caa_scheme_code],
+            caa_scheme_type: [this.results.caa_scheme_type],
+            caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
+
             caa_effective_from_date:[this.results.caa_effective_from_date],
             caa_effective_to_date:[this.results.caa_effective_to_date],
             caa_system_generated_no:[this.results.caa_system_generated_no],
@@ -926,17 +923,14 @@ export class CurrentSchemeComponent implements OnInit {
            this.results = res;
            this.feeArray = this.results.caa_fees;
           this.glSubheadArray = this.results.caa_glsubheads;
- 
-           console.log(this.results);
-           
+            
            this.formData = this.fb.group({
- 
-             caa_function_type: [this.function_type],
-             caa_scheme_code: [this.scheme_code],
-             caa_scheme_type: [this.scheme_type],
-             caa_scheme_code_desc: [this.scheme_code_desc], 
- 
-             id:[this.results.id],
+            
+            id:[this.results.id],
+            caa_function_type: [this.results.caa_function_type],
+            caa_scheme_code: [this.results.caa_scheme_code],
+            caa_scheme_type: [this.results.caa_scheme_type],
+            caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
                      //General Details
              caa_effective_from_date:[this.results.caa_effective_from_date],
              caa_effective_to_date:[this.results.caa_effective_to_date],

@@ -56,7 +56,7 @@ export class OverdraftSchemeMaintenanceComponent implements OnInit {
   scheme_code: any; 
   scheme_type: any;
   functionArray: any = [
-    'A-Add','I-Inquire','M-Modify','V-Verify','X-Cancel'
+    'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
