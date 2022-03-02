@@ -1693,11 +1693,22 @@ productLookup(): void {
   const cdialogRef = this.dialog.open(ProductComponent,dconfig);
   cdialogRef.afterClosed().subscribe((result) => {
     console.log(result.data);
-    // this.schemeCode = result.data.schemeCode;
-
-    this.formData.controls.schemeCode.setValue(result.data.oda_scheme_code);
-    //this.account_code=result.data.accountCode
-    // this.schemeDescription=result.data.productDescription
+    if(this.dtype=="oda"){
+      this.formData.controls.schemeCode.setValue(result.data.oda_scheme_code);
+    }
+    if(this.dtype=="sba"){
+      this.formData.controls.schemeCode.setValue(result.data.sba_scheme_code);
+    }
+    if(this.dtype=="caa"){
+      this.formData.controls.schemeCode.setValue(result.data.caa_scheme_code);
+    }
+    if(this.dtype=="tda"){
+      this.formData.controls.schemeCode.setValue(result.data.tda_scheme_code);
+    }
+    if(this.dtype=="laa"){
+      this.formData.controls.schemeCode.setValue(result.data.laa_scheme_code);
+    }
+  
   });
 }
 
