@@ -9,7 +9,8 @@ import {Response} from '../../interfaces/response'
   providedIn: 'root'
 })
 export class GlSubheadService {
-  private baseUrl: string = 'http://127.0.0.1:9099/subhead/';
+  //private baseUrl: string = 'http://127.0.0.1:9099/subhead/';
+  private baseUrl: string = `${environment.accountsAPI}/subhead`;
 
   constructor(private http: HttpClient) { }
 

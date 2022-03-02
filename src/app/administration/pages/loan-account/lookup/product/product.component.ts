@@ -5,10 +5,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {productService} from './product.service'
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 
-export interface  user {
-  userCode: String;
-  name: String;
+export interface  product {
+  schemeCode: String;
+  productDescription: String;
 }
 
 @Component({
@@ -19,12 +20,27 @@ export interface  user {
 export class ProductComponent implements OnInit {
   isLoadingResults: boolean = true;
   displayedColumns: string[] = ['code', 'description'];
-  dataSource: MatTableDataSource<user>;
+  dataSource: MatTableDataSource<product>;
+  type!: string
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(public dialogRef: MatDialogRef<ProductComponent>,private productservice: productService,@Inject(MAT_DIALOG_DATA) data ) { }
+  constructor(public dialogRef: MatDialogRef<ProductComponent>,private productservice: productService,@Inject(MAT_DIALOG_DATA) data ) { 
+this.type=data.type 
+console.log(this.type)
+    this.productservice.retrieveAllProducts(data.type).subscribe(
+      (data) => {
+        this.isLoadingResults = false;
+        //console.log(data.entity)
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(data);
+      },
+      (error) => {}
+    );
+  }
 
   ngOnInit(): void {
   }
