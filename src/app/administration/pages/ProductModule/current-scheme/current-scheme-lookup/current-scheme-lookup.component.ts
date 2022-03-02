@@ -50,8 +50,6 @@ export class CurrentSchemeLookupComponent implements OnInit {
        this.dataSource.paginator.firstPage();
      }
    }
- 
- 
    onSelect(data:any){
      this.dialogRef.close({ event: 'close', data:data });
    }

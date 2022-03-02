@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,7 @@ import { LoanproductService } from '../loanproduct/loanproduct.service';
 import { OverdraftService } from './overdraft.service';
 
 import {} from 'src/app/administration/pages/ProductModule/Accounts/office-accounts/office-accounts-lookup/office-accounts-lookup.component'
+import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
 
 @Component({
   selector: 'app-overdrafts-scheme',
@@ -119,6 +120,12 @@ export class OverdraftsSchemeComponent implements OnInit {
   fomartedFromDate: any;
   selecteddateTo: any;
   fomartedToDate: any;
+  dtype: string;
+  oda_normal_int_receivable_ac: any;
+  oda_penal_int_receivable_ac: any;
+  oda_normal_int_received_ac: any;
+  oda_penal_int_received_ac: any;
+  oda_advance_int_ac: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
@@ -243,6 +250,71 @@ export class OverdraftsSchemeComponent implements OnInit {
       this.glSubheadData.controls.oda_gl_subhead_description.setValue(this.gl_subhead_description);
     });
   }
+
+
+      // Account lookups
+normIntReceivedAccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_normal_int_receivable_ac = result.data.acid;
+    this.formData.controls.oda_normal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+
+penalIntRecAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_penal_int_receivable_ac = result.data.acid;
+    this.formData.controls.oda_penal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+normIntReceivedaccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_normal_int_received_ac = result.data.acid;
+    this.formData.controls.oda_normal_int_received_ac.setValue(result.data.acid);
+  });
+}
+penalIntReceivedaccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_penal_int_received_ac = result.data.acid;
+    this.formData.controls.oda_penal_int_received_ac.setValue(result.data.acid);
+  });
+}
+advanceIntAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_advance_int_ac = result.data.acid;
+    this.formData.controls.oda_advance_int_ac.setValue(result.data.acid);
+  });
+}
+
 
 
 

@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
               <input type="text" [value]="this.sba_scheme_code" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
-              <mat-icon (click)="schemeCodeLookup()">search</mat-icon>
+              <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
             </div>
          </div>            
     </div>
