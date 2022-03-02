@@ -32,6 +32,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   lookupdata: any;
   lookupData: any;
   scheme_type_id: any;
+  existingData = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -66,32 +67,16 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
 
   schemeCodeLookup(): void {
     const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
-      // height:'400px',
-      // width:'700px'
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log("This are the lookup data",result);
       this.lookupdata= result.data;
-      console.log(this.lookupData);
-      
       this.scheme_code = this.lookupdata.caa_scheme_code;
-      this.scheme_code_desc = this.lookupData.caa_scheme_code_desc;
+      this.scheme_code_desc = result.data.caa_scheme_code_desc;
+
       this.formData.controls.scheme_code.setValue(this.scheme_code);
-      this.formData.controls.scheme_code_desc.setValue(this.scheme_code_desc)
     });
   }
-
-  // schemeTypeLookup(): void {
-  //   const dialogRef = this.dialog.open(CurrentSchemeLookupComponent, {
-  //     // height:'400px',
-  //     // width:'700px'
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.lookupData = result.data;
-  //     this.scheme_type = this.lookupData.caa_scheme_type;
-  //     this.formData.controls.scheme_type.setValue(this.scheme_type);
-      
-  //   });
-  // }
 
   schemeTypeLookup(): void {
     const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
@@ -103,25 +88,14 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
       this.formData.controls.scheme_type.setValue(this.scheme_type);
     });
   }
-
-  
-
-
-  onChange(state:any){
-    this.function_type = state.target.value;
-    switch(this.function_type){
-      case "1: add":
-        // this.addEventId();
-        break;
-      case "2: enquire":
-          break;
-      case "3: update":
-            break;
-      case "4: remove":
-          break;
+  onSelectFunction(event:any){
+    if(event.target.value != "A-Add"){
+      this.existingData = true;
+      this.formData.controls.scheme_code_desc.disable()
+    }else if(event.target.value == "A-Add"){
+      this.existingData = false;
     }
   }
- 
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
 

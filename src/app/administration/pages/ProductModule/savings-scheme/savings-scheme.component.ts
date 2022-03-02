@@ -626,22 +626,6 @@ BackdatedTransactionLookup(): void {
         }
          
 
-        //  onAll(event:any){
-        //   this.formData.controls.org_cust_cif.clearValidators()
-        //   this.formData.controls.org_cust_cif.setValue("")
-        //   this.formData.controls.org_cust_cif.updateValueAndValidity()
-        //   this.requireCif = false;
-        // }
-        // onSpecific(event:any){
-        //   this.formData.controls.org_cust_cif.setValidators([Validators.required])
-        //   this.requireCif = true;
-        //   this.onAddField();
-        // }
-        
-         
-         
-       
-
       disabledFormControll(){
         this.formData.disable();
       }
@@ -744,6 +728,8 @@ BackdatedTransactionLookup(): void {
             sba_exc_int_cal_not_upto_date:[''],
             sba_exc_insufficient_available_bal:[''],
             sba_exc_backdated_transaction:[''],
+            is_verified:[false],
+            is_deleted:[false],
             
             sba_fees: new FormArray([]),
             sba_glsubheads: new FormArray([])
@@ -961,6 +947,8 @@ BackdatedTransactionLookup(): void {
                 sba_exc_int_cal_not_upto_date:[this.results.sba_exc_int_cal_not_upto_date],
                 sba_exc_insufficient_available_bal:[this.results.sba_exc_insufficient_available_bal],
                 sba_exc_backdated_transaction:[this.results.sba_exc_backdated_transaction],
+                is_verified:[this.results.is_verified],
+                is_deleted:[this.results.is_deleted],
 
                 sba_fees:[this.results.sba_fees],
                 sba_glsubheads:[ this.results.sba_glsubheads]
@@ -1083,7 +1071,6 @@ BackdatedTransactionLookup(): void {
                 is_verified:[true],
                 is_deleted:[this.results.is_deleted],
 
-
                 sba_fees:[this.results.sba_fees],
                 sba_glsubheads:[ this.results.sba_glsubheads]
 
@@ -1201,7 +1188,6 @@ BackdatedTransactionLookup(): void {
                 sba_exc_backdated_transaction:[this.results.sba_exc_backdated_transaction],
                 is_verified:[this.results.is_verified],
                 is_deleted:[true],
-
 
                 sba_fees:[this.results.sba_fees],
                 sba_glsubheads:[ this.results.sba_glsubheads]

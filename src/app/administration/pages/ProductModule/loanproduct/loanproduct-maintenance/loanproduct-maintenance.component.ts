@@ -93,6 +93,7 @@ export class LoanproductMaintenanceComponent implements OnInit {
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.existingData = true;
+      this.formData.controls.scheme_code_desc.disable()
       // this.formData.controls.scheme_type.setValue("")
       // this.formData.controls.scheme_code.setValidators([Validators.required])
     }else if(event.target.value == "A-Add"){

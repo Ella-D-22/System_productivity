@@ -908,8 +908,6 @@ export class LoanproductComponent implements OnInit {
           .set("scheme_code", this.scheme_code);     
           this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
-            console.log("Got Called!");
-            console.log("Data from Backend", this.results);
             
             this.formData = this.fb.group({
               // cr_normal_int:[this.results.cr_normal_int],

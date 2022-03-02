@@ -711,7 +711,7 @@ export class TermDepositComponent implements OnInit {
         });
       }
       else if (this.function_type == "I-Inquire") {
-        console.log("Got Called!");
+        // console.log("Got Called!");
         
         //load the page with form data submit disabled
         // find by event id
@@ -925,6 +925,8 @@ export class TermDepositComponent implements OnInit {
 
       }
       else if (this.function_type == "V-Verify") {
+        this.disabledFormControll();
+
         
         //load the page with form data submit disabled
         // find by event id
@@ -1034,14 +1036,7 @@ export class TermDepositComponent implements OnInit {
 
       }
       else if (this.function_type == "X-Delete") {
-        console.log("Got Called!");
-        
-        //load the page with form data submit disabled
-        // find by event id
-        this.showContractInput = true;
-        // call to disable edit
-        // this.disabledFormControll();
-        // hide Buttons
+        this.disabledFormControll();
         this.isEnabled = false;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
