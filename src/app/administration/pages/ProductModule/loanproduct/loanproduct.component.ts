@@ -706,7 +706,8 @@ advanceIntAcLookup(): void {
           .set("scheme_code", this.scheme_code);     
           this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
-
+              console.log(this.results);
+              
             this.feeArray = this.results.laa_loanfees;
             this.glSubheadArray = this.results.laa_glsubheads;
             
