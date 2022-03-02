@@ -79,7 +79,7 @@
                     <label class="start pull-left">Recovery Lossline A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input  type="text" formControlName="oda_recovery_lossline_ac" class="form-control" />
+                    <input  type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_recovery_lossline_ac" class="form-control" />
                     <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
                     <!-- <input  type="number" formControlName="oda_dr_int_prcnt_max" class="form-control form-control-sub"/> -->
                   </div>
@@ -93,7 +93,7 @@
                     <label class="start pull-left">Charge Off A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="text" formControlName="oda_charge_off_ac" class="form-control" />
+                    <input  type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_charge_off_ac" class="form-control" />
                     <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
                     <!-- <input  type="number" formControlName="oda_cr_int_prcnt_max" class="form-control-sub"/> -->
                     </div>
@@ -315,7 +315,7 @@
                         <option value="" disabled>-- Date --</option>
                         <option *ngFor="let flag of datesArray" [value]="flag">{{ flag }}</option>
                       </select>
-                      <input type="text" formControlName="oda_int_cal_freq_dr_holiday" class="pull-right-dates-3 form-control" placeholder="Holiday"/>
+                      <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_int_cal_freq_dr_holiday" class="pull-right-dates-3 form-control" placeholder="Holiday"/>
       
                   </div>
                 </div>
@@ -504,7 +504,7 @@
        <label class="start pull-left">Account in Debit Balance<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.ac_debit_balance_value" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+       <input [value]="this.ac_debit_balance_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
        <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
       </div>
    </div> 
@@ -515,7 +515,7 @@
       <label class="start pull-left">Account in Credit Balance</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_credit_balance_value" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+      <input [value]="this.ac_credit_balance_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_revolving_od" class="pull-right form-control"/>
       <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
      </div>
   </div>              
@@ -528,7 +528,7 @@
        <label class="start pull-left">Liability exceeds group limit<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.liability_exceed_group_value" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+       <input [value]="this.liability_exceed_group_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_revolving_od" class="pull-right form-control"/>
        <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
       </div>
    </div> 
@@ -539,7 +539,7 @@
       <label class="start pull-left">Account is frozed</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_is_froozed_value" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+      <input [value]="this.ac_is_froozed_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_revolving_od" class="pull-right form-control"/>
       <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
      </div>
   </div>              
@@ -552,7 +552,7 @@
        <label class="start pull-left">Sanction Limit Expired<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.sanction_limit_expired_value" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+       <input [value]="this.sanction_limit_expired_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
        <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
       </div>
    </div> 
@@ -563,7 +563,7 @@
       <label class="start pull-left">Interest Calculation not upto date</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.interest_calc_value" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+      <input [value]="this.interest_calc_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_revolving_od" class="pull-right form-control"/>
       <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
      </div>
   </div>              
@@ -577,7 +577,7 @@
        <label class="start pull-left">Insufficient available balance<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.insufficient_exception_value" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+       <input [value]="this.insufficient_exception_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
        <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
       </div>
    </div> 
@@ -588,7 +588,7 @@
       <label class="start pull-left">Backdated transaction</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.backdate_transaction_value" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+      <input [value]="this.backdate_transaction_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
       <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
       <mat-hint>{{this.backdate_transaction_value}}</mat-hint>
 
@@ -619,7 +619,7 @@
                 <label class="start pull-left">Gl Subhead<span class="warning">*</span></label>
                </div>
                <div class="col-md-6 col-sm-12 form-column ">
-                <input [value]="this.gl_subhead_description" type="text" formControlName="oda_gl_subhead" class="pull-right form-control"/>
+                <input [value]="this.gl_subhead_description" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_gl_subhead" class="pull-right form-control"/>
                 <mat-icon (click)="glSubheadLookup()">search</mat-icon>
                </div>
             </div> 
@@ -711,7 +711,7 @@
                  <label class="start pull-left">Fee Type<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <input [value]="this.event_type_desc" type="text" formControlName="oda_fee_type" class="pull-right form-control"/>
+                 <input [value]="this.event_type_desc" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_fee_type" class="pull-right form-control"/>
                  <mat-icon (click)="eventTypeLookup()">search</mat-icon>
                 </div>
              </div> 
@@ -722,7 +722,7 @@
                    <label class="start pull-left">Fee Event</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input [value]="this.event_id" type="text" formControlName="oda_fee_event" class="pull-right form-control"/>
+                    <input [value]="this.event_id" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_fee_event" class="pull-right form-control"/>
                     <mat-icon (click)="eventidLookup()">search</mat-icon>
                   </div>
                </div>            
@@ -798,7 +798,7 @@
                    <label class="start pull-left">Demand Flow ID</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="oda_fee_demand_flow_id" class="pull-right form-control"/>
+                    <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_fee_demand_flow_id" class="pull-right form-control"/>
                   </div>
                </div>            
           </div>
@@ -811,7 +811,7 @@
                  <label class="start pull-left">Dr.Placeholder<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <input type="text" formControlName="oda_fee_dr_placeholder" class="pull-right form-control" />
+                 <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_fee_dr_placeholder" class="pull-right form-control" />
                 </div>
              </div> 
             </div>
@@ -821,7 +821,7 @@
                    <label class="start pull-left">Cr.Placeholder</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="oda_fee_cr_placeholder" class="pull-right form-control"/>
+                    <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_fee_cr_placeholder" class="pull-right form-control"/>
                   </div>
                </div>            
           </div>
@@ -834,7 +834,7 @@
                  <label class="start pull-left">Max.No.Of Assesments<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <input type="text" formControlName="oda_fee_max_no_of_assesment" class="pull-right form-control"/>
+                 <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_fee_max_no_of_assesment" class="pull-right form-control"/>
                 </div>
              </div> 
             </div>
