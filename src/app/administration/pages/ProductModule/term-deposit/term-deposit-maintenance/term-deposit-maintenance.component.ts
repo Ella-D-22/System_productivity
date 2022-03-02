@@ -68,11 +68,8 @@ export class TermDepositMaintenanceComponent implements OnInit {
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.existingData = true;
-      this.formData.controls.scheme_code.setValue("")
-      this.formData.controls.scheme_code.setValidators([Validators.required])
+      this.formData.controls.scheme_code_desc.disable();
     }else if(event.target.value == "A-Add"){
-      this.formData.controls.scheme_code.setValidators([])
-      this.formData.controls.scheme_code.setValue("");
       this.existingData = false;
     }
   }

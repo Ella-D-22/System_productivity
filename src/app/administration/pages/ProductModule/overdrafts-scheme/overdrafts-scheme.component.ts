@@ -551,20 +551,7 @@ export class OverdraftsSchemeComponent implements OnInit {
     this.showSystem_gen_no = false;;
   }
   disabledFormControll() {
-    // this.formData.controls.start_date.disable();
-    // this.formData.controls.end_date.disable();
-    // this.formData.controls.base_int_code.disable();
-    // this.formData.controls.base_int_pcnt_cr.disable();
-    // this.formData.controls.base_int_pcnt_dr.disable();
-    // this.formData.controls.version_desc.disable();
-    // this.formData.controls.version_desc_repo.disable();
-    // this.formData.controls.add_version_info.disable();
-
-    // this.formData.controls.cr_normal_int.disable();
-    // this.formData.controls.ac_ccy.disable();
-    // this.formData.controls.home_ccy.disable();
-    // this.formData.controls.max_no_of_assesment.disable();
-
+    this.formData.disable()
   }
   getPage() {
     this.subscription = this.odaAPI.currentMessage.subscribe(message => {
@@ -573,10 +560,6 @@ export class OverdraftsSchemeComponent implements OnInit {
       this.scheme_code = this.message.scheme_code;
       this.scheme_type = this.message.scheme_type;
       this.scheme_code_desc = this.message.scheme_code_desc;
-
-
-      console.log(message);
-      
 
       if (this.function_type == "A-Add") {
         console.log("test")
@@ -648,7 +631,6 @@ export class OverdraftsSchemeComponent implements OnInit {
         });
       }
       else if (this.function_type == "I-Inquire") {
-        console.log("testing")
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
@@ -656,7 +638,9 @@ export class OverdraftsSchemeComponent implements OnInit {
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
           this.results = res;
           this.formData = this.fb.group({
 
@@ -739,11 +723,9 @@ export class OverdraftsSchemeComponent implements OnInit {
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
-        this.params = new HttpParams()
-          .set('event_id', this.event_id)
-          .set('event_type', this.event_type);
-        // call to disable edit
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
 
           this.results= res;
           this.formData = this.fb.group({
@@ -835,16 +817,14 @@ export class OverdraftsSchemeComponent implements OnInit {
 
       }
       else if (this.function_type == "V-Verify") {
-        // Populate data with rotected fileds only verification is enabled
-        console.log("testing")
-        //load the page with form data submit disabled
-        // find by event id
         this.showContractInput = true;
         // call to disable edit
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
           this.results = res;
           this.formData = this.fb.group({
 
@@ -929,17 +909,15 @@ export class OverdraftsSchemeComponent implements OnInit {
           this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
         })
       }
-      else if (this.function_type == "C-Cancle") {
-        // should open a page with data and show remove button
-        console.log("testing")
-        //load the page with form data submit disabled
-        // find by event id
+      else if (this.function_type == "X-Delete") {
         this.showContractInput = true;
         // call to disable edit
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
           this.results = res;
           this.formData = this.fb.group({
 

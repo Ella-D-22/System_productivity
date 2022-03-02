@@ -15,10 +15,7 @@ export interface  ApiData {
   scheme_code: String;
   scheme_type: String;
   scheme_code_desc: String;
-
 }
-
-
 @Component({
   selector: 'app-loanproduct-lookup',
   templateUrl: './loanproduct-lookup.component.html',
