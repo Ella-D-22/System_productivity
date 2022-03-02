@@ -72,6 +72,7 @@ export class SavingschemeMaintenanceComponent implements OnInit {
       this.formData.controls.scheme_code_desc.disable()
     }else if(event.target.value == "A-Add"){
       this.existingData = false;
+      this.formData.controls.scheme_code_desc.enable()
     }
   }
 

@@ -8,7 +8,7 @@ import {BranchService} from './branch.service'
 
 export interface  branch {
   solCode: String;
-  branchDescription: String;
+  solDescription: String;
 }
 
 @Component({
@@ -25,7 +25,7 @@ export class BranchComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(public dialogRef: MatDialogRef<BranchComponent>,private branchService: BranchService,@Inject(MAT_DIALOG_DATA) data ) { 
+  constructor(public dialogRef: MatDialogRef<BranchComponent>,private branchService: BranchService ) { 
     this.branchService.retrieveAllBranches().subscribe(
       (data) => {
         this.isLoadingResults = false;

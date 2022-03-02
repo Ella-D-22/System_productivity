@@ -189,8 +189,8 @@
               <label class="start pull-left">Normal Int. Receivable A/c.</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_normal_int_receivable_ac" class="pull-right form-control"/>
-               <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+              <input type="text" [value]="this.laa_normal_int_receivable_ac" formControlName="laa_normal_int_receivable_ac" class="pull-right form-control"/>
+               <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
             </div>
           </div>
         </div>
@@ -204,8 +204,8 @@
               <label class="start pull-left">Penal Int. Receivable A/c.</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
-              <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_penal_int_receivable_ac" class="pull-right form-control"/>
-               <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+              <input type="text" [value]="this.laa_penal_int_receivable_ac" formControlName="laa_penal_int_receivable_ac" class="pull-right form-control"/>
+               <mat-icon *ngIf="isEnabled" (click)="penalIntRecAcLookup()">search</mat-icon>
             </div>
           </div>
         </div>
@@ -215,8 +215,8 @@
               <label class="start pull-left">Normal Int. Received A/c.</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_normal_int_received_ac" class="pull-right form-control"/>
-               <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+              <input type="text" [value]="this.laa_normal_int_received_ac" formControlName="laa_normal_int_received_ac" class="pull-right form-control"/>
+               <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
             </div>
           </div>
         </div>
@@ -228,8 +228,8 @@
               <label class="start pull-left">Penal Int. Received A/c.<span class="warning">*</span></label>
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
-              <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_penal_int_received_ac" class="pull-right form-control"/>
-               <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+              <input type="text" [value]="this.laa_penal_int_received_ac" formControlName="laa_penal_int_received_ac" class="pull-right form-control"/>
+               <mat-icon *ngIf="isEnabled" (click)="penalIntReceivedaccountLookup()">search</mat-icon>
             </div>
           </div>
         </div>
@@ -239,8 +239,8 @@
               <label class="start pull-left">Advance Int. A/c.</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_advance_int_ac" class="pull-right form-control"/>
-               <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+              <input type="text" [value]="this.laa_advance_int_ac" formControlName="laa_advance_int_ac" class="pull-right form-control"/>
+               <mat-icon *ngIf="isEnabled" (click)="advanceIntAcLookup()">search</mat-icon>
             </div>
           </div>
         </div>

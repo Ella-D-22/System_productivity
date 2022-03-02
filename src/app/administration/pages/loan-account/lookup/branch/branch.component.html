@@ -13,14 +13,14 @@
   
     <!-- Position Column -->
     <ng-container matColumnDef="code">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Code </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch Code </th>
       <td mat-cell *matCellDef="let branch"> {{branch.solCode}} </td>
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Description </th>
-      <td mat-cell *matCellDef="let branch"> {{branch.branchDescription}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch Description </th>
+      <td mat-cell *matCellDef="let branch"> {{branch.solDescription}} </td>
     </ng-container>
   
   

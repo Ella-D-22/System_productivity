@@ -2,11 +2,12 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
 import { LinkedEventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
@@ -130,6 +131,12 @@ export class TermDepositComponent implements OnInit {
   selecteddateTo: any;
   fomartedToDate: any;
   tda_fees: any;
+  dtype: string;
+  tda_normal_int_receivable_ac: any;
+  tda_penal_int_receivable_ac: any;
+  tda_normal_int_received_ac: any;
+  tda_penal_int_received_ac: any;
+  tda_advance_int_ac: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
@@ -153,6 +160,71 @@ export class TermDepositComponent implements OnInit {
       this.feeFormData.controls.tda_fee_type.setValue(this.event_type_code);
     });
   }
+
+  
+      // Account lookups
+normIntReceivedAccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.tda_normal_int_receivable_ac = result.data.acid;
+    this.formData.controls.tda_normal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+
+penalIntRecAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.tda_penal_int_receivable_ac = result.data.acid;
+    this.formData.controls.tda_penal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+normIntReceivedaccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.tda_normal_int_received_ac = result.data.acid;
+    this.formData.controls.tda_normal_int_received_ac.setValue(result.data.acid);
+  });
+}
+penalIntReceivedaccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.tda_penal_int_received_ac = result.data.acid;
+    this.formData.controls.tda_penal_int_received_ac.setValue(result.data.acid);
+  });
+}
+advanceIntAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.tda_advance_int_ac = result.data.acid;
+    this.formData.controls.tda_advance_int_ac.setValue(result.data.acid);
+  });
+}
+
 
 // Exceptions Lookup
   ac_debit_balance_Lookup(): void {

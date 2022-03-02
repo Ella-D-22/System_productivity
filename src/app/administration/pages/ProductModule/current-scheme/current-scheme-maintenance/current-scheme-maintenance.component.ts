@@ -91,6 +91,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
       this.existingData = true;
       this.formData.controls.scheme_code_desc.disable()
     }else if(event.target.value == "A-Add"){
+      this.formData.controls.scheme_code_desc.enable()
       this.existingData = false;
     }
   }
