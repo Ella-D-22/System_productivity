@@ -147,7 +147,7 @@ export class SchemeTypeComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
           })
         }
         else if(this.function_type == "M-Modify"){
@@ -167,7 +167,7 @@ export class SchemeTypeComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -193,7 +193,7 @@ export class SchemeTypeComponent implements OnInit {
               });
             }, err=>{
               this.error = err;
-                this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+                this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
                 this._snackBar.open(this.error, "Try again!", {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
@@ -219,7 +219,7 @@ export class SchemeTypeComponent implements OnInit {
               });
             }, err=>{
               this.error = err;
-                this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+                this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
                 this._snackBar.open(this.error, "Try again!", {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
@@ -231,7 +231,6 @@ export class SchemeTypeComponent implements OnInit {
       })
       }
       // convenience getter for easy access to form fields
-
       onSubmit() {
           this.submitted = true;
           // stop here if form is invalid

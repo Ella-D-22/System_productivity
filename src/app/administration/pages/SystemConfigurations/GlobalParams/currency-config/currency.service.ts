@@ -41,7 +41,7 @@ export class CurrencyService {
   }
     // Get all Active
     getAllActiveCurrencys() {
-      let API_URL = `${this.baseURL}/all/active`;
+      let API_URL = `${this.baseURL}/all`;
       return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
       .pipe(
         map((res) => {

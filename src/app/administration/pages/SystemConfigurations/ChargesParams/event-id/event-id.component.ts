@@ -178,8 +178,8 @@ export class EventIdComponent implements OnInit {
         round_off_value: [''],
         has_exercise_duty: [''],
         exercise_duty_percentage:[''],
-        is_verified:[''],
-        is_deleted:['']
+        is_verified:[false],
+        is_deleted:[false]
       });
       disabledFormControll(){
         this.formData.controls.ac_placeholder.disable() 
@@ -248,8 +248,8 @@ export class EventIdComponent implements OnInit {
             round_off_value: [''],
             has_exercise_duty: [''],
             exercise_duty_percentage:[''],
-            is_verified:[''],
-            is_deleted:['']
+            is_verified:[false],
+            is_deleted:[false]
           });
         }
         else if(this.function_type == "I-Inquire"){
@@ -391,7 +391,7 @@ export class EventIdComponent implements OnInit {
               round_off_value: [this.results.round_off_value],
               has_exercise_duty: [this.results.has_exercise_duty],
               exercise_duty_percentage:[this.results.exercise_duty_percentage],
-              is_verified:[this.results.is_verified],
+              is_verified:[true],
               is_deleted:[this.results.is_deleted]
             });
           }, err=>{
@@ -444,7 +444,7 @@ export class EventIdComponent implements OnInit {
               has_exercise_duty: [this.results.has_exercise_duty],
               exercise_duty_percentage:[this.results.exercise_duty_percentage],
               is_verified:[this.results.is_verified],
-              is_deleted:[this.results.is_deleted]
+              is_deleted:[true]
             });
           }, err=>{
             this.error = err;

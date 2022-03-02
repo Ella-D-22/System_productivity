@@ -28,7 +28,6 @@ export class SavingsSchemeComponent implements OnInit {
   isDisabled = false;
   isEnabled = true;
   flagArray: any = [
-
     'Y','N'
   ]
   amt_derivation_Array: any = [
