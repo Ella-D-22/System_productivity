@@ -219,7 +219,7 @@
               <label class="start pull-left">Penal Int. Receivable A/c.</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
-              <input type="text" formControlName="sba_penal_int_receivable_ac" class="pull-right form-control"/>
+              <input type="text" formControlName="sba_penal_int_receivable_ac" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control"/>
                <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
             </div>
           </div>
@@ -322,7 +322,7 @@
                   <option value="" disabled>-- Date --</option>
                   <option *ngFor="let flag of datesArray" [value]="flag">{{ flag }}</option>
                 </select>
-                <input type="text" formControlName="sba_int_cal_freq_dr_holiday" class="pull-right-dates-3 form-control" placeholder="Holiday"/>
+                <input type="text" formControlName="sba_int_cal_freq_dr_holiday" oninput ="this.value=this.value.toUpperCase()" class="pull-right-dates-3 form-control" placeholder="Holiday"/>
 
             </div>
           </div>
@@ -849,7 +849,7 @@
                    <label class="start pull-left">Demand Flow ID</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="sba_fee_demand_flow" class="pull-right form-control"/>
+                    <input type="text" formControlName="sba_fee_demand_flow" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control"/>
                   </div>
                </div>            
           </div>
@@ -872,7 +872,7 @@
                    <label class="start pull-left">Cr.Placeholder</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="sba_fee_cr_placeholder" class="pull-right form-control"/>
+                    <input type="text" formControlName="sba_fee_cr_placeholder" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control"/>
                   </div>
                </div>            
           </div>
@@ -885,7 +885,7 @@
                  <label class="start pull-left">Max.No.Of Assesments<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <input type="text" formControlName="sba_fee_max_no_of_assesment" class="pull-right form-control"/>
+                 <input type="text" formControlName="sba_fee_max_no_of_assesment" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control"/>
                 </div>
              </div> 
             </div>

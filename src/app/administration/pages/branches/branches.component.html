@@ -30,7 +30,7 @@
          <label class="start pull-left">Email</label>
         </div>
         <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" formControlName="email" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+          <input type="text" formControlName="email" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
         </div>
      </div>           
 </div>
@@ -40,7 +40,7 @@
        <label class="start pull-left">Branch Description</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <textarea type="text" formControlName="solDescription" class="pull-right form-control"></textarea>
+        <textarea type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="solDescription" class="pull-right form-control"></textarea>
       </div>
    </div>  
   </div>
@@ -53,7 +53,7 @@
            <label class="start pull-left">Phone Number</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column">
-            <input type="text" formControlName="phoneNumber" class="pull-right form-control"/>
+            <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="phoneNumber" class="pull-right form-control"/>
           </div>
        </div>           
   </div>
@@ -63,7 +63,7 @@
              <label class="start pull-left">Location</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" formControlName="location" class="pull-right form-control"/>
+              <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="location" class="pull-right form-control"/>
             </div>
          </div> 
     </div>

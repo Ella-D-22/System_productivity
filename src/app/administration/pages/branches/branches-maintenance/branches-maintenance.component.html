@@ -33,7 +33,8 @@
          <label class="start pull-left">Sol.Code<span class="warning">*</span></label>
         </div>
         <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" [value]="this.solCode" maxlength="6" formControlName="solCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.solCode.errors }" />
+          <input type="text" [value]="this.solCode" maxlength="6" oninput ="this.value=this.value.toUpperCase()"
+          formControlName="solCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.solCode.errors }" />
           <mat-icon  *ngIf="existingData" (click)="branchesCodeLookup()">search</mat-icon><br>
         </div>
      </div>   
