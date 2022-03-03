@@ -43,7 +43,7 @@ export class InterestMaintainanceComponent implements OnInit {
  }
  
  navigate(){
-     this.router.navigate(['interest'], {
+     this.router.navigate(['system/interest/data/view'], {
        state:{
          code : this.interestCode,
          type: this.function_type

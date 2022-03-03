@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { InterestService } from './interest.service';
 import { Router } from '@angular/router';
 import { Interest } from './interfaces/interest';
-import { Slab } from './interfaces/slab';
 
 @Component({
   selector: 'app-interest',
