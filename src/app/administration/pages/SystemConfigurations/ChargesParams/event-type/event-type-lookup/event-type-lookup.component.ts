@@ -58,6 +58,7 @@ export class EventTypeLookupComponent implements OnInit, OnDestroy {
     getData() {
       this.subscription = this.eventTypeAPI.getEventTypes().subscribe(res => {
        this.data = res;
+       
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;

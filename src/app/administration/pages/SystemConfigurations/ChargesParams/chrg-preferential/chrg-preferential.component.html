@@ -16,6 +16,7 @@
         <h4>Event Id</h4>
         <p>{{this.event_id}}</p>
     </div>
+
 </div>
 <div class="row">
   <div class="col-md-4 col-sm-12">
@@ -71,6 +72,33 @@
        </div> 
     </div>
 </div> 
+<div class="row">
+  <div class="col-md-6 col-sm-12"> 
+    <div class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+        <label class="start pull-left">Effective From</label>
+      </div>
+      <div class="col-md-6 col-sm-12 form-column ">
+        <input  [matDatepicker]="zpicker" formControlName="start_date" class="form-control" />
+        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="zpicker"></mat-datepicker-toggle>
+        <mat-datepicker #zpicker></mat-datepicker>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12">
+    <div class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+        <label class="start pull-left">Expiry Date.</label>
+      </div>
+      <div class="col-md-6 col-sm-12 form-column">
+        <input  [matDatepicker]="kpickerm" oninput ="this.value=this.value.toUpperCase()" formControlName="end_date" class="form-control" />
+       <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="kpickerm"></mat-datepicker-toggle>
+       <mat-datepicker #kpickerm></mat-datepicker>
+      </div>
+    </div>
+  </div>
+</div>
+
  <div class="row">
     <div class="col-md-6 col-sm-12">
            <div class="form-group">

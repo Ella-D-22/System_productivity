@@ -78,6 +78,7 @@
         <div class="col-md-6 col-sm-12">           
         </div>
       </div>
+      
       <div *ngIf="this.showChargeInput" class="row">
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -86,12 +87,18 @@
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
               <input [required]="this.showChargeInput" type="text" [value]="this.event_id" formControlName="event_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_id.errors }" />
-            <mat-icon *ngIf="this.showLokup" (click)="eventId()">search</mat-icon>
+            <mat-icon (click)="eventId()">search</mat-icon>
             </div>
-         </div>      
+         </div>   
+         <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+          </div>
+          <div class="col-md-6 col-sm-12 form-column ">
+            <mat-hint>{{this.event_id_desc}}</mat-hint>
+          </div>
+       </div>    
         </div>
         <div class="col-md-6 col-sm-12">
-            
              <div class="form-group">
               <div class="col-md-6 col-sm-12 form-column ">
                <label class="start pull-left">Charge Type<span class="warning">*</span></label>
@@ -100,13 +107,17 @@
                 <input type="text" [value]="this.event_type" formControlName="event_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
               <!-- <mat-icon *ngIf="this.showLokup"  (click)="eventType()">search</mat-icon> -->
               </div>
-           </div>           
+           </div>  
+           <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <mat-hint>{{this.event_type_desc}}</mat-hint>
+            </div>
+         </div>          
         </div>
       </div>
         <br />
-        <button class="pull-left"  mat-raised-button color="default" type="submit">
-            Close
-          </button>
         <button class="pull-right" mat-raised-button color="primary" type="submit">
           <span
             *ngIf="loading"

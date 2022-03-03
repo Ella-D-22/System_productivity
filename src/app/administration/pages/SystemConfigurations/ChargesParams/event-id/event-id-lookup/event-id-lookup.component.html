@@ -32,6 +32,11 @@
                 <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.event_type}} </td>
               </ng-container>
 
+            <ng-container matColumnDef="event_type_desc">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Charge Type Description</th>
+              <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.event_type_desc}} </td>
+            </ng-container>
+
             <ng-container matColumnDef="is_verified">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Verified</th>
               <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> Y </td>

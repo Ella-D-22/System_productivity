@@ -45,6 +45,9 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
   event_type_data: any;
   showLokup = true;
   showChargeInput = false;
+  lookupdata: any;
+  event_id_desc: any;
+  event_type_desc: any;
 
   constructor(
     private chrgPreferentialAPI: ChrgPreferentialServiceService,
@@ -96,8 +99,7 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
   });
   eventType(): void {
     const dialogRef = this.dialog.open(EventTypeLookupComponent, {
-      height: '400px',
-      width: '600px',
+      
     });
     dialogRef.afterClosed().subscribe(result => {
       this.event_type = result.data.description;
@@ -107,19 +109,21 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
   }
   eventId(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
-      height: '400px',
-      width: '600px',
+     
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.event_id = result.data;
+      this.lookupdata = result.data;
+      this.event_id = result.data.event_id;
+      this.event_id_desc = result.data.event_id_desc;
+      this.event_type = result.data.event_type;
+      this.event_type_desc = result.data.event_type_desc;
       this.formData.controls.event_id.setValue(result.data);
     });
   }
   
   organizationIdLookup(): void {
     const dialogRef = this.dialog.open(LinkedOrganizationLookupComponent, {
-      height: '400px',
-      width: '600px',
+     
     });
     dialogRef.afterClosed().subscribe(result => {
       this.organization_id = result.data;
@@ -131,8 +135,7 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
 
   chrgPref(): void {
     const dialogRef = this.dialog.open(ChrgPreferentialLookupComponent, {
-      height: '400px',
-      width: '600px',
+     
     });
     dialogRef.afterClosed().subscribe(result => {
       this.event_id = result.data;
@@ -156,6 +159,7 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
       this.showAccountInput = false;
       this.showCifInput = false;
       this.showContractInput = false;
+      this.formData.controls.event_type.disable()
       // this.formData.controls.event_id.setValidators(Validators.required);
     }else if(event.target.value == "Contract Level"){
       this.formData.controls.organization_id.setValidators([Validators.required])
