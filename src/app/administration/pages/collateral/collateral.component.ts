@@ -16,6 +16,7 @@ import { EventIdLookupComponent } from '../SystemConfigurations/ChargesParams/ev
 export class CollateralComponent implements OnInit {
  
   subscription !:Subscription
+  deleting = false;
   isEnabled = true;
   isDisabled = false;
   submitted = false;
@@ -248,7 +249,14 @@ export class CollateralComponent implements OnInit {
     stock_exchange:[''],
     expected_min_price:[''],
     sales_proceed_received:[''],
-    
+    sales_notes:[''],
+   
+    //fees
+    percentage_amount_collected:[''],
+    collected_amount:['']
+
+
+
     
 
   })
@@ -310,7 +318,69 @@ export class CollateralComponent implements OnInit {
     this.formData.controls['companyDetails:'].disable();
     this.formData.controls['sharesCapital'].disable();
     this.formData.controls['nosharesIsssued'].disable();
-    this.formData.controls['contactDetails'].disable()
+    this.formData.controls['contactDetails'].disable();
+     //Insurance Details
+    this.formData.controls['insuranceType'].disable();
+    this.formData.controls['policyNo'].disable();
+    this.formData.controls['policyAmount'].disable();
+    this.formData.controls['insurerDetails'].disable();
+    this.formData.controls['risk_cover_start_date'].disable();
+    this.formData.controls['risk_cover_end_date'].disable();
+    this.formData.controls['last_premium_paid_date'].disable();
+    this.formData.controls['premiumAmount'].disable();
+    this.formData.controls['frequency'].disable();
+    this.formData.controls['itemsInsured'].disable();
+    this.formData.controls['notes'].disable();
+ 
+     //receipt and payment
+    this.formData.controls['name'].disable();
+    this.formData.controls['city'].disable();
+    this.formData.controls['address'].disable();
+    this.formData.controls['state'].disable();
+    this.formData.controls['postal_code'].disable();
+    this.formData.controls['receipt_type'].disable();
+    this.formData.controls['receipt_amount'].disable();
+    this.formData.controls['payment_type'].disable();
+    this.formData.controls['payment_amount'].disable();
+    this.formData.controls['due_date'].disable();
+    this.formData.controls['paid_received_date'].disable();
+    this.formData.controls['date_from'].disable();
+    this.formData.controls['to_date'].disable();
+    this.formData.controls['proof_verified_date'].disable();
+    this.formData.controls['mode_of_pay'].disable();
+    this.formData.controls['remarks'].disable();
+ 
+     //inspection details
+    this.formData.controls['inspection_type'].disable();
+    this.formData.controls['insp_address'].disable();
+    this.formData.controls['insp_city'].disable();
+    this.formData.controls['insp_state'].disable();
+    this.formData.controls['insp_postal_code'].disable();
+    this.formData.controls['insp_telephone_no'].disable();
+    this.formData.controls['due_date_for_visit'].disable();
+    this.formData.controls['date_of_visit'].disable();
+    this.formData.controls['inspected_value'].disable();
+    this.formData.controls['inspection_emp_id'].disable();
+    this.formData.controls['insp_remarks'].disable();
+ 
+ 
+     //sales notes for Tradable Securities
+ 
+    this.formData.controls['brokerName'].disable();
+    this.formData.controls['sent_for_sale_on'].disable();
+    this.formData.controls['sales_due_date'].disable();
+    this.formData.controls['sales_review_date'].disable();
+    this.formData.controls['proceeds_received_on'].disable();
+    this.formData.controls['stock_exchange'].disable();
+    this.formData.controls['expected_min_price'].disable();
+    this.formData.controls['sales_proceed_received'].disable();
+    this.formData.controls['sales_notes'].disable();
+    
+     //fees
+    this.formData.controls['percentage_amount_collected'].disable();
+    this.formData.controls['collected_amount'].disable();
+ 
+ 
 
   
 
@@ -350,6 +420,66 @@ export class CollateralComponent implements OnInit {
                   modifiedBy:['Ann'],
                   modifiedTime:[new Date()],
                   // sn:[0]
+                   //Insurance Details
+                  insuranceType:[''],
+                  policyNo:[''],
+                  policyAmount:[''],
+                  insurerDetails:[''],
+                  risk_cover_start_date:[''],
+                  risk_cover_end_date:[''],
+                  last_premium_paid_date:[''],
+                  premiumAmount:[''],
+                  frequency:[''],
+                  itemsInsured:[''],
+                  notes:[''],
+
+                  //receipt and payment
+                  name:[''],
+                  city:[''],
+                  address:[''],
+                  state:[''],
+                  postal_code:[''],
+                  receipt_type:[''],
+                  receipt_amount:[''],
+                  payment_type:[''],
+                  payment_amount:[''],
+                  due_date:[''],
+                  paid_received_date:[''],
+                  date_from:[''],
+                  to_date:[''],
+                  proof_verified_date:[''],
+                  mode_of_pay:[''],
+                  remarks:[''],
+
+                  //inspection details
+                  inspection_type:[''],
+                  insp_address:[''],
+                  insp_city:[''],
+                  insp_state:[''],
+                  insp_postal_code:[''],
+                  insp_telephone_no:[''],
+                  due_date_for_visit:[''],
+                  date_of_visit:[''],
+                  inspected_value:[''],
+                  inspection_emp_id:[''],
+                  insp_remarks:[''],
+
+
+                  //sales notes for Tradable Securities
+
+                  brokerName:[''],
+                  sent_for_sale_on:[''],
+                  sales_due_date:[''],
+                  sales_review_date:[''],
+                  proceeds_received_on:[''],
+                  stock_exchange:[''],
+                  expected_min_price:[''],
+                  sales_proceed_received:[''],
+                  sales_notes:[''],
+                
+                  //fees
+                  percentage_amount_collected:[''],
+                  collected_amount:['']
             
                 });
               
@@ -387,19 +517,71 @@ export class CollateralComponent implements OnInit {
                 shareCapital:[this.resData.entity.shareCapital],
                 sharesIssued:[this.resData.entity.sharesIssued],
 
-                // deletedBy:[this.resData.entity.deletedBy],
-                // deletedTime:[this.resData.entity.deletedTime],
-                // deletedFlag:[this.resData.entity.deletedFlag],
-                // verifiedBy:[this.resData.entity.verifiedBy],
-                // verifiedTime:[this.resData.entity.verifiedTime],
-                // verifiedFlag:[this.resData.entity.verifiedFlag],
-                // postedBy:[this.resData.entity.postedBy],
-                // postedTime:[this.resData.entity.postedTime],
-                // postedFlag:[this.resData.entity.postedFlag],
-                // modifiedBy:[this.resData.entity.modifiedBy],
-                // modifiedTime:[this.resData.entity.modifiedTime],
+              
+
+                 
+                  //Insurance Details
+                  insuranceType:[''],
+                  policyNo:[''],
+                  policyAmount:[''],
+                  insurerDetails:[''],
+                  risk_cover_start_date:[''],
+                  risk_cover_end_date:[''],
+                  last_premium_paid_date:[''],
+                  premiumAmount:[''],
+                  frequency:[''],
+                  itemsInsured:[''],
+                  notes:[''],
+
+                  //receipt and payment
+                  name:[''],
+                  city:[''],
+                  address:[''],
+                  state:[''],
+                  postal_code:[''],
+                  receipt_type:[''],
+                  receipt_amount:[''],
+                  payment_type:[''],
+                  payment_amount:[''],
+                  due_date:[''],
+                  paid_received_date:[''],
+                  date_from:[''],
+                  to_date:[''],
+                  proof_verified_date:[''],
+                  mode_of_pay:[''],
+                  remarks:[''],
+
+                  //inspection details
+                  inspection_type:[''],
+                  insp_address:[''],
+                  insp_city:[''],
+                  insp_state:[''],
+                  insp_postal_code:[''],
+                  insp_telephone_no:[''],
+                  due_date_for_visit:[''],
+                  date_of_visit:[''],
+                  inspected_value:[''],
+                  inspection_emp_id:[''],
+                  insp_remarks:[''],
+
+
+                  //sales notes for Tradable Securities
+
+                  brokerName:[''],
+                  sent_for_sale_on:[''],
+                  sales_due_date:[''],
+                  sales_review_date:[''],
+                  proceeds_received_on:[''],
+                  stock_exchange:[''],
+                  expected_min_price:[''],
+                  sales_proceed_received:[''],
+                  sales_notes:[''],
+
+                  //fees
+                  percentage_amount_collected:[''],
+                  collected_amount:[''],
                 
-                sn:[this.resData.entity.sn]
+                  sn:[this.resData.entity.sn]
 
 
               });
