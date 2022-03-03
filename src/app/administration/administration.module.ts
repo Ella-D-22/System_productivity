@@ -13,11 +13,6 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { EventIdComponent } from './pages/SystemConfigurations/ChargesParams/event-id/event-id.component';
-import { AcPlaceholderLookupComponent } from './pages/SystemConfigurations/ChargesParams/event-id/ac-placeholder-lookup/ac-placeholder-lookup.component';
-import { TransactionReportCodeLookupComponent } from './pages/SystemConfigurations/ChargesParams/event-id/transaction-report-code-lookup/transaction-report-code-lookup.component';
-import { RateCodeLookupComponent } from './pages/SystemConfigurations/ChargesParams/event-id/rate-code-lookup/rate-code-lookup.component';
-import { PartTransBusinessLookupComponent } from './pages/SystemConfigurations/ChargesParams/event-id/part-trans-business-lookup/part-trans-business-lookup.component';
-import { LinkedEventIdLookupComponent } from './pages/SystemConfigurations/ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
 import { EventIdMaintenanceComponent } from './pages/SystemConfigurations/ChargesParams/event-id/event-id-maintenance/event-id-maintenance.component';
 import { MenuOptionBarComponent } from './layouts/menu-option-bar/menu-option-bar.component';
 import { CurrencyConfigComponent } from './pages/SystemConfigurations/GlobalParams/currency-config/currency-config.component';
@@ -32,28 +27,9 @@ import { EventTypeLookupComponent } from './pages/SystemConfigurations/ChargesPa
 import { ChrgPreferentialComponent } from './pages/SystemConfigurations/ChargesParams/chrg-preferential/chrg-preferential.component';
 import { ChrgPreferentialMaintenanceComponent } from './pages/SystemConfigurations/ChargesParams/chrg-preferential/chrg-preferential-maintenance/chrg-preferential-maintenance.component';
 import { ChrgPreferentialLookupComponent } from './pages/SystemConfigurations/ChargesParams/chrg-preferential/chrg-preferential-lookup/chrg-preferential-lookup.component';
-import { HlvsmComponent } from './pages/SystemConfigurations/InterestParams/hlvsm/hlvsm.component';
-import { HlvsmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/hlvsm/hlvsm-maintenance/hlvsm-maintenance.component';
-import { HlvsmLookUpComponent } from './pages/SystemConfigurations/InterestParams/hlvsm/hlvsm-look-up/hlvsm-look-up.component';
-import { HtvsmComponent } from './pages/SystemConfigurations/InterestParams/htvsm/htvsm.component';
-import { HitcmComponent } from './pages/SystemConfigurations/InterestParams/hitcm/hitcm.component';
-import { HitcmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/hitcm/hitcm-maintenance/hitcm-maintenance.component';
-import { HitcmLookUpComponent } from './pages/SystemConfigurations/InterestParams/hitcm/hitcm-look-up/hitcm-look-up.component';
-import { HivsmComponent } from './pages/SystemConfigurations/InterestParams/hivsm/hivsm.component';
-import { HivsmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/hivsm/hivsm-maintenance/hivsm-maintenance.component';
-import { HivsmLookUpComponent } from './pages/SystemConfigurations/InterestParams/hivsm/hivsm-look-up/hivsm-look-up.component';
-import { HtvsmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/htvsm/htvsm-maintenance/htvsm-maintenance.component';
-import { HtvsmLookUpComponent } from './pages/SystemConfigurations/InterestParams/htvsm/htvsm-look-up/htvsm-look-up.component';
-import { HbivsmComponent } from './pages/SystemConfigurations/InterestParams/hbivsm/hbivsm.component';
-import { HbivsmLookUpComponent } from './pages/SystemConfigurations/InterestParams/hbivsm/hbivsm-look-up/hbivsm-look-up.component';
-import { HbivsmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/hbivsm/hbivsm-maintenance/hbivsm-maintenance.component';
 import { TermDepositComponent } from './pages/ProductModule/term-deposit/term-deposit.component';
 import { TermDepositMaintenanceComponent } from './pages/ProductModule/term-deposit/term-deposit-maintenance/term-deposit-maintenance.component';
 import { TermDepositLookupComponent } from './pages/ProductModule/term-deposit/term-deposit-lookup/term-deposit-lookup.component';
-import { OfficeAccountsComponent } from './pages/ProductModule/Accounts/office-accounts/office-accounts.component';
-import { AccountPlaceholdersComponent } from './pages/ProductModule/Accounts/account-placeholders/account-placeholders.component';
-import { OfficeAccountsLookupComponent } from './pages/ProductModule/Accounts/office-accounts/office-accounts-lookup/office-accounts-lookup.component';
-import { OfficeAccountsMaintenanceComponent } from './pages/ProductModule/Accounts/office-accounts/office-accounts-maintenance/office-accounts-maintenance.component';
 import { LoanproductComponent } from './pages/ProductModule/loanproduct/loanproduct.component';
 import { LoanproductMaintenanceComponent } from './pages/ProductModule/loanproduct/loanproduct-maintenance/loanproduct-maintenance.component';
 import { LoanproductLookupComponent } from './pages/ProductModule/loanproduct/loanproduct-lookup/loanproduct-lookup.component';
@@ -100,6 +76,10 @@ import { CustomerComponent } from './pages/loan-account/lookup/customer/customer
 import { GlSubheadLookup2Component } from './pages/loan-account/lookup/gl-subhead/gl-subhead.component';
 import { ProductComponent } from './pages/loan-account/lookup/product/product.component';
 import { UserComponent } from './pages/loan-account/lookup/user/user.component';
+import { EventIdLookupComponent } from './pages/SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
+import { InterestComponent } from './pages/interest/interest.component';
+import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
+import { InterestLookupComponent } from './pages/interest/interest-lookup/interest-lookup.component';
 
 
 @NgModule({
@@ -111,11 +91,6 @@ import { UserComponent } from './pages/loan-account/lookup/user/user.component';
     SidebarComponent,
     EventIdComponent,
     DashboardComponent,
-    AcPlaceholderLookupComponent,
-    TransactionReportCodeLookupComponent,
-    RateCodeLookupComponent,
-    PartTransBusinessLookupComponent,
-    LinkedEventIdLookupComponent,
     EventIdMaintenanceComponent,
     CurrencyConfigComponent,
     LinkedOrganizationComponent,
@@ -129,28 +104,9 @@ import { UserComponent } from './pages/loan-account/lookup/user/user.component';
     ChrgPreferentialComponent,
     ChrgPreferentialMaintenanceComponent,
     ChrgPreferentialLookupComponent,
-    HlvsmComponent,
-    HlvsmMaintenanceComponent,
-    HlvsmLookUpComponent,
-    HtvsmComponent,
-    HitcmComponent,
-    HitcmMaintenanceComponent,
-    HitcmLookUpComponent,
-    HivsmComponent,
-    HivsmMaintenanceComponent,
-    HivsmLookUpComponent,
-    HtvsmMaintenanceComponent,
-    HtvsmLookUpComponent,
-    HbivsmComponent,
-    HbivsmLookUpComponent,
-    HbivsmMaintenanceComponent,
     TermDepositComponent,
     TermDepositMaintenanceComponent,
     TermDepositLookupComponent,
-    OfficeAccountsComponent,
-    AccountPlaceholdersComponent,
-    OfficeAccountsLookupComponent,
-    OfficeAccountsMaintenanceComponent,
     LoanproductComponent,
     LoanproductMaintenanceComponent,
     LoanproductLookupComponent,
@@ -179,9 +135,6 @@ import { UserComponent } from './pages/loan-account/lookup/user/user.component';
     ExceptionsCodesComponent,
     ExceptionsCodesMaintenanceComponent,
     ExceptionsCodesLookupComponent,
-    // AccountModuleComponent,
-    // AccountMaintenanceComponent,
-    // AccountLookupComponent,
     CollateralComponent,
     CollateralMaintenanceComponent,
     CollateralLookupComponent,
@@ -201,7 +154,12 @@ import { UserComponent } from './pages/loan-account/lookup/user/user.component';
     CustomerComponent,
     GlSubheadLookup2Component,
     ProductComponent,
-    UserComponent
+    UserComponent,
+    EventIdLookupComponent,
+    
+    InterestComponent,
+    InterestMaintainanceComponent,
+    InterestLookupComponent
 
     
   ],

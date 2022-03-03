@@ -51,7 +51,7 @@
                  <label class="start pull-left">Account ID<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                  <input type="text" [value]="this.account_id" formControlName="account_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.account_id.errors }" />
+                  <input [required]="this.showAccountInput" type="text" [value]="this.account_id" formControlName="account_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.account_id.errors }" />
                 <mat-icon (click)="eventId()">search</mat-icon>
                 </div>
              </div>  
@@ -60,7 +60,7 @@
                  <label class="start pull-left">CIF ID<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                  <input type="text" [value]="this.cif_id" formControlName="cif_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.cif_id.errors }" />
+                  <input [required]="this.showCifInput" type="text" [value]="this.cif_id" formControlName="cif_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.cif_id.errors }" />
                 <mat-icon (click)="eventId()">search</mat-icon>
                 </div>
              </div>
@@ -69,7 +69,7 @@
                  <label class="start pull-left">OrganizationID<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                  <input type="text" [value]="this.organization_name" formControlName="organization_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_id.errors }" />
+                  <input [required]="this.showContractInput" type="text" [value]="this.organization_name" formControlName="organization_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_id.errors }" />
                 <mat-icon (click)="organizationIdLookup()">search</mat-icon>
                 </div>
              </div> 
@@ -78,28 +78,29 @@
         <div class="col-md-6 col-sm-12">           
         </div>
       </div>
-      <div  class="row">
+      <div *ngIf="this.showChargeInput" class="row">
         <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">Event Type<span class="warning">*</span></label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column ">
-                  <input type="text" [value]="this.event_type" formControlName="event_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
-                <mat-icon *ngIf="this.showLokup"  (click)="eventType()">search</mat-icon>
-                </div>
-             </div>       
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+             <label class="start pull-left">Charge Definition<span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <input [required]="this.showChargeInput" type="text" [value]="this.event_id" formControlName="event_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_id.errors }" />
+            <mat-icon *ngIf="this.showLokup" (click)="eventId()">search</mat-icon>
+            </div>
+         </div>      
         </div>
         <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">Event ID<span class="warning">*</span></label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column ">
-                  <input type="text" [value]="this.event_id" formControlName="event_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_id.errors }" />
-                <mat-icon *ngIf="this.showLokup" (click)="eventId()">search</mat-icon>
-                </div>
-             </div>            
+            
+             <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+               <label class="start pull-left">Charge Type<span class="warning">*</span></label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+                <input type="text" [value]="this.event_type" formControlName="event_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
+              <!-- <mat-icon *ngIf="this.showLokup"  (click)="eventType()">search</mat-icon> -->
+              </div>
+           </div>           
         </div>
       </div>
         <br />

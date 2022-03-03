@@ -31,7 +31,7 @@
          <label class="start pull-left">Gl Subhead Code</label>
         </div>
         <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" [value]="this.glSubheadCode" oninput ="this.value=this.value.toUpperCase()" disabled formControlName="glSubheadCode" class="pull-right form-control"/>
+          <input type="text" maxlength = "6" [value]="this.glSubheadCode" oninput ="this.value=this.value.toUpperCase()" disabled formControlName="glSubheadCode" class="pull-right form-control"/>
         </div>
      </div>           
   </div>
@@ -41,7 +41,7 @@
        <label class="start pull-left">Gl Subhead Description</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <textarea type="text" formControlName="glSubheadDescription" oninput ="this.value=this.value.toUpperCase()"  class="pull-right form-control"></textarea>
+        <textarea type="text" maxlength = "6" formControlName="glSubheadDescription" oninput ="this.value=this.value.toUpperCase()"  class="pull-right form-control"></textarea>
       </div>
    </div>  
   </div>
@@ -53,20 +53,13 @@
        <label class="start pull-left">Gl Code</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" [value]="this.glCode" formControlName="glCode" class="pull-right form-control"/>
-        <mat-icon (click)="refCodeLookup()">search</mat-icon><br>
+        <input type="text" maxlength = "6" [value]="this.glCode" formControlName="glCode" class="pull-right form-control"/>
+        <mat-icon *ngIf="isEnabled"  (click)="refCodeLookup()">search</mat-icon><br>
       </div>
    </div>           
 </div>
 <div class="col-md-6 col-sm-12">
-  <!-- <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-     <label class="start pull-left">Description</label>
-    </div>
-    <div class="col-md-6 col-sm-12 form-column">
-      <textarea type="text" formControlName="glDescription" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.glDescription.errors }"></textarea>
-    </div>
- </div>   -->
+  
 </div>
 </div>
 <div class="row">
@@ -85,6 +78,9 @@
   </div>
   </div>
   <br />
+  <button class="pull-left" routerLink="../../maintenance"  mat-raised-button color="default" type="button">
+    Back
+  </button>
   <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
     <span
       *ngIf="loading"

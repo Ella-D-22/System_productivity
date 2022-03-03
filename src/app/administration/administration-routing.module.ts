@@ -14,20 +14,8 @@ import { EventTypeMaintenanceComponent } from './pages/SystemConfigurations/Char
 import { EventTypeComponent } from './pages/SystemConfigurations/ChargesParams/event-type/event-type.component';
 import { ChrgPreferentialMaintenanceComponent } from './pages/SystemConfigurations/ChargesParams/chrg-preferential/chrg-preferential-maintenance/chrg-preferential-maintenance.component';
 import { ChrgPreferentialComponent } from './pages/SystemConfigurations/ChargesParams/chrg-preferential/chrg-preferential.component';
-import { HlvsmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/hlvsm/hlvsm-maintenance/hlvsm-maintenance.component';
-import { HitcmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/hitcm/hitcm-maintenance/hitcm-maintenance.component';
-import { HitcmComponent } from './pages/SystemConfigurations/InterestParams/hitcm/hitcm.component';
-import { HivsmComponent } from './pages/SystemConfigurations/InterestParams/hivsm/hivsm.component';
-import { HivsmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/hivsm/hivsm-maintenance/hivsm-maintenance.component';
-import { HlvsmComponent } from './pages/SystemConfigurations/InterestParams/hlvsm/hlvsm.component';
-import { HtvsmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/htvsm/htvsm-maintenance/htvsm-maintenance.component';
-import { HtvsmComponent } from './pages/SystemConfigurations/InterestParams/htvsm/htvsm.component';
-import { HbivsmMaintenanceComponent } from './pages/SystemConfigurations/InterestParams/hbivsm/hbivsm-maintenance/hbivsm-maintenance.component';
-import { HbivsmComponent } from './pages/SystemConfigurations/InterestParams/hbivsm/hbivsm.component';
 import { TermDepositMaintenanceComponent } from './pages/ProductModule/term-deposit/term-deposit-maintenance/term-deposit-maintenance.component';
 import { TermDepositComponent } from './pages/ProductModule/term-deposit/term-deposit.component';
-import { OfficeAccountsMaintenanceComponent } from './pages/ProductModule/Accounts/office-accounts/office-accounts-maintenance/office-accounts-maintenance.component';
-import { OfficeAccountsComponent } from './pages/ProductModule/Accounts/office-accounts/office-accounts.component';
 import { LoanproductMaintenanceComponent } from './pages/ProductModule/loanproduct/loanproduct-maintenance/loanproduct-maintenance.component';
 import { LoanproductComponent } from './pages/ProductModule/loanproduct/loanproduct.component';
 import { ChrgPrioritizationComponent } from './pages/SystemConfigurations/ChargesParams/chrg-prioritization/chrg-prioritization.component';
@@ -54,6 +42,8 @@ import { CashTransactionsComponent } from './pages/transactions/transactions/cas
 import { TransactionMaintainanceComponent } from './pages/transactions/transactions/transaction-maintainance/transaction-maintainance.component';
 import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
 import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
+import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
+import { InterestComponent } from './pages/interest/interest.component';
 
 const routes: Routes = [{
   path: '',
@@ -179,62 +169,12 @@ const routes: Routes = [{
     
 
     // Interest Version Code
-    {
-      path: 'configurations/interest/hitcm/maintenance',
-      component:HitcmMaintenanceComponent,
-    },
-    {
-      path: 'configurations/interest/hitcm/data/view',
-      component:HitcmComponent,
-    },
-    // Base Interest Version Code
-    {
-      path: 'configurations/interest/hbivsm/maintenance',
-      component:HbivsmMaintenanceComponent,
-    },
-    {
-      path: 'configurations/interest/hbivsm/data/view',
-      component:HbivsmComponent,
-    },
-    // Interest Version Slab Maintenace
-    {
-      path: 'configurations/interest/hivsm/maintenance',
-      component:HivsmMaintenanceComponent,
-    },
-    {
-      path: 'configurations/interest/hivsm/data/view',
-      component:HivsmComponent,
-    },
-     // Loan Interest Version Slab Maintenace
-     {
-      path: 'configurations/interest/hlvsm/maintenance',
-      component:HlvsmMaintenanceComponent,
-    },
-    {
-      path: 'configurations/interest/hlvsm/data/view',
-      component:HlvsmComponent,
-    },
-      // Term Deposit Version Slab Maintenace
-      {
-      path: 'configurations/interest/htvsm/maintenance',
-      component:HtvsmMaintenanceComponent,
-    },
-    {
-      path: 'configurations/interest/htvsm/data/view',
-      component:HtvsmComponent,
-    },
+
 
        // *******************************************************************************************\
       //                                        Accounts Settings
       // *******************************************************************************************
-      {
-        path: 'configurations/accounts/office/maintenance',
-        component:OfficeAccountsMaintenanceComponent,
-      },
-      {
-        path: 'configurations/accounts/office/data/view',
-        component:OfficeAccountsComponent
-      },
+   
 
 
       // *******************************************************************************************\
@@ -335,6 +275,22 @@ const routes: Routes = [{
         path: 'transactions/cash/data/view',
         component:CashTransactionsComponent,
       },
+
+       
+      // *******************************************************************************************\
+      //                                         Interest Settings
+      // *******************************************************************************************
+      {
+        path: 'interest/maintenance',
+        component:InterestMaintainanceComponent,
+      },
+      {
+        path: 'interest/data/view',
+        component:InterestComponent,
+      },
+
+      
+      
       
 
 

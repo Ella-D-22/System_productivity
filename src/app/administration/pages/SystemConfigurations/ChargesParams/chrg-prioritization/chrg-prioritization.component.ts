@@ -8,9 +8,9 @@ import { Subscription } from 'rxjs';
 import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { CurrencyLookupComponent } from '../../GlobalParams/currency-config/currency-lookup/currency-lookup.component';
-import { AcPlaceholderLookupComponent } from '../event-id/ac-placeholder-lookup/ac-placeholder-lookup.component';
 import { DatePipe } from '@angular/common';
 import { ChrgPreferentialServiceService } from '../chrg-preferential/chrg-preferential-service.service';
+import { EventIdLookupComponent } from '../event-id/event-id-lookup/event-id-lookup.component';
 
 @Component({
   selector: 'app-chrg-prioritization',
@@ -384,13 +384,8 @@ return  priorities;
         }  
       })   
       }
-
-
-
-
-
       accountLookup(): void {
-        const dialogRef = this.dialog.open(AcPlaceholderLookupComponent, {
+        const dialogRef = this.dialog.open(EventIdLookupComponent, {
           height: '400px',
           width: '600px',
         });

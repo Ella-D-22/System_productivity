@@ -6,8 +6,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CollateralService } from './collateral.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { LinkedEventIdLookupComponent } from '../SystemConfigurations/ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
-// import { ChargesLookupComponent } from './charges-lookup/charges-lookup.component';
+import { EventIdLookupComponent } from '../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 
 @Component({
   selector: 'app-collateral',
@@ -73,7 +72,7 @@ export class CollateralComponent implements OnInit {
 
 // charge event for withdrawal
   withdrawalLookup(){
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent,{
+    const dialogRef = this.dialog.open(EventIdLookupComponent,{
       height: '400px',
       width:'600px'
 
@@ -92,7 +91,7 @@ export class CollateralComponent implements OnInit {
   }
   //charge event for Lodging
   LodgingLookup(){
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent,{
+    const dialogRef = this.dialog.open(EventIdLookupComponent,{
       height: '400px',
       width:'600px'
 

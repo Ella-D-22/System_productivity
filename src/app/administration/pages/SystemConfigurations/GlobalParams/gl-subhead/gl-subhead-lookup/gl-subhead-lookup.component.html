@@ -1,8 +1,7 @@
 <div class="">
-  <div class="row table-action-row">
+  <div class="row breadcrumb">
     <div class="col-md-6 col-sm-12">
-  <div>
-  </div>
+      <p><strong>GL Subhead Lookup</strong></p>
       </div>
     <div class="col-md-6 col-sm-12">
     <mat-icon class="pull-right">search</mat-icon>
@@ -30,6 +29,16 @@
     <ng-container matColumnDef="glSubheadDescription">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> GL Subhead Description</th>
       <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.glSubheadDescription}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="is_verified">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Verified</th>
+      <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> Y </td>
+    </ng-container>
+
+    <ng-container matColumnDef="is_deleted">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Deleted</th>
+      <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> N </td>
     </ng-container>
     
 

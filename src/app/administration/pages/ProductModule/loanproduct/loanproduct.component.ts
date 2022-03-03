@@ -8,11 +8,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
-import { LinkedEventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
+import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 import { GlSubheadLookupComponent } from '../../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
-import { HivsmService } from '../../SystemConfigurations/InterestParams/hivsm/hivsm.service';
 import { LoanproductService } from './loanproduct.service';
 
 @Component({
@@ -118,7 +117,7 @@ export class LoanproductComponent implements OnInit {
   laa_advance_int_ac: any;
 
   eventidLookup(): void {
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
+    const dialogRef = this.dialog.open(EventIdLookupComponent, {
       // height: '400px',
       // width: '600px',
     });
@@ -710,6 +709,9 @@ advanceIntAcLookup(): void {
               
             this.feeArray = this.results.laa_loanfees;
             this.glSubheadArray = this.results.laa_glsubheads;
+
+            console.log("These are all the fees", this.feeArray );
+            
             
             this.formData = this.fb.group({
 
