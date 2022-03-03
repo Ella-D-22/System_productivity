@@ -44,6 +44,7 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
   organization_name: any;
   event_type_data: any;
   showLokup = true;
+  showChargeInput = false;
 
   constructor(
     private chrgPreferentialAPI: ChrgPreferentialServiceService,
@@ -144,24 +145,23 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
       this.showAccountInput = false;
       this.showCifInput = true;
       this.showContractInput = false;
+      this.showChargeInput = false;
     }else if(event.target.value == "Account Level"){
       this.showAccountInput = true;
       this.showCifInput = false;
+      this.showChargeInput = false;
       this.showContractInput = false;
-      // this.formData.controls.linked_organization.setValidators([Validators.required])
     }else if(event.target.value == "Charge Level"){
-      this.formData.controls.event_id.enable();
-      this.formData.controls.event_type.enable();
+      this.showChargeInput = true;
       this.showAccountInput = false;
       this.showCifInput = false;
       this.showContractInput = false;
-      // this.formData.controls.linked_organization.setValidators([Validators.required])
+      // this.formData.controls.event_id.setValidators(Validators.required);
     }else if(event.target.value == "Contract Level"){
-      this.formData.controls.event_id.disable();
-      this.formData.controls.event_type.disable();
       this.formData.controls.organization_id.setValidators([Validators.required])
       this.showLokup = false;
       this.showAccountInput = false;
+      this.showChargeInput = false;
       this.showCifInput = false;
       this.showContractInput = true;
       // this.formData.controls.linked_organization.setValidators([Validators.required])
