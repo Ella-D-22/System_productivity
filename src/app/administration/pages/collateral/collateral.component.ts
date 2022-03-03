@@ -235,12 +235,20 @@ export class CollateralComponent implements OnInit {
     date_of_visit:[''],
     inspected_value:[''],
     inspection_emp_id:[''],
-    insp_remarks:['']
+    insp_remarks:[''],
 
 
     //sales notes for Tradable Securities
 
-
+    brokerName:[''],
+    sent_for_sale_on:[''],
+    sales_due_date:[''],
+    sales_review_date:[''],
+    proceeds_received_on:[''],
+    stock_exchange:[''],
+    expected_min_price:[''],
+    sales_proceed_received:[''],
+    
     
 
   })

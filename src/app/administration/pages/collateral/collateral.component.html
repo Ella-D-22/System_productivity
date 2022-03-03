@@ -1031,7 +1031,49 @@
 
 
                </mat-tab>
-               <mat-tab class="mat-tab" label="Sales Notes"></mat-tab>
+               <mat-tab class="mat-tab" label="Sales Notes">
+                   <br>
+                   <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-12 form-column">
+                                <label for="" class="start pull-left">Broker Name<span class="warning">*</span></label>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-column">
+                               <input type="text" formControlName="brokerName" class="pull-right form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-12 form-column">
+                                <label for="" class="start pull-left">Sent for sale on<span class="warning">*</span></label>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-column ">
+                                <input  [matDatepicker]="sepicker" formControlName="sent_for_sale_on" class="form-control" />
+                                <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="sepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #sepicker></mat-datepicker>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-12 form-column">
+                                <label for="" class="start pull-left">Sales Due Date<span class="warning">*</span></label>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-column ">
+                                <input  [matDatepicker]="duepicker" formControlName="sales_due_date" class="form-control" />
+                                <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="duepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #duepicker></mat-datepicker>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+               </mat-tab>
                <mat-tab class="mat-tab" label="Fees"></mat-tab>
 
 
