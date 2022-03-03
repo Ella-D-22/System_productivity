@@ -20,27 +20,33 @@
            <label class="start pull-left">Function<span class="warning">*</span></label>
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
-            <select  class="form-control" formControlName="function_type" [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
+            <select (change)="onSelectFunction($event)"  class="form-control" formControlName="function_type" [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
               <option value="" disabled>-- Choose Function --</option>
               <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
             </select>
           </div>
-       </div> 
-       
-       
+       </div>  
       </div>
       <div class="col-md-6 col-sm-12">
-        <div class="form-group">
+        <div *ngIf="!this.existingData" class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
            <label class="start pull-left">Event Type<span class="warning">*</span></label>
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
-            <input type="text" [value]="this.event_description" oninput ="this.value=this.value.toUpperCase()" formControlName="event_type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
+            <input type="text" [value]="this.event_type_code" oninput ="this.value=this.value.toUpperCase()" formControlName="event_type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
               <mat-icon (click)="eventType()">search</mat-icon>
           </div>
-       </div>    
+       </div>  
+       <div class="form-group">
+        <div class="col-md-6 col-sm-12 form-column ">
+        </div>
+        <div class="col-md-6 col-sm-12 form-column ">
+          <mat-hint>{{this.event_description}}</mat-hint>
+        </div>
+     </div> 
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -49,15 +55,22 @@
               </div>
               <div class="col-md-6 col-sm-12 form-column ">
                 <input type="text" [value]="this.event_id" formControlName="event_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_id.errors }" />
-              <mat-icon (click)="eventId()">search</mat-icon>
+              <mat-icon *ngIf="this.existingData" (click)="eventId()">search</mat-icon>
               </div>
-           </div>            
+           </div>    
       </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Charge Description</label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+            <textarea [value]="this.event_id_desc" type="text" maxlength = "40" formControlName="event_id_desc" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control"></textarea>
+          </div>
+       </div>            
+    </div>
     </div>
       <br />
-      <button class="pull-left"  mat-raised-button color="default" type="submit">
-          Close
-        </button>
       <button class="pull-right" mat-raised-button color="primary" type="submit">
         <span
           *ngIf="loading"

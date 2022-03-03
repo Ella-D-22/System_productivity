@@ -1,14 +1,14 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, Inject, NgZone, OnInit, Optional } from '@angular/core';
+import { HttpClient} from '@angular/common/http';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { EventTypeLookupComponent } from '../../event-type/event-type-lookup/event-type-lookup.component';
-import { LinkedEventIdLookupComponent } from '../linked-event-id-lookup/linked-event-id-lookup.component';
+import { EventIdLookupComponent } from '../event-id-lookup/event-id-lookup.component';
 
 @Component({
   selector: 'app-event-id-maintenance',
@@ -26,6 +26,9 @@ export class EventIdMaintenanceComponent implements OnInit {
   event_description: any;
   error: any;
   event_type_data: any;
+  event_type_code: any;
+  event_id_desc: any;
+  existingData: boolean;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -52,49 +55,42 @@ export class EventIdMaintenanceComponent implements OnInit {
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
     event_type: ['', [Validators.required]],
-    event_type_data:[''],
-    event_id: ['', [Validators.required]]
+    event_id: ['', [Validators.required]],
+    event_id_desc:[''],
   });
+  
+  onSelectFunction(event:any){
+    if(event.target.value != "A-Add"){
+      this.existingData = true;
+      this.formData.controls.event_id_desc.disable()
+    }else if(event.target.value == "A-Add"){
+      this.formData.controls.event_id_desc.enable()
+      this.existingData = false;
+    }
+  }
 
   eventType(): void {
     const dialogRef = this.dialog.open(EventTypeLookupComponent, {
-      height: '400px',
-      width: '600px',
+      // height: '400px',
+      // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.event_description  = result.data.description
+      this.event_type_code = result.data.code
       this.formData.controls.event_type.setValue(result.data.code);
       this.formData.controls.event_type_data.setValue(result.data);
-
     });
   }
   eventId(): void {
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
-      height: '400px',
-      width: '600px',
+    const dialogRef = this.dialog.open(EventIdLookupComponent , {
+     
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.event_id = result.data;
+      this.event_id = result.data.event_id;
+      this.event_id_desc = result.data.event_id_desc;
       this.formData.controls.event_id.setValue(result.data);
+      this.formData.controls.event_type.setValue(result.data.event_type);
     });
-  }
-
-  onChange(state:any){
-    this.function_type = state.target.value;
-    switch(this.function_type){
-      case "1: add":
-        this.addEventId();
-        break;
-      case "2: enquire":
-          break;
-      case "3: update":
-            break;
-      case "4: remove":
-          break;
-    }
-  }
-  addEventId(){
-    this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
   }
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }

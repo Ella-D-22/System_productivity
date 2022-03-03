@@ -5,10 +5,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { CurrencyLookupComponent } from '../../GlobalParams/currency-config/currency-lookup/currency-lookup.component';
-import { AcPlaceholderLookupComponent } from '../event-id/ac-placeholder-lookup/ac-placeholder-lookup.component';
 import { ChrgPreferentialServiceService } from './chrg-preferential-service.service';
 import { DatePipe } from '@angular/common';
 
@@ -472,15 +470,15 @@ export class ChrgPreferentialComponent implements OnInit {
 
 
       accountLookup(): void {
-        const dialogRef = this.dialog.open(AcPlaceholderLookupComponent, {
-          height: '400px',
-          width: '600px',
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          this.ac_placeholder = result.data;
-          this.dialogValue = result.data;
-          this.formData.controls.ac_placeholder.setValue(result.data);
-        });
+        // const dialogRef = this.dialog.open(AcPlaceholderLookupComponent, {
+        //   height: '400px',
+        //   width: '600px',
+        // });
+        // dialogRef.afterClosed().subscribe(result => {
+        //   this.ac_placeholder = result.data;
+        //   this.dialogValue = result.data;
+        //   this.formData.controls.ac_placeholder.setValue(result.data);
+        // });
       }
       minAmtCurrencyLookup(): void {
         const dialogRef = this.dialog.open(CurrencyLookupComponent, {

@@ -51,12 +51,12 @@ export class EventTypeMaintenanceComponent implements OnInit {
 
   eventTypeLookup(): void {
     const dialogRef = this.dialog.open(EventTypeLookupComponent, {
-      height: '400px',
-      // width: '600px',
+     
     });
     dialogRef.afterClosed().subscribe(result => {
       this.eventlookupres = result.data;
       this.description = this.eventlookupres.description
+      this.eventtype_code = this.eventlookupres.code
       this.formData.controls.eventtype_code.setValue(result.data);
     });
   }

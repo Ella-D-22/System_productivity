@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HlvsmComponent } from './hlvsm.component';
+import { EventIdLookupComponent } from './event-id-lookup.component';
 
-describe('HlvsmComponent', () => {
-  let component: HlvsmComponent;
-  let fixture: ComponentFixture<HlvsmComponent>;
+describe('EventIdLookupComponent', () => {
+  let component: EventIdLookupComponent;
+  let fixture: ComponentFixture<EventIdLookupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HlvsmComponent ]
+      declarations: [ EventIdLookupComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HlvsmComponent);
+    fixture = TestBed.createComponent(EventIdLookupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

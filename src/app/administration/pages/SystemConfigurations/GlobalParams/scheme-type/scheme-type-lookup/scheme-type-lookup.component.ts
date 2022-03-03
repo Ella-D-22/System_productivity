@@ -26,7 +26,7 @@ export class SchemeTypeLookupComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   title = 'export-table-data-to-any-format';
-  displayedColumns: string[] = [ 'index','scheme_type','scheme_abbreviation','scheme_category'];
+  displayedColumns: string[] = [ 'index','scheme_type','scheme_abbreviation','scheme_category','is_verified','is_deleted'];
   dataSource!: MatTableDataSource<ApiData>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

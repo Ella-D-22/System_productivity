@@ -7,7 +7,6 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
-import { LinkedEventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 import { ExceptionsCodesLookupComponent } from '../../SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-lookup/exceptions-codes-lookup.component';
@@ -15,8 +14,8 @@ import { GlSubheadLookupComponent } from '../../SystemConfigurations/GlobalParam
 import { LoanproductService } from '../loanproduct/loanproduct.service';
 import { OverdraftService } from './overdraft.service';
 
-import {} from 'src/app/administration/pages/ProductModule/Accounts/office-accounts/office-accounts-lookup/office-accounts-lookup.component'
 import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
+import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 
 @Component({
   selector: 'app-overdrafts-scheme',
@@ -128,7 +127,7 @@ export class OverdraftsSchemeComponent implements OnInit {
   oda_advance_int_ac: any;
 
   eventidLookup(): void {
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
+    const dialogRef = this.dialog.open(EventIdLookupComponent, {
       // height: '400px',
       // width: '600px',
     });

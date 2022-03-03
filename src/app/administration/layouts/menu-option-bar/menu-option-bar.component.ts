@@ -7,8 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
-import { LinkedEventIdLookupComponent } from '../../pages/SystemConfigurations/ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
-import { EventTypeLookupComponent } from '../../pages/SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 
 @Component({
   selector: 'app-menu-option-bar',
@@ -61,41 +59,7 @@ export class MenuOptionBarComponent implements OnInit {
   // onSelect(data:any){
   //   this.dialogRef.close({ event: 'close', data:data });
   // }
-  eventType(): void {
-    const dialogRef = this.dialog.open(EventTypeLookupComponent, {
-      height: '400px',
-      width: '600px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.event_type = result.data;
-      this.formData.controls.event_type.setValue(result.data);
-    });
-  }
-  eventId(): void {
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
-      height: '400px',
-      width: '600px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.event_id = result.data;
-      this.formData.controls.event_id.setValue(result.data);
-    });
-  }
 
-  onChange(state:any){
-    this.function_type = state.target.value;
-    switch(this.function_type){
-      case "1: add":
-        this.addEventId();
-        break;
-      case "2: enquire":
-          break;
-      case "3: update":
-            break;
-      case "4: remove":
-          break;
-    }
-  }
   addEventId(){
     this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
   }

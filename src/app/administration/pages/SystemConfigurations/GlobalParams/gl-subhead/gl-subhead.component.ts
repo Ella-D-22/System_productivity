@@ -309,7 +309,7 @@ export class GlSubheadComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {

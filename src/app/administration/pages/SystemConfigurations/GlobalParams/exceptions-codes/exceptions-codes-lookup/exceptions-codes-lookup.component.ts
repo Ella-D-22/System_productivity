@@ -1,22 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, NgZone, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, NgZone, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
+import { FormBuilder} from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
-import { LinkedorganizationService } from '../../linked-organization/linkedorganization.service';
-import { LinkedOrganizationLookupComponent } from '../../linked-organization/linked-organization-lookup/linked-organization-lookup.component';
-import { SchemeTypeService } from '../../scheme-type/scheme-type.service';
-import { ApiData, SchemeTypeLookupComponent } from '../../scheme-type/scheme-type-lookup/scheme-type-lookup.component';
-import { CurrencyLookupComponent } from '../../currency-config/currency-lookup/currency-lookup.component';
+import { ApiData } from '../../scheme-type/scheme-type-lookup/scheme-type-lookup.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/@core/Service/AuthService/auth.service';
-import { GlSubheadService } from '../../gl-subhead/gl-subhead.service';
 import { ExceptionsCodesServiceService } from '../exceptions-codes-service.service';
 
 @Component({
@@ -30,7 +22,7 @@ export class ExceptionsCodesLookupComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   title = 'export-table-data-to-any-format';
-  displayedColumns: string[] = [ 'index','exception_code','exce_description','exce_code_type','exce_working_class'];
+  displayedColumns: string[] = [ 'index','exception_code','exce_description','exce_code_type','exce_working_class','is_verified','is_deleted'];
   dataSource!: MatTableDataSource<ApiData>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

@@ -1,14 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, Inject, NgZone, OnInit, Optional } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, NgZone, OnInit} from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog} from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
 import { CurrencyLookupComponent } from '../../GlobalParams/currency-config/currency-lookup/currency-lookup.component';
-import { AcPlaceholderLookupComponent } from './ac-placeholder-lookup/ac-placeholder-lookup.component';
 
 @Component({
   selector: 'app-event-id',
@@ -62,6 +61,11 @@ export class EventIdComponent implements OnInit {
   event_type_description: any;
   event_type_desc: any;
   eventid_id: any;
+  event_id_desc: any;
+  min_amt_ccy_name: any;
+  chrg_coll_crncy_name: any;
+  max_amt_ccy_name: any;
+  chrg_calc_crncy_name: any;
 
   constructor(
     public fb: FormBuilder,
@@ -156,6 +160,7 @@ export class EventIdComponent implements OnInit {
         event_id:[''],
         event_type:[''],
         event_type_desc:[''],
+        event_id_desc:[''],
         ac_placeholder: [this.ac_placeholder, [Validators.required]],
         amt_derivation_type: ['', [Validators.required]],
         amt: [''],
@@ -182,43 +187,23 @@ export class EventIdComponent implements OnInit {
         is_deleted:[false]
       });
       disabledFormControll(){
-        this.formData.controls.ac_placeholder.disable() 
-        this.formData.controls.ac_placeholder.disable()
-        this.formData.controls.amt_derivation_type.disable();
-        this.formData.controls.amt.disable();
-        this.formData.controls.percentage.disable();
-        this.formData.controls.chrg_code.disable();
-        this.formData.controls.file_name.disable();
-        this.formData.controls.chrg_calc_crncy.disable();
-        this.formData.controls.chrg_coll_crncy.disable();
-        this.formData.controls.min_amt_ccy.disable();
-        this.formData.controls.min_amt.disable();
-        this.formData.controls.max_amt_ccy.disable();
-        this.formData.controls.max_amt.disable();
-        this.formData.controls.fee_report_code.disable();
-        this.formData.controls.rate_code.disable();
-        this.formData.controls.tran_remarks_state.disable();
-        this.formData.controls.tran_remarks.disable();
-        this.formData.controls.tran_particulars_state.disable();
-        this.formData.controls.tran_particulars.disable();
-        this.formData.controls.round_off_flag.disable();
-        this.formData.controls.round_off_value.disable();
-        this.formData.controls.has_exercise_duty.disable();
-        this.formData.controls.exercise_duty_percentage.disable();
-        this.formData.controls.is_verified.disable();
-        this.formData.controls.is_deleted.disable();
+        this.formData.disable()
       }
 
       getPage(){
         this.subscription = this.eventIdAPI.currentMessage.subscribe(message =>{
           this.message = message;  
-          console.log(this.message)
+          
         this.function_type =this.message.function_type;
-        this.event_type = this.message.event_type;
-        this.event_description = this.event_type.description
-        this.event_id = this.message.event_id;
+        this.event_type = this.message.event_id.event_type;
+        this.event_type_desc = this.message.event_id.event_type_desc
         
-        this.event_type_desc  =this.message.event_type_data.description
+        this.event_id = this.message.event_id.event_id;
+        this.event_id_desc  =this.message.event_id.event_id_desc
+
+        
+        
+
 
         if(this.function_type == "A-Add"){
           // open empty forms
@@ -460,53 +445,53 @@ export class EventIdComponent implements OnInit {
       })    
       }
       accountLookup(): void {
-        const dialogRef = this.dialog.open(AcPlaceholderLookupComponent, {
-          height: '400px',
-          width: '600px',
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          this.ac_placeholder = result.data;
-          this.dialogValue = result.data;
-          this.formData.controls.ac_placeholder.setValue(result.data);
-        });
+        // const dialogRef = this.dialog.open(AcPlaceholderLookupComponent, {
+        //   height: '400px',
+        //   width: '600px',
+        // });
+        // dialogRef.afterClosed().subscribe(result => {
+        //   this.ac_placeholder = result.data;
+        //   this.dialogValue = result.data;
+        //   this.formData.controls.ac_placeholder.setValue(result.data);
+        // });
       }
       minAmtCurrencyLookup(): void {
         const dialogRef = this.dialog.open(CurrencyLookupComponent, {
-          height: '400px',
-          width: '600px',
+        
         });
         dialogRef.afterClosed().subscribe(result => {
           this.min_amt_ccy = result.data.ccy;
+          this.min_amt_ccy_name = result.data.ccy_name;
           this.formData.controls.min_amt_ccy.setValue(result.data.ccy);
         });
       }
       maxAmtCurrencyLookup(): void {
         const dialogRef = this.dialog.open(CurrencyLookupComponent, {
-          height: '400px',
-          width: '600px',
+          
         });
         dialogRef.afterClosed().subscribe(result => {
           this.max_amt_ccy = result.data.ccy;
+          this.max_amt_ccy_name = result.data.ccy_name;
           this.formData.controls.max_amt_ccy.setValue(result.data.ccy);
         });
       }
       chrgCalcCrncyLookup(): void {
         const dialogRef = this.dialog.open(CurrencyLookupComponent, {
-          height: '400px',
-          width: '600px',
+         
         });
         dialogRef.afterClosed().subscribe(result => {
           this.chrg_calc_crncy = result.data.ccy;
+          this.chrg_calc_crncy_name = result.data.ccy_name;
           this.formData.controls.chrg_calc_crncy.setValue(result.data.ccy);
         });
       }
       chrgCollCrncyLookup(): void {
         const dialogRef = this.dialog.open(CurrencyLookupComponent, {
-          height: '400px',
-          width: '600px',
+         
         });
         dialogRef.afterClosed().subscribe(result => {
           this.chrg_coll_crncy= result.data.ccy;
+          this.chrg_coll_crncy_name = result.data.ccy_name;
           this.formData.controls.chrg_coll_crncy.setValue(result.data.ccy);
         });
       }

@@ -1,17 +1,13 @@
-<mat-card-header  class="breadcrumb">
-    <div>GL-Subhead Lookup</div>
-  </mat-card-header>
   <div class="">
-      <div class="row table-action-row">
-        <div class="col-md-6 col-sm-12">
-      <div>
-      </div>
-          </div>
-        <div class="col-md-6 col-sm-12">
-        <mat-icon class="pull-right">search</mat-icon>
-        <input class="pull-right search form-control" (keyup)="applyFilter($event)" placeholder="Filter..." #input>
+    <div class="row breadcrumb">
+      <div class="col-md-6 col-sm-12">
+        <h3>EXCEPTION LOOKUP</h3>
         </div>
+      <div class="col-md-6 col-sm-12">
+      <mat-icon class="pull-right">search</mat-icon>
+      <input class="pull-right search form-control" (keyup)="applyFilter($event)" placeholder="Filter..." #input>
       </div>
+    </div>
       <br> 
       <div class="table-row">
         <table class="y-scrollable-table"mat-table matSort matTableExporter [dataSource] = "dataSource">
@@ -36,8 +32,17 @@
         </ng-container>
   
         <ng-container matColumnDef="exce_working_class">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Exception Working Class</th>
-          <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.exce_working_class}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Exception Work Class Role </th>
+          <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.exce_work_class_role}} </td>
+        </ng-container>
+        <ng-container matColumnDef="is_verified">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Verified</th>
+          <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> Y </td>
+        </ng-container>
+
+        <ng-container matColumnDef="is_deleted">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Deleted</th>
+          <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> N </td>
         </ng-container>
   
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

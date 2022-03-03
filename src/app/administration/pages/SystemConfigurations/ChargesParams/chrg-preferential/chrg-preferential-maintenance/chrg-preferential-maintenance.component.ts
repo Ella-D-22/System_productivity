@@ -1,17 +1,17 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, Inject, NgZone, OnInit, Optional } from '@angular/core';
+import { Component,NgZone, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
-import { LinkedEventIdLookupComponent } from '../../event-id/linked-event-id-lookup/linked-event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../event-type/event-type-lookup/event-type-lookup.component';
 import { ChrgPreferentialServiceService } from '../chrg-preferential-service.service';
 import { ChrgPreferentialLookupComponent } from '../chrg-preferential-lookup/chrg-preferential-lookup.component';
 import { LinkedOrganizationLookupComponent } from '../../../GlobalParams/linked-organization/linked-organization-lookup/linked-organization-lookup.component';
+import { EventIdLookupComponent } from '../../event-id/event-id-lookup/event-id-lookup.component';
 
 @Component({
   selector: 'app-chrg-preferential-maintenance',
@@ -105,7 +105,7 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
     });
   }
   eventId(): void {
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
+    const dialogRef = this.dialog.open(EventIdLookupComponent, {
       height: '400px',
       width: '600px',
     });
