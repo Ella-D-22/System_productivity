@@ -186,7 +186,6 @@
                             </div>
                         </div>
                     </div>
-
                 </mat-tab>
                <mat-tab class="mat-tab" label="Particulars">
                         <br>
@@ -299,8 +298,9 @@
                                 </div>
                             </div>
                         </div>
-
+                         <br>
                         <mat-divider></mat-divider>
+                        <br>
                         <h3>Immovable Properties</h3>
                         <br>
                         <div class="row">
@@ -414,7 +414,9 @@
                                 </div>
                             </div> 
                         </div>
+                         <br>
                         <mat-divider></mat-divider>
+                        <br>
                         <!-- Shares Details -->
                         <h3>Shares</h3>
                         <br>
@@ -463,6 +465,7 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <mat-divider></mat-divider>
                         <br>
                         <h3>Stocks</h3>
@@ -488,9 +491,152 @@
                                 </div>
                             </div>
                         </div>
-
-                   
+                        <br>
+                         <div class="row">
+                             <div class="col-md-6 col-sm-12">
+                                 <div class="form-group">
+                                     <div class="col-md-6 col-sm-12 form-column">
+                                         <label for="" class="start pull-left">Frequency Statement Submission for Stocks<span class="warning">*</span></label>
+                                     </div>
+                                     <div class="col-md-6 col-sm-12 form-column">
+                                        <select   class="form-control" formControlName="frequencyforSubmission">
+                                            <option value="" disabled>-- Select --</option>
+                                            <option *ngFor="let flag of submissionFreqArray" [value]="flag">{{ flag }}</option>
+                                          </select>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Due Date<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                       <input  [matDatepicker]="qpicker" formControlName="dueDate" class="form-control" />
+                                       <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="qpicker"></mat-datepicker-toggle>
+                                       <mat-datepicker #qpicker></mat-datepicker>
+                                       </div>
+                                </div>
+                             </div>
+                         </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">lodged Date<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input  [matDatepicker]="npicker" formControlName="lodgedDate" class="form-control" />
+                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="npicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #npicker></mat-datepicker>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Review Date<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input  [matDatepicker]="opicker" formControlName="reviewDate" class="form-control" />
+                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="opicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #opicker></mat-datepicker>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Withdrawn Date<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input  [matDatepicker]="rpicker" formControlName="withdrawnDate" class="form-control" />
+                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="rpicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #rpicker></mat-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <mat-divider></mat-divider>
+                        <br>
+                        <h3>Term Deposits</h3>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Deposit Account No.<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="depositAccountNo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Denominations No.<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="denominationsNo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Apportioned Value No.<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="apportionedValue" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Lien Amount<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="lienAmount" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Full Benefit<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="fullBenefit" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                </mat-tab>
+               <mat-tab class="mat-tab" label="Insurance">
+
+               </mat-tab>
+               <mat-tab class="mat-tab" label ="Receipt and Payment">
+
+                
+               </mat-tab>
+               <mat-tab class="mat-tab" label="Inspection"></mat-tab>
+               <mat-tab class="mat-tab" label="Sales Notes"></mat-tab>
+               <mat-tab class="mat-tab" label="Fees"></mat-tab>
+
+
             </mat-tab-group>
             
         </form>

@@ -112,7 +112,11 @@ export class CollateralComponent implements OnInit {
   get f(){return this.formData.controls}
   
   collateralTypeArray : any = [
-    'Vehicle', 'consumer_goods','equipment', 'inventory','farm products'
+    'Vehicle and Machineries', 'Immovable Properties','Stock', 'Shares','Term Deposits'
+  ]
+
+  submissionFreqArray: any =[
+    'Daily', 'Weekly','Monthly', 'Yearly', 'None'
   ]
   
 
@@ -189,6 +193,7 @@ export class CollateralComponent implements OnInit {
     sharesCapital:[''],
     nosharesIsssued:[''],
     contactDetails:[''],
+    
     
 
   })
