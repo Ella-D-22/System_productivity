@@ -97,11 +97,10 @@ export class CurrencyConfigComponent implements OnInit {
         this.ccy_id = this.message.currency_ccy.id
         this.ccy_name = this.message.currency_ccy.ccy_name
         this.currency_ccy = this.message.currency_ccy;
+        this.formData.controls.is_verified.disable();
 
         if(this.function_type == "A-Add"){
-
-          this.formData.controls.is_deleted.disable();
-          this.formData.controls.is_verified.disable();
+          
           // open empty forms
           this.formData = this.fb.group({
             id:[''],
@@ -135,7 +134,7 @@ export class CurrencyConfigComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
           })
         }
         else if(this.function_type == "M-Modify"){
@@ -155,7 +154,7 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -178,7 +177,7 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -201,7 +200,7 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,

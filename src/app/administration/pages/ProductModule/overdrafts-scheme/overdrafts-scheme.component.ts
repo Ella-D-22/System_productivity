@@ -2,12 +2,11 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
-import { LinkedEventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 import { ExceptionsCodesLookupComponent } from '../../SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-lookup/exceptions-codes-lookup.component';
@@ -15,7 +14,8 @@ import { GlSubheadLookupComponent } from '../../SystemConfigurations/GlobalParam
 import { LoanproductService } from '../loanproduct/loanproduct.service';
 import { OverdraftService } from './overdraft.service';
 
-import {} from 'src/app/administration/pages/ProductModule/Accounts/office-accounts/office-accounts-lookup/office-accounts-lookup.component'
+import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
+import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 
 @Component({
   selector: 'app-overdrafts-scheme',
@@ -119,9 +119,15 @@ export class OverdraftsSchemeComponent implements OnInit {
   fomartedFromDate: any;
   selecteddateTo: any;
   fomartedToDate: any;
+  dtype: string;
+  oda_normal_int_receivable_ac: any;
+  oda_penal_int_receivable_ac: any;
+  oda_normal_int_received_ac: any;
+  oda_penal_int_received_ac: any;
+  oda_advance_int_ac: any;
 
   eventidLookup(): void {
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
+    const dialogRef = this.dialog.open(EventIdLookupComponent, {
       // height: '400px',
       // width: '600px',
     });
@@ -243,6 +249,71 @@ export class OverdraftsSchemeComponent implements OnInit {
       this.glSubheadData.controls.oda_gl_subhead_description.setValue(this.gl_subhead_description);
     });
   }
+
+
+      // Account lookups
+normIntReceivedAccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_normal_int_receivable_ac = result.data.acid;
+    this.formData.controls.oda_normal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+
+penalIntRecAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_penal_int_receivable_ac = result.data.acid;
+    this.formData.controls.oda_penal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+normIntReceivedaccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_normal_int_received_ac = result.data.acid;
+    this.formData.controls.oda_normal_int_received_ac.setValue(result.data.acid);
+  });
+}
+penalIntReceivedaccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_penal_int_received_ac = result.data.acid;
+    this.formData.controls.oda_penal_int_received_ac.setValue(result.data.acid);
+  });
+}
+advanceIntAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_advance_int_ac = result.data.acid;
+    this.formData.controls.oda_advance_int_ac.setValue(result.data.acid);
+  });
+}
+
 
 
 
@@ -551,20 +622,7 @@ export class OverdraftsSchemeComponent implements OnInit {
     this.showSystem_gen_no = false;;
   }
   disabledFormControll() {
-    // this.formData.controls.start_date.disable();
-    // this.formData.controls.end_date.disable();
-    // this.formData.controls.base_int_code.disable();
-    // this.formData.controls.base_int_pcnt_cr.disable();
-    // this.formData.controls.base_int_pcnt_dr.disable();
-    // this.formData.controls.version_desc.disable();
-    // this.formData.controls.version_desc_repo.disable();
-    // this.formData.controls.add_version_info.disable();
-
-    // this.formData.controls.cr_normal_int.disable();
-    // this.formData.controls.ac_ccy.disable();
-    // this.formData.controls.home_ccy.disable();
-    // this.formData.controls.max_no_of_assesment.disable();
-
+    this.formData.disable()
   }
   getPage() {
     this.subscription = this.odaAPI.currentMessage.subscribe(message => {
@@ -574,16 +632,11 @@ export class OverdraftsSchemeComponent implements OnInit {
       this.scheme_type = this.message.scheme_type;
       this.scheme_code_desc = this.message.scheme_code_desc;
 
-
-      console.log(message);
-      
-
       if (this.function_type == "A-Add") {
-        console.log("test")
         // open empty forms
         this.formData = this.fb.group({
           oda_function_type: [this.function_type],
-          oda_scheme_code: [this.int_tbl_code],
+          oda_scheme_code: [this.scheme_code],
           oda_scheme_type: [this.scheme_type],
           oda_scheme_code_desc: [this.scheme_code_desc],
       
@@ -648,7 +701,6 @@ export class OverdraftsSchemeComponent implements OnInit {
         });
       }
       else if (this.function_type == "I-Inquire") {
-        console.log("testing")
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
@@ -656,14 +708,21 @@ export class OverdraftsSchemeComponent implements OnInit {
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
           this.results = res;
+
+          this.feeArray = this.results.oda_fees;
+          this.glSubheadArray = this.results.oda_glsubheads;
+          
           this.formData = this.fb.group({
 
+            id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
+            oda_scheme_type: [this.results.oda_scheme_type],
             oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
 
-            id: [this.results.id],
             oda_effective_to_date: [this.results.oda_effective_to_date],
             oda_effective_from_date: [this.results.oda_effective_from_date],
             oda_system_generated_no: [this.results.oda_system_generated_no],
@@ -674,8 +733,7 @@ export class OverdraftsSchemeComponent implements OnInit {
             oda_system_gen_no:[this.results.oda_system_gen_no],
             oda_number_generation_code:[this.results.oda_number_generation_code],
             // Interest Details
-      
-        
+  
             oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
             oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
             oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
@@ -690,7 +748,7 @@ export class OverdraftsSchemeComponent implements OnInit {
             oda_int_cal_freq_dr_date:[this.results.oda_int_cal_freq_dr_date],
             oda_int_cal_freq_dr_holiday:[this.results.oda_int_cal_freq_dr_holiday],
         
-        // end of interest details
+            // end of interest details
             oda_max_sanction_limit: [this.results.oda_max_sanction_limit],
             oda_dr_bal_limit: [this.results.oda_dr_bal_limit],
             // oda_max_sanction_limit: [this.results.],
@@ -719,8 +777,9 @@ export class OverdraftsSchemeComponent implements OnInit {
             // oda_calc_freq_dr_holiday: [this.results.],
             oda_norm_int_product_method: [this.results.oda_norm_int_product_method],
             oda_penal_int_rate_method: [this.results.oda_penal_int_rate_method],
-           // oda_fees: new FormArray([]),
-           // oda_glsubheads: new FormArray([])
+
+           oda_fees: [this.results.oda_fees],
+           oda_glsubheads:[this.results.oda_glsubheads],
 
           });
         }, err => {
@@ -731,38 +790,30 @@ export class OverdraftsSchemeComponent implements OnInit {
             duration: 3000,
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
-          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
         })
       }
       else if (this.function_type == "M-Modify") {
-        // Populate fields with data and allow modifications
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
-        this.params = new HttpParams()
-          .set('event_id', this.event_id)
-          .set('event_type', this.event_type);
-        // call to disable edit
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+        // hide Buttons
+        this.isEnabled = false;
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
+          this.results = res;
 
-          this.results= res;
+          this.feeArray = this.results.oda_fees;
+          this.glSubheadArray = this.results.oda_glsubheads;
+          
           this.formData = this.fb.group({
 
-            // oda_function_type: [this.function_type],
-            // oda_scheme_code: [this.int_tbl_code],
-            // oda_scheme_type: [this.scheme_type],
-            // oda_scheme_code_desc: [this.scheme_code_desc],
-
-                        // oda_function_type: [this.function_type],
-            // oda_scheme_code: [this.int_tbl_code],
-            // oda_scheme_type: [this.scheme_type],
-            // oda_scheme_code_desc: [this.scheme_code_desc],
-
-
-            oda_scheme_code: [this.results.oda_scheme_code],
-            oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
 
             id: [this.results.id],
+            oda_scheme_code: [this.results.oda_scheme_code],
+            oda_scheme_type: [this.results.oda_scheme_type],
+            oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
+
             oda_effective_to_date: [this.results.oda_effective_to_date],
             oda_effective_from_date: [this.results.oda_effective_from_date],
             oda_system_generated_no: [this.results.oda_system_generated_no],
@@ -773,8 +824,7 @@ export class OverdraftsSchemeComponent implements OnInit {
             oda_system_gen_no:[this.results.oda_system_gen_no],
             oda_number_generation_code:[this.results.oda_number_generation_code],
             // Interest Details
-      
-        
+  
             oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
             oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
             oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
@@ -789,7 +839,7 @@ export class OverdraftsSchemeComponent implements OnInit {
             oda_int_cal_freq_dr_date:[this.results.oda_int_cal_freq_dr_date],
             oda_int_cal_freq_dr_holiday:[this.results.oda_int_cal_freq_dr_holiday],
         
-        // end of interest details
+            // end of interest details
             oda_max_sanction_limit: [this.results.oda_max_sanction_limit],
             oda_dr_bal_limit: [this.results.oda_dr_bal_limit],
             // oda_max_sanction_limit: [this.results.],
@@ -818,13 +868,16 @@ export class OverdraftsSchemeComponent implements OnInit {
             // oda_calc_freq_dr_holiday: [this.results.],
             oda_norm_int_product_method: [this.results.oda_norm_int_product_method],
             oda_penal_int_rate_method: [this.results.oda_penal_int_rate_method],
-           // oda_fees: new FormArray([]),
-           // oda_glsubheads: new FormArray([])
+            
+            is_verified:[this.results.is_verified],
+            is_deleted:[this.results.is_deleted],
+
+           oda_fees: [this.results.oda_fees],
+           oda_glsubheads:[this.results.oda_glsubheads],
 
           });
         }, err => {
           this.error = err;
-          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
           this._snackBar.open(this.error, "Try again!", {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
@@ -832,11 +885,8 @@ export class OverdraftsSchemeComponent implements OnInit {
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
         })
-
       }
       else if (this.function_type == "V-Verify") {
-        // Populate data with rotected fileds only verification is enabled
-        console.log("testing")
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
@@ -844,19 +894,22 @@ export class OverdraftsSchemeComponent implements OnInit {
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
           this.results = res;
+
+          this.feeArray = this.results.oda_fees;
+          this.glSubheadArray = this.results.oda_glsubheads;
+          
           this.formData = this.fb.group({
 
-            // oda_function_type: [this.function_type],
-            // oda_scheme_code: [this.int_tbl_code],
-            // oda_scheme_type: [this.scheme_type],
-            // oda_scheme_code_desc: [this.scheme_code_desc],
-
-            oda_scheme_code: [this.results.oda_scheme_code],
-            oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
 
             id: [this.results.id],
+            oda_scheme_code: [this.results.oda_scheme_code],
+            oda_scheme_type: [this.results.oda_scheme_type],
+            oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
+
             oda_effective_to_date: [this.results.oda_effective_to_date],
             oda_effective_from_date: [this.results.oda_effective_from_date],
             oda_system_generated_no: [this.results.oda_system_generated_no],
@@ -867,8 +920,7 @@ export class OverdraftsSchemeComponent implements OnInit {
             oda_system_gen_no:[this.results.oda_system_gen_no],
             oda_number_generation_code:[this.results.oda_number_generation_code],
             // Interest Details
-      
-        
+  
             oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
             oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
             oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
@@ -883,7 +935,7 @@ export class OverdraftsSchemeComponent implements OnInit {
             oda_int_cal_freq_dr_date:[this.results.oda_int_cal_freq_dr_date],
             oda_int_cal_freq_dr_holiday:[this.results.oda_int_cal_freq_dr_holiday],
         
-        // end of interest details
+            // end of interest details
             oda_max_sanction_limit: [this.results.oda_max_sanction_limit],
             oda_dr_bal_limit: [this.results.oda_dr_bal_limit],
             // oda_max_sanction_limit: [this.results.],
@@ -912,10 +964,11 @@ export class OverdraftsSchemeComponent implements OnInit {
             // oda_calc_freq_dr_holiday: [this.results.],
             oda_norm_int_product_method: [this.results.oda_norm_int_product_method],
             oda_penal_int_rate_method: [this.results.oda_penal_int_rate_method],
-           // oda_fees: new FormArray([]),
-           // oda_glsubheads: new FormArray([])
-              
 
+           oda_fees: [this.results.oda_fees],
+           oda_glsubheads:[this.results.oda_glsubheads],
+           is_verified:[true],
+           is_deleted:[this.results.is_deleted]
 
           });
         }, err => {
@@ -926,12 +979,9 @@ export class OverdraftsSchemeComponent implements OnInit {
             duration: 3000,
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
-          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
         })
       }
-      else if (this.function_type == "C-Cancle") {
-        // should open a page with data and show remove button
-        console.log("testing")
+      else if (this.function_type == "X-Delete") {
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
@@ -939,19 +989,22 @@ export class OverdraftsSchemeComponent implements OnInit {
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
-        this.subscription = this.odaAPI.getOverdraftByOverdraft(this.scheme_code).subscribe(res => {
+        let params = new HttpParams()
+        .set("scheme_code", this.scheme_code);     
+        this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
           this.results = res;
+
+          this.feeArray = this.results.oda_fees;
+          this.glSubheadArray = this.results.oda_glsubheads;
+          
           this.formData = this.fb.group({
 
-            // oda_function_type: [this.function_type],
-            // oda_scheme_code: [this.int_tbl_code],
-            // oda_scheme_type: [this.scheme_type],
-            // oda_scheme_code_desc: [this.scheme_code_desc],
-
+            
+            id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
+            oda_scheme_type: [this.results.oda_scheme_type],
             oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
 
-            id: [this.results.id],
             oda_effective_to_date: [this.results.oda_effective_to_date],
             oda_effective_from_date: [this.results.oda_effective_from_date],
             oda_system_generated_no: [this.results.oda_system_generated_no],
@@ -962,8 +1015,7 @@ export class OverdraftsSchemeComponent implements OnInit {
             oda_system_gen_no:[this.results.oda_system_gen_no],
             oda_number_generation_code:[this.results.oda_number_generation_code],
             // Interest Details
-      
-        
+  
             oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
             oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
             oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
@@ -978,7 +1030,7 @@ export class OverdraftsSchemeComponent implements OnInit {
             oda_int_cal_freq_dr_date:[this.results.oda_int_cal_freq_dr_date],
             oda_int_cal_freq_dr_holiday:[this.results.oda_int_cal_freq_dr_holiday],
         
-        // end of interest details
+            // end of interest details
             oda_max_sanction_limit: [this.results.oda_max_sanction_limit],
             oda_dr_bal_limit: [this.results.oda_dr_bal_limit],
             // oda_max_sanction_limit: [this.results.],
@@ -1007,8 +1059,12 @@ export class OverdraftsSchemeComponent implements OnInit {
             // oda_calc_freq_dr_holiday: [this.results.],
             oda_norm_int_product_method: [this.results.oda_norm_int_product_method],
             oda_penal_int_rate_method: [this.results.oda_penal_int_rate_method],
-           // oda_fees: new FormArray([]),
-           // oda_glsubheads: new FormArray([])
+           is_verified:[this.results.is_verified],
+           is_deleted:[true],
+
+           oda_fees: [this.results.oda_fees],
+           oda_glsubheads:[this.results.oda_glsubheads],
+
           });
         }, err => {
           this.error = err;
@@ -1018,7 +1074,6 @@ export class OverdraftsSchemeComponent implements OnInit {
             duration: 3000,
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
-          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
         })
       }
     })

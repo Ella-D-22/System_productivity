@@ -2,12 +2,13 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
-import { LinkedEventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
+import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
+import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 import { ExceptionsCodesLookupComponent } from '../../SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-lookup/exceptions-codes-lookup.component';
@@ -107,9 +108,15 @@ export class CurrentSchemeComponent implements OnInit {
   fomartedFromDate: any;
   selecteddateTo: any;
   fomartedToDate: any;
+  dtype: any;
+  caa_normal_int_receivable_ac: any;
+  caa_penal_int_receivable_ac: any;
+  caa_normal_int_received_ac: any;
+  caa_penal_int_received_ac: any;
+  caa_advance_int_ac: any;
 
   eventidLookup(): void {
-    const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
+    const dialogRef = this.dialog.open(EventIdLookupComponent, {
       // height: '400px',
       // width: '600px',
     });
@@ -348,6 +355,69 @@ export class CurrentSchemeComponent implements OnInit {
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
+
+  // Account lookups
+normIntReceivedAccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_normal_int_receivable_ac = result.data.acid;
+    this.formData.controls.caa_normal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+
+penalIntRecAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_penal_int_receivable_ac = result.data.acid;
+    this.formData.controls.caa_penal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+normIntReceivedaccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_normal_int_received_ac = result.data.acid;
+    this.formData.controls.caa_normal_int_received_ac.setValue(result.data.acid);
+  });
+}
+penalIntReceivedaccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_penal_int_received_ac = result.data.acid;
+    this.formData.controls.caa_penal_int_received_ac.setValue(result.data.acid);
+  });
+}
+advanceIntAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_advance_int_ac = result.data.acid;
+    this.formData.controls.caa_advance_int_ac.setValue(result.data.acid);
+  });
+}
 
 
   editLoanFeeForm(i: any) {
@@ -733,13 +803,11 @@ export class CurrentSchemeComponent implements OnInit {
               
           this.formData = this.fb.group({
 
-            
-            caa_function_type: [this.function_type],
-            caa_scheme_code: [this.scheme_code],
-            caa_scheme_type: [this.scheme_type],
-            caa_scheme_code_desc: [this.results.scheme_code_desc], 
-
             id:[this.results.id],
+            caa_function_type: [this.results.caa_function_type],
+            caa_scheme_code: [this.results.caa_scheme_code],
+            caa_scheme_type: [this.results.caa_scheme_type],
+            caa_scheme_code_desc: [this.results.caa_scheme_code_desc], 
                     //General Details
             caa_effective_from_date:[this.results.caa_effective_from_date],
             caa_effective_to_date:[this.results.caa_effective_to_date],
@@ -830,13 +898,12 @@ export class CurrentSchemeComponent implements OnInit {
           
           this.formData = this.fb.group({
 
-            caa_function_type: [this.function_type],
-            caa_scheme_code: [this.scheme_code],
-            caa_scheme_type: [this.scheme_type],
-            caa_scheme_code_desc: [this.scheme_code_desc], 
-
             id:[this.results.id],
-                    //General Details
+            caa_function_type: [this.results.caa_function_type],
+            caa_scheme_code: [this.results.caa_scheme_code],
+            caa_scheme_type: [this.results.caa_scheme_type],
+            caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
+
             caa_effective_from_date:[this.results.caa_effective_from_date],
             caa_effective_to_date:[this.results.caa_effective_to_date],
             caa_system_generated_no:[this.results.caa_system_generated_no],
@@ -926,17 +993,14 @@ export class CurrentSchemeComponent implements OnInit {
            this.results = res;
            this.feeArray = this.results.caa_fees;
           this.glSubheadArray = this.results.caa_glsubheads;
- 
-           console.log(this.results);
-           
+            
            this.formData = this.fb.group({
- 
-             caa_function_type: [this.function_type],
-             caa_scheme_code: [this.scheme_code],
-             caa_scheme_type: [this.scheme_type],
-             caa_scheme_code_desc: [this.scheme_code_desc], 
- 
-             id:[this.results.id],
+            
+            id:[this.results.id],
+            caa_function_type: [this.results.caa_function_type],
+            caa_scheme_code: [this.results.caa_scheme_code],
+            caa_scheme_type: [this.results.caa_scheme_type],
+            caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
                      //General Details
              caa_effective_from_date:[this.results.caa_effective_from_date],
              caa_effective_to_date:[this.results.caa_effective_to_date],

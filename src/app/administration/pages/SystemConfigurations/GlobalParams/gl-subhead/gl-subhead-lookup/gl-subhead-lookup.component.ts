@@ -20,7 +20,7 @@ export class GlSubheadLookupComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   title = 'export-table-data-to-any-format';
-  displayedColumns: string[] = [ 'index','glCode','glSubheadCode','glSubheadDescription'];
+  displayedColumns: string[] = [ 'index','glCode','glSubheadCode','glSubheadDescription','is_verified','is_deleted'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

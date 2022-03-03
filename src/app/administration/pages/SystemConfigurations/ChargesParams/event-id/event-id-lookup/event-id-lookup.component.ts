@@ -8,19 +8,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/@core/Service/AuthService/auth.service';
-import { EventTypeService } from '../event-type.service';
+import { EventIdService } from '../event-id.service';
 
 @Component({
-  selector: 'app-event-type-lookup',
-  templateUrl: './event-type-lookup.component.html',
-  styleUrls: ['./event-type-lookup.component.scss']
+  selector: 'app-event-id-lookup',
+  templateUrl: './event-id-lookup.component.html',
+  styleUrls: ['./event-id-lookup.component.scss']
 })
-export class EventTypeLookupComponent implements OnInit, OnDestroy {
+export class EventIdLookupComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   title = 'export-table-data-to-any-format';
-  displayedColumns: string[] = [ 'index','code','description','is_verified','is_deleted'];
-
+  displayedColumns: string[] = [ 'index','event_id','event_id_desc','event_type','is_verified','is_deleted'];           
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -31,16 +30,15 @@ export class EventTypeLookupComponent implements OnInit, OnDestroy {
   employee_id: any;
   creatingAccount = false;
   formData:any;
-
-
+  
   constructor(    
-    public dialogRef: MatDialogRef<EventTypeLookupComponent>,
+    public dialogRef: MatDialogRef<EventIdLookupComponent>,
     private router: Router,
     private ngZone: NgZone,
     private _snackBar: MatSnackBar,
     private authAPI: AuthService,
     public fb: FormBuilder,
-    private eventTypeAPI: EventTypeService
+    private eventIdAPI: EventIdService
     ) { }
     ngOnInit() {
       this.getData();
@@ -56,7 +54,7 @@ export class EventTypeLookupComponent implements OnInit, OnDestroy {
       }
     }
     getData() {
-      this.subscription = this.eventTypeAPI.getEventTypes().subscribe(res => {
+      this.subscription = this.eventIdAPI.getEventIds().subscribe(res => {
        this.data = res;
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.data);

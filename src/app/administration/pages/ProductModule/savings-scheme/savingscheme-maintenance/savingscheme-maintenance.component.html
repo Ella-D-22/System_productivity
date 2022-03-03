@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
               <input type="text" [value]="this.sba_scheme_code" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
-              <mat-icon (click)="schemeCodeLookup()">search</mat-icon>
+              <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
             </div>
          </div>            
     </div>
@@ -57,7 +57,7 @@
              <label class="start pull-left">Scheme Code Desc</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
-               <textarea [value]="this.sba_scheme_code_desc" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"></textarea>
+               <textarea [value]="this.sba_scheme_code_desc" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"></textarea>
             </div>
          </div>            
     </div>

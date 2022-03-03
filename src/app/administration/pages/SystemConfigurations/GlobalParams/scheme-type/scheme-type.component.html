@@ -31,7 +31,7 @@
        <label class="start pull-left">Scheme Type</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="scheme_type" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_type.errors }" />
+        <input type="text" maxlength = "30"  formControlName="scheme_type" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_type.errors }" />
       </div>
    </div>            
   </div>
@@ -41,7 +41,7 @@
        <label class="start pull-left">Scheme Type Abbreviation</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="scheme_abbreviation" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_abbreviation.errors }" />
+        <input type="text" maxlength = "6" formControlName="scheme_abbreviation" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_abbreviation.errors }" />
       </div>
    </div>   
   </div>
@@ -53,7 +53,7 @@
              <label class="start pull-left">Scheme Category</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" formControlName="scheme_category" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_category.errors }" />
+              <input type="text" maxlength = "40" formControlName="scheme_category" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_category.errors }" />
             </div>
          </div>           
     </div>
@@ -63,13 +63,15 @@
              <label class="start pull-left">Scheme Description</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <textarea type="text" formControlName="scheme_description" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_description.errors }"></textarea>
+              <textarea type="text" maxlength = "60"  formControlName="scheme_description" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_description.errors }"></textarea>
             </div>
          </div>   
     </div>
   </div>
-
-    <br />
+    <br/>
+    <button class="pull-left" routerLink="../../maintenance"  mat-raised-button color="default" type="button">
+      Back
+    </button>
     <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
       <span
         *ngIf="loading"

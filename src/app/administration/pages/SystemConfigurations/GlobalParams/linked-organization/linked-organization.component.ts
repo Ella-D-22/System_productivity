@@ -1,16 +1,14 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, Inject, NgZone, OnInit, Optional } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient} from '@angular/common/http';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog} from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
-import { AcPlaceholderLookupComponent } from '../../ChargesParams/event-id/ac-placeholder-lookup/ac-placeholder-lookup.component';
 import { LinkedorganizationService } from './linkedorganization.service';
 import { CurrencyLookupComponent } from '../currency-config/currency-lookup/currency-lookup.component';
-import { LinkedEventIdLookupComponent } from '../../ChargesParams/event-id/linked-event-id-lookup/linked-event-id-lookup.component';
+import { EventIdLookupComponent } from '../../ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 
 @Component({
   selector: 'app-linked-organization',
@@ -188,7 +186,7 @@ export class LinkedOrganizationComponent implements OnInit {
       }
     }
     eventId(i: any): void {
-      const dialogRef = this.dialog.open(LinkedEventIdLookupComponent, {
+      const dialogRef = this.dialog.open(EventIdLookupComponent, {
         height: '400px',
         width: '600px',
       });

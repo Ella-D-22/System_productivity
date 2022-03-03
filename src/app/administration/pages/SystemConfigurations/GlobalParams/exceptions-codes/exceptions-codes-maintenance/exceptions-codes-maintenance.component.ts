@@ -35,6 +35,7 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
 
   newData = false;
   exception_code_value: any;
+  exce_description: any;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -65,6 +66,7 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
       this.exception_code_value = this.lookupData.exception_code;
+      this.exce_description = this.lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.lookupData.id);
     });
   }

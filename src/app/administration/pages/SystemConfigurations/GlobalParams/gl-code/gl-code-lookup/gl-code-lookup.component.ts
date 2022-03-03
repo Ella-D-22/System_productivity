@@ -1,5 +1,5 @@
 import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -8,11 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/@core/Service/AuthService/auth.service';
-import { SchemeTypeLookupComponent } from '../../scheme-type/scheme-type-lookup/scheme-type-lookup.component';
-import { SchemeTypeService } from '../../scheme-type/scheme-type.service';
 import { GlCodeService } from '../gl-code.service';
-
-
 
 @Component({
   selector: 'app-gl-code-lookup',
@@ -23,7 +19,7 @@ export class GlCodeLookupComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   title = 'export-table-data-to-any-format';
-  displayedColumns: string[] = [ 'index','glCode','glDescription'];
+  displayedColumns: string[] = [ 'index','glCode','glDescription','is_verified','is_deleted'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

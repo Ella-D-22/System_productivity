@@ -31,7 +31,7 @@
          <label class="start pull-left">Gl Code</label>
         </div>
         <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" [value]="this.glCode" oninput ="this.value=this.value.toUpperCase()" disabled formControlName="glCode" class="pull-right form-control"/>
+          <input type="text" maxlength = "6" [value]="this.glCode" oninput ="this.value=this.value.toUpperCase()" disabled formControlName="glCode" class="pull-right form-control"/>
         </div>
      </div>           
 </div>
@@ -41,12 +41,15 @@
        <label class="start pull-left">Description</label>
       </div>
       <div class="col-md-6 col-sm-12 form-column">
-        <textarea type="text" formControlName="glDescription" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.glDescription.errors }"></textarea>
+        <textarea type="text" maxlength = "40" formControlName="glDescription" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.glDescription.errors }"></textarea>
       </div>
    </div>  
   </div>
 </div>
     <br />
+    <button class="pull-left" routerLink="../../maintenance"  mat-raised-button color="default" type="button">
+      Back
+    </button>
     <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
       <span
         *ngIf="loading"

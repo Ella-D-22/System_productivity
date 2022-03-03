@@ -83,9 +83,11 @@ export class OverdraftService {
         catchError(this.errorMgmt)
       )
   }
-  getOverdraftByOverdraft(code:any): Observable<any> {
-    let API_URL = `${this.baseURL}/find/by/${code}`;
-    return this.http.get(API_URL)
+
+  getproductBySchemeCode(params:any): Observable<any> {
+    // console.log("Server",params);
+    let API_URL = `${this.baseURL}/find/by/`;
+    return this.http.get(API_URL, { params:params, withCredentials: false })
       .pipe(
         map((res) => {
           return res || {}

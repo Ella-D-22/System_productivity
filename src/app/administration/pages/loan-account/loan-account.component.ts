@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {LoanAccountService} from './loan-account.service'
 
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { FormBuilder, Validators,FormArray,FormGroup, FormControl } from '@angular/forms';
 import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
 
 import {
   MatSnackBar,
@@ -16,6 +17,9 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { GlSubheadLookup2Component } from './lookup/gl-subhead/gl-subhead.component';
+import { BranchComponent } from './lookup/branch/branch.component';
+import { ProductComponent } from './lookup/product/product.component';
 
 
 @Component({
@@ -26,6 +30,8 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class LoanAccountComponent implements OnInit {
   message!: any;
   resData: any;
+
+  dtype!:string
 
   horizontalPosition :MatSnackBarHorizontalPosition = 'end';
   verticalPosition : MatSnackBarVerticalPosition = 'top';
@@ -1636,4 +1642,74 @@ console.log('Error: ', error);
 
 }
 }
+
+glSubheadLookup(): void {
+  const dialogRef = this.dialog.open(GlSubheadLookup2Component, {
+    // height: '400px',
+    // width: '600px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log("Gl Subhead data", result);
+    this.formData.controls.glSubhead.setValue(result.data.glSubheadCode);
+  });
+}
+
+branchSubheadLookup(): void {
+  const dialogRef = this.dialog.open(BranchComponent, {
+    // height: '400px',
+    // width: '600px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log("Branch data", result);
+    this.formData.controls.solCode.setValue(result.data.solCode);
+  });
+}
+
+productLookup(): void {
+  if(this.message.account_type=="Loan"){
+    this.dtype="laa"
+  }
+  else if(this.message.account_type=="Office"){
+    this.dtype="oda"           
+  }
+  else if(this.message.account_type=="Savings"){   
+    this.dtype="sba"         
+  }
+  else if(this.message.account_type=="Overdraft"){
+    this.dtype="oda"            
+  }
+  else if(this.message.account_type=="Current"){  
+    this.dtype="caa"         
+  }
+  else if(this.message.account_type=="Term-Deposit"){ 
+    this.dtype="tda"          
+  }
+  console.log(this.message.account_type)
+  console.log(this.dtype)
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(ProductComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    console.log(result.data);
+    
+    if(this.dtype=="oda"){
+      this.formData.controls.schemeCode.setValue(result.data.oda_scheme_code);
+    }
+    if(this.dtype=="sba"){
+      this.formData.controls.schemeCode.setValue(result.data.sba_scheme_code);
+    }
+    if(this.dtype=="caa"){
+      this.formData.controls.schemeCode.setValue(result.data.caa_scheme_code);
+    }
+    if(this.dtype=="tda"){
+      this.formData.controls.schemeCode.setValue(result.data.tda_scheme_code);
+    }
+    if(this.dtype=="laa"){
+      this.formData.controls.schemeCode.setValue(result.data.laa_scheme_code);
+    }
+  });
+}
+
 }

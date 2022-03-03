@@ -30,19 +30,25 @@
     <div class="col-md-6 col-sm-12">
       <div *ngIf="showOrganizationId" class="form-group">
         <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Event Type Id<span class="warning">*</span></label>
+         <label class="start pull-left">Charge Type Code<span class="warning">*</span></label>
         </div>
         <div class="col-md-6 col-sm-12 form-column ">
-          <input type="text" [value]="this.description" formControlName="eventtype_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.eventtype_code.errors }" />
+          <input type="text" maxlength="6" [value]="this.eventtype_code" oninput ="this.value=this.value.toUpperCase()" formControlName="eventtype_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.eventtype_code.errors }" />
             <mat-icon (click)="eventTypeLookup()">search</mat-icon>
         </div>
-     </div>    
+     </div>  
+     <div *ngIf="showOrganizationId" class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+       <!-- <label class="start pull-left">Event Type Id<span class="warning">*</span></label> -->
+      </div>
+      <div class="col-md-6 col-sm-12 form-column ">
+        <mat-hint>{{this.description}}</mat-hint>
+      </div>
+   </div> 
+
     </div>
   </div>
-    <br />
-    <button class="pull-left"  mat-raised-button color="default" type="submit">
-        Close
-      </button>
+    <br/>
     <button class="pull-right" mat-raised-button color="primary" type="submit">
       <span
         *ngIf="loading"

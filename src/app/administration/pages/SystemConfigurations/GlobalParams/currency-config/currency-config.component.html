@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header  class="breadcrumb">
-    <div>Home/Configuration/Event_id</div>
+    <div>Home/Configuration/Currency</div>
 </mat-card-header>
 <div class="row">
   <div class="col-md-6 col-sm-12">
@@ -31,7 +31,7 @@
      <label class="start pull-left">CCY</label>
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-      <input type="text" formControlName="ccy" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy.errors }" />
+      <input type="text" maxlength = "4" formControlName="ccy" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy.errors }" />
     </div>
  </div>            
 </div>
@@ -41,7 +41,7 @@
      <label class="start pull-left">Country</label>
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-      <input type="text" formControlName="country" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+      <input type="text" maxlength = "30" formControlName="country" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
     </div>
  </div>   
 </div>
@@ -53,23 +53,17 @@
            <label class="start pull-left">CCY Name</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column">
-            <input type="text" formControlName="ccy_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
+            <input type="text" maxlength = "30" formControlName="ccy_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
           </div>
        </div>           
   </div>
   <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Operations</label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column">
-        <mat-checkbox class="example-margin" formControlName="is_verified">Verified.</mat-checkbox>
-        <mat-checkbox class="example-margin" formControlName="is_deleted">Del.</mat-checkbox>
-      </div>
-   </div>  
   </div>
 </div>
   <br />
+   <button class="pull-left" routerLink="../../maintenance"  mat-raised-button color="default" type="button">
+        Back
+      </button>
   <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
     <span
       *ngIf="loading"
