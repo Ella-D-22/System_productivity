@@ -363,10 +363,7 @@ export class CollateralComponent implements OnInit {
                 collateralCode:[this.resData.entity.collateralCode],
                 collateralType:[this.resData.entity.collateralType],
                 description:[this.resData.entity.description],
-                companyCode:[this.resData.entity.companyCode],
-                companyDetails:[this.resData.entity.companyDetails],
-                contactDetails:[this.resData.entity.contactDetails],
-                customerCode:[this.resData.entity.customerCode],
+              
                 faceValue:[this.resData.entity.faceValue],
                 margin:[this.resData.entity.margin],
                 marketValue:[this.resData.entity.marketValue],
@@ -375,8 +372,13 @@ export class CollateralComponent implements OnInit {
                 chargeEventForWithdrawal:[this.resData.entity.chargeEventForWithdrawal],
                 percentageDrawingPower:[this.resData.entity.percentageDrawingPower],
                 percentageLoanToTake:[this.resData.entity.percentageLoanToTake],
+
+               
+                companyDetails:[this.resData.entity.companyDetails],
+                contactDetails:[this.resData.entity.contactDetails],
                 shareCapital:[this.resData.entity.shareCapital],
                 sharesIssued:[this.resData.entity.sharesIssued],
+
                 // deletedBy:[this.resData.entity.deletedBy],
                 // deletedTime:[this.resData.entity.deletedTime],
                 // deletedFlag:[this.resData.entity.deletedFlag],
