@@ -16,6 +16,7 @@ import { EventIdLookupComponent } from '../SystemConfigurations/ChargesParams/ev
 export class CollateralComponent implements OnInit {
  
   subscription !:Subscription
+  deleting = false;
   isEnabled = true;
   isDisabled = false;
   submitted = false;
@@ -111,28 +112,31 @@ export class CollateralComponent implements OnInit {
   get f(){return this.formData.controls}
   
   collateralTypeArray : any = [
-    'Vehicle', 'consumer_goods','equipment', 'inventory','farm products'
+    'Vehicle and Machineries', 'Immovable Properties','Stock', 'Shares','Term Deposits'
+  ]
+
+  submissionFreqArray: any =[
+    'Daily', 'Weekly','Monthly', 'Yearly', 'None'
   ]
   
 
   formData = this.formBuilder.group({
+
+    // General detalails for collaterals
     collateralType : ['', [Validators.required]],
     collateralCode :['', [Validators.required, Validators.maxLength(4)]],
     description :['', [Validators.required]],
-    companyCode:['', Validators.maxLength(4)],
-    companyDetails:[''],
-    contactDetails:[''],
-    customerCode:[''],
-    faceValue:['',Validators.required],
-    margin:['',Validators.required],
-    marketValue:[ Validators.required],
+    ceilingLimit:[''],
+    loanValue:['',Validators.required],
+    marginPercent:['',Validators.required],
+    marketValue:['', Validators.required],
+    currencyCollateral:[''],
     otherDetails:[''],
     chargeEventForLodging:[''],
     chargeEventForWithdrawal:[''],
     percentageDrawingPower:[''],
     percentageLoanToTake:[''],
-    shareCapital:[''],
-    sharesIssued:[''],
+    lastEvaluationDate:[''],
     deletedBy:['Ann'],
     deletedTime:[new Date()],
     deletedFlag:['N'],
@@ -144,6 +148,115 @@ export class CollateralComponent implements OnInit {
     postedFlag:['Y'],
     modifiedBy:['Ann'],
     modifiedTime:[new Date()],
+
+    //Particulars details for collateral
+    //1. Vehicle and Machineries
+    yearofManufacture:[''],
+    dateofPurchase:[''],
+    registrationNumber:[''],
+    chasisNumber:[''],
+    engineNo:[''],
+    registeredownerName:[''],
+    model:[''],
+    manufacture:[''],
+    machineNo:[''],
+
+    //2.Immovable Properties
+    propertyDocumentNo:[''],
+    purchaseDate:[''],
+    builtArea:[''],
+    landArea:[''],
+    unitMeasurement:[''],
+    propertyAddress:[''],
+    leased:[''],
+    leasedExpiryDate:[''],
+    ageBuilding:[''],
+
+    //3.Stock
+    lodgedDate:[''],
+    collateralValue:[''],
+    frequencyforSubmission:[''],
+    applypenalInterest:[''],
+    reviewDate:[''],
+    dueDate:[''],
+    withdrawnDate:[''],
+
+    //4.Term Deposits
+    depositAccountNo:[''],
+    denominationsNo:[''],
+    fullBenefit:[''],
+    apportionedValue:[''],
+    lienAmount:[''],
+
+    //5.Shares
+    companyDetails:[''],
+    sharesCapital:[''],
+    nosharesIsssued:[''],
+    contactDetails:[''],
+
+    //Insurance Details
+    insuranceType:[''],
+    policyNo:[''],
+    policyAmount:[''],
+    insurerDetails:[''],
+    risk_cover_start_date:[''],
+    risk_cover_end_date:[''],
+    last_premium_paid_date:[''],
+    premiumAmount:[''],
+    frequency:[''],
+    itemsInsured:[''],
+    notes:[''],
+
+    //receipt and payment
+    name:[''],
+    city:[''],
+    address:[''],
+    state:[''],
+    postal_code:[''],
+    receipt_type:[''],
+    receipt_amount:[''],
+    payment_type:[''],
+    payment_amount:[''],
+    due_date:[''],
+    paid_received_date:[''],
+    date_from:[''],
+    to_date:[''],
+    proof_verified_date:[''],
+    mode_of_pay:[''],
+    remarks:[''],
+
+    //inspection details
+    inspection_type:[''],
+    insp_address:[''],
+    insp_city:[''],
+    insp_state:[''],
+    insp_postal_code:[''],
+    insp_telephone_no:[''],
+    due_date_for_visit:[''],
+    date_of_visit:[''],
+    inspected_value:[''],
+    inspection_emp_id:[''],
+    insp_remarks:[''],
+
+
+    //sales notes for Tradable Securities
+
+    brokerName:[''],
+    sent_for_sale_on:[''],
+    sales_due_date:[''],
+    sales_review_date:[''],
+    proceeds_received_on:[''],
+    stock_exchange:[''],
+    expected_min_price:[''],
+    sales_proceed_received:[''],
+    sales_notes:[''],
+   
+    //fees
+    percentage_amount_collected:[''],
+    collected_amount:['']
+
+
+
     
 
   })
@@ -153,20 +266,121 @@ export class CollateralComponent implements OnInit {
     this.formData.controls['collateralCode'].disable();
     this.formData.controls['collateralType'].disable();
     this.formData.controls['description'].disable();
-    this.formData.controls['companyCode'].disable();
-    this.formData.controls['companyDetails'].disable();
-    this.formData.controls['contactDetails'].disable();
-    this.formData.controls['customerCode'].disable();
-    this.formData.controls['faceValue'].disable();
-    this.formData.controls['margin'].disable();
+    this.formData.controls['loanValue'].disable();
+    this.formData.controls['marginPercent'].disable();
     this.formData.controls['marketValue'].disable();
     this.formData.controls['otherDetails'].disable()
     this.formData.controls['chargeEventForLodging'].disable();
     this.formData.controls['chargeEventForWithdrawal'].disable();
     this.formData.controls['percentageDrawingPower'].disable();
     this.formData.controls['percentageLoanToTake'].disable();
-    this.formData.controls['shareCapital'].disable();
-    this.formData.controls['sharesIssued'].disable();
+    this.formData.controls['lastEvaluationDate'].disable();
+    this.formData.controls['ceilingLimit'].disable();
+    this.formData.controls['currencyCollateral'].disable();
+     //1. Vehicle and Machineries
+     this.formData.controls['yearofManufacture'].disable();
+     this.formData.controls['dateofPurchase'].disable();
+     this.formData.controls['registrationNumber'].disable();
+     this.formData.controls['chasisNumber'].disable();
+     this.formData.controls['engineNo'].disable();
+     this.formData.controls['registeredownerName'].disable();
+     this.formData.controls['model'].disable();
+     this.formData.controls['manufacture'].disable();
+     this.formData.controls['machineNo'].disable();
+
+         //2.Immovable Properties
+    this.formData.controls['propertyDocumentNo'].disable();
+    this.formData.controls['purchaseDate'].disable();
+    this.formData.controls['builtArea'].disable();
+    this.formData.controls['landArea'].disable();
+    this.formData.controls['unitMeasurement'].disable();
+    this.formData.controls['propertyAddress'].disable();
+    this.formData.controls['leased'].disable();
+    this.formData.controls['leasedExpiryDate'].disable();
+    this.formData.controls['ageBuilding'].disable();
+
+     //3.Stock
+     this.formData.controls['lodgedDate'].disable();
+     this.formData.controls['collateralValue'].disable();
+     this.formData.controls['frequencyforSubmission'].disable();
+     this.formData.controls['applypenalInterest'].disable();
+     this.formData.controls['reviewDate'].disable();
+     this.formData.controls['dueDate'].disable();
+     this.formData.controls['withdrawnDate'].disable();
+    //4.Term Deposits
+    this.formData.controls['depositAccountNo'].disable();
+    this.formData.controls['denominationsNo'].disable();
+    this.formData.controls['fullBenefit'].disable();
+    this.formData.controls['apportionedValue'].disable();
+    this.formData.controls['lienAmount'].disable();
+
+    //5.Shares
+    this.formData.controls['companyDetails:'].disable();
+    this.formData.controls['sharesCapital'].disable();
+    this.formData.controls['nosharesIsssued'].disable();
+    this.formData.controls['contactDetails'].disable();
+     //Insurance Details
+    this.formData.controls['insuranceType'].disable();
+    this.formData.controls['policyNo'].disable();
+    this.formData.controls['policyAmount'].disable();
+    this.formData.controls['insurerDetails'].disable();
+    this.formData.controls['risk_cover_start_date'].disable();
+    this.formData.controls['risk_cover_end_date'].disable();
+    this.formData.controls['last_premium_paid_date'].disable();
+    this.formData.controls['premiumAmount'].disable();
+    this.formData.controls['frequency'].disable();
+    this.formData.controls['itemsInsured'].disable();
+    this.formData.controls['notes'].disable();
+ 
+     //receipt and payment
+    this.formData.controls['name'].disable();
+    this.formData.controls['city'].disable();
+    this.formData.controls['address'].disable();
+    this.formData.controls['state'].disable();
+    this.formData.controls['postal_code'].disable();
+    this.formData.controls['receipt_type'].disable();
+    this.formData.controls['receipt_amount'].disable();
+    this.formData.controls['payment_type'].disable();
+    this.formData.controls['payment_amount'].disable();
+    this.formData.controls['due_date'].disable();
+    this.formData.controls['paid_received_date'].disable();
+    this.formData.controls['date_from'].disable();
+    this.formData.controls['to_date'].disable();
+    this.formData.controls['proof_verified_date'].disable();
+    this.formData.controls['mode_of_pay'].disable();
+    this.formData.controls['remarks'].disable();
+ 
+     //inspection details
+    this.formData.controls['inspection_type'].disable();
+    this.formData.controls['insp_address'].disable();
+    this.formData.controls['insp_city'].disable();
+    this.formData.controls['insp_state'].disable();
+    this.formData.controls['insp_postal_code'].disable();
+    this.formData.controls['insp_telephone_no'].disable();
+    this.formData.controls['due_date_for_visit'].disable();
+    this.formData.controls['date_of_visit'].disable();
+    this.formData.controls['inspected_value'].disable();
+    this.formData.controls['inspection_emp_id'].disable();
+    this.formData.controls['insp_remarks'].disable();
+ 
+ 
+     //sales notes for Tradable Securities
+ 
+    this.formData.controls['brokerName'].disable();
+    this.formData.controls['sent_for_sale_on'].disable();
+    this.formData.controls['sales_due_date'].disable();
+    this.formData.controls['sales_review_date'].disable();
+    this.formData.controls['proceeds_received_on'].disable();
+    this.formData.controls['stock_exchange'].disable();
+    this.formData.controls['expected_min_price'].disable();
+    this.formData.controls['sales_proceed_received'].disable();
+    this.formData.controls['sales_notes'].disable();
+    
+     //fees
+    this.formData.controls['percentage_amount_collected'].disable();
+    this.formData.controls['collected_amount'].disable();
+ 
+ 
 
   
 
@@ -183,7 +397,6 @@ export class CollateralComponent implements OnInit {
                   companyCode:['', [Validators.required, Validators.maxLength(6)]],
                   contactDetails:[''],
                   companyDetails:[''],
-                  customerCode:[''],
                   faceValue:['', [Validators.required]],
                   margin:['', [Validators.required]],
                   marketValue:[, [Validators.required]],
@@ -206,6 +419,66 @@ export class CollateralComponent implements OnInit {
                   modifiedBy:['Ann'],
                   modifiedTime:[new Date()],
                   // sn:[0]
+                   //Insurance Details
+                  insuranceType:[''],
+                  policyNo:[''],
+                  policyAmount:[''],
+                  insurerDetails:[''],
+                  risk_cover_start_date:[''],
+                  risk_cover_end_date:[''],
+                  last_premium_paid_date:[''],
+                  premiumAmount:[''],
+                  frequency:[''],
+                  itemsInsured:[''],
+                  notes:[''],
+
+                  //receipt and payment
+                  name:[''],
+                  city:[''],
+                  address:[''],
+                  state:[''],
+                  postal_code:[''],
+                  receipt_type:[''],
+                  receipt_amount:[''],
+                  payment_type:[''],
+                  payment_amount:[''],
+                  due_date:[''],
+                  paid_received_date:[''],
+                  date_from:[''],
+                  to_date:[''],
+                  proof_verified_date:[''],
+                  mode_of_pay:[''],
+                  remarks:[''],
+
+                  //inspection details
+                  inspection_type:[''],
+                  insp_address:[''],
+                  insp_city:[''],
+                  insp_state:[''],
+                  insp_postal_code:[''],
+                  insp_telephone_no:[''],
+                  due_date_for_visit:[''],
+                  date_of_visit:[''],
+                  inspected_value:[''],
+                  inspection_emp_id:[''],
+                  insp_remarks:[''],
+
+
+                  //sales notes for Tradable Securities
+
+                  brokerName:[''],
+                  sent_for_sale_on:[''],
+                  sales_due_date:[''],
+                  sales_review_date:[''],
+                  proceeds_received_on:[''],
+                  stock_exchange:[''],
+                  expected_min_price:[''],
+                  sales_proceed_received:[''],
+                  sales_notes:[''],
+                
+                  //fees
+                  percentage_amount_collected:[''],
+                  collected_amount:['']
             
                 });
               
@@ -227,10 +500,7 @@ export class CollateralComponent implements OnInit {
                 collateralCode:[this.resData.entity.collateralCode],
                 collateralType:[this.resData.entity.collateralType],
                 description:[this.resData.entity.description],
-                companyCode:[this.resData.entity.companyCode],
-                companyDetails:[this.resData.entity.companyDetails],
-                contactDetails:[this.resData.entity.contactDetails],
-                customerCode:[this.resData.entity.customerCode],
+              
                 faceValue:[this.resData.entity.faceValue],
                 margin:[this.resData.entity.margin],
                 marketValue:[this.resData.entity.marketValue],
@@ -239,21 +509,78 @@ export class CollateralComponent implements OnInit {
                 chargeEventForWithdrawal:[this.resData.entity.chargeEventForWithdrawal],
                 percentageDrawingPower:[this.resData.entity.percentageDrawingPower],
                 percentageLoanToTake:[this.resData.entity.percentageLoanToTake],
+
+               
+                companyDetails:[this.resData.entity.companyDetails],
+                contactDetails:[this.resData.entity.contactDetails],
                 shareCapital:[this.resData.entity.shareCapital],
                 sharesIssued:[this.resData.entity.sharesIssued],
-                // deletedBy:[this.resData.entity.deletedBy],
-                // deletedTime:[this.resData.entity.deletedTime],
-                // deletedFlag:[this.resData.entity.deletedFlag],
-                // verifiedBy:[this.resData.entity.verifiedBy],
-                // verifiedTime:[this.resData.entity.verifiedTime],
-                // verifiedFlag:[this.resData.entity.verifiedFlag],
-                // postedBy:[this.resData.entity.postedBy],
-                // postedTime:[this.resData.entity.postedTime],
-                // postedFlag:[this.resData.entity.postedFlag],
-                // modifiedBy:[this.resData.entity.modifiedBy],
-                // modifiedTime:[this.resData.entity.modifiedTime],
+
+              
+
+                 
+                  //Insurance Details
+                  insuranceType:[this.resData.entity.insuranceType],
+                  policyNo:[''],
+                  policyAmount:[''],
+                  insurerDetails:[''],
+                  risk_cover_start_date:[''],
+                  risk_cover_end_date:[''],
+                  last_premium_paid_date:[''],
+                  premiumAmount:[''],
+                  frequency:[''],
+                  itemsInsured:[''],
+                  notes:[''],
+
+                  //receipt and payment
+                  name:[''],
+                  city:[''],
+                  address:[''],
+                  state:[''],
+                  postal_code:[''],
+                  receipt_type:[''],
+                  receipt_amount:[''],
+                  payment_type:[''],
+                  payment_amount:[''],
+                  due_date:[''],
+                  paid_received_date:[''],
+                  date_from:[''],
+                  to_date:[''],
+                  proof_verified_date:[''],
+                  mode_of_pay:[''],
+                  remarks:[''],
+
+                  //inspection details
+                  inspection_type:[''],
+                  insp_address:[''],
+                  insp_city:[''],
+                  insp_state:[''],
+                  insp_postal_code:[''],
+                  insp_telephone_no:[''],
+                  due_date_for_visit:[''],
+                  date_of_visit:[''],
+                  inspected_value:[''],
+                  inspection_emp_id:[''],
+                  insp_remarks:[''],
+
+
+                  //sales notes for Tradable Securities
+
+                  brokerName:[''],
+                  sent_for_sale_on:[''],
+                  sales_due_date:[''],
+                  sales_review_date:[''],
+                  proceeds_received_on:[''],
+                  stock_exchange:[''],
+                  expected_min_price:[''],
+                  sales_proceed_received:[''],
+                  sales_notes:[''],
+
+                  //fees
+                  percentage_amount_collected:[''],
+                  collected_amount:[''],
                 
-                sn:[this.resData.entity.sn]
+                  sn:[this.resData.entity.sn]
 
 
               });
@@ -301,6 +628,67 @@ export class CollateralComponent implements OnInit {
                   postedFlag:[this.resData.entity.postedFlag],
                   modifiedBy:['Ann'],
                   modifiedTime:[new Date()],
+                  //Insurance Details
+                  insuranceType:[''],
+                  policyNo:[''],
+                  policyAmount:[''],
+                  insurerDetails:[''],
+                  risk_cover_start_date:[''],
+                  risk_cover_end_date:[''],
+                  last_premium_paid_date:[''],
+                  premiumAmount:[''],
+                  frequency:[''],
+                  itemsInsured:[''],
+                  notes:[''],
+
+                  //receipt and payment
+                  name:[''],
+                  city:[''],
+                  address:[''],
+                  state:[''],
+                  postal_code:[''],
+                  receipt_type:[''],
+                  receipt_amount:[''],
+                  payment_type:[''],
+                  payment_amount:[''],
+                  due_date:[''],
+                  paid_received_date:[''],
+                  date_from:[''],
+                  to_date:[''],
+                  proof_verified_date:[''],
+                  mode_of_pay:[''],
+                  remarks:[''],
+
+                  //inspection details
+                  inspection_type:[''],
+                  insp_address:[''],
+                  insp_city:[''],
+                  insp_state:[''],
+                  insp_postal_code:[''],
+                  insp_telephone_no:[''],
+                  due_date_for_visit:[''],
+                  date_of_visit:[''],
+                  inspected_value:[''],
+                  inspection_emp_id:[''],
+                  insp_remarks:[''],
+
+
+                  //sales notes for Tradable Securities
+
+                  brokerName:[''],
+                  sent_for_sale_on:[''],
+                  sales_due_date:[''],
+                  sales_review_date:[''],
+                  proceeds_received_on:[''],
+                  stock_exchange:[''],
+                  expected_min_price:[''],
+                  sales_proceed_received:[''],
+                  sales_notes:[''],
+
+                  //fees
+                  percentage_amount_collected:[''],
+                  collected_amount:[''],
+
                   sn:[this.resData.entity.sn]
   
   
@@ -348,6 +736,67 @@ export class CollateralComponent implements OnInit {
                   postedFlag:[this.resData.entity.postedFlag],
                   modifiedBy:[this.resData.entity.modifiedBy],
                   modifiedTime:[this.resData.entity.modifiedTime],
+
+                   //Insurance Details
+                  insuranceType:[''],
+                  policyNo:[''],
+                  policyAmount:[''],
+                  insurerDetails:[''],
+                  risk_cover_start_date:[''],
+                  risk_cover_end_date:[''],
+                  last_premium_paid_date:[''],
+                  premiumAmount:[''],
+                  frequency:[''],
+                  itemsInsured:[''],
+                  notes:[''],
+
+                  //receipt and payment
+                  name:[''],
+                  city:[''],
+                  address:[''],
+                  state:[''],
+                  postal_code:[''],
+                  receipt_type:[''],
+                  receipt_amount:[''],
+                  payment_type:[''],
+                  payment_amount:[''],
+                  due_date:[''],
+                  paid_received_date:[''],
+                  date_from:[''],
+                  to_date:[''],
+                  proof_verified_date:[''],
+                  mode_of_pay:[''],
+                  remarks:[''],
+
+                  //inspection details
+                  inspection_type:[''],
+                  insp_address:[''],
+                  insp_city:[''],
+                  insp_state:[''],
+                  insp_postal_code:[''],
+                  insp_telephone_no:[''],
+                  due_date_for_visit:[''],
+                  date_of_visit:[''],
+                  inspected_value:[''],
+                  inspection_emp_id:[''],
+                  insp_remarks:[''],
+
+
+                  //sales notes for Tradable Securities
+
+                  brokerName:[''],
+                  sent_for_sale_on:[''],
+                  sales_due_date:[''],
+                  sales_review_date:[''],
+                  proceeds_received_on:[''],
+                  stock_exchange:[''],
+                  expected_min_price:[''],
+                  sales_proceed_received:[''],
+                  sales_notes:[''],
+                
+                  //fees
+                  percentage_amount_collected:[''],
+                  collected_amount:[''],
                   sn:[this.resData.entity.sn]
   
   
