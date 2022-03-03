@@ -28,7 +28,7 @@ export class CurrentSchemeLookupComponent implements OnInit {
          (data) =>{   
            console.log(data);
            this.results = data;
-           console.log(data);
+           console.log(this.results);
            this.dataSource = new MatTableDataSource(this.results)
            this.dataSource.paginator = this.paginator;
            this.dataSource.sort = this.sort;  
@@ -50,8 +50,6 @@ export class CurrentSchemeLookupComponent implements OnInit {
        this.dataSource.paginator.firstPage();
      }
    }
- 
- 
    onSelect(data:any){
      this.dialogRef.close({ event: 'close', data:data });
    }

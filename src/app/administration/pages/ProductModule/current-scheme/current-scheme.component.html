@@ -190,8 +190,8 @@
                     <label class="start pull-left">Normal Int. Receivable A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="caa_normal_int_receivable_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+                    <input type="text" [value]="this.caa_normal_int_receivable_ac" formControlName="caa_normal_int_receivable_ac" class="pull-right form-control"/>
+                     <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
                   </div>
                 </div>
               </div>
@@ -205,8 +205,8 @@
                     <label class="start pull-left">Penal Int. Receivable A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input type="text" formControlName="caa_penal_int_receivable_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+                    <input type="text" [value]="this.caa_penal_int_receivable_ac" formControlName="caa_penal_int_receivable_ac" class="pull-right form-control"/>
+                     <mat-icon *ngIf="isEnabled" (click)="penalIntRecAcLookup()">search</mat-icon>
                   </div>
                 </div>
               </div>
@@ -216,8 +216,9 @@
                     <label class="start pull-left">Normal Int. Received A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="caa_normal_int_received_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+                   
+                    <input type="text" [value]="this.caa_normal_int_received_ac" formControlName="caa_normal_int_received_ac" class="pull-right form-control"/>
+                     <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
                   </div>
                 </div>
               </div>
@@ -229,8 +230,8 @@
                     <label class="start pull-left">Penal Int. Received A/c.<span class="warning">*</span></label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input type="text" formControlName="caa_penal_int_received_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+                    <input type="text" [value]="this.caa_penal_int_received_ac" formControlName="caa_penal_int_received_ac" class="pull-right form-control"/>
+                     <mat-icon *ngIf="isEnabled" (click)="penalIntReceivedaccountLookup()">search</mat-icon>
                   </div>
                 </div>
               </div>
@@ -240,8 +241,8 @@
                     <label class="start pull-left">Advance Int. A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="caa_advance_int_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="accountLookup()">search</mat-icon>
+                    <input type="text" [value]="this.caa_advance_int_ac" formControlName="caa_advance_int_ac" class="pull-right form-control"/>
+                     <mat-icon *ngIf="isEnabled" (click)="advanceIntAcLookup()">search</mat-icon>
                   </div>
                 </div>
               </div>
@@ -308,7 +309,7 @@
                         <option value="" disabled>-- Date --</option>
                         <option *ngFor="let flag of datesArray" [value]="flag">{{ flag }}</option>
                       </select>
-                      <input type="text" formControlName="caa_int_cal_freq_dr_holiday" class="pull-right-dates-3 form-control" placeholder="Holiday"/>
+                      <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="caa_int_cal_freq_dr_holiday" class="pull-right-dates-3 form-control" placeholder="Holiday"/>
       
                   </div>
                 </div>
@@ -505,7 +506,7 @@
                 <label class="start pull-left">Gl Subhead<span class="warning">*</span></label>
                </div>
                <div class="col-md-6 col-sm-12 form-column ">
-                <input [value]="this.gl_subhead_description" type="text" formControlName="caa_gl_subhead" class="pull-right form-control"/>
+                <input [value]="this.gl_subhead_description" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="caa_gl_subhead" class="pull-right form-control"/>
                 <mat-icon (click)="glSubheadLookup()">search</mat-icon>
                </div>
             </div> 
@@ -661,7 +662,7 @@
                    <label class="start pull-left">Demand Flow ID</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="caa_fee_demand_flow" class="pull-right form-control"/>
+                    <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="caa_fee_demand_flow" class="pull-right form-control"/>
                   </div>
                </div>            
           </div>
@@ -674,7 +675,7 @@
                  <label class="start pull-left">Dr.Placeholder<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <input type="text" formControlName="caa_fee_dr_placeholder" class="pull-right form-control" />
+                 <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="caa_fee_dr_placeholder" class="pull-right form-control" />
                 </div>
              </div> 
             </div>
@@ -684,7 +685,7 @@
                    <label class="start pull-left">Cr.Placeholder</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="caa_fee_cr_placeholder" class="pull-right form-control"/>
+                    <input type="text"  oninput ="this.value=this.value.toUpperCase()" formControlName="caa_fee_cr_placeholder" class="pull-right form-control"/>
                   </div>
                </div>            
           </div>
@@ -697,7 +698,7 @@
                  <label class="start pull-left">Max.No.Of Assesments<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <input type="text" formControlName="caa_fee_max_no_of_assesment" class="pull-right form-control"/>
+                 <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="caa_fee_max_no_of_assesment" class="pull-right form-control"/>
                 </div>
              </div> 
             </div>

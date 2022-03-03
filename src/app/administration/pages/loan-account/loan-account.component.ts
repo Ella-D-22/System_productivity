@@ -1693,6 +1693,7 @@ productLookup(): void {
   const cdialogRef = this.dialog.open(ProductComponent,dconfig);
   cdialogRef.afterClosed().subscribe((result) => {
     console.log(result.data);
+    
     if(this.dtype=="oda"){
       this.formData.controls.schemeCode.setValue(result.data.oda_scheme_code);
     }
@@ -1708,7 +1709,6 @@ productLookup(): void {
     if(this.dtype=="laa"){
       this.formData.controls.schemeCode.setValue(result.data.laa_scheme_code);
     }
-  
   });
 }
 
