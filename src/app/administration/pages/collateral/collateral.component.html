@@ -20,7 +20,7 @@
     <div class="container-fluid">
         <form action="" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
             <mat-tab-group mat-align-tabs="center">
-                <mat-tab class="mat-tab" label="Collateral">
+                <mat-tab class="mat-tab" label="General Details">
                     <br>
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
@@ -54,26 +54,28 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left" required maxLength="6">Collateral Code<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left" required maxLength="6">Loan to Value(Ksh)<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="collateralCode"  class="pull-right form-control" readonly>
+                                    <input type="text" formControlName="loanValue"  class="pull-right form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Face Value(Ksh)<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Last Evaluation Date<span class="warning">*</span></label>
                                 </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="faceValue" class="pull-right form-control">
-                                </div>
+                                <div class="col-md-6 col-sm-12 form-column ">
+                                    <input  [matDatepicker]="zpicker" formControlName="lastEvaluationDate" class="form-control" />
+                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="zpicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #zpicker></mat-datepicker>
+                                    </div>
                             </div>
                         </div>
                     </div>
                     <br>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
@@ -94,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <br>
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
@@ -153,138 +155,344 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Other Details<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Market Value<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="marketValue" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Margin Percent<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="marginPercent" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="">Other Details<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="otherDetails" class="pull-right form-control">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Margin<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="margin" class="pull-right form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="">Contact Details<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="contactDetails" class="pull-right form-control">
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </mat-tab>
-                <mat-tab class="mat-tab" label="Company">
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Company Code<span class="warning">*</span></label>
+               <mat-tab class="mat-tab" label="Particulars">
+                        <br>
+                        <h3>Vehicles and Machineries</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Year of Manufacture<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="yearofManufacture" class="pull-right form-control">
+                                       
+                                    </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="companyCode" class="pull-right form-control">
-                                   
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Date of Purchase<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input  [matDatepicker]="kpicker" formControlName="dateofPurchase" class="form-control" />
+                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="kpicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #kpicker></mat-datepicker>
+                                        </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Company Details<span class="warning">*</span></label>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Manufacture<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="manufacture" class="pull-right form-control">
+                                    </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="companyDetails" class="pull-right form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Model<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="model" class="pull-right form-control">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Share Capital<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="shareCapital" class="pull-right form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Shares Issued<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="sharesIssued" class="pull-right form-control">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Machine No<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="machineNo" class="pull-right form-control">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-  
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Engine No<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="engineNo" class="pull-right form-control">
+                                    </div>
+                                </div>
 
-                </mat-tab>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Registered Owner Name<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="registeredownerName" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Chasis Number<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="chasisNumber" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Registration Number<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="registrationNumber" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <mat-divider></mat-divider>
+                        <h3>Immovable Properties</h3>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Date of Purchase<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input  [matDatepicker]="lpicker" formControlName="purchaseDate" class="form-control" />
+                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="lpicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #lpicker></mat-datepicker>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Property Document No.<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="propertyDocumentNo" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Built Area<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="builtArea" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Land Area<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="landArea" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Unit Measurement<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="unitMeasurement" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Property Address<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="propertyAddress" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Age Building<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="ageBuilding" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Leased<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="leased">
+                                          <mat-radio-button value="Yes">Yes.</mat-radio-button>
+                                          <mat-radio-button value="No">No. </mat-radio-button>
+                                        </mat-radio-group>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Leased Expiry date<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input  [matDatepicker]="mpicker" formControlName="leasedExpiryDate" class="form-control" />
+                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="mpicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #mpicker></mat-datepicker>
+                                        </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <mat-divider></mat-divider>
+                        <!-- Shares Details -->
+                        <h3>Shares</h3>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Company Details<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="companyDetails" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Shares Capital<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="sharesCapital" class="pull-right form-control">
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Number of Shares Issued<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="nosharesIsssued" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Contact Details<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="contactDetails" class="pull-right form-control">
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <br>
+                        <h3>Stocks</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Collateral Value<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column ">
+                                        <input type="text" formControlName="collateralValue" class="pull-right form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <label for="" class="start pull-left">Penal Interest<span class="warning">*</span></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 form-column">
+                                        <input type="text" formControlName="applypenalInterest" class="pull-right form-control">
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                   
+               </mat-tab>
             </mat-tab-group>
-              <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Confirm</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                        <p>Do you wish to delete the data ?</p>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                        
-                    <div class="row mt-4" > 
-                        <div class="col-md-1 offset-md-9">
-                        <button mat-raised-button color="warn" type="reset">
-                            Reset
-                            </button>
-                        </div>
-                        <div class="col-md-1">
-                        <button *ngIf="this.function_type != 'D-Delete'" mat-raised-button color="primary" type="submit">
-                            <span
-                
-                            ></span>
-                            Submit
-                            </button>
-                            <button *ngIf="this.function_type == 'D-Delete'" mat-raised-button color="primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
-                                <span
-                    
-                                ></span>
-                                Delete
-                                </button>
-                               
-                        </div>
-                    </div>
-                </div>
+            
         </form>
 
     </div>

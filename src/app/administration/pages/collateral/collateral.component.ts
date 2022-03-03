@@ -117,23 +117,22 @@ export class CollateralComponent implements OnInit {
   
 
   formData = this.formBuilder.group({
+
+    // General detalails for collaterals
     collateralType : ['', [Validators.required]],
     collateralCode :['', [Validators.required, Validators.maxLength(4)]],
     description :['', [Validators.required]],
-    companyCode:['', Validators.maxLength(4)],
-    companyDetails:[''],
-    contactDetails:[''],
-    customerCode:[''],
-    faceValue:['',Validators.required],
-    margin:['',Validators.required],
-    marketValue:[ Validators.required],
+    ceilingLimit:[''],
+    loanValue:['',Validators.required],
+    marginPercent:['',Validators.required],
+    marketValue:['', Validators.required],
+    currencyCollateral:[''],
     otherDetails:[''],
     chargeEventForLodging:[''],
     chargeEventForWithdrawal:[''],
     percentageDrawingPower:[''],
     percentageLoanToTake:[''],
-    shareCapital:[''],
-    sharesIssued:[''],
+    lastEvaluationDate:[''],
     deletedBy:['Ann'],
     deletedTime:[new Date()],
     deletedFlag:['N'],
@@ -145,6 +144,51 @@ export class CollateralComponent implements OnInit {
     postedFlag:['Y'],
     modifiedBy:['Ann'],
     modifiedTime:[new Date()],
+
+    //Particulars details for collateral
+    //1. Vehicle and Machineries
+    yearofManufacture:[''],
+    dateofPurchase:[''],
+    registrationNumber:[''],
+    chasisNumber:[''],
+    engineNo:[''],
+    registeredownerName:[''],
+    model:[''],
+    manufacture:[''],
+    machineNo:[''],
+
+    //2.Immovable Properties
+    propertyDocumentNo:[''],
+    purchaseDate:[''],
+    builtArea:[''],
+    landArea:[''],
+    unitMeasurement:[''],
+    propertyAddress:[''],
+    leased:[''],
+    leasedExpiryDate:[''],
+    ageBuilding:[''],
+
+    //3.Stock
+    lodgedDate:[''],
+    collateralValue:[''],
+    frequencyforSubmission:[''],
+    applypenalInterest:[''],
+    reviewDate:[''],
+    dueDate:[''],
+    withdrawnDate:[''],
+
+    //4.Term Deposits
+    depositAccountNo:[''],
+    denominationsNo:[''],
+    fullBenefit:[''],
+    apportionedValue:[''],
+    lienAmount:[''],
+
+    //5.Shares
+    companyDetails:[''],
+    sharesCapital:[''],
+    nosharesIsssued:[''],
+    contactDetails:[''],
     
 
   })
@@ -154,20 +198,59 @@ export class CollateralComponent implements OnInit {
     this.formData.controls['collateralCode'].disable();
     this.formData.controls['collateralType'].disable();
     this.formData.controls['description'].disable();
-    this.formData.controls['companyCode'].disable();
-    this.formData.controls['companyDetails'].disable();
-    this.formData.controls['contactDetails'].disable();
-    this.formData.controls['customerCode'].disable();
-    this.formData.controls['faceValue'].disable();
-    this.formData.controls['margin'].disable();
+    this.formData.controls['loanValue'].disable();
+    this.formData.controls['marginPercent'].disable();
     this.formData.controls['marketValue'].disable();
     this.formData.controls['otherDetails'].disable()
     this.formData.controls['chargeEventForLodging'].disable();
     this.formData.controls['chargeEventForWithdrawal'].disable();
     this.formData.controls['percentageDrawingPower'].disable();
     this.formData.controls['percentageLoanToTake'].disable();
-    this.formData.controls['shareCapital'].disable();
-    this.formData.controls['sharesIssued'].disable();
+    this.formData.controls['lastEvaluationDate'].disable();
+    this.formData.controls['ceilingLimit'].disable();
+    this.formData.controls['currencyCollateral'].disable();
+     //1. Vehicle and Machineries
+     this.formData.controls['yearofManufacture'].disable();
+     this.formData.controls['dateofPurchase'].disable();
+     this.formData.controls['registrationNumber'].disable();
+     this.formData.controls['chasisNumber'].disable();
+     this.formData.controls['engineNo'].disable();
+     this.formData.controls['registeredownerName'].disable();
+     this.formData.controls['model'].disable();
+     this.formData.controls['manufacture'].disable();
+     this.formData.controls['machineNo'].disable();
+
+         //2.Immovable Properties
+    this.formData.controls['propertyDocumentNo'].disable();
+    this.formData.controls['purchaseDate'].disable();
+    this.formData.controls['builtArea'].disable();
+    this.formData.controls['landArea'].disable();
+    this.formData.controls['unitMeasurement'].disable();
+    this.formData.controls['propertyAddress'].disable();
+    this.formData.controls['leased'].disable();
+    this.formData.controls['leasedExpiryDate'].disable();
+    this.formData.controls['ageBuilding'].disable();
+
+     //3.Stock
+     this.formData.controls['lodgedDate'].disable();
+     this.formData.controls['collateralValue'].disable();
+     this.formData.controls['frequencyforSubmission'].disable();
+     this.formData.controls['applypenalInterest'].disable();
+     this.formData.controls['reviewDate'].disable();
+     this.formData.controls['dueDate'].disable();
+     this.formData.controls['withdrawnDate'].disable();
+    //4.Term Deposits
+    this.formData.controls['depositAccountNo'].disable();
+    this.formData.controls['denominationsNo'].disable();
+    this.formData.controls['fullBenefit'].disable();
+    this.formData.controls['apportionedValue'].disable();
+    this.formData.controls['lienAmount'].disable();
+
+    //5.Shares
+    this.formData.controls['companyDetails:'].disable();
+    this.formData.controls['sharesCapital'].disable();
+    this.formData.controls['nosharesIsssued'].disable();
+    this.formData.controls['contactDetails'].disable()
 
   
 
