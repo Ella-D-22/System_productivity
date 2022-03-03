@@ -397,7 +397,6 @@ export class CollateralComponent implements OnInit {
                   companyCode:['', [Validators.required, Validators.maxLength(6)]],
                   contactDetails:[''],
                   companyDetails:[''],
-                  customerCode:[''],
                   faceValue:['', [Validators.required]],
                   margin:['', [Validators.required]],
                   marketValue:[, [Validators.required]],
@@ -521,7 +520,7 @@ export class CollateralComponent implements OnInit {
 
                  
                   //Insurance Details
-                  insuranceType:[''],
+                  insuranceType:[this.resData.entity.insuranceType],
                   policyNo:[''],
                   policyAmount:[''],
                   insurerDetails:[''],
@@ -629,6 +628,67 @@ export class CollateralComponent implements OnInit {
                   postedFlag:[this.resData.entity.postedFlag],
                   modifiedBy:['Ann'],
                   modifiedTime:[new Date()],
+                  //Insurance Details
+                  insuranceType:[''],
+                  policyNo:[''],
+                  policyAmount:[''],
+                  insurerDetails:[''],
+                  risk_cover_start_date:[''],
+                  risk_cover_end_date:[''],
+                  last_premium_paid_date:[''],
+                  premiumAmount:[''],
+                  frequency:[''],
+                  itemsInsured:[''],
+                  notes:[''],
+
+                  //receipt and payment
+                  name:[''],
+                  city:[''],
+                  address:[''],
+                  state:[''],
+                  postal_code:[''],
+                  receipt_type:[''],
+                  receipt_amount:[''],
+                  payment_type:[''],
+                  payment_amount:[''],
+                  due_date:[''],
+                  paid_received_date:[''],
+                  date_from:[''],
+                  to_date:[''],
+                  proof_verified_date:[''],
+                  mode_of_pay:[''],
+                  remarks:[''],
+
+                  //inspection details
+                  inspection_type:[''],
+                  insp_address:[''],
+                  insp_city:[''],
+                  insp_state:[''],
+                  insp_postal_code:[''],
+                  insp_telephone_no:[''],
+                  due_date_for_visit:[''],
+                  date_of_visit:[''],
+                  inspected_value:[''],
+                  inspection_emp_id:[''],
+                  insp_remarks:[''],
+
+
+                  //sales notes for Tradable Securities
+
+                  brokerName:[''],
+                  sent_for_sale_on:[''],
+                  sales_due_date:[''],
+                  sales_review_date:[''],
+                  proceeds_received_on:[''],
+                  stock_exchange:[''],
+                  expected_min_price:[''],
+                  sales_proceed_received:[''],
+                  sales_notes:[''],
+
+                  //fees
+                  percentage_amount_collected:[''],
+                  collected_amount:[''],
+
                   sn:[this.resData.entity.sn]
   
   
@@ -676,6 +736,67 @@ export class CollateralComponent implements OnInit {
                   postedFlag:[this.resData.entity.postedFlag],
                   modifiedBy:[this.resData.entity.modifiedBy],
                   modifiedTime:[this.resData.entity.modifiedTime],
+
+                   //Insurance Details
+                  insuranceType:[''],
+                  policyNo:[''],
+                  policyAmount:[''],
+                  insurerDetails:[''],
+                  risk_cover_start_date:[''],
+                  risk_cover_end_date:[''],
+                  last_premium_paid_date:[''],
+                  premiumAmount:[''],
+                  frequency:[''],
+                  itemsInsured:[''],
+                  notes:[''],
+
+                  //receipt and payment
+                  name:[''],
+                  city:[''],
+                  address:[''],
+                  state:[''],
+                  postal_code:[''],
+                  receipt_type:[''],
+                  receipt_amount:[''],
+                  payment_type:[''],
+                  payment_amount:[''],
+                  due_date:[''],
+                  paid_received_date:[''],
+                  date_from:[''],
+                  to_date:[''],
+                  proof_verified_date:[''],
+                  mode_of_pay:[''],
+                  remarks:[''],
+
+                  //inspection details
+                  inspection_type:[''],
+                  insp_address:[''],
+                  insp_city:[''],
+                  insp_state:[''],
+                  insp_postal_code:[''],
+                  insp_telephone_no:[''],
+                  due_date_for_visit:[''],
+                  date_of_visit:[''],
+                  inspected_value:[''],
+                  inspection_emp_id:[''],
+                  insp_remarks:[''],
+
+
+                  //sales notes for Tradable Securities
+
+                  brokerName:[''],
+                  sent_for_sale_on:[''],
+                  sales_due_date:[''],
+                  sales_review_date:[''],
+                  proceeds_received_on:[''],
+                  stock_exchange:[''],
+                  expected_min_price:[''],
+                  sales_proceed_received:[''],
+                  sales_notes:[''],
+                
+                  //fees
+                  percentage_amount_collected:[''],
+                  collected_amount:[''],
                   sn:[this.resData.entity.sn]
   
   
