@@ -1,4 +1,4 @@
-import {Message} from 'src/app/interfaces/message'
+import { Message } from "./message";
 
 export interface Response {
     message: Message;

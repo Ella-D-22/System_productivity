@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Interest } from 'src/app/interfaces/interest';
-import { Slab } from 'src/app/interfaces/slab';
 
 import { InterestService } from './interest.service';
 import { Router } from '@angular/router';
+import { Interest } from './interfaces/interest';
+import { Slab } from './interfaces/slab';
 
 @Component({
   selector: 'app-interest',

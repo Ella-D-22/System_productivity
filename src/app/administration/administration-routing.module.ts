@@ -42,6 +42,8 @@ import { CashTransactionsComponent } from './pages/transactions/transactions/cas
 import { TransactionMaintainanceComponent } from './pages/transactions/transactions/transaction-maintainance/transaction-maintainance.component';
 import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
 import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
+import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
+import { InterestComponent } from './pages/interest/interest.component';
 
 const routes: Routes = [{
   path: '',
@@ -273,6 +275,22 @@ const routes: Routes = [{
         path: 'transactions/cash/data/view',
         component:CashTransactionsComponent,
       },
+
+       
+      // *******************************************************************************************\
+      //                                         Interest Settings
+      // *******************************************************************************************
+      {
+        path: 'interest/maintenance',
+        component:InterestMaintainanceComponent,
+      },
+      {
+        path: 'interest/data/view',
+        component:InterestComponent,
+      },
+
+      
+      
       
 
 

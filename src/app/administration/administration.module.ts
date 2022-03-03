@@ -77,6 +77,9 @@ import { GlSubheadLookup2Component } from './pages/loan-account/lookup/gl-subhea
 import { ProductComponent } from './pages/loan-account/lookup/product/product.component';
 import { UserComponent } from './pages/loan-account/lookup/user/user.component';
 import { EventIdLookupComponent } from './pages/SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
+import { InterestComponent } from './pages/interest/interest.component';
+import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
+import { InterestLookupComponent } from './pages/interest/interest-lookup/interest-lookup.component';
 
 
 @NgModule({
@@ -152,7 +155,11 @@ import { EventIdLookupComponent } from './pages/SystemConfigurations/ChargesPara
     GlSubheadLookup2Component,
     ProductComponent,
     UserComponent,
-    EventIdLookupComponent
+    EventIdLookupComponent,
+    
+    InterestComponent,
+    InterestMaintainanceComponent,
+    InterestLookupComponent
 
     
   ],

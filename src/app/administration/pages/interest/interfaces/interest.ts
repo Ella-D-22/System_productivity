@@ -1,4 +1,5 @@
-import { Slab } from 'src/app/interfaces/slab';
+import { Slab } from "./slab";
+
 export interface Interest {
     sn?: number,
     interestCode?: string,
