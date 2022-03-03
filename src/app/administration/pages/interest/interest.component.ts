@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Interest } from 'src/app/interfaces/interest';
-import { Slab } from 'src/app/interfaces/slab';
+import { Interest } from './interfaces/interest';
+import { Slab } from './interfaces/slab';
 
 import { InterestService } from './interest.service';
 import { Router } from '@angular/router';
+
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-interest',
@@ -11,6 +17,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./interest.component.css']
 })
 export class InterestComponent implements OnInit {
+
+  message!: any;
+
+  horizontalPosition :MatSnackBarHorizontalPosition = 'end';
+  verticalPosition : MatSnackBarVerticalPosition = 'top';
+  loading: any=false
+
   
   code!: any;
 
@@ -51,6 +64,7 @@ export class InterestComponent implements OnInit {
   // slabs: Slab[]=[]
 
   constructor(private router: Router,
+    private _snackBar: MatSnackBar,
     private interestservice: InterestService) {
       this.code = this.router.getCurrentNavigation()?.extras.state;
       this.interestCode=this.code.code
@@ -195,18 +209,25 @@ export class InterestComponent implements OnInit {
 
     this.interestservice.createInterest(this.interest).subscribe(
       (data) => {
-        this.router.navigate(['success'], {
-          state: {
-            message: data.message,
-          },
-        });
+        this.loading=false
+        console.log(data.message)
+        this.message=data.message
+              this._snackBar.open(this.message, "X", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 10000,
+              panelClass: ['green-snackbar'],
+            });
       },
       (error) => {
-        this.router.navigate(['failure'], {
-          state: {
-            message: error.error.message,
-          },
-        });
+        this.loading=false
+        //console.log("error")
+          this._snackBar.open(error.error.message, "Try again!", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 10000,
+            panelClass: ['red-snackbar'],
+          });
       }
     );
 
@@ -223,18 +244,25 @@ export class InterestComponent implements OnInit {
     this.interestservice.updateInterestDefinition(this.rinterest).subscribe(
 
       (data) => {
-        this.router.navigate(['success'], {
-          state: {
-            message: data.message,
-          },
-        });
+        this.loading=false
+        console.log(data.message)
+        this.message=data.message
+              this._snackBar.open(this.message, "X", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 10000,
+              panelClass: ['green-snackbar'],
+            });
       },
       (error) => {
-        this.router.navigate(['failure'], {
-          state: {
-            message: error.error.message,
-          },
-        });
+        this.loading=false
+        //console.log("error")
+          this._snackBar.open(error.error.message, "Try again!", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 10000,
+            panelClass: ['red-snackbar'],
+          });
       }
 
     )
@@ -248,11 +276,25 @@ export class InterestComponent implements OnInit {
     this.interestservice.updateInterestDefinition(this.interest).subscribe(
 
       (data) => {
+        this.loading=false
         console.log(data.message)
+        this.message=data.message
+              this._snackBar.open(this.message, "X", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 10000,
+              panelClass: ['green-snackbar'],
+            });
       },
       (error) => {
-
-     console.log(error.error.message)
+        this.loading=false
+        //console.log("error")
+          this._snackBar.open(error.error.message, "Try again!", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 10000,
+            panelClass: ['red-snackbar'],
+          });
       }
     );
 
