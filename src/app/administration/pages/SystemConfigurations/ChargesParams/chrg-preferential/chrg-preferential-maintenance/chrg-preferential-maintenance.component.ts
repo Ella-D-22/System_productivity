@@ -141,14 +141,10 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
 
   onSelectPreferential(event:any){
     if(event.target.value == "Customer Level"){
-      this.formData.controls.event_id.disable();
-      this.formData.controls.event_type.disable();
       this.showAccountInput = false;
       this.showCifInput = true;
       this.showContractInput = false;
     }else if(event.target.value == "Account Level"){
-      this.formData.controls.event_id.disable();
-      this.formData.controls.event_type.disable();
       this.showAccountInput = true;
       this.showCifInput = false;
       this.showContractInput = false;
