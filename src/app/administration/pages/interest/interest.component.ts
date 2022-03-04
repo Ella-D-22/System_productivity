@@ -63,6 +63,7 @@ export class InterestComponent implements OnInit {
 
   rcSlabs: Slab[]=[]
   rdSlabs: Slab[]=[]
+  currency_name: any;
 
   // slabs: Slab[]=[]
 
@@ -310,7 +311,8 @@ export class InterestComponent implements OnInit {
       width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.currency = result.data;
+      this.currency_name = result.data.ccy_name;
+      this.currency = result.data.ccy;
       //this.formData.controls.chrg_calc_crncy.setValue(result.data);
     });
   }

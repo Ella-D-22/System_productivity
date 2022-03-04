@@ -15,8 +15,8 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <select (change)="onSelectFunction($event)" class="form-control" formControlName="function_type">
-                  <option value="" disabled>-- Choose Function --</option>
+                <select  (change)="onTabClick($event)" class="form-control" required>
+                  <option value="" disabled>-- Choose Type --</option>
                   <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
                 </select>
               </div>

@@ -36,7 +36,7 @@ export class InterestMaintainanceComponent implements OnInit {
   }
 
   
-  onSelectFunction(value: any){
+  onTabClick(value: any){
     // this.interestTabIndex = value.target.value;
     this.function_type= value.target.value;
     

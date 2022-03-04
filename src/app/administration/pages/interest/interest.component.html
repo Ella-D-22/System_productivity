@@ -42,6 +42,7 @@
                 <input name="currency" oninput ="this.value=this.value.toUpperCase()"
                 [(ngModel)]="currency" type="text" class="form-control" />
                 <mat-icon (click)="currencyLookup()">search</mat-icon>
+                {{this.currency_name}}
               </div>
             </div>
           </div>
