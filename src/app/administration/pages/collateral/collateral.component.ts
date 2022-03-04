@@ -7,6 +7,7 @@ import { CollateralService } from './collateral.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { EventIdLookupComponent } from '../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-collateral',
@@ -64,6 +65,10 @@ export class CollateralComponent implements OnInit {
     console.log(this.message);
     
    
+     }
+
+     onSelectionType(event:any){
+       this.collateralType= event.target.value
      }
   
   
@@ -394,19 +399,17 @@ export class CollateralComponent implements OnInit {
                   collateralCode:[this.collateralCode],
                   collateralType:['',[Validators.required]],
                   description:['',[Validators.required]],
-                  companyCode:['', [Validators.required, Validators.maxLength(6)]],
-                  contactDetails:[''],
-                  companyDetails:[''],
-                  faceValue:['', [Validators.required]],
-                  margin:['', [Validators.required]],
-                  marketValue:[, [Validators.required]],
+                  ceilingLimit:['', [Validators.required]],
+                  currencyCollateral:[''],
+                  marginPercent:['', [Validators.required]],
+                  marketValue:['', [Validators.required]],
+                  loanValue:[''],
                   otherDetails:[''],
-                  chargeEventForLodging:[,],
-                  chargeEventForWithdrawal:[,],
-                  percentageDrawingPower:[,],
-                  percentageLoanToTake:[,],
-                  shareCapital:[,],
-                  sharesIssued:[,],
+                  chargeEventForLodging:[''],
+                  chargeEventForWithdrawal:[''],
+                  percentageDrawingPower:[''],
+                  percentageLoanToTake:[''],
+                  lastEvaluationDate:[''],
                   deletedBy:[''],
                   deletedTime:[''],
                   deletedFlag:['N'],
@@ -419,6 +422,51 @@ export class CollateralComponent implements OnInit {
                   modifiedBy:['Ann'],
                   modifiedTime:[new Date()],
                   // sn:[0]
+
+                   //1. Vehicle and Machineries
+                  yearofManufacture:[''],
+                  dateofPurchase:[''],
+                  registrationNumber:[''],
+                  chasisNumber:[''],
+                  engineNo:[''],
+                  registeredownerName:[''],
+                  model:[''],
+                  manufacture:[''],
+                  machineNo:[''],
+
+                  //2.Immovable Properties
+                  propertyDocumentNo:[''],
+                  purchaseDate:[''],
+                  builtArea:[''],
+                  landArea:[''],
+                  unitMeasurement:[''],
+                  propertyAddress:[''],
+                  leased:[''],
+                  leasedExpiryDate:[''],
+                  ageBuilding:[''],
+
+                  //3.Stock
+                  lodgedDate:[''],
+                  collateralValue:[''],
+                  frequencyforSubmission:[''],
+                  applypenalInterest:[''],
+                  reviewDate:[''],
+                  dueDate:[''],
+                  withdrawnDate:[''],
+
+                  //4.Term Deposits
+                  depositAccountNo:[''],
+                  denominationsNo:[''],
+                  fullBenefit:[''],
+                  apportionedValue:[''],
+                  lienAmount:[''],
+
+                  //5.Shares
+                  companyDetails:[''],
+                  sharesCapital:[''],
+                  nosharesIsssued:[''],
+                  contactDetails:[''],
+
                    //Insurance Details
                   insuranceType:[''],
                   policyNo:[''],
@@ -500,68 +548,109 @@ export class CollateralComponent implements OnInit {
                 collateralCode:[this.resData.entity.collateralCode],
                 collateralType:[this.resData.entity.collateralType],
                 description:[this.resData.entity.description],
-              
-                faceValue:[this.resData.entity.faceValue],
-                margin:[this.resData.entity.margin],
+                currencyCollateral:[this.resData.entity.currencyCollateral],
+                ceilingLimit:[this.resData.entity.ceilingLimit],
+                loanValue:[this.resData.entity.loanValue],
+                marginPercent:[this.resData.entity.marginPercent],
                 marketValue:[this.resData.entity.marketValue],
                 otherDetails:[this.resData.entity.otherDetails],
                 chargeEventForLodging:[this.resData.entity.chargeEventForLodging],
                 chargeEventForWithdrawal:[this.resData.entity.chargeEventForWithdrawal],
                 percentageDrawingPower:[this.resData.entity.percentageDrawingPower],
                 percentageLoanToTake:[this.resData.entity.percentageLoanToTake],
+                lastEvaluationDate:[this.resData.entity.lastEvaluationDate],
 
-               
+                            //1. Vehicle and Machineries
+                yearofManufacture:[this.resData.entity.yearofManufacture],
+                dateofPurchase:[this.resData.entity.dateofPurchase],
+                registrationNumber:[this.resData.entity.registrationNumber],
+                chasisNumber:[this.resData.entity.chasisNumber],
+                engineNo:[this.resData.entity.engineNo],
+                registeredownerName:[this.resData.entity.registeredownerName],
+                model:[this.resData.entity.model],
+                manufacture:[this.resData.entity.manufacture],
+                machineNo:[this.resData.entity.machineNo],
+
+                //2.Immovable Properties
+                propertyDocumentNo:[this.resData.entity.propertyDocumentNo],
+                purchaseDate:[this.resData.entity.purchaseDate],
+                builtArea:[this.resData.entity.builtArea],
+                landArea:[this.resData.entity.landArea],
+                unitMeasurement:[this.resData.entity.unitMeasurement],
+                propertyAddress:[this.resData.entity.propertyAddress],
+                leased:[this.resData.entity.leased],
+                leasedExpiryDate:[this.resData.entity.leasedExpiryDate],
+                ageBuilding:[this.resData.entity.ageBuilding],
+
+                //3.Stock
+                lodgedDate:[this.resData.entity.lodgedDate],
+                collateralValue:[this.resData.entity.collateralValue],
+                frequencyforSubmission:[this.resData.entity.frequencyforSubmission],
+                applypenalInterest:[this.resData.entity.applypenalInterest],
+                reviewDate:[this.resData.entity.reviewDate],
+                dueDate:[this.resData.entity.duedate],
+                withdrawnDate:[this.resData.entity.withdrawnDate],
+
+                //4.Term Deposits
+                depositAccountNo:[this.resData.entity.depositAccountNo],
+                denominationsNo:[this.resData.entity.denominationsNo],
+                fullBenefit:[this.resData.entity.fullBenefit],
+                apportionedValue:[this.resData.entity.apportionedValue],
+                lienAmount:[this.resData.entity.lienAmount],
+
+                //5.Shares
                 companyDetails:[this.resData.entity.companyDetails],
                 contactDetails:[this.resData.entity.contactDetails],
                 shareCapital:[this.resData.entity.shareCapital],
                 sharesIssued:[this.resData.entity.sharesIssued],
+
 
               
 
                  
                   //Insurance Details
                   insuranceType:[this.resData.entity.insuranceType],
-                  policyNo:[''],
-                  policyAmount:[''],
-                  insurerDetails:[''],
-                  risk_cover_start_date:[''],
-                  risk_cover_end_date:[''],
-                  last_premium_paid_date:[''],
-                  premiumAmount:[''],
-                  frequency:[''],
-                  itemsInsured:[''],
-                  notes:[''],
+                  policyNo:[this.resData.entity.policyNo],
+                  policyAmount:[this.resData.entity.policyAmount],
+                  insurerDetails:[this.resData.entity.insurerDetails],
+                  risk_cover_start_date:[this.resData.entity.risk_cover_start_date],
+                  risk_cover_end_date:[this.resData.entity.risk_cover_end_date],
+                  last_premium_paid_date:[this.resData.entity.last_premium_paid_date],
+                  premiumAmount:[this.resData.entity.premiumAmount],
+                  frequency:[this.resData.entity.frequency],
+                  itemsInsured:[this.resData.entity.itemsInsured],
+                  notes:[this.resData.entity.notes],
 
                   //receipt and payment
-                  name:[''],
-                  city:[''],
-                  address:[''],
-                  state:[''],
-                  postal_code:[''],
-                  receipt_type:[''],
-                  receipt_amount:[''],
-                  payment_type:[''],
-                  payment_amount:[''],
-                  due_date:[''],
-                  paid_received_date:[''],
-                  date_from:[''],
-                  to_date:[''],
-                  proof_verified_date:[''],
-                  mode_of_pay:[''],
-                  remarks:[''],
+                  name:[this.resData.entity.name],
+                  city:[this.resData.entity.city],
+                  address:[this.resData.entity.address],
+                  state:[this.resData.entity.state],
+                  postal_code:[this.resData.entity.postal_code],
+                  receipt_type:[this.resData.entity.receipt_type],
+                  receipt_amount:[this.resData.entity.receipt_amount],
+                  payment_type:[this.resData.entity.payment_type],
+                  payment_amount:[this.resData.entity.payment_amount],
+                  due_date:[this.resData.entity.due_date],
+                  paid_received_date:[this.resData.entity.paid_received_date],
+                  date_from:[this.resData.entity.date_from],
+                  to_date:[this.resData.entity.to_date],
+                  proof_verified_date:[this.resData.entity.proof_verified_date],
+                  mode_of_pay:[this.resData.entity.mode_of_pay],
+                  remarks:[this.resData.entity.remarks],
 
                   //inspection details
-                  inspection_type:[''],
-                  insp_address:[''],
-                  insp_city:[''],
-                  insp_state:[''],
-                  insp_postal_code:[''],
-                  insp_telephone_no:[''],
-                  due_date_for_visit:[''],
-                  date_of_visit:[''],
-                  inspected_value:[''],
-                  inspection_emp_id:[''],
-                  insp_remarks:[''],
+                  inspection_type:[this.resData.entity.inspection_type],
+                  insp_address:[this.resData.entity.insp_address],
+                  insp_city:[this.resData.entity.insp_city],
+                  insp_state:[this.resData.entity.insp_state],
+                  insp_postal_code:[this.resData.entity.insp_postal_code],
+                  insp_telephone_no:[this.resData.entity.insp_telephone_no],
+                  due_date_for_visit:[this.resData.entity.due_date_for_visit],
+                  date_of_visit:[this.resData.entity.date_of_visit],
+                  inspected_value:[this.resData.entity.inspected_value],
+                  inspection_emp_id:[this.resData.entity.inspection_emp_id],
+                  insp_remarks:[this.resData.entity.insp_remarks],
 
 
                   //sales notes for Tradable Securities
@@ -602,7 +691,7 @@ export class CollateralComponent implements OnInit {
                   collateralCode:[this.resData.entity.collateralCode],
                   collateralType:[this.resData.entity.collateralType],
                   description:[this.resData.entity.description],
-                  companyCode:[this.resData.entity.companyCode],
+    
                   companyDetails:[this.resData.entity.companyDetails],
                   contactDetails:[this.resData.entity.contactDetails],
                   customerCode:[this.resData.entity.customerCode],
