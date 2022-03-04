@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-interest-maintainance',
   templateUrl: './interest-maintainance.component.html',
-  styleUrls: ['./interest-maintainance.component.css']
+  styleUrls: ['./interest-maintainance.component.scss']
 })
 export class InterestMaintainanceComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
@@ -36,7 +36,7 @@ export class InterestMaintainanceComponent implements OnInit {
   }
 
   
-  onTabClick(value: any){
+  onSelectFunction(value: any){
     // this.interestTabIndex = value.target.value;
     this.function_type= value.target.value;
     

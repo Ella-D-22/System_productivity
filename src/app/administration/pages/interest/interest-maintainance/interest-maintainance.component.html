@@ -15,8 +15,8 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <select (change)="onTabClick($event)">
-                  <option value="" disabled>-- Choose Type --</option>
+                <select (change)="onSelectFunction($event)" class="form-control" formControlName="function_type">
+                  <option value="" disabled>-- Choose Function --</option>
                   <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
                 </select>
               </div>
@@ -37,18 +37,19 @@
               </div>
             </div>
           </div>
-  
-          <div class="col-md-2">
-            <button
-              mat-raised-button
-              color="primary"
-              class="btn go mx-auto d-block"
-              type="button"
-              (click)="navigate()"
-            >
-              Submit
-            </button>
-          </div>
+        </div>
+        <div class="row">
+          
+
+        <button class="pull-right" mat-raised-button color="primary" 
+        (click)="navigate()" type="button">
+          <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          Submit
+        </button>
+
         </div>
   
         <br />
