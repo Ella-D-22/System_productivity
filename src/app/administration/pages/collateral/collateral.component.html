@@ -15,7 +15,7 @@
     </div>
     
    
-    <mat-divider></mat-divider>
+    
     <br>
     <div class="container-fluid">
         <form action="" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
@@ -30,11 +30,21 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <!-- <input type="text" formControlName="collateralType" class="pull-right form-control"> -->
-                                    <select name="" id="" class="form-control form-select" formControlName="collateralType" 
+                                    <!-- <select name="" id="" class="form-control form-select" formControlName="collateralType" 
                                     [ngClass]="{'is-invalid':submitted && f['collateralType'].errors}">
                                         <!-- <option value="" disabled>-- Collateral Type --</option> -->
-                                        <option *ngFor="let flag of collateralTypeArray" [value]="flag">{{flag}}</option>
-                                    </select>
+                                        <!-- <option *ngFor="let flag of collateralTypeArray" [value]="flag">{{flag}}</option>
+                                    </select> -->
+                                    <select (change)="onSelectionType($event)" class="form-control"
+                                     [ngClass]="{'is-invalid':submitted && f['collateralType'].errors}" 
+                                    formControlName="collateralType">
+                                        <option value="" disabled>-- Choose collateralType-</option>
+                                        <option value=1>VEHICLE AND MACHINERIES</option>
+                                        <option value=2>IMMOVABLE</option>
+                                        <option value=3>SHARES</option>
+                                        <option value=4>STOCKS</option>
+                                        <option value="5">TERM DEPOSITS</option>
+                                      </select>
                                 </div>
                             </div>
                         </div>
@@ -179,121 +189,126 @@
                     </div>
                 </mat-tab>
                <mat-tab class="mat-tab" label="Particulars">
-                        <br>     
-                        <h3>Vehicles and Machineries</h3>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Year of Manufacture<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="yearofManufacture" class="pull-right form-control">
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Date of Purchase<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column ">
-                                        <input  [matDatepicker]="kpicker" formControlName="dateofPurchase" class="form-control" />
-                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="kpicker"></mat-datepicker-toggle>
-                                        <mat-datepicker #kpicker></mat-datepicker>
+                        <br>  
+                        <div *ngIf="this.collateralType == 1 ">
+                            <h3>Vehicles and Machineries</h3>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Year of Manufacture<span class="warning">*</span></label>
                                         </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="yearofManufacture" class="pull-right form-control">
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Date of Purchase<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column ">
+                                            <input  [matDatepicker]="kpicker" formControlName="dateofPurchase" class="form-control" />
+                                            <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="kpicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #kpicker></mat-datepicker>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                           
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Manufacture<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="manufacture" class="pull-right form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Model<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="model" class="pull-right form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Machine No<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="machineNo" class="pull-right form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Engine No<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="engineNo" class="pull-right form-control">
+                                        </div>
+                                    </div>
+    
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Registered Owner Name<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column ">
+                                            <input type="text" formControlName="registeredownerName" class="pull-right form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Chasis Number<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column ">
+                                            <input type="text" formControlName="chasisNumber" class="pull-right form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                        
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Manufacture<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="manufacture" class="pull-right form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Model<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="model" class="pull-right form-control">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Registration Number<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column ">
+                                            <input type="text" formControlName="registrationNumber" class="pull-right form-control">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                       
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Machine No<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="machineNo" class="pull-right form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Engine No<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="engineNo" class="pull-right form-control">
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Registered Owner Name<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="registeredownerName" class="pull-right form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Chasis Number<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="chasisNumber" class="pull-right form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                   
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Registration Number<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="registrationNumber" class="pull-right form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div>   
+
                          
-                        <mat-divider></mat-divider>
-                        <br>
+                        
+                        
+                      <div *ngIf="this.collateralType == 2">
+                            
                         <h3>Immovable Properties</h3>
-                    
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
@@ -405,60 +420,65 @@
                                 </div>
                             </div> 
                         </div>
-                         <br>
-                        <mat-divider></mat-divider>
-                        <br>
+
+                      </div>
+                         
+                        
+                        
                         <!-- Shares Details -->
-                        <h3>Shares</h3>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Company Details<span class="warning">*</span></label>
+                        <div *ngIf="this.collateralType == 3">
+                            <h3>Shares</h3>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Company Details<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column ">
+                                            <input type="text" formControlName="companyDetails" class="pull-right form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="companyDetails" class="pull-right form-control">
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Shares Capital<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="sharesCapital" class="pull-right form-control">
+                                          </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Shares Capital<span class="warning">*</span></label>
+                          
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Number of Shares Issued<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column ">
+                                            <input type="text" formControlName="nosharesIsssued" class="pull-right form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="sharesCapital" class="pull-right form-control">
-                                      </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Contact Details<span class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="contactDetails" class="pull-right form-control">
+                                          </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                      
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Number of Shares Issued<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="nosharesIsssued" class="pull-right form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Contact Details<span class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="contactDetails" class="pull-right form-control">
-                                      </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <mat-divider></mat-divider>
-                        <br>
+                        <!-- <br> -->
+            
+                        <!-- <br> -->
+                       <div *ngIf="this.collateralType == 4">
                         <h3>Stocks</h3>
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
@@ -552,9 +572,12 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <mat-divider></mat-divider>
-                        <br>
+
+                       </div>
+                        <!-- <br> -->
+                        
+                        <!-- <br> -->
+                       <div *ngIf="this.collateralType == 5">
                         <h3>Term Deposits</h3>
                         <br>
                         <div class="row">
@@ -615,6 +638,8 @@
                                 </div>
                             </div>
                         </div>
+
+                       </div>
                </mat-tab>
                <mat-tab class="mat-tab" label ="Receipt and Payment">
                 <br>
