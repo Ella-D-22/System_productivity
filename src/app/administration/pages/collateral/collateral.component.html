@@ -39,11 +39,11 @@
                                      [ngClass]="{'is-invalid':submitted && f['collateralType'].errors}" 
                                     formControlName="collateralType">
                                         <option value="" disabled>-- Choose collateralType-</option>
-                                        <option value=1>VEHICLE AND MACHINERIES</option>
-                                        <option value=2>IMMOVABLE</option>
-                                        <option value=3>SHARES</option>
-                                        <option value=4>STOCKS</option>
-                                        <option value="5">TERM DEPOSITS</option>
+                                        <option value="VEHICLE & MACHINERIES">VEHICLE AND MACHINERIES</option>
+                                        <option value="IMMOVABLE">IMMOVABLE</option>
+                                        <option value="SHARES">SHARES</option>
+                                        <option value="STOCKS">STOCKS</option>
+                                        <option value="TERM DEPOSITS">TERM DEPOSITS</option>
                                       </select>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                     <label for="" class="start pull-left">Collateral Description<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="description" class="pull-right form-control">
+                                    <input type="text" formControlName="description" oninput="this.value=this.value.toUpperCase()" class="pull-right form-control">
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                                     <label for="" class="start pull-left" required maxLength="6">Loan to Value(Ksh)<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="loanValue"  class="pull-right form-control">
+                                    <input type="number" formControlName="loanValue"  class="pull-right form-control">
                                 </div>
                             </div>
                         </div>
@@ -93,17 +93,17 @@
                                     <label for="" class="start pull-left">Drawing Power(%)<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="percentageDrawingPower" class="pull-right form-control">
+                                    <input type="number" formControlName="percentageDrawingPower" maxlength="2" class="pull-right form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Loan To Take(%)<span class="warning">*</span></label>
+                                    <label for="number"  class="start pull-left">Loan To Take(%)<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="percentageLoanToTake" class="pull-right form-control">
+                                    <input type="number" formControlName="percentageLoanToTake" maxlength="2" class="pull-right form-control">
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                                     <label for="" class="start pull-left">Market Value<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="marketValue" class="pull-right form-control">
+                                    <input type="number" formControlName="marketValue" class="pull-right form-control">
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                                     <label for="" class="start pull-left">Margin Percent<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="marginPercent" class="pull-right form-control">
+                                    <input type="number" formControlName="marginPercent" class="pull-right form-control">
                                 </div>
                             </div>
                         </div>
@@ -182,15 +182,30 @@
                                     <label for="">Other Details<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="otherDetails" class="pull-right form-control">
+                                    <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="otherDetails" class="pull-right form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="">Customer Code<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="customerCode" class="pull-right form-control"
+                                     oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </mat-tab>
+
                <mat-tab class="mat-tab" label="Particulars">
+
+                <p> chege {{collateralType}}</p>
                         <br>  
-                        <div *ngIf="this.collateralType == 1 ">
+                        <div *ngIf="this.vehicle_and_machineries">
                             <h3>Vehicles and Machineries</h3>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -199,7 +214,7 @@
                                             <label for="" class="start pull-left">Year of Manufacture<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="yearofManufacture" class="pull-right form-control">
+                                            <input type="number" formControlName="yearofManufacture" class="pull-right form-control">
                                            
                                         </div>
                                     </div>
@@ -225,7 +240,7 @@
                                             <label for="" class="start pull-left">Manufacture<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="manufacture" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="manufacture" class="pull-right form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -235,7 +250,7 @@
                                             <label for="" class="start pull-left">Model<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="model" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="model" class="pull-right form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +263,7 @@
                                             <label for="" class="start pull-left">Machine No<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="machineNo" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="machineNo" class="pull-right form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -258,7 +273,7 @@
                                             <label for="" class="start pull-left">Engine No<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="engineNo" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="engineNo" class="pull-right form-control">
                                         </div>
                                     </div>
     
@@ -272,7 +287,7 @@
                                             <label for="" class="start pull-left">Registered Owner Name<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column ">
-                                            <input type="text" formControlName="registeredownerName" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="registeredownerName" class="pull-right form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -282,7 +297,7 @@
                                             <label for="" class="start pull-left">Chasis Number<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column ">
-                                            <input type="text" formControlName="chasisNumber" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="chasisNumber" class="pull-right form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +310,7 @@
                                             <label for="" class="start pull-left">Registration Number<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column ">
-                                            <input type="text" formControlName="registrationNumber" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="registrationNumber" class="pull-right form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -306,7 +321,7 @@
                          
                         
                         
-                      <div *ngIf="this.collateralType == 2">
+                      <div *ngIf="this.immovable">
                             
                         <h3>Immovable Properties</h3>
                         <div class="row">
@@ -328,7 +343,7 @@
                                         <label for="" class="start pull-left">Property Document No.<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="propertyDocumentNo" class="pull-right form-control">
+                                        <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="propertyDocumentNo" class="pull-right form-control">
                                     </div>
                                 </div>
                             </div>
@@ -341,7 +356,7 @@
                                         <label for="" class="start pull-left">Built Area<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="builtArea" class="pull-right form-control">
+                                        <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="builtArea" class="pull-right form-control">
                                     </div>
                                 </div>
                             </div>
@@ -351,7 +366,7 @@
                                         <label for="" class="start pull-left">Land Area<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="landArea" class="pull-right form-control">
+                                        <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="landArea" class="pull-right form-control">
                                     </div>
                                 </div>
                             </div>
@@ -364,7 +379,7 @@
                                         <label for="" class="start pull-left">Unit Measurement<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="unitMeasurement" class="pull-right form-control">
+                                        <input type="number" formControlName="unitMeasurement" class="pull-right form-control">
                                     </div>
                                 </div>
                             </div>
@@ -374,7 +389,7 @@
                                         <label for="" class="start pull-left">Property Address<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="propertyAddress" class="pull-right form-control">
+                                        <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="propertyAddress" class="pull-right form-control">
                                     </div>
                                 </div>
                             </div>
@@ -387,7 +402,7 @@
                                         <label for="" class="start pull-left">Age Building<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="ageBuilding" class="pull-right form-control">
+                                        <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="ageBuilding" class="pull-right form-control">
                                     </div>
                                 </div>
                             </div>
@@ -426,7 +441,7 @@
                         
                         
                         <!-- Shares Details -->
-                        <div *ngIf="this.collateralType == 3">
+                        <div *ngIf="this.shares">
                             <h3>Shares</h3>
                             <br>
                             <div class="row">
@@ -436,7 +451,7 @@
                                             <label for="" class="start pull-left">Company Details<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column ">
-                                            <input type="text" formControlName="companyDetails" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="companyDetails" class="pull-right form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -446,7 +461,7 @@
                                             <label for="" class="start pull-left">Shares Capital<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="sharesCapital" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="sharesCapital" class="pull-right form-control">
                                           </div>
                                     </div>
                                 </div>
@@ -459,7 +474,7 @@
                                             <label for="" class="start pull-left">Number of Shares Issued<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column ">
-                                            <input type="text" formControlName="nosharesIsssued" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="nosharesIsssued" class="pull-right form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -469,7 +484,7 @@
                                             <label for="" class="start pull-left">Contact Details<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="contactDetails" class="pull-right form-control">
+                                            <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="contactDetails" class="pull-right form-control">
                                           </div>
                                     </div>
                                 </div>
@@ -478,7 +493,7 @@
                         <!-- <br> -->
             
                         <!-- <br> -->
-                       <div *ngIf="this.collateralType == 4">
+                       <div *ngIf="this.stocks">
                         <h3>Stocks</h3>
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
@@ -487,7 +502,7 @@
                                         <label for="" class="start pull-left">Collateral Value<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column ">
-                                        <input type="text" formControlName="collateralValue" class="pull-right form-control">
+                                        <input type="number" formControlName="collateralValue" class="pull-right form-control">
                                     </div>
                                 </div>
                             </div>
@@ -497,7 +512,7 @@
                                         <label for="" class="start pull-left">Penal Interest<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="applypenalInterest" class="pull-right form-control">
+                                        <input type="number" formControlName="applypenalInterest" class="pull-right form-control">
                                       </div>
                                 </div>
                             </div>
@@ -577,7 +592,7 @@
                         <!-- <br> -->
                         
                         <!-- <br> -->
-                       <div *ngIf="this.collateralType == 5">
+                       <div *ngIf="this.term_deposits">
                         <h3>Term Deposits</h3>
                         <br>
                         <div class="row">
@@ -587,7 +602,7 @@
                                         <label for="" class="start pull-left">Deposit Account No.<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="depositAccountNo" class="form-control">
+                                        <input type="number" oninput="this.value=this.value.toUpperCase()" formControlName="depositAccountNo" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -597,7 +612,7 @@
                                         <label for="" class="start pull-left">Denominations No.<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="denominationsNo" class="form-control">
+                                        <input type="number" oninput="this.value=this.value.toUpperCase()" formControlName="denominationsNo" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -610,7 +625,7 @@
                                         <label for="" class="start pull-left">Apportioned Value No.<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="apportionedValue" class="form-control">
+                                        <input type="number" formControlName="apportionedValue" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -620,7 +635,7 @@
                                         <label for="" class="start pull-left">Lien Amount<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="lienAmount" class="form-control">
+                                        <input type="number" formControlName="lienAmount" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -633,7 +648,7 @@
                                         <label for="" class="start pull-left">Full Benefit<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="fullBenefit" class="form-control">
+                                        <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="fullBenefit" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -650,7 +665,7 @@
                                 <label for="" class="start pull-left">Name<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="name" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="name" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -660,7 +675,7 @@
                                 <label for="" class="start pull-left">Address<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="address" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="address" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -673,7 +688,7 @@
                                 <label for="" class="start pull-left">City<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="city" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="city" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -683,7 +698,7 @@
                                 <label for="" class="start pull-left">State<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="state" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="state" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -696,7 +711,7 @@
                                 <label for="" class="start pull-left">Receipt Type<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="receipt_type" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="receipt_type" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -719,7 +734,7 @@
                                 <label for="" class="start pull-left">Payment Type<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="payment_type" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="payment_type" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -742,7 +757,7 @@
                                 <label for="" class="start pull-left">Due Date<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column ">
-                                <input  [matDatepicker]="duepicker" formControlName="due_date" class="form-control" />
+                                <input  [matDatepicker]="duepicker" formControlName="due_date_for_rec" class="form-control" />
                                 <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="duepicker"></mat-datepicker-toggle>
                                 <mat-datepicker #duepicker></mat-datepicker>
                                 </div>
@@ -781,7 +796,7 @@
                                 <label for="" class="start pull-left">Paid/Received Date<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column ">
-                                <input type="text" formControlName="mode_of_pay" class="form-control" />
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="mode_of_pay" class="form-control" />
                             </div>   
                         </div>
                     </div>
@@ -799,7 +814,7 @@
                                    <label for="" class="start pull-left">Insurance Type<span class="warning">*</span></label>
                                </div>
                                <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="insuranceType" class="pull-right form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="insuranceType" class="pull-right form-control">
                                </div>
                            </div>
                        </div>
@@ -809,7 +824,7 @@
                                 <label for="" class="start pull-left">Insurer Details<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                             <textarea name="" id="" cols="30" rows="10" formControlName="insurerDetails" class="pull-right form-control" ></textarea>
+                             <textarea name="" id="" cols="30" rows="10" oninput="this.value=this.value.toUpperCase()" formControlName="insurerDetails" class="pull-right form-control" ></textarea>
                             </div>
                         </div>
                     </div>
@@ -822,7 +837,7 @@
                                 <label for="" class="start pull-left">Policy No.<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                             <input type="text" formControlName="policyNo" class="pull-right form-control">
+                             <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="policyNo" class="pull-right form-control">
                             </div>
                         </div>
                     </div>
@@ -832,7 +847,7 @@
                              <label for="" class="start pull-left">Policy Amount<span class="warning">*</span></label>
                          </div>
                          <div class="col-md-6 col-sm-12 form-column">
-                          <input type="text" formControlName="policyAmount" class="pull-right form-control">
+                          <input type="number" formControlName="policyAmount" class="pull-right form-control">
                          </div>
                      </div>
                  </div>
@@ -884,7 +899,7 @@
                                 <label for="" class="start pull-left">Premium Amt<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column ">
-                                <input formControlName="premiumAmount" class="pull-right form-control" />
+                                <input type="number" formControlName="premiumAmount" class="pull-right form-control" />
                                 </div>
                         </div>
                     </div>
@@ -910,7 +925,7 @@
                                 <label for="" class="start pull-left">Items Insured<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                             <textarea name="" id="" cols="30" rows="10" formControlName="itemsInsured" class="pull-right form-control" ></textarea>
+                             <textarea name="" id="" cols="30" rows="10" oninput="this.value=this.value.toUpperCase()"  formControlName="itemsInsured" class="pull-right form-control" ></textarea>
                             </div>
                         </div>
                     </div>
@@ -928,7 +943,7 @@
                                 <label for="" class="start pull-left">Inspection Type<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="inspection_type" class="form-control">
+                                <input type="text"  oninput="this.value=this.value.toUpperCase()" formControlName="inspection_type" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -938,7 +953,7 @@
                                 <label for="" class="start pull-left">Address<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="insp_address" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="insp_address" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -951,7 +966,7 @@
                                 <label for="" class="start pull-left">City<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="insp_city" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="insp_city" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -961,7 +976,7 @@
                                 <label for="" class="start pull-left">State<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="insp_state" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="insp_state" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -1034,7 +1049,7 @@
                                 <label for="" class="start pull-left">Inspection Emp ID<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="inspection_emp_id" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="inspection_emp_id" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -1047,7 +1062,8 @@
                                 <label for="" class="start pull-left">Remarks<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <textarea name="" id="" cols="30" rows="10" formControlName="insp_remarks" class="form-control"></textarea>
+                                <textarea name="" id="" cols="30" oninput="this.value=this.value.toUpperCase()" 
+                                rows="10" formControlName="insp_remarks" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -1065,7 +1081,7 @@
                                 <label for="" class="start pull-left">Broker Name<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                               <input type="text" formControlName="brokerName" class="pull-right form-control">
+                               <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="brokerName" class="pull-right form-control">
                             </div>
                         </div>
                     </div>
@@ -1156,7 +1172,7 @@
                                 <label for="" class="start pull-left" >Remarks<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="sales_notes" class="form-control">
+                                <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="sales_notes" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -1172,7 +1188,7 @@
                                    <label for="" class="start pull-left">Collected Amt.%<span class="warning">*</span></label>
                                </div>
                                <div class="col-md-6 col-sm-12 form-column">
-                                   <input type="number" formControlName="percentage_amount_collected" class="form-control">
+                                   <input type="number" formControlName="percentage_amount_collected" maxlength="2" class="form-control">
                                </div>
                            </div>
                        </div>
