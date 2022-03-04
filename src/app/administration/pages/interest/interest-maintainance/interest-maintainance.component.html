@@ -5,7 +5,7 @@
     <mat-divider></mat-divider>
   
     <div class="container-fluid mt-4">
-      <form class="form">
+      <form class="form" ngNativeValidate >
         <div class="row">
           <div class="col-md-5">
             <div class="form-group row">
@@ -15,7 +15,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <select (change)="onTabClick($event)">
+                <select  (change)="onTabClick($event)" class="form-control" required>
                   <option value="" disabled>-- Choose Type --</option>
                   <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
                 </select>
@@ -30,7 +30,7 @@
                 >
               </div>
               <div class="col-md-6 col-7 form-column">
-                <input type="text" class="form-control"  [(ngModel)]="interestCode" name="interestCode"/>
+                <input type="text" class="form-control" oninput ="this.value=this.value.toUpperCase()"  [(ngModel)]="interestCode" name="interestCode" required/>
               </div>
               <div class="col-md-1 col-1" *ngIf="function_type!='A-Add'">
                 <mat-icon (click)="interestLookup()">search</mat-icon>
