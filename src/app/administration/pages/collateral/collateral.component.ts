@@ -687,8 +687,8 @@ export class CollateralComponent implements OnInit {
                 //5.Shares
                 companyDetails:[this.resData.entity.companyDetails],
                 contactDetails:[this.resData.entity.contactDetails],
-                shareCapital:[this.resData.entity.shareCapital],
-                sharesIssued:[this.resData.entity.sharesIssued],
+                sharesCapital:[this.resData.entity.sharesCapital],
+                nosharesIsssued:[this.resData.entity.nosharesIsssued],
 
 
               

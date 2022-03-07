@@ -776,6 +776,33 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-12 form-column">
+                               <label for="" class="start pull-left">Date From<span class="warning">*</span></label>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-column">
+                                <input  [matDatepicker]="frompicker" formControlName="date_from" class="form-control" />
+                                <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                                <mat-datepicker #frompicker></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-12 form-column">
+                                <label for="" class="start pull-left">To<span class="warning">*</span></label>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-column">
+                                <input  [matDatepicker]="toopicker" formControlName="to_date" class="form-control" />
+                                <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="toopicker"></mat-datepicker-toggle>
+                                <mat-datepicker #toopicker></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
@@ -793,11 +820,25 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <div class="col-md-6 col-sm-12 form-column">
-                                <label for="" class="start pull-left">Paid/Received Date<span class="warning">*</span></label>
+                                <label for="" class="start pull-left">Mode of Pay<span class="warning">*</span></label>
                             </div>
                             <div class="col-md-6 col-sm-12 form-column ">
                                 <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="mode_of_pay" class="form-control" />
                             </div>   
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-12 form-column">
+                                <label for="" class="start pull-left">Remarks<span class="warning">*</span></label>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-column">
+                                <textarea name="" id="" cols="30" rows="10" oninput="this.value=this.value.toUpperCase()" 
+                                formControlName="remarks" class="form-control"></textarea>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
