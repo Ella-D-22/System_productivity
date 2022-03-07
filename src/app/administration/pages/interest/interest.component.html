@@ -13,10 +13,9 @@
       <p>{{code.code}}</p>
     </div>
   </div>
-
   
     <mat-divider></mat-divider>
-    <form class="form" (ngSubmit)="submitInterest()">
+    <form class="form" (ngSubmit)="submitInterest()" >
       <div class="container-fluid mt-4">
         <div class="row">
           <div class="col-md-6">
@@ -42,6 +41,8 @@
               <div class="col-md-6 col-8 form-column">
                 <input name="currency" oninput ="this.value=this.value.toUpperCase()"
                 [(ngModel)]="currency" type="text" class="form-control" />
+                <mat-icon (click)="currencyLookup()">search</mat-icon>
+                {{this.currency_name}}
               </div>
             </div>
           </div>
@@ -83,7 +84,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <select name="fullDiff"
+                <select name="fullDiff" class="form-control"
                 [(ngModel)]="fullDiff">
                   <option value="F" selected>FULL</option>
                   <option value="D">DIFFERENTIAL</option>
@@ -131,25 +132,12 @@
                 <div class="col-md-7">
                   <input
                     type="number"
-                    step=".00000001"
+                    step=".01"
                     required
                     class="form-control"
                     name="crate"
                   [(ngModel)]="crate"
                   />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select readonly name="cdrCr"
-                  [(ngModel)]="cdrCr">
-                    <option value="C">CREDIT</option>
-                  </select>
                 </div>
               </div>
             </div>
@@ -191,7 +179,7 @@
                 <div class="col-md-7">
                   <input
                     type="number"
-                    step=".00000001"
+                    step=".01"
                     required
                     class="form-control"
                     name="crate{{i}}"
@@ -201,27 +189,17 @@
               </div>
             </div>
             <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select readonly  name="cdrCr{{i}}"
-                  [(ngModel)]="c.drCr">
-                    <option value="C">CREDIT</option>
-                  </select>
+              <div class="row" *ngIf="i==clength-1 && fullDiff=='D'">
+                <div class="col-md-2 col-6">
+                  <mat-icon *ngIf="clength>1" (click)="removeCSlab()">remove_circle</mat-icon>
+                </div>
+                <div class="col-md-2 col-6">
+
+                <mat-icon (click)="addCSlab()">add_circle</mat-icon>
                 </div>
               </div>
             </div>
-  
-            <div class="row container m-0 p-0 mb-2 mt-2" *ngIf="i==clength-1 && fullDiff=='D'">
-              <div class="col-md-1 offset-md-10 col-4">
-                <button *ngIf="clength>1" type="button" class="btn btn-danger" (click)="removeCSlab()">-</button>
-              </div>
-              <div class="col-md-1 col-4">
-                <button type="button" class="btn btn-success" (click)="addCSlab()">+</button>
-              </div>
-            </div>
+
           </div>
           </div>
         </div>
@@ -264,25 +242,12 @@
                 <div class="col-md-7">
                   <input
                     type="number"
-                    step=".00000001"
+                    step=".01"
                     required
                     class="form-control"
                     name="drate"
                   [(ngModel)]="drate"
                   />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select readonly name="ddrCR"
-                  [(ngModel)]="ddrCr">
-                    <option value="D">DEBIT</option>
-                  </select>
                 </div>
               </div>
             </div>
@@ -323,7 +288,7 @@
                 <div class="col-md-7">
                   <input
                     type="number"
-                    step=".00000001"
+                    step=".01"
                     required
                     class="form-control"
                     name="drate{{i}}"
@@ -333,27 +298,16 @@
               </div>
             </div>
             <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select readonly  name="ddrCr{{i}}"
-                  [(ngModel)]="d.drCr">
-                    <option value="D">DEBIT</option>
-                  </select>
+              <div class="row"  *ngIf="i==dlength-1 && fullDiff=='D'">
+                <div class="col-md-2 col-4">
+                  <mat-icon *ngIf="dlength>1" (click)="removeDSlab()">remove_circle</mat-icon>
+                </div>
+                <div class="col-md-2 col-4">
+                  <mat-icon (click)="addDSlab()">add_circle</mat-icon>
                 </div>
               </div>
             </div>
-  
-            <div class="row container m-0 p-0 mt-2"  *ngIf="i==dlength-1 && fullDiff=='D'">
-              <div class="col-md-1 offset-md-10 col-4">
-                <button *ngIf="dlength>1" type="button" class="btn btn-danger" (click)="removeDSlab()">-</button>
-              </div>
-              <div class="col-md-1 col-4">
-                <button type="button" class="btn btn-success" (click)="addDSlab()">+</button>
-              </div>
-            </div>
+
           </div>
           </div>
           </div>
@@ -471,7 +425,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <select name="fullDiff" disabled [(ngModel)]="rinterest.fullDiff"
+                <select name="fullDiff" disabled [(ngModel)]="rinterest.fullDiff" class="form-control"
                 >
                   <option value="F" selected>FULL</option>
                   <option value="D">DIFFERENTIAL</option>
@@ -522,25 +476,12 @@
                 <div class="col-md-7">
                   <input readonly
                     type="number"
-                    step=".00000001"
+                    step=".01"
                     required
                     class="form-control"
                     name="crate{{i}}"
                     [(ngModel)]="c.rate"
                   />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select disabled  name="cdrCr{{i}}" [(ngModel)]="c.drCr"
-                  >
-                    <option value="C">CREDIT</option>
-                  </select>
                 </div>
               </div>
             </div>
@@ -590,27 +531,13 @@
                 <div class="col-md-7">
                   <input readonly
                     type="number"
-                    step=".00000001"
+                    step=".01"
                     required
                     class="form-control"
                     name="drate{{i}}"
                     [(ngModel)]="d.rate"
                     
                   />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select disabled  name="ddrCr{{i}}"
-                  [(ngModel)]="d.drCr"
-                  >
-                    <option value="D">DEBIT</option>
-                  </select>
                 </div>
               </div>
             </div>
@@ -707,7 +634,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <select name="fullDiff" disabled [(ngModel)]="rinterest.fullDiff"
+                <select name="fullDiff" disabled [(ngModel)]="rinterest.fullDiff" class="form-control"
                 >
                   <option value="F" selected>FULL</option>
                   <option value="D">DIFFERENTIAL</option>
@@ -744,7 +671,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input [readonly]="i!=clength-1" [required]="interest.fullDiff=='D'" [disabled]="interest.fullDiff=='F'" type="number" class="form-control"  name="cto{{i}}"
+                  <input [readonly]="i!=clength-1" [required]="interest.fullDiff=='D'" [disabled]="rinterest.fullDiff=='F'" type="number" class="form-control"  name="cto{{i}}"
                   [(ngModel)]="c.toAmount"
                   />
                 </div>
@@ -767,28 +694,19 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select disabled  name="cdrCr{{i}}" [(ngModel)]="c.drCr"
-                  >
-                    <option value="C">CREDIT</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-  
-            <div class="row container m-0 p-0 mb-2 mt-2" *ngIf="i==clength-1 && interest.fullDiff=='D'">
-              <div class="col-md-1 offset-md-10 col-4">
-                <button *ngIf="clength>1" type="button" class="btn btn-danger" (click)="removeCSlab()">-</button>
-              </div>
-              <div class="col-md-1 col-4">
-                <button type="button" class="btn btn-success" (click)="addCSlab()">+</button>
-              </div>
-            </div>
+
+
+  <div class="col-md-3">
+    <div class="row container m-0 p-0 mb-2 mt-2" *ngIf="i==clength-1 && interest.fullDiff=='D'">
+      <div class="col-md-1 offset-md-10 col-4">
+        <button *ngIf="clength>1" type="button" class="btn btn-danger" (click)="removeCSlab()">-</button>
+      </div>
+      <div class="col-md-1 col-4">
+        <button type="button" class="btn btn-success" (click)="addCSlab()">+</button>
+      </div>
+    </div>
+  </div>
+
   
           </div>
           </div>
@@ -847,28 +765,17 @@
               </div>
             </div>
             <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select disabled  name="ddrCr{{i}}"
-                  [(ngModel)]="d.drCr"
-                  >
-                    <option value="D">DEBIT</option>
-                  </select>
+              <div class="row container m-0 p-0 mt-2"  *ngIf="i==dlength-1 && interest.fullDiff=='D'">
+                <div class="col-md-1 offset-md-10 col-4">
+                  <button *ngIf="dlength>1" type="button" class="btn btn-danger" (click)="removeDSlab()">-</button>
+                </div>
+                <div class="col-md-1 col-4">
+                  <button type="button" class="btn btn-success" (click)="addDSlab()">+</button>
                 </div>
               </div>
             </div>
   
-            <div class="row container m-0 p-0 mt-2"  *ngIf="i==dlength-1 && interest.fullDiff=='D'">
-              <div class="col-md-1 offset-md-10 col-4">
-                <button *ngIf="dlength>1" type="button" class="btn btn-danger" (click)="removeDSlab()">-</button>
-              </div>
-              <div class="col-md-1 col-4">
-                <button type="button" class="btn btn-success" (click)="addDSlab()">+</button>
-              </div>
-            </div>
+
   
           </div>
   
@@ -1039,19 +946,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select disabled  name="cdrCr{{i}}" [(ngModel)]="c.drCr"
-                  >
-                    <option value="C">CREDIT</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+
           </div>
           </div>
         </div>
@@ -1105,20 +1000,6 @@
                     [(ngModel)]="d.rate"
                     
                   />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group row mt-1">
-                <label for="iacc" class="col-md-4 col-form-label text-left"
-                  >Dr/Cr</label
-                >
-                <div class="col-md-6">
-                  <select disabled  name="ddrCr{{i}}"
-                  [(ngModel)]="d.drCr"
-                  >
-                    <option value="D">DEBIT</option>
-                  </select>
                 </div>
               </div>
             </div>

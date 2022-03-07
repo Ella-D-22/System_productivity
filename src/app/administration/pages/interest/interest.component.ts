@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Interest } from './interfaces/interest';
 import { Slab } from './interfaces/slab';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { InterestService } from './interest.service';
 import { Router } from '@angular/router';
+
+import { CurrencyLookupComponent } from '../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 
 import {
   MatSnackBar,
@@ -60,11 +63,13 @@ export class InterestComponent implements OnInit {
 
   rcSlabs: Slab[]=[]
   rdSlabs: Slab[]=[]
+  currency_name: any;
 
   // slabs: Slab[]=[]
 
   constructor(private router: Router,
     private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
     private interestservice: InterestService) {
       this.code = this.router.getCurrentNavigation()?.extras.state;
       this.interestCode=this.code.code
@@ -298,5 +303,17 @@ export class InterestComponent implements OnInit {
       }
     );
 
+  }
+
+  currencyLookup(): void {
+    const dialogRef = this.dialog.open(CurrencyLookupComponent, {
+      height: '400px',
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.currency_name = result.data.ccy_name;
+      this.currency = result.data.ccy;
+      //this.formData.controls.chrg_calc_crncy.setValue(result.data);
+    });
   }
 }
