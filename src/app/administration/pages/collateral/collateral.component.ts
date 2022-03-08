@@ -124,9 +124,7 @@ export class CollateralComponent implements OnInit {
     'Daily', 'Weekly','Monthly', 'Yearly', 'None'
   ]
   
-
   formData = this.formBuilder.group({
-
     // General detalails for collaterals
     collateralType : ['', [Validators.required]],
     collateralCode :['', [Validators.required, Validators.maxLength(4)]],
@@ -268,127 +266,7 @@ export class CollateralComponent implements OnInit {
   
 
   disabledFormControl(){
-    this.formData.controls['collateralCode'].disable();
-    this.formData.controls['collateralType'].disable();
-    this.formData.controls['description'].disable();
-    this.formData.controls['loanValue'].disable();
-    this.formData.controls['marginPercent'].disable();
-    this.formData.controls['marketValue'].disable();
-    this.formData.controls['otherDetails'].disable()
-    this.formData.controls['chargeEventForLodging'].disable();
-    this.formData.controls['chargeEventForWithdrawal'].disable();
-    this.formData.controls['percentageDrawingPower'].disable();
-    this.formData.controls['percentageLoanToTake'].disable();
-    this.formData.controls['lastEvaluationDate'].disable();
-    this.formData.controls['ceilingLimit'].disable();
-    this.formData.controls['currencyCollateral'].disable();
-     //1. Vehicle and Machineries
-     this.formData.controls['yearofManufacture'].disable();
-     this.formData.controls['dateofPurchase'].disable();
-     this.formData.controls['registrationNumber'].disable();
-     this.formData.controls['chasisNumber'].disable();
-     this.formData.controls['engineNo'].disable();
-     this.formData.controls['registeredownerName'].disable();
-     this.formData.controls['model'].disable();
-     this.formData.controls['manufacture'].disable();
-     this.formData.controls['machineNo'].disable();
-
-         //2.Immovable Properties
-    this.formData.controls['propertyDocumentNo'].disable();
-    this.formData.controls['purchaseDate'].disable();
-    this.formData.controls['builtArea'].disable();
-    this.formData.controls['landArea'].disable();
-    this.formData.controls['unitMeasurement'].disable();
-    this.formData.controls['propertyAddress'].disable();
-    this.formData.controls['leased'].disable();
-    this.formData.controls['leasedExpiryDate'].disable();
-    this.formData.controls['ageBuilding'].disable();
-
-     //3.Stock
-     this.formData.controls['lodgedDate'].disable();
-     this.formData.controls['collateralValue'].disable();
-     this.formData.controls['frequencyforSubmission'].disable();
-     this.formData.controls['applypenalInterest'].disable();
-     this.formData.controls['reviewDate'].disable();
-     this.formData.controls['dueDate'].disable();
-     this.formData.controls['withdrawnDate'].disable();
-    //4.Term Deposits
-    this.formData.controls['depositAccountNo'].disable();
-    this.formData.controls['denominationsNo'].disable();
-    this.formData.controls['fullBenefit'].disable();
-    this.formData.controls['apportionedValue'].disable();
-    this.formData.controls['lienAmount'].disable();
-
-    //5.Shares
-    this.formData.controls['companyDetails:'].disable();
-    this.formData.controls['sharesCapital'].disable();
-    this.formData.controls['nosharesIsssued'].disable();
-    this.formData.controls['contactDetails'].disable();
-     //Insurance Details
-    this.formData.controls['insuranceType'].disable();
-    this.formData.controls['policyNo'].disable();
-    this.formData.controls['policyAmount'].disable();
-    this.formData.controls['insurerDetails'].disable();
-    this.formData.controls['risk_cover_start_date'].disable();
-    this.formData.controls['risk_cover_end_date'].disable();
-    this.formData.controls['last_premium_paid_date'].disable();
-    this.formData.controls['premiumAmount'].disable();
-    this.formData.controls['frequency'].disable();
-    this.formData.controls['itemsInsured'].disable();
-    this.formData.controls['notes'].disable();
- 
-     //receipt and payment
-    this.formData.controls['name'].disable();
-    this.formData.controls['city'].disable();
-    this.formData.controls['address'].disable();
-    this.formData.controls['state'].disable();
-    this.formData.controls['postal_code'].disable();
-    this.formData.controls['receipt_type'].disable();
-    this.formData.controls['receipt_amount'].disable();
-    this.formData.controls['payment_type'].disable();
-    this.formData.controls['payment_amount'].disable();
-    this.formData.controls['due_date'].disable();
-    this.formData.controls['paid_received_date'].disable();
-    this.formData.controls['date_from'].disable();
-    this.formData.controls['to_date'].disable();
-    this.formData.controls['proof_verified_date'].disable();
-    this.formData.controls['mode_of_pay'].disable();
-    this.formData.controls['remarks'].disable();
- 
-     //inspection details
-    this.formData.controls['inspection_type'].disable();
-    this.formData.controls['insp_address'].disable();
-    this.formData.controls['insp_city'].disable();
-    this.formData.controls['insp_state'].disable();
-    this.formData.controls['insp_postal_code'].disable();
-    this.formData.controls['insp_telephone_no'].disable();
-    this.formData.controls['due_date_for_visit'].disable();
-    this.formData.controls['date_of_visit'].disable();
-    this.formData.controls['inspected_value'].disable();
-    this.formData.controls['inspection_emp_id'].disable();
-    this.formData.controls['insp_remarks'].disable();
- 
- 
-     //sales notes for Tradable Securities
- 
-    this.formData.controls['brokerName'].disable();
-    this.formData.controls['sent_for_sale_on'].disable();
-    this.formData.controls['sales_due_date'].disable();
-    this.formData.controls['sales_review_date'].disable();
-    this.formData.controls['proceeds_received_on'].disable();
-    this.formData.controls['stock_exchange'].disable();
-    this.formData.controls['expected_min_price'].disable();
-    this.formData.controls['sales_proceed_received'].disable();
-    this.formData.controls['sales_notes'].disable();
-    
-     //fees
-    this.formData.controls['percentage_amount_collected'].disable();
-    this.formData.controls['collected_amount'].disable();
- 
- 
-
-  
-
+    this.formData.disable()
   }
   getPage(){
     this.function_type = this.message.function_type;

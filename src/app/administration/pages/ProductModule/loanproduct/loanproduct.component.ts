@@ -7,7 +7,9 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { InterestLookupComponent } from '../../interest/interest-lookup/interest-lookup.component';
 import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
+import { LoanAccountService } from '../../loan-account/loan-account.service';
 import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
@@ -49,7 +51,7 @@ export class LoanproductComponent implements OnInit {
     'P-Personal Loan','M-Mortage/Housing Loan','R-Property/Loan','S-Student/Educational Loan','A-Auto Loan','C-Consumer Loan','O-Other Loan'
   ]
    eiFormulaFlgArray: any = [
-     'P-PMT Formula','M-EMI Formula','F-Flat Rate','R-Rule of 78'
+     'P-PMT Formula','F-Flat Rate'
    ]
    weeksArray: any = [
      'Week 1', 'Week 2','Week 3', 'Week 4'
@@ -76,18 +78,10 @@ export class LoanproductComponent implements OnInit {
      '22','23','24','25','26','27','28','29','30','31'
    ]
    loanRepaymentMethodsArray: any = [
-    'B – Bill to employer',
-    'D –Electronic Clearing',
     'E – Recover up to Effective Amount',
-    'H – Recover through ACH',
-    'M – Multisource repayment',
-    'N – No batch recovery',
-    'P –Post Dated cheques',
+    'C – Cash Repayment',
     'S – Recover from Salary',
-    'T – Recover by Granting TOD'
    ]
-
-   
 
    months = Array.from({length: 12}, (item, i) => {
     return new Date(0, i).toLocaleString('en-US', {month: 'long'})
@@ -115,6 +109,14 @@ export class LoanproductComponent implements OnInit {
   laa_normal_int_received_ac: any;
   laa_penal_int_received_ac: any;
   laa_advance_int_ac: any;
+  interestCode: any;
+  laa_principal_lossline_ac: any;
+  laa_principal_lossline_ac_desc: any;
+  laa_recovery_lossline_ac: any;
+  laa_recovery_lossline_ac_desc: any;
+  data: import("/home/coullence/Documents/Production Apps Solutions/Sacco_Solution/Production/SACCO-Clientside/src/app/administration/pages/loan-account/interfaces/response").Response;
+  laa_fee_cr_placeholder: any;
+  laa_fee_dr_placeholder: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -167,7 +169,44 @@ export class LoanproductComponent implements OnInit {
   }
 
 
+  intTableCodeLookup(): void {
+      const cdialogRef = this.dialog.open(InterestLookupComponent, {
+      
+      });
+      cdialogRef.afterClosed().subscribe((result) => {
+        console.log(result.data);
+        this.interestCode = result.data.interestCode;
+      });
+    }
+
     // Account lookups
+principal_lossline_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.laa_principal_lossline_ac = result.data.acid;
+    this.laa_principal_lossline_ac_desc = result.data.accountName;
+    this.formData.controls.laa_principal_lossline_ac.setValue(result.data.acid);
+  });
+}
+
+recoveryLosslineAcLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.laa_recovery_lossline_ac = result.data.acid;
+    this.laa_recovery_lossline_ac_desc = result.data.accountName;
+    this.formData.controls.laa_recovery_lossline_ac.setValue(result.data.acid);
+  });
+}
 normIntReceivedAccountLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -226,6 +265,20 @@ advanceIntAcLookup(): void {
   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
   cdialogRef.afterClosed().subscribe((result) => {
     this.laa_advance_int_ac = result.data.acid;
+    this.formData.controls.laa_advance_int_ac.setValue(result.data.acid);
+  });
+}
+
+laa_fee_cr_placeholderLookup(field_variable: any): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    field_variable = result.data.acid;
+    console.log(field_variable);
     this.formData.controls.laa_advance_int_ac.setValue(result.data.acid);
   });
 }
@@ -292,6 +345,7 @@ advanceIntAcLookup(): void {
     private dialog: MatDialog,
     private tokenStorage: TokenStorageService,
     private loanproductAPI:LoanproductService,
+    private accountsAPI: LoanAccountService,
     public datepipe: DatePipe
 
 
@@ -572,6 +626,41 @@ advanceIntAcLookup(): void {
       disabledFormControll(){
         this.formData.disable();
       }
+        // MAKE API CALLS FOR RELATED DATA
+  getAllAccounts(){
+    let type = 'oa'
+    this.subscription = this.accountsAPI.retrieveAllAccounts(type).subscribe(res=>{
+      this.data = res;
+      switch (this.data.entity.acid) {
+        case 0:
+            console.log("It is a Sunday.");
+            break;
+        case 1:
+            console.log("It is a Monday.");
+            break;
+        case 2:
+            console.log("It is a Tuesday.");
+            break;
+        case 3:
+            console.log("It is a Wednesday.");
+            break;
+        case 4:
+            console.log("It is a Thursday.");
+            break;
+        case 5:
+            console.log("It is a Friday.");
+            break;
+        case 6:
+            console.log("It is a Saturday.");
+            break;
+        default:
+            console.log("No such day exists!");
+            break;
+    }
+    })
+  }
+
+
       getPage(){
         this.subscription = this.loanproductAPI.currentMessage.subscribe(message =>{
           this.message = message;  

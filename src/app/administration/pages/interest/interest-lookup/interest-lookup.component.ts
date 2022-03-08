@@ -10,12 +10,12 @@ import { InterestService } from '../interest.service';
 @Component({
   selector: 'app-interest-lookup',
   templateUrl: './interest-lookup.component.html',
-  styleUrls: ['./interest-lookup.component.css']
+  styleUrls: ['./interest-lookup.component.scss']
 })
 export class InterestLookupComponent implements OnInit {
 
   isLoadingResults: boolean = true;
-  displayedColumns: string[] = ['code', 'description'];
+  displayedColumns: string[] = ['interestCode','startDate','endDate','fullDiff','currency','verifiedFlag'];
   // dataSource = branches;
   dataSource: MatTableDataSource<Interest>;
 
