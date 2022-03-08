@@ -64,8 +64,15 @@
                     <label class="start pull-left">Principal Lossline A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" formControlName="caa_principal_lossline_ac" class="form-control" />
-                    <!-- <input  type="number" formControlName="caa_cr_int_prcnt_max" class="form-control-sub"/> -->
+                    <input  type="number" [value]="this.caa_principal_lossline_ac" formControlName="caa_principal_lossline_ac" class="form-control" />
+                    <mat-icon *ngIf="isEnabled" (click)="caa_principal_lossline_acLookup()">search</mat-icon>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.caa_principal_lossline_ac_desc}}</mat-hint>
                     </div>
                 </div>
               </div>
@@ -75,8 +82,15 @@
                     <label class="start pull-left">Recovery Lossline A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input  type="number" formControlName="caa_recovery_lossline_ac" class="form-control" />
-                    <!-- <input  type="number" formControlName="caa_dr_int_prcnt_max" class="form-control form-control-sub"/> -->
+                    <input  type="number" [value]="this.caa_recovery_lossline_ac" formControlName="caa_recovery_lossline_ac" class="form-control" />
+                    <mat-icon *ngIf="isEnabled" (click)="caa_recovery_lossline_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.caa_recovery_lossline_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -88,8 +102,15 @@
                     <label class="start pull-left">Charge Off A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" formControlName="caa_charge_off_ac" class="form-control" />
-                    <!-- <input  type="number" formControlName="caa_cr_int_prcnt_max" class="form-control-sub"/> -->
+                    <input  type="number" [value]="this.caa_charge_off_ac" formControlName="caa_charge_off_ac" class="form-control" />
+                    <mat-icon *ngIf="isEnabled" (click)="caa_charge_off_acLookup()">search</mat-icon>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.caa_charge_off_ac_desc}}</mat-hint>
                     </div>
                 </div>
               </div>
@@ -191,12 +212,18 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input type="text" [value]="this.caa_normal_int_receivable_ac" formControlName="caa_normal_int_receivable_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="caa_normal_int_receivable_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.caa_normal_int_receivable_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
             </div>
-      
       
             <div class="row">
               <div class="col-md-6 col-sm-12"> 
@@ -206,7 +233,14 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
                     <input type="text" [value]="this.caa_penal_int_receivable_ac" formControlName="caa_penal_int_receivable_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="penalIntRecAcLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="caa_penal_int_receivable_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.caa_penal_int_receivable_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -221,6 +255,13 @@
                      <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
                   </div>
                 </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.caa_normal_int_received_ac_desc}}</mat-hint>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -231,7 +272,14 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
                     <input type="text" [value]="this.caa_penal_int_received_ac" formControlName="caa_penal_int_received_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="penalIntReceivedaccountLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="caa_penal_int_received_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.caa_penal_int_received_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -242,7 +290,14 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input type="text" [value]="this.caa_advance_int_ac" formControlName="caa_advance_int_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="advanceIntAcLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="caa_advance_int_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.caa_advance_int_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -342,10 +397,6 @@
                     <mat-radio-button value="Yes">Yes.</mat-radio-button>
                     <mat-radio-button value="No">No.</mat-radio-button>
                   </mat-radio-group>
-
-
-
-
                 </div>
                </div>            
         </div>
@@ -384,11 +435,8 @@
        </div> 
       </div>
       </div>
-
-
         <div class="row">
-            <div class="col-md-6 col-sm-12">
-                         
+            <div class="col-md-6 col-sm-12">        
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
@@ -628,7 +676,15 @@
                   <label class="start pull-left">Amortize Credit PH.</label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                  <input  type="number" formControlName="caa_fee_amortize_credit_ph" class="form-control" />
+                  <input  type="number" [value]="this.caa_fee_amortize_credit_ph" formControlName="caa_fee_amortize_credit_ph" class="form-control"/>
+                  <mat-icon *ngIf="isEnabled" (click)="caa_fee_amortize_credit_phLookup()">search</mat-icon>
+                  </div>
+              </div>
+              <div class="form-group"  >
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.caa_fee_amortize_credit_ph_desc}}</mat-hint>
                   </div>
               </div>
             </div>
@@ -638,7 +694,15 @@
                   <label class="start pull-left">Amortize Debit PH</label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column">
-                  <input  type="number" formControlName="caa_fee_amortize_debit_ph" class="form-control" />
+                  <input  type="number" [value]="this.caa_fee_amortize_debit_ph" formControlName="caa_fee_amortize_debit_ph" class="form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="caa_fee_amortize_debit_phLookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.caa_fee_amortize_debit_ph_desc}}</mat-hint>
                 </div>
               </div>
             </div>
@@ -675,9 +739,17 @@
                  <label class="start pull-left">Dr.Placeholder<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="caa_fee_dr_placeholder" class="pull-right form-control" />
+                 <input type="text" [value]="this.caa_fee_dr_placeholder" oninput ="this.value=this.value.toUpperCase()" formControlName="caa_fee_dr_placeholder" class="pull-right form-control" />
+                 <mat-icon *ngIf="isEnabled" (click)="caa_fee_dr_placeholderLookup()">search</mat-icon>
                 </div>
-             </div> 
+             </div>
+             <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+                <mat-hint>{{this.caa_fee_dr_placeholder_desc}}</mat-hint>
+              </div>
+           </div>  
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -685,9 +757,17 @@
                    <label class="start pull-left">Cr.Placeholder</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text"  oninput ="this.value=this.value.toUpperCase()" formControlName="caa_fee_cr_placeholder" class="pull-right form-control"/>
+                    <input type="text" [value]="this.caa_fee_cr_placeholder"  oninput ="this.value=this.value.toUpperCase()" formControlName="caa_fee_cr_placeholder" class="pull-right form-control"/>
+                    <mat-icon *ngIf="isEnabled" (click)="caa_fee_cr_placeholderLookup()">search</mat-icon>              
                   </div>
-               </div>            
+               </div>   
+               <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.caa_fee_cr_placeholder_desc}}</mat-hint>            
+                </div>
+             </div>          
           </div>
           </div>
          

@@ -104,8 +104,16 @@
                   <label class="start pull-left">Charge Off A/c.</label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                  <input  type="number" formControlName="laa_charge_off_ac" class="form-control" />
-               <mat-icon *ngIf="isEnabled" (click)="penalIntReceivedaccountLookup()">search</mat-icon>
+                  <input  type="number" [value]="this.laa_charge_off_ac" formControlName="laa_charge_off_ac" class="form-control" />
+               <mat-icon *ngIf="isEnabled" (click)="laa_charge_off_acLookup()">search</mat-icon>
+                  </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <!-- <label class="start pull-left">Charge Off A/c.</label> -->
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.laa_charge_off_ac_desc}}</mat-hint>
                   </div>
               </div>
             </div>
@@ -180,10 +188,10 @@
               <label class="start pull-left">Interest Table Code.</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" [value]="this.laa_normal_int_receivable_ac" formControlName="laa_normal_int_receivable_ac" class="pull-right form-control"/>
+              <input type="text" [value]="this.laa_interest_table_code" formControlName="laa_interest_table_code" class="pull-right form-control"/>
                <mat-icon *ngIf="isEnabled" (click)="intTableCodeLookup()">search</mat-icon>
             </div>
-          </div>  
+          </div> 
       </div>
       </div>
       <div class="row">
@@ -207,7 +215,7 @@
             </div>
             <div class="col-md-6 col-sm-12 form-column">
               <input type="text" [value]="this.laa_normal_int_receivable_ac" formControlName="laa_normal_int_receivable_ac" class="pull-right form-control"/>
-               <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
+               <mat-icon *ngIf="isEnabled" (click)="laa_normal_int_receivable_acLookup()">search</mat-icon>
             </div>
           </div>
         </div>
@@ -475,9 +483,9 @@
                    <label class="start pull-left">First Priority</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <select   class="form-control" formControlName="laa_fee_frequency" >
+                    <select  class="form-control" formControlName="laa_fee_frequency" >
                       <option value="" disabled>-- Select --</option>
-                      <option *ngFor="let flag of chronologicalOrderArray" [value]="flag">{{ flag }}</option>
+                      <option  *ngFor="let flag of chronologicalOrderArray" [value]="flag">{{ flag }}</option>
                     </select>
                   </div>
                </div> 
@@ -1507,10 +1515,17 @@
              <label class="start pull-left">A/c. Int. Suspense<span class="warning">*</span></label>
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
-             <input type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_ac_int_suspense" class="pull-right form-control" />
-           <mat-icon>search</mat-icon>
+             <input type="text" [value]="this.laa_ac_int_suspense" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_ac_int_suspense" class="pull-right form-control" />
+             <mat-icon *ngIf="isEnabled" (click)="laa_ac_int_suspenseLookup()">search</mat-icon>
             </div>
          </div> 
+         <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+          </div>
+          <div class="col-md-6 col-sm-12 form-column ">
+            <mat-hint>{{this.laa_ac_int_suspense_desc}}</mat-hint>
+          </div>
+       </div> 
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -1682,18 +1697,18 @@
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
              <input type="text" [value]="this.laa_fee_dr_placeholder" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_fee_dr_placeholder" class="pull-right form-control" />
-             <mat-icon (click)="laa_fee_cr_placeholderLookup(this.laa_fee_cr_placeholder)">search</mat-icon>
+             <mat-icon (click)="laa_fee_dr_placeholderLookup()">search</mat-icon>
             </div>
          </div> 
-         <div class="form-group">
+         <!-- <div class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
            <label class="start pull-left">Dr.Placeholder<span class="warning">*</span></label>
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
            <input type="text" [value]="this.laa_fee_dr_placeholder" oninput ="this.value=this.value.toUpperCase()" formControlName="laa_fee_dr_placeholder" class="pull-right form-control" />
-           <mat-icon (click)="laa_fee_cr_placeholderLookup(this.laa_fee_cr_placeholder)">search</mat-icon>
+           <mat-icon (click)="laa_fee_dr_placeholderLookup()">search</mat-icon>
           </div>
-       </div> 
+       </div>  -->
 
         </div>
         <div class="col-md-6 col-sm-12">
@@ -1703,7 +1718,7 @@
               </div>
               <div class="col-md-6 col-sm-12 form-column">
                 <input type="text" [value]="this.laa_fee_cr_placeholder" formControlName="laa_fee_cr_placeholder" class="pull-right form-control"/>
-                 <mat-icon (click)="laa_fee_cr_placeholderLookup(this.laa_fee_cr_placeholder)">search</mat-icon>
+                 <mat-icon (click)="laa_fee_cr_placeholderLookup()">search</mat-icon>
               </div>
            </div>  
            <div class="form-group">

@@ -62,9 +62,11 @@ export class LoanproductComponent implements OnInit {
    int_comp_freq_array: any = ['D- Daily', 'W – Weekly', 'F – Fortnightly', 'M – Monthly','Q- Quarterly','H – Half yearly', 'Y- Yearly','T-Twice a month']
    ei_payment_freq_array: any = ['D- Daily','W – Weekly','F – Fortnightly','M – Monthly','Q- Quarterly','H – Half yearly', 'Y- Yearly']
    
-   chronologicalOrderArray: any = [
-     'Principal', 'Interests','Charges','Collection'
-   ]
+
+
+
+
+
   
    //  debitIntCompFreqArray: any = [
   //   'Daily','Monthly', 'Quarterly','No compounding'
@@ -117,6 +119,16 @@ export class LoanproductComponent implements OnInit {
   data: import("/home/coullence/Documents/Production Apps Solutions/Sacco_Solution/Production/SACCO-Clientside/src/app/administration/pages/loan-account/interfaces/response").Response;
   laa_fee_cr_placeholder: any;
   laa_fee_dr_placeholder: any;
+  laa_fee_amortize_debit_ph: any;
+  laa_charge_off_ac: any;
+  laa_charge_off_ac_desc: any;
+  laa_interest_table_code: any;
+  laa_interest_table_code_desc: any;
+  laa_ac_int_suspense: any;
+  laa_ac_int_suspense_desc: any;
+  laa_fee_amortize_credit_ph: any;
+  laa_fee_amortize_credit_ph_desc: any;
+  laa_fee_amortize_debit_ph_desc: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -174,8 +186,8 @@ export class LoanproductComponent implements OnInit {
       
       });
       cdialogRef.afterClosed().subscribe((result) => {
-        console.log(result.data);
-        this.interestCode = result.data.interestCode;
+        this.laa_interest_table_code = result.data.interestCode;
+
       });
     }
 
@@ -194,6 +206,20 @@ principal_lossline_acLookup(): void {
   });
 }
 
+laa_charge_off_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.laa_charge_off_ac = result.data.acid;
+    this.laa_charge_off_ac_desc = result.data.accountName;
+    this.formData.controls.laa_charge_off_ac.setValue(result.data.acid);
+  });
+}
+
 recoveryLosslineAcLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -207,7 +233,7 @@ recoveryLosslineAcLookup(): void {
     this.formData.controls.laa_recovery_lossline_ac.setValue(result.data.acid);
   });
 }
-normIntReceivedAccountLookup(): void {
+laa_normal_int_receivable_acLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
   dconfig.data={
@@ -217,6 +243,19 @@ normIntReceivedAccountLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.laa_normal_int_receivable_ac = result.data.acid;
     this.formData.controls.laa_normal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+
+normIntReceivedAccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.laa_normal_int_received_ac = result.data.acid;
+    this.formData.controls.laa_normal_int_received_ac.setValue(result.data.acid);
   });
 }
 
@@ -269,7 +308,7 @@ advanceIntAcLookup(): void {
   });
 }
 
-laa_fee_cr_placeholderLookup(field_variable: any): void {
+laa_fee_dr_placeholderLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
   dconfig.data={
@@ -277,15 +316,65 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
   }
   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
   cdialogRef.afterClosed().subscribe((result) => {
-    field_variable = result.data.acid;
-    console.log(field_variable);
-    this.formData.controls.laa_advance_int_ac.setValue(result.data.acid);
+    this.laa_fee_dr_placeholder = result.data.acid;
+    this.formData.controls.laa_fee_dr_placeholder.setValue(result.data.acid);
+  });
+}
+laa_fee_cr_placeholderLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.laa_fee_cr_placeholder = result.data.acid;
+    this.formData.controls.laa_fee_cr_placeholder.setValue(result.data.acid);
+  });
+}
+laa_ac_int_suspenseLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.laa_ac_int_suspense = result.data.acid;
+    this.laa_ac_int_suspense_desc = result.data.accountName;
+    this.formData.controls.laa_ac_int_suspense.setValue(result.data.acid);
+  });
+}
+
+laa_fee_amortize_credit_phLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.laa_fee_amortize_credit_ph = result.data.acid;
+    this.laa_fee_amortize_credit_ph_desc = result.data.accountName;
+    this.formData.controls.laa_fee_amortize_credit_ph.setValue(result.data.acid);
+  });
+}
+laa_fee_amortize_debit_phLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.laa_fee_amortize_debit_ph = result.data.acid;
+    this.laa_fee_amortize_debit_ph_desc = result.data.accountName;
+    this.formData.controls.laa_fee_amortize_debit_ph.setValue(result.data.acid);
   });
 }
 
 
-  
-  
+
   dt = new Date();
   month = this.dt.getMonth();
   year = this.dt.getFullYear();
@@ -351,8 +440,41 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
 
     ) { }
 
+        //  chronologicalOrderArray: any = [
+        //   'Principal', 'Interests','Charges','Collection'
+        // ]
+     
+        chronologicalOrderArray = new Array();
+
+        setNewChronologicalElements(){
+          this.chronologicalOrderArray =[
+              'Principal', 'Interests','Charges','Collection'
+            ]
+        }
+        // removeChronologicalElement(event:any){
+        //   let i = event.target.value;
+        //   this.chronologicalOrderArray.slice(i)
+        //   console.log("remains", this.chronologicalOrderArray);
+          
+        // }
+
+        // onSelectFunction(event:any){
+        //   if(event.target.value != "A-Add"){
+        //     this.existingData = true;
+        //     this.formData.controls.scheme_code_desc.disable()
+        //   }else if(event.target.value == "A-Add"){
+        //     this.formData.controls.scheme_code_desc.enable()
+        //     this.existingData = false;
+      
+        //     // this.formData.controls.currency_ccy.setValidators([])
+        //     // this.formData.controls.currency_ccy.setValue("");
+        //   }
+        // }
+
+
     submitted = false;
       ngOnInit() {
+        this.setNewChronologicalElements();
         this.getPage();
       }
       feeArray= new Array();
@@ -423,13 +545,11 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
         laa_grace_prd_for_late_fee_mmm:[''],
         laa_grace_prd_for_late_fee_ddd:[''],
         laa_tolerance_limit_for_dpd_cycle:[''],
-        laa_consdr_tolerance_for_late_fee:[''],
         laa_penal_int_on_principal_demand_overdue:[''],
         laa_penal_int_on_int_demand_overdue:[''],
         laa_no_penal_int_on_penal_int_demand:[''],
         laa_penal_int_frm_dmd_eff_date:[''],
         laa_penal_int_based_on:[''],
-        laa_consider_tolerance_for_late_fee:[''],
         laa_penal_int_prod_mthd:[''],
         laa_norm_int_prod_mthd:[''],
         laa_penal_int_rate_mthd:[''],
@@ -495,6 +615,8 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
            laa_is_gl_subhead_deleted:['']
            
          })
+
+        
 
          initLoanForm(){
          this.newData = true;
@@ -737,13 +859,12 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
             laa_grace_prd_for_late_fee_mmm:[''],
             laa_grace_prd_for_late_fee_ddd:[''],
             laa_tolerance_limit_for_dpd_cycle:[''],
-            laa_consdr_tolerance_for_late_fee:[''],
+            
             laa_penal_int_on_principal_demand_overdue:[''],
             laa_penal_int_on_int_demand_overdue:[''],
             laa_no_penal_int_on_penal_int_demand:[''],
             laa_penal_int_frm_dmd_eff_date:[''],
             laa_penal_int_based_on:[''],
-            laa_consider_tolerance_for_late_fee:[''],
             laa_penal_int_prod_mthd:[''],
             laa_norm_int_prod_mthd:[''],
             laa_penal_int_rate_mthd:[''],
@@ -798,9 +919,7 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
               
             this.feeArray = this.results.laa_loanfees;
             this.glSubheadArray = this.results.laa_glsubheads;
-
-            console.log("These are all the fees", this.feeArray );
-            
+          
             
             this.formData = this.fb.group({
 
@@ -869,13 +988,11 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
               laa_grace_prd_for_late_fee_mmm:[this.results.laa_grace_prd_for_late_fee_mmm],
               laa_grace_prd_for_late_fee_ddd:[this.results.laa_grace_prd_for_late_fee_ddd],
               laa_tolerance_limit_for_dpd_cycle:[this.results.laa_tolerance_limit_for_dpd_cycle],
-              laa_consdr_tolerance_for_late_fee:[this.results.laa_consdr_tolerance_for_late_fee],
               laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
               laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
               laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
-              laa_consider_tolerance_for_late_fee:[this.results.laa_consider_tolerance_for_late_fee],
               laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
               laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
               laa_penal_int_rate_mthd:[this.results.laa_penal_int_rate_mthd],
@@ -1000,13 +1117,12 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
               laa_grace_prd_for_late_fee_mmm:[this.results.laa_grace_prd_for_late_fee_mmm],
               laa_grace_prd_for_late_fee_ddd:[this.results.laa_grace_prd_for_late_fee_ddd],
               laa_tolerance_limit_for_dpd_cycle:[this.results.laa_tolerance_limit_for_dpd_cycle],
-              laa_consdr_tolerance_for_late_fee:[this.results.laa_consdr_tolerance_for_late_fee],
+              
               laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
               laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
               laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
-              laa_consider_tolerance_for_late_fee:[this.results.laa_consider_tolerance_for_late_fee],
               laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
               laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
               laa_penal_int_rate_mthd:[this.results.laa_penal_int_rate_mthd],
@@ -1139,13 +1255,12 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
               laa_grace_prd_for_late_fee_mmm:[this.results.laa_grace_prd_for_late_fee_mmm],
               laa_grace_prd_for_late_fee_ddd:[this.results.laa_grace_prd_for_late_fee_ddd],
               laa_tolerance_limit_for_dpd_cycle:[this.results.laa_tolerance_limit_for_dpd_cycle],
-              laa_consdr_tolerance_for_late_fee:[this.results.laa_consdr_tolerance_for_late_fee],
               laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
               laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
               laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
-              laa_consider_tolerance_for_late_fee:[this.results.laa_consider_tolerance_for_late_fee],
+              
               laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
               laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
               laa_penal_int_rate_mthd:[this.results.laa_penal_int_rate_mthd],
@@ -1279,13 +1394,12 @@ laa_fee_cr_placeholderLookup(field_variable: any): void {
               laa_grace_prd_for_late_fee_mmm:[this.results.laa_grace_prd_for_late_fee_mmm],
               laa_grace_prd_for_late_fee_ddd:[this.results.laa_grace_prd_for_late_fee_ddd],
               laa_tolerance_limit_for_dpd_cycle:[this.results.laa_tolerance_limit_for_dpd_cycle],
-              laa_consdr_tolerance_for_late_fee:[this.results.laa_consdr_tolerance_for_late_fee],
+              
               laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
               laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
               laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
-              laa_consider_tolerance_for_late_fee:[this.results.laa_consider_tolerance_for_late_fee],
               laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
               laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
               laa_penal_int_rate_mthd:[this.results.laa_penal_int_rate_mthd],

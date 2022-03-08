@@ -114,6 +114,25 @@ export class CurrentSchemeComponent implements OnInit {
   caa_normal_int_received_ac: any;
   caa_penal_int_received_ac: any;
   caa_advance_int_ac: any;
+  caa_principal_lossline_ac: any;
+  caa_principal_lossline_ac_desc: any;
+  caa_recovery_lossline_ac: any;
+  caa_recovery_lossline_ac_desc: any;
+  caa_charge_off_ac: any;
+  caa_charge_off_ac_desc: any;
+  caa_normal_int_receivable_ac_desc: any;
+  caa_penal_int_receivable_ac_desc: any;
+  caa_normal_int_received_ac_desc: any;
+  caa_penal_int_received_ac_desc: any;
+  caa_advance_int_ac_desc: any;
+  caa_fee_amortize_credit_ph: any;
+  caa_fee_amortize_credit_ph_desc: any;
+  caa_fee_amortize_debit_ph: any;
+  caa_fee_amortize_debit_ph_desc: any;
+  caa_fee_dr_placeholder: any;
+  caa_fee_dr_placeholder_desc: any;
+  caa_fee_cr_placeholder: any;
+  caa_fee_cr_placeholder_desc: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -357,19 +376,6 @@ export class CurrentSchemeComponent implements OnInit {
   }
 
   // Account lookups
-normIntReceivedAccountLookup(): void {
-  this.dtype="oa"
-  const dconfig= new MatDialogConfig()
-  dconfig.data={
-    type:this.dtype
-  }
-  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-  cdialogRef.afterClosed().subscribe((result) => {
-    this.caa_normal_int_receivable_ac = result.data.acid;
-    this.formData.controls.caa_normal_int_receivable_ac.setValue(result.data.acid);
-  });
-}
-
 penalIntRecAcLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -420,6 +426,177 @@ advanceIntAcLookup(): void {
 }
 
 
+
+caa_principal_lossline_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_principal_lossline_ac = result.data.acid;
+    this.caa_principal_lossline_ac_desc = result.data.accountName;
+    this.formData.controls.caa_principal_lossline_ac.setValue(result.data.acid);
+  });
+}
+
+caa_recovery_lossline_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_recovery_lossline_ac = result.data.acid;
+    this.caa_recovery_lossline_ac_desc = result.data.accountName;
+    this.formData.controls.caa_recovery_lossline_ac.setValue(result.data.acid);
+  });
+}
+
+caa_charge_off_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_charge_off_ac = result.data.acid;
+    this.caa_charge_off_ac_desc = result.data.accountName;
+    this.formData.controls.caa_charge_off_ac.setValue(result.data.acid);
+  });
+}
+
+caa_normal_int_receivable_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_normal_int_receivable_ac = result.data.acid;
+    this.caa_normal_int_receivable_ac_desc = result.data.accountName;
+    this.formData.controls.caa_normal_int_receivable_ac.setValue(result.data.acid);
+  });
+} 
+
+caa_penal_int_receivable_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_penal_int_receivable_ac = result.data.acid;
+    this.caa_penal_int_receivable_ac_desc = result.data.accountName;
+    this.formData.controls.caa_penal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+
+normIntReceivedAccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_normal_int_received_ac = result.data.acid;
+    this.caa_normal_int_received_ac_desc = result.data.accountName;
+    this.formData.controls.caa_normal_int_received_ac.setValue(result.data.acid);
+  });
+}
+
+
+caa_penal_int_received_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_penal_int_received_ac = result.data.acid;
+    this.caa_penal_int_received_ac_desc = result.data.accountName;
+    this.formData.controls.caa_penal_int_received_ac.setValue(result.data.acid);
+  });
+}
+
+caa_advance_int_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_advance_int_ac = result.data.acid;
+    this.caa_advance_int_ac_desc = result.data.accountName;
+    this.formData.controls.caa_advance_int_ac.setValue(result.data.acid);
+  });
+}
+
+caa_fee_amortize_credit_phLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_fee_amortize_credit_ph = result.data.acid;
+    this.caa_fee_amortize_credit_ph_desc = result.data.accountName;
+    this.formData.controls.caa_fee_amortize_credit_ph.setValue(result.data.acid);
+  });
+}
+
+
+caa_fee_amortize_debit_phLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_fee_amortize_debit_ph = result.data.acid;
+    this.caa_fee_amortize_debit_ph_desc = result.data.accountName;
+    this.formData.controls.caa_fee_amortize_debit_ph.setValue(result.data.acid);
+  });
+}
+
+caa_fee_dr_placeholderLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_fee_dr_placeholder = result.data.acid;
+    this.caa_fee_dr_placeholder_desc = result.data.accountName;
+    this.formData.controls.caa_fee_dr_placeholder.setValue(result.data.acid);
+  });
+}
+
+
+caa_fee_cr_placeholderLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.caa_fee_cr_placeholder = result.data.acid;
+    this.caa_fee_cr_placeholder_desc = result.data.accountName;
+    this.formData.controls.caa_fee_cr_placeholder.setValue(result.data.acid);
+  });
+}
   editLoanFeeForm(i: any) {
     this.newData = false;
     this.arrayIndex = this.feeArray[i];

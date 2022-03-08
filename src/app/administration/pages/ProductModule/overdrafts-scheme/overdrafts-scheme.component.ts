@@ -125,6 +125,24 @@ export class OverdraftsSchemeComponent implements OnInit {
   oda_normal_int_received_ac: any;
   oda_penal_int_received_ac: any;
   oda_advance_int_ac: any;
+  oda_principal_lossline_ac: any;
+  oda_principal_lossline_ac_desc: any;
+  oda_recovery_lossline_ac: any;
+  oda_recovery_lossline_ac_desc: any;
+  oda_charge_off_ac: any;
+  oda_charge_off_ac_desc: any;
+  oda_normal_int_receivable_ac_desc: any;
+  oda_penal_int_receivable_ac_desc: any;
+  oda_normal_int_received_ac_desc: any;
+  oda_penal_int_received_ac_desc: any;
+  oda_advance_int_ac_desc: any;
+  oda_fee_amortize_credit_ph: any;
+  oda_fee_amortize_credit_ph_desc: any;
+  oda_fee_amortize_debit_ph: any;
+  oda_fee_amortize_debit_ph_desc: any;
+  oda_fee_dr_placeholder_desc: any;
+  oda_fee_cr_placeholder: any;
+  oda_fee_cr_placeholder_desc: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -251,20 +269,6 @@ export class OverdraftsSchemeComponent implements OnInit {
   }
 
 
-      // Account lookups
-normIntReceivedAccountLookup(): void {
-  this.dtype="oa"
-  const dconfig= new MatDialogConfig()
-  dconfig.data={
-    type:this.dtype
-  }
-  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-  cdialogRef.afterClosed().subscribe((result) => {
-    this.oda_normal_int_receivable_ac = result.data.acid;
-    this.formData.controls.oda_normal_int_receivable_ac.setValue(result.data.acid);
-  });
-}
-
 penalIntRecAcLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -314,8 +318,174 @@ advanceIntAcLookup(): void {
   });
 }
 
+// ********************* Accounts Lookups 
+oda_principal_lossline_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_principal_lossline_ac = result.data.acid;
+    this.oda_principal_lossline_ac_desc = result.data.accountName;
+    this.formData.controls.oda_principal_lossline_ac.setValue(result.data.acid);
+  });
+}
+oda_recovery_lossline_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_recovery_lossline_ac = result.data.acid;
+    this.oda_recovery_lossline_ac_desc = result.data.accountName;
+    this.formData.controls.oda_recovery_lossline_ac.setValue(result.data.acid);
+  });
+}
+oda_charge_off_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_charge_off_ac = result.data.acid;
+    this.oda_charge_off_ac_desc = result.data.accountName;
+    this.formData.controls.oda_charge_off_ac.setValue(result.data.acid);
+  });
+}
+
+oda_normal_int_receivable_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_normal_int_receivable_ac = result.data.acid;
+    this.oda_normal_int_receivable_ac_desc = result.data.accountName;
+    this.formData.controls.oda_normal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+
+oda_penal_int_receivable_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_penal_int_receivable_ac = result.data.acid;
+    this.oda_penal_int_receivable_ac_desc = result.data.accountName;
+    this.formData.controls.oda_penal_int_receivable_ac.setValue(result.data.acid);
+  });
+}
+
+normIntReceivedAccountLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_normal_int_received_ac = result.data.acid;
+    this.oda_normal_int_received_ac_desc = result.data.accountName;
+    this.formData.controls.oda_normal_int_received_ac.setValue(result.data.acid);
+  });
+}
 
 
+oda_penal_int_received_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_penal_int_received_ac = result.data.acid;
+    this.oda_penal_int_received_ac_desc = result.data.accountName;
+    this.formData.controls.oda_penal_int_received_ac.setValue(result.data.acid);
+  });
+}
+
+oda_advance_int_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_advance_int_ac = result.data.acid;
+    this.oda_advance_int_ac_desc = result.data.accountName;
+    this.formData.controls.oda_advance_int_ac.setValue(result.data.acid);
+  });
+}
+
+
+oda_fee_amortize_credit_phLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_fee_amortize_credit_ph = result.data.acid;
+    this.oda_fee_amortize_credit_ph_desc = result.data.accountName;
+    this.formData.controls.oda_fee_amortize_credit_ph.setValue(result.data.acid);
+  });
+}
+
+oda_fee_amortize_debit_phLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_fee_amortize_debit_ph = result.data.acid;
+    this.oda_fee_amortize_debit_ph_desc = result.data.accountName;
+    this.formData.controls.oda_fee_amortize_debit_ph.setValue(result.data.acid);
+  });
+}
+
+oda_fee_dr_placeholder(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_fee_dr_placeholder = result.data.acid;
+    this.oda_fee_dr_placeholder_desc = result.data.accountName;
+    this.formData.controls.oda_fee_dr_placeholder.setValue(result.data.acid);
+  });
+}
+
+oda_fee_cr_placeholderLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.oda_fee_cr_placeholder = result.data.acid;
+    this.oda_fee_cr_placeholder_desc = result.data.accountName;
+    this.formData.controls.oda_fee_cr_placeholder.setValue(result.data.acid);
+  });
+}
 
   dt = new Date();
   month = this.dt.getMonth();
