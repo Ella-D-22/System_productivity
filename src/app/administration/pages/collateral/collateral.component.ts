@@ -443,14 +443,19 @@ export class CollateralComponent implements OnInit {
 
               this.collateralType= this.resData.entity.collateralType;
               if(this.collateralType == "VEHICLE & MACHINERIES"){
+                this.disabledFormControl()
                 this.vehicle_and_machineries = true;
               }else if(this.collateralType == "IMMOVABLE"){
+                this.disabledFormControl()
                 this.immovable = true;
               }else if(this.collateralType == "SHARES"){
+                this.disabledFormControl()
                 this.shares = true;
               }else if(this.collateralType == "STOCKS"){
+                this.disabledFormControl()
                 this.stocks = true;
               }else if(this.collateralType == "TERM DEPOSITS"){
+                this.disabledFormControl()
                 this.term_deposits = true;
               }
              

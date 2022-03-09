@@ -203,7 +203,7 @@
 
                <mat-tab class="mat-tab" label="Particulars">
 
-                <p> chege {{collateralType}}</p>
+
                         <br>  
                         <div *ngIf="this.vehicle_and_machineries">
                             <h3>Vehicles and Machineries</h3>
@@ -648,7 +648,10 @@
                                         <label for="" class="start pull-left">Full Benefit<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" oninput="this.value=this.value.toUpperCase()" formControlName="fullBenefit" class="form-control">
+                                        <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="caa_pl_ac_ccy">
+                                            <mat-radio-button value="Yes">Yes</mat-radio-button>
+                                            <mat-radio-button value="No">No</mat-radio-button>
+                                          </mat-radio-group>
                                     </div>
                                 </div>
                             </div>
