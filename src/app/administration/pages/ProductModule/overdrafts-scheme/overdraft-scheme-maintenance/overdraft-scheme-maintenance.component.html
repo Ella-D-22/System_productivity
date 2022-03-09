@@ -30,7 +30,7 @@
     <div class="col-md-6 col-sm-12">
       <div *ngIf="!this.existingData" class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
-           <label class="start pull-left">Scheme Type</label>
+           <label class="start pull-left">Product Type</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
             <input type="text" [value]="this.scheme_type" formControlName="scheme_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_type.errors }" />
@@ -43,10 +43,10 @@
     <div class="col-md-6 col-sm-12">
         <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Scheme Code<span class="warning">*</span></label>
+             <label class="start pull-left">Product Code<span class="warning">*</span></label>
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
-              <input type="text" [value]="this.scheme_code" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
+              <input type="text" maxlength="6" [value]="this.scheme_code" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
               <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
             </div>
          </div>            
@@ -54,10 +54,10 @@
     <div class="col-md-6 col-sm-12">
         <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Scheme Code Desc</label>
+             <label class="start pull-left">Product Desc</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
-               <textarea [value]="this.scheme_code_desc" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"></textarea>
+               <textarea maxlength="200" [value]="this.scheme_code_desc" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"></textarea>
             </div>
          </div>            
     </div>

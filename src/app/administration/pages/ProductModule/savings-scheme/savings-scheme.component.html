@@ -65,7 +65,15 @@
                 <label class="start pull-left">Principal Lossline A/c.</label>
               </div>
               <div class="col-md-6 col-sm-12 form-column ">
-                <input  type="number" formControlName="sba_principal_lossline_ac" class="form-control" />
+                <input  type="number" [value]="this.sba_principal_lossline_ac" formControlName="sba_principal_lossline_ac" class="form-control"/>
+               <mat-icon *ngIf="isEnabled" (click)="principal_lossline_acLookup()">search</mat-icon>
+                </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+                <mat-hint>{{this.sba_principal_lossline_ac_desc}}</mat-hint>
                 </div>
             </div>
           </div>
@@ -75,7 +83,15 @@
                 <label class="start pull-left">Recovery Lossline A/c.</label>
               </div>
               <div class="col-md-6 col-sm-12 form-column">
-                <input  type="number" formControlName="sba_recovery_lossline_ac" class="form-control" />
+                <input  type="number" [value]="this.sba_recovery_lossline_ac" formControlName="sba_recovery_lossline_ac" class="form-control"/>
+               <mat-icon *ngIf="isEnabled" (click)="recovery_lossline_acLookup()">search</mat-icon>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              </div>
+              <div class="col-md-6 col-sm-12 form-column">
+                <mat-hint>{{this.sba_recovery_lossline_ac_desc}}</mat-hint>
               </div>
             </div>
           </div>
@@ -87,7 +103,15 @@
                 <label class="start pull-left">Charge Off A/c.</label>
               </div>
               <div class="col-md-6 col-sm-12 form-column ">
-                <input  type="number" formControlName="sba_charge_off_ac" class="form-control" />
+                <input  type="number" [value]="this.sba_charge_off_ac" formControlName="sba_charge_off_ac" class="form-control"/>
+               <mat-icon *ngIf="isEnabled" (click)="charge_off_acLookup()">search</mat-icon>
+                </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column">
+              </div>
+              <div class="col-md-6 col-sm-12 form-column">
+                <mat-hint>{{this.sba_charge_off_ac_desc}}</mat-hint>
                 </div>
             </div>
           </div>
@@ -208,6 +232,13 @@
                <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
             </div>
           </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <mat-hint>{{this.sba_normal_int_receivable_ac_desc}}</mat-hint>
+            </div>
+          </div>
         </div>
       </div> 
        
@@ -222,6 +253,13 @@
                <mat-icon *ngIf="isEnabled" (click)="penalIntRecAcLookup()">search</mat-icon>
             </div>
           </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <mat-hint>{{this.sba_penal_int_receivable_ac_desc}}</mat-hint>
+            </div>
+          </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -231,6 +269,13 @@
             <div class="col-md-6 col-sm-12 form-column">
               <input type="text" [value]="this.sba_normal_int_received_ac" formControlName="sba_normal_int_received_ac" class="pull-right form-control"/>
                <mat-icon *ngIf="isEnabled" (click)="normIntReceivedaccountLookup()">search</mat-icon>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <mat-hint>{{this.sba_normal_int_received_ac_desc}}</mat-hint>
             </div>
           </div>
         </div>
@@ -246,6 +291,13 @@
                <mat-icon *ngIf="isEnabled" (click)="penalIntReceivedaccountLookup()">search</mat-icon>
             </div>
           </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <mat-hint>{{this.sba_penal_int_received_ac_desc}}</mat-hint>
+            </div>
+          </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -255,6 +307,13 @@
             <div class="col-md-6 col-sm-12 form-column">
               <input type="text" [value]="this.sba_advance_int_ac" formControlName="sba_advance_int_ac" class="pull-right form-control"/>
                <mat-icon *ngIf="isEnabled" (click)="advanceIntAcLookup()">search</mat-icon>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <mat-hint>{{this.sba_advance_int_ac_desc}}</mat-hint>
             </div>
           </div>
         </div>
@@ -447,14 +506,14 @@
 
         <div class="row">
             <div class="col-md-6 col-sm-12">
-              <div class="form-group">
+              <!-- <div class="form-group">
                   <div class="col-md-6 col-sm-12 form-column ">
                    <label class="start pull-left">Dormant Fee.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input type="number" formControlName="sba_dormant_fee" class="pull-right form-control"/>
                   </div>
-               </div>            
+               </div>             -->
           </div>
           <div class="col-md-6 col-sm-12">
                       
@@ -814,7 +873,15 @@
                   <label class="start pull-left">Amortize Credit PH.</label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                  <input  type="number" formControlName="sba_fee_amortize_credit_ph" class="form-control" />
+                  <input  type="number" [value]="this.sba_fee_amortize_credit_ph" formControlName="sba_fee_amortize_credit_ph" class="form-control"/>
+                 <mat-icon (click)="amortizeCreditPHLookup()">search</mat-icon>
+                  </div>
+              </div>
+              <div class="form-group"  >
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.sba_fee_amortize_credit_ph_desc}}</mat-hint>
                   </div>
               </div>
             </div>
@@ -824,7 +891,15 @@
                   <label class="start pull-left">Amortize Debit PH</label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column">
-                  <input  type="number" formControlName="sba_fee_amortize_debit_ph" class="form-control" />
+                  <input  type="number" [value]="this.sba_fee_amortize_debit_ph" formControlName="sba_fee_amortize_debit_ph" class="form-control"/>
+                  <mat-icon (click)="sba_fee_amortize_debit_phLookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.sba_fee_amortize_debit_ph_desc}}</mat-hint>
                 </div>
               </div>
             </div>
@@ -861,9 +936,17 @@
                  <label class="start pull-left">Dr.Placeholder<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <input type="text" formControlName="sba_fee_dr_placeholder" class="pull-right form-control" />
+                 <input type="text" [value]="this.sba_fee_dr_placeholder" formControlName="sba_fee_dr_placeholder" class="pull-right form-control"/>
+                 <mat-icon (click)="sba_fee_dr_placeholderLookup()">search</mat-icon>
                 </div>
              </div> 
+             <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+                <mat-hint>{{this.sba_fee_dr_placeholder_desc}}</mat-hint>
+              </div>
+           </div> 
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -871,9 +954,17 @@
                    <label class="start pull-left">Cr.Placeholder</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="sba_fee_cr_placeholder" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control"/>
+                    <input type="text" [value]="this.sba_fee_cr_placeholder" formControlName="sba_fee_cr_placeholder" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control"/>
+                   <mat-icon (click)="sba_fee_cr_placeholderLookup()">search</mat-icon>
                   </div>
-               </div>            
+               </div> 
+               <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.sba_fee_cr_placeholder_desc}}</mat-hint>
+                </div>
+             </div>            
           </div>
           </div>
          

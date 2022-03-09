@@ -142,9 +142,7 @@ export class CollateralComponent implements OnInit {
     'DAILY', 'WEEKLY','MONTHLY', 'YEARLY', 'NONE'
   ]
   
-
   formData = this.formBuilder.group({
-
     // General detalails for collaterals
     collateralType : [''],
     collateralCode :[''],
@@ -287,11 +285,7 @@ export class CollateralComponent implements OnInit {
   
 
   disabledFormControl(){
-    this.formData.disable();
- 
-
-  
-
+    this.formData.disable()
   }
   getPage(){
     this.function_type = this.message.function_type;

@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './interest-maintainance.component.html',
   styleUrls: ['./interest-maintainance.component.scss']
 })
+
 export class InterestMaintainanceComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -53,8 +54,7 @@ export class InterestMaintainanceComponent implements OnInit {
  
  interestLookup(): void {
    const cdialogRef = this.dialog.open(InterestLookupComponent, {
-     height: '400px',
-     width: '600px',
+   
    });
    cdialogRef.afterClosed().subscribe((result) => {
      console.log(result.data);

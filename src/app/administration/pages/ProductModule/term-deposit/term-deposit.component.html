@@ -71,10 +71,18 @@
                     <label class="start pull-left">Principal Lossline A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" formControlName="tda_principal_lossline_ac" class="form-control" />
-                    <!-- <input  type="number" formControlName="tda_cr_int_prcnt_max" class="form-control-sub"/> -->
+                    <input  type="number" [value]="this.tda_principal_lossline_ac" formControlName="tda_principal_lossline_ac" class="form-control"/>
+                    <mat-icon *ngIf="isEnabled" (click)="tda_principal_lossline_acLookup()">search</mat-icon>
                     </div>
                 </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.tda_principal_lossline_ac_desc}}</mat-hint>
+                    </div>
+                </div>
+
               </div>
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
@@ -82,8 +90,16 @@
                     <label class="start pull-left">Recovery Lossline A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input  type="number" formControlName="tda_recovery_lossline_ac" class="form-control" />
-                    <!-- <input  type="number" formControlName="tda_dr_int_prcnt_max" class="form-control form-control-sub"/> -->
+                    <input  type="number" [value]="this.tda_recovery_lossline_ac" formControlName="tda_recovery_lossline_ac" class="form-control" />
+                    <mat-icon *ngIf="isEnabled" (click)="tda_principal_lossline_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.tda_recovery_lossline_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -95,8 +111,15 @@
                     <label class="start pull-left">Charge Off A/c.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" formControlName="tda_charge_off_ac" class="form-control" />
-                    <!-- <input  type="number" formControlName="tda_cr_int_prcnt_max" class="form-control-sub"/> -->
+                    <input  type="number" [value]="this.tda_charge_off_ac" formControlName="tda_charge_off_ac" class="form-control" />
+                    <mat-icon *ngIf="isEnabled" (click)="tda_charge_off_acLookup()">search</mat-icon>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.tda_charge_off_ac_desc}}</mat-hint>
                     </div>
                 </div>
               </div>
@@ -198,7 +221,14 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input type="text" [value]="this.tda_normal_int_receivable_ac" formControlName="tda_normal_int_receivable_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="tda_normal_int_receivable_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.tda_normal_int_receivable_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -213,7 +243,14 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
                     <input type="text" [value]="this.tda_penal_int_receivable_ac" formControlName="tda_penal_int_receivable_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="penalIntRecAcLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="tda_penal_int_receivable_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.tda_penal_int_receivable_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -224,7 +261,14 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input type="text" [value]="this.tda_normal_int_received_ac" formControlName="tda_normal_int_received_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="normIntReceivedAccountLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="tda_normal_int_received_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.tda_normal_int_received_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -237,7 +281,14 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
                     <input type="text" [value]="this.tda_penal_int_received_ac" formControlName="tda_penal_int_received_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="penalIntReceivedaccountLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="tda_penal_int_received_acLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.tda_penal_int_received_ac_desc}}</mat-hint>
                   </div>
                 </div>
               </div>
@@ -248,9 +299,17 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input type="text" [value]="this.tda_advance_int_ac" formControlName="tda_advance_int_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="advanceIntAcLookup()">search</mat-icon>
+                     <mat-icon *ngIf="isEnabled" (click)="tda_advance_int_acLookup()">search</mat-icon>
                   </div>
                 </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.tda_advance_int_ac_desc}}</mat-hint>
+                  </div>
+                </div>
+
               </div>
             </div>
       
@@ -382,10 +441,19 @@
                <label class="start pull-left">Sundry Deposit Placeholder</label>
               </div>
               <div class="col-md-6 col-sm-12 form-column">
-                <input type="number" formControlName="tda_sundry_deposit_ph" class="pull-right form-control"/>
+                <input type="number" [value]="this.tda_sundry_deposit_ph" formControlName="tda_sundry_deposit_ph" class="pull-right form-control"/>
+                <mat-icon *ngIf="isEnabled" (click)="tda_sundry_deposit_phLookup()">search</mat-icon>
                 <mat-icon>search</mat-icon>
               </div>
-           </div>                  
+           </div>   
+           <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <mat-hint>{{this.tda_sundry_deposit_ph_desc}}</mat-hint>
+              <mat-icon>search</mat-icon>
+            </div>
+         </div>                
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -429,7 +497,7 @@
       </div>
        <div class="row">
         <div class="col-md-6 col-sm-12">
-          <div class="form-group">
+          <!-- <div class="form-group">
               <div class="col-md-6 col-sm-12 form-column ">
                <label class="start pull-left">Sundry Deposit Placeholder</label>
               </div>
@@ -437,7 +505,7 @@
                 <input type="number" formControlName="tda_sundry_deposit_ph" class="pull-right form-control"/>
                 <mat-icon>search</mat-icon>
               </div>
-           </div>                  
+           </div>                   -->
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -463,10 +531,17 @@
              <label class="start pull-left">Repayment A/c. Placeholder</label>
               </div>
               <div class="col-md-6 col-sm-12 form-column">
-                <input type="number" formControlName="tda_repayment_ac_ph" class="pull-right form-control"/>
-                <mat-icon>search</mat-icon>
+                <input type="number" [value]="this.tda_repayment_ac_ph" formControlName="tda_repayment_ac_ph" class="pull-right form-control"/>
+                <mat-icon *ngIf="isEnabled" (click)="tda_repayment_ac_phLookup()">search</mat-icon>
               </div>
-           </div>     
+           </div>   
+           <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <mat-hint>{{this.tda_repayment_ac_ph_desc}}</mat-hint>
+            </div>
+         </div>   
         </div>
       </div>
 
@@ -479,10 +554,17 @@
        <label class="start pull-left">Account in Debit Balance<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.ac_debit_balance_value" type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
-       <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
+       <input [value]="this.tda_int_table_code" type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
+       <mat-icon (click)="tda_int_table_codeLookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.tda_int_table_code_desc}}</mat-hint>
+    </div>
+ </div>
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -490,10 +572,18 @@
       <label class="start pull-left">Account in Credit Balance</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_credit_balance_value " type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
-      <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
+      <input [value]="this.tda_int_table_code" type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
+      <mat-icon (click)="tda_int_table_codeLookup()">search</mat-icon>
      </div>
-  </div>              
+  </div> 
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <mat-hint>{{this.tda_int_table_code_desc}}</mat-hint>
+    </div>
+ </div> 
+
 </div>
 </div>
 <div class="row">
@@ -733,7 +823,15 @@
                 <label class="start pull-left">Amortize Credit PH.</label>
               </div>
               <div class="col-md-6 col-sm-12 form-column ">
-                <input  type="number" formControlName="tda_fee_amortize_credit_ph" class="form-control" />
+                <input  type="number" [value]="this.tda_fee_amortize_credit_ph" formControlName="tda_fee_amortize_credit_ph" class="form-control"/>
+               <mat-icon (click)="tda_fee_amortize_credit_phLookup()">search</mat-icon>
+                </div>
+            </div>
+            <div class="form-group"  >
+              <div class="col-md-6 col-sm-12 form-column ">
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+                <mat-hint>{{this.tda_fee_amortize_credit_ph_desc}}</mat-hint>
                 </div>
             </div>
           </div>
@@ -743,7 +841,15 @@
                 <label class="start pull-left">Amortize Debit PH</label>
               </div>
               <div class="col-md-6 col-sm-12 form-column">
-                <input  type="number" formControlName="tda_fee_amortize_debit_ph" class="form-control" />
+                <input  type="number" [value]="this.tda_fee_amortize_debit_ph" formControlName="tda_fee_amortize_debit_ph" class="form-control"/>
+               <mat-icon (click)="tda_fee_amortize_debit_phLookup()">search</mat-icon>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              </div>
+              <div class="col-md-6 col-sm-12 form-column">
+                <mat-hint>{{this.tda_fee_amortize_debit_ph_desc}}</mat-hint>
               </div>
             </div>
           </div>
@@ -780,9 +886,17 @@
                <label class="start pull-left">Dr.Placeholder<span class="warning">*</span></label>
               </div>
               <div class="col-md-6 col-sm-12 form-column ">
-               <input type="text" formControlName="tda_fee_dr_placeholder" class="pull-right form-control" />
+               <input type="text" [value]="this.tda_fee_dr_placeholder" formControlName="tda_fee_dr_placeholder" class="pull-right form-control"/>
+               <mat-icon (click)="tda_fee_dr_placeholderLookup()">search</mat-icon>
               </div>
            </div> 
+           <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <mat-hint>{{this.tda_fee_dr_placeholder_desc}}</mat-hint>
+            </div>
+         </div> 
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
@@ -790,9 +904,17 @@
                  <label class="start pull-left">Cr.Placeholder</label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column">
-                  <input type="text" formControlName="tda_fee_cr_placeholder" class="pull-right form-control"/>
+                  <input type="text" [value]="this.tda_fee_cr_placeholder" formControlName="tda_fee_cr_placeholder" class="pull-right form-control"/>
+                  <mat-icon (click)="tda_fee_cr_placeholderLookup()">search</mat-icon>
                 </div>
-             </div>            
+             </div>   
+             <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              </div>
+              <div class="col-md-6 col-sm-12 form-column">
+                <mat-hint>{{this.tda_fee_cr_placeholder_desc}}</mat-hint>
+              </div>
+           </div>          
         </div>
         </div>
        

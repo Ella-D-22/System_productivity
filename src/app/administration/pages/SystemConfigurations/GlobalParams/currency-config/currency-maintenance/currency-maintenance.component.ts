@@ -52,7 +52,7 @@ export class CurrencyMaintenanceComponent implements OnInit {
 
   currencyLookup(): void {
     const dialogRef = this.dialog.open(CurrencyLookupComponent, {
-      height: '400px',
+      // height: '400px',
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {

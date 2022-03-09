@@ -179,8 +179,6 @@ export class LoanAccountMaintainanceComponent implements OnInit {
           else if(this.account_type=="Term-Deposit"){ 
             this.dtype="td"          
           }
-          console.log(this.account_type)
-          console.log(this.dtype)
           const dconfig= new MatDialogConfig()
           dconfig.data={
             type:this.dtype

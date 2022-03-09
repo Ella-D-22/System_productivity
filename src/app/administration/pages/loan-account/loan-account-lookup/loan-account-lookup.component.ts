@@ -7,20 +7,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {LoanAccountService} from '../loan-account.service'
 
 
-export interface  account {
-  acid: String;
-  accountName: String;
-}
+
 
 @Component({
   selector: 'app-loan-account-lookup',
   templateUrl: './loan-account-lookup.component.html',
-  styleUrls: ['./loan-account-lookup.component.css']
+  styleUrls: ['./loan-account-lookup.component.scss']
 })
 export class LoanAccountLookupComponent implements OnInit {
   isLoadingResults: boolean = true;
-  displayedColumns: string[] = ['code', 'description'];
-  dataSource!: MatTableDataSource<account>;
+  displayedColumns: string[] = ['index','acid','accountName','accountStatus','currency','solCode','schemeType','customerCode'];
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
