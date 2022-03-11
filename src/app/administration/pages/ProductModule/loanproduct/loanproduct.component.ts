@@ -116,7 +116,6 @@ export class LoanproductComponent implements OnInit {
   laa_principal_lossline_ac_desc: any;
   laa_recovery_lossline_ac: any;
   laa_recovery_lossline_ac_desc: any;
-  data: import("/home/coullence/Documents/Production Apps Solutions/Sacco_Solution/Production/SACCO-Clientside/src/app/administration/pages/loan-account/interfaces/response").Response;
   laa_fee_cr_placeholder: any;
   laa_fee_dr_placeholder: any;
   laa_fee_amortize_debit_ph: any;
@@ -129,6 +128,7 @@ export class LoanproductComponent implements OnInit {
   laa_fee_amortize_credit_ph: any;
   laa_fee_amortize_credit_ph_desc: any;
   laa_fee_amortize_debit_ph_desc: any;
+  data: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
