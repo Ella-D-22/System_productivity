@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AuthService } from 'src/@core/Service/AuthService/auth.service';
+import { AuthService } from 'src/@core/AuthService/auth.service';
 import { EventTypeService } from '../event-type.service';
 
 @Component({

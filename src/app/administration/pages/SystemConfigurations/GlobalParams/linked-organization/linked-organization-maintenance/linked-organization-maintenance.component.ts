@@ -6,7 +6,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { LinkedOrganizationLookupComponent } from '../linked-organization-lookup/linked-organization-lookup.component';
 import { LinkedorganizationService } from '../linkedorganization.service';
 

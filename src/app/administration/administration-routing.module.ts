@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/@core/helpers/auth.guard';
+import {CanActivateModuleGuard } from 'src/@core/helpers/CanActivateModule.guard';
 import { Role } from 'src/@core/Models/role/role.model';
 import { AdministrationComponent } from './administration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -58,98 +58,136 @@ const routes: Routes = [{
     {
       path: 'configurations/global/linked/organization/maintenance',
       component:LinkedOrganizationMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/global/linked/organization/data/view',
       component:LinkedOrganizationComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/global/currency/maintenance',
       component:CurrencyMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/global/currency/data/view',
       component:CurrencyConfigComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     // Scheme Type
     {
       path: 'configurations/global/scheme-type/maintenance',
       component:SchemeTypeMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/global/scheme-type/data/view',
-      component:SchemeTypeComponent
+      component:SchemeTypeComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
 
     // Exceptions Controller
-    
-
     {
       path: 'configurations/global/exceptions-codes/maintenance',
       component:ExceptionsCodesMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     
     {
       path: 'configurations/global/exceptions-codes/data/view',
-      component:ExceptionsCodesComponent 
+      component:ExceptionsCodesComponent ,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
 
 
     // GL Code Maintenance
     {
       path: 'configurations/global/gl-code/maintenance',
-      component:GlCodeMaintenanceComponent ,
+      component:GlCodeMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/global/gl-code/data/view',
-      component:GlCodeComponent 
+      component:GlCodeComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     // GL subhead code Maintenance
     {
       path: 'configurations/global/gl-subhead/maintenance',
-      component:GlSubheadMaintenanceComponent
+      component:GlSubheadMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/global/gl-subhead/data/view',
-      component:GlSubheadComponent
+      component:GlSubheadComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
 
     // Charge Preferentials
     {
       path: 'configurations/charge/preferentials/maintenance',
       component:ChrgPreferentialMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/charge/preferentials/data/view',
       component:ChrgPreferentialComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
 // Charge Prioritization
     {
       path: 'configurations/charge/prioritization/maintenance',
       component:ChrgPrioritizationMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/charge/prioritization/data/view',
       component:ChrgPrioritizationComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
 
     // Event Type
     {
       path: 'configurations/charge/event-type/maintenance',
       component:EventTypeMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/charge/event-type/data/view',
       component:EventTypeComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
 // event id
     {
       path: 'configurations/charge/event-id/maintenance',
       component:EventIdMaintenanceComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     {
       path: 'configurations/charge/event-id/data/view',
       component:EventIdComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
 
     // {
@@ -164,6 +202,8 @@ const routes: Routes = [{
     {
       path: 'event_id_module/currency',
       component:CurrencyConfigComponent,
+      canActivate: [CanActivateModuleGuard],
+      data: {preload:true },
     },
     // ******************* Interests Setup ****************************************************
     
@@ -185,39 +225,55 @@ const routes: Routes = [{
       {
         path: 'configurations/product/loan-product/maintenance',
         component:LoanproductMaintenanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'configurations/product/loan-product/data/view',
         component:LoanproductComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
 
       {
         path: 'configurations/product/term-deposit/maintenance',
         component:TermDepositMaintenanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'configurations/product/term-deposit/data/view',
         component:TermDepositComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
 
       // Saving Scheme
       {
         path: 'configurations/product/saving-scheme/maintenance',
         component:SavingschemeMaintenanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'configurations/product/saving-scheme/data/view',
         component:SavingsSchemeComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       
       // Current Scheme
       {
         path: 'configurations/product/current-scheme/maintenance',
-        component: CurrentSchemeMaintenanceComponent ,
+        component: CurrentSchemeMaintenanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'configurations/product/current-scheme/data/view',
-        component: CurrentSchemeComponent ,
+        component: CurrentSchemeComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       
       // Overdraft Scheme
@@ -225,15 +281,17 @@ const routes: Routes = [{
       {
         path: 'configurations/product/overdraft-scheme/maintenance',
         component:OverdraftSchemeMaintenanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'configurations/product/overdraft-scheme/data/view',
         component:OverdraftsSchemeComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
-
-
      
-            // *******************************************************************************************\
+     // *******************************************************************************************\
       //                                         Accounts Settings
       // *******************************************************************************************
 
@@ -241,19 +299,27 @@ const routes: Routes = [{
       {
         path: 'account/maintenance',
         component:LoanAccountMaintainanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'accounts/data/view',
         component:LoanAccountComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       // collateral
       {
         path: 'collateral/maintenance',
         component:CollateralMaintenanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'collateral/data/view',
         component:CollateralComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       // Braches
       
@@ -261,19 +327,27 @@ const routes: Routes = [{
       {
         path: 'branches/maintenance',
         component:BranchesMaintenanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'branches/data/view',
         component:BranchesComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       
       {
         path: 'transactions/maintenance',
         component:TransactionMaintainanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'transactions/cash/data/view',
         component:CashTransactionsComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
 
        
@@ -283,26 +357,15 @@ const routes: Routes = [{
       {
         path: 'interest/maintenance',
         component:InterestMaintainanceComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
       {
         path: 'interest/data/view',
         component:InterestComponent,
+        canActivate: [CanActivateModuleGuard],
+        data: {preload:true },
       },
-
-      
-      
-      
-
-
-      
-    
-      
-
-
-    
-      
-
-   
   ],
 }];
 

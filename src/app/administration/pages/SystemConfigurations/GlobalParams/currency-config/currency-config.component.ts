@@ -5,7 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { CurrencyService } from './currency.service';
 
 @Component({
@@ -60,6 +60,9 @@ export class CurrencyConfigComponent implements OnInit {
       this.redirectToMaintenancePage();
       this.getPage();
     }
+    currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+    auth_user = this.currentUser.username;
+    
     redirectToMaintenancePage(){
       this.subscription = this.currencyAPI.currentMessage.subscribe(message =>{
         this.message = message;

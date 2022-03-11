@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { NewPasswordComponent } from './new-password/new-password.component';
 import { AuthenticatedComponent } from './authenticated/authenticated.component';
 import { MaterialModule } from '../material.module';
+import { OtpComponent } from './otp/otp.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MaterialModule } from '../material.module';
     LoginComponent,
     ResetPasswordComponent,
     NewPasswordComponent,
-    AuthenticatedComponent],
+    AuthenticatedComponent,
+    OtpComponent],
   imports: [
     CommonModule,
     FormsModule,

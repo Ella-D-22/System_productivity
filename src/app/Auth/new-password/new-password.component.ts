@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AuthService  } from 'src/@core/Service/AuthService/auth.service';
+import { AuthService  } from 'src/@core/AuthService/auth.service';
 
 
 @Component({
@@ -56,7 +56,7 @@ export class NewPasswordComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authService.resetPassword(this.f.token.value, this.f.password.value, this.f.confirmPassword.value)
+        this.authService.resetPassword(this.myForm.value)
             .pipe(first())
             .subscribe(
                 data => {

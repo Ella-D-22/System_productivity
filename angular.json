@@ -90,10 +90,14 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "clientside:build:production"
+              "browserTarget": "clientside:build:production",
+              
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "browserTarget": "clientside:build:development"
+              "browserTarget": "clientside:build:development",
+
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
