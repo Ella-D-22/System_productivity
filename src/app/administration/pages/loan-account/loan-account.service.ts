@@ -22,17 +22,15 @@ export class LoanAccountService {
    updateAccount(interest: any) {
     return this.http.put<Response>(this.baseUrl+'/update/', interest);
    }
-   headers = new HttpHeaders().set('Content-Type', 'application/json')
-   .set('Access-Control-Allow-Origin','*');
+
 
   //  {'Access-Control-Allow-Origin':'*'}
   //  setHeader("Access-Control-Allow-Origin", "https://yoursite.com")
 
   
   retrieveAllAccounts(type: string): Observable<Response> {
-  console.log(this.headers);
 
-    return this.http.get<Response>(this.baseUrl+type+'/all/', {headers:this.headers, withCredentials: false});
+    return this.http.get<Response>(this.baseUrl+type+'/all/');
    }
 
   retriveAccount(id: string) { 

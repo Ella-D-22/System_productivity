@@ -15,6 +15,9 @@ import { GlCodeService } from './gl-code.service';
   styleUrls: ['./gl-code.component.scss']
 })
 export class GlCodeComponent implements OnInit {
+  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  auth_user = this.currentUser.username;
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   loading = false;
@@ -70,6 +73,9 @@ export class GlCodeComponent implements OnInit {
       this.redirectToMaintenancePage();
       this.getPage();
     }
+
+    
+    
     redirectToMaintenancePage(){
       this.subscription = this.glcodeAPI.currentMessage.subscribe(message=>{
         this.message = message;
@@ -118,14 +124,14 @@ export class GlCodeComponent implements OnInit {
             glDescription:[''],
             modifiedBy:[''],
             modifiedTime:[''],
-            postedBy:['Collins'],
+            postedBy:[this.auth_user],
             postedTime:[new Date()],
-            postedFlag:[''],
-            verifiedBy:[''],
+            postedFlag:['Y'],
+            verifiedBy:['P'],
             verifiedTime:[''],
-            verifiedFlag:[''],
-            deletedBy:[''],
-            deletedFlag:[''],
+            verifiedFlag:['P'],
+            deletedBy:['P'],
+            deletedFlag:['P'],
             deletedTime:['']
           });
           // this.formData.controls.code.disable();
@@ -166,7 +172,7 @@ export class GlCodeComponent implements OnInit {
               deletedTime: [this.results.entity.deletedTime],
               glCode: [this.results.entity.glCode],
               glDescription: [this.results.entity.glDescription],
-              modifiedBy: [this.results.entity.modifiedBy],
+              modifiedBy: [this.auth_user],
               modifiedTime: [this.results.entity.modifiedTime],
               postedBy: [this.results.entity.postedBy],
               postedFlag: [this.results.entity.postedFlag],
@@ -203,7 +209,7 @@ export class GlCodeComponent implements OnInit {
               postedFlag: [this.results.entity.postedFlag],
               postedTime: [this.results.entity.postedTime],
               sn: [this.results.entity.sn],
-              verifiedBy: [this.results.entity.verifiedBy],
+              verifiedBy: [this.auth_user],
               verifiedFlag: ["Y"],
               // verifiedTime: [this.results.entity.verifiedTime]
             });

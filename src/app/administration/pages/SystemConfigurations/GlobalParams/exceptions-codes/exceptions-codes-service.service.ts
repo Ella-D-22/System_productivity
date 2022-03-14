@@ -11,7 +11,7 @@ export class ExceptionsCodesServiceService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
     // API endpoint     /api/v1/parameters/configurations/static/params/scheme-type/
-  baseURL = `${environment.productAPI}/api/v1/parameters/configurations/static/params/exceptioncode/`;
+  baseURL = `${environment.productAPI}/api/v1/parameters/configurations/static/params/exceptioncode`;
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');

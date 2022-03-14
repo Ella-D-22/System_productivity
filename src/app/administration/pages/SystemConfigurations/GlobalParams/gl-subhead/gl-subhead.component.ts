@@ -14,6 +14,9 @@ import { GlSubheadService } from './gl-subhead.service';
   styleUrls: ['./gl-subhead.component.scss']
 })
 export class GlSubheadComponent implements OnInit {
+  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  auth_user = this.currentUser.username;
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   loading = false;
@@ -134,24 +137,21 @@ export class GlSubheadComponent implements OnInit {
           this.formData.controls.glSubheadCode.setValue(this.glSubheadCode)
           this.formData = this.fb.group({
             deleteFlag: ["N"],
-            deletedBy: [""],
+            deletedBy: ["N"],
             deletedTime: [""],
             glCode: [""],
             glSubheadCode: [this.glSubheadCode],
             glSubheadDescription: [""],
-            modifiedBy: [""],
+            modifiedBy: ["P"],
             modifiedTime: [""],
-            postedBy: ["AAA"],
+            postedBy: [this.auth_user],
             postedFlag:["Y"],
             postedTime: [new Date()],
-            verifiedBy: ["AAA"],
+            verifiedBy: ["P"],
             verifiedFlag: ["Y"],
             verifiedTime: [new Date()],
             
           });
-          console.log("This results",);
-          
-          // this.formData.controls.code.disable();
         }
         else if(this.function_type == "I-Inquire"){
           // call to disable edit
@@ -166,8 +166,6 @@ export class GlSubheadComponent implements OnInit {
               glSubheadDescription:[this.results.entity.glSubheadDescription],
               postedBy:["User"],
               modifiedBy:["User"]
-              
-
             });
           }, err=>{
             this.error = err;
@@ -183,14 +181,12 @@ export class GlSubheadComponent implements OnInit {
         else if(this.function_type == "M-Modify"){          
           this.subscription = this.glSubheadCodeAPI.getGlSubheadCodeByCode(this.glSubheadCode).subscribe(res=>{
             this.results = res;
-            console.log("glSubhead", this.results);
-            
             this.formData = this.fb.group({
               sn:[this.results.entity.sn],
               glSubheadCode: [this.results.entity.glSubheadCode, [Validators.required]],
               glCode:[this.results.entity.glCode],
               glSubheadDescription:[this.results.entity.glSubheadDescription],
-              modifiedBy: ["user"],
+              modifiedBy: [this.auth_user],
               modifiedTime: [new Date()],
               postedBy: [this.results.entity.postedBy],
               postedFlag:[this.results.entity.postedFlag],
@@ -201,9 +197,7 @@ export class GlSubheadComponent implements OnInit {
               deleteFlag: [this.results.entity.deleteFlag],
               deletedBy: [this.results.entity.deletedBy],
               deletedTime: [this.results.entity.deletedTime]
-
             });
-            // this.formData.controls.glCode.disable();
           }, err=>{
             this.error = err;
               this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
@@ -219,25 +213,22 @@ export class GlSubheadComponent implements OnInit {
           // Populate data with rotected fileds only verification is enabled
           this.subscription = this.glSubheadCodeAPI.getGlSubheadCodeByCode(this.glSubheadCode).subscribe(res=>{
             this.results = res;
-            console.log("glSubhead", this.results);
-            
             this.formData = this.fb.group({
               sn:[this.results.entity.sn],
               glSubheadCode: [this.results.entity.glSubheadCode, [Validators.required]],
               glCode:[this.results.entity.glCode],
               glSubheadDescription:[this.results.entity.glSubheadDescription],
-              modifiedBy: ["user"],
+              modifiedBy: [this.results.entity.modifiedBy],
               modifiedTime: [new Date()],
               postedBy: [this.results.entity.postedBy],
               postedFlag:[this.results.entity.postedFlag],
               postedTime: [this.results.entity.postedTime],
-              verifiedBy: ["user"],
+              verifiedBy: [this.auth_user],
               verifiedFlag: ["Y"],
               verifiedTime: [new Date()],
               deleteFlag: [this.results.entity.deleteFlag],
               deletedBy: [this.results.entity.deletedBy],
               deletedTime: [this.results.entity.deletedTime]
-
             });
             // this.formData.controls.glCode.disable();
           }, err=>{
@@ -257,14 +248,12 @@ export class GlSubheadComponent implements OnInit {
           this.isEnabled = false;
           this.subscription = this.glSubheadCodeAPI.getGlSubheadCodeByCode(this.glSubheadCode).subscribe(res=>{
             this.results = res;
-            console.log("glSubhead", this.results);
-            
             this.formData = this.fb.group({
               sn:[this.results.entity.sn],
               glSubheadCode: [this.results.entity.glSubheadCode, [Validators.required]],
               glCode:[this.results.entity.glCode],
               glSubheadDescription:[this.results.entity.glSubheadDescription],
-              modifiedBy: ["user"],
+              modifiedBy: [this.results.entity.modifiedBy],
               modifiedTime: [new Date()],
               postedBy: [this.results.entity.postedBy],
               postedFlag:[this.results.entity.postedFlag],
@@ -273,9 +262,8 @@ export class GlSubheadComponent implements OnInit {
               verifiedFlag: [this.results.entity.verifiedFlag],
               verifiedTime: [this.results.entity.verifiedTime],
               deleteFlag: ["Y"],
-              deletedBy: ["User"],
+              deletedBy: [this.auth_user],
               deletedTime: [new Date()]
-
             });
             // this.formData.controls.glCode.disable();
           }, err=>{
@@ -292,15 +280,11 @@ export class GlSubheadComponent implements OnInit {
       })
       }
       // convenience getter for easy access to form fields
-
       onSubmit() {
           this.submitted = true;
-          console.log("all data ",this.formData.value)
           // stop here if form is invalid
           if (this.formData.valid) {
             if(this.function_type == "A-Add"){
-          console.log("all data for add ",this.formData.value)
-
             this.subscription = this.glSubheadCodeAPI.createGlSubheadCode(this.formData.value).subscribe(res=>{
               this.results = res;
                 this._snackBar.open("Executed Successfully!", "X", {

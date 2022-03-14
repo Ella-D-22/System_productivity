@@ -80,7 +80,6 @@ export class SchemeTypeComponent implements OnInit {
         }
       })
     }
-
       ac_placeholder = "";
       min_amt_ccy = "";
       max_amt_ccy = "";
@@ -93,9 +92,7 @@ export class SchemeTypeComponent implements OnInit {
         is_verified:[''],
         is_deleted:['']
       });
-
     get f() { return this.formData.controls; }
-
       disabledFormControll(){
         this.formData.controls.scheme_type.disable();
         this.formData.controls.scheme_abbreviation.disable();
