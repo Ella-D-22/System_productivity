@@ -30,7 +30,8 @@
                             <label for="" >Collateral Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" [value]="this.collateralCode" formControlName="collateralCode" class="pull-right form-control" 
+                            <input type="text" oninput="this.value=this.value.toUpperCase()" [value]="this.collateralCode" formControlName="collateralCode" maxlength="6"
+                            class="pull-right form-control" 
                             [ngClass]="{'is-invalid':submitted && f['collateralCode'].errors}">
                             <mat-icon *ngIf="function_type!='A-Add'" (click)="collateralLookup()">search</mat-icon>
                             <br>
