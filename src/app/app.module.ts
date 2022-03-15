@@ -20,7 +20,7 @@ export const config: FileInputConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent  
   ],
   imports: [
     BrowserModule,
