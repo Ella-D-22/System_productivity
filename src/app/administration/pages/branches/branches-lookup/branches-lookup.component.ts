@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/@core/Service/AuthService/auth.service';
+import { AuthService } from 'src/@core/AuthService/auth.service';
 import { GlCodeLookupComponent } from '../../SystemConfigurations/GlobalParams/gl-code/gl-code-lookup/gl-code-lookup.component';
 import { GlCodeService } from '../../SystemConfigurations/GlobalParams/gl-code/gl-code.service';
 import { BranchesService } from '../branches.service';

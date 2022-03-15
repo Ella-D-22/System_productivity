@@ -5,7 +5,7 @@ import { MatDialog} from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { LoanproductService } from '../loanproduct.service';
 import { LoanproductLookupComponent } from '../loanproduct-lookup/loanproduct-lookup.component';
 import { SchemeTypeLookupComponent } from '../../../SystemConfigurations/GlobalParams/scheme-type/scheme-type-lookup/scheme-type-lookup.component';

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AuthService  } from 'src/@core/Service/AuthService/auth.service';
+import { AuthService  } from 'src/@core/AuthService/auth.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -69,7 +69,7 @@ this.params = new HttpParams()
 .set('email', this.f.email.value)
 .set('password', password);
 
-let API_URL = `${environment.apiUrl}/api/auth/password/reset/`;
+let API_URL = `${environment.userAPI}/api/auth/password/reset/`;
 return this.http.put(API_URL,{},{params: this.params, headers: this.headers, withCredentials: false }).subscribe(results  => {
 this.loading = false;
             this._snackBar.open("Password Reset Successfully  Check your submited Email!", "X", {

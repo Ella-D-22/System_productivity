@@ -6,14 +6,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { DataTablesModule } from 'angular-datatables';
-import { ModuleGuard } from 'src/@core/helpers/Module.guard';
-import { authInterceptorProviders } from 'src/@core/helpers/auth.interceptor';
-import { FileInputConfig, NGX_MAT_FILE_INPUT_CONFIG } from 'ngx-material-file-input';
+import { FileInputConfig } from 'ngx-material-file-input';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { DatePipe } from '@angular/common';
 import { AdministrationModule } from './administration/administration.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CanLoadModuleGuard } from 'src/@core/helpers/CanLoadModule.guard';
+import { CanActivateModuleGuard } from 'src/@core/helpers/CanActivateModule.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpHeaderInterceptor } from './http.interceptor';
 export const config: FileInputConfig = {
   sizeUnit: 'Octet'
 };
@@ -47,7 +49,10 @@ export const config: FileInputConfig = {
   // add with module injection
   providers: [
     DatePipe,
-    ModuleGuard,authInterceptorProviders, { provide: NGX_MAT_FILE_INPUT_CONFIG, useValue: config }],
+    CanLoadModuleGuard,
+    CanActivateModuleGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
