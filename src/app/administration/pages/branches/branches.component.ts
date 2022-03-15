@@ -5,7 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { GlCodeService } from '../SystemConfigurations/GlobalParams/gl-code/gl-code.service';
 import { BranchesService } from './branches.service';
 
@@ -73,8 +73,8 @@ export class BranchesComponent implements OnInit {
       this.redirectToMaintenancePage();
       this.getPage();
     }
-  
-    auth_user = "Auth User"
+    currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+    auth_user = this.currentUser.username;
 
     redirectToMaintenancePage(){
       this.subscription = this.branchAPI.currentMessage.subscribe(message=>{
@@ -96,16 +96,16 @@ export class BranchesComponent implements OnInit {
         location:['', [Validators.required]],
         // modifiedBy:[this.auth_user],
         // postedBy:[this.auth_user]
-        deletedBy:[this.auth_user],
+        deletedBy:["Posted"],
         deletedTime:[new Date()],
         deletedFlag:['N'],
-        verifiedBy:[this.auth_user],
+        verifiedBy:["Posted"],
         verifiedTime:[new Date()],
         verifiedFlag:['Y'],
         postedBy:[this.auth_user],
         postedTime:[new Date()],
         postedFlag:['Y'],
-        modifiedBy:[this.auth_user],
+        modifiedBy:["Posted"],
         modifiedTime:[new Date()],
       });
 
@@ -124,12 +124,8 @@ export class BranchesComponent implements OnInit {
           this.messageData = message;      
           this.function_type = this.messageData.function_type
           this.solCode = this.messageData.solCode
-          console.log(this.solCode);
-          console.log(this.messageData);
           
         if(this.function_type == "A-Add"){
-          
-        
           this.formData = this.fb.group({
             solCode:[this.solCode],
             solDescription:['', [Validators.required]],
@@ -138,16 +134,16 @@ export class BranchesComponent implements OnInit {
             location:['', [Validators.required]],
             // modifiedBy:[this.auth_user],
             // postedBy:[this.auth_user]
-            deletedBy:[this.auth_user],
+            deletedBy:["Not Deleted"],
             deletedTime:[new Date()],
             deletedFlag:['N'],
-            verifiedBy:[this.auth_user],
+            verifiedBy:["Posted"],
             verifiedTime:[new Date()],
             verifiedFlag:['Y'],
             postedBy:[this.auth_user],
             postedTime:[new Date()],
             postedFlag:['Y'],
-            modifiedBy:[this.auth_user],
+            modifiedBy:["Posted"],
             modifiedTime:[new Date()],
           });
           // this.formData.controls.code.disable();
@@ -159,8 +155,6 @@ export class BranchesComponent implements OnInit {
           this.isEnabled = false;
           this.subscription = this.branchAPI.getBranchBySolCode(this.message.solCode).subscribe(res=>{
             this.results = res;
-            console.log("this all", this.results);
-            
             this.formData = this.fb.group({
               solCode:[this.solCode],
               solDescription:[this.results.entity.solDescription, [Validators.required]],
@@ -198,12 +192,12 @@ export class BranchesComponent implements OnInit {
               postedBy:[this.results.entity.postedBy],
               postedTime:[this.results.entity.postedTime],
               postedFlag:[this.results.entity.postedFlag],
-              verifiedBy:[this.results.entity.verifiedBy],
+              verifiedBy:["Modified"],
               verifiedTime:[this.results.entity.verifiedTime],
               verifiedFlag:[this.results.entity.verifiedFlag],
               deletedFlag:['N'],
               deletedTime:[this.results.entity.deletedTime],
-              deletedBy:[''],
+              deletedBy:['Modified'],
               sn:[this.results.entity.sn]
             });
             // this.formData.controls.solCode.disable();
@@ -222,7 +216,6 @@ export class BranchesComponent implements OnInit {
           // Populate data with rotected fileds only verification is enabled
           this.branchAPI.getBranchBySolCode(this.message.solCode).subscribe(res=>{
             this.results = res;
-
             this.formData = this.fb.group({
               solCode:[this.results.entity.solCode],
               solDescription:[this.results.entity.solDescription],
@@ -234,7 +227,7 @@ export class BranchesComponent implements OnInit {
               postedTime:[this.results.entity.postedTime],
               modifiedBy:[this.results.entity.modifiedBy],
               modifiedTime:[this.results.entity.modifiedTime],
-              deletedBy:[this.results.entity.deletedBy],
+              deletedBy:["Verified"],
               deletedTime:[this.results.entity.deletedTime],
               deletedFlag:[this.results.entity.deletedFlag],
               verifiedBy:[this.auth_user],

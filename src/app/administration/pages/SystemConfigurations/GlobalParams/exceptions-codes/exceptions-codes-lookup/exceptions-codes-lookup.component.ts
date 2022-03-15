@@ -8,7 +8,7 @@ import { ApiData } from '../../scheme-type/scheme-type-lookup/scheme-type-lookup
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AuthService } from 'src/@core/Service/AuthService/auth.service';
+import { AuthService } from 'src/@core/AuthService/auth.service';
 import { ExceptionsCodesServiceService } from '../exceptions-codes-service.service';
 
 @Component({

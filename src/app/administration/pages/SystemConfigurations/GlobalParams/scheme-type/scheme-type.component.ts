@@ -5,7 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { LinkedorganizationService } from '../linked-organization/linkedorganization.service';
 import { SchemeTypeService } from './scheme-type.service';
 
@@ -80,7 +80,6 @@ export class SchemeTypeComponent implements OnInit {
         }
       })
     }
-
       ac_placeholder = "";
       min_amt_ccy = "";
       max_amt_ccy = "";
@@ -93,9 +92,7 @@ export class SchemeTypeComponent implements OnInit {
         is_verified:[''],
         is_deleted:['']
       });
-
     get f() { return this.formData.controls; }
-
       disabledFormControll(){
         this.formData.controls.scheme_type.disable();
         this.formData.controls.scheme_abbreviation.disable();

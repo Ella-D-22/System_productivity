@@ -46,7 +46,7 @@
            <label class="start pull-left">Scheme Code<span class="warning">*</span></label>
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
-            <input type="text" [value]="this.scheme_code" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
+            <input maxlength="6" type="text" [value]="this.scheme_code" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
             <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
           </div>
        </div>            

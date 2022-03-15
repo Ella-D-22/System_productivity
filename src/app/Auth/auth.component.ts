@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from "rxjs/operators";
 import { Subscription } from 'rxjs';
-import { AuthenticationService } from 'src/@core/Service/authentication.service';
 import { Role } from 'src/@core/Models/role/role.model';
 import { User } from 'src/@core/Models/user/user.model';
+import { AuthService } from 'src/@core/AuthService/auth.service';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -16,9 +16,9 @@ export class AuthComponent implements  OnInit, OnDestroy {
 
   constructor(
       private router: Router,
-      private authenticationService: AuthenticationService
+      private authService: AuthService
   ) {
-      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+      this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   subscription: Subscription = new Subscription;
@@ -34,7 +34,7 @@ export class AuthComponent implements  OnInit, OnDestroy {
   }
 
   logout() {
-      this.authenticationService.logout();
+      this.authService.logout();
       this.router.navigate(['/Auth/login']);
   }
 }

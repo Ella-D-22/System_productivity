@@ -5,19 +5,30 @@
 export const environment = {
   production: false,
   
-  apiUrl: 'http://localhost:9191',
-  systemAPI: 'http://localhost:9093',
-  accountsAPI: 'http://localhost:9099',
-  collateralAPI:'http://localhost:9103',
-  productAPI:'http://localhost:9100',
-  branchsAPI:'http://localhost:8000',
-  transactionAPI:'http://localhost:9105',
+  userAPI: 'http://localhost:9091',
+  systemAPI: 'http://localhost:9091/system-service',
+  accountsAPI: 'http://localhost:9091/account-service',
+  collateralAPI:'http://localhost:9091/collateral-service',
+  productAPI:'http://localhost:9091/product-service',
+  branchsAPI:'http://localhost:9091/branch-service',
+  transactionAPI:'http://localhost:9091/transaction-service',
+  
+  // sacco_api:'http://localhost:9105',
+//   user-service:
+//   url: http://localhost:9091
+// account-service:
+//   url: http://localhost:9099
+// product-service:
+//   url: http://localhost:9100
+// collateral-service:
+//   url: http://localhost:9103
+// system-service:
+//   url: http://localhost:9093
+// branch-service:
+//   url: http://localhost:8000
+// transaction-service:
+//   url: http://localhost:9105
 
-
-
-
-  // accountsAPI: 'http://localhost:9191'
-  // branchsAPI:'http://localhost:8000'
 };
 
 /*

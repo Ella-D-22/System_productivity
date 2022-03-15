@@ -1,14 +1,13 @@
 export const environment = {
   production: true,
   
-  apiUrl: 'http://52.15.152.26:9191',
-  systemAPI: 'http://52.15.152.26:9093',
-  accountsAPI: 'http://52.15.152.26:9099',
-  collateralAPI:'http://52.15.152.26:9103',
-  productAPI:'http://52.15.152.26:9100',
-  branchsAPI:'http://52.15.152.26:8000',
-  transactionAPI:'http://52.15.152.26:9105',
-
+  userAPI: 'http://localhost:9091',
+  systemAPI: 'http://localhost:9091/system-service',
+  accountsAPI: 'http://localhost:9091/account-service',
+  collateralAPI:'http://localhost:9091/collateral-service',
+  productAPI:'http://localhost:9091/product-service',
+  branchsAPI:'http://localhost:9091/branch-service',
+  transactionAPI:'http://localhost:9091/transaction-service',
 
 
   /*

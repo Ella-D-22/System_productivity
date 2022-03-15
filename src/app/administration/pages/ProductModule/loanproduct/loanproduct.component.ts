@@ -6,7 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { InterestLookupComponent } from '../../interest/interest-lookup/interest-lookup.component';
 import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
 import { LoanAccountService } from '../../loan-account/loan-account.service';
@@ -23,6 +23,8 @@ import { LoanproductService } from './loanproduct.service';
   encapsulation: ViewEncapsulation.None
 })
 export class LoanproductComponent implements OnInit {
+  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  auth_user = this.currentUser.username;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -62,12 +64,6 @@ export class LoanproductComponent implements OnInit {
    int_comp_freq_array: any = ['D- Daily', 'W – Weekly', 'F – Fortnightly', 'M – Monthly','Q- Quarterly','H – Half yearly', 'Y- Yearly','T-Twice a month']
    ei_payment_freq_array: any = ['D- Daily','W – Weekly','F – Fortnightly','M – Monthly','Q- Quarterly','H – Half yearly', 'Y- Yearly']
    
-
-
-
-
-
-  
    //  debitIntCompFreqArray: any = [
   //   'Daily','Monthly', 'Quarterly','No compounding'
   //  ]
@@ -373,8 +369,6 @@ laa_fee_amortize_debit_phLookup(): void {
   });
 }
 
-
-
   dt = new Date();
   month = this.dt.getMonth();
   year = this.dt.getFullYear();
@@ -451,27 +445,6 @@ laa_fee_amortize_debit_phLookup(): void {
               'Principal', 'Interests','Charges','Collection'
             ]
         }
-        // removeChronologicalElement(event:any){
-        //   let i = event.target.value;
-        //   this.chronologicalOrderArray.slice(i)
-        //   console.log("remains", this.chronologicalOrderArray);
-          
-        // }
-
-        // onSelectFunction(event:any){
-        //   if(event.target.value != "A-Add"){
-        //     this.existingData = true;
-        //     this.formData.controls.scheme_code_desc.disable()
-        //   }else if(event.target.value == "A-Add"){
-        //     this.formData.controls.scheme_code_desc.enable()
-        //     this.existingData = false;
-      
-        //     // this.formData.controls.currency_ccy.setValidators([])
-        //     // this.formData.controls.currency_ccy.setValue("");
-        //   }
-        // }
-
-
     submitted = false;
       ngOnInit() {
         this.setNewChronologicalElements();
@@ -586,14 +559,28 @@ laa_fee_amortize_debit_phLookup(): void {
         laa_prov_cr:[''],
         
         laa_loanfees: new FormArray([]),
-        laa_glsubheads: new FormArray([])
+        laa_glsubheads: new FormArray([]),
+
+        // Create Audits
+        postedBy: ['N'],
+        postedFlag: ['N'],
+        postedTime: [new Date()],
+        modifiedBy: ['N'],
+        modifiedFlag: ['N'],
+        modifiedTime: [new Date()],
+        verifiedBy: ['N'],
+        verifiedFlag: ['N'],
+        verifiedTime: [new Date()],
+        deletedBy: ['N'],
+        deletedFlag: ['N'],
+        deletedTime: [new Date()],
+
                });
               //  Form ends
 
          feeFormData = this.fb.group({
                   laa_fee_type:['',[Validators.required]],
                   laa_fee_event:['',[Validators.required]],
-
                   laa_fee_frequency:[''],
                   laa_fee_amortize_credit_ph:[''],
                   laa_fee_amortize_debit_ph:[''],
@@ -605,7 +592,6 @@ laa_fee_amortize_debit_phLookup(): void {
                   laa_fee_cr_placeholder:[''],
                   laa_fee_amort_tenor:[''],
                   laa_fee_max_no_of_assesment:[''],
-
          });
 
          glSubheadData = this.fb.group({
@@ -613,21 +599,15 @@ laa_fee_amortize_debit_phLookup(): void {
            laa_gl_subhead_description:[''],
            laa_gl_subhead_deafault:[''],
            laa_is_gl_subhead_deleted:['']
-           
          })
-
-        
-
          initLoanForm(){
          this.newData = true;
           this.feeFormData = this.fb.group({
             laa_fee_type:['',[Validators.required]],
             laa_fee_event:['',[Validators.required]],
-
             laa_fee_frequency:[''],
             laa_fee_amortize_credit_ph:[''],
             laa_fee_amortize_debit_ph:[''],
-
             laa_fee_deductable:[''],
             laa_fee_multiple:[''],
             laa_fee_amortize:[''],
@@ -655,11 +635,9 @@ laa_fee_amortize_debit_phLookup(): void {
           this.feeFormData = this.fb.group({
             laa_fee_type:[this.feeArray[i].laa_fee_type],
             laa_fee_event:[this.feeArray[i].laa_fee_event],
-
             laa_fee_frequency:[''],
             laa_fee_amortize_credit_ph:[''],
             laa_fee_amortize_debit_ph:[''],
-
             laa_fee_deductable:[this.feeArray[i].laa_deductable],
             laa_fee_multiple:[this.feeArray[i].laa_multiple],
             laa_fee_amortize:[this.feeArray[i].laa_amortize],
@@ -672,12 +650,8 @@ laa_fee_amortize_debit_phLookup(): void {
 
    const index: number = this.feeArray.indexOf(this.feeArray.values);
    this.feeArray.splice(index, i);
-
          }
-
-
-
-     get g() { return this.formData.controls; }
+    get g() { return this.formData.controls; }
     get t() { return this.g.laa_loanfees as FormArray; }
     get l() {return this.g.laa_glsubheads as FormArray;}
 
@@ -709,7 +683,6 @@ laa_fee_amortize_debit_phLookup(): void {
               this.initGlSUbheadForm();
            }
          }
-         
          updateLoanFee(i:any){
           this.t.push(this.fb.group(
             this.feeFormData.value
@@ -718,8 +691,6 @@ laa_fee_amortize_debit_phLookup(): void {
            console.log("form fee", this.feeArray);
            this.initLoanForm();
          }
-
-
          onRemove(i:any,){
           const index: number = this.feeArray.indexOf(this.feeArray.values);
             this.feeArray.splice(index, i);
@@ -727,9 +698,7 @@ laa_fee_amortize_debit_phLookup(): void {
             this.feeArray = this.feeArray;
            console.log("click", i);
          }
-         
-
-
+  
          onRemoveGLSubhead(i:any,){
           const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
           this.glSubheadArray.splice(index, i);
@@ -798,7 +767,7 @@ laa_fee_amortize_debit_phLookup(): void {
             laa_scheme_code: [this.scheme_code],
             laa_scheme_type:[this.scheme_type],
             laa_scheme_code_desc:[this.scheme_code_desc],
-          
+      
             id:[''],
             laa_effective_from_date:[''],
             laa_effective_to_date:[''],
@@ -809,8 +778,6 @@ laa_fee_amortize_debit_phLookup(): void {
             laa_number_generation:[''],
             laa_system_gen_no:[''],
             laa_number_generation_code:[''],
-
-
             laa_pl_ac_ccy:[''],
             laa_int_receivale_applicable:[''],
             laa_normal_int_receivable_ac:[''],
@@ -859,7 +826,6 @@ laa_fee_amortize_debit_phLookup(): void {
             laa_grace_prd_for_late_fee_mmm:[''],
             laa_grace_prd_for_late_fee_ddd:[''],
             laa_tolerance_limit_for_dpd_cycle:[''],
-            
             laa_penal_int_on_principal_demand_overdue:[''],
             laa_penal_int_on_int_demand_overdue:[''],
             laa_no_penal_int_on_penal_int_demand:[''],
@@ -901,8 +867,21 @@ laa_fee_amortize_debit_phLookup(): void {
             laa_prov_cr:[''],
             
             laa_loanfees: new FormArray([]),
-            laa_glsubheads: new FormArray([])
+            laa_glsubheads: new FormArray([]),
 
+            // Create Audits
+            postedBy: ['N'],
+            postedFlag: ['N'],
+            postedTime: [new Date()],
+            modifiedBy: ['N'],
+            modifiedFlag: ['N'],
+            modifiedTime: [new Date()],
+            verifiedBy: ['N'],
+            verifiedFlag: ['N'],
+            verifiedTime: [new Date()],
+            deletedBy: ['N'],
+            deletedFlag: ['N'],
+            deletedTime: [new Date()],
           });
         }
         else if(this.function_type == "I-Inquire"){
@@ -1028,6 +1007,19 @@ laa_fee_amortize_debit_phLookup(): void {
               laa_prov_dr:[this.results.laa_prov_dr],
               laa_prov_cr:[this.results.laa_prov_cr],
 
+                // Audits
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedFlag: [this.results.modifiedFlag],
+                modifiedTime: [this.results.modifiedTime],
+                verifiedBy: [this.results.verifiedBy],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime],
+                deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
+                deletedTime: [this.results.deletedTime],
             });
           }, err=>{
             this.error = err;
@@ -1161,7 +1153,21 @@ laa_fee_amortize_debit_phLookup(): void {
               is_deleted:[this.results.is_deleted],
 
               laa_loanfees:[this.results.laa_loanfees],
-              laa_glsubheads: [this.results.laa_glsubheads]
+              laa_glsubheads: [this.results.laa_glsubheads],
+
+                // Audits
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                modifiedBy: [this.auth_user],
+                modifiedFlag: ['Y'],
+                modifiedTime: [new Date()],
+                verifiedBy: [this.results.verifiedBy],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime],
+                deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
+                deletedTime: [this.results.deletedTime],
 
             });
           }, err=>{
@@ -1299,7 +1305,21 @@ laa_fee_amortize_debit_phLookup(): void {
               is_deleted:[this.results.is_deleted],
 
               laa_loanfees:[this.results.laa_loanfees],
-              laa_glsubheads: [this.results.laa_glsubheads]
+              laa_glsubheads: [this.results.laa_glsubheads],
+
+               // Audits
+               postedBy: [this.results.postedBy],
+               postedFlag: [this.results.postedFlag],
+               postedTime: [this.results.postedTime],
+               modifiedBy: [this.results.modifiedBy],
+               modifiedFlag: [this.results.modifiedFlag],
+               modifiedTime: [this.results.modifiedTime],
+               verifiedBy: [this.auth_user],
+               verifiedFlag: ['Y'],
+               verifiedTime: [new Date()],
+               deletedBy: [this.results.deletedBy],
+               deletedFlag: [this.results.deletedFlag],
+               deletedTime: [this.results.deletedTime],
             });
           }, err=>{
             this.error = err;
@@ -1438,7 +1458,22 @@ laa_fee_amortize_debit_phLookup(): void {
               is_verified:[this.results.is_verified],
 
               laa_loanfees:[this.results.laa_loanfees],
-              laa_glsubheads: [this.results.laa_glsubheads]
+              laa_glsubheads: [this.results.laa_glsubheads],
+
+               // Audits
+               postedBy: [this.results.postedBy],
+               postedFlag: [this.results.postedFlag],
+               postedTime: [this.results.postedTime],
+               modifiedBy: [this.results.modifiedBy],
+               modifiedFlag: [this.results.modifiedFlag],
+               modifiedTime: [this.results.modifiedTime],
+               verifiedBy: [this.results.verifiedBy],
+               verifiedFlag: [this.results.verifiedFlag],
+               verifiedTime: [this.results.verifiedTime],
+               deletedBy: [this.auth_user],
+               deletedFlag: ['Y'],
+               deletedTime: [new Date()],
+
             });
           }, err=>{
             this.error = err;

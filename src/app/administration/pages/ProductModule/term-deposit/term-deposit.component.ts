@@ -6,7 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
 import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
@@ -21,6 +21,8 @@ import { TermDepositServiceService } from './term-deposit-service.service';
   styleUrls: ['./term-deposit.component.scss']
 })
 export class TermDepositComponent implements OnInit {
+  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  auth_user = this.currentUser.username;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -420,10 +422,6 @@ tda_fee_cr_placeholderLookup(): void {
   });
 }
 
-
-
-
-
 // Exceptions Lookup
   ac_debit_balance_Lookup(): void {
     const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
@@ -629,9 +627,7 @@ tda_fee_cr_placeholderLookup(): void {
     tda_int_cal_freq_dr_holiday:[''],
     tda_int_table_code:[''],
 
-
     // end of interest details
-
     tda_deposit_amt_min:[''],
     tda_deposit_amt_max:[''],
     tda_deposit_amt_steps:[''],
@@ -674,7 +670,20 @@ tda_fee_cr_placeholderLookup(): void {
     // int_cal_freq_dr_date:[''],
     // int_cal_freq_dr_holiday:[''],
     tda_fees: new FormArray([]),
-    tda_glsubheads: new FormArray([])
+    tda_glsubheads: new FormArray([]),
+    // Create Audits
+    postedBy: ['N'],
+    postedFlag: ['N'],
+    postedTime: [new Date()],
+    modifiedBy: ['N'],
+    modifiedFlag: ['N'],
+    modifiedTime: [new Date()],
+    verifiedBy: ['N'],
+    verifiedFlag: ['N'],
+    verifiedTime: [new Date()],
+    deletedBy: ['N'],
+    deletedFlag: ['N'],
+    deletedTime: [new Date()],
   });
 
   feeFormData = this.fb.group({
@@ -975,7 +984,21 @@ tda_fee_cr_placeholderLookup(): void {
           // int_cal_freq_dr_date:[''],
           // int_cal_freq_dr_holiday:[''],
           tda_fees: new FormArray([]),
-          tda_glsubheads: new FormArray([])
+          tda_glsubheads: new FormArray([]),
+
+          // Create Audits
+          postedBy: [this.auth_user],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['N'],
+          modifiedFlag: ['N'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['N'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deletedBy: ['N'],
+          deletedFlag: ['N'],
+          deletedTime: [new Date()],
           
 
         });
@@ -1076,7 +1099,20 @@ tda_fee_cr_placeholderLookup(): void {
             // int_cal_freq_dr_date:[this.results.],
             // int_cal_freq_dr_holiday:[this.results.],
             tda_fees: new FormArray([]),
-            tda_glsubheads: new FormArray([])
+            tda_glsubheads: new FormArray([]),
+            // Audits
+            postedBy: [this.results.postedBy],
+            postedFlag: [this.results.postedFlag],
+            postedTime: [this.results.postedTime],
+            modifiedBy: [this.results.modifiedBy],
+            modifiedFlag: [this.results.modifiedFlag],
+            modifiedTime: [this.results.modifiedTime],
+            verifiedBy: [this.results.verifiedBy],
+            verifiedFlag: [this.results.verifiedFlag],
+            verifiedTime: [this.results.verifiedTime],
+            deletedBy: [this.results.deletedBy],
+            deletedFlag: [this.results.deletedFlag],
+            deletedTime: [this.results.deletedTime],
 
 
           });
@@ -1181,7 +1217,20 @@ tda_fee_cr_placeholderLookup(): void {
             // int_cal_freq_dr_date:[this.results.],
             // int_cal_freq_dr_holiday:[this.results.],
             tda_fees: new FormArray([]),
-            tda_glsubheads: new FormArray([])
+            tda_glsubheads: new FormArray([]),
+            // Audits
+            postedBy: [this.results.postedBy],
+            postedFlag: [this.results.postedFlag],
+            postedTime: [this.results.postedTime],
+            modifiedBy: [this.auth_user],
+            modifiedFlag: ['Y'],
+            modifiedTime: [new Date()],
+            verifiedBy: [this.results.verifiedBy],
+            verifiedFlag: [this.results.verifiedFlag],
+            verifiedTime: [this.results.verifiedTime],
+            deletedBy: [this.results.deletedBy],
+            deletedFlag: [this.results.deletedFlag],
+            deletedTime: [this.results.deletedTime],
           });
         }, err => {
           this.error = err;
@@ -1292,7 +1341,20 @@ tda_fee_cr_placeholderLookup(): void {
             // int_cal_freq_dr_date:[this.results.],
             // int_cal_freq_dr_holiday:[this.results.],
             tda_fees: new FormArray([]),
-            tda_glsubheads: new FormArray([])
+            tda_glsubheads: new FormArray([]),
+            // Audits
+            postedBy: [this.results.postedBy],
+            postedFlag: [this.results.postedFlag],
+            postedTime: [this.results.postedTime],
+            modifiedBy: [this.results.modifiedBy],
+            modifiedFlag: [this.results.modifiedFlag],
+            modifiedTime: [this.results.modifiedTime],
+            verifiedBy: [this.auth_user],
+            verifiedFlag: ['Y'],
+            verifiedTime: [new Date()],
+            deletedBy: [this.results.deletedBy],
+            deletedFlag: [this.results.deletedFlag],
+            deletedTime: [this.results.deletedTime],
           });
         }, err => {
           this.error = err;
@@ -1396,7 +1458,20 @@ tda_fee_cr_placeholderLookup(): void {
             // int_cal_freq_dr_date:[this.results.],
             // int_cal_freq_dr_holiday:[this.results.],
             tda_fees: new FormArray([]),
-            tda_glsubheads: new FormArray([])
+            tda_glsubheads: new FormArray([]),
+            // Audits
+            postedBy: [this.results.postedBy],
+            postedFlag: [this.results.postedFlag],
+            postedTime: [this.results.postedTime],
+            modifiedBy: [this.results.modifiedBy],
+            modifiedFlag: [this.results.modifiedFlag],
+            modifiedTime: [this.results.modifiedTime],
+            verifiedBy: [this.results.verifiedBy],
+            verifiedFlag: [this.results.verifiedFlag],
+            verifiedTime: [this.results.verifiedTime],
+            deletedBy: [this.auth_user],
+            deletedFlag: ['Y'],
+            deletedTime: [new Date()],
           });
         }, err => {
           this.error = err;

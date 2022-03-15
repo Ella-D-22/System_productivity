@@ -28,23 +28,19 @@ import { ProductComponent } from './lookup/product/product.component';
   styleUrls: ['./loan-account.component.css'],
 })
 export class LoanAccountComponent implements OnInit {
+  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  auth_user = this.currentUser.username;
+
   message!: any;
   resData: any;
-
   dtype!:string
-
   horizontalPosition :MatSnackBarHorizontalPosition = 'end';
   verticalPosition : MatSnackBarVerticalPosition = 'top';
-
   imgfile!: File; // Variable to store file
   signfile!: File; // Variable to store file
-
   customerImage!: any
   signatureImage!: any
   resMessage:any
-
-
-
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -64,7 +60,7 @@ export class LoanAccountComponent implements OnInit {
   loading = false;
 
   formData = this.fb.group({
-    accountManager: ['KAMAU'],
+    accountManager: [],
     customerCode: [''],
     accountName: [''],
     accountOwnership: [''],
@@ -87,7 +83,6 @@ export class LoanAccountComponent implements OnInit {
     modifiedBy: [''],
     modifiedTime: [''],
   });
-
   disabledFormControll() {
     this.formData.controls.accountManager.disable();
     this.formData.controls.customerCode.disable();
@@ -101,20 +96,17 @@ export class LoanAccountComponent implements OnInit {
     this.formData.controls.withholdingTax.disable();
     this.formData.controls.amountDisbursed.disable();
   }
-
   // convenience getter for easy access to form fields
   get f() {
     return this.formData.controls;
   }
-
   getPage() {
-    console.log(this.message.function_type);
     if (
       this.message.function_type == 'A-Add' &&
       this.message.account_type == 'Loan'
     ) {
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         customerCode: [''],
         currency: [''],
         glSubhead: [''],
@@ -125,17 +117,17 @@ export class LoanAccountComponent implements OnInit {
         withholdingTax: [''],
         amountDisbursed: [''],
 
-        repaymentPeriod: ['45'],
-        accountOwnership:['C'],
-        schemeType:['LAA'],
+        repaymentPeriod: [''],
+        accountOwnership:[''],
+        schemeType:[''],
         deleteFlag: ['N'],
-        postedBy: ['KAMAU'],
+        postedBy: [this.auth_user],
         postedFlag: ['Y'],
         openingDate: [new Date()],
         postedTime: [new Date()],
-        modifiedBy: ['KAMAU'],
+        modifiedBy: ['P'],
         modifiedTime: [new Date()],
-        accountName: ['KAMAU'],
+        accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
         loan:['']
@@ -145,7 +137,7 @@ export class LoanAccountComponent implements OnInit {
       this.message.account_type == 'Savings'
     ) {
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         customerCode: [''],
         currency: [''],
         glSubhead: [''],
@@ -155,50 +147,18 @@ export class LoanAccountComponent implements OnInit {
         solCode: [''],
         withholdingTax: [''],
         accountOwnership:['C'],
-        schemeType:['SBA'],
+        schemeType:[''],
         deleteFlag: ['N'],
-        postedBy: ['KAMAU'],
+        postedBy: [this.auth_user],
         postedFlag: ['Y'],
         openingDate: [new Date()],
         postedTime: [new Date()],
-        modifiedBy: ['KAMAU'],
+        modifiedBy: ['N'],
         modifiedTime: [new Date()],
-        accountName: ['KAMAU'],
+        accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
         loan:['']
-
-//         loan: this.fb.group([
-//           this.fb.group({
-//             loanDocuments: new FormArray([
-//             this.fb.group({
-//             documentImage: [this.customerImage, Validators.required]
-              
-//     }),
-//     this.fb.group({
-//       documentImage: [this.signatureImage, Validators.required]
-      
-// })
-//             ])
-//             })
-//           ])
-
-// loan: new FormGroup({
-//   loanDocuments: new FormArray([
-//     new FormGroup({
-//       documentImage: new FormControl(this.customerImage),
-//     })
-//   ])
-// }
-//)
-
-
-
-
-        // acid: ['P7845'],
-
-        // amountDisbursed: [''],
-        // repaymentPeriod: ['45'],
       });
     } else if (
       this.message.function_type == 'A-Add' &&
@@ -215,13 +175,13 @@ export class LoanAccountComponent implements OnInit {
         solCode: [''],
         withholdingTax: [''],
         accountOwnership:['C'],
-        schemeType:['TDA'],
+        schemeType:[''],
         deleteFlag: ['N'],
-        postedBy: ['KAMAU'],
+        postedBy: [this.auth_user],
         postedFlag: ['Y'],
         openingDate: [new Date()],
         postedTime: [new Date()],
-        modifiedBy: ['KAMAU'],
+        modifiedBy: ['P'],
         modifiedTime: [new Date()],
         accountName: ['KAMAU'],
         matured: ['N'],
@@ -244,11 +204,11 @@ export class LoanAccountComponent implements OnInit {
         accountOwnership:['C'],
         schemeType:['ODA'],
         deleteFlag: ['N'],
-        postedBy: ['KAMAU'],
+        postedBy: [this.auth_user],
         postedFlag: ['Y'],
         openingDate: [new Date()],
         postedTime: [new Date()],
-        modifiedBy: ['KAMAU'],
+        modifiedBy: ['P'],
         modifiedTime: [new Date()],
         accountName: ['KAMAU'],
         matured: ['N'],
@@ -271,11 +231,11 @@ export class LoanAccountComponent implements OnInit {
         accountOwnership:['C'],
         schemeType:['CAA'],
         deleteFlag: ['N'],
-        postedBy: ['KAMAU'],
+        postedBy: [this.auth_user],
         postedFlag: ['Y'],
         openingDate: [new Date()],
         postedTime: [new Date()],
-        modifiedBy: ['KAMAU'],
+        modifiedBy: ['P'],
         modifiedTime: [new Date()],
         accountName: ['KAMAU'],
         matured: ['N'],
@@ -299,11 +259,11 @@ export class LoanAccountComponent implements OnInit {
         accountOwnership:['O'],
         schemeType:['OAB'],
         deleteFlag: ['N'],
-        postedBy: ['KAMAU'],
+        postedBy: [this.auth_user],
         postedFlag: ['Y'],
         openingDate: [new Date()],
         postedTime: [new Date()],
-        modifiedBy: ['KAMAU'],
+        modifiedBy: ['P'],
         modifiedTime: [new Date()],
         accountName: ['KAMAU'],
         matured: ['N'],
@@ -607,7 +567,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -615,7 +575,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
 
@@ -668,7 +628,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -676,7 +636,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
 
@@ -729,7 +689,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -737,7 +697,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
 
@@ -791,7 +751,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -799,7 +759,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
 
@@ -854,7 +814,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -862,7 +822,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
 
@@ -936,7 +896,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -944,7 +904,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["Y"],
             verifiedTime:[new Date()]
 
@@ -1018,7 +978,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -1026,7 +986,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["Y"],
             verifiedTime:[new Date()]
 
@@ -1081,7 +1041,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -1089,7 +1049,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["Y"],
             verifiedTime:[new Date()]
 
@@ -1145,7 +1105,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -1153,7 +1113,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["Y"],
             verifiedTime:[new Date()]
 
@@ -1229,7 +1189,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -1237,7 +1197,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
 
@@ -1294,7 +1254,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -1302,13 +1262,9 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
-
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
 
         },
@@ -1324,14 +1280,6 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1348,9 +1296,7 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
-
             accountBalance:[data.entity.accountBalance],
-
             accountOwnership:[data.entity.accountOwnership],
             deleteFlag: ["Y"],
             deleteTime: [new Date()],
@@ -1358,28 +1304,20 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
             accountStatus: [data.entity.accountStatus],
             acid:[data.entity.acid],
             sn:[data.entity.sn],
-
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
-
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
-
       )
       this.disabledFormControll();
     } else if (
@@ -1387,15 +1325,7 @@ export class LoanAccountComponent implements OnInit {
       this.message.account_type == 'Current'
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
-        data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+        data=>{        
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1412,9 +1342,7 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
-
             accountBalance:[data.entity.accountBalance],
-
             accountOwnership:[data.entity.accountOwnership],
             deleteFlag: ["Y"],
             deleteTime: [new Date()],
@@ -1422,26 +1350,19 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
             accountStatus: [data.entity.accountStatus],
             acid:[data.entity.acid],
             sn:[data.entity.sn],
-
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
-
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
 
       )
@@ -1453,14 +1374,6 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1487,7 +1400,7 @@ export class LoanAccountComponent implements OnInit {
             postedFlag: [data.entity.postedFlag],
             openingDate: [data.entity.openingDate],
             postedTime: [data.entity.postedTime],
-            modifiedBy: ['KAMAU'],
+            modifiedBy: ['P'],
             modifiedTime: [new Date()],
             accountName: [data.entity.accountName],
             matured: [data.entity.matured],
@@ -1495,7 +1408,7 @@ export class LoanAccountComponent implements OnInit {
             acid:[data.entity.acid],
             sn:[data.entity.sn],
 
-            verifiedBy:["KAMAU"],
+            verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
 

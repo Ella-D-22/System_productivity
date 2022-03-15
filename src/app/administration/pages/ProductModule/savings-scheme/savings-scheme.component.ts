@@ -6,7 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
 import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
@@ -22,6 +22,8 @@ import { SavingschemeService } from './savingscheme.service';
   styleUrls: ['./savings-scheme.component.scss']
 })
 export class SavingsSchemeComponent implements OnInit {
+  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  auth_user = this.currentUser.username;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -420,12 +422,6 @@ sba_fee_cr_placeholderLookup(): void {
     this.formData.controls.sba_fee_cr_placeholder.setValue(result.data.acid);
   });
 }
-
-
-
-
-
-
   dt = new Date();
   month = this.dt.getMonth();
   year = this.dt.getFullYear();
@@ -435,8 +431,6 @@ sba_fee_cr_placeholderLookup(): void {
   scheme_code: any;
   scheme_type: any;
   scheme_code_desc: any;
-
-
  getDaysInMonth() {
   var date = new Date(this.year, this.month, 1);
   var days = [];
@@ -446,8 +440,6 @@ sba_fee_cr_placeholderLookup(): void {
   }
   return days;
 }
-
-  
   dialogValue: any;
   dialogData: any;
   function_type: any;
@@ -699,11 +691,24 @@ BackdatedTransactionLookup(): void {
         sba_exc_int_cal_not_upto_date:[''],
         sba_exc_insufficient_available_bal:[''],
         sba_exc_backdated_transaction:[''],
-        
-
-
+      
         sba_fees: new FormArray([]),
-        sba_glsubheads: new FormArray([])
+        sba_glsubheads: new FormArray([]),
+
+        // Create Audits
+        postedBy: ['N'],
+        postedFlag: ['N'],
+        postedTime: [new Date()],
+        modifiedBy: ['N'],
+        modifiedFlag: ['N'],
+        modifiedTime: [new Date()],
+        verifiedBy: ['N'],
+        verifiedFlag: ['N'],
+        verifiedTime: [new Date()],
+        deletedBy: ['N'],
+        deletedFlag: ['N'],
+        deletedTime: [new Date()],
+
                });
 
          feeFormData = this.fb.group({
@@ -850,6 +855,9 @@ BackdatedTransactionLookup(): void {
 
          onRemoveGLSubhead(i:any,){
           const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
+          console.log("Number", index);
+          console.log("Index", i);
+
           this.glSubheadArray.splice(index, i);
           this.glSubheadArray = this.glSubheadArray
          }
@@ -986,7 +994,20 @@ BackdatedTransactionLookup(): void {
             is_deleted:[false],
             
             sba_fees: new FormArray([]),
-            sba_glsubheads: new FormArray([])
+            sba_glsubheads: new FormArray([]),
+            // Create Audits
+            postedBy: [this.auth_user],
+            postedFlag: ['Y'],
+            postedTime: [new Date()],
+            modifiedBy: ['N'],
+            modifiedFlag: ['N'],
+            modifiedTime: [new Date()],
+            verifiedBy: ['N'],
+            verifiedFlag: ['N'],
+            verifiedTime: [new Date()],
+            deletedBy: ['N'],
+            deletedFlag: ['N'],
+            deletedTime: [new Date()],
 
           });
         }
@@ -1095,6 +1116,19 @@ BackdatedTransactionLookup(): void {
               sba_exc_int_cal_not_upto_date:[this.results.sba_exc_int_cal_not_upto_date],
               sba_exc_insufficient_available_bal:[this.results.sba_exc_insufficient_available_bal],
               sba_exc_backdated_transaction:[this.results.sba_exc_backdated_transaction],
+              // Audits
+              postedBy: [this.results.postedBy],
+              postedFlag: [this.results.postedFlag],
+              postedTime: [this.results.postedTime],
+              modifiedBy: [this.results.modifiedBy],
+              modifiedFlag: [this.results.modifiedFlag],
+              modifiedTime: [this.results.modifiedTime],
+              verifiedBy: [this.results.verifiedBy],
+              verifiedFlag: [this.results.verifiedFlag],
+              verifiedTime: [this.results.verifiedTime],
+              deletedBy: [this.results.deletedBy],
+              deletedFlag: [this.results.deletedFlag],
+              deletedTime: [this.results.deletedTime],
             });
           }, err=>{
             this.error = err;
@@ -1205,7 +1239,20 @@ BackdatedTransactionLookup(): void {
                 is_deleted:[this.results.is_deleted],
 
                 sba_fees:[this.results.sba_fees],
-                sba_glsubheads:[ this.results.sba_glsubheads]
+                sba_glsubheads:[ this.results.sba_glsubheads],
+                // Audits
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                modifiedBy: [this.auth_user],
+                modifiedFlag: ['Y'],
+                modifiedTime: [new Date()],
+                verifiedBy: [this.results.verifiedBy],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime],
+                deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
+                deletedTime: [this.results.deletedTime],
             });
 
             this.feeArray = this.results.sba_fees
@@ -1326,7 +1373,20 @@ BackdatedTransactionLookup(): void {
                 is_deleted:[this.results.is_deleted],
 
                 sba_fees:[this.results.sba_fees],
-                sba_glsubheads:[ this.results.sba_glsubheads]
+                sba_glsubheads:[ this.results.sba_glsubheads],
+                // Audits
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedFlag: [this.results.modifiedFlag],
+                modifiedTime: [this.results.modifiedTime],
+                verifiedBy: [this.auth_user],
+                verifiedFlag: ['Y'],
+                verifiedTime: [new Date()],
+                deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
+                deletedTime: [this.results.deletedTime],
 
               });
             }, err=>{
@@ -1443,7 +1503,21 @@ BackdatedTransactionLookup(): void {
                 is_deleted:[true],
 
                 sba_fees:[this.results.sba_fees],
-                sba_glsubheads:[ this.results.sba_glsubheads]
+                sba_glsubheads:[ this.results.sba_glsubheads],
+
+                // Audits
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedFlag: [this.results.modifiedFlag],
+                modifiedTime: [this.results.modifiedTime],
+                verifiedBy: [this.results.verifiedBy],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime],
+                deletedBy: [this.auth_user],
+                deletedFlag: ['Y'],
+                deletedTime: [new Date()],
 
               });
             }, err=>{

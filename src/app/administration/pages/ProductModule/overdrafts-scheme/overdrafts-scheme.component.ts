@@ -6,7 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TokenStorageService } from 'src/@core/Service/token-storage.service';
+import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 import { ExceptionsCodesLookupComponent } from '../../SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-lookup/exceptions-codes-lookup.component';
@@ -23,6 +23,8 @@ import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams
   styleUrls: ['./overdrafts-scheme.component.scss']
 })
 export class OverdraftsSchemeComponent implements OnInit {
+  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  auth_user = this.currentUser.username;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -619,7 +621,21 @@ oda_fee_cr_placeholderLookup(): void {
     oda_norm_int_product_method: [''],
     oda_penal_int_rate_method: [''],
     oda_fees: new FormArray([]),
-    oda_glsubheads: new FormArray([])
+    oda_glsubheads: new FormArray([]),
+    // Create Audits
+    postedBy: ['N'],
+    postedFlag: ['N'],
+    postedTime: [new Date()],
+    modifiedBy: ['N'],
+    modifiedFlag: ['N'],
+    modifiedTime: [new Date()],
+    verifiedBy: ['N'],
+    verifiedFlag: ['N'],
+    verifiedTime: [new Date()],
+    deletedBy: ['N'],
+    deletedFlag: ['N'],
+    deletedTime: [new Date()],
+
   });
 
   feeFormData = this.fb.group({
@@ -866,7 +882,21 @@ oda_fee_cr_placeholderLookup(): void {
           oda_norm_int_product_method: [''],
           oda_penal_int_rate_method: [''],
           oda_fees: new FormArray([]),
-          oda_glsubheads: new FormArray([])
+          oda_glsubheads: new FormArray([]),
+
+                  // Create Audits
+                  postedBy: ['N'],
+                  postedFlag: ['N'],
+                  postedTime: [new Date()],
+                  modifiedBy: ['N'],
+                  modifiedFlag: ['N'],
+                  modifiedTime: [new Date()],
+                  verifiedBy: ['N'],
+                  verifiedFlag: ['N'],
+                  verifiedTime: [new Date()],
+                  deletedBy: ['N'],
+                  deletedFlag: ['N'],
+                  deletedTime: [new Date()],
 
         });
       }
@@ -950,6 +980,19 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
+           // Audits
+           postedBy: [this.results.postedBy],
+           postedFlag: [this.results.postedFlag],
+           postedTime: [this.results.postedTime],
+           modifiedBy: [this.results.modifiedBy],
+           modifiedFlag: [this.results.modifiedFlag],
+           modifiedTime: [this.results.modifiedTime],
+           verifiedBy: [this.results.verifiedBy],
+           verifiedFlag: [this.results.verifiedFlag],
+           verifiedTime: [this.results.verifiedTime],
+           deletedBy: [this.results.deletedBy],
+           deletedFlag: [this.results.deletedFlag],
+           deletedTime: [this.results.deletedTime],
 
           });
         }, err => {
@@ -1044,6 +1087,19 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
+           // Audits
+           postedBy: [this.results.postedBy],
+           postedFlag: [this.results.postedFlag],
+           postedTime: [this.results.postedTime],
+           modifiedBy: [this.auth_user],
+           modifiedFlag: ['Y'],
+           modifiedTime: [new Date()],
+           verifiedBy: [this.results.verifiedBy],
+           verifiedFlag: [this.results.verifiedFlag],
+           verifiedTime: [this.results.verifiedTime],
+           deletedBy: [this.results.deletedBy],
+           deletedFlag: [this.results.deletedFlag],
+           deletedTime: [this.results.deletedTime],
 
           });
         }, err => {
@@ -1137,8 +1193,20 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
-           is_verified:[true],
-           is_deleted:[this.results.is_deleted]
+           
+           // Audits
+           postedBy: [this.results.postedBy],
+           postedFlag: [this.results.postedFlag],
+           postedTime: [this.results.postedTime],
+           modifiedBy: [this.results.modifiedBy],
+           modifiedFlag: [this.results.modifiedFlag],
+           modifiedTime: [this.results.modifiedTime],
+           verifiedBy: [this.auth_user],
+           verifiedFlag: ['Y'],
+           verifiedTime: [new Date()],
+           deletedBy: [this.results.deletedBy],
+           deletedFlag: [this.results.deletedFlag],
+           deletedTime: [this.results.deletedTime],
 
           });
         }, err => {
@@ -1234,6 +1302,20 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
+
+           // Audits
+           postedBy: [this.results.postedBy],
+           postedFlag: [this.results.postedFlag],
+           postedTime: [this.results.postedTime],
+           modifiedBy: [this.results.modifiedBy],
+           modifiedFlag: [this.results.modifiedFlag],
+           modifiedTime: [this.results.modifiedTime],
+           verifiedBy: [this.results.verifiedBy],
+           verifiedFlag: [this.results.verifiedFlag],
+           verifiedTime: [this.results.verifiedTime],
+           deletedBy: [this.auth_user],
+           deletedFlag: ['Y'],
+           deletedTime: [new Date()],
 
           });
         }, err => {

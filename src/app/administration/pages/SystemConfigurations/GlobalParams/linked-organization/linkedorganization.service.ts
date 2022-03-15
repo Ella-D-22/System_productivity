@@ -11,7 +11,7 @@ export class LinkedorganizationService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
     // API endpoint
-  baseURL = `${environment.apiUrl}/api/v1/parameters/configurations/static/params/organization/`;
+  baseURL = `${environment.systemAPI}/api/v1/parameters/configurations/static/params/organization/`;
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');
