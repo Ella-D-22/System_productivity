@@ -44,7 +44,8 @@ import { LoanAccountComponent } from './pages/loan-account/loan-account.componen
 import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
 import { InterestComponent } from './pages/interest/interest.component';
-
+import { MisCodesComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes.component';
+import { MisCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes-maintenance/mis-codes-maintenance.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -108,18 +109,33 @@ const routes: Routes = [{
       data: {preload:true },
     },
 
+    //MIS Codes Maintenance
+    {
+      path:'configurations/global/mis-codes/maintenance',
+      component:MisCodesMaintenanceComponent,
+      // canActivate:[CanActivateModuleGuard],
+      data:{preload:true},
+    },
+
+    {
+      path:'configurations/global/mis-codes/data/view',
+      component:MisCodesComponent,
+      // canActivate:[CanActivateModuleGuard],
+      data:{preload:true},
+    },
+
 
     // GL Code Maintenance
     {
       path: 'configurations/global/gl-code/maintenance',
       component:GlCodeMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/global/gl-code/data/view',
       component:GlCodeComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     // GL subhead code Maintenance
@@ -299,7 +315,7 @@ const routes: Routes = [{
       {
         path: 'account/maintenance',
         component:LoanAccountMaintainanceComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {

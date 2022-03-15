@@ -80,6 +80,9 @@ import { EventIdLookupComponent } from './pages/SystemConfigurations/ChargesPara
 import { InterestComponent } from './pages/interest/interest.component';
 import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
 import { InterestLookupComponent } from './pages/interest/interest-lookup/interest-lookup.component';
+import { MisCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes-maintenance/mis-codes-maintenance.component';
+import { MisCodesLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes-lookup/mis-codes-lookup.component';
+import { MisCodesComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes.component';
 
 
 @NgModule({
@@ -159,7 +162,11 @@ import { InterestLookupComponent } from './pages/interest/interest-lookup/intere
     
     InterestComponent,
     InterestMaintainanceComponent,
-    InterestLookupComponent
+    InterestLookupComponent,
+    
+    MisCodesMaintenanceComponent,
+    MisCodesLookupComponent,
+    MisCodesComponent
 
     
   ],
