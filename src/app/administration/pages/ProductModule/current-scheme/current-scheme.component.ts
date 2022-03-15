@@ -200,6 +200,14 @@ export class CurrentSchemeComponent implements OnInit {
   caa_fee_dr_placeholder_desc: any;
   caa_fee_cr_placeholder: any;
   caa_fee_cr_placeholder_desc: any;
+  ac_debit_balance_value: any;
+  ac_credit_balance_value: any;
+  liability_exceed_group_value: any;
+  ac_is_froozed_value: any;
+  sanction_limit_expired_value: any;
+  interest_calc_value: any;
+  insufficient_exception_value: any;
+  backdate_transaction_value: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -369,6 +377,16 @@ export class CurrentSchemeComponent implements OnInit {
 
     caa_fees: new FormArray([]),
     caa_glsubheads: new FormArray([]),
+
+     // Exceptions
+     caa_ac_debit_balance:[''],
+     caa_ac_credit_balance:[''],
+     caa_liability_exceed_group:[''],
+     caa_ac_is_froozed_value:[''],
+     caa_sanction_limit_expired:[''],
+     caa_interest_calc:[''],
+     caa_insufficient_exception:[''],
+     caa_backdate_transaction:[''],
 
     // Audits
     postedBy: [''],
@@ -679,6 +697,90 @@ export class CurrentSchemeComponent implements OnInit {
       this.formData.controls.caa_fee_cr_placeholder.setValue(result.data.acid);
     });
   }
+
+
+  // Exceptions Lookup
+  ac_debit_balance_Lookup(): void {
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.exception_lookupData = result.data;
+      this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
+      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    });
+  }
+  ac_credit_balance_Lookup(): void {
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.exception_lookupData = result.data;
+      this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
+      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    });
+  }
+  liability_exceed_group_Lookup(): void {
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.exception_lookupData = result.data;
+      this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
+      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    });
+  }
+  ac_is_froozed_Lookup(): void {
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.exception_lookupData = result.data;
+      this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
+      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    });
+  }
+  sanction_limit_expired_Lookup(): void {
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.exception_lookupData = result.data;
+      this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
+      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    });
+  }
+  interest_calc_Lookup(): void {
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.exception_lookupData = result.data;
+      this.interest_calc_value =  this.exception_lookupData.exception_code;
+      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    });
+  }
+  insufficient_exception_Lookup(): void {
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.exception_lookupData = result.data;
+      this.insufficient_exception_value =  this.exception_lookupData.exception_code;
+      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    });
+  }
+  backdate_transaction_Lookup(): void {
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.exception_lookupData = result.data;
+      this.backdate_transaction_value =  this.exception_lookupData.exception_code;
+      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    });
+  }
+  
   editLoanFeeForm(i: any) {
     this.newData = false;
     this.arrayIndex = this.feeArray[i];
@@ -917,6 +1019,17 @@ export class CurrentSchemeComponent implements OnInit {
 
             caa_fees: new FormArray([]),
             caa_glsubheads: new FormArray([]),
+
+                 // Exceptions
+            caa_ac_debit_balance:[''],
+            caa_ac_credit_balance:[''],
+            caa_liability_exceed_group:[''],
+            caa_ac_is_froozed_value:[''],
+            caa_sanction_limit_expired:[''],
+            caa_interest_calc:[''],
+            caa_insufficient_exception:[''],
+            caa_backdate_transaction:[''],
+
             // Audits
             postedBy: [this.auth_user],
             postedFlag: ['Y'],
@@ -1199,6 +1312,16 @@ export class CurrentSchemeComponent implements OnInit {
 
                   caa_fees: [this.feeArray],
                   caa_glsubheads: [this.glSubheadArray],
+
+                       // Exceptions
+                  caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
+                  caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
+                  caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
+                  caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
+                  caa_sanction_limit_expired:[this.results.caa_sanction_limit_expired],
+                  caa_interest_calc:[this.results.caa_interest_calc],
+                  caa_insufficient_exception:[this.results.caa_insufficient_exception],
+                  caa_backdate_transaction:[this.results.caa_backdate_transaction],
                   
                   // Audits
                   postedBy: [this.results.postedBy],
@@ -1358,6 +1481,17 @@ export class CurrentSchemeComponent implements OnInit {
 
                   caa_fees: new FormArray([]),
                   caa_glsubheads: new FormArray([]),
+
+                  // Exceptions
+                  caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
+                  caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
+                  caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
+                  caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
+                  caa_sanction_limit_expired:[this.results.caa_sanction_limit_expired],
+                  caa_interest_calc:[this.results.caa_interest_calc],
+                  caa_insufficient_exception:[this.results.caa_insufficient_exception],
+                  caa_backdate_transaction:[this.results.caa_backdate_transaction],
+
                   // Audits
                   postedBy: [this.results.postedBy],
                   postedFlag: [this.results.postedFlag],
@@ -1517,6 +1651,16 @@ export class CurrentSchemeComponent implements OnInit {
 
                   caa_fees: new FormArray([]),
                   caa_glsubheads: new FormArray([]),
+
+                  // Exceptions
+                  caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
+                  caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
+                  caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
+                  caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
+                  caa_sanction_limit_expired:[this.results.caa_sanction_limit_expired],
+                  caa_interest_calc:[this.results.caa_interest_calc],
+                  caa_insufficient_exception:[this.results.caa_insufficient_exception],
+                  caa_backdate_transaction:[this.results.caa_backdate_transaction],
 
 
                   // Audits

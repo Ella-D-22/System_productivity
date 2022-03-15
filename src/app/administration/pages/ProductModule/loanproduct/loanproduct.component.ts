@@ -13,6 +13,7 @@ import { LoanAccountService } from '../../loan-account/loan-account.service';
 import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesParams/event-type/event-type-lookup/event-type-lookup.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
+import { ExceptionsCodesLookupComponent } from '../../SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-lookup/exceptions-codes-lookup.component';
 import { GlSubheadLookupComponent } from '../../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
 import { LoanproductService } from './loanproduct.service';
 
@@ -125,6 +126,15 @@ export class LoanproductComponent implements OnInit {
   laa_fee_amortize_credit_ph_desc: any;
   laa_fee_amortize_debit_ph_desc: any;
   data: any;
+  exception_lookupData: any;
+  ac_debit_balance_value: any;
+  ac_credit_balance_value: any;
+  liability_exceed_group_value: any;
+  ac_is_froozed_value: any;
+  sanction_limit_expired_value: any;
+  interest_calc_value: any;
+  insufficient_exception_value: any;
+  backdate_transaction_value: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -160,6 +170,8 @@ export class LoanproductComponent implements OnInit {
   onOffsetSequence(event:any){
     this.showChronologicalOrder = false;
   }
+
+
 
   glSubheadLookup(): void {
     const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
@@ -368,6 +380,89 @@ laa_fee_amortize_debit_phLookup(): void {
     this.formData.controls.laa_fee_amortize_debit_ph.setValue(result.data.acid);
   });
 }
+
+// Exceptions Lookup
+ac_debit_balance_Lookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.exception_lookupData = result.data;
+    this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
+    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+  });
+}
+ac_credit_balance_Lookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.exception_lookupData = result.data;
+    this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
+    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+  });
+}
+liability_exceed_group_Lookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.exception_lookupData = result.data;
+    this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
+    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+  });
+}
+ac_is_froozed_Lookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.exception_lookupData = result.data;
+    this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
+    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+  });
+}
+sanction_limit_expired_Lookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.exception_lookupData = result.data;
+    this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
+    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+  });
+}
+interest_calc_Lookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.exception_lookupData = result.data;
+    this.interest_calc_value =  this.exception_lookupData.exception_code;
+    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+  });
+}
+insufficient_exception_Lookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.exception_lookupData = result.data;
+    this.insufficient_exception_value =  this.exception_lookupData.exception_code;
+    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+  });
+}
+backdate_transaction_Lookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.exception_lookupData = result.data;
+    this.backdate_transaction_value =  this.exception_lookupData.exception_code;
+    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+  });
+}
+
 
   dt = new Date();
   month = this.dt.getMonth();
@@ -868,6 +963,15 @@ laa_fee_amortize_debit_phLookup(): void {
             
             laa_loanfees: new FormArray([]),
             laa_glsubheads: new FormArray([]),
+                // Exceptions
+            laa_ac_debit_balance:[''],
+            laa_ac_credit_balance:[''],
+            laa_liability_exceed_group:[''],
+            laa_ac_is_froozed_value:[''],
+            laa_sanction_limit_expired:[''],
+            laa_interest_calc:[''],
+            laa_insufficient_exception:[''],
+            laa_backdate_transaction:[''],
 
             // Create Audits
             postedBy: ['N'],
@@ -1006,6 +1110,16 @@ laa_fee_amortize_debit_phLookup(): void {
               laa_ac_penal_int_suspense:[this.results.laa_ac_penal_int_suspense],
               laa_prov_dr:[this.results.laa_prov_dr],
               laa_prov_cr:[this.results.laa_prov_cr],
+
+                  // Exceptions
+              laa_ac_debit_balance:[this.results.laa_ac_debit_balance],
+              laa_ac_credit_balance:[this.results.laa_ac_credit_balance],
+              laa_liability_exceed_group:[this.results.laa_liability_exceed_group],
+              laa_ac_is_froozed_value:[this.results.laa_ac_is_froozed_value],
+              laa_sanction_limit_expired:[this.results.laa_sanction_limit_expired],
+              laa_interest_calc:[this.results.laa_interest_calc],
+              laa_insufficient_exception:[this.results.laa_insufficient_exception],
+              laa_backdate_transaction:[this.results.laa_backdate_transaction],
 
                 // Audits
                 postedBy: [this.results.postedBy],
@@ -1154,6 +1268,17 @@ laa_fee_amortize_debit_phLookup(): void {
 
               laa_loanfees:[this.results.laa_loanfees],
               laa_glsubheads: [this.results.laa_glsubheads],
+
+
+              // Exceptions
+              laa_ac_debit_balance:[this.results.laa_ac_debit_balance],
+              laa_ac_credit_balance:[this.results.laa_ac_credit_balance],
+              laa_liability_exceed_group:[this.results.laa_liability_exceed_group],
+              laa_ac_is_froozed_value:[this.results.laa_ac_is_froozed_value],
+              laa_sanction_limit_expired:[this.results.laa_sanction_limit_expired],
+              laa_interest_calc:[this.results.laa_interest_calc],
+              laa_insufficient_exception:[this.results.laa_insufficient_exception],
+              laa_backdate_transaction:[this.results.laa_backdate_transaction],
 
                 // Audits
                 postedBy: [this.results.postedBy],
@@ -1307,6 +1432,16 @@ laa_fee_amortize_debit_phLookup(): void {
               laa_loanfees:[this.results.laa_loanfees],
               laa_glsubheads: [this.results.laa_glsubheads],
 
+              // Exceptions
+              laa_ac_debit_balance:[this.results.laa_ac_debit_balance],
+              laa_ac_credit_balance:[this.results.laa_ac_credit_balance],
+              laa_liability_exceed_group:[this.results.laa_liability_exceed_group],
+              laa_ac_is_froozed_value:[this.results.laa_ac_is_froozed_value],
+              laa_sanction_limit_expired:[this.results.laa_sanction_limit_expired],
+              laa_interest_calc:[this.results.laa_interest_calc],
+              laa_insufficient_exception:[this.results.laa_insufficient_exception],
+              laa_backdate_transaction:[this.results.laa_backdate_transaction],
+
                // Audits
                postedBy: [this.results.postedBy],
                postedFlag: [this.results.postedFlag],
@@ -1459,6 +1594,16 @@ laa_fee_amortize_debit_phLookup(): void {
 
               laa_loanfees:[this.results.laa_loanfees],
               laa_glsubheads: [this.results.laa_glsubheads],
+
+              // Exceptions
+              laa_ac_debit_balance:[this.results.laa_ac_debit_balance],
+              laa_ac_credit_balance:[this.results.laa_ac_credit_balance],
+              laa_liability_exceed_group:[this.results.laa_liability_exceed_group],
+              laa_ac_is_froozed_value:[this.results.laa_ac_is_froozed_value],
+              laa_sanction_limit_expired:[this.results.laa_sanction_limit_expired],
+              laa_interest_calc:[this.results.laa_interest_calc],
+              laa_insufficient_exception:[this.results.laa_insufficient_exception],
+              laa_backdate_transaction:[this.results.laa_backdate_transaction],
 
                // Audits
                postedBy: [this.results.postedBy],

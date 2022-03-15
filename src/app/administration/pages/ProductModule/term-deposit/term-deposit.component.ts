@@ -206,19 +206,34 @@ export class TermDepositComponent implements OnInit {
 // }
 
 
-// tda_principal_lossline_acLookup(): void {
-//   this.dtype="oa"
-//   const dconfig= new MatDialogConfig()
-//   dconfig.data={
-//     type:this.dtype
-//   }
-//   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-//   cdialogRef.afterClosed().subscribe((result) => {
-//     this.tda_recovery_lossline_ac = result.data.acid;
-//     this.tda_recovery_lossline_ac_desc = result.data.accountName;
-//     this.formData.controls.tda_recovery_lossline_ac.setValue(result.data.acid);
-//   });
-// }
+
+tda_principal_lossline_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.tda_principal_lossline_ac = result.data.acid;
+    this.tda_principal_lossline_ac_desc = result.data.accountName;
+    this.formData.controls.tda_principal_lossline_ac.setValue(result.data.acid);
+  });
+}
+
+tda_recovery_lossline_acLookup(): void {
+  this.dtype="oa"
+  const dconfig= new MatDialogConfig()
+  dconfig.data={
+    type:this.dtype
+  }
+  const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+  cdialogRef.afterClosed().subscribe((result) => {
+    this.tda_recovery_lossline_ac = result.data.acid;
+    this.tda_recovery_lossline_ac_desc = result.data.accountName;
+    this.formData.controls.tda_recovery_lossline_ac.setValue(result.data.acid);
+  });
+}
 
 tda_charge_off_acLookup(): void {
   this.dtype="oa"
@@ -363,6 +378,9 @@ tda_int_table_codeLookup(): void {
     this.formData.controls.tda_int_table_code.setValue(result.data.acid);
   });
 }
+
+
+
 
 tda_fee_amortize_credit_phLookup(): void {
   this.dtype="oa"
@@ -669,6 +687,17 @@ tda_fee_cr_placeholderLookup(): void {
     // int_cal_freq_dr_day:[''],
     // int_cal_freq_dr_date:[''],
     // int_cal_freq_dr_holiday:[''],
+
+    // Exceptions
+    tda_ac_debit_balance:[''],
+    tda_ac_credit_balance:[''],
+    tda_liability_exceed_group:[''],
+    tda_ac_is_froozed_value:[''],
+    tda_sanction_limit_expired:[''],
+    tda_interest_calc:[''],
+    tda_insufficient_exception:[''],
+    tda_backdate_transaction:[''],
+
     tda_fees: new FormArray([]),
     tda_glsubheads: new FormArray([]),
     // Create Audits
@@ -784,9 +813,6 @@ tda_fee_cr_placeholderLookup(): void {
       this.initLoanForm();
     }
   }
-
-
-  
   previewGlSubheads(){
     if(this.glSubheadData.valid){
       if(this.glSubheadArray.length<1){
@@ -801,27 +827,18 @@ tda_fee_cr_placeholderLookup(): void {
         this.initGlSUbheadForm();
      }
    }
-
-
   updateLoanFee(i: any) {
     this.t.push(this.fb.group(
       this.feeFormData.value
     ));
     this.feeArray.push(this.feeFormData.value);
-    console.log("form fee", this.feeArray);
     this.initLoanForm();
   }
-
-
   onRemove(i: any,) {
     const index: number = this.feeArray.indexOf(this.feeArray.values);
     this.feeArray.splice(index, i);
-    console.log("new", this.feeArray);
     this.feeArray = this.feeArray;
-    console.log("click", i);
   }
-
-
   onRemoveGLSubhead(i: any,) {
     const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
     this.glSubheadArray.splice(index, i);
@@ -838,66 +855,8 @@ tda_fee_cr_placeholderLookup(): void {
   }
 
   disabledFormControll() {
-      
-            this.formData.controls.tda_effective_from_date.disable();
-            this.formData.controls.tda_effective_to_date.disable();
-            this.formData.controls.tda_system_generated_no.disable();
-            this.formData.controls.tda_number_generation_code.disable();
-            this.formData.controls.tda_principal_lossline_ac.disable();
-            this.formData.controls.tda_recovery_lossline_ac.disable();
-            this.formData.controls.tda_charge_off_ac.disable();
-            this.formData.controls.tda_number_generation.disable();
-      
-            this.formData.controls.tda_pl_ac_ccy.disable();
-            this.formData.controls.tda_int_receivale_applicable.disable();
-            this.formData.controls.tda_normal_int_receivable_ac.disable();
-            this.formData.controls.tda_penal_int_receivable_ac.disable();
-            this.formData.controls.tda_normal_int_received_ac.disable();
-            this.formData.controls.tda_penal_int_received_ac.disable();
-            this.formData.controls.tda_advance_int_ac.disable();
-            this.formData.controls.tda_dr_int_compounding_freq.disable();
-            this.formData.controls.tda_int_cal_freq_dr_week.disable();
-            this.formData.controls.tda_app_discounted_int_rate.disable();
-            this.formData.controls.tda_int_cal_freq_dr_day.disable();
-            this.formData.controls.tda_int_cal_freq_dr_date.disable();
-            this.formData.controls.tda_int_cal_freq_dr_holiday.disable();
-            this.formData.controls.tda_int_table_code.disable();
-
-            this.formData.controls.tda_deposit_amt_min.disable();
-            this.formData.controls.tda_deposit_amt_max.disable();
-            this.formData.controls.tda_deposit_amt_steps.disable();
-            this.formData.controls.tda_period_mm_min.disable();
-            this.formData.controls.tda_period_dd_min.disable();
-            this.formData.controls.tda_period_mm_max.disable();
-            this.formData.controls.tda_period_dd_max.disable();
-            this.formData.controls.tda_period_steps_mm.disable();
-            this.formData.controls.tda_period_steps_dd.disable();
-            this.formData.controls.tda_deposit_type.disable();
-            this.formData.controls.tda_sundry_deposit_ph.disable();
-            this.formData.controls.tda_repayment_report_code.disable();
-            this.formData.controls.tda_duration_to_mrk_ac_inactive.disable();
-            this.formData.controls.tda_duration_frm_inactive_to_dormant.disable();
-            this.formData.controls.tda_pre_closure_rate.disable();
-            this.formData.controls.tda_pre_closure_penalty_rate.disable();
-            this.formData.controls.tda_frequency_for_int_calc_on_preclosure_month.disable();
-            this.formData.controls.tda_sweeps.disable();
-            this.formData.controls.tda_part_closure.disable();
-            this.formData.controls.tda_value_dated_closure.disable();
-            this.formData.controls.tda_repayment_ac_ph.disable();
-            this.formData.controls.tda_auto_renewal.disable();
-            this.formData.controls.tda_max_no_of_renewal.disable();
-            this.formData.controls.tda_renewal_period_mm.disable();
-            this.formData.controls.tda_renewal_period_dd.disable();
-            this.formData.controls.tda_renewal_allowed_within_days.disable();
-            this.formData.controls.tda_renewal_period.disable();
-            this.formData.controls.tda_automatically_create_dep.disable();
-            this.formData.controls.tda_link_to_operative_ac.disable();
-            this.formData.controls.tda_auto_cr_period_mm.disable();
-            this.formData.controls.tda_auto_cr_period_dd.disable();
-            this.formData.controls.int_cal_freq_dr_week.disable();
-            this.formData.controls.int_cal_freq_dr_day.disable();
-            this.formData.controls.int_cal_freq_dr_date.disable();
-            this.formData.controls.int_cal_freq_dr_holiday.disable();  }
+    this.formData.disable()
+  }
   getPage() {
     this.subscription = this.tdaAPI.currentMessage.subscribe(message => {
       this.message = message;
@@ -983,6 +942,17 @@ tda_fee_cr_placeholderLookup(): void {
           // int_cal_freq_dr_day:[''],
           // int_cal_freq_dr_date:[''],
           // int_cal_freq_dr_holiday:[''],
+
+          // Exceptions
+          tda_ac_debit_balance:[''],
+          tda_ac_credit_balance:[''],
+          tda_liability_exceed_group:[''],
+          tda_ac_is_froozed_value:[''],
+          tda_sanction_limit_expired:[''],
+          tda_interest_calc:[''],
+          tda_insufficient_exception:[''],
+          tda_backdate_transaction:[''],
+
           tda_fees: new FormArray([]),
           tda_glsubheads: new FormArray([]),
 
@@ -999,8 +969,6 @@ tda_fee_cr_placeholderLookup(): void {
           deletedBy: ['N'],
           deletedFlag: ['N'],
           deletedTime: [new Date()],
-          
-
         });
       }
       else if (this.function_type == "I-Inquire") {
@@ -1039,7 +1007,7 @@ tda_fee_cr_placeholderLookup(): void {
             tda_recovery_lossline_ac:[this.results.tda_recovery_lossline_ac],
             tda_charge_off_ac:[this.results.tda_charge_off_ac],
             tda_number_generation:[this.results.tda_number_generation],
-      
+    
             // interest details
             tda_pl_ac_ccy:[this.results.tda_pl_ac_ccy],
             tda_int_receivale_applicable:[this.results.tda_int_receivale_applicable],
@@ -1098,6 +1066,17 @@ tda_fee_cr_placeholderLookup(): void {
             // int_cal_freq_dr_day:[this.results.],
             // int_cal_freq_dr_date:[this.results.],
             // int_cal_freq_dr_holiday:[this.results.],
+            
+            // Exceptions
+            tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
+            tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
+            tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
+            tda_ac_is_froozed_value:[this.results.tda_ac_is_froozed_value],
+            tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
+            tda_interest_calc:[this.results.tda_interest_calc],
+            tda_insufficient_exception:[this.results.tda_insufficient_exception],
+            tda_backdate_transaction:[this.results.tda_backdate_transaction],
+
             tda_fees: new FormArray([]),
             tda_glsubheads: new FormArray([]),
             // Audits
@@ -1113,8 +1092,6 @@ tda_fee_cr_placeholderLookup(): void {
             deletedBy: [this.results.deletedBy],
             deletedFlag: [this.results.deletedFlag],
             deletedTime: [this.results.deletedTime],
-
-
           });
         }, err => {
           this.error = err;
@@ -1209,13 +1186,20 @@ tda_fee_cr_placeholderLookup(): void {
             tda_auto_cr_period_mm:[this.results.tda_auto_cr_period_mm],
             tda_auto_cr_period_dd:[this.results.tda_auto_cr_period_dd],
             int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-            // int_cal_freq_dr_week:[this.results.],
             int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
             int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
             int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-            // int_cal_freq_dr_day:[this.results.],
-            // int_cal_freq_dr_date:[this.results.],
-            // int_cal_freq_dr_holiday:[this.results.],
+           
+            // Exceptions
+            tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
+            tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
+            tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
+            tda_ac_is_froozed_value:[this.results.tda_ac_is_froozed_value],
+            tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
+            tda_interest_calc:[this.results.tda_interest_calc],
+            tda_insufficient_exception:[this.results.tda_insufficient_exception],
+            tda_backdate_transaction:[this.results.tda_backdate_transaction],
+
             tda_fees: new FormArray([]),
             tda_glsubheads: new FormArray([]),
             // Audits
@@ -1245,8 +1229,6 @@ tda_fee_cr_placeholderLookup(): void {
       }
       else if (this.function_type == "V-Verify") {
         this.disabledFormControll();
-
-        
         //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
@@ -1332,16 +1314,23 @@ tda_fee_cr_placeholderLookup(): void {
             tda_auto_cr_period_mm:[this.results.tda_auto_cr_period_mm],
             tda_auto_cr_period_dd:[this.results.tda_auto_cr_period_dd],
             int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-            // int_cal_freq_dr_week:[this.results.],
             int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
             int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
             int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
             is_verified:[true],
-            // int_cal_freq_dr_day:[this.results.],
-            // int_cal_freq_dr_date:[this.results.],
-            // int_cal_freq_dr_holiday:[this.results.],
             tda_fees: new FormArray([]),
             tda_glsubheads: new FormArray([]),
+
+             // Exceptions
+             tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
+             tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
+             tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
+             tda_ac_is_froozed_value:[this.results.tda_ac_is_froozed_value],
+             tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
+             tda_interest_calc:[this.results.tda_interest_calc],
+             tda_insufficient_exception:[this.results.tda_insufficient_exception],
+             tda_backdate_transaction:[this.results.tda_backdate_transaction],
+
             // Audits
             postedBy: [this.results.postedBy],
             postedFlag: [this.results.postedFlag],
@@ -1459,6 +1448,17 @@ tda_fee_cr_placeholderLookup(): void {
             // int_cal_freq_dr_holiday:[this.results.],
             tda_fees: new FormArray([]),
             tda_glsubheads: new FormArray([]),
+
+             // Exceptions
+             tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
+             tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
+             tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
+             tda_ac_is_froozed_value:[this.results.tda_ac_is_froozed_value],
+             tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
+             tda_interest_calc:[this.results.tda_interest_calc],
+             tda_insufficient_exception:[this.results.tda_insufficient_exception],
+             tda_backdate_transaction:[this.results.tda_backdate_transaction],
+             
             // Audits
             postedBy: [this.results.postedBy],
             postedFlag: [this.results.postedFlag],

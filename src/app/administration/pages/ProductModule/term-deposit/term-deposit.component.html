@@ -82,7 +82,6 @@
                     <mat-hint>{{this.tda_principal_lossline_ac_desc}}</mat-hint>
                     </div>
                 </div>
-
               </div>
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
@@ -91,7 +90,7 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input  type="number" [value]="this.tda_recovery_lossline_ac" formControlName="tda_recovery_lossline_ac" class="form-control" />
-                    <mat-icon *ngIf="isEnabled" (click)="tda_principal_lossline_acLookup()">search</mat-icon>
+                    <mat-icon *ngIf="isEnabled" (click)="tda_recovery_lossline_acLookup()">search</mat-icon>
                   </div>
                 </div>
 
@@ -443,7 +442,6 @@
               <div class="col-md-6 col-sm-12 form-column">
                 <input type="number" [value]="this.tda_sundry_deposit_ph" formControlName="tda_sundry_deposit_ph" class="pull-right form-control"/>
                 <mat-icon *ngIf="isEnabled" (click)="tda_sundry_deposit_phLookup()">search</mat-icon>
-                <mat-icon>search</mat-icon>
               </div>
            </div>   
            <div class="form-group">
@@ -451,7 +449,6 @@
             </div>
             <div class="col-md-6 col-sm-12 form-column">
               <mat-hint>{{this.tda_sundry_deposit_ph_desc}}</mat-hint>
-              <mat-icon>search</mat-icon>
             </div>
          </div>                
         </div>
@@ -554,8 +551,8 @@
        <label class="start pull-left">Account in Debit Balance<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.tda_int_table_code" type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
-       <mat-icon (click)="tda_int_table_codeLookup()">search</mat-icon>
+       <input [value]="this.ac_debit_balance_value" type="text" formControlName="tda_ac_debit_balance" class="pull-right form-control"/>
+       <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
       </div>
    </div> 
    <div class="form-group">
@@ -572,8 +569,8 @@
       <label class="start pull-left">Account in Credit Balance</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.tda_int_table_code" type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
-      <mat-icon (click)="tda_int_table_codeLookup()">search</mat-icon>
+      <input [value]="this.ac_credit_balance_value" type="text" formControlName="tda_ac_credit_balance" class="pull-right form-control"/>
+      <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
      </div>
   </div> 
   <div class="form-group">
@@ -593,7 +590,7 @@
        <label class="start pull-left">Liability exceeds group limit<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.liability_exceed_group_value " type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
+       <input [value]="this.liability_exceed_group_value" type="text" formControlName="tda_liability_exceed_group" class="pull-right form-control"/>
        <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
       </div>
    </div> 
@@ -604,7 +601,7 @@
       <label class="start pull-left">Account is frozed</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_is_froozed_value " type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
+      <input [value]="this.ac_is_froozed_value" type="text" formControlName="tda_ac_is_froozed" class="pull-right form-control"/>
       <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
      </div>
   </div>              
@@ -617,7 +614,7 @@
        <label class="start pull-left">Sanction Limit Expired<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.sanction_limit_expired_value " type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
+       <input [value]="this.sanction_limit_expired_value" type="text" formControlName="tda_sanction_limit_expired" class="pull-right form-control"/>
        <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
       </div>
    </div> 
@@ -628,7 +625,7 @@
       <label class="start pull-left">Interest Calculation not upto date</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.interest_calc_value " type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
+      <input [value]="this.interest_calc_value" type="text" formControlName="tda_interest_calc" class="pull-right form-control"/>
       <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
      </div>
   </div>              
@@ -642,7 +639,7 @@
        <label class="start pull-left">Insufficient available balance<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.insufficient_exception_value " type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
+       <input [value]="this.insufficient_exception_value" type="text" formControlName="tda_insufficient_exception" class="pull-right form-control"/>
        <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
       </div>
    </div> 
@@ -653,7 +650,7 @@
       <label class="start pull-left">Backdated transaction</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.backdate_transaction_value " type="text" formControlName="tda_int_table_code" class="pull-right form-control"/>
+      <input [value]="this.backdate_transaction_value" type="text" formControlName="tda_backdate_transaction" class="pull-right form-control"/>
       <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
      </div>
   </div>              
@@ -670,7 +667,6 @@
         #resetRequestsForm="ngForm"
         novalidate 
       >
-  
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
