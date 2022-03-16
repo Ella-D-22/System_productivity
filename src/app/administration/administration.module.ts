@@ -80,8 +80,12 @@ import { EventIdLookupComponent } from './pages/SystemConfigurations/ChargesPara
 import { InterestComponent } from './pages/interest/interest.component';
 import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
 import { InterestLookupComponent } from './pages/interest/interest-lookup/interest-lookup.component';
-
-
+import { MisSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector-maintenance/mis-sector-maintenance.component';
+import { MisSectorLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector-lookup/mis-sector-lookup.component';
+import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector.component';
+import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
+import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
+import { MisSubSectorLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-lookup/mis-sub-sector-lookup.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -159,7 +163,17 @@ import { InterestLookupComponent } from './pages/interest/interest-lookup/intere
     
     InterestComponent,
     InterestMaintainanceComponent,
-    InterestLookupComponent
+    InterestLookupComponent,
+
+    //MIS-Codes
+    MisSectorComponent,
+    MisSectorLookupComponent,
+    MisSectorMaintenanceComponent,
+    MisSubSectorComponent,
+    MisSubSectorMaintenanceComponent,
+    MisSubSectorLookupComponent,
+    
+ 
 
     
   ],

@@ -1,0 +1,52 @@
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <div>Home/Configurations/Global/MIS-Sector/maintenance</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+  <br>
+    <div class="container-fluid">
+        <form class="form"
+        novalidate
+        (ngSubmit)="onSubmit()"
+        [formGroup]="formData"
+        #resetRequestsForm = "ngForm"
+        >
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label class="start pull-left">Function<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-5 col-sm-12 form-column">
+                        <select formControlName="function_type" (change)="onFunctionSelection($event)"
+                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}">
+                            <option value="" disabled>-- Choose Function --</option>
+                            <option *ngFor="let flag of functionArray" [value]="flag">{{flag}}</option>
+                        </select>
+                    </div>
+                </div>      
+            </div>
+            <div *ngIf="showMisCode" class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">MIS-CODE<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" maxlength="5" [value]="this.miscode" formControlName="miscode" class="form-control"
+                        [ngClass]="{'is-invalid': submitted && f.miscode.errors}">
+                        <mat-icon (click)="misSectorLookup()">search</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <button class="pull-right" mat-raised-button color="primary" type="submit">
+            <span
+            *ngFor="loading" 
+            class="spinner-border spinner-border-sm mr-1"></span>
+            GO
+        </button>
+    </form>
+    </div>
+</mat-card>

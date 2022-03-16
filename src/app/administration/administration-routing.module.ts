@@ -44,7 +44,10 @@ import { LoanAccountComponent } from './pages/loan-account/loan-account.componen
 import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
 import { InterestComponent } from './pages/interest/interest.component';
-
+import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector.component';
+import { MisSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector-maintenance/mis-sector-maintenance.component';
+import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
+import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -108,18 +111,49 @@ const routes: Routes = [{
       data: {preload:true },
     },
 
+    //MIS Codes Maintenance
+    {
+      path:'configurations/global/mis-sector/maintenance',
+      component:MisSectorMaintenanceComponent,
+      // canActivate:[CanActivateModuleGuard],
+      data:{preload:true},
+    },
+
+    {
+      path:'configurations/global/mis-sector/data/view',
+      component:MisSectorComponent,
+      // canActivate:[CanActivateModuleGuard],
+      data:{preload:true},
+    },
+
+    //Mis Sub Sector
+    {
+      path:'configurations/global/mis-sub-sector/maintenance',
+      component:MisSubSectorMaintenanceComponent,
+      // canActivate:[CanActivateModuleGuard],
+      data:{preload:true}
+    },
+    
+    {
+      path:'configurations/global/mis-sub-sector/data/view',
+      component:MisSubSectorComponent,
+      // canActivate:[CanActivateModuleGuard],
+      data:{preload:true},
+
+    },
+
 
     // GL Code Maintenance
     {
       path: 'configurations/global/gl-code/maintenance',
       component:GlCodeMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/global/gl-code/data/view',
       component:GlCodeComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     // GL subhead code Maintenance
@@ -299,7 +333,7 @@ const routes: Routes = [{
       {
         path: 'account/maintenance',
         component:LoanAccountMaintainanceComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {

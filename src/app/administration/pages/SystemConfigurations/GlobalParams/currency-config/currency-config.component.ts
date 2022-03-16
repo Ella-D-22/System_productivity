@@ -78,6 +78,7 @@ export class CurrencyConfigComponent implements OnInit {
       min_amt_ccy = "";
       max_amt_ccy = "";
       linked_event_id = "";
+      
       formData = this.fb.group({
         ccy: ['', [Validators.required]],
         country: ['', [Validators.required]],
