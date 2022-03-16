@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MisCodesService } from './mis-codes.service';
+import { MisSectorService } from './mis-sector.service';
 
-describe('MisCodesService', () => {
-  let service: MisCodesService;
+describe('MisSectorService', () => {
+  let service: MisSectorService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MisCodesService);
+    service = TestBed.inject(MisSectorService);
   });
 
   it('should be created', () => {

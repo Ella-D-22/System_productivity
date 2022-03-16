@@ -44,8 +44,10 @@ import { LoanAccountComponent } from './pages/loan-account/loan-account.componen
 import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
 import { InterestComponent } from './pages/interest/interest.component';
-import { MisCodesComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes.component';
-import { MisCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes-maintenance/mis-codes-maintenance.component';
+import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector.component';
+import { MisSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector-maintenance/mis-sector-maintenance.component';
+import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
+import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -111,17 +113,33 @@ const routes: Routes = [{
 
     //MIS Codes Maintenance
     {
-      path:'configurations/global/mis-codes/maintenance',
-      component:MisCodesMaintenanceComponent,
+      path:'configurations/global/mis-sector/maintenance',
+      component:MisSectorMaintenanceComponent,
       // canActivate:[CanActivateModuleGuard],
       data:{preload:true},
     },
 
     {
-      path:'configurations/global/mis-codes/data/view',
-      component:MisCodesComponent,
+      path:'configurations/global/mis-sector/data/view',
+      component:MisSectorComponent,
       // canActivate:[CanActivateModuleGuard],
       data:{preload:true},
+    },
+
+    //Mis Sub Sector
+    {
+      path:'configurations/global/mis-sub-sector/maintenance',
+      component:MisSubSectorMaintenanceComponent,
+      // canActivate:[CanActivateModuleGuard],
+      data:{preload:true}
+    },
+    
+    {
+      path:'configurations/global/mis-sub-sector/data/view',
+      component:MisSubSectorComponent,
+      // canActivate:[CanActivateModuleGuard],
+      data:{preload:true},
+
     },
 
 

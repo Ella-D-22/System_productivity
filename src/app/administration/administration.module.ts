@@ -80,11 +80,12 @@ import { EventIdLookupComponent } from './pages/SystemConfigurations/ChargesPara
 import { InterestComponent } from './pages/interest/interest.component';
 import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
 import { InterestLookupComponent } from './pages/interest/interest-lookup/interest-lookup.component';
-import { MisCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes-maintenance/mis-codes-maintenance.component';
-import { MisCodesLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes-lookup/mis-codes-lookup.component';
-import { MisCodesComponent } from './pages/SystemConfigurations/GlobalParams/mis-codes/mis-codes.component';
-
-
+import { MisSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector-maintenance/mis-sector-maintenance.component';
+import { MisSectorLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector-lookup/mis-sector-lookup.component';
+import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector.component';
+import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
+import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
+import { MisSubSectorLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-lookup/mis-sub-sector-lookup.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -163,10 +164,16 @@ import { MisCodesComponent } from './pages/SystemConfigurations/GlobalParams/mis
     InterestComponent,
     InterestMaintainanceComponent,
     InterestLookupComponent,
+
+    //MIS-Codes
+    MisSectorComponent,
+    MisSectorLookupComponent,
+    MisSectorMaintenanceComponent,
+    MisSubSectorComponent,
+    MisSubSectorMaintenanceComponent,
+    MisSubSectorLookupComponent,
     
-    MisCodesMaintenanceComponent,
-    MisCodesLookupComponent,
-    MisCodesComponent
+ 
 
     
   ],
