@@ -20,20 +20,21 @@
                     </div>
                     <div class="col-md-5 col-sm-12 form-column">
                         <select formControlName="function_type" (change)="onFunctionSelection($event)"
-                        class="form-control" [ngClass]="{ 'is-invalid': submitted}">
+                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}">
                             <option value="" disabled>-- Choose Function --</option>
-                            <option *ngFor="let flag of function_Array" [value]="flag">{{flag}}</option>
+                            <option *ngFor="let flag of functionArray" [value]="flag">{{flag}}</option>
                         </select>
                     </div>
                 </div>      
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div *ngIf="showMisCode" class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <div class="col-md-6 col-sm-12 form-column">
                         <label for="" class="start pull-left">MIS-CODE<span class="warning">*</span></label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                        <input type="text" maxlength="5" [value]="this.miscode" formControlName="miscode" class="form-control">
+                        <input type="text" maxlength="5" [value]="this.miscode" formControlName="miscode" class="form-control"
+                        [ngClass]="{'is-invalid': submitted && f.miscode.errors}">
                         <mat-icon (click)="misSectorLookup()">search</mat-icon>
                     </div>
                 </div>

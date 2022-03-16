@@ -1,1 +1,66 @@
-<p>mis-sector works!</p>
+<mat-card>
+    <mat-card-header class="breadcrumb">
+      <div>Home/system/configurations/global/mis-sub-sector/data/view</div>
+    </mat-card-header>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h4>Function</h4>
+            <p>{{this.function_type}}</p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h4>Code</h4>
+            <p>{{this.miscode}}</p>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form formGroup="formData"
+        class="form"
+        (ngSubmit)="onSubmit()"
+        #resetRequestsForm="ngForm"
+        novalidate>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left">MIS Code<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" maxlength="4" formControlName="miscode" oninput="this.value=this.value.toUpperCase()"
+                            class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left">MIS Sector<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" formControlName="mis_sector" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left">MIS Sector Description<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" class="pull-right form-control" formControlName="mis_sector_desc" oninput="this.value=this.value.toUpperCase()">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+
+                </div>
+            </div>
+            <br>
+            <button mat-raised-button color="warning" type="reset" class="pull-left">Reset</button>
+            <button mat-raised-button color="primary" type="submit" class="pull-right">Submit</button>
+        </form>
+    </div>
+</mat-card>

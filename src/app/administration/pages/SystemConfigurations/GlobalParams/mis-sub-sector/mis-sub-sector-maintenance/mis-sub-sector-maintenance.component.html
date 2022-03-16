@@ -1,1 +1,41 @@
-<p>mis-sub-sector-maintenance works!</p>
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <div>Home/system/configurations/global/mis-sub-sector/maintenance</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form class="form",
+        novalidate
+        #resetRequestsForm="ngForm"
+        [formGroup]="formData"
+        >
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="">function<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <select (change)="onFunctionSelection($event)" class="form-control">
+                                <option value="" disabled>-- Choose Function --</option>
+                                <option *ngFor="let flag of functionArray" [value]="flag" >{{flag}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left">Sector ID<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button mat-raised-button color="primary" type="submit">GO</button>
+        </form>
+    </div>
+</mat-card>

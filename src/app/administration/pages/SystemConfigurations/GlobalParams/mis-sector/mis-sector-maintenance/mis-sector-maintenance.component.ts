@@ -16,12 +16,12 @@ export class MisSectorMaintenanceComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition;
   verticalPosition:MatSnackBarVerticalPosition
   miscode:any;
-   dialogData:any;
+  dialogData:any;
+  function_type:any;
 
 
 
-
-   showMisCode:false;
+   showMisCode:any;
   submitted:false;
   loading:false;
 
@@ -38,7 +38,7 @@ formData = this.fb.group({
   miscode:['']
 })
 
-function_Array = [
+functionArray:any = [
   'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
 ]
 
@@ -49,11 +49,14 @@ onFunctionSelection(event:any){
     this.formData.controls.miscode.setValue("")
   }else if(event.target.value == "A-Add"){
     this.showMisCode = false;
-    this.formData.controls.miscode.setValidators([Validators.required])
+    this.formData.controls.miscode.setValidators([])
     this.formData.controls.miscode.setValue("")
     
   }
 }
+get f() { 
+  return this.formData.controls; }
+
 misSectorLookup(){
   const dialogRef =  this.dialog.open(MisSectorLookupComponent,{
 
@@ -68,8 +71,8 @@ misSectorLookup(){
   }
 
   onSubmit(){
+   console.log(this.formData.value);
    
-
    if(this.formData.valid){
      this.misSectorService.changeMessage(this.formData.value)
      this.router.navigateByUrl('system/configurations/global/mis-sub-sector/data/view')
