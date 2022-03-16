@@ -208,6 +208,14 @@ export class CurrentSchemeComponent implements OnInit {
   interest_calc_value: any;
   insufficient_exception_value: any;
   backdate_transaction_value: any;
+  ac_debit_balance_description: any;
+  ac_credit_balance_description: any;
+  liability_exceed_group_description: any;
+  ac_is_froozed_description: any;
+  sanction_limit_expired_description: any;
+  interest_calc_description: any;
+  insufficient_exception_description: any;
+  backdate_transaction_description: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -455,18 +463,18 @@ export class CurrentSchemeComponent implements OnInit {
     });
   }
 
-  exception_codeLookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      this.exception_lookupData = result.data;
-      this.exception_code_value = this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(
-        this.exception_lookupData.id
-      );
-    });
-  }
+  // exception_codeLookup(): void {
+  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     this.exception_lookupData = result.data;
+  //     this.exception_code_value = this.exception_lookupData.exception_code;
+  //     this.formData.controls.exception_code.setValue(
+  //       this.exception_lookupData.id
+  //     );
+  //   });
+  // }
 
   // Account lookups
   penalIntRecAcLookup(): void {
@@ -707,6 +715,7 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
+      this.ac_debit_balance_description =  this.exception_lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
@@ -717,6 +726,7 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
+      this.ac_credit_balance_description =  this.exception_lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
@@ -727,6 +737,7 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
+      this.liability_exceed_group_description =  this.exception_lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
@@ -737,6 +748,7 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
+      this.ac_is_froozed_description =  this.exception_lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
@@ -747,6 +759,7 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
+      this.sanction_limit_expired_description =  this.exception_lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
@@ -757,6 +770,7 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.interest_calc_value =  this.exception_lookupData.exception_code;
+      this.interest_calc_description =  this.exception_lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
@@ -767,6 +781,7 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.insufficient_exception_value =  this.exception_lookupData.exception_code;
+      this.insufficient_exception_description =  this.exception_lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
@@ -777,6 +792,7 @@ export class CurrentSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.backdate_transaction_value =  this.exception_lookupData.exception_code;
+      this.backdate_transaction_description =  this.exception_lookupData.exce_description;
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
@@ -897,54 +913,7 @@ export class CurrentSchemeComponent implements OnInit {
   }
   disabledFormControll() {
     //General Details
-    this.formData.controls.caa_effective_from_date.disable(),
-    this.formData.controls.caa_effective_to_date.disable(),
-    this.formData.controls.caa_system_generated_no.disable(),
-    this.formData.controls.caa_principal_lossline_ac.disable(),
-    this.formData.controls.caa_recovery_lossline_ac.disable();
-    this.formData.controls.caa_charge_off_ac.disable();
-    this.formData.controls.caa_number_generation.disable();
-    this.formData.controls.caa_system_gen_no.disable();
-    this.formData.controls.caa_number_generation_code.disable();
-    //interest details
-    this.formData.controls.caa_pl_ac_ccy.disable();
-    this.formData.controls.caa_int_receivale_applicable.disable();
-    this.formData.controls.caa_normal_int_receivable_ac.disable();
-    this.formData.controls.caa_penal_int_receivable_ac.disable();
-    this.formData.controls.caa_normal_int_received_ac.disable();
-    this.formData.controls.caa_penal_int_received_ac.disable();
-    this.formData.controls.caa_advance_int_ac.disable();
-    this.formData.controls.caa_dr_int_compounding_freq.disable();
-    this.formData.controls.caa_int_cal_freq_dr_week.disable();
-    this.formData.controls.caa_app_discounted_int_rate.disable();
-    this.formData.controls.caa_int_cal_freq_dr_day.disable();
-    this.formData.controls.caa_int_cal_freq_dr_date.disable();
-    this.formData.controls.caa_int_cal_freq_dr_holiday.disable();
-
-    // end of interest details
-    this.formData.controls.caa_max_sanction_limit.disable();
-    this.formData.controls.caa_norm_int_product_method.disable();
-    this.formData.controls.caa_ac_statement_charged_by.disable();
-    // caa_max_sanction_limit:[''],
-    this.formData.controls.caa_dr_bal_limit.disable();
-    this.formData.controls.caa_max_penal_int.disable();
-    this.formData.controls.caa_ledger_follio_fee.disable();
-    this.formData.controls.caa_inactive_ac_abnormal_trans_limit.disable();
-    this.formData.controls.caa_dormant_ac_abnormal_trans_limit.disable();
-    this.formData.controls.caa_duration_to_mark_ac_inactive.disable();
-    this.formData.controls.caa_duration_from_inactive_to_dormant.disable();
-    this.formData.controls.caa_dormant_fee.disable();
-    this.formData.controls.caa_inactive_fee.disable();
-    // caa_norm_int_product_method:[''],
-    this.formData.controls.caa_calc_freq_dr_week.disable();
-    // caa_calc_freq_dr_week:[''],
-    // caa_calc_freq_dr_week:[''],
-    this.formData.controls.caa_allow_sweeps.disable();
-    this.formData.controls.caa_allow_debit_against_unclear_bal.disable();
-    // caa_calc_freq_dr_week:[''],
-    this.formData.controls.caa_calc_freq_dr_day.disable();
-    this.formData.controls.caa_calc_freq_dr_date.disable();
-    this.formData.controls.caa_calc_freq_dr_holiday.disable();
+    this.formData.disable();
   }
   getPage() {
     this.subscription = this.currentSchemeAPI.currentMessage.subscribe(
@@ -1305,10 +1274,7 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_calc_freq_dr_holiday: [
                     this.results.caa_calc_freq_dr_holiday,
                   ],
-                  // caa_calc_freq_dr_week:[''],
-                  // caa_calc_freq_dr_day:[''],
-                  // caa_calc_freq_dr_date:[''],
-                  // caa_calc_freq_dr_holiday:[''],
+         
 
                   caa_fees: [this.feeArray],
                   caa_glsubheads: [this.glSubheadArray],

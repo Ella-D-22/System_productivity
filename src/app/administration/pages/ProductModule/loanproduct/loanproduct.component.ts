@@ -135,6 +135,9 @@ export class LoanproductComponent implements OnInit {
   interest_calc_value: any;
   insufficient_exception_value: any;
   backdate_transaction_value: any;
+  event_id_desc: any;
+  laa_fee_dr_placeholder_desc: any;
+  laa_fee_cr_placeholder_desc: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -142,8 +145,12 @@ export class LoanproductComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.event_id = result.data;
-      this.feeFormData.controls.laa_fee_event.setValue(result.data);
+      this.event_id  = result.data.event_id ;
+      this.event_id_desc = result.data.event_id_desc;
+      this.event_type = result.data.event_type;
+      this.event_type_desc = result.data.event_type_desc
+      this.feeFormData.controls.laa_fee_event.setValue(this.event_id);
+      this.feeFormData.controls.laa_fee_type.setValue(this.event_type);
     });
   }
   eventTypeLookup(): void {
@@ -325,7 +332,8 @@ laa_fee_dr_placeholderLookup(): void {
   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
   cdialogRef.afterClosed().subscribe((result) => {
     this.laa_fee_dr_placeholder = result.data.acid;
-    this.formData.controls.laa_fee_dr_placeholder.setValue(result.data.acid);
+    this.laa_fee_dr_placeholder_desc = result.data.accountName;
+    this.feeFormData.controls.laa_fee_dr_placeholder.setValue(result.data.acid);
   });
 }
 laa_fee_cr_placeholderLookup(): void {
@@ -337,7 +345,8 @@ laa_fee_cr_placeholderLookup(): void {
   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
   cdialogRef.afterClosed().subscribe((result) => {
     this.laa_fee_cr_placeholder = result.data.acid;
-    this.formData.controls.laa_fee_cr_placeholder.setValue(result.data.acid);
+    this.laa_fee_cr_placeholder_desc = result.data.accountName;
+    this.feeFormData.controls.laa_fee_cr_placeholder.setValue(result.data.acid);
   });
 }
 laa_ac_int_suspenseLookup(): void {
@@ -364,7 +373,7 @@ laa_fee_amortize_credit_phLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.laa_fee_amortize_credit_ph = result.data.acid;
     this.laa_fee_amortize_credit_ph_desc = result.data.accountName;
-    this.formData.controls.laa_fee_amortize_credit_ph.setValue(result.data.acid);
+    this.feeFormData.controls.laa_fee_amortize_credit_ph.setValue(result.data.acid);
   });
 }
 laa_fee_amortize_debit_phLookup(): void {
@@ -377,7 +386,7 @@ laa_fee_amortize_debit_phLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.laa_fee_amortize_debit_ph = result.data.acid;
     this.laa_fee_amortize_debit_ph_desc = result.data.accountName;
-    this.formData.controls.laa_fee_amortize_debit_ph.setValue(result.data.acid);
+    this.feeFormData.controls.laa_fee_amortize_debit_ph.setValue(result.data.acid);
   });
 }
 
@@ -526,23 +535,39 @@ backdate_transaction_Lookup(): void {
     private accountsAPI: LoanAccountService,
     public datepipe: DatePipe
 
-
     ) { }
 
-        //  chronologicalOrderArray: any = [
-        //   'Principal', 'Interests','Charges','Collection'
-        // ]
-     
         chronologicalOrderArray = new Array();
-
-        setNewChronologicalElements(){
+        // Init Array
+        iniChronologicalList(){
+          this.chronologicalOrderArray = new Array();
           this.chronologicalOrderArray =[
-              'Principal', 'Interests','Charges','Collection'
-            ]
+            'Principal', 'Interests','Charges','Collection'
+          ]
+          this.formData.controls.laa_chron_order_firstp.setValue('');
+          this.formData.controls.laa_chron_order_secondp.setValue('');
+          this.formData.controls.laa_chron_order_thirdp.setValue('');
+          this.formData.controls.laa_chron_order_fourthp.setValue('');
+        }
+        // POP
+        onSelectedChronologicalOrder(e:any){
+          let element = e.target.value;
+        this.chronologicalOrderArray.forEach((value,index)=>{
+          if(value==element) this.chronologicalOrderArray.splice(index,1);
+      });
+      
+        }
+         // POP
+         onSecondSelectedChronologicalOrder(e:any){
+          let element = e.target.value;
+        this.chronologicalOrderArray.forEach((value,index)=>{
+          if(value==element) this.chronologicalOrderArray.splice(index,1);
+      });
+      
         }
     submitted = false;
       ngOnInit() {
-        this.setNewChronologicalElements();
+        this.iniChronologicalList();
         this.getPage();
       }
       feeArray= new Array();
@@ -565,6 +590,7 @@ backdate_transaction_Lookup(): void {
         laa_number_generation_code:[''],
 
         laa_pl_ac_ccy:[''],
+        laa_interest_table_code:[''],
         laa_int_receivale_applicable:[''],
         laa_normal_int_receivable_ac:[''],
         laa_penal_int_receivable_ac:[''],
@@ -589,6 +615,10 @@ backdate_transaction_Lookup(): void {
         laa_hold_operataive_ac:[''],
         laa_upfront_inst_coll:[''],
         laa_flow_offset_based_on:[''],
+        laa_chron_order_firstp:[''],
+        laa_chron_order_secondp:[''],
+        laa_chron_order_thirdp:[''],
+        laa_chron_order_fourthp:[''],
         laa_int_base:[''],
         laa_int_product:[''],
         laa_int_routed_through:[''],
@@ -655,6 +685,17 @@ backdate_transaction_Lookup(): void {
         
         laa_loanfees: new FormArray([]),
         laa_glsubheads: new FormArray([]),
+        // Exceptions
+        laa_ac_debit_balance:[''],
+        laa_ac_credit_balance:[''],
+        laa_liability_exceed_group:[''],
+        laa_ac_is_froozed:[''],
+        laa_sanction_limit_expired:[''],
+        laa_interest_calc:[''],
+        laa_insufficient_exception:[''],
+        laa_backdate_transaction:[''],
+
+
 
         // Create Audits
         postedBy: ['N'],
@@ -717,7 +758,7 @@ backdate_transaction_Lookup(): void {
          initGlSUbheadForm(){
            this.newData = true;
           this.glSubheadData = this.fb.group({
-            laa_gl_subhead:[''],
+            laa_gl_subhead:['',[Validators.required]],
             laa_gl_subhead_description:[''],
             laa_gl_subhead_deafault:[''],
             laa_is_gl_subhead_deleted:['']
@@ -726,25 +767,27 @@ backdate_transaction_Lookup(): void {
 
          editLoanFeeForm(i:any){
            this.newData = false;
-           this.arrayIndex = this.feeArray[i];
-          this.feeFormData = this.fb.group({
+          //  this.arrayIndex = this.feeArray[i];`
+          this.feeFormData = this.fb.group({          
             laa_fee_type:[this.feeArray[i].laa_fee_type],
             laa_fee_event:[this.feeArray[i].laa_fee_event],
-            laa_fee_frequency:[''],
-            laa_fee_amortize_credit_ph:[''],
-            laa_fee_amortize_debit_ph:[''],
-            laa_fee_deductable:[this.feeArray[i].laa_deductable],
-            laa_fee_multiple:[this.feeArray[i].laa_multiple],
-            laa_fee_amortize:[this.feeArray[i].laa_amortize],
-            laa_fee_demand_flow:[this.feeArray[i].laa_demand_flow],
-            laa_fee_dr_placeholder:[this.feeArray[i].laa_dr_placeholder],
-            laa_fee_cr_placeholder:[this.feeArray[i].laa_cr_placeholder],
-            laa_fee_amort_tenor:[this.feeArray[i].laa_amort_tenor],
-            laa_fee_max_no_of_assesment:[this.feeArray[i].laa_max_no], 
+            laa_fee_frequency:[this.feeArray[i].laa_fee_frequency],
+            laa_fee_amortize_credit_ph:[this.feeArray[i].laa_fee_amortize_credit_ph],
+            laa_fee_amortize_debit_ph:[this.feeArray[i].laa_fee_amortize_debit_ph],
+            laa_fee_deductable:[this.feeArray[i].laa_fee_deductable],
+            laa_fee_multiple:[this.feeArray[i].laa_fee_multiple],
+            laa_fee_amortize:[this.feeArray[i].laa_fee_amortize],
+            laa_fee_demand_flow:[this.feeArray[i].laa_fee_demand_flow],
+            laa_fee_dr_placeholder:[this.feeArray[i].laa_fee_dr_placeholder],
+            laa_fee_cr_placeholder:[this.feeArray[i].laa_fee_cr_placeholder],
+            laa_fee_amort_tenor:[this.feeArray[i].laa_fee_amort_tenor],
+            laa_fee_max_no_of_assesment:[this.feeArray[i].laa_fee_max_no_of_assesment],
    });
 
    const index: number = this.feeArray.indexOf(this.feeArray.values);
    this.feeArray.splice(index, i);
+   this.feeArray = this.feeArray;
+    
          }
     get g() { return this.formData.controls; }
     get t() { return this.g.laa_loanfees as FormArray; }
@@ -789,9 +832,7 @@ backdate_transaction_Lookup(): void {
          onRemove(i:any,){
           const index: number = this.feeArray.indexOf(this.feeArray.values);
             this.feeArray.splice(index, i);
-            console.log("new", this.feeArray);
             this.feeArray = this.feeArray;
-           console.log("click", i);
          }
   
          onRemoveGLSubhead(i:any,){
@@ -799,6 +840,7 @@ backdate_transaction_Lookup(): void {
           this.glSubheadArray.splice(index, i);
           this.glSubheadArray = this.glSubheadArray
          }
+         
 
          onSystem_generated_no(event: any){
           this.showSystem_gen_no = true;
@@ -874,6 +916,7 @@ backdate_transaction_Lookup(): void {
             laa_system_gen_no:[''],
             laa_number_generation_code:[''],
             laa_pl_ac_ccy:[''],
+            laa_interest_table_code:[''],
             laa_int_receivale_applicable:[''],
             laa_normal_int_receivable_ac:[''],
             laa_penal_int_receivable_ac:[''],
@@ -897,6 +940,10 @@ backdate_transaction_Lookup(): void {
             laa_hold_operataive_ac:[''],
             laa_upfront_inst_coll:[''],
             laa_flow_offset_based_on:[''],
+            laa_chron_order_firstp:[''],
+            laa_chron_order_secondp:[''],
+            laa_chron_order_thirdp:[''],
+            laa_chron_order_fourthp:[''],
             laa_int_base:[''],
             laa_int_product:[''],
             laa_int_routed_through:[''],
@@ -967,7 +1014,7 @@ backdate_transaction_Lookup(): void {
             laa_ac_debit_balance:[''],
             laa_ac_credit_balance:[''],
             laa_liability_exceed_group:[''],
-            laa_ac_is_froozed_value:[''],
+            laa_ac_is_froozed:[''],
             laa_sanction_limit_expired:[''],
             laa_interest_calc:[''],
             laa_insufficient_exception:[''],
@@ -1024,6 +1071,7 @@ backdate_transaction_Lookup(): void {
               laa_number_generation_code:[this.results.onNumber_generation_code],
 
               laa_pl_ac_ccy:[this.results.laa_pl_ac_ccy],
+              laa_interest_table_code:[this.results.laa_interest_table_code],
               laa_int_receivale_applicable:[this.results.laa_int_receivale_applicable],
               laa_normal_int_receivable_ac:[this.results.laa_normal_int_receivable_ac],
               laa_penal_int_receivable_ac:[this.results.laa_penal_int_receivable_ac],
@@ -1047,6 +1095,10 @@ backdate_transaction_Lookup(): void {
               laa_hold_operataive_ac:[this.results.laa_hold_operataive_ac],
               laa_upfront_inst_coll:[this.results.laa_upfront_inst_coll],
               laa_flow_offset_based_on:[this.results.laa_flow_offset_based_on],
+              laa_chron_order_firstp:[this.results.laa_chron_order_firstp],
+              laa_chron_order_secondp:[this.results.laa_chron_order_secondp],
+              laa_chron_order_thirdp:[this.results.laa_chron_order_thirdp],
+              laa_chron_order_fourthp:[this.results.laa_chron_order_fourthp],
               laa_int_base:[this.results.laa_int_base],
               laa_int_product:[this.results.laa_int_product],
               laa_int_routed_through:[this.results.laa_int_routed_through],
@@ -1176,6 +1228,7 @@ backdate_transaction_Lookup(): void {
 
 
               laa_pl_ac_ccy:[this.results.laa_pl_ac_ccy],
+              laa_interest_table_code:[this.results.laa_interest_table_code],
               laa_int_receivale_applicable:[this.results.laa_int_receivale_applicable],
               laa_normal_int_receivable_ac:[this.results.laa_normal_int_receivable_ac],
               laa_penal_int_receivable_ac:[this.results.laa_penal_int_receivable_ac],
@@ -1199,6 +1252,10 @@ backdate_transaction_Lookup(): void {
               laa_hold_operataive_ac:[this.results.laa_hold_operataive_ac],
               laa_upfront_inst_coll:[this.results.laa_upfront_inst_coll],
               laa_flow_offset_based_on:[this.results.laa_flow_offset_based_on],
+              laa_chron_order_firstp:[this.results.laa_chron_order_firstp],
+              laa_chron_order_secondp:[this.results.laa_chron_order_secondp],
+              laa_chron_order_thirdp:[this.results.laa_chron_order_thirdp],
+              laa_chron_order_fourthp:[this.results.laa_chron_order_fourthp],
               laa_int_base:[this.results.laa_int_base],
               laa_int_product:[this.results.laa_int_product],
               laa_int_routed_through:[this.results.laa_int_routed_through],
@@ -1339,6 +1396,7 @@ backdate_transaction_Lookup(): void {
 
 
               laa_pl_ac_ccy:[this.results.laa_pl_ac_ccy],
+              laa_interest_table_code:[this.results.laa_interest_table_code],
               laa_int_receivale_applicable:[this.results.laa_int_receivale_applicable],
               laa_normal_int_receivable_ac:[this.results.laa_normal_int_receivable_ac],
               laa_penal_int_receivable_ac:[this.results.laa_penal_int_receivable_ac],
@@ -1362,6 +1420,10 @@ backdate_transaction_Lookup(): void {
               laa_hold_operataive_ac:[this.results.laa_hold_operataive_ac],
               laa_upfront_inst_coll:[this.results.laa_upfront_inst_coll],
               laa_flow_offset_based_on:[this.results.laa_flow_offset_based_on],
+              laa_chron_order_firstp:[this.results.laa_chron_order_firstp],
+              laa_chron_order_secondp:[this.results.laa_chron_order_secondp],
+              laa_chron_order_thirdp:[this.results.laa_chron_order_thirdp],
+              laa_chron_order_fourthp:[this.results.laa_chron_order_fourthp],
               laa_int_base:[this.results.laa_int_base],
               laa_int_product:[this.results.laa_int_product],
               laa_int_routed_through:[this.results.laa_int_routed_through],
@@ -1502,6 +1564,7 @@ backdate_transaction_Lookup(): void {
 
 
               laa_pl_ac_ccy:[this.results.laa_pl_ac_ccy],
+              laa_interest_table_code:[this.results.laa_interest_table_code],
               laa_int_receivale_applicable:[this.results.laa_int_receivale_applicable],
               laa_normal_int_receivable_ac:[this.results.laa_normal_int_receivable_ac],
               laa_penal_int_receivable_ac:[this.results.laa_penal_int_receivable_ac],
@@ -1525,6 +1588,10 @@ backdate_transaction_Lookup(): void {
               laa_hold_operataive_ac:[this.results.laa_hold_operataive_ac],
               laa_upfront_inst_coll:[this.results.laa_upfront_inst_coll],
               laa_flow_offset_based_on:[this.results.laa_flow_offset_based_on],
+              laa_chron_order_firstp:[this.results.laa_chron_order_firstp],
+              laa_chron_order_secondp:[this.results.laa_chron_order_secondp],
+              laa_chron_order_thirdp:[this.results.laa_chron_order_thirdp],
+              laa_chron_order_fourthp:[this.results.laa_chron_order_fourthp],
               laa_int_base:[this.results.laa_int_base],
               laa_int_product:[this.results.laa_int_product],
               laa_int_routed_through:[this.results.laa_int_routed_through],

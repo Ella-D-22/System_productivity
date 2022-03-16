@@ -547,13 +547,13 @@
        <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
       </div>
    </div> 
-   <!-- <div class="form-group">
+   <div class="form-group">
     <div class="col-md-6 col-sm-12 form-column ">
     </div>
     <div class="col-md-6 col-sm-12 form-column ">
-      <mat-hint>{{this.caa_int_table_code_desc}}</mat-hint>
+      <mat-hint>{{this.ac_debit_balance_description}}</mat-hint>
     </div>
- </div> -->
+ </div>
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -565,13 +565,13 @@
       <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
      </div>
   </div> 
-  <!-- <div class="form-group">
+  <div class="form-group">
     <div class="col-md-6 col-sm-12 form-column ">
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-      <mat-hint>{{this.caa_int_table_code_desc}}</mat-hint>
+      <mat-hint>{{this.ac_credit_balance_description}}</mat-hint>
     </div>
- </div>  -->
+ </div> 
 
 </div>
 </div>
@@ -586,6 +586,13 @@
        <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.liability_exceed_group_description}}</mat-hint>
+    </div>
+ </div>
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -596,7 +603,14 @@
       <input [value]="this.ac_is_froozed_value" type="text" formControlName="caa_ac_is_froozed" class="pull-right form-control"/>
       <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div> 
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <mat-hint>{{this.ac_is_froozed_description}}</mat-hint>
+    </div>
+ </div>              
 </div>
 </div>
 <div class="row">
@@ -610,6 +624,13 @@
        <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.sanction_limit_expired_description}}</mat-hint>
+    </div>
+ </div> 
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -620,7 +641,14 @@
       <input [value]="this.interest_calc_value" type="text" formControlName="caa_interest_calc" class="pull-right form-control"/>
       <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div>  
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <mat-hint>{{this.interest_calc_description}}</mat-hint>
+    </div>
+ </div>             
 </div>
 </div>
 
@@ -635,6 +663,13 @@
        <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.insufficient_exception_description}}</mat-hint>
+    </div>
+ </div> 
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -645,10 +680,16 @@
       <input [value]="this.backdate_transaction_value" type="text" formControlName="caa_backdate_transaction" class="pull-right form-control"/>
       <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div>   
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <mat-hint>{{this.backdate_transaction_description}}</mat-hint>
+    </div>
+ </div>            
 </div>
 </div>
-
       </mat-tab>
       <!-- GL Subhead -->
       <mat-tab class="mat-tab" label="GL-Subhead">

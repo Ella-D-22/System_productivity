@@ -145,6 +145,14 @@ export class OverdraftsSchemeComponent implements OnInit {
   oda_fee_dr_placeholder_desc: any;
   oda_fee_cr_placeholder: any;
   oda_fee_cr_placeholder_desc: any;
+  ac_debit_balance_description: any;
+  ac_credit_balance_description: any;
+  liability_exceed_group_description: any;
+  ac_is_froozed_description: any;
+  sanction_limit_expired_description: any;
+  interest_calc_description: any;
+  insufficient_exception_description: any;
+  backdate_transaction_description: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -177,7 +185,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.ac_debit_balance_description = this.exception_lookupData.exce_description
+      this.formData.controls.oda_ac_debit_balance.setValue(this.exception_lookupData .id);
     });
   }
   ac_credit_balance_Lookup(): void {
@@ -187,7 +196,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.ac_credit_balance_description =  this.exception_lookupData.exce_description;
+      this.formData.controls.oda_ac_credit_balance.setValue(this.exception_lookupData .id);
     });
   }
   liability_exceed_group_Lookup(): void {
@@ -197,7 +207,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.liability_exceed_group_description =  this.exception_lookupData.exce_description;
+      this.formData.controls.oda_liability_exceed_group.setValue(this.exception_lookupData .id);
     });
   }
   ac_is_froozed_Lookup(): void {
@@ -207,7 +218,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.ac_is_froozed_description=  this.exception_lookupData.exce_description;
+      this.formData.controls.oda_ac_is_froozed.setValue(this.exception_lookupData .id);
     });
   }
   sanction_limit_expired_Lookup(): void {
@@ -217,7 +229,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.sanction_limit_expired_description =  this.exception_lookupData.exce_description;
+      this.formData.controls.oda_sanction_limit_expired.setValue(this.exception_lookupData .id);
     });
   }
   interest_calc_Lookup(): void {
@@ -227,7 +240,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.interest_calc_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.interest_calc_description =  this.exception_lookupData.exce_description;
+      this.formData.controls.oda_interest_calc.setValue(this.exception_lookupData .id);
     });
   }
   insufficient_exception_Lookup(): void {
@@ -237,7 +251,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.insufficient_exception_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.insufficient_exception_description =  this.exception_lookupData.exce_description;
+      this.formData.controls.oda_insufficient_exception.setValue(this.exception_lookupData .id);
     });
   }
   backdate_transaction_Lookup(): void {
@@ -247,7 +262,8 @@ export class OverdraftsSchemeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.backdate_transaction_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.backdate_transaction_description =  this.exception_lookupData.exce_description;
+      this.formData.controls.oda_backdate_transaction.setValue(this.exception_lookupData .id);
     });
   }
 
@@ -509,8 +525,6 @@ oda_fee_cr_placeholderLookup(): void {
     }
     return days;
   }
-
-
   dialogValue: any;
   dialogData: any;
   function_type: any;
@@ -622,6 +636,17 @@ oda_fee_cr_placeholderLookup(): void {
     oda_penal_int_rate_method: [''],
     oda_fees: new FormArray([]),
     oda_glsubheads: new FormArray([]),
+
+    // Exceptions 
+    oda_exc_ac_in_debit_bal:[''],
+    oda_exc_ac_in_cr_bal:[''],
+    oda_exc_liability_exceeds_group_limit:[''],
+    oda_exc_ac_is_frozed:[''],
+    oda_exc_sanction_limit_expired:[''],
+    oda_exc_int_cal_not_upto_date:[''],
+    oda_exc_insufficient_available_bal:[''],
+    oda_exc_backdated_transaction:[''],
+
     // Create Audits
     postedBy: ['N'],
     postedFlag: ['N'],
@@ -884,6 +909,16 @@ oda_fee_cr_placeholderLookup(): void {
           oda_fees: new FormArray([]),
           oda_glsubheads: new FormArray([]),
 
+              // Exceptions 
+          oda_exc_ac_in_debit_bal:[''],
+          oda_exc_ac_in_cr_bal:[''],
+          oda_exc_liability_exceeds_group_limit:[''],
+          oda_exc_ac_is_frozed:[''],
+          oda_exc_sanction_limit_expired:[''],
+          oda_exc_int_cal_not_upto_date:[''],
+          oda_exc_insufficient_available_bal:[''],
+          oda_exc_backdated_transaction:[''],
+
                   // Create Audits
                   postedBy: ['N'],
                   postedFlag: ['N'],
@@ -980,6 +1015,17 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
+
+               // Exceptions 
+            oda_exc_ac_in_debit_bal:[this.results.oda_exc_ac_in_debit_bal],
+            oda_exc_ac_in_cr_bal:[this.results.oda_exc_ac_in_cr_bal],
+            oda_exc_liability_exceeds_group_limit:[this.results.oda_exc_liability_exceeds_group_limit],
+            oda_exc_ac_is_frozed:[this.results.oda_exc_ac_is_frozed],
+            oda_exc_sanction_limit_expired:[this.results.oda_exc_sanction_limit_expired],
+            oda_exc_int_cal_not_upto_date:[this.results.oda_exc_int_cal_not_upto_date],
+            oda_exc_insufficient_available_bal:[this.results.oda_exc_insufficient_available_bal],
+            oda_exc_backdated_transaction:[this.results.oda_exc_backdated_transaction],
+
            // Audits
            postedBy: [this.results.postedBy],
            postedFlag: [this.results.postedFlag],
@@ -1087,6 +1133,20 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
+           
+
+          // Exceptions 
+          oda_exc_ac_in_debit_bal:[this.results.oda_exc_ac_in_debit_bal],
+          oda_exc_ac_in_cr_bal:[this.results.oda_exc_ac_in_cr_bal],
+          oda_exc_liability_exceeds_group_limit:[this.results.oda_exc_liability_exceeds_group_limit],
+          oda_exc_ac_is_frozed:[this.results.oda_exc_ac_is_frozed],
+          oda_exc_sanction_limit_expired:[this.results.oda_exc_sanction_limit_expired],
+          oda_exc_int_cal_not_upto_date:[this.results.oda_exc_int_cal_not_upto_date],
+          oda_exc_insufficient_available_bal:[this.results.oda_exc_insufficient_available_bal],
+          oda_exc_backdated_transaction:[this.results.oda_exc_backdated_transaction],
+
+          
+
            // Audits
            postedBy: [this.results.postedBy],
            postedFlag: [this.results.postedFlag],
@@ -1193,6 +1253,18 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
+
+           
+
+            // Exceptions 
+            oda_exc_ac_in_debit_bal:[this.results.oda_exc_ac_in_debit_bal],
+            oda_exc_ac_in_cr_bal:[this.results.oda_exc_ac_in_cr_bal],
+            oda_exc_liability_exceeds_group_limit:[this.results.oda_exc_liability_exceeds_group_limit],
+            oda_exc_ac_is_frozed:[this.results.oda_exc_ac_is_frozed],
+            oda_exc_sanction_limit_expired:[this.results.oda_exc_sanction_limit_expired],
+            oda_exc_int_cal_not_upto_date:[this.results.oda_exc_int_cal_not_upto_date],
+            oda_exc_insufficient_available_bal:[this.results.oda_exc_insufficient_available_bal],
+            oda_exc_backdated_transaction:[this.results.oda_exc_backdated_transaction],
            
            // Audits
            postedBy: [this.results.postedBy],
@@ -1302,6 +1374,16 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
+
+              // Exceptions 
+          oda_exc_ac_in_debit_bal:[this.results.oda_exc_ac_in_debit_bal],
+          oda_exc_ac_in_cr_bal:[this.results.oda_exc_ac_in_cr_bal],
+          oda_exc_liability_exceeds_group_limit:[this.results.oda_exc_liability_exceeds_group_limit],
+          oda_exc_ac_is_frozed:[this.results.oda_exc_ac_is_frozed],
+          oda_exc_sanction_limit_expired:[this.results.oda_exc_sanction_limit_expired],
+          oda_exc_int_cal_not_upto_date:[this.results.oda_exc_int_cal_not_upto_date],
+          oda_exc_insufficient_available_bal:[this.results.oda_exc_insufficient_available_bal],
+          oda_exc_backdated_transaction:[this.results.oda_exc_backdated_transaction],
 
            // Audits
            postedBy: [this.results.postedBy],

@@ -554,10 +554,17 @@
        <label class="start pull-left">Account in Debit Balance<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.ac_debit_balance_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+       <input [value]="this.ac_debit_balance_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_ac_in_debit_bal" class="pull-right form-control"/>
        <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.ac_debit_balance_description}}</mat-hint>
+    </div>
+ </div> 
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -565,10 +572,18 @@
       <label class="start pull-left">Account in Credit Balance</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_credit_balance_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_revolving_od" class="pull-right form-control"/>
+      <input [value]="this.ac_credit_balance_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_ac_in_cr_bal" class="pull-right form-control"/>
       <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div>    
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <mat-hint>{{this.ac_credit_balance_description}}</mat-hint>
+    </div>
+ </div> 
+
 </div>
 </div>
 <div class="row">
@@ -578,10 +593,17 @@
        <label class="start pull-left">Liability exceeds group limit<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.liability_exceed_group_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_revolving_od" class="pull-right form-control"/>
+       <input [value]="this.liability_exceed_group_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_liability_exceeds_group_limit" class="pull-right form-control"/>
        <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.liability_exceed_group_description}}</mat-hint>
+    </div>
+ </div> 
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -589,10 +611,18 @@
       <label class="start pull-left">Account is frozed</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_is_froozed_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_revolving_od" class="pull-right form-control"/>
+      <input [value]="this.ac_is_froozed_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_ac_is_frozed" class="pull-right form-control"/>
       <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div>    
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <mat-hint>{{this.ac_is_froozed_descpription"}}</mat-hint>
+    </div>
+ </div> 
+
 </div>
 </div>
 <div class="row">
@@ -602,10 +632,17 @@
        <label class="start pull-left">Sanction Limit Expired<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.sanction_limit_expired_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+       <input [value]="this.sanction_limit_expired_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_sanction_limit_expired" class="pull-right form-control"/>
        <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.sanction_limit_expired_description}}</mat-hint>
+    </div>
+ </div> 
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -613,13 +650,19 @@
       <label class="start pull-left">Interest Calculation not upto date</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.interest_calc_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_revolving_od" class="pull-right form-control"/>
+      <input [value]="this.interest_calc_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_int_cal_not_upto_date" class="pull-right form-control"/>
       <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div> 
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+      <mat-hint>{{this.interest_calc_description}}</mat-hint>
+    </div>
+ </div>              
 </div>
 </div>
-
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <div class="form-group">
@@ -627,10 +670,18 @@
        <label class="start pull-left">Insufficient available balance<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.insufficient_exception_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+       <input [value]="this.insufficient_exception_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_insufficient_available_bal" class="pull-right form-control"/>
        <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.insufficient_exception_description}}</mat-hint>
+    </div>
+ </div> 
+
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -638,18 +689,21 @@
       <label class="start pull-left">Backdated transaction</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.backdate_transaction_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_revolving_od" class="pull-right form-control"/>
+      <input [value]="this.backdate_transaction_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_backdated_transaction" class="pull-right form-control"/>
       <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
-      <mat-hint>{{this.backdate_transaction_value}}</mat-hint>
-
      </div>
-  </div>              
+  </div> 
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column">
+     <mat-hint>{{this.backdate_transaction_description}}</mat-hint>
+    </div>
+ </div> 
+
 </div>
 </div>
-
-
       </mat-tab>
- 
   
       <!-- GL Subhead -->
       <mat-tab class="mat-tab" label="GL-Subhead">

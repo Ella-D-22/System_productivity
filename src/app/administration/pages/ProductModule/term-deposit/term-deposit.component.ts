@@ -448,7 +448,7 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_ac_debit_balance.setValue(this.exception_lookupData .id);
     });
   }
   ac_credit_balance_Lookup(): void {
@@ -458,7 +458,7 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_ac_credit_balance.setValue(this.exception_lookupData .id);
     });
   }
   liability_exceed_group_Lookup(): void {
@@ -468,7 +468,7 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_liability_exceed_group.setValue(this.exception_lookupData .id);
     });
   }
   ac_is_froozed_Lookup(): void {
@@ -478,7 +478,7 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_ac_is_froozed.setValue(this.exception_lookupData .id);
     });
   }
   sanction_limit_expired_Lookup(): void {
@@ -488,7 +488,7 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_sanction_limit_expired.setValue(this.exception_lookupData .id);
     });
   }
   interest_calc_Lookup(): void {
@@ -498,7 +498,7 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.interest_calc_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_interest_calc.setValue(this.exception_lookupData .id);
     });
   }
   insufficient_exception_Lookup(): void {
@@ -508,7 +508,7 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.insufficient_exception_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_insufficient_exception.setValue(this.exception_lookupData .id);
     });
   }
   backdate_transaction_Lookup(): void {
@@ -518,7 +518,7 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.backdate_transaction_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_backdate_transaction.setValue(this.exception_lookupData .id);
     });
   }
   
@@ -692,7 +692,7 @@ tda_fee_cr_placeholderLookup(): void {
     tda_ac_debit_balance:[''],
     tda_ac_credit_balance:[''],
     tda_liability_exceed_group:[''],
-    tda_ac_is_froozed_value:[''],
+    tda_ac_is_froozed:[''],
     tda_sanction_limit_expired:[''],
     tda_interest_calc:[''],
     tda_insufficient_exception:[''],
@@ -947,7 +947,7 @@ tda_fee_cr_placeholderLookup(): void {
           tda_ac_debit_balance:[''],
           tda_ac_credit_balance:[''],
           tda_liability_exceed_group:[''],
-          tda_ac_is_froozed_value:[''],
+          tda_ac_is_froozed:[''],
           tda_sanction_limit_expired:[''],
           tda_interest_calc:[''],
           tda_insufficient_exception:[''],
@@ -1071,7 +1071,7 @@ tda_fee_cr_placeholderLookup(): void {
             tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
             tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
             tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
-            tda_ac_is_froozed_value:[this.results.tda_ac_is_froozed_value],
+            tda_ac_is_froozed:[this.results.tda_ac_is_froozed],
             tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
             tda_interest_calc:[this.results.tda_interest_calc],
             tda_insufficient_exception:[this.results.tda_insufficient_exception],
@@ -1194,7 +1194,7 @@ tda_fee_cr_placeholderLookup(): void {
             tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
             tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
             tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
-            tda_ac_is_froozed_value:[this.results.tda_ac_is_froozed_value],
+            tda_ac_is_froozed:[this.results.tda_ac_is_froozed],
             tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
             tda_interest_calc:[this.results.tda_interest_calc],
             tda_insufficient_exception:[this.results.tda_insufficient_exception],
@@ -1325,7 +1325,7 @@ tda_fee_cr_placeholderLookup(): void {
              tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
              tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
              tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
-             tda_ac_is_froozed_value:[this.results.tda_ac_is_froozed_value],
+             tda_ac_is_froozed:[this.results.tda_ac_is_froozed],
              tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
              tda_interest_calc:[this.results.tda_interest_calc],
              tda_insufficient_exception:[this.results.tda_insufficient_exception],
@@ -1453,7 +1453,7 @@ tda_fee_cr_placeholderLookup(): void {
              tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
              tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
              tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
-             tda_ac_is_froozed_value:[this.results.tda_ac_is_froozed_value],
+             tda_ac_is_froozed:[this.results.tda_ac_is_froozed],
              tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
              tda_interest_calc:[this.results.tda_interest_calc],
              tda_insufficient_exception:[this.results.tda_insufficient_exception],
