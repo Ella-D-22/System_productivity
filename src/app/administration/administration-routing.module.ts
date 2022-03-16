@@ -131,7 +131,7 @@ const routes: Routes = [{
       path:'configurations/global/mis-sub-sector/maintenance',
       component:MisSubSectorMaintenanceComponent,
       // canActivate:[CanActivateModuleGuard],
-      data:{preload:true}
+      data:{preload:true},
     },
     
     {

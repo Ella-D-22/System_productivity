@@ -10,6 +10,7 @@ export class MisSubSectorMaintenanceComponent implements OnInit {
 submitted = false;
 loading = false;
 function_type:any;
+showSubSectorId:any;
   constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -21,6 +22,10 @@ function_type:any;
   functionArray:any = [
     'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
   ]
+
+  get f() { 
+    return this.formData.controls; }
+
 onFunctionSelection(event:any){
   if(this.function_type != "Add"){
 
