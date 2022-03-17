@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MisSubSectorService {
-headers =  new HttpHeaders().set('content-type', 'application-json');
+headers =  new HttpHeaders().set('Content-Type', 'application/json');
 
 baseURL = `${environment.accountsAPI}/api/vi/mis/subsector`
   constructor(private http:HttpClient) { }

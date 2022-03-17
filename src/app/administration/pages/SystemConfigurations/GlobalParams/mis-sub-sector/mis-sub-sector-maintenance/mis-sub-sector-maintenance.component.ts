@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { MisSectorLookupComponent } from '../../mis-sector/mis-sector-lookup/mis-sector-lookup.component';
+import { MisSubSectorLookupComponent } from '../mis-sub-sector-lookup/mis-sub-sector-lookup.component';
+import { MisSubSectorService } from '../mis-sub-sector.service';
 
 @Component({
   selector: 'app-mis-sub-sector-maintenance',
@@ -11,13 +17,26 @@ submitted = false;
 loading = false;
 function_type:any;
 showSubSectorId:any;
-  constructor(private fb:FormBuilder) { }
+dialogData:any;
+miscode:any;
+subSectorId = false;
+showMisCode = false;
+horizontalPosition:MatSnackBarHorizontalPosition
+verticalPosition:MatSnackBarVerticalPosition
+
+  constructor(private fb:FormBuilder,
+    private SubSectorAPI:MisSubSectorService,
+    private router:Router,
+    private _snackbar:MatSnackBar,
+    private dialog:MatDialog) { }
 
   ngOnInit(): void {
   }
 
   formData = this.fb.group({
-    function_type:['']
+    function_type:[''],
+    miscode:[''],
+    id:['']
   })
   functionArray:any = [
     'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
@@ -26,14 +45,58 @@ showSubSectorId:any;
   get f() { 
     return this.formData.controls; }
 
-onFunctionSelection(event:any){
-  if(this.function_type != "Add"){
-
-  }else if (this.function_type == 'A-Add'){
+    SectorLookup():void{
+      const dialogRef =  this.dialog.open(MisSectorLookupComponent,{
     
+      });
+      dialogRef.afterClosed().subscribe(results =>{
+        this.dialogData = results.data;
+        this.miscode = this.dialogData.miscode
+        
+      })
+    }
+
+    subSectorLookup():void{
+      const dialogRef =  this.dialog.open(MisSubSectorLookupComponent,{
+    
+      });
+      dialogRef.afterClosed().subscribe(results =>{
+        this.dialogData = results.data;
+        this.subSectorId = this.dialogData.id
+        
+      })
+    }
+onFunctionSelection(event:any){
+  if(this.function_type != "A-Add"){
+  this.showSubSectorId = true;
+  this.showMisCode = false;
+  }else if (this.function_type == "A-Add"){
+    this.showMisCode = true;
+    this.showSubSectorId =  false;
+
   }
 }
   onSubmit(){
+    console.log("Form Data", this.formData.value);
+    
+    this.loading = true;
+    this.submitted = true
+    if(this.formData.valid){
+      this.SubSectorAPI.changeMessage(this.formData.value)
+      if(this.function_type == "Add"){
+        this.router.navigateByUrl("system/configurations/global/mis-sub-sector/data/view")
+      }else if(this.function_type != "A-Add"){
+        this.router.navigateByUrl("system/configurations/global/mis-sub-sector/data/view")
 
+      }
+    }else{
+      this.loading =false;
+        this._snackbar.open("Invalid form data","Try Again",{
+          horizontalPosition:this.horizontalPosition,
+          verticalPosition:this.verticalPosition,
+          duration:3000,
+          panelClass:['red-snackbar','login-snackbar']
+        })
+    }
   }
 }

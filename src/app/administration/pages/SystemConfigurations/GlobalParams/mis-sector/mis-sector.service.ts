@@ -8,18 +8,18 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MisSectorService {
-  headers =  new HttpHeaders().set('content-type', 'application-json');
+  headers =  new HttpHeaders().set('Content-Type', 'application/json')
 
   constructor(private http:HttpClient) { }
 
   baseURL = `${environment.accountsAPI}/api/vi/mis/sector`;
 
-// message medium 
-private messageSource = new BehaviorSubject('default message');
-currentMessage =  this.messageSource.asObservable();
-changeMessage(message:string){
-  this.messageSource.next(message)
-}
+  //message medium
+  private messageSource = new BehaviorSubject('default message');
+  currentMessage = this.messageSource.asObservable();
+  changeMessage(message: string) {
+    this.messageSource.next(message)
+  }
 //error Handling
 errorMgmt(error:HttpErrorResponse){
   let errorMessage = '';
@@ -46,7 +46,7 @@ createMisSector(data:any):Observable<any>{
 
 //get all
 
-getMisSector(){
+getAllMissectors(){
   let API_URL = `${this.baseURL}/all`
   return this.http.get(API_URL, {headers:this.headers,
   withCredentials:false}).pipe(map(res =>{
@@ -70,7 +70,7 @@ getAllActiveMisSector(){
 }
 
 //get by sector id
-getMisSectorId(id:any):Observable<any>{
+getMissectorById(id:any):Observable<any>{
   let API_URL = `${this.baseURL}/find/${id}`
   return this.http.get(API_URL, {withCredentials:false}).pipe(
     map(res =>{
@@ -81,7 +81,7 @@ getMisSectorId(id:any):Observable<any>{
 }
 
 //update the record
-updateMisSector(id:string | null, data:any):Observable<any>{
+updateMissector(id:string | null, data:any):Observable<any>{
   let API_URL = `${this.baseURL}/update/${id}`
   return this.http.put(API_URL, data, {headers:this.headers,
   withCredentials:false}).pipe(map(
@@ -94,7 +94,7 @@ updateMisSector(id:string | null, data:any):Observable<any>{
 }
 
 //delete a record
-deleteMisSector(id:any):Observable<any>{
+deleteMissector(id:any):Observable<any>{
   let API_URL = `${this.baseURL}/delete/${id}`
   return this.http.delete(API_URL,{withCredentials:false}).pipe(
     catchError(this.errorMgmt)

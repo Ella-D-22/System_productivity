@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/system/configurations/product/term-deposit/maintenance</div>
+        <div>Home/system/configurations/global/mis-sub-sector/maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -19,26 +19,45 @@
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
                         <select name="" id="" formControlName="function_type" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}">
+                        [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}" (change)="onFunctionSelection($event)">
                             <option value="" disabled>-- Choose Function --</option>
                             <option *ngFor="let flag of functionArray" [value]="flag" >{{flag}}</option>
                         </select>    
                     </div>   
                 </div>
             </div>
-            <div *ngIf="showSubSectorId" class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <div class="col-md-6 col-sm-12 form-column">
-                        <label for="" class="start pull-left">SubSector Id<span class="warning">*</span></label>
+                        <label for="" class="start pull-left">MIS CODE<span class="warning">*</span></label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                        <input type="text" class="form-control">
-                        <mat-icon>search</mat-icon>
+                        <input type="text" class="form-control" formControlName="miscode" [value]="this.miscode">
+                        <mat-icon (click)="SectorLookup()">search</mat-icon>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="pull-right" mat-raised-button color="primary">GO</button>
+        <br>
+        <div class="row">
+            <div *ngIf="showSubSectorId" class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">MIS SubSector Id<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" class="form-control" formControlName="id" [value]="this.subSectorId">
+                        <mat-icon (click)="subSectorLookup()">search</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="pull-right" mat-raised-button color="primary">GO
+            <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+        </button>
     </form>
     </div>
 </mat-card>

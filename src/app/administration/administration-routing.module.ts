@@ -120,6 +120,7 @@ const routes: Routes = [{
     },
 
     {
+      
       path:'configurations/global/mis-sector/data/view',
       component:MisSectorComponent,
       // canActivate:[CanActivateModuleGuard],
