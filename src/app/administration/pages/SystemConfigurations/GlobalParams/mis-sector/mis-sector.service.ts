@@ -68,6 +68,16 @@ getAllActiveMisSector(){
   catchError(this.errorMgmt)
   )
 }
+//get records by code
+getMissectorByCode(miscode:any):Observable<any>{
+  let API_URL = `${this.baseURL}/find/by/mis_code/${miscode}`
+  return this.http.get(API_URL,{withCredentials:false}).pipe(
+    map(res =>{
+      return res || {}
+    }),
+    catchError(this.errorMgmt)
+  )
+}
 
 //get by sector id
 getMissectorById(id:any):Observable<any>{

@@ -14,8 +14,8 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h4>Sub Sector Id</h4>
-                <p>{{this.subSectorId}}</p>
+                <h4>MIS Sub Sector Code</h4>
+                <p>{{this.missubcode}}</p>
             </div>
         </div>
     </div>
@@ -23,9 +23,11 @@
     <br>
     <div class="container-fluid">
         <form class="form"
+        [formGroup]="formData"
         novalidate
         #resetRequestsForm = "ngForm"
         (submit)="onSubmit()">
+        
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
@@ -38,6 +40,20 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label class="start pull-right">MIS CODE Sub Sector <span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input  type="text" formControlName="missubcode" class="form-control" [ngClass]="{'is-invalid': submitted && f.missubcode.errors }"
+                        oninput="this.value=this.value.toUpperCase()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <div class="col-md-6 col-sm-12 form-column">

@@ -6,6 +6,7 @@
         <thead>
             <tr>
                 <th>Sub Sector id</th>
+                <th>SUb Sector Code</th>
                 <th>Sub Sector</th>
                 <th>Sub Sector Description</th>
                
@@ -14,6 +15,7 @@
         <tbody>
             <tr (click)="onSelect(item)"  *ngFor="let item of subSectorData">
                 <td><a class="update btn btn-sm" color="accent">{{item.id}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.missubcode}}</a></td>
                 <td><a class="update btn btn-sm" color="accent">{{item.mis_sub_sector}}</a></td>
                 <td><a class="update btn btn-sm" color="accent">{{item.mis_sub_sector_desc}}</a></td>
             </tr>

@@ -16,6 +16,8 @@ subSectorId:any;
 results:any
 error:any
 miscode:any
+missubcode:any;
+subSectorCode:any
 subscription:Subscription
 
 horizontalPosition:MatSnackBarHorizontalPosition
@@ -39,6 +41,7 @@ submitted = false
     id: [''],
     mis_sub_sector: [''],
     mis_sub_sector_desc: [''],
+    missubcode:[''],
     modifiedBy: [''],
     modifiedTime: [''],
     postedBy: [''],
@@ -48,10 +51,18 @@ submitted = false
     verifiedFlag: [''],
     verifiedTime:['']
    })
+
+
+    // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  // auth_user = this.currentUser.username;
+  auth_user = "nobody"
+
+
   // convenience getter for easy access to form fields
   get f() { return this.formData.controls; }
-   disabledFunctionDataValue(){
-    this.formData.controls.value.disable()
+ 
+  disabledFormControl(){
+    this.formData.disable()
   }
  
  
@@ -71,14 +82,17 @@ submitted = false
 
    // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
   // auth_user = this.currentUser.username;
-  auth_user = "nobody"
+
 getPage(){
   this.subscription = this.subSectorApi.currentMessage.subscribe(
     message =>{
       this.message = message
+      console.log(this.message);
+      
       this.function_type = this.message.function_type
       this.subSectorId = this.message.id
-    
+      this.missubcode = this.message.missubcode
+      this.miscode = this.message.miscode
       if(this.function_type == "A-Add"){
         
         this.formData = this.fb.group({
@@ -87,6 +101,7 @@ getPage(){
           deletedTime:[new Date()],
           // id: [''],
           mis_sub_sector: [''],
+          missubcode:[''],
           mis_sub_sector_desc: [''],
           modifiedBy: ['Nobody'],
           modifiedTime: [new Date()],
@@ -99,11 +114,13 @@ getPage(){
 
         })
       } else if(this.function_type == "I-Inquire"){
-        
-        this.disabledFunctionDataValue()
-       this.subscription = this.subSectorApi.getSubSectorId(this.subSectorId).subscribe(
+      console.log("MS SUBCODE", this.missubcode);
+
+        this.disabledFormControl()
+       this.subscription = this.subSectorApi.getSubSectorByCode(this.missubcode).subscribe(
          res =>{
            this.results = res
+           console.log("RESPOND", res);
            this.subSectorId = this.results.id
            this.formData = this.fb.group({
             deleteFlag:[this.results.deletedFlag],
@@ -111,6 +128,7 @@ getPage(){
             deletedTime:[this.results.deletedTime],
             id: [this.results.id],
             mis_sub_sector: [this.results.mis_sub_sector],
+            missubcode:[this.results.missubcode],
             mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
             modifiedBy: [this.results.modifiedBy],
             modifiedTime: [this.results.modifiedTime],
@@ -135,7 +153,7 @@ getPage(){
        )
       }else if(this.function_type == "M-Modify"){
         
-        this.subscription = this.subSectorApi.getSubSectorId(this.subSectorId).subscribe(
+        this.subscription = this.subSectorApi.getSubSectorByCode(this.missubcode).subscribe(
           res =>{
             this.results = res
             this.subSectorId = this.results.id
@@ -145,6 +163,7 @@ getPage(){
               deletedTime:[this.results.deletedTime],
               id: [this.results.id],
               mis_sub_sector: [this.results.mis_sub_sector],
+              missubcode:[this.results.missubcode],
               mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
               modifiedBy: [this.auth_user],
               modifiedTime: [new Date()],
@@ -170,9 +189,9 @@ getPage(){
       } else if(this.function_type == "V-Verify"){
 
       }else if(this.function_type == "X-Delete"){
-        this.disabledFunctionDataValue()
+        this.disabledFormControl()
 
-        this.subscription = this.subSectorApi.getSubSectorId(this.subSectorId).subscribe(
+        this.subscription = this.subSectorApi.getSubSectorByCode(this.missubcode).subscribe(
           res =>{
             this.results = res
 
@@ -183,6 +202,7 @@ getPage(){
               deletedTime:[new Date()],
               id: [this.results.id],
               mis_sub_sector: [this.results.mis_sub_sector],
+              missubcode:[this.results.missubcode],
               mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
               modifiedBy: [this.results.modifiedBy],
               modifiedTime: [this.results.modifiedTime],
@@ -250,7 +270,7 @@ onSubmit(){
       )    
 
     }else if(this.function_type == "X-Delete"){
-      this.subscription = this.subSectorApi.deleteSubSector(this.subSectorId).subscribe(
+      this.subscription = this.subSectorApi.deleteSubSector(this.missubcode).subscribe(
         res =>{
           this.results = res
           this._snackbar.open("Record Deleted Successfully","X",{

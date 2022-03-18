@@ -21,7 +21,7 @@ export class MisSectorMaintenanceComponent implements OnInit {
   showMisCode:any;
   submitted = false;
   loading = false;
-  sectorId:any;
+  sectorId:any
   constructor(private fb:FormBuilder,
     private router:Router,
     private ngZone:NgZone,
@@ -61,10 +61,8 @@ misSectorLookup():void{
     this.dialogData = results.data;
     this.miscode = this.dialogData.miscode
     this.sectorId  = this.dialogData.id
-    this.formData.controls.miscode.setValue(this.miscode)
-    
-    console.log(this.dialogData);
-    
+    this.formData.controls.miscode.setValue(results.data.miscode)
+    // this.formData.controls.sectorId.setValue(results.data.id)
   })
 }
   ngOnInit(): void {

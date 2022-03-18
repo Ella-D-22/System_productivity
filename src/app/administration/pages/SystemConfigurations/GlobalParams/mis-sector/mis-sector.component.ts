@@ -35,6 +35,9 @@ isEnabled = false;
   // auth_user = this.currentUser.username;
   auth_user = "nobody"
 
+  disabledFormControl(){
+    this.formData.disable()
+  }
 
   formData =  this.fb.group({
   mis_sector: [''],
@@ -55,7 +58,7 @@ isEnabled = false;
   
   })
  disabledFunctionDataValue(){
-   this.formData.controls.value.disable()
+  //  this.formData.controls.value.disable()
  }
 
 
@@ -73,17 +76,13 @@ isEnabled = false;
 
  }
 getPage(){
-  console.log("hello world");
+ 
   
   this.subscription = this.SectorAPi.currentMessage.subscribe(
     message =>{
       this.message = message;
-      console.log(this.message);
-      
       this.function_type = this.message.function_type;
       this.miscode = this.message.miscode;
-      
-       console.log(this.miscode);
        
       if(this.function_type == "A-Add"){
        this.isEnabled = true;
@@ -105,34 +104,30 @@ getPage(){
         
         });
       } else if(this.function_type == "I-Inquire"){
-        this.disabledFunctionDataValue()
-        console.log("Inquiring");
+        this.disabledFormControl()
         
-          this.isEnabled = false;
-          console.log("code",this.miscode);
-          
-        this.subscription = this.SectorAPi.getMissectorById(this.miscode).subscribe(
-          res =>{
-            console.log(this.results);
-            
+        
+          this.isEnabled = false;  
+        this.subscription = this.SectorAPi.getMissectorByCode(this.miscode).subscribe(
+          res =>{ 
             this.results = res
-            this.miscode = this.results.miscode
+            // this.miscode = this.results.miscode
             this.formData = this.fb.group({
               id:[this.results.id],
-              miscode:[this.miscode],
+              miscode:[this.results.miscode],
               mis_sector:[this.results.mis_sector],
               mis_sector_desc:[this.results.mis_sector_desc],
-              deleteFlag:[''],
-              deletedTime:[''],
-              deletedBy:[''],
-              verifiedBy:[''],
-              verifiedTime:[''],
-              verifiedFlag:[''],
+              deleteFlag:[this.results.deletedFlag],
+              deletedTime:[this.results.deletedTime],
+              deletedBy:[this.results.deletedBy],
+              verifiedBy:[this.results.verifiedBy],
+              verifiedTime:[this.results.verifiedTime],
+              verifiedFlag:[this.results.verifiedFlag],
               postedFlag:[this.results.postedFlag],
               postedBy:[this.results.postedBy],
               postedTime:[this.results.postedTime],
-              modifiedBy:[''],
-              modifiedTime:[''],
+              modifiedBy:[this.results.modifiedBy],
+              modifiedTime:[this.results.modifiedTime],
             
             });
           }, 
@@ -148,7 +143,7 @@ getPage(){
           })
       }else if(this.function_type == "M-Modify"){
         this.isEnabled = true;
-        this.subscription = this.SectorAPi.getMissectorById(this.miscode).subscribe(
+        this.subscription = this.SectorAPi.getMissectorByCode(this.miscode).subscribe(
           res =>{
             this.results = res;
             console.log(this.results);
@@ -158,17 +153,17 @@ getPage(){
               miscode:[this.results.miscode],
               mis_sector:[this.results.mis_sector],
               mis_sector_desc:[this.results.mis_sector_desc],
-              deleteFlag:[''],
-              deletedTime:[''],
-              deletedBy:[''],
-              verifiedBy:[''],
-              verifiedTime:[''],
-              verifiedFlag:[''],
+              deleteFlag:[this.results.deletedFlag],
+              deletedTime:[this.results.deletedTime],
+              deletedBy:[this.results.deletedBy],
+              verifiedBy:[this.results.verifiedBy],
+              verifiedTime:[this.results.verifiedTime],
+              verifiedFlag:[this.results.verifiedFlag],
               postedFlag:[this.results.postedFlag],
               postedBy:[this.results.postedBy],
               postedTime:[this.results.postedTime],
-              modifiedBy:[''],
-              modifiedTime:[''],
+              modifiedBy:[this.auth_user],
+              modifiedTime:[new Date()],
             
             });
             
@@ -189,7 +184,7 @@ getPage(){
 
       }else if(this.function_type == "X-Delete"){
         this.disabledFunctionDataValue()
-        this.subscription = this.SectorAPi.getMissectorById(this.miscode_id).subscribe(
+        this.subscription = this.SectorAPi.getMissectorByCode(this.miscode).subscribe(
           res =>{
             this.results = res
             this.miscode = this.results.miscode
@@ -198,17 +193,17 @@ getPage(){
               miscode:[this.results.miscode],
               mis_sector:[this.results.mis_sector],
               mis_sector_desc:[this.results.mis_sector_desc],
-              deleteFlag:[''],
-              deletedTime:[''],
-              deletedBy:[''],
-              verifiedBy:[''],
-              verifiedTime:[''],
-              verifiedFlag:[''],
+              deleteFlag:['Y'],
+              deletedTime:[new Date()],
+              deletedBy:[this.auth_user],
+              verifiedBy:[this.results.verifiedBy],
+              verifiedTime:[this.results.verifiedTime],
+              verifiedFlag:[this.results.verifiedFlag],
               postedFlag:[this.results.postedFlag],
               postedBy:[this.results.postedBy],
               postedTime:[this.results.postedTime],
-              modifiedBy:[''],
-              modifiedTime:[''],
+              modifiedBy:[this.results.modifiedBy],
+              modifiedTime:[this.results.modifiedTime],
             
             });
           }, 

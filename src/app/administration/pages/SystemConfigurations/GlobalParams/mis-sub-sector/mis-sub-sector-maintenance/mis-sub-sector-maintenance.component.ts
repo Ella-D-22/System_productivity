@@ -19,6 +19,7 @@ function_type:any;
 showSubSectorId:any;
 dialogData:any;
 miscode:any;
+missubcode:any;
 subSectorId = false;
 showMisCode = false;
 horizontalPosition:MatSnackBarHorizontalPosition
@@ -36,7 +37,8 @@ verticalPosition:MatSnackBarVerticalPosition
   formData = this.fb.group({
     function_type:[''],
     miscode:[''],
-    id:['']
+    missubcode:[''],
+
   })
   functionArray:any = [
     'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
@@ -52,18 +54,19 @@ verticalPosition:MatSnackBarVerticalPosition
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
         this.miscode = this.dialogData.miscode
-        
+        this.formData.controls.miscode.setValue(results.data.miscode)
       })
     }
 
     subSectorLookup():void{
       const dialogRef =  this.dialog.open(MisSubSectorLookupComponent,{
-    
+         
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
         this.subSectorId = this.dialogData.id
-        
+        this.missubcode = this.dialogData.missubcode
+        this.formData.controls.missubcode.setValue(results.data.missubcode)
       })
     }
 onFunctionSelection(event:any){
