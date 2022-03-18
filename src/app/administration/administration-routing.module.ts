@@ -48,6 +48,7 @@ import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mi
 import { MisSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector-maintenance/mis-sector-maintenance.component';
 import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
 import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
+import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -133,6 +134,14 @@ const routes: Routes = [{
       component:MisSubSectorMaintenanceComponent,
       // canActivate:[CanActivateModuleGuard],
       data:{preload:true},
+    },
+
+    //guarantos configurations
+    {
+       path:'configurations/global/guarantors-config/data/view',
+       component:GuarantosComponent,
+      //  canActivate:[CanActivateModuleGuard],
+       data:{preload:true},
     },
     
     {

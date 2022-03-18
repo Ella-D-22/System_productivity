@@ -86,6 +86,8 @@ import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mi
 import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
 import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
 import { MisSubSectorLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-lookup/mis-sub-sector-lookup.component';
+import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos.component';
+import { GuarantosMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos-maintenance/guarantos-maintenance.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -172,6 +174,9 @@ import { MisSubSectorLookupComponent } from './pages/SystemConfigurations/Global
     MisSubSectorComponent,
     MisSubSectorMaintenanceComponent,
     MisSubSectorLookupComponent,
+    GuarantosComponent,
+    GuarantosMaintenanceComponent,
+    
     
  
 
