@@ -70,10 +70,12 @@ verticalPosition:MatSnackBarVerticalPosition
       })
     }
 onFunctionSelection(event:any){
-  if(this.function_type != "A-Add"){
+  if(event.target.value != "A-Add"){
+
   this.showSubSectorId = true;
   this.showMisCode = false;
-  }else if (this.function_type == "A-Add"){
+
+  }else if (event.target.value == "A-Add"){
     this.showMisCode = true;
     this.showSubSectorId =  false;
 

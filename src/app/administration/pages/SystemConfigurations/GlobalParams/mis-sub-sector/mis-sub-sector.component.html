@@ -71,7 +71,9 @@
             Back
           </button>
           <br>
-        <button mat-raised-button color="primary" type="submit" class="start pull-right">Submit</button>
+        <button mat-raised-button color="primary" type="submit" class="start pull-right" *ngIf="isEnabled">Submit</button>
+        <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
+
         </form>
     </div>
 </mat-card>

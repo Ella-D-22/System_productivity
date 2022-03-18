@@ -27,6 +27,7 @@ verticalPosition:MatSnackBarVerticalPosition
 submitted=false;
 loading=false;
 isEnabled = false;
+isDeleted = false;
   ngOnInit(): void {
     this.redirectToMaintence()
     this.getPage()
@@ -117,7 +118,7 @@ getPage(){
               miscode:[this.results.miscode],
               mis_sector:[this.results.mis_sector],
               mis_sector_desc:[this.results.mis_sector_desc],
-              deleteFlag:[this.results.deletedFlag],
+              deleteFlag:[this.results.deleteFlag],
               deletedTime:[this.results.deletedTime],
               deletedBy:[this.results.deletedBy],
               verifiedBy:[this.results.verifiedBy],
@@ -153,7 +154,7 @@ getPage(){
               miscode:[this.results.miscode],
               mis_sector:[this.results.mis_sector],
               mis_sector_desc:[this.results.mis_sector_desc],
-              deleteFlag:[this.results.deletedFlag],
+              deleteFlag:[this.results.deleteFlag],
               deletedTime:[this.results.deletedTime],
               deletedBy:[this.results.deletedBy],
               verifiedBy:[this.results.verifiedBy],
@@ -184,6 +185,7 @@ getPage(){
 
       }else if(this.function_type == "X-Delete"){
         this.disabledFunctionDataValue()
+        this.isDeleted = true;
         this.subscription = this.SectorAPi.getMissectorByCode(this.miscode).subscribe(
           res =>{
             this.results = res
@@ -251,7 +253,7 @@ onSubmit(){
          }
        )
      } else if(this.function_type == "M-Modify"){
-       this.subscription = this.SectorAPi.updateMissector(this.miscode_id,this.formData.value).subscribe(
+       this.subscription = this.SectorAPi.updateMissector(this.formData.value).subscribe(
          res =>{
            this.results = res
            this._snackbar.open("Executed Successfully","X",{
@@ -275,7 +277,7 @@ onSubmit(){
        )    
 
      }else if(this.function_type == "X-Delete"){
-      this.subscription = this.SectorAPi.deleteMissector(this.miscode_id).subscribe(
+      this.subscription = this.SectorAPi.updateMissector(this.formData.value).subscribe(
         res =>{
           this.results = res
           this._snackbar.open("Record Deleted Successfully","X",{

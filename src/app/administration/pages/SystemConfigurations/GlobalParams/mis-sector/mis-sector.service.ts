@@ -91,9 +91,9 @@ getMissectorById(id:any):Observable<any>{
 }
 
 //update the record
-updateMissector(id:string | null, data:any):Observable<any>{
-  let API_URL = `${this.baseURL}/update/${id}`
-  return this.http.put(API_URL, data, {headers:this.headers,
+updateMissector(data:any):Observable<any>{
+  let API_URL = `${this.baseURL}/update`
+  return this.http.put(API_URL,data ,{headers:this.headers,
   withCredentials:false}).pipe(map(
     res =>{
       return res || {}

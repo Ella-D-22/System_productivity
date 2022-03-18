@@ -82,8 +82,8 @@ getSubSectorByCode(missubcode:any):Observable<any>{
   )
 }
 //Updating the records
-updateSubSector(id:string | null, data:any):Observable<any>{
-  let API_URL =  `${this.baseURL}/update/${id}`;
+updateSubSector(data:any):Observable<any>{
+  let API_URL =  `${this.baseURL}/update`;
   return this.http.put(API_URL, data, { headers:this.headers,
   withCredentials:false}).pipe(map(res => {
     return res || {}
