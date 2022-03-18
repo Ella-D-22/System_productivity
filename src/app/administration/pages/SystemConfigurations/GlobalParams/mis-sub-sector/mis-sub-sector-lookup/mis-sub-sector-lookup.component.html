@@ -1,1 +1,23 @@
-<p>mis-sub-sector-lookup works!</p>
+
+<div class="breadcrumb">
+    <h4 >List of Sub Sector MIS CODES</h4>
+</div>
+    <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Sub Sector id</th>
+                <th>SUb Sector Code</th>
+                <th>Sub Sector</th>
+                <th>Sub Sector Description</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr (click)="onSelect(item)"  *ngFor="let item of subSectorData">
+                <td><a class="update btn btn-sm" color="accent">{{item.id}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.missubcode}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.mis_sub_sector}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.mis_sub_sector_desc}}</a></td>
+            </tr>
+        </tbody>
+    </table>

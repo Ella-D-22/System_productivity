@@ -1,0 +1,111 @@
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <div>Home/system/configurations/global/guarantors-config</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container">
+        <form class="form" (ngSubmit)="onSubmit()" novalidate [formGroup]="formData">
+            <h4>Configurations Settings</h4>
+            <mat-divider></mat-divider>
+            <br>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="" class="start pull-left">Check Customer Activeness</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <mat-radio-group aria-label="Select an option" >
+                                <mat-radio-button value="1">YES</mat-radio-button>
+                                <mat-radio-button value="2">NO</mat-radio-button>
+                              </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="">Check Customer Guarantor Active No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <mat-radio-group aria-label="Select an option" >
+                                <mat-radio-button value="1">YES</mat-radio-button>
+                                <mat-radio-button value="2">NO</mat-radio-button>
+                              </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="">Check loan status</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <mat-radio-group aria-label="Select an option" >
+                                <mat-radio-button value="1">YES</mat-radio-button>
+                                <mat-radio-button value="2">NO</mat-radio-button>
+                              </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="">Check shares qualification</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <mat-radio-group aria-label="Select an option">
+                                <mat-radio-button value="1">YES</mat-radio-button>
+                                <mat-radio-button value="2">NO</mat-radio-button>
+                              </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="">Check subsequent guarantee status</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <mat-radio-group aria-label="Select an option">
+                                <mat-radio-button value="1">YES</mat-radio-button>
+                                <mat-radio-button value="2">NO</mat-radio-button>
+                              </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </form>
+    </div>
+</mat-card>

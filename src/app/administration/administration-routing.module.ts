@@ -48,6 +48,7 @@ import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mi
 import { MisSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector-maintenance/mis-sector-maintenance.component';
 import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
 import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
+import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -120,6 +121,7 @@ const routes: Routes = [{
     },
 
     {
+      
       path:'configurations/global/mis-sector/data/view',
       component:MisSectorComponent,
       // canActivate:[CanActivateModuleGuard],
@@ -131,7 +133,15 @@ const routes: Routes = [{
       path:'configurations/global/mis-sub-sector/maintenance',
       component:MisSubSectorMaintenanceComponent,
       // canActivate:[CanActivateModuleGuard],
-      data:{preload:true}
+      data:{preload:true},
+    },
+
+    //guarantos configurations
+    {
+       path:'configurations/global/guarantors-config/data/view',
+       component:GuarantosComponent,
+      //  canActivate:[CanActivateModuleGuard],
+       data:{preload:true},
     },
     
     {
@@ -339,7 +349,7 @@ const routes: Routes = [{
       {
         path: 'accounts/data/view',
         component:LoanAccountComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       // collateral

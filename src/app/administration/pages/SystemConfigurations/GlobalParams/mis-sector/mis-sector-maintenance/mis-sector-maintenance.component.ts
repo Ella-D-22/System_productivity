@@ -18,13 +18,10 @@ export class MisSectorMaintenanceComponent implements OnInit {
   miscode:any;
   dialogData:any;
   function_type:any;
-
-
-
-   showMisCode:any;
-  submitted:false;
-  loading:false;
-
+  showMisCode:any;
+  submitted = false;
+  loading = false;
+  sectorId:any
   constructor(private fb:FormBuilder,
     private router:Router,
     private ngZone:NgZone,
@@ -34,7 +31,7 @@ export class MisSectorMaintenanceComponent implements OnInit {
 
 
 formData = this.fb.group({
-  fuction_type:['', [Validators.required]],
+  function_type:[''],
   miscode:['']
 })
 
@@ -45,37 +42,45 @@ functionArray:any = [
 onFunctionSelection(event:any){
   if(event.target.value != "A-Add"){
     this.showMisCode = true;
-    this.formData.controls.miscode.setValidators([Validators.required])
+    this.formData.controls.miscode.setValidators([])
     this.formData.controls.miscode.setValue("")
   }else if(event.target.value == "A-Add"){
     this.showMisCode = false;
     this.formData.controls.miscode.setValidators([])
     this.formData.controls.miscode.setValue("")
-    
   }
 }
 get f() { 
   return this.formData.controls; }
 
-misSectorLookup(){
+misSectorLookup():void{
   const dialogRef =  this.dialog.open(MisSectorLookupComponent,{
 
   });
   dialogRef.afterClosed().subscribe(results =>{
     this.dialogData = results.data;
     this.miscode = this.dialogData.miscode
-    
+    this.sectorId  = this.dialogData.id
+    this.formData.controls.miscode.setValue(results.data.miscode)
+    // this.formData.controls.sectorId.setValue(results.data.id)
   })
 }
   ngOnInit(): void {
   }
 
   onSubmit(){
-   console.log(this.formData.value);
-   
+   console.log("data", this.formData.value);
+   this.loading = true;
+    this.submitted = true;
    if(this.formData.valid){
      this.misSectorService.changeMessage(this.formData.value)
-     this.router.navigateByUrl('system/configurations/global/mis-sub-sector/data/view')
+     if(this.function_type == "A-Add"){
+
+      this.router.navigateByUrl('system/configurations/global/mis-sector/data/view')
+     }else if(this.function_type != "A-Add"){
+      this.router.navigateByUrl('system/configurations/global/mis-sector/data/view')
+
+     }
    }else{
      this.loading = false;
      this._snackbar.open("Invalid Form Data", "Try Again", {

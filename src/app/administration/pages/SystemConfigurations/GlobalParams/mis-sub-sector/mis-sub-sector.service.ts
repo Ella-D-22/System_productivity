@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MisSubSectorService {
-headers =  new HttpHeaders().set('content-type', 'application-json');
+headers =  new HttpHeaders().set('Content-Type', 'application/json');
 
 baseURL = `${environment.accountsAPI}/api/vi/mis/subsector`
   constructor(private http:HttpClient) { }
@@ -69,10 +69,22 @@ getSubSectorId(id:any):Observable<any>{
   )
 }
 
+//get by code
+getSubSectorByCode(missubcode:any):Observable<any>{
+  console.log("Server", missubcode);
+  
+  let API_URL = `${this.baseURL}/find/by/mis_subcode/${missubcode}`
+  return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(
+    map( res =>{
+      return res || {}
+    }),
+    catchError(this.errorMgmt)
+  )
+}
 //Updating the records
-updateSubSector(id:string | null, data:any):Observable<any>{
-  let API_URL =  `${this.baseURL}/update/${id}`;
-  return this.http.put(API_URL, data, { headers:this.headers,
+updateSubSector(data:any):Observable<any>{
+  let API_URL =  `${this.baseURL}/update`;
+  return this.http.put(API_URL, data, {
   withCredentials:false}).pipe(map(res => {
     return res || {}
   }),
