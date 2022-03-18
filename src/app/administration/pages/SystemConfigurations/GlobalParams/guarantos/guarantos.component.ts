@@ -34,4 +34,8 @@ export class GuarantosComponent implements OnInit {
     verifiedTime: ['']
   })
 
+  onSubmit(){
+    
+  }
+
 }

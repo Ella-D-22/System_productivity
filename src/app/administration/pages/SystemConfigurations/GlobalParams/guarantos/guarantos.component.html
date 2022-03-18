@@ -5,7 +5,7 @@
     <mat-divider></mat-divider>
     <br>
     <div class="container">
-        <div class="form">
+        <form class="form" (ngSubmit)="onSubmit()" novalidate [formGroup]="formData">
             <h4>Configurations Settings</h4>
             <mat-divider></mat-divider>
             <br>
@@ -104,6 +104,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <br>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </form>
     </div>
 </mat-card>
