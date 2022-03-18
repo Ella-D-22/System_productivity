@@ -192,12 +192,12 @@ getPage(){
 
       }else if(this.function_type == "X-Delete"){
         this.disabledFormControl()
-         this.isDeleted = false;
+         this.isDeleted = true;
         this.subscription = this.subSectorApi.getSubSectorByCode(this.missubcode).subscribe(
           res =>{
             this.results = res
-
-            this.subSectorId = this.results.id
+             console.log("Deleted", res);
+             
             this.formData = this.fb.group({
               deleteFlag:['Y'],
               deletedBy: [this.auth_user],
@@ -215,8 +215,17 @@ getPage(){
               verifiedFlag: [this.results.verifiedFlag],
               verifiedTime:[this.results.verifiedTime]
             });
-            this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
 
+          },
+          err =>{          
+            this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+            this.error = err;
+            this._snackbar.open(this.error, "Try Again", {
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-sackbar', 'login-snackbar'],
+            });
           })
       }
     })

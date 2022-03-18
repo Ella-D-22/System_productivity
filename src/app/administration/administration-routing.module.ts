@@ -340,7 +340,7 @@ const routes: Routes = [{
       {
         path: 'accounts/data/view',
         component:LoanAccountComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       // collateral
