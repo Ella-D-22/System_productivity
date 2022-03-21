@@ -907,6 +907,7 @@ export class CollateralComponent implements OnInit {
               panelClass: ['green-snackbar','login-snackbar'],
             });
         },err=>{
+          this.router.navigateByUrl("/system/configurations/limits and collateral/Collateral/maintenance")
           this.error = err;
           this._snackBar.open(this.error, "Try again!", {
             horizontalPosition: this.horizontalPosition,
@@ -934,6 +935,7 @@ export class CollateralComponent implements OnInit {
                 panelClass: ['green-snackbar','login-snackbar'],
               });
           },err=>{
+            this.router.navigateByUrl("/system/configurations/limits and collateral/Collateral/maintenance")
             this.error = err;
             this._snackBar.open(this.error, "Try again!", {
               horizontalPosition: this.horizontalPosition,
@@ -968,7 +970,7 @@ export class CollateralComponent implements OnInit {
         }
 
       }else{
-      
+        this.router.navigateByUrl("/system/configurations/limits and collateral/Collateral/maintenance")
         this._snackBar.open("Invalid Form Data", "Try again!", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
