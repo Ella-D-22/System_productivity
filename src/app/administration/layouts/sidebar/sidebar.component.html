@@ -135,9 +135,25 @@
             <!-- Accounts Params -->
           
 
-      <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/collateral/maintenance">
+      <!-- <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/collateral/maintenance">
         <mat-icon>supervised_user_circle</mat-icon>
-         Collaterals Management</a> 
+         Collaterals Management</a>  -->
+
+         <mat-accordion class="app-nav-accordion">
+           <mat-expansion-panel class="mat-elevation-z0">
+             <mat-expansion-panel-header>
+               <mat-panel-title class="nav-title">
+                 <mat-icon>supervised_user_circle</mat-icon>
+                 Collaterals Management
+               </mat-panel-title>
+             </mat-expansion-panel-header>
+             <mat-nav-list>
+              <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/limits and collateral/Limits/maintenance" matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Limits</a>
+              <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/limits and collateral/Collateral/maintenance" matTooltip="Collaterals Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Collateral</a>
+
+             </mat-nav-list>
+           </mat-expansion-panel>
+         </mat-accordion>
          
          <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/branches/maintenance">
           <mat-icon>home</mat-icon>

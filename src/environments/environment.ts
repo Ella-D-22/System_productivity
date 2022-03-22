@@ -8,7 +8,7 @@ export const environment = {
   userAPI: 'http://localhost:9091',
   systemAPI: 'http://localhost:9091/system-service',
   // accountsAPI: 'http://localhost:9091/account-service',
-  collateralAPI:'http://localhost:9091/collateral-service',
+  // collateralAPI:'http://localhost:9091/collateral-service',
   // productAPI:'http://localhost:9091/product-service',
   branchsAPI:'http://localhost:9091/branch-service',
   transactionAPI:'http://localhost:9091/transaction-service',
@@ -29,7 +29,7 @@ export const environment = {
 // transaction-service:
 //   url: http://localhost:9105
 
-
+collateralAPI:'http://localhost:9103',
 accountsAPI: 'http://localhost:9099',
 productAPI: 'http://localhost:9100'
 

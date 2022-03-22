@@ -354,15 +354,15 @@ const routes: Routes = [{
       },
       // collateral
       {
-        path: 'collateral/maintenance',
+        path: 'configurations/limits and collateral/Collateral/maintenance',
         component:CollateralMaintenanceComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
-        path: 'collateral/data/view',
+        path: 'configurations/limits and collateral/Collateral/data/view',
         component:CollateralComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       // Braches
