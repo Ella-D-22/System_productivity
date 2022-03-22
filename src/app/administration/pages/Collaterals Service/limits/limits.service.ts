@@ -56,6 +56,17 @@ export class LimitsService {
 
    ))
  }
+ //get record by id
+ getLimitsNodesById(id:any):Observable<any>{
+   let API_URL = `${this.baseURL}/find/${id}`
+   return this.http.get(API_URL, {withCredentials:false}).pipe(map(
+     res =>{
+       return res || {}
+     },
+     catchError(this.errorMgmt)
+
+   ))
+ }
 
  updateLimitNodes(data:any):Observable<any>{
    let API_URL =  `${this.baseURL}/update`

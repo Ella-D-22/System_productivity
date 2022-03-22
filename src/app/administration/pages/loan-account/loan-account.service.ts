@@ -12,8 +12,7 @@ import { catchError, map } from 'rxjs/operators';
 export class LoanAccountService {
   // private baseUrl: string = 'http://127.0.0.1:9099/accounts/';
   private baseUrl: string = `${environment.accountsAPI}/accounts/`;
-
-
+  private testUrl: string = `${environment.productAPI}/api/v1/customer/guarantors/`
   constructor(private http: HttpClient) { }
 
   createAccount(interest: any): Observable<Response>{
@@ -24,8 +23,6 @@ export class LoanAccountService {
    }
 
 
-  //  {'Access-Control-Allow-Origin':'*'}
-  //  setHeader("Access-Control-Allow-Origin", "https://yoursite.com")
 
   
   retrieveAllAccounts(type: string): Observable<Response> {
@@ -37,25 +34,12 @@ export class LoanAccountService {
 return this.http.get<Response>(this.baseUrl+id);
   }
 
-  // headers = new HttpHeaders().set('Content-Type', 'application/json')
-  // .set('Access-Control-Allow-Origin','*');
-
-  //   // Get by id
-  //   retrieveAllAccounts(type: string) {
-  //     console.log("Hey got called");
-      
-  //     let API_URL = this.baseUrl+type+'/all/'
-  //     return this.http.get(API_URL, {headers:this.headers, withCredentials: true })
-  //       .pipe(
-  //         map((res) => {
-  //           return res || {}
-  //         }),
-  //         catchError(this.errorMgmt)
-  //       )
-  //   }
-  // errorMgmt(errorMgmt: any): import("rxjs").OperatorFunction<any, any> {
-  //   throw new Error('Method not implemented.');
-  // }
+  //testing guarantor eligibility
+  getCustomerEligibility(customer_code:any):Observable<any>{
+    // let API_URL = `${this.testUrl}/eligibility/test/${customer_code}`
+    // return this.http.post(API_URL, {})
+    return this.http.post<Response>(this.testUrl+'/eligibility/test/', customer_code)
+  }
 
 }
 

@@ -28,9 +28,9 @@ import { ProductComponent } from './lookup/product/product.component';
   styleUrls: ['./loan-account.component.css'],
 })
 export class LoanAccountComponent implements OnInit {
-  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
-  auth_user = this.currentUser.username;
-
+  // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  // auth_user = this.currentUser.username;
+     auth_user = "User"
   message!: any;
   resData: any;
   dtype!:string
@@ -1427,6 +1427,7 @@ export class LoanAccountComponent implements OnInit {
     }
   }
 
+   
   onSubmit() {
     this.loading=true
     this.formData.value.loan={
