@@ -62,7 +62,7 @@ import { RetailModifyComponent } from './pages/CustomersComponent/components/mai
 import { ParamAddComponent } from './pages/CustomersComponent/components/params/param-add/param-add.component';
 import { ParamInquireComponent } from './pages/CustomersComponent/components/params/param-inquire/param-inquire.component';
 import { ParamMainComponent } from './pages/CustomersComponent/components/params/param-main/param-main.component';
-=======
+
 import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
 import { LimitsComponent } from './pages/Collaterals Service/limits/limits.component';
 const routes: Routes = [{
@@ -465,6 +465,8 @@ const routes: Routes = [{
       },
       // Retail Customer
       {
+        path: 'customers/maintenance',
+
         path: 'customers/retail/maintenance',
         component: MainKycComponent,
         // canActivate: [CanActivateModuleGuard],
@@ -496,6 +498,7 @@ const routes: Routes = [{
       },
       //  Cooporate Customer 
       {
+        path: 'customers/maintenance',
         path: 'customers/cooporate/maintenance',
         component: MainKycComponent,
         // canActivate: [CanActivateModuleGuard],
