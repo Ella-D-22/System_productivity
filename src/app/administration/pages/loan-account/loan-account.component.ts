@@ -20,6 +20,8 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { GlSubheadLookup2Component } from './lookup/gl-subhead/gl-subhead.component';
 import { BranchComponent } from './lookup/branch/branch.component';
 import { ProductComponent } from './lookup/product/product.component';
+import { Subscription } from 'rxjs';
+import { GlSubheadLookupComponent } from '../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
 
 
 @Component({
@@ -41,6 +43,13 @@ export class LoanAccountComponent implements OnInit {
   customerImage!: any
   signatureImage!: any
   resMessage:any
+  subscription:Subscription
+  gl_subhead:any
+  gl_subhead_description:any
+  gl_subhead_code:any
+  glSubheadData:any
+  results:any
+  error:any
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -100,6 +109,23 @@ export class LoanAccountComponent implements OnInit {
   get f() {
     return this.formData.controls;
   }
+
+  glSubheadLookup(): void {
+    const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
+      // height: '400px',
+      // width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.gl_subhead = result.data;
+      this.gl_subhead_description =  result.data.glSubheadDescription;
+      this.gl_subhead_code =  result.data.glSubheadCode;     
+       // this.eventtypedata = result.data;
+      this.glSubheadData.controls.laa_gl_subhead.setValue(this.gl_subhead_code);
+      this.glSubheadData.controls.laa_gl_subhead_description.setValue(this.gl_subhead_description);
+    });
+  }
+
+
   getPage() {
     if (
       this.message.function_type == 'A-Add' &&
@@ -1521,6 +1547,38 @@ export class LoanAccountComponent implements OnInit {
 
     console.log(this.formData.value);
   }
+customer_code:any
+glSubheadArray:any
+
+initGlSUbheadForm(){
+  
+  // this.glSubheadData = this.fb.group({
+
+  // })
+}
+
+  //Checking for eligibility of a guarantors
+  eligibilityTest(){
+  this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
+    res =>{
+        this.results = res
+        this.l.push(this.fb.group
+          this.glSubheadData).value
+          this.glSubheadArray.push(this.glSubheadData.value);
+
+        
+    },
+    err=>{
+      this.error = err
+      this._snackBar.open(this.error, "Try Again",{
+        horizontalPosition:this.horizontalPosition,
+        verticalPosition:this.verticalPosition,
+        duration:3000,
+        panelClass:['red-snackbar', 'login-snackbar']
+      })
+    }
+  )
+  }
 
   onPhotoChange(event: any) {
     this.imgfile = event.target.files[0];
@@ -1557,7 +1615,7 @@ console.log('Error: ', error);
 }
 }
 
-glSubheadLookup(): void {
+glSubheadLookup1(): void {
   const dialogRef = this.dialog.open(GlSubheadLookup2Component, {
     // height: '400px',
     // width: '600px',
