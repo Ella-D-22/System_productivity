@@ -49,6 +49,20 @@ import { MisSectorMaintenanceComponent } from './pages/SystemConfigurations/Glob
 import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
 import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
 import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos.component';
+
+import { MainKycComponent } from './pages/CustomersComponent/components/main/main-kyc/main-kyc.component';
+import { CorporateAddComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-add/corporate-add.component';
+import { CorporateDeleteComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-delete/corporate-delete.component';
+import { CorporateInquireComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-inquire/corporate-inquire.component';
+import { CorporateModifyComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-modify/corporate-modify.component';
+import { RetailAddComponent } from './pages/CustomersComponent/components/main/retail-kyc/retail-add/retail-add.component';
+import { RetailDeleteComponent } from './pages/CustomersComponent/components/main/retail-kyc/retail-delete/retail-delete.component';
+import { RetailInquireComponent } from './pages/CustomersComponent/components/main/retail-kyc/retail-inquire/retail-inquire.component';
+import { RetailModifyComponent } from './pages/CustomersComponent/components/main/retail-kyc/retail-modify/retail-modify.component';
+import { ParamAddComponent } from './pages/CustomersComponent/components/params/param-add/param-add.component';
+import { ParamInquireComponent } from './pages/CustomersComponent/components/params/param-inquire/param-inquire.component';
+import { ParamMainComponent } from './pages/CustomersComponent/components/params/param-main/param-main.component';
+=======
 import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
 import { LimitsComponent } from './pages/Collaterals Service/limits/limits.component';
 const routes: Routes = [{
@@ -426,6 +440,94 @@ const routes: Routes = [{
         canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
+
+
+      // *******************************************************************************************\
+      //                                         Customers Management
+      // *******************************************************************************************
+      {
+        path: 'customers/param/maintenance',
+        component: ParamMainComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/param/add',
+        component: ParamAddComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/param/inquire',
+        component: ParamInquireComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      // Retail Customer
+      {
+        path: 'customers/retail/maintenance',
+        component: MainKycComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/retail/add',
+        component: RetailAddComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/retail/modify',
+        component: RetailModifyComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/retail/delete',
+        component: RetailDeleteComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/retail/delete',
+        component: RetailInquireComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      //  Cooporate Customer 
+      {
+        path: 'customers/cooporate/maintenance',
+        component: MainKycComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/cooporate/add',
+        component: CorporateAddComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/cooporate/modify',
+        component: CorporateModifyComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/cooporate/delete',
+        component: CorporateDeleteComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customers/cooporate/inquire',
+        component: CorporateInquireComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+
+     
+
   ],
 }];
 

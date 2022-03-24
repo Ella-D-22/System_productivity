@@ -1,0 +1,96 @@
+<mat-card class="container-fluid">
+  <mat-card-header>
+    <div>Customer Maintainance</div>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <div class="container-fluid mt-4">
+    <form class="form">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="form-group row">
+            <div class="col-md-5 col-12 form-column">
+              <label class="start pull-left"
+                >Function<span class="warning">*</span></label
+              >
+            </div>
+            <div class="col-md-6 col-8 form-column">
+              <select (change)="onKycTabClick($event)">
+                <option value="" disabled>-- Choose Function --</option>
+                <option value="1">ADD</option>
+                <option value="2">INQUIRE</option>
+                <option value="3">MODIFY</option>
+                <option value="4">DELETE</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="form-group row">
+            <div class="col-md-5 col-sm-12 form-column">
+              <label class="start pull-left"
+                >KYC Type<span class="warning">*</span></label
+              >
+            </div>
+            <div class="col-md-6 col-8 form-column">
+              <select (change)="onTabClick($event)">
+                <option value="" disabled>-- Choose Type --</option>
+                <option value="1">RETAIL</option>
+                <option value="2">CORPORATE</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div *ngIf="customerTabIndex == 1" class="col-md-2">
+          <button
+            mat-raised-button
+            color="primary"
+            class="btn go mx-auto d-block"
+            type="button"
+            (click)="navigate()"
+          >
+            GO
+          </button>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="col-md-5 mt-2" *ngIf="customerTabIndex != 1">
+          <div class="form-group row ">
+            <div class="col-md-5 col-12 form-column">
+              <label class="start pull-left"
+                >Customer Code<span class="warning">*</span></label
+              >
+            </div>
+            <div class="col-md-6 col-7 form-column">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="customerCode"
+                name="schemeCode"
+              />
+            </div>
+            <div class="col-md-1 col-1">
+              <mat-icon>search</mat-icon>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="customerTabIndex != 1" class="col-md-2 offset-md-3 col-3 mt-2">
+          <button
+            mat-raised-button
+            color="primary"
+            class="btn go mx-auto d-block"
+            type="button"
+            (click)="navigate()"
+          >
+            GO
+          </button>
+        </div>
+      </div>
+      <br />
+    </form>
+  </div>
+</mat-card>

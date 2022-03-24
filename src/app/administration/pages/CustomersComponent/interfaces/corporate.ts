@@ -1,0 +1,26 @@
+export interface corporateKyc{
+    contactPersonName?: string,
+    corporateSegment?: string,
+    custCode?: string,
+    headOffice?: string,
+    inCorporationDate?: Date,
+    joiningDate?: Date,
+    kraPin?: string,
+    legalEntityType?: string,
+    organisationName?: string,
+    region?: string,
+    registrationPin?: string,
+    shortName?: string,
+    subSegment?: string,
+
+    deletedBy?: string,
+    deletedFlag?: string,
+    deletedTime?: Date,
+    modifiedBy?: string,
+    modifiedOn?: Date,
+    postedBy?: string,
+    postedFlag?: string,
+    postedTime?: Date,
+    verifiedFlag?: string,
+    verifiedTime?: Date
+  }
