@@ -49,6 +49,7 @@ import { MisSectorMaintenanceComponent } from './pages/SystemConfigurations/Glob
 import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
 import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
 import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos.component';
+
 import { MainKycComponent } from './pages/CustomersComponent/components/main/main-kyc/main-kyc.component';
 import { CorporateAddComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-add/corporate-add.component';
 import { CorporateDeleteComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-delete/corporate-delete.component';
@@ -61,6 +62,9 @@ import { RetailModifyComponent } from './pages/CustomersComponent/components/mai
 import { ParamAddComponent } from './pages/CustomersComponent/components/params/param-add/param-add.component';
 import { ParamInquireComponent } from './pages/CustomersComponent/components/params/param-inquire/param-inquire.component';
 import { ParamMainComponent } from './pages/CustomersComponent/components/params/param-main/param-main.component';
+=======
+import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
+import { LimitsComponent } from './pages/Collaterals Service/limits/limits.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -281,7 +285,7 @@ const routes: Routes = [{
       {
         path: 'configurations/product/loan-product/maintenance',
         component:LoanproductMaintenanceComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
@@ -370,6 +374,20 @@ const routes: Routes = [{
         component:CollateralMaintenanceComponent,
         // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
+      },
+
+      //limits
+      {
+        path: 'configurations/limits and collateral/Limits Nodes/maintenance',
+        component:LimitsMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        data: {preload:true},
+      },
+      {
+        path: 'configurations/limits and collateral/Limits Nodes/data/view',
+        component:LimitsComponent,
+        // canActivate: [CanActivateModuleGuard],
+        data: {preload:true},
       },
       {
         path: 'configurations/limits and collateral/Collateral/data/view',
