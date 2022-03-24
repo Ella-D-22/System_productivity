@@ -14,7 +14,11 @@ export class LimitsComponent implements OnInit {
 
 
   function_type:any
-  subscribtion:Subscription
+  message:any
+  limitId:any
+  results:any
+  error:any
+  subscription:Subscription
   horizonatalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
 
@@ -28,7 +32,7 @@ export class LimitsComponent implements OnInit {
   }
 
   formData = this.fb.group({
-   cust_code: [''],
+  cust_code: [''],
   deleteFlag: [''],
   deletedBy: [''],
   deletedTime: [''],
@@ -50,30 +54,261 @@ export class LimitsComponent implements OnInit {
     return this.formData.controls; }
 
   
-  getPage(){
-
-    if(this.function_type ==  'A-Add'){
-
-    }else if(this.function_type == 'I-Inquire'){
-
-    }else if(this.function_type == 'M-Modify'){
-
-    }else if(this.function_type == 'X-Delete'){
-
-    }else if(this.function_type == 'V-verify'){
-
+    disabledFormControl(){
+      this.formData.disable()
     }
+  getPage(){
+    this.subscription = this.NodesApi.currentMessage.subscribe(
+      message =>{
+        this.message = message
+        this.function_type = this.message.function_type
+        this.limitId = this.message.limitId
+        if(this.function_type ==  'A-Add'){
+      
+          this.formData = this.fb.group({
+            cust_code: [''],
+            deleteFlag: [''],
+            deletedBy: [''],
+            deletedTime: [''],
+            id: [],
+            limit_node: [''],
+            limit_node_category: [''],
+            limit_node_value: [''],
+            modifiedBy: [''],
+            modifiedTime: [''],
+            postedBy: [''],
+            postedFlag: [''],
+            postedTime: [''],
+            verifiedBy: [''],
+            verifiedFlag: [''],
+            verifiedTime: ['']
+
+          });
+    
+        }else if(this.function_type == 'I-Inquire'){
+          this.disabledFormControl()
+          this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
+            res =>{
+                this.results = res
+
+                this.formData = this.fb.group({
+                  cust_code: [this.results.cust_code],
+                  deleteFlag: [this.results.deleteFlag],
+                  deletedBy: [this.results.deletedBy],
+                  deletedTime: [this.results.deletedTime],
+                  id: [this.results.id],
+                  limit_node: [this.results.limit_node],
+                  limit_node_category: [this.results.limit_node_category],
+                  limit_node_value: [this.results.limit_node_value],
+                  modifiedBy: [this.results.modifiedBy],
+                  modifiedTime: [this.results.modifiedTime],
+                  postedBy: [this.results.postedBy],
+                  postedFlag: [this.results.postedFlag],
+                  postedTime: [this.results.postedTime],
+                  verifiedBy: [this.results.verifiedBy],
+                  verifiedFlag: [this.results.verifiedFlag],
+                  verifiedTime: [this.results.verifiedTime]
+                });
+                err =>{
+                  this.router.navigateByUrl("")
+                  this.error = err
+                  this._snackbar.open(this.error, "Try Again",{
+                    horizontalPosition:this.horizonatalPosition,
+                    verticalPosition:this.verticalPosition,
+                    duration:3000,
+                    panelClass:['red-snackbar', 'login-snackbar']
+                  })
+                }
+
+            }
+          )
+    
+        }else if(this.function_type == 'M-Modify'){
+          this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
+            res =>{
+              this.results = res
+              this.formData = this.fb.group({
+                cust_code: [this.results.cust_code],
+                deleteFlag: [this.results.deleteFlag],
+                deletedBy: [this.results.deletedBy],
+                deletedTime: [this.results.deletedTime],
+                id: [this.results.id],
+                limit_node: [this.results.limit_node],
+                limit_node_category: [this.results.limit_node_category],
+                limit_node_value: [this.results.limit_node_value],
+                modifiedBy: ['None'],
+                modifiedTime: [new Date()],
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                verifiedBy: [this.results.verifiedBy],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime]
+              });
+              err =>{
+                this.router.navigateByUrl("")
+                this.error = err
+                this._snackbar.open(this.error, "Try Again",{
+                  horizontalPosition:this.horizonatalPosition,
+                  verticalPosition:this.verticalPosition,
+                  duration:3000,
+                  panelClass:['red-snackbar', 'login-snackbar']
+                })
+              }
+
+            }
+          )
+    
+        }else if(this.function_type == 'X-Delete'){
+          this.disabledFormControl
+          this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
+            res =>{
+              this.results = res
+
+              this.formData = this.fb.group({
+                cust_code: [this.results.cust_code],
+                deleteFlag: ['Y'],
+                deletedBy: ['User'],
+                deletedTime: [new Date()],
+                id: [this.results.id],
+                limit_node: [this.results.limit_node],
+                limit_node_category: [this.results.limit_node_category],
+                limit_node_value: [this.results.limit_node_value],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedTime: [this.results.modifiedTime],
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                verifiedBy: [this.results.verifiedBy],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime]
+              });
+              err =>{
+                this.router.navigateByUrl("")
+                this.error = err
+                this._snackbar.open(this.error, "Try Again",{
+                  horizontalPosition:this.horizonatalPosition,
+                  verticalPosition:this.verticalPosition,
+                  duration:3000,
+                  panelClass:['red-snackbar', 'login-snackbar']
+                })
+              }
+
+            }
+          )
+    
+        }else if(this.function_type == 'V-verify'){
+          this.disabledFormControl
+          this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
+            res =>{
+              this.results = res
+              this.formData = this.fb.group({
+                cust_code: [this.results.cust_code],
+                deleteFlag: [this.results.deleteFlag],
+                deletedBy: [this.results.deletedBy],
+                deletedTime: [this.results.deletedTime],
+                id: [this.results.id],
+                limit_node: [this.results.limit_node],
+                limit_node_category: [this.results.limit_node_category],
+                limit_node_value: [this.results.limit_node_value],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedTime: [this.results.modifiedTime],
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                verifiedBy: ["User"],
+                verifiedFlag: ['Y'],
+                verifiedTime: [new Date()]
+              });
+              err =>{
+                this.router.navigateByUrl("")
+                this.error = err
+                this._snackbar.open(this.error, "Try Again",{
+                  horizontalPosition:this.horizonatalPosition,
+                  verticalPosition:this.verticalPosition,
+                  duration:3000,
+                  panelClass:['red-snackbar', 'login-snackbar']
+                })
+              } } )}
+})
+    
+  
   }
 
   onSubmit(){
     if(this.formData.valid){
       if(this.function_type == "A-Add"){
+        this.subscription = this.NodesApi.createLimitNodes(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Executed Successfully", "X",{
+              horizontalPosition:this.horizonatalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            })
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizonatalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
 
       }else if(this.function_type == "I-Iquire"){
+        
 
       }else if(this.function_type == "M-Modify"){
+        this.subscription = this.NodesApi.updateLimitNodes(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Executed Successfully", "X",{
+              horizontalPosition:this.horizonatalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            })
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizonatalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
 
       }else if(this.function_type == "X-Delete"){
+        this.subscription = this.NodesApi.updateLimitNodes(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Record Deleted Successfully", "X",{
+              horizontalPosition:this.horizonatalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            })
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizonatalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
+
 
       }else if(this.function_type == "V-verify"){
 
