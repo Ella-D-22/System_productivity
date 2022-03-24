@@ -61,6 +61,8 @@ import { RetailModifyComponent } from './pages/CustomersComponent/components/mai
 import { ParamAddComponent } from './pages/CustomersComponent/components/params/param-add/param-add.component';
 import { ParamInquireComponent } from './pages/CustomersComponent/components/params/param-inquire/param-inquire.component';
 import { ParamMainComponent } from './pages/CustomersComponent/components/params/param-main/param-main.component';
+import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
+import { LimitsComponent } from './pages/Collaterals Service/limits/limits.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -281,7 +283,7 @@ const routes: Routes = [{
       {
         path: 'configurations/product/loan-product/maintenance',
         component:LoanproductMaintenanceComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
@@ -371,6 +373,20 @@ const routes: Routes = [{
         // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
+
+      //limits
+      {
+        path: 'configurations/limits and collateral/Limits Nodes/maintenance',
+        component:LimitsMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        data: {preload:true},
+      },
+      {
+        path: 'configurations/limits and collateral/Limits Nodes/data/view',
+        component:LimitsComponent,
+        // canActivate: [CanActivateModuleGuard],
+        data: {preload:true},
+      },
       {
         path: 'configurations/limits and collateral/Collateral/data/view',
         component:CollateralComponent,
@@ -447,7 +463,7 @@ const routes: Routes = [{
       },
       // Retail Customer
       {
-        path: 'customers/retail/maintenance',
+        path: 'customers/maintenance',
         component: MainKycComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
@@ -478,7 +494,7 @@ const routes: Routes = [{
       },
       //  Cooporate Customer 
       {
-        path: 'customers/cooporate/maintenance',
+        path: 'customers/maintenance',
         component: MainKycComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
