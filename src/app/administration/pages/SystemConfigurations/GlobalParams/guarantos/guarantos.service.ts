@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class GuarantosService {
   headers =  new HttpHeaders().set('Content-Type', 'application/json');
 
-  baseURL = `${environment.productAPI}/api/vi/customer/guarantors/config`
+  baseURL = `${environment.productAPI}/api/v1/customer/guarantors`
 
   constructor(private http:HttpClient) { }
   
@@ -32,18 +32,45 @@ export class GuarantosService {
     return throwError(errorMessage)
   }
 
-  //add 
-// createGuarantorsConfig(data:any):Observable<any>{
-//   let API_URL = `${this.baseURL}/add`
-//   return this.http.post(API_URL, data,{headers:this.headers, withCredentials:false}).pipe(map(
-//     res =>{
-//       return res || {}
-//     },
-//    catchError(this.errorMgmt)
-//   ))
-// }
+  // http://localhost:9100/api/vi/customer/guarantors/eligibility%E2%80%8B/test%E2%80%8B/3223
+  // http://localhost:9100/api/v1/customer/guarantors/eligibility/test/047
 
-//get all
+  // http://localhost:9100/api/v1/customer/guarantors/eligibility​/test​/3223
+
+  //add 
+testGuarantorEligibility(customer_code:any):Observable<any>{
+  let API_URL = `http://localhost:9100/api/v1/customer/guarantors/eligibility​/test​/3223`
+  return this.http.get(API_URL,{headers:this.headers}).pipe(map(
+    res =>{
+      return res || {}
+    },
+   catchError(this.errorMgmt)
+  ))
+}
+getAll():Observable<any>{
+  let API_URL = `http://localhost:9100/api/v1/customer/guarantors/eligibility​/test​/3223`
+  return this.http.get(API_URL,{headers:this.headers}).pipe(map(
+    res =>{
+      return res || {}
+    },
+   catchError(this.errorMgmt)
+  ))
+}
+getTermDeposits() {
+  let API_URL = `${this.baseURL}/all`;
+  return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
+  .pipe(
+    map((res) => {
+      return res || {}
+    }),
+    catchError(this.errorMgmt)
+  )
+}
+
+//get all    
+
+// guarantorEligibilityTest
+
 getGuarantorsConfig(id:any){
   let API_URL = `${this.baseURL}/find/${id}`
   return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(map(

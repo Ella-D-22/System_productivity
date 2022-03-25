@@ -291,20 +291,20 @@ const routes: Routes = [{
       {
         path: 'configurations/product/loan-product/data/view',
         component:LoanproductComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
 
       {
         path: 'configurations/product/term-deposit/maintenance',
         component:TermDepositMaintenanceComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'configurations/product/term-deposit/data/view',
         component:TermDepositComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
 
@@ -312,13 +312,13 @@ const routes: Routes = [{
       {
         path: 'configurations/product/saving-scheme/maintenance',
         component:SavingschemeMaintenanceComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'configurations/product/saving-scheme/data/view',
         component:SavingsSchemeComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       
@@ -326,13 +326,13 @@ const routes: Routes = [{
       {
         path: 'configurations/product/current-scheme/maintenance',
         component: CurrentSchemeMaintenanceComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'configurations/product/current-scheme/data/view',
         component: CurrentSchemeComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       
@@ -341,13 +341,13 @@ const routes: Routes = [{
       {
         path: 'configurations/product/overdraft-scheme/maintenance',
         component:OverdraftSchemeMaintenanceComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'configurations/product/overdraft-scheme/data/view',
         component:OverdraftsSchemeComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
      
