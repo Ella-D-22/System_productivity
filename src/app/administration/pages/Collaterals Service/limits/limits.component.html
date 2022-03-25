@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <input type="text" class="form-control" formControlName="cust_code">
-                            <mat-icon>search</mat-icon>
+                            <mat-icon (click)="customerLookup()">search</mat-icon>
                         </div>
                     </div>
                 </div>
@@ -28,8 +28,9 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <select name="" id="" class="form-control" formControlName="limit_node_category">
-                                <option value="Non funded">NON FUNDED</option>
-                                <option value="FUNDED">FUNDED</option>
+                                <option value="" disabled>--Node Category --</option>
+                                <option value="NON FUND BASED">NON FUND BASED</option>
+                                <option value="FUND BASED">FUND BASED</option>
                             </select>
                         </div>
                     </div>
@@ -42,7 +43,7 @@
                             <label for="">Limit Node</label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" formControlName="limit_node" class="form-control">
+                            <input type="text" formControlName="limit_node" class="form-control" oninput="this.value=this.value.toUpperCase()">
                         </div>
                     </div>
                 </div>
@@ -52,11 +53,18 @@
                             <label for="">Limit Node Value</label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="number" formControlName="limit_node_value" class="form-control">
+                            <input type="number" formControlName="limit_node_value" class="form-control" oninput="this.value=this.value.toUpperCase()">
                         </div>
                     </div>
                 </div>
             </div>
+
+            <br>
+            <button class="pull-left" routerLink="../../maintenance"  mat-raised-button color="default" type="button">
+                Back
+            </button> 
+            <button class="pull-right" mat-raised-button color="warn" type="submit" *ngIf="isDeleted">Delete</button>
+            <button class="pull-right" mat-raised-button color="primary" type="submit" *ngIf="isEnabled" >Submit</button>
         </form>
        
     </div>

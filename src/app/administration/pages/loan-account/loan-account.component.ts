@@ -109,6 +109,9 @@ export class LoanAccountComponent implements OnInit {
   get f() {
     return this.formData.controls;
   }
+  get g() {
+    return this.glSubheadData.controls;
+  }
 
   glSubheadLookup(): void {
     const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
@@ -1559,6 +1562,23 @@ initGlSUbheadForm(){
 
   //Checking for eligibility of a guarantors
   eligibilityTest(){
+
+  this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
+    res =>{
+        this.results = res
+          this.glSubheadArray.push(this.glSubheadData.value);
+    },
+    err=>{
+      this.error = err
+      this._snackBar.open(this.error, "Try Again",{
+        horizontalPosition:this.horizontalPosition,
+        verticalPosition:this.verticalPosition,
+        duration:3000,
+        panelClass:['red-snackbar', 'login-snackbar']
+      })
+    }
+  )
+
   // this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
   //   res =>{
   //       this.results = res
@@ -1578,6 +1598,7 @@ initGlSUbheadForm(){
   //     })
   //   }
   // )
+
   }
 
   onPhotoChange(event: any) {
@@ -1616,7 +1637,8 @@ console.log('Error: ', error);
 }
 
 glSubheadLookup1(): void {
-  const dialogRef = this.dialog.open(GlSubheadLookup2Component, {
+  const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
+
     // height: '400px',
     // width: '600px',
   });
