@@ -184,6 +184,8 @@ customerPhoto!: image
         });
       },
       (error) => {
+        console.log("this is the error", error);
+        
         this.router.navigate(['failure'], {
           state: {
             message: error.error.message,

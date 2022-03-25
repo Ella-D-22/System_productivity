@@ -73,11 +73,12 @@
               />
             </div>
             <div class="col-md-1 col-1">
-              <mat-icon>search</mat-icon>
+              <mat-icon (click)="getCustomers()" >search</mat-icon>
             </div>
           </div>
         </div>
-
+      </div>
+      <div class="row">
         <div *ngIf="customerTabIndex != 1" class="col-md-2 offset-md-3 col-3 mt-2">
           <button
             mat-raised-button

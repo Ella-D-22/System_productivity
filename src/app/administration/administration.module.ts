@@ -107,6 +107,7 @@ import { ParamInquireComponent } from './pages/CustomersComponent/components/par
 import { ParamMainComponent } from './pages/CustomersComponent/components/params/param-main/param-main.component';
 import { FailureComponent } from './pages/CustomersComponent/components/status/failure/failure.component';
 import { SuccessComponent } from './pages/CustomersComponent/components/status/success/success.component';
+import { CustomerLookupComponent } from './pages/CustomersComponent/customer-lookup/customer-lookup.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -216,7 +217,8 @@ import { SuccessComponent } from './pages/CustomersComponent/components/status/s
     SuccessComponent,
     ParamAddComponent,
     ParamInquireComponent,
-    ParamMainComponent
+    ParamMainComponent,
+    CustomerLookupComponent
     
     
  
