@@ -33,19 +33,19 @@ export class GuarantosService {
   }
 
   //add 
-createGuarantorsConfig(data:any):Observable<any>{
-  let API_URL = `${this.baseURL}/add`
-  return this.http.post(API_URL, data,{headers:this.headers, withCredentials:false}).pipe(map(
-    res =>{
-      return res || {}
-    },
-   catchError(this.errorMgmt)
-  ))
-}
+// createGuarantorsConfig(data:any):Observable<any>{
+//   let API_URL = `${this.baseURL}/add`
+//   return this.http.post(API_URL, data,{headers:this.headers, withCredentials:false}).pipe(map(
+//     res =>{
+//       return res || {}
+//     },
+//    catchError(this.errorMgmt)
+//   ))
+// }
 
 //get all
-getAllGuarantorsConfig(){
-  let API_URL = `${this.baseURL}/all`
+getGuarantorsConfig(id:any){
+  let API_URL = `${this.baseURL}/find/${id}`
   return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(map(
     res =>{
       return res || {}

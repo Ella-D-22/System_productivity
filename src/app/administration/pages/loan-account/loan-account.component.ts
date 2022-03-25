@@ -1562,6 +1562,7 @@ initGlSUbheadForm(){
 
   //Checking for eligibility of a guarantors
   eligibilityTest(){
+
   this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
     res =>{
         this.results = res
@@ -1577,6 +1578,27 @@ initGlSUbheadForm(){
       })
     }
   )
+
+  // this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
+  //   res =>{
+  //       this.results = res
+  //       this.l.push(this.fb.group
+  //         this.glSubheadData).value
+  //         this.glSubheadArray.push(this.glSubheadData.value);
+
+        
+  //   },
+  //   err=>{
+  //     this.error = err
+  //     this._snackBar.open(this.error, "Try Again",{
+  //       horizontalPosition:this.horizontalPosition,
+  //       verticalPosition:this.verticalPosition,
+  //       duration:3000,
+  //       panelClass:['red-snackbar', 'login-snackbar']
+  //     })
+  //   }
+  // )
+
   }
 
   onPhotoChange(event: any) {

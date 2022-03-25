@@ -1,0 +1,800 @@
+<mat-card class="container-fluid">
+  <div>
+    <h3 class="text-center">Add A Retail Customer</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+  <form class="form" (ngSubmit)="retailSave()">
+    <mat-tab-group>
+      <mat-tab label="Customer Details">
+        <div class="container-fluid mt-4">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Citizen<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <mat-radio-group name="citizen" [(ngModel)]="citizen">
+                    <mat-radio-button color="primary" value="Y"
+                      >Yes</mat-radio-button
+                    >
+                    <mat-radio-button color="primary" value="N"
+                      >No</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Minor<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <mat-radio-group name="minor" [(ngModel)]="minor">
+                    <mat-radio-button color="primary" value="Y"
+                      >Yes</mat-radio-button
+                    >
+                    <mat-radio-button color="primary" value="N"
+                      >No</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6" *ngIf="citizen == 'Y'  && minor=='N'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Indentification No<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    required
+                    [(ngModel)]="identificationNo"
+                    name="identificationNo"
+                    type="number"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6" *ngIf="citizen == 'N' && minor=='N'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Passport No<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    required
+                    name="passportNo"
+                    type="text"
+                    [(ngModel)]="passportNo"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="minor == 'Y'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Birth Certificate No<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    required
+                    name="birthCertificateNo"
+                    [(ngModel)]="birthCertificateNo"
+                    type="text"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Branch Code<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    
+                    name="solCode"
+                    type="text"
+                    [(ngModel)]="solCode"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-1 col-2">
+                  <mat-icon>search</mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Date of Birth<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    name="dob"
+                    type="date"
+                    [(ngModel)]="dob"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Surname<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input name="surname" type="text" class="form-control"
+                  [(ngModel)]="surname" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >First Name<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input name="firstName" type="text" class="form-control"
+                  [(ngModel)]="firstName" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Middle Name<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input name="middleName" type="text" class="form-control" 
+                  [(ngModel)]="middleName"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6" *ngIf="minor=='Y'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Guardian<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                     [(ngModel)]="guardianCode"
+                    name="guardianCode"
+                    type="text"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-1 col-2">
+                  <mat-icon>search</mat-icon>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="minor=='N'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Employed <span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <mat-radio-group name="employed" [(ngModel)]="employed">
+                    <mat-radio-button color="primary" value="Y"
+                      >Yes</mat-radio-button
+                    >
+                    <mat-radio-button color="primary" value="N"
+                      >No</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="minor=='N'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Employer Code<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                     [(ngModel)]="employerCode"
+                    name="employerCode"
+                    type="text"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-1 col-2">
+                  <mat-icon>search</mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Gender<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input maxlength="10"
+                    type="text" [(ngModel)]="gender"
+                    name="kraPin"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-6" *ngIf="minor=='N'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Occupation<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    type="text" [(ngModel)]="occupation"
+                    name="occupation"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+          <div class="row" *ngIf="minor=='N'">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Tax Pin No<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    type="text" [(ngModel)]="kraPin"
+                    name="kraPin"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="minor=='N'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Occupation<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    type="text" [(ngModel)]="occupation"
+                    name="occupation"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Contact Details" *ngIf="minor=='N'">
+        <div class="row container-fluid mt-4 mb-2">
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-md-5 col-sm-12 form-column">
+                      <label class="form-label start pull-left"
+                        >Postal Address<span class="text-danger">*</span></label
+                      >
+                    </div>
+                    <div class="col-md-6 col-8 form-column">
+                      <input
+                        type="text" [(ngModel)]="boxOfficeNo"
+                        name="boxOfficeNo"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-md-5 col-sm-12 form-column">
+                      <label class="form-label start pull-left"
+                        >Postal Code<span class="warning">*</span></label
+                      >
+                    </div>
+                    <div class="col-md-6 col-8 form-column">
+                      <input
+                        type="text" [(ngModel)]="postalCode"
+                        name="postalCode"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-md-5 col-sm-12 form-column">
+                      <label class="form-label start pull-left"
+                        >Email Address<span class="text-danger">*</span></label
+                      >
+                    </div>
+                    <div class="col-md-6 col-8 form-column">
+                      <input
+                        type="email" [(ngModel)]="emailAddress"
+                        name="emailAddress"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-md-5 col-sm-12 form-column">
+                      <label class="form-label start pull-left"
+                        >Phone Number<span class="warning">*</span></label
+                      >
+                    </div>
+                    <div class="col-md-6 col-8 form-column">
+                      <input
+                        type="number" [(ngModel)]="phoneNumber"
+                        name="phoneNumber"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-md-5 col-sm-12 form-column">
+                      <label class="form-label start pull-left"
+                        >County<span class="text-danger">*</span></label
+                      >
+                    </div>
+                    <div class="col-md-6 col-8 form-column">
+                      <input
+                        type="text" 
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-md-5 col-sm-12 form-column">
+                      <label class="form-label start pull-left"
+                        >Resident Town<span class="warning">*</span></label
+                      >
+                    </div>
+                    <div class="col-md-6 col-8 form-column">
+                      <input
+                        type="text" [(ngModel)]="residentialTown"
+                        name="residentialTown"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+    </mat-tab>
+      <mat-tab label="Next of Kin">
+        <div class="row container-fluid mt-4 mb-2">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Email Address<span class="text-danger">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="email" [(ngModel)]="kemailAddress"
+                  name="kemailAddress"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Surname<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="text" [(ngModel)]="ksurname"
+                  name="ksurname"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >First Name<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="text" [(ngModel)]="kfirstName"
+                  name="kfirstName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Middle Name<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="text" [(ngModel)]="kmiddleName"
+                  name="kmiddleName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Phone Number<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="number" [(ngModel)]="kphoneNo"
+                  name="kphoneNo"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Identification No<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="number" [(ngModel)]="kidNo"
+                  name="kidNo"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Relationship<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    type="text"
+                     [(ngModel)]="krelationship"
+                    name="krelationship"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-md-1 col-2">
+                    <mat-icon>search</mat-icon>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Occupation<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    type="text" [(ngModel)]="koccupation"
+                    name="koccupation"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Date of Birth<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="date"
+                  [(ngModel)]="kdob"
+                  name="kdob"
+                  class="form-control"
+                />
+              </div>
+
+            </div>
+          </div>
+          </div>
+          </div>
+      </mat-tab>
+
+      <mat-tab label="Nominee">
+        <div class="row container-fluid mt-4 mb-2">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Email Address<span class="text-danger">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="email" [(ngModel)]="nemailAddress"
+                  name="nemailAddress"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Surname<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="text" [(ngModel)]="nsurname"
+                  name="nsurname"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >First Name<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="text" [(ngModel)]="nfirstName"
+                  name="nfirstName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Middle Name<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="text" [(ngModel)]="nmiddleName"
+                  name="nmiddleName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Phone Number<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="number" [(ngModel)]="nphoneNo"
+                  name="nphoneNo"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                  >Identification No<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input
+                  type="number" [(ngModel)]="nidNo"
+                  name="nidNo"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Date of Birth<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    type="date" [(ngModel)]="ndob"
+                    name="ndob"
+                    class="form-control"
+                  />
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-12 form-column">
+                  <label class="form-label start pull-left"
+                    >Occupation<span class="warning">*</span></label
+                  >
+                </div>
+                <div class="col-md-6 col-8 form-column">
+                  <input
+                    type="text" [(ngModel)]="noccupation"
+                    name="noccupation"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </mat-tab>
+      <mat-tab label="Photos"> 
+        <div class="container-fluid row mt-4">
+          <div  class="col-md-3">
+            <input class="form-control" type="file" required 
+                    (change)="onPhotoChange($event)"
+                    >
+            <p>Photo Upload</p>
+            
+          </div>
+        
+          
+            <img [src]="customerImage" class="col-md-6"/>
+        
+        </div>
+        <div class="container-fluid row mt-4">
+          <div  class="col-md-3">
+            <input class="form-control" type="file" required 
+            
+                    (change)="onSignatureChange($event)">
+            <p>Signature Upload</p>
+        
+          </div>
+          
+            <img [src]="signatureImage" class="col-md-6"/>
+        
+        </div>
+      </mat-tab>
+      <mat-tab label="Submission">
+        <div class="row container-fluid mt-4 mb-2">
+          <div class="col-md-1 col-4">
+            <button
+              mat-raised-button
+              color="warn"
+              class="btn go mx-auto d-block"
+              type="reset"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div class="col-md-1 col-4">
+            <button
+              mat-raised-button
+              class="btn bg-success go mx-auto d-block text-light"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+</mat-card>
