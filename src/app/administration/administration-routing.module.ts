@@ -466,8 +466,6 @@ const routes: Routes = [{
       // Retail Customer
       {
         path: 'customers/maintenance',
-
-        path: 'customers/retail/maintenance',
         component: MainKycComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
@@ -497,13 +495,12 @@ const routes: Routes = [{
         // data: {preload:true },
       },
       //  Cooporate Customer 
-      {
-        path: 'customers/maintenance',
-        path: 'customers/cooporate/maintenance',
-        component: MainKycComponent,
-        // canActivate: [CanActivateModuleGuard],
-        // data: {preload:true },
-      },
+      // {
+      //   path: 'customers/maintenance',
+      //   component: MainKycComponent,
+      //   // canActivate: [CanActivateModuleGuard],
+      //   // data: {preload:true },
+      // },
       {
         path: 'customers/cooporate/add',
         component: CorporateAddComponent,
