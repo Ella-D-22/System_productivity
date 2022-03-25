@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LimitsService {
   
-  baseURL = `${environment.collateralAPI}/limit`
+  baseURL = `${environment.collateralAPI}/api/v1/limitnode`
   constructor(private http:HttpClient) { }
   
   headers = new HttpHeaders().set('Content-Type', 'application/json');

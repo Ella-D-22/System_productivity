@@ -109,6 +109,9 @@ export class LoanAccountComponent implements OnInit {
   get f() {
     return this.formData.controls;
   }
+  get g() {
+    return this.glSubheadData.controls;
+  }
 
   glSubheadLookup(): void {
     const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
@@ -1562,11 +1565,7 @@ initGlSUbheadForm(){
   this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
     res =>{
         this.results = res
-        this.l.push(this.fb.group
-          this.glSubheadData).value
           this.glSubheadArray.push(this.glSubheadData.value);
-
-        
     },
     err=>{
       this.error = err
@@ -1616,7 +1615,8 @@ console.log('Error: ', error);
 }
 
 glSubheadLookup1(): void {
-  const dialogRef = this.dialog.open(GlSubheadLookup2Component, {
+  const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
+
     // height: '400px',
     // width: '600px',
   });

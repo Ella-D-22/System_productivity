@@ -822,6 +822,7 @@ backdate_transaction_Lookup(): void {
            }
          }
          updateLoanFee(i:any){
+           this.feeArray[i] = this.feeFormData.value 
           this.t.push(this.fb.group(
             this.feeFormData.value
             ));

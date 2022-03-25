@@ -90,6 +90,7 @@ import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/gu
 import { GuarantosMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos-maintenance/guarantos-maintenance.component';
 import { LimitsComponent } from './pages/Collaterals Service/limits/limits.component';
 import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
+import { LimitsLookupComponent } from './pages/Collaterals Service/limits/limits-lookup/limits-lookup.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -178,8 +179,10 @@ import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/l
     MisSubSectorLookupComponent,
     GuarantosComponent,
     GuarantosMaintenanceComponent,
+
     LimitsComponent,
     LimitsMaintenanceComponent,
+    LimitsLookupComponent,
     
     
  
