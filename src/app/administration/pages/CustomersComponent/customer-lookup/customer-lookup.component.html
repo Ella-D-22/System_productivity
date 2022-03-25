@@ -1,0 +1,117 @@
+<div class="">
+    <div class="row breadcrumb">
+      <div class="col-md-6 col-sm-12">
+        <p><strong>Customers Lookup</strong></p>
+        </div>
+      <div class="col-md-6 col-sm-12">
+      </div>
+    </div>
+    <br>  
+    <div class="row filter-form">
+
+            <p>
+                
+        Filtres by
+            </p>
+            <form action="" [formGroup]="formData" novalidate class="form"
+            (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm">
+               <div class="row">
+                   <div class="col-md-6 col-sm-12">
+                       <div class="form-group">
+                           <div class="col-md-6 col-sm-12 form-column">
+                               <label for="">Customer Type<span class="warning">*</span></label>
+                           </div>
+                           <div class="col-md-6 col-sm-12 form-column">
+                               <select name="" id="" class="form-control" formControlName="cust_type">
+                                   <option value="" disabled>-- Select --</option>
+                                   <option *ngFor="let flag of customer_type_array" [value]="flag">{{flag}}</option>
+                               </select>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6 col-sm-12">
+                       
+
+                       <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="">Customer Branch<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <select name="" id="" class="form-control" formControlName="branch_code">
+                                <option value="" disabled>-- Select --</option>
+                                <option *ngFor="let flag of this.customer_branch_array" [value]="flag.solCode">{{flag.solCode}} - {{flag.location}}</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                   </div>
+                   <br>
+                   <div class="col-md-1 offset-md-9">
+                         <button class="pull-right " mat-raised-button color="primary" (click)="getFilteredCustomers()">
+                       <span
+                         *ngIf="loading"
+                         class="spinner-border spinner-border-sm mr-1"
+                       ></span>
+                       Submit
+                     </button>
+                   </div>
+                 
+               </div>
+           </form>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <!-- <p><strong>Customers Lookup</strong></p> -->
+          </div>
+        <div class="col-md-6 col-sm-12">
+        <input class="pull-right search form-control" (keyup)="applyFilter($event)" placeholder="Filter..." #input>
+        </div>
+      </div>
+
+
+    <div class="table-row">
+      <table class="y-scrollable-table"mat-table matSort matTableExporter [dataSource] = "dataSource">
+       <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+        <td (click)="onSelect(row)" mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cust_code">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Code</th>
+        <td  (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.customerCode}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cust_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name</th>
+        <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.firstName}} {{row.middleName}} {{row.surname}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cust_id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer ID</th>
+        <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.identificationNo}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cust_occupation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Occupation </th>
+        <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.occupation}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cust_joiningdate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Joining Date</th>
+        <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.joiningDate | date}} </td>
+      </ng-container>
+      
+  
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[7, 20, 30, 40, 50, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>

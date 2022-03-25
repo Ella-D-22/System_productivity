@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CustomerLookupComponent } from '../../../customer-lookup/customer-lookup.component';
 
 @Component({
   selector: 'app-main-kyc',
@@ -11,8 +13,13 @@ export class MainKycComponent implements OnInit {
   customerTabIndex: number = 1 ;
 
   customerCode: string;
+  lookupData: any;
 
-  constructor(private router:Router) { }
+  constructor(
+    private router:Router,
+    private dialog: MatDialog,
+
+    ) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +30,19 @@ export class MainKycComponent implements OnInit {
  onKycTabClick(value: any){
     this.customerTabIndex = value.target.value;
    
+}
+
+// getCustomers(){
+  
+// }
+
+getCustomers(): void {
+  const dialogRef = this.dialog.open(CustomerLookupComponent , {
+    // height: '400px',
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.lookupData = result.data;
+  });
 }
 
 navigate(){

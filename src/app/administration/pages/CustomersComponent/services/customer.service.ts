@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse,HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { corporateKyc } from '../interfaces/corporate';
 import { retailKyc } from '../interfaces/retail';
 
@@ -8,7 +9,10 @@ import { retailKyc } from '../interfaces/retail';
   providedIn: 'root'
 })
 export class CustomerService {
-  private baseUrl: string = 'http://127.0.0.1:9097/';
+  baseUrl= `${environment.customerAPI}/`;
+
+  // private baseUrl: string = 'http://127.0.0.1:9097/';
+
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +27,9 @@ export class CustomerService {
   }
   retrieveAllCorporate(): Observable<Response>{
     return this.http.get<Response>(this.baseUrl+'corporate/all/');
+  }
+  retrieveCooporateCustmersPerSolCode(params:any): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl+'cooporate/all/by/solcode',{params:params});
     
   }
   updateCorporate(corporate: corporateKyc): Observable<Response>{
@@ -41,6 +48,12 @@ export class CustomerService {
   }
   retrieveAllRetail(): Observable<Response>{
     return this.http.get<Response>(this.baseUrl+'retail/all/');
+    
+  }
+  retrieveRetailCustmersPerSolCode(params:any): Observable<Response>{
+    console.log("params", params);
+    
+    return this.http.get<Response>(this.baseUrl+'/retail/all/by/solcode',{params:params});
     
   }
   updateRetail(retail: retailKyc): Observable<Response>{
