@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CollateralLookupComponent } from '../../collateral/collateral-lookup/collateral-lookup.component';
+import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
 import { LimitsService } from './limits.service';
 
 @Component({
@@ -21,11 +24,13 @@ export class LimitsComponent implements OnInit {
   subscription:Subscription
   horizonatalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
-  
+  customerData:any
+  collateralData:any
   constructor(private fb:FormBuilder,
     private NodesApi:LimitsService,
     private _snackbar:MatSnackBar,
-    private router:Router) { }
+    private router:Router, 
+    private dialog:MatDialog) { }
 
     isDeleted = false
     isEnabled = false
@@ -49,6 +54,7 @@ export class LimitsComponent implements OnInit {
   modifiedTime: [''],
   non_fundbased_pcnt: [''],
   non_funded_value: [''],
+  collateral_value: [''],
   postedBy: [''],
   postedFlag: [''],
   postedTime: [''],
@@ -56,7 +62,7 @@ export class LimitsComponent implements OnInit {
   verifiedFlag: [''],
   verifiedTime: ['']
   })
-
+ user = "Nobody"
   get f() { 
     return this.formData.controls; }
 
@@ -65,10 +71,32 @@ export class LimitsComponent implements OnInit {
       this.formData.disable()
     }
     customerLookup(){
+     const dialogRef = this.dialog.open(CustomerLookupComponent,{
+     
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.customerData = result.data;
+      this.formData.controls.customer_code.setValue(result.data.customer_code);
+    });
+    }
+
+    collateralLookup(){
+     const dialogRef = this.dialog.open(CollateralLookupComponent,{
+       height: '400px',
+       width: '600px'
+     });
+     dialogRef.afterClosed().subscribe(
+      res =>{
+        this.collateralData = res.data
+      }
+     )
+    }
+    removeCollaterals(){
 
     }
-    collateralLookup(){
 
+    addCollaterals(){
+      
     }
   getPage(){
     this.subscription = this.NodesApi.currentMessage.subscribe(
@@ -80,21 +108,27 @@ export class LimitsComponent implements OnInit {
           this.isDeleted = false;
           this.isEnabled = true;
           this.formData = this.fb.group({
-            cust_code: [''],
-            deleteFlag: ['N'],
-            deletedBy: ['None'],
-            deletedTime: [new Date()],
-            limit_node: [''],
-            limit_node_category: [''],
-            limit_node_value: [''],
-            modifiedBy: ['None'],
-            modifiedTime: [new Date()],
-            postedBy: ['User'],
-            postedFlag: ['Y'],
-            postedTime: [new Date()],
-            verifiedBy: ['None'],
-            verifiedFlag: ['N'],
-            verifiedTime: [new Date()]
+            collateral_code: [''],
+            customer_code: [''],
+            deletedBy: [''],
+            deletedFlag: [''],
+            deletedTime: [''],
+            fund_based_pcnt: [''],
+            funded_value: [''],
+            limit_code: [''],
+            description: [''],
+            limit_value: [''],
+            modifiedBy: [''],
+            modifiedTime: [''],
+            non_fundbased_pcnt: [''],
+            non_funded_value: [''],
+            collateral_value: [''],
+            postedBy: [''],
+            postedFlag: [''],
+            postedTime: [''],
+            verifiedBy: [''],
+            verifiedFlag: [''],
+            verifiedTime: ['']
 
           });
     
@@ -107,16 +141,22 @@ export class LimitsComponent implements OnInit {
                 this.results = res
 
                 this.formData = this.fb.group({
-                  cust_code: [this.results.cust_code],
-                  deleteFlag: [this.results.deleteFlag],
+                  collateral_code: [this.results.collateral_code],
+                  customer_code: [this.results.customer_code],
                   deletedBy: [this.results.deletedBy],
+                  deletedFlag: [this.results.deletedFlag],
                   deletedTime: [this.results.deletedTime],
+                  fund_based_pcnt: [this.results.fund_based_pcnt],
+                  funded_value: [this.results.funded_value],
                   id: [this.results.id],
-                  limit_node: [this.results.limit_node],
-                  limit_node_category: [this.results.limit_node_category],
-                  limit_node_value: [this.results.limit_node_value],
+                  limit_code: [this.results.limit_code],
+                  description: [this.results.description],
+                  limit_value: [this.results.limit_value],
                   modifiedBy: [this.results.modifiedBy],
                   modifiedTime: [this.results.modifiedTime],
+                  non_fundbased_pcnt: [this.results.non_fundbased_pcnt],
+                  non_funded_value: [this.results.non_funded_value],
+                  collateral_value: [this.results.collateral_value],
                   postedBy: [this.results.postedBy],
                   postedFlag: [this.results.postedFlag],
                   postedTime: [this.results.postedTime],
@@ -145,16 +185,22 @@ export class LimitsComponent implements OnInit {
             res =>{
               this.results = res
               this.formData = this.fb.group({
-                cust_code: [this.results.cust_code],
-                deleteFlag: [this.results.deleteFlag],
+                collateral_code: [this.results.collateral_code],
+                customer_code: [this.results.customer_code],
                 deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
+                fund_based_pcnt: [this.results.fund_based_pcnt],
+                funded_value: [this.results.funded_value],
                 id: [this.results.id],
-                limit_node: [this.results.limit_node],
-                limit_node_category: [this.results.limit_node_category],
-                limit_node_value: [this.results.limit_node_value],
-                modifiedBy: ['None'],
+                limit_code: [this.results.limit_code],
+                description: [this.results.description],
+                limit_value: [this.results.limit_value],
+                modifiedBy: [this.user],
                 modifiedTime: [new Date()],
+                non_fundbased_pcnt: [this.results.non_fundbased_pcnt],
+                non_funded_value: [this.results.non_funded_value],
+                collateral_value: [this.results.collateral_value],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
                 postedTime: [this.results.postedTime],
@@ -185,16 +231,22 @@ export class LimitsComponent implements OnInit {
               this.results = res
 
               this.formData = this.fb.group({
-                cust_code: [this.results.cust_code],
-                deleteFlag: ['Y'],
-                deletedBy: ['User'],
+                collateral_code: [this.results.collateral_code],
+                customer_code: [this.results.customer_code],
+                deletedBy: [this.user],
+                deletedFlag: ['Y'],
                 deletedTime: [new Date()],
+                fund_based_pcnt: [this.results.fund_based_pcnt],
+                funded_value: [this.results.funded_value],
                 id: [this.results.id],
-                limit_node: [this.results.limit_node],
-                limit_node_category: [this.results.limit_node_category],
-                limit_node_value: [this.results.limit_node_value],
+                limit_code: [this.results.limit_code],
+                description: [this.results.description],
+                limit_value: [this.results.limit_value],
                 modifiedBy: [this.results.modifiedBy],
                 modifiedTime: [this.results.modifiedTime],
+                non_fundbased_pcnt: [this.results.non_fundbased_pcnt],
+                non_funded_value: [this.results.non_funded_value],
+                collateral_value: [this.results.collateral_value],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
                 postedTime: [this.results.postedTime],
@@ -222,20 +274,26 @@ export class LimitsComponent implements OnInit {
             res =>{
               this.results = res
               this.formData = this.fb.group({
-                cust_code: [this.results.cust_code],
-                deleteFlag: [this.results.deleteFlag],
+                collateral_code: [this.results.collateral_code],
+                customer_code: [this.results.customer_code],
                 deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
+                fund_based_pcnt: [this.results.fund_based_pcnt],
+                funded_value: [this.results.funded_value],
                 id: [this.results.id],
-                limit_node: [this.results.limit_node],
-                limit_node_category: [this.results.limit_node_category],
-                limit_node_value: [this.results.limit_node_value],
+                limit_code: [this.results.limit_code],
+                description: [this.results.description],
+                limit_value: [this.results.limit_value],
                 modifiedBy: [this.results.modifiedBy],
                 modifiedTime: [this.results.modifiedTime],
+                non_fundbased_pcnt: [this.results.non_fundbased_pcnt],
+                non_funded_value: [this.results.non_funded_value],
+                collateral_value: [this.results.collateral_value],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
                 postedTime: [this.results.postedTime],
-                verifiedBy: ["User"],
+                verifiedBy: [this.results.verifiedBy],
                 verifiedFlag: ['Y'],
                 verifiedTime: [new Date()]
               });

@@ -56,16 +56,7 @@
            </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <!-- <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column">
-                        <label for="" class="start pull-right">Fund Base Value<span class="warning">*</span></label>
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                        <input type="number" class="form-control" formControlName="funded_value">
-                    </div>
-                </div> -->
-            </div>
+           
             <div class="col-md-6 col-sm-12">
                <div class="form-group">
                    <div class="col-md-6 col-sm-12 form-column">
@@ -77,31 +68,45 @@
                </div>
            </div>
         </div>
+        <br>
+        <div><h4>Collaterals</h4></div>
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-5 col-sm-12">
                 <div class="form-group">
                     <div class="col-md-6 col-sm-12 form-column">
-                        <label for="" class="start pull-right">Collateral Code<span class="warning">*</span></label>
+                        <label for="">Collateral Code</label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                        <input type="text" formControlName="collateral_code" class="form-control">
+                        <input type="text" class="form-control">
                         <mat-icon (click)="collateralLookup()">search</mat-icon>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-               <!-- <div class="form-group">
-                   <div class="col-md-6 col-sm-12 form-column">
-                       <label for="" class="start pull-right">
-                           Non Fund Based Value<span class="warning">*</span></label>
-                   </div>
-                   <div class="col-md-6 col-sm-12 form-column">
-                       <input type="number" formControlName="non_funded_value" class="form-control">
-                   </div>
-               </div> -->
-           </div>
+            <div class="col-md-5 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="">Collateral Code</label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" class="form-control" >
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-12">
+                <div class="row">
+                    <div class="col-md-4 col-4">
+                        <mat-icon (click)="removeCollaterals()" color="warn">remove_circle</mat-icon>
+                    </div>
+                    <div class="col-md-4 col-4">
+                        <mat-icon (click)="addCollaterals()" color="primary">add_circle</mat-icon>
+                    </div>
+                </div>
+          
+            </div>
         </div>
-
+        <br>
+        <button mat-raised-button color="" type="submit" class="pull-left">Back</button>
+        <button mat-raised-button color="primary" type="submit" class="pull-right">Submit</button>
 
     </form>
   </div>
