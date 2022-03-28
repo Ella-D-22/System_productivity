@@ -92,7 +92,6 @@ import { LimitsComponent } from './pages/Collaterals Service/limits/limits.compo
 import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
 
 import { LimitsLookupComponent } from './pages/Collaterals Service/limits/limits-lookup/limits-lookup.component';
-=======
 import { CorporateComponent } from './pages/CustomersComponent/components/lookup/corporate/corporate.component';
 import { EmployerComponent } from './pages/CustomersComponent/components/lookup/employer/employer.component';
 import { RetailComponent } from './pages/CustomersComponent/components/lookup/retail/retail.component';
