@@ -36,7 +36,7 @@ export class LimitsMaintenanceComponent implements OnInit {
   
   formData = this.fb.group({
     function_type:[''],
-    limitId : ['']
+    limit_code : ['']
   })
   get f() { 
     return this.formData.controls; }

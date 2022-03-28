@@ -1,71 +1,108 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/system/Collaterals/data/View</div>
+        <div>Home/system/Limits/data/View</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
-    <div class="container-fluid">
-        <form class="form"
-         (ngSubmit)="onSubmit()"
-        novalidate
-        [formGroup]="formData">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="" class="start pull-left">Customer Code</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" class="form-control" formControlName="cust_code">
-                            <mat-icon (click)="customerLookup()">search</mat-icon>
-                        </div>
+  <div class="container-fluid">
+      <form class="form"
+      novalidate
+      [formGroup]="formData">
+         <div class="row">
+             <div class="col-md-6 col-sm-12">
+                 <div class="form-group">
+                     <div class="col-md-6 col-sm-12 form-column">
+                         <label for="">Limit Name<span class="warning">*</span></label>
+                     </div>
+                     <div class="col-md-6 col-sm-12 form-column">
+                         <input type="text" class="form-control" formControlName="description"
+                          oninput="this.value=this.value.toUppercase()">
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-right">Customer Code<span class="warning">*</span></label>
                     </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="" class="start pull-left">Limit Node Category</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <select name="" id="" class="form-control" formControlName="limit_node_category">
-                                <option value="" disabled>--Node Category --</option>
-                                <option value="NON FUND BASED">NON FUND BASED</option>
-                                <option value="FUND BASED">FUND BASED</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="">Limit Node</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" formControlName="limit_node" class="form-control" oninput="this.value=this.value.toUpperCase()">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="">Limit Node Value</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <input type="number" formControlName="limit_node_value" class="form-control" oninput="this.value=this.value.toUpperCase()">
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="customer_code" class="form-control">
+                        <mat-icon (click)="customerLookup()">search</mat-icon>
 
-            <br>
-            <button class="pull-left" routerLink="../../maintenance"  mat-raised-button color="default" type="button">
-                Back
-            </button> 
-            <button class="pull-right" mat-raised-button color="warn" type="submit" *ngIf="isDeleted">Delete</button>
-            <button class="pull-right" mat-raised-button color="primary" type="submit" *ngIf="isEnabled" >Submit</button>
-        </form>
-       
-    </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-right">Parent Limit Value<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="number" class="form-control" formControlName="limit_value">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+               <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <label for="" class="start pull-right">Fund Based(%)<span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <input type="number" class="form-control" formControlName="fund_based_pcnt">
+                   </div>
+               </div>
+           </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <!-- <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-right">Fund Base Value<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="number" class="form-control" formControlName="funded_value">
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-md-6 col-sm-12">
+               <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <label for="" class="start pull-right">Non Fund Based(%)<span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <input type="number" formControlName="non_fundbased_pcnt" class="form-control">
+                   </div>
+               </div>
+           </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-right">Collateral Code<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="collateral_code" class="form-control">
+                        <mat-icon (click)="collateralLookup()">search</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+               <!-- <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <label for="" class="start pull-right">
+                           Non Fund Based Value<span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <input type="number" formControlName="non_funded_value" class="form-control">
+                   </div>
+               </div> -->
+           </div>
+        </div>
+
+
+    </form>
+  </div>
 </mat-card>

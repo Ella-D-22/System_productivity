@@ -34,16 +34,21 @@ export class LimitsComponent implements OnInit {
   }
 
   formData = this.fb.group({
-  cust_code: [''],
-  deleteFlag: [''],
+  collateral_code: [''],
+  customer_code: [''],
   deletedBy: [''],
+  deletedFlag: [''],
   deletedTime: [''],
-  id: [],
-  limit_node: [''],
-  limit_node_category: [''],
-  limit_node_value: [''],
+  fund_based_pcnt: [''],
+  funded_value: [''],
+  id: [''],
+  limit_code: [''],
+  description: [''],
+  limit_value: [''],
   modifiedBy: [''],
   modifiedTime: [''],
+  non_fundbased_pcnt: [''],
+  non_funded_value: [''],
   postedBy: [''],
   postedFlag: [''],
   postedTime: [''],
@@ -60,6 +65,9 @@ export class LimitsComponent implements OnInit {
       this.formData.disable()
     }
     customerLookup(){
+
+    }
+    collateralLookup(){
 
     }
   getPage(){
