@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -36,6 +36,7 @@ export class LimitsComponent implements OnInit {
     isEnabled = false
   ngOnInit(): void {
     this.getPage()
+    this.onAddField()
   }
 
   formData = this.fb.group({
@@ -60,11 +61,24 @@ export class LimitsComponent implements OnInit {
   postedTime: [''],
   verifiedBy: [''],
   verifiedFlag: [''],
-  verifiedTime: ['']
+  verifiedTime: [''],
+  collaterals: new FormArray([]),
   })
  user = "Nobody"
-  get f() { 
-    return this.formData.controls; }
+  get f() { return this.formData.controls; }
+  get c(){return this.f.collaterals as FormArray}
+    // define form
+    onAddField(){
+      this.c.push(this.fb.group({
+        collateral_code:[''],
+        collateral_value:['']
+      }))
+    }
+    // define a funcion to remove
+    onRemoveField(i:any){
+      this.c.removeAt(i)
+    }
+
 
   
     disabledFormControl(){
@@ -96,7 +110,7 @@ export class LimitsComponent implements OnInit {
     }
 
     addCollaterals(){
-      
+
     }
   getPage(){
     this.subscription = this.NodesApi.currentMessage.subscribe(
@@ -312,7 +326,12 @@ export class LimitsComponent implements OnInit {
   
   }
 
+
   onSubmit(){
+    console.log("thi form", this.formData.value);
+    
+    console.log("hello");
+    
     if(this.formData.valid){
       if(this.function_type == "A-Add"){
       console.log(this.formData.value);
