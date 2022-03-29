@@ -6,8 +6,8 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CollateralService } from './collateral.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { EventIdLookupComponent } from '../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { EventIdLookupComponent } from '../../SystemConfigurations/ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
 
 @Component({
   selector: 'app-collateral',
@@ -105,7 +105,7 @@ export class CollateralComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(
       result =>{
-        console.log("with lokup",result);
+        console.log("with lookup",result);
         
         this.lookupdata = result.data;
         this.with_collateralCode = this.lookupdata.collateralCode;
