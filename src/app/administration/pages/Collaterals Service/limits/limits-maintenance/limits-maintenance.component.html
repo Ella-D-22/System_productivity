@@ -27,9 +27,14 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
-                            <label class="start pull-left"> Limit Node ID<span class="warning">*</span></label>
+                            <label class="start pull-left"> Limit Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" formControlName="imit_code"
+                             class="form-control" [value]="limitId"
+                             oninput="this.value=this.value.toUppercase()"
+                             [ngClass]="{'is-invalid': submitted && f.limitId.errors}">
+                            <mat-icon (click)="limitNodesLookup()">search</mat-icon>
                             <input type="text" formControlName="limitId" class="form-control">
                             <mat-icon>search</mat-icon>
                         </div>

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CollateralLookupComponent } from '../../collateral/collateral-lookup/collateral-lookup.component';
+import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
 import { LimitsService } from './limits.service';
 
 @Component({
@@ -21,41 +24,91 @@ export class LimitsComponent implements OnInit {
   subscription:Subscription
   horizonatalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
-
+  customerData:any
+  collateralData:any
   constructor(private fb:FormBuilder,
     private NodesApi:LimitsService,
     private _snackbar:MatSnackBar,
-    private router:Router) { }
+    private router:Router, 
+    private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.getPage()
+    this.onAddField()
   }
 
   formData = this.fb.group({
-  cust_code: [''],
-  deleteFlag: [''],
+  collateral_code: [''],
+  customer_code: [''],
   deletedBy: [''],
+  deletedFlag: [''],
   deletedTime: [''],
-  id: [],
-  limit_node: [''],
-  limit_node_category: [''],
-  limit_node_value: [''],
+  fund_based_pcnt: [''],
+  funded_value: [''],
+  id: [''],
+  limit_code: [''],
+  description: [''],
+  limit_value: [''],
   modifiedBy: [''],
   modifiedTime: [''],
+  non_fundbased_pcnt: [''],
+  non_funded_value: [''],
+  collateral_value: [''],
   postedBy: [''],
   postedFlag: [''],
   postedTime: [''],
   verifiedBy: [''],
   verifiedFlag: [''],
-  verifiedTime: ['']
+  verifiedTime: [''],
+  collaterals: new FormArray([]),
   })
+ user = "Nobody"
+  get f() { return this.formData.controls; }
+  get c(){return this.f.collaterals as FormArray}
+    // define form
+    onAddField(){
+      this.c.push(this.fb.group({
+        collateral_code:[''],
+        collateral_value:['']
+      }))
+    }
+    // define a funcion to remove
+    onRemoveField(i:any){
+      this.c.removeAt(i)
+    }
 
-  get f() { 
-    return this.formData.controls; }
 
   
     disabledFormControl(){
       this.formData.disable()
+    }
+    customerLookup(){
+     const dialogRef = this.dialog.open(CustomerLookupComponent,{
+     
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.customerData = result.data;
+      this.formData.controls.customer_code.setValue(result.data.customer_code);
+    });
+    }
+
+    collateralLookup(){
+     const dialogRef = this.dialog.open(CollateralLookupComponent,{
+       height: '400px',
+       width: '600px'
+     });
+     dialogRef.afterClosed().subscribe(
+      res =>{
+        this.collateralData = res.data
+      }
+     )
+    }
+    removeCollaterals(){
+
+    }
+
+    addCollaterals(){
+
     }
   getPage(){
     this.subscription = this.NodesApi.currentMessage.subscribe(
@@ -66,6 +119,21 @@ export class LimitsComponent implements OnInit {
         if(this.function_type ==  'A-Add'){
       
           this.formData = this.fb.group({
+            collateral_code: [''],
+            customer_code: [''],
+            deletedBy: [''],
+            deletedFlag: [''],
+            deletedTime: [''],
+            fund_based_pcnt: [''],
+            funded_value: [''],
+            limit_code: [''],
+            description: [''],
+            limit_value: [''],
+            modifiedBy: [''],
+            modifiedTime: [''],
+            non_fundbased_pcnt: [''],
+            non_funded_value: [''],
+            collateral_value: [''],
             cust_code: [''],
             deleteFlag: [''],
             deletedBy: [''],
@@ -92,16 +160,22 @@ export class LimitsComponent implements OnInit {
                 this.results = res
 
                 this.formData = this.fb.group({
-                  cust_code: [this.results.cust_code],
-                  deleteFlag: [this.results.deleteFlag],
+                  collateral_code: [this.results.collateral_code],
+                  customer_code: [this.results.customer_code],
                   deletedBy: [this.results.deletedBy],
+                  deletedFlag: [this.results.deletedFlag],
                   deletedTime: [this.results.deletedTime],
+                  fund_based_pcnt: [this.results.fund_based_pcnt],
+                  funded_value: [this.results.funded_value],
                   id: [this.results.id],
-                  limit_node: [this.results.limit_node],
-                  limit_node_category: [this.results.limit_node_category],
-                  limit_node_value: [this.results.limit_node_value],
+                  limit_code: [this.results.limit_code],
+                  description: [this.results.description],
+                  limit_value: [this.results.limit_value],
                   modifiedBy: [this.results.modifiedBy],
                   modifiedTime: [this.results.modifiedTime],
+                  non_fundbased_pcnt: [this.results.non_fundbased_pcnt],
+                  non_funded_value: [this.results.non_funded_value],
+                  collateral_value: [this.results.collateral_value],
                   postedBy: [this.results.postedBy],
                   postedFlag: [this.results.postedFlag],
                   postedTime: [this.results.postedTime],
@@ -128,16 +202,22 @@ export class LimitsComponent implements OnInit {
             res =>{
               this.results = res
               this.formData = this.fb.group({
-                cust_code: [this.results.cust_code],
-                deleteFlag: [this.results.deleteFlag],
+                collateral_code: [this.results.collateral_code],
+                customer_code: [this.results.customer_code],
                 deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
+                fund_based_pcnt: [this.results.fund_based_pcnt],
+                funded_value: [this.results.funded_value],
                 id: [this.results.id],
-                limit_node: [this.results.limit_node],
-                limit_node_category: [this.results.limit_node_category],
-                limit_node_value: [this.results.limit_node_value],
-                modifiedBy: ['None'],
+                limit_code: [this.results.limit_code],
+                description: [this.results.description],
+                limit_value: [this.results.limit_value],
+                modifiedBy: [this.user],
                 modifiedTime: [new Date()],
+                non_fundbased_pcnt: [this.results.non_fundbased_pcnt],
+                non_funded_value: [this.results.non_funded_value],
+                collateral_value: [this.results.collateral_value],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
                 postedTime: [this.results.postedTime],
@@ -166,16 +246,22 @@ export class LimitsComponent implements OnInit {
               this.results = res
 
               this.formData = this.fb.group({
-                cust_code: [this.results.cust_code],
-                deleteFlag: ['Y'],
-                deletedBy: ['User'],
+                collateral_code: [this.results.collateral_code],
+                customer_code: [this.results.customer_code],
+                deletedBy: [this.user],
+                deletedFlag: ['Y'],
                 deletedTime: [new Date()],
+                fund_based_pcnt: [this.results.fund_based_pcnt],
+                funded_value: [this.results.funded_value],
                 id: [this.results.id],
-                limit_node: [this.results.limit_node],
-                limit_node_category: [this.results.limit_node_category],
-                limit_node_value: [this.results.limit_node_value],
+                limit_code: [this.results.limit_code],
+                description: [this.results.description],
+                limit_value: [this.results.limit_value],
                 modifiedBy: [this.results.modifiedBy],
                 modifiedTime: [this.results.modifiedTime],
+                non_fundbased_pcnt: [this.results.non_fundbased_pcnt],
+                non_funded_value: [this.results.non_funded_value],
+                collateral_value: [this.results.collateral_value],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
                 postedTime: [this.results.postedTime],
@@ -203,20 +289,26 @@ export class LimitsComponent implements OnInit {
             res =>{
               this.results = res
               this.formData = this.fb.group({
-                cust_code: [this.results.cust_code],
-                deleteFlag: [this.results.deleteFlag],
+                collateral_code: [this.results.collateral_code],
+                customer_code: [this.results.customer_code],
                 deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
+                fund_based_pcnt: [this.results.fund_based_pcnt],
+                funded_value: [this.results.funded_value],
                 id: [this.results.id],
-                limit_node: [this.results.limit_node],
-                limit_node_category: [this.results.limit_node_category],
-                limit_node_value: [this.results.limit_node_value],
+                limit_code: [this.results.limit_code],
+                description: [this.results.description],
+                limit_value: [this.results.limit_value],
                 modifiedBy: [this.results.modifiedBy],
                 modifiedTime: [this.results.modifiedTime],
+                non_fundbased_pcnt: [this.results.non_fundbased_pcnt],
+                non_funded_value: [this.results.non_funded_value],
+                collateral_value: [this.results.collateral_value],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
                 postedTime: [this.results.postedTime],
-                verifiedBy: ["User"],
+                verifiedBy: [this.results.verifiedBy],
                 verifiedFlag: ['Y'],
                 verifiedTime: [new Date()]
               });
@@ -235,7 +327,12 @@ export class LimitsComponent implements OnInit {
   
   }
 
+
   onSubmit(){
+    console.log("thi form", this.formData.value);
+    
+    console.log("hello");
+    
     if(this.formData.valid){
       if(this.function_type == "A-Add"){
         this.subscription = this.NodesApi.createLimitNodes(this.formData.value).subscribe(

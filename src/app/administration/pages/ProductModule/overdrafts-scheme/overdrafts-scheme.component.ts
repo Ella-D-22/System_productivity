@@ -113,6 +113,7 @@ export class OverdraftsSchemeComponent implements OnInit {
   ac_credit_balance_value: any;
   liability_exceed_group_value: any;
   ac_is_froozed_value: any;
+  ac_is_froozed_descpription:any
   sanction_limit_expired_value: any;
   interest_calc_value: any;
   insufficient_exception_value: any;

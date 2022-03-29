@@ -1,9 +1,87 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/system/Collaterals/data/View</div>
+        <div>Home/system/Limits/data/View</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
+  <div class="container-fluid">
+      <form class="form"
+      novalidate
+      [formGroup]="formData"
+      (ngSubmit)="onSubmit()">
+         <div class="row">
+             <div class="col-md-6 col-sm-12">
+                 <div class="form-group">
+                     <div class="col-md-6 col-sm-12 form-column">
+                         <label for="">Limit Name<span class="warning">*</span></label>
+                     </div>
+                     <div class="col-md-6 col-sm-12 form-column">
+                         <input type="text" class="form-control" formControlName="description"
+                          oninput="this.value=this.value.toUppercase()">
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-right">Customer Code<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="customer_code" class="form-control">
+                        <mat-icon (click)="customerLookup()">search</mat-icon>
+
+                    </div>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-right">Parent Limit Value<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="number" class="form-control" formControlName="limit_value">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+               <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <label for="" class="start pull-right">Fund Based(%)<span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <input type="number" class="form-control" formControlName="fund_based_pcnt">
+                   </div>
+               </div>
+           </div>
+        </div>
+        <div class="row">
+           
+            <div class="col-md-6 col-sm-12">
+               <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <label for="" class="start pull-right">Non Fund Based(%)<span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <input type="number" formControlName="non_fundbased_pcnt" class="form-control">
+                   </div>
+               </div>
+           </div>
+        </div>
+        <br>
+            <div *ngFor="let colForm of c.controls; let i = index">
+                <div [formGroup]="colForm">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-right">Collateral Code<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" class="form-control" formControlName="collateral_code">
+                                </div>
+                            </div>
     <div class="container-fluid">
         <form class="form"
          (ngSubmit)="onSubmit()"
@@ -54,8 +132,28 @@
                         <div class="col-md-6 col-sm-12 form-column">
                             <input type="number" formControlName="limit_node_value" class="form-control">
                         </div>
+                        <div class="col-md-6 col-sm-12">
+                           <div class="form-group">
+                               <div class="col-md-6 col-sm-12 form-column">
+                                   <label for="" class="start pull-right">Collateral Value<span class="warning">*</span></label>
+                               </div>
+                               <div class="col-md-6 col-sm-12 form-column">
+                                   <input type="number" class="form-control" formControlName="collateral_value">
+                                   <mat-icon (click)="onAddField()" color="primary">add_circle</mat-icon>
+                                   <mat-icon (click)="onRemoveField(i)" color="warn">remove_circle</mat-icon>
+                              
+                                </div>
+                           </div>
+                       </div>
                     </div>
                 </div>
+                </div>
+        <br>
+        <button mat-raised-button color="" type="submit" class="pull-left">Back</button>
+        <button mat-raised-button color="primary" type="submit" class="pull-right">Submit</button>
+
+    </form>
+  </div>
             </div>
         </form>
        
