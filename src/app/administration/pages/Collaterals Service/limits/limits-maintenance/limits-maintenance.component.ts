@@ -16,6 +16,7 @@ export class LimitsMaintenanceComponent implements OnInit {
   limitId:any
   function_type:any;
   dialogData:any;
+  submitted = false
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
   
@@ -65,6 +66,7 @@ export class LimitsMaintenanceComponent implements OnInit {
   
 
   onSubmit(){
+    this.submitted = true
     if(this.formData.valid){
       if(this.function_type == 'A-Add'){
         this.router.navigateByUrl("")
