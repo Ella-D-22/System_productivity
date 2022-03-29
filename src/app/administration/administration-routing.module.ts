@@ -78,38 +78,38 @@ const routes: Routes = [{
     {
       path: 'configurations/global/linked/organization/maintenance',
       component:LinkedOrganizationMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/global/linked/organization/data/view',
       component:LinkedOrganizationComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/global/currency/maintenance',
       component:CurrencyMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/global/currency/data/view',
       component:CurrencyConfigComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     // Scheme Type
     {
       path: 'configurations/global/scheme-type/maintenance',
       component:SchemeTypeMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/global/scheme-type/data/view',
       component:SchemeTypeComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
 
@@ -117,14 +117,14 @@ const routes: Routes = [{
     {
       path: 'configurations/global/exceptions-codes/maintenance',
       component:ExceptionsCodesMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     
     {
       path: 'configurations/global/exceptions-codes/data/view',
       component:ExceptionsCodesComponent ,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
 
@@ -186,13 +186,13 @@ const routes: Routes = [{
     {
       path: 'configurations/global/gl-subhead/maintenance',
       component:GlSubheadMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/global/gl-subhead/data/view',
       component:GlSubheadComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
 
@@ -200,26 +200,26 @@ const routes: Routes = [{
     {
       path: 'configurations/charge/preferentials/maintenance',
       component:ChrgPreferentialMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/charge/preferentials/data/view',
       component:ChrgPreferentialComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
 // Charge Prioritization
     {
       path: 'configurations/charge/prioritization/maintenance',
       component:ChrgPrioritizationMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/charge/prioritization/data/view',
       component:ChrgPrioritizationComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
 
@@ -227,26 +227,26 @@ const routes: Routes = [{
     {
       path: 'configurations/charge/event-type/maintenance',
       component:EventTypeMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/charge/event-type/data/view',
       component:EventTypeComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
 // event id
     {
       path: 'configurations/charge/event-id/maintenance',
       component:EventIdMaintenanceComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     {
       path: 'configurations/charge/event-id/data/view',
       component:EventIdComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
 
@@ -262,7 +262,7 @@ const routes: Routes = [{
     {
       path: 'event_id_module/currency',
       component:CurrencyConfigComponent,
-      canActivate: [CanActivateModuleGuard],
+      // canActivate: [CanActivateModuleGuard],
       data: {preload:true },
     },
     // ******************* Interests Setup ****************************************************
@@ -285,7 +285,7 @@ const routes: Routes = [{
       {
         path: 'configurations/product/loan-product/maintenance',
         component:LoanproductMaintenanceComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
@@ -401,26 +401,26 @@ const routes: Routes = [{
       {
         path: 'branches/maintenance',
         component:BranchesMaintenanceComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'branches/data/view',
         component:BranchesComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       
       {
         path: 'transactions/maintenance',
         component:TransactionMaintainanceComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'transactions/cash/data/view',
         component:CashTransactionsComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
 
@@ -431,13 +431,13 @@ const routes: Routes = [{
       {
         path: 'interest/maintenance',
         component:InterestMaintainanceComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'interest/data/view',
         component:InterestComponent,
-        canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
 
@@ -448,81 +448,81 @@ const routes: Routes = [{
       {
         path: 'customers/param/maintenance',
         component: ParamMainComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/param/add',
         component: ParamAddComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/param/inquire',
         component: ParamInquireComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       // Retail Customer
       {
         path: 'customers/maintenance',
         component: MainKycComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/retail/add',
         component: RetailAddComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/retail/modify',
         component: RetailModifyComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/retail/delete',
         component: RetailDeleteComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/retail/delete',
         component: RetailInquireComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       //  Cooporate Customer 
       // {
       //   path: 'customers/maintenance',
       //   component: MainKycComponent,
-      //   // canActivate: [CanActivateModuleGuard],
+        // canActivate: [CanActivateModuleGuard],
       //   // data: {preload:true },
       // },
       {
         path: 'customers/cooporate/add',
         component: CorporateAddComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/cooporate/modify',
         component: CorporateModifyComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/cooporate/delete',
         component: CorporateDeleteComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
       {
         path: 'customers/cooporate/inquire',
         component: CorporateInquireComponent,
-        // canActivate: [CanActivateModuleGuard],
+        canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
 

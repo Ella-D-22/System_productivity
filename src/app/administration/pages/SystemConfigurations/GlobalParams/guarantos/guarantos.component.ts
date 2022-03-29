@@ -18,6 +18,7 @@ export class GuarantosComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.guarantorAPI.getTermDeposits();
   }
   formData = this.fb.group({
     check_cust_activeness: [''],

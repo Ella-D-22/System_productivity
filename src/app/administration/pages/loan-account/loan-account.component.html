@@ -43,26 +43,38 @@
                       <label class="start pull-left">Account Manager</label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                      <input type="text" formControlName="accountManager" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
-                       <mat-icon>search</mat-icon>
+                      <input [value]="this.customerCode" type="text" formControlName="accountManager" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
+                     <mat-icon (click)="this.getCustomers()" >search</mat-icon>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column ">
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                      <mat-hint>{{this.firstName}} {{this.middleName}} {{this.surname}}</mat-hint>
                     </div>
                   </div>
                 </div>
-  
+
               <div class="col-md-6 col-sm-12" *ngIf="message.account_type!='Office'">
                 <div class="form-group">
                   <div class="col-md-6 col-sm-12 form-column ">
                     <label class="start pull-left">Customer Code</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
-                    <input formControlName="customerCode" type="text" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
-                     <mat-icon>search</mat-icon>
+                    <input [value]="this.customerCode" formControlName="customerCode" type="text" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
+                     <mat-icon (click)="this.getCustomers()" >search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.firstName}} {{this.middleName}} {{this.surname}}</mat-hint>
                   </div>
                 </div>
               </div>
-  
             </div>
-  
             <div class="row">
               <div class="col-md-6 col-sm-12">
                   <div class="form-group">
@@ -71,7 +83,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
                       <input type="text" formControlName="schemeCode" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
-                       <mat-icon (click)="productLookup()">search</mat-icon>
+                       <mat-icon (click)="schemeCodeLookup()">search</mat-icon>
                     </div>
                   </div>
                 </div>
@@ -81,10 +93,17 @@
                    <label class="start pull-left">GL-Subhead Code</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="glSubhead" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
+                   <input [value]="this.gl_subhead_code" type="text" formControlName="glSubhead" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
                    <mat-icon (click)="glSubheadLookup()">search</mat-icon>
                   </div>
                </div> 
+               <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.gl_subhead_description}}</mat-hint>
+                </div>
+             </div>
               </div>
             </div>
   
@@ -144,17 +163,23 @@
                   </div>
                </div> 
               </div>
-  
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                   <div class="col-md-6 col-sm-12 form-column ">
                    <label class="start pull-left">Branch Code</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="solCode" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
-                   <mat-icon (click)="branchSubheadLookup()">search</mat-icon>
+                   <input type="text" [value]="this.solCode" formControlName="solCode" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
+                   <mat-icon (click)=" branchesCodeLookup()">search</mat-icon>
                   </div>
                </div> 
+               <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.glDescription}}</mat-hint>
+                </div>
+             </div> 
               </div>
             </div>
             <div class="row mb-2" *ngIf="message.account_type!='Loan'">
@@ -220,37 +245,62 @@
           </mat-tab>
           <mat-tab class="mat-tab" label="Guarantors" *ngIf="message.account_type == 'Loan'">
             <br>
-            <form class="form" (ngSubmit)="onSubmitdata()" novalidate>
-              <div class="row">
-                <div class="col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column">
-                       <label for="">Guarantors</label>
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                      <input type="text" [value]="this.gl_subhead_description">
-                      <mat-icon (click)="glSubheadLookup1()">search</mat-icon>
-                      <br>
-                    
-                    </div>
-                  </div>
+
+
+              <form
+            class="form"
+            [formGroup]="guarantorsFormData"
+            #resetRequestsForm="ngForm"
+            novalidate
+          >
+      
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                   <label for="">Guarantors</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input formControlName="customerCode" type="text" [value]="this.customerCode">
+                  <mat-icon (click)="getCustomers()">search</mat-icon>
+                  <br>
+                 </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint> <small>{{this.firstName}} {{this.middleName}} {{this.surname}}</small> </mat-hint>
+            
                 </div>
               </div>
-              <button class="pull-right btn-sm"  type="button" (click)="eligibilityTest()">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                + Add
-              </button>
-                <br>
-            </form>
+
+            </div>
+          </div>
+     
+            <br />
+            <button class="pull-right btn-sm"  type="button" (click)="addGuarantor()">
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span>
+             Add Guarantor
+            </button>
+      
+            <br />
+          </form>
+
+
+
+
             <br>
             <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Customer Code</th>
-                  <th>Customer Name</th>
-                  <th>Branch</th>
-                  <th>Operation</th>
+                  <th>G-Customer Code</th>
+                  <th>G-Full Name</th>
+                  <th>G-Registration Date</th>
                 </tr>
               </thead>
               <tbody>
@@ -258,7 +308,6 @@
                   <td>{{i + 1}}</td>
                   <td>{{item.laa_gl_subhead}}</td>
                   <td>{{item.laa_gl_subhead_description}}</td>
-                  <td>{{item.laa_gl_subhead_deafault}}</td>
                   <td><a class="update btn btn-sm" color="accent" (click)="onRemoveGLSubhead(i)">X</a>
                     <!-- <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a> -->
                   </td>

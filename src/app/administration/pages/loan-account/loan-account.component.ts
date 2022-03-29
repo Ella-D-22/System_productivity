@@ -9,6 +9,7 @@ import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
+  HttpParams,
 } from '@angular/common/http';
 
 import {
@@ -22,6 +23,11 @@ import { BranchComponent } from './lookup/branch/branch.component';
 import { ProductComponent } from './lookup/product/product.component';
 import { Subscription } from 'rxjs';
 import { GlSubheadLookupComponent } from '../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
+import { CustomerLookupComponent } from '../CustomersComponent/customer-lookup/customer-lookup.component';
+import { productService } from './lookup/product/product.service';
+import { GuarantosService } from '../SystemConfigurations/GlobalParams/guarantos/guarantos.service';
+import { LoanproductLookupComponent } from '../ProductModule/loanproduct/loanproduct-lookup/loanproduct-lookup.component';
+import { BranchesLookupComponent } from '../branches/branches-lookup/branches-lookup.component';
 
 
 @Component({
@@ -50,6 +56,17 @@ export class LoanAccountComponent implements OnInit {
   glSubheadData:any
   results:any
   error:any
+  customers_lookup_data: any;
+  customerCode: any;
+  firstName: any;
+  middleName: any;
+  surname: any;
+  lookupdata: any;
+  laa_scheme_code: any;
+  laa_scheme_code_desc: any;
+  lookupData: any;
+  solCode: any;
+  glDescription: any;
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -58,13 +75,23 @@ export class LoanAccountComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private dialog: MatDialog,
 
-    private accountservice: LoanAccountService
+    private accountservice: LoanAccountService,
+    private productAPI: productService,
+    private guarantorsAPI:GuarantosService,
   ) {
     this.message = this.router.getCurrentNavigation()?.extras.state;
   }
 
   ngOnInit(): void {
     this.getPage();
+    this.getAll();
+  }
+
+  getAll(){
+
+    this.subscription = this.guarantorsAPI.getAll().subscribe()
+
+    
   }
   loading = false;
 
@@ -92,6 +119,11 @@ export class LoanAccountComponent implements OnInit {
     modifiedBy: [''],
     modifiedTime: [''],
   });
+
+  guarantorsFormData  = this.fb.group({
+    customerCode: ['',[Validators.required]],
+  });
+
   disabledFormControll() {
     this.formData.controls.accountManager.disable();
     this.formData.controls.customerCode.disable();
@@ -109,9 +141,6 @@ export class LoanAccountComponent implements OnInit {
   get f() {
     return this.formData.controls;
   }
-  get g() {
-    return this.glSubheadData.controls;
-  }
 
   glSubheadLookup(): void {
     const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
@@ -125,6 +154,69 @@ export class LoanAccountComponent implements OnInit {
        // this.eventtypedata = result.data;
       this.glSubheadData.controls.laa_gl_subhead.setValue(this.gl_subhead_code);
       this.glSubheadData.controls.laa_gl_subhead_description.setValue(this.gl_subhead_description);
+    });
+  }
+
+  getCustomers(): void {
+    const dialogRef = this.dialog.open(CustomerLookupComponent , {
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.customers_lookup_data = result.data;
+      this.customerCode = this.customers_lookup_data.customerCode
+      this.firstName =  this.customers_lookup_data.firstName
+      this.middleName = this.customers_lookup_data.middleName
+      this.surname =  this.customers_lookup_data.surname
+      this. guarantorsFormData.controls.customerCode.setValue(this.customerCode);
+      
+    });
+  }
+
+  addGuarantor(){
+    this.customer_code = this.guarantorsFormData.controls.customerCode.value;
+    const params = new HttpParams()
+    .set('customer_code',this.customer_code )
+    this.subscription = this.guarantorsAPI.testGuarantorEligibility(params).subscribe(res=>{
+      this._snackBar.open("The Customer Qualifies", "X", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000,
+        panelClass: ['green-snackbar','login-snackbar'],
+      });
+    }, err=>{
+      this.error = err;   
+      this._snackBar.open(this.error.error.message, "Check Another!", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000,
+        panelClass: ['red-snackbar','login-snackbar'],
+      });
+    })
+
+  }
+
+  schemeCodeLookup(): void {
+    // if account is for loan
+    // Scheme code for CAA
+    
+    const dialogRef = this.dialog.open(LoanproductLookupComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupdata= result.data;
+      this.laa_scheme_code = this.lookupdata.laa_scheme_code;
+      this.laa_scheme_code_desc = this.lookupdata.laa_scheme_code_desc;
+      this.formData.controls.scheme_code.setValue(this.laa_scheme_code);
+    });
+  }
+  branchesCodeLookup(): void {
+    const dialogRef = this.dialog.open(BranchesLookupComponent, {
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupData = result.data;
+      this.solCode = this.lookupData.solCode;
+      this.glDescription = this.lookupData.glDescription;
+      this.formData.controls.solCode.setValue(this.solCode);
     });
   }
 
@@ -161,6 +253,7 @@ export class LoanAccountComponent implements OnInit {
         accountStatus: ['P'],
         loan:['']
       });
+
     } else if (
       this.message.function_type == 'A-Add' &&
       this.message.account_type == 'Savings'
@@ -1562,23 +1655,6 @@ initGlSUbheadForm(){
 
   //Checking for eligibility of a guarantors
   eligibilityTest(){
-
-  this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
-    res =>{
-        this.results = res
-          this.glSubheadArray.push(this.glSubheadData.value);
-    },
-    err=>{
-      this.error = err
-      this._snackBar.open(this.error, "Try Again",{
-        horizontalPosition:this.horizontalPosition,
-        verticalPosition:this.verticalPosition,
-        duration:3000,
-        panelClass:['red-snackbar', 'login-snackbar']
-      })
-    }
-  )
-
   // this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
   //   res =>{
   //       this.results = res
@@ -1598,7 +1674,6 @@ initGlSUbheadForm(){
   //     })
   //   }
   // )
-
   }
 
   onPhotoChange(event: any) {
@@ -1637,8 +1712,7 @@ console.log('Error: ', error);
 }
 
 glSubheadLookup1(): void {
-  const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
-
+  const dialogRef = this.dialog.open(GlSubheadLookup2Component, {
     // height: '400px',
     // width: '600px',
   });
