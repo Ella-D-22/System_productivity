@@ -59,9 +59,9 @@ import { ExceptionsCodesComponent } from './pages/SystemConfigurations/GlobalPar
 import { ExceptionsCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-maintenance/exceptions-codes-maintenance.component';
 import { ExceptionsCodesLookupComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-lookup/exceptions-codes-lookup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { CollateralComponent } from './pages/collateral/collateral.component';
-import { CollateralMaintenanceComponent } from './pages/collateral/collateral-maintenance/collateral-maintenance.component';
-import { CollateralLookupComponent } from './pages/collateral/collateral-lookup/collateral-lookup.component';
+import { CollateralComponent } from './pages/collateral-limits/collateral/collateral.component';
+import { CollateralMaintenanceComponent } from './pages/collateral-limits/collateral/collateral-maintenance/collateral-maintenance.component';
+import { CollateralLookupComponent } from './pages/collateral-limits/collateral/collateral-lookup/collateral-lookup.component';
 import { BranchesComponent } from './pages/branches/branches.component';
 import { BranchesLookupComponent } from './pages/branches/branches-lookup/branches-lookup.component';
 import { BranchesMaintenanceComponent } from './pages/branches/branches-maintenance/branches-maintenance.component';
@@ -88,10 +88,9 @@ import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/G
 import { MisSubSectorLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-lookup/mis-sub-sector-lookup.component';
 import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos.component';
 import { GuarantosMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos-maintenance/guarantos-maintenance.component';
-import { LimitsComponent } from './pages/Collaterals Service/limits/limits.component';
-import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
-
-import { LimitsLookupComponent } from './pages/Collaterals Service/limits/limits-lookup/limits-lookup.component';
+import { LimitsComponent } from './pages/collateral-limits/limits/limits.component';
+import { LimitsMaintenanceComponent } from './pages/collateral-limits/limits/limits-maintenance/limits-maintenance.component';
+import { LimitsLookupComponent } from './pages/collateral-limits/limits/limits-lookup/limits-lookup.component';
 import { CorporateComponent } from './pages/CustomersComponent/components/lookup/corporate/corporate.component';
 import { EmployerComponent } from './pages/CustomersComponent/components/lookup/employer/employer.component';
 import { RetailComponent } from './pages/CustomersComponent/components/lookup/retail/retail.component';

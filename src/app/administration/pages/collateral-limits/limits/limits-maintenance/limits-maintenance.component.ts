@@ -36,7 +36,7 @@ export class LimitsMaintenanceComponent implements OnInit {
   
   formData = this.fb.group({
     function_type:[''],
-    limit_code : ['']
+    limit_id : ['']
   })
   get f() { 
     return this.formData.controls; }
@@ -64,7 +64,7 @@ export class LimitsMaintenanceComponent implements OnInit {
       this.dialogData = results.data;
       console.log(this.dialogData);
       
-      this.formData.controls.limitId.setValue(results.data.id)
+      this.formData.controls.limit_id.setValue(results.data.id)
      
     })
   }
@@ -77,9 +77,9 @@ export class LimitsMaintenanceComponent implements OnInit {
       this.NodesAPI.changeMessage(this.formData.value)
       if(this.function_type == 'A-Add'){
 
-        this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/data/view")
+        this.router.navigateByUrl("system/configurations/collateral-limits/Limits/data/view")
       }else if (this.function_type != 'A-Add'){
-        this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/data/view")
+        this.router.navigateByUrl("system/configurations/collateral-limits/Limits/data/view")
       }
     }else{
       this._snackbar.open("Invalid form data", "Try Again", {

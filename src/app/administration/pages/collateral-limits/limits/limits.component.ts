@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CollateralLookupComponent } from '../../collateral/collateral-lookup/collateral-lookup.component';
+import { CollateralLookupComponent } from '../collateral/collateral-lookup/collateral-lookup.component';
 import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
 import { LimitsService } from './limits.service';
 
@@ -26,6 +26,7 @@ export class LimitsComponent implements OnInit {
   verticalPosition:MatSnackBarVerticalPosition
   customerData:any
   collateralData:any
+  limitCode:any
   constructor(private fb:FormBuilder,
     private NodesApi:LimitsService,
     private _snackbar:MatSnackBar,
@@ -111,7 +112,8 @@ export class LimitsComponent implements OnInit {
       message =>{
         this.message = message
         this.function_type = this.message.function_type
-        this.limitId = this.message.limitId
+        this.limitId = this.message.limit_id
+        this.limitCode = this.message.limit_code
         if(this.function_type ==  'A-Add'){
           this.isDeleted = false;
           this.isEnabled = true;
@@ -149,6 +151,8 @@ export class LimitsComponent implements OnInit {
           this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
             res =>{
                 this.results = res
+                console.log(this.results, "Inquiring");
+                
 
                 this.formData = this.fb.group({
                   collateral_code: [this.results.collateral_code],
@@ -177,7 +181,7 @@ export class LimitsComponent implements OnInit {
 
                 });
                 err =>{
-                  this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+                  this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
                   this.error = err
                   this._snackbar.open(this.error, "Try Again",{
                     horizontalPosition:this.horizonatalPosition,
@@ -223,7 +227,7 @@ export class LimitsComponent implements OnInit {
 
               });
               err =>{
-                this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+                this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizonatalPosition,
@@ -310,7 +314,7 @@ export class LimitsComponent implements OnInit {
                 verifiedTime: [new Date()]
               });
               err =>{
-                this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+                this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizonatalPosition,
@@ -344,7 +348,7 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
 
           },
           err =>{
@@ -373,7 +377,7 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
 
           },
           err =>{
@@ -400,7 +404,7 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
 
           },
           err =>{
@@ -420,7 +424,7 @@ export class LimitsComponent implements OnInit {
         this.isEnabled = true
       }
     }else{
-      this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+      this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
 
        this._snackbar.open("Invalid Form Data Value", "Try Again",{
          horizontalPosition:this.horizonatalPosition,

@@ -34,8 +34,6 @@ import { CurrentSchemeMaintenanceComponent } from './pages/ProductModule/current
 import { CurrentSchemeComponent } from './pages/ProductModule/current-scheme/current-scheme.component';
 import { ExceptionsCodesComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes.component';
 import { ExceptionsCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-maintenance/exceptions-codes-maintenance.component';
-import { CollateralMaintenanceComponent } from './pages/collateral/collateral-maintenance/collateral-maintenance.component';
-import { CollateralComponent } from './pages/collateral/collateral.component';
 import { BranchesMaintenanceComponent } from './pages/branches/branches-maintenance/branches-maintenance.component';
 import { BranchesComponent } from './pages/branches/branches.component';
 import { CashTransactionsComponent } from './pages/transactions/transactions/cash-transactions/cash-transactions.component';
@@ -62,9 +60,11 @@ import { RetailModifyComponent } from './pages/CustomersComponent/components/mai
 import { ParamAddComponent } from './pages/CustomersComponent/components/params/param-add/param-add.component';
 import { ParamInquireComponent } from './pages/CustomersComponent/components/params/param-inquire/param-inquire.component';
 import { ParamMainComponent } from './pages/CustomersComponent/components/params/param-main/param-main.component';
+import { CollateralComponent } from './pages/collateral-limits/collateral/collateral.component';
+import { CollateralMaintenanceComponent } from './pages/collateral-limits/collateral/collateral-maintenance/collateral-maintenance.component';
+import { LimitsComponent } from './pages/collateral-limits/limits/limits.component';
+import { LimitsMaintenanceComponent } from './pages/collateral-limits/limits/limits-maintenance/limits-maintenance.component';
 
-import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
-import { LimitsComponent } from './pages/Collaterals Service/limits/limits.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -370,7 +370,7 @@ const routes: Routes = [{
       },
       // collateral
       {
-        path: 'configurations/limits and collateral/Collateral/maintenance',
+        path: 'configurations/collateral-limits/Collateral/maintenance',
         component:CollateralMaintenanceComponent,
         // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
@@ -378,19 +378,19 @@ const routes: Routes = [{
 
       //limits
       {
-        path: 'configurations/limits and collateral/Limits Nodes/maintenance',
+        path: 'configurations/collateral-limits/Limits/maintenance',
         component:LimitsMaintenanceComponent,
         // canActivate: [CanActivateModuleGuard],
         data: {preload:true},
       },
       {
-        path: 'configurations/limits and collateral/Limits Nodes/data/view',
+        path: 'configurations/collateral-limits/Limits/data/view',
         component:LimitsComponent,
         // canActivate: [CanActivateModuleGuard],
         data: {preload:true},
       },
       {
-        path: 'configurations/limits and collateral/Collateral/data/view',
+        path: 'configurations/collateral-limits/Collateral/data/view',
         component:CollateralComponent,
         // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
