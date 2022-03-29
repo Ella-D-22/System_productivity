@@ -38,17 +38,21 @@ export class GuarantosService {
   // http://localhost:9100/api/v1/customer/guarantors/eligibility​/test​/3223
 
   //add 
-testGuarantorEligibility(customer_code:any):Observable<any>{
-  let API_URL = `http://localhost:9100/api/v1/customer/guarantors/eligibility​/test​/3223`
-  return this.http.get(API_URL,{headers:this.headers}).pipe(map(
+testGuarantorEligibility(params:any):Observable<any>{
+  let API_URL = `${this.baseURL}/eligibility`;
+  return this.http.get(API_URL,{ params:params, headers:this.headers}).pipe(map(
     res =>{
       return res || {}
     },
    catchError(this.errorMgmt)
   ))
 }
+
+
+// http://localhost:9100/api/v1/customer/guarantors/eligibility​/test​/3223
+
 getAll():Observable<any>{
-  let API_URL = `http://localhost:9100/api/v1/customer/guarantors/eligibility​/test​/3223`
+  let API_URL = `${this.baseURL}/all`;
   return this.http.get(API_URL,{headers:this.headers}).pipe(map(
     res =>{
       return res || {}
