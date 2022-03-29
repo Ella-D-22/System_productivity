@@ -32,6 +32,8 @@ export class LimitsComponent implements OnInit {
     private router:Router, 
     private dialog:MatDialog) { }
 
+    isDeleted = false
+    isEnabled = false
   ngOnInit(): void {
     this.getPage()
     this.onAddField()
@@ -117,7 +119,8 @@ export class LimitsComponent implements OnInit {
         this.function_type = this.message.function_type
         this.limitId = this.message.limitId
         if(this.function_type ==  'A-Add'){
-      
+          this.isDeleted = false;
+          this.isEnabled = true;
           this.formData = this.fb.group({
             collateral_code: [''],
             customer_code: [''],
@@ -139,11 +142,15 @@ export class LimitsComponent implements OnInit {
             postedTime: [''],
             verifiedBy: [''],
             verifiedFlag: [''],
-            verifiedTime: ['']
+            verifiedTime: [''],
+            collaterals: new FormArray([]),
 
+         
           });
     
         }else if(this.function_type == 'I-Inquire'){
+          this.isDeleted = false;
+          this.isEnabled = false
           this.disabledFormControl()
           this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
             res =>{
@@ -171,10 +178,12 @@ export class LimitsComponent implements OnInit {
                   postedTime: [this.results.postedTime],
                   verifiedBy: [this.results.verifiedBy],
                   verifiedFlag: [this.results.verifiedFlag],
-                  verifiedTime: [this.results.verifiedTime]
+                  verifiedTime: [this.results.verifiedTime],
+                  collaterals: new FormArray([]),
+
                 });
                 err =>{
-                  this.router.navigateByUrl("")
+                  this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
                   this.error = err
                   this._snackbar.open(this.error, "Try Again",{
                     horizontalPosition:this.horizonatalPosition,
@@ -188,6 +197,8 @@ export class LimitsComponent implements OnInit {
           )
     
         }else if(this.function_type == 'M-Modify'){
+          this.isDeleted = false;
+          this.isEnabled = true
           this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
             res =>{
               this.results = res
@@ -213,10 +224,12 @@ export class LimitsComponent implements OnInit {
                 postedTime: [this.results.postedTime],
                 verifiedBy: [this.results.verifiedBy],
                 verifiedFlag: [this.results.verifiedFlag],
-                verifiedTime: [this.results.verifiedTime]
+                verifiedTime: [this.results.verifiedTime],
+                collaterals: new FormArray([]),
+
               });
               err =>{
-                this.router.navigateByUrl("")
+                this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizonatalPosition,
@@ -230,6 +243,8 @@ export class LimitsComponent implements OnInit {
           )
     
         }else if(this.function_type == 'X-Delete'){
+          this.isDeleted = true;
+          this.isEnabled = false
           this.disabledFormControl
           this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
             res =>{
@@ -303,7 +318,7 @@ export class LimitsComponent implements OnInit {
                 verifiedTime: [new Date()]
               });
               err =>{
-                this.router.navigateByUrl("")
+                this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizonatalPosition,
@@ -325,6 +340,8 @@ export class LimitsComponent implements OnInit {
     
     if(this.formData.valid){
       if(this.function_type == "A-Add"){
+      console.log(this.formData.value);
+      
         this.subscription = this.NodesApi.createLimitNodes(this.formData.value).subscribe(
           res =>{
             this.results = res
@@ -334,7 +351,9 @@ export class LimitsComponent implements OnInit {
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
 
-            })
+            });
+            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+
           },
           err =>{
             this.error = err
@@ -348,9 +367,10 @@ export class LimitsComponent implements OnInit {
         )
 
       }else if(this.function_type == "I-Iquire"){
-        
+     
 
       }else if(this.function_type == "M-Modify"){
+      
         this.subscription = this.NodesApi.updateLimitNodes(this.formData.value).subscribe(
           res =>{
             this.results = res
@@ -360,7 +380,9 @@ export class LimitsComponent implements OnInit {
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
 
-            })
+            });
+            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+
           },
           err =>{
             this.error = err
@@ -374,6 +396,8 @@ export class LimitsComponent implements OnInit {
         )
 
       }else if(this.function_type == "X-Delete"){
+        this.isDeleted = true;
+        this.isEnabled = false;
         this.subscription = this.NodesApi.updateLimitNodes(this.formData.value).subscribe(
           res =>{
             this.results = res
@@ -383,7 +407,9 @@ export class LimitsComponent implements OnInit {
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
 
-            })
+            });
+            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+
           },
           err =>{
             this.error = err
@@ -398,9 +424,12 @@ export class LimitsComponent implements OnInit {
 
 
       }else if(this.function_type == "V-verify"){
-
+        this.isDeleted = false;
+        this.isEnabled = true
       }
     }else{
+      this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+
        this._snackbar.open("Invalid Form Data Value", "Try Again",{
          horizontalPosition:this.horizonatalPosition,
          verticalPosition:this.verticalPosition,

@@ -463,18 +463,7 @@ export class CurrentSchemeComponent implements OnInit {
     });
   }
 
-  // exception_codeLookup(): void {
-  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-  //     // height: '400px',
-  //   });
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     this.exception_lookupData = result.data;
-  //     this.exception_code_value = this.exception_lookupData.exception_code;
-  //     this.formData.controls.exception_code.setValue(
-  //       this.exception_lookupData.id
-  //     );
-  //   });
-  // }
+
 
   // Account lookups
   penalIntRecAcLookup(): void {
@@ -821,6 +810,11 @@ export class CurrentSchemeComponent implements OnInit {
     const index: number = this.feeArray.indexOf(this.feeArray.values);
     this.feeArray.splice(index, i);
   }
+
+  onUpdate(i:any){
+     this.feeArray[i] = this.feeFormData.value
+     this.glSubheadArray[i] = this.glSubheadData.value
+  }  
   editGlSubhead(i: any) {
     this.newData = false;
     this.arrayIndex = this.glSubheadArray[i];
@@ -870,10 +864,11 @@ export class CurrentSchemeComponent implements OnInit {
     }
   }
   updateLoanFee(i: any) {
-    this.t.push(this.fb.group(this.feeFormData.value));
-    this.feeArray.push(this.feeFormData.value);
-    console.log('form fee', this.feeArray);
-    this.initLoanForm();
+    this.feeArray[i] = this.feeFormData.value
+    // this.t.push(this.fb.group(this.feeFormData.value));
+    // this.feeArray.push(this.feeFormData.value);
+    // console.log('form fee', this.feeArray);
+    // this.initLoanForm();
   }
   onRemove(i: any) {
     const index: number = this.feeArray.indexOf(this.feeArray.values);

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { LimitsLookupComponent } from '../limits-lookup/limits-lookup.component';
 import { LimitsService } from '../limits.service';
 
 @Component({
@@ -13,10 +14,9 @@ import { LimitsService } from '../limits.service';
 export class LimitsMaintenanceComponent implements OnInit {
 
   showLimitId = false;
-  limitId:any
+  submitted = false
   function_type:any;
   dialogData:any;
-  submitted = false
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
   
@@ -43,35 +43,43 @@ export class LimitsMaintenanceComponent implements OnInit {
 
 
   onSelectFunction(event:any){
-    if(event.target.value == 'A-Add'){
+    if(event.target.value == "A-Add"){
        this.showLimitId = false;
-    }else if (event.target.value != 'A-Add'){
+       this.formData.controls.limitId.setValue("")
+      //  this.formData.controls.function_type.setValue("")
+    }else if (event.target.value != "A-Add"){
        this.showLimitId = true;
+      //  this.formData.controls.function_type.setValue("")
+       this.formData.controls.limitId.setValue("")
     }
 
   }
 
   //lookup
-  limitsNodesLookup():void{
-    const dialogRef =  this.dialog.open(LimitsMaintenanceComponent,{
+  limitNodesLookup():void{
+    const dialogRef =  this.dialog.open(LimitsLookupComponent,{
 
     });
     dialogRef.afterClosed().subscribe(results =>{
       this.dialogData = results.data;
+      console.log(this.dialogData);
+      
+      this.formData.controls.limitId.setValue(results.data.id)
      
-      // this.formData.controls.miscode.setValue(results.data.miscode)
-      // this.formData.controls.sectorId.setValue(results.data.id)
     })
   }
-  
+
 
   onSubmit(){
-    this.submitted = true
+    this.submitted = true;
+    
     if(this.formData.valid){
+      this.NodesAPI.changeMessage(this.formData.value)
       if(this.function_type == 'A-Add'){
-        this.router.navigateByUrl("")
+
+        this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/data/view")
       }else if (this.function_type != 'A-Add'){
-        this.router.navigateByUrl("")
+        this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/data/view")
       }
     }else{
       this._snackbar.open("Invalid form data", "Try Again", {

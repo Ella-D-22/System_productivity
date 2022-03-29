@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
             Authorization: `${'Bearer '+accessToken}`,
             // 'WEB-API-key': environment.webApiKey,
             'Content-Type': 'application/json',
-            // 'Access-Control-Allow-Origin':'*'
+            'Access-Control-Allow-Origin':'*'
           });
           const cloneReq = request.clone({headers});
       

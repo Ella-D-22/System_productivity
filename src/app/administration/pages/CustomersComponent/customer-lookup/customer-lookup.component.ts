@@ -61,6 +61,7 @@ export class CustomerLookupComponent implements OnInit, OnDestroy {
     // ]
     getBranches(){
       this.subscription = this.branchesAPI.getBranchs().subscribe(res=>{
+        console.log("The data from Branches", res);
         this.branchesdata = res;
         this.customer_branch_array = this.branchesdata.entity;
 

@@ -90,7 +90,8 @@ import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/gu
 import { GuarantosMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos-maintenance/guarantos-maintenance.component';
 import { LimitsComponent } from './pages/Collaterals Service/limits/limits.component';
 import { LimitsMaintenanceComponent } from './pages/Collaterals Service/limits/limits-maintenance/limits-maintenance.component';
-// import { LimitsLookupComponent } from './pages/Collaterals Service/limits/limits-lookup/limits-lookup.component';
+
+import { LimitsLookupComponent } from './pages/Collaterals Service/limits/limits-lookup/limits-lookup.component';
 import { CorporateComponent } from './pages/CustomersComponent/components/lookup/corporate/corporate.component';
 import { EmployerComponent } from './pages/CustomersComponent/components/lookup/employer/employer.component';
 import { RetailComponent } from './pages/CustomersComponent/components/lookup/retail/retail.component';
@@ -109,6 +110,7 @@ import { ParamMainComponent } from './pages/CustomersComponent/components/params
 import { FailureComponent } from './pages/CustomersComponent/components/status/failure/failure.component';
 import { SuccessComponent } from './pages/CustomersComponent/components/status/success/success.component';
 import { CustomerLookupComponent } from './pages/CustomersComponent/customer-lookup/customer-lookup.component';
+
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -197,10 +199,15 @@ import { CustomerLookupComponent } from './pages/CustomersComponent/customer-loo
     MisSubSectorLookupComponent,
     GuarantosComponent,
     GuarantosMaintenanceComponent,
+
     LimitsComponent,
     LimitsMaintenanceComponent,
 
+    LimitsLookupComponent,
+
+
     // Customers
+
     MainKycComponent,
     RetailAddComponent,
     RetailModifyComponent,
@@ -219,6 +226,11 @@ import { CustomerLookupComponent } from './pages/CustomersComponent/customer-loo
     ParamInquireComponent,
     ParamMainComponent,
     CustomerLookupComponent
+
+    
+    
+ 
+
     
   ],
   imports: [
