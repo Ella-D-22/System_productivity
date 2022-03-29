@@ -9,6 +9,7 @@ import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
+  HttpParams,
 } from '@angular/common/http';
 
 import {
@@ -25,6 +26,8 @@ import { GlSubheadLookupComponent } from '../SystemConfigurations/GlobalParams/g
 import { CustomerLookupComponent } from '../CustomersComponent/customer-lookup/customer-lookup.component';
 import { productService } from './lookup/product/product.service';
 import { GuarantosService } from '../SystemConfigurations/GlobalParams/guarantos/guarantos.service';
+import { LoanproductLookupComponent } from '../ProductModule/loanproduct/loanproduct-lookup/loanproduct-lookup.component';
+import { BranchesLookupComponent } from '../branches/branches-lookup/branches-lookup.component';
 
 
 @Component({
@@ -58,6 +61,12 @@ export class LoanAccountComponent implements OnInit {
   firstName: any;
   middleName: any;
   surname: any;
+  lookupdata: any;
+  laa_scheme_code: any;
+  laa_scheme_code_desc: any;
+  lookupData: any;
+  solCode: any;
+  glDescription: any;
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -75,6 +84,14 @@ export class LoanAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPage();
+    this.getAll();
+  }
+
+  getAll(){
+
+    this.subscription = this.guarantorsAPI.getAll().subscribe()
+
+    
   }
   loading = false;
 
@@ -157,7 +174,9 @@ export class LoanAccountComponent implements OnInit {
 
   addGuarantor(){
     this.customer_code = this.guarantorsFormData.controls.customerCode.value;
-    this.subscription = this.guarantorsAPI.testGuarantorEligibility(this.customer_code).subscribe(res=>{
+    const params = new HttpParams()
+    .set('customer_code',this.customer_code )
+    this.subscription = this.guarantorsAPI.testGuarantorEligibility(params).subscribe(res=>{
       this._snackBar.open("The Customer Qualifies", "X", {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
@@ -165,10 +184,8 @@ export class LoanAccountComponent implements OnInit {
         panelClass: ['green-snackbar','login-snackbar'],
       });
     }, err=>{
-      this.error = err;
-      console.log("hey respond", this.error );
-      
-      this._snackBar.open(this.error, "Try again!", {
+      this.error = err;   
+      this._snackBar.open(this.error.error.message, "Check Another!", {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
         duration: 3000,
@@ -176,6 +193,31 @@ export class LoanAccountComponent implements OnInit {
       });
     })
 
+  }
+
+  schemeCodeLookup(): void {
+    // if account is for loan
+    // Scheme code for CAA
+    
+    const dialogRef = this.dialog.open(LoanproductLookupComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupdata= result.data;
+      this.laa_scheme_code = this.lookupdata.laa_scheme_code;
+      this.laa_scheme_code_desc = this.lookupdata.laa_scheme_code_desc;
+      this.formData.controls.scheme_code.setValue(this.laa_scheme_code);
+    });
+  }
+  branchesCodeLookup(): void {
+    const dialogRef = this.dialog.open(BranchesLookupComponent, {
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupData = result.data;
+      this.solCode = this.lookupData.solCode;
+      this.glDescription = this.lookupData.glDescription;
+      this.formData.controls.solCode.setValue(this.solCode);
+    });
   }
 
 
