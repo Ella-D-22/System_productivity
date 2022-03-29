@@ -13,6 +13,7 @@ import { LimitsService } from '../limits.service';
 export class LimitsMaintenanceComponent implements OnInit {
 
   showLimitId = false;
+  limitId:any
   function_type:any;
   dialogData:any;
   horizontalPosition:MatSnackBarHorizontalPosition
@@ -61,7 +62,7 @@ export class LimitsMaintenanceComponent implements OnInit {
       // this.formData.controls.sectorId.setValue(results.data.id)
     })
   }
-
+  
 
   onSubmit(){
     if(this.formData.valid){
