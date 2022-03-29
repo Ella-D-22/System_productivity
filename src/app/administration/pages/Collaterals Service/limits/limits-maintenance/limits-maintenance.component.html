@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/Collateral Services/Limits-Maintenance</div>
+        <div>Home/Collateral Services/Limits</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -8,9 +8,7 @@
         <form class="form"
         novalidate
         (ngSubmit)="onSubmit()"
-        [formGroup]="formData"       
-         #resetRequestsForm = "ngForm"
-        >
+        [formGroup]="formData">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
@@ -18,8 +16,7 @@
                             <label class="start pull-left">Function<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <select formControlName="function_type" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}" (change)="onSelectFunction($event)">
+                            <select formControlName="function_type" class="form-control">
                                 <option value="" disabled>-- Choose Function --</option>
                                 <option *ngFor="let flag of functionArray"  [value]="flag">{{flag}}</option>
 
@@ -27,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="showLimitId"  class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
                             <label class="start pull-left"> Limit Code<span class="warning">*</span></label>
@@ -37,13 +34,12 @@
                              class="form-control" [value]="limitId"
                              oninput="this.value=this.value.toUppercase()"
                              [ngClass]="{'is-invalid': submitted && f.limitId.errors}">
-                            <mat-icon (click)="limitNodesLookup()">search</mat-icon>
+                            <mat-icon (click)="limitsNodesLookup()">search</mat-icon>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="pull-right" mat-raised-button color="primary" type="submit">GO</button>
-            <br>
+            <button mat-raised-button color="primary" type="submit">GO</button>
         </form>
     </div>
 </mat-card>
