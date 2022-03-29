@@ -40,8 +40,7 @@ export class LimitsComponent implements OnInit {
   }
 
   formData = this.fb.group({
-  collateral_code: [''],
-  customer_code: [''],
+ 
   deletedBy: [''],
   deletedFlag: [''],
   deletedTime: [''],
@@ -55,7 +54,7 @@ export class LimitsComponent implements OnInit {
   modifiedTime: [''],
   non_fundbased_pcnt: [''],
   non_funded_value: [''],
-  collateral_value: [''],
+  customer_code: [''],
   postedBy: [''],
   postedFlag: [''],
   postedTime: [''],
@@ -105,13 +104,8 @@ export class LimitsComponent implements OnInit {
       }
      )
     }
-    removeCollaterals(){
-
-    }
-
-    addCollaterals(){
-
-    }
+   
+ 
   getPage(){
     this.subscription = this.NodesApi.currentMessage.subscribe(
       message =>{
@@ -121,32 +115,32 @@ export class LimitsComponent implements OnInit {
         if(this.function_type ==  'A-Add'){
           this.isDeleted = false;
           this.isEnabled = true;
-          this.formData = this.fb.group({
-            collateral_code: [''],
-            customer_code: [''],
-            deletedBy: [''],
-            deletedFlag: [''],
-            deletedTime: [''],
+
+          this.formData = this.fb.group({    
+            deletedBy: ['None'],
+            deletedFlag: ['N'],
+            deletedTime: [new Date()],
             fund_based_pcnt: [''],
             funded_value: [''],
             limit_code: [''],
             description: [''],
             limit_value: [''],
-            modifiedBy: [''],
-            modifiedTime: [''],
+            modifiedBy: ['None'],
+            modifiedTime: [new Date()],
             non_fundbased_pcnt: [''],
             non_funded_value: [''],
-            collateral_value: [''],
-            postedBy: [''],
-            postedFlag: [''],
-            postedTime: [''],
-            verifiedBy: [''],
-            verifiedFlag: [''],
-            verifiedTime: [''],
+            customer_code: [''],
+            postedBy: ['User'],
+            postedFlag: ['Y'],
+            postedTime: [new Date()],
+            verifiedBy: ['None'],
+            verifiedFlag: ['N'],
+            verifiedTime: [new Date()],
             collaterals: new FormArray([]),
 
          
           });
+        
     
         }else if(this.function_type == 'I-Inquire'){
           this.isDeleted = false;
@@ -251,8 +245,7 @@ export class LimitsComponent implements OnInit {
               this.results = res
 
               this.formData = this.fb.group({
-                collateral_code: [this.results.collateral_code],
-                customer_code: [this.results.customer_code],
+            
                 deletedBy: [this.user],
                 deletedFlag: ['Y'],
                 deletedTime: [new Date()],
@@ -294,8 +287,7 @@ export class LimitsComponent implements OnInit {
             res =>{
               this.results = res
               this.formData = this.fb.group({
-                collateral_code: [this.results.collateral_code],
-                customer_code: [this.results.customer_code],
+              
                 deletedBy: [this.results.deletedBy],
                 deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
