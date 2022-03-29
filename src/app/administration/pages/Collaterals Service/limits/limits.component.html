@@ -82,55 +82,6 @@
                                     <input type="text" class="form-control" formControlName="collateral_code">
                                 </div>
                             </div>
-    <div class="container-fluid">
-        <form class="form"
-         (ngSubmit)="onSubmit()"
-        novalidate
-        [formGroup]="formData">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="" class="start pull-left">Customer Code</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" class="form-control" formControlName="cust_code">
-                            <mat-icon>search</mat-icon>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="" class="start pull-left">Limit Node Category</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <select name="" id="" class="form-control" formControlName="limit_node_category">
-                                <option value="Non funded">NON FUNDED</option>
-                                <option value="FUNDED">FUNDED</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="">Limit Node</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" formControlName="limit_node" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="">Limit Node Value</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <input type="number" formControlName="limit_node_value" class="form-control">
                         </div>
                         <div class="col-md-6 col-sm-12">
                            <div class="form-group">
@@ -154,8 +105,4 @@
 
     </form>
   </div>
-            </div>
-        </form>
-       
-    </div>
 </mat-card>

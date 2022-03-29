@@ -835,14 +835,17 @@ BackdatedTransactionLookup(): void {
          }
         
          updateLoanFee(i:any){
-          this.t.push(this.fb.group(
-            this.feeFormData.value
-            ));
-           this.feeArray.push(this.feeFormData.value);
-           console.log("form fee", this.feeArray);
-           this.initLoanForm();
+           this.feeArray[i] = this.feeFormData.value
+          // this.t.push(this.fb.group(
+          //   this.feeFormData.value
+          //   ));
+          //  this.feeArray.push(this.feeFormData.value);
+          //  console.log("form fee", this.feeArray);
+          //  this.initLoanForm();
          }
-
+         updateGlSubheads(i:any){
+           this.glSubheadArray[i] = this.glsubheadFormData.value
+         }
 
          onRemove(i:any,){
           const index: number = this.feeArray.indexOf(this.feeArray.values);
