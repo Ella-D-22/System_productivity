@@ -13,11 +13,11 @@
              <div class="col-md-6 col-sm-12">
                  <div class="form-group">
                      <div class="col-md-6 col-sm-12 form-column">
-                         <label for="">Limit Name<span class="warning">*</span></label>
+                         <label for="">Limit Code<span class="warning">*</span></label>
                      </div>
                      <div class="col-md-6 col-sm-12 form-column">
-                         <input type="text" class="form-control" formControlName="description"
-                          oninput="this.value=this.value.toUppercase()">
+                         <input type="text" class="form-control" formControlName="limit_code"
+                          oninput="this.value=this.value.toUpperCase()">
                      </div>
                  </div>
              </div>
@@ -27,7 +27,7 @@
                         <label for="" class="start pull-right">Customer Code<span class="warning">*</span></label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                        <input type="text" formControlName="customer_code" class="form-control">
+                        <input type="text" formControlName="customer_code" class="form-control" oninput="this.value=this.value.toUpperCase()">
                         <mat-icon (click)="customerLookup()">search</mat-icon>
 
                     </div>
@@ -56,8 +56,8 @@
                </div>
            </div>
         </div>
+        
         <div class="row">
-           
             <div class="col-md-6 col-sm-12">
                <div class="form-group">
                    <div class="col-md-6 col-sm-12 form-column">
@@ -65,6 +65,16 @@
                    </div>
                    <div class="col-md-6 col-sm-12 form-column">
                        <input type="number" formControlName="non_fundbased_pcnt" class="form-control">
+                   </div>
+               </div>
+           </div>
+           <div class="col-md-6 col-sm-12">
+               <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <label for="" class="start pull-right">Limit Description<span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <input type="text" formControlName="description" class="form-control" oninput="this.value=this.value.toUpperCase()">
                    </div>
                </div>
            </div>
@@ -79,7 +89,8 @@
                                     <label for="" class="start pull-right">Collateral Code<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" class="form-control" formControlName="collateral_code">
+                                    <input type="text" class="form-control" formControlName="collateral_code" oninput="this.value=this.value.toUpperCase()">
+                                    <mat-icon (click)="collateralLookup()">search</mat-icon>
                                 </div>
                             </div>
                         </div>
@@ -90,6 +101,7 @@
                                </div>
                                <div class="col-md-6 col-sm-12 form-column">
                                    <input type="number" class="form-control" formControlName="collateral_value">
+                                   
                                    <mat-icon (click)="onAddField()" color="primary">add_circle</mat-icon>
                                    <mat-icon (click)="onRemoveField(i)" color="warn">remove_circle</mat-icon>
                               
@@ -99,8 +111,9 @@
                     </div>
                 </div>
                 </div>
+
         <br>
-        <button mat-raised-button color="" type="submit" class="pull-left">Back</button>
+        <button mat-raised-button color="default" routerLink="../../maintenance"   type="submit" class="pull-left" >Back</button>
         <button mat-raised-button color="primary" type="submit" class="pull-right">Submit</button>
 
     </form>

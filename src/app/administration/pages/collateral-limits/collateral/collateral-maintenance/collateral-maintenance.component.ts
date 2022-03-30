@@ -163,7 +163,7 @@ export class CollateralMaintenanceComponent implements OnInit {
         this.function_type = this.formData.value['function_type']
         console.log("test", this.function_type)
         if(this.available == false && this.function_type == 'A-Add'){
-          this.router.navigate(['configurations/limits and collateral/Collateral/data/view'],{
+          this.router.navigate(['configurations/collateral-limits/Collateral/data/view'],{
             state:this.formData.value
           })
           console.log(this.available);
@@ -181,7 +181,7 @@ export class CollateralMaintenanceComponent implements OnInit {
          console.log(this.available);
          
         }else if(this.available == true && this.function_type != 'A-Add'){
-          this.router.navigate(['configurations/limits and collateral/Collateral/data/view'],{
+          this.router.navigate(['configurations/collateral-limits/Collateral/data/view'],{
             state:this.formData.value
           })
           console.log(this.available);

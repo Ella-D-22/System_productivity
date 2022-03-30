@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CollateralLookupComponent } from '../../collateral/collateral-lookup/collateral-lookup.component';
+import { CollateralLookupComponent } from '../collateral/collateral-lookup/collateral-lookup.component';
 import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
 import { LimitsService } from './limits.service';
 
@@ -26,6 +26,7 @@ export class LimitsComponent implements OnInit {
   verticalPosition:MatSnackBarVerticalPosition
   customerData:any
   collateralData:any
+  limitCode:any
   constructor(private fb:FormBuilder,
     private NodesApi:LimitsService,
     private _snackbar:MatSnackBar,
@@ -40,8 +41,7 @@ export class LimitsComponent implements OnInit {
   }
 
   formData = this.fb.group({
-  collateral_code: [''],
-  customer_code: [''],
+ 
   deletedBy: [''],
   deletedFlag: [''],
   deletedTime: [''],
@@ -55,7 +55,7 @@ export class LimitsComponent implements OnInit {
   modifiedTime: [''],
   non_fundbased_pcnt: [''],
   non_funded_value: [''],
-  collateral_value: [''],
+  customer_code: [''],
   postedBy: [''],
   postedFlag: [''],
   postedTime: [''],
@@ -105,48 +105,44 @@ export class LimitsComponent implements OnInit {
       }
      )
     }
-    removeCollaterals(){
-
-    }
-
-    addCollaterals(){
-
-    }
+   
+ 
   getPage(){
     this.subscription = this.NodesApi.currentMessage.subscribe(
       message =>{
         this.message = message
         this.function_type = this.message.function_type
-        this.limitId = this.message.limitId
+        this.limitId = this.message.limit_id
+        this.limitCode = this.message.limit_code
         if(this.function_type ==  'A-Add'){
           this.isDeleted = false;
           this.isEnabled = true;
-          this.formData = this.fb.group({
-            collateral_code: [''],
-            customer_code: [''],
-            deletedBy: [''],
-            deletedFlag: [''],
-            deletedTime: [''],
+
+          this.formData = this.fb.group({    
+            deletedBy: ['None'],
+            deletedFlag: ['N'],
+            deletedTime: [new Date()],
             fund_based_pcnt: [''],
             funded_value: [''],
             limit_code: [''],
             description: [''],
             limit_value: [''],
-            modifiedBy: [''],
-            modifiedTime: [''],
+            modifiedBy: ['None'],
+            modifiedTime: [new Date()],
             non_fundbased_pcnt: [''],
             non_funded_value: [''],
-            collateral_value: [''],
-            postedBy: [''],
-            postedFlag: [''],
-            postedTime: [''],
-            verifiedBy: [''],
-            verifiedFlag: [''],
-            verifiedTime: [''],
+            customer_code: [''],
+            postedBy: ['User'],
+            postedFlag: ['Y'],
+            postedTime: [new Date()],
+            verifiedBy: ['None'],
+            verifiedFlag: ['N'],
+            verifiedTime: [new Date()],
             collaterals: new FormArray([]),
 
          
           });
+        
     
         }else if(this.function_type == 'I-Inquire'){
           this.isDeleted = false;
@@ -155,6 +151,8 @@ export class LimitsComponent implements OnInit {
           this.subscription = this.NodesApi.getLimitsNodesById(this.limitId).subscribe(
             res =>{
                 this.results = res
+                console.log(this.results, "Inquiring");
+                
 
                 this.formData = this.fb.group({
                   collateral_code: [this.results.collateral_code],
@@ -183,7 +181,7 @@ export class LimitsComponent implements OnInit {
 
                 });
                 err =>{
-                  this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+                  this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
                   this.error = err
                   this._snackbar.open(this.error, "Try Again",{
                     horizontalPosition:this.horizonatalPosition,
@@ -229,7 +227,7 @@ export class LimitsComponent implements OnInit {
 
               });
               err =>{
-                this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+                this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizonatalPosition,
@@ -251,8 +249,7 @@ export class LimitsComponent implements OnInit {
               this.results = res
 
               this.formData = this.fb.group({
-                collateral_code: [this.results.collateral_code],
-                customer_code: [this.results.customer_code],
+            
                 deletedBy: [this.user],
                 deletedFlag: ['Y'],
                 deletedTime: [new Date()],
@@ -294,8 +291,7 @@ export class LimitsComponent implements OnInit {
             res =>{
               this.results = res
               this.formData = this.fb.group({
-                collateral_code: [this.results.collateral_code],
-                customer_code: [this.results.customer_code],
+              
                 deletedBy: [this.results.deletedBy],
                 deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
@@ -318,7 +314,7 @@ export class LimitsComponent implements OnInit {
                 verifiedTime: [new Date()]
               });
               err =>{
-                this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+                this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizonatalPosition,
@@ -352,7 +348,7 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
 
           },
           err =>{
@@ -381,7 +377,7 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
 
           },
           err =>{
@@ -408,7 +404,7 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
 
           },
           err =>{
@@ -428,7 +424,7 @@ export class LimitsComponent implements OnInit {
         this.isEnabled = true
       }
     }else{
-      this.router.navigateByUrl("system/configurations/limits and collateral/Limits Nodes/maintenance")
+      this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
 
        this._snackbar.open("Invalid Form Data Value", "Try Again",{
          horizontalPosition:this.horizonatalPosition,
