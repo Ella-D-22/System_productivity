@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
+import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
 import { MainGroupService } from '../main-group.service';
 
 @Component({
@@ -20,6 +22,7 @@ export class MainGroupComponent implements OnInit {
  group_code:any
  results:any
  error:any
+ dialogData:any
 
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
@@ -82,10 +85,29 @@ export class MainGroupComponent implements OnInit {
   get g(){return this.f.groupMembers as FormArray}
   
     branchLookup():void{
+      const dialogRef =  this.dialog.open(BranchesLookupComponent,{
+
+      });
+      dialogRef.afterClosed().subscribe(results =>{
+        this.dialogData = results.data;
+        console.log(this.dialogData);
+        
+        this.formData.controls.sol_id.setValue(results.data.sol_id)
+       
+      })
 
     }
     customerLookup():void{
+      const dialogRef =  this.dialog.open(CustomerLookupComponent,{
 
+      });
+      dialogRef.afterClosed().subscribe(results =>{
+        this.dialogData = results.data;
+        console.log(this.dialogData);
+        
+        this.formData.controls.cust_code.setValue(results.data.cust_code)
+       
+      })
     }
     onAddField(){
 

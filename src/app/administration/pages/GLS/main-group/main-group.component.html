@@ -50,7 +50,7 @@
                                     <label for="" class="start pull-left" >Branch Name<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" class="form-control" formControlName="branch_name">
+                                    <input type="text" class="form-control" formControlName="branch_name" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -210,7 +210,7 @@
                                            <label for="" class="start pull-left">Customer Name<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="cust_name" class="form-control">
+                                           <input type="text" formControlName="cust_name" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div>

@@ -35,7 +35,7 @@ export class SubGroupService {
 
  }
 
- createMainGroup(data:any):Observable<any>{
+ createSubGroup(data:any):Observable<any>{
    let API_URL = `${this.baseURL}/add`
    return this.http.post(API_URL, data, {headers:this.headers, withCredentials:false}).pipe(map(
      res =>{
@@ -46,7 +46,7 @@ export class SubGroupService {
    ))
  }
 
- getMainGroups(){
+ getSubGroups(){
    let API_URL = `${this.baseURL}/all`
    return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(map(
      res =>{
@@ -56,7 +56,7 @@ export class SubGroupService {
    ))
  }
 
- getMainGroupByCode(subgroupCode:any):Observable<any>{
+ getSubGroupByCode(subgroupCode:any):Observable<any>{
    let API_URL = `${this.baseURL}/find/${subgroupCode}`
    return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(
      map(
@@ -68,7 +68,7 @@ export class SubGroupService {
    )
  }
 
- updateMainGroups(data:any):Observable<any>{
+ updateSubGroups(data:any):Observable<any>{
    let API_URL = `${this.baseURL}/update`
    return this.http.put(API_URL, data, {headers:this.headers, withCredentials:false}).pipe(map(
      res =>{

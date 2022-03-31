@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
+import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
 import { SubGroupService } from './sub-group.service';
 
 @Component({
@@ -20,10 +23,12 @@ export class SubGroupComponent implements OnInit {
   function_type:any
   message:any
   subgroup_code:any
+  dialogData:any
   constructor(private subService:SubGroupService,
     private _snackbar:MatSnackBar,
-    private router:Router,
-    private fb:FormBuilder) { }
+     private router:Router,
+     private fb:FormBuilder,
+    private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.getPage()
@@ -109,12 +114,30 @@ export class SubGroupComponent implements OnInit {
 
 
 
+  branchLookup():void{
+    const dialogRef =  this.dialog.open(BranchesLookupComponent,{
 
-  customerLookup():void{
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.dialogData = results.data;
+      console.log(this.dialogData);
+      
+      this.formData.controls.sol_id.setValue(results.data.sol_id)
+     
+    })
 
   }
-  branchLookup():void{
+  customerLookup():void{
+    const dialogRef =  this.dialog.open(CustomerLookupComponent,{
 
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.dialogData = results.data;
+      console.log(this.dialogData);
+      
+      this.formData.controls.cust_code.setValue(results.data.cust_code)
+     
+    })
   }
 
   getPage(){
@@ -166,7 +189,7 @@ export class SubGroupComponent implements OnInit {
           });
         } else if(this.function_type == "I-Inquire"){
           this.disabledFormControl()
-          this.subscription = this.subService.getMainGroupByCode(this.subgroup_code).subscribe(
+          this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
 
@@ -213,7 +236,7 @@ export class SubGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "M_Modify"){
-          this.subscription = this.subService.getMainGroupByCode(this.subgroup_code).subscribe(
+          this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
 
@@ -271,7 +294,7 @@ export class SubGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "X-Delete"){
-          this.subscription = this.subService.getMainGroupByCode(this.subgroup_code).subscribe(
+          this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
 
@@ -335,7 +358,81 @@ export class SubGroupComponent implements OnInit {
 
 
   onSubmit(){
+    if(this.formData.valid){
+
+      if(this.function_type == "A-Add"){
+        this.isEnabled = true;
+        this.subscription = this.subService.createSubGroup(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Executed Successfully", "X",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            });
+            this.router.navigateByUrl("system/GLS/main-group/maintenance")
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
+      } else if(this.function_type == "M-Modify"){
+        this.subscription = this.subService.updateSubGroups(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Executed Successfully", "X",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            });
+            this.router.navigateByUrl("system/GLS/main-group/maintenance")
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
+      } else if(this.function_type == "X-Delete"){
+        this.subscription = this.subService.updateSubGroups(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Executed Successfully", "X",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            });
+            this.router.navigateByUrl("system/GLS/main-group/maintenance")
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
+      }
+    }
+  }
 
   }
 
-}
