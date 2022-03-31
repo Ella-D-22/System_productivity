@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MainGroupService {
 
-  baseURL = `${environment.collateralAPI}/api/v1/limit`
+  baseURL = `${environment.glsAPI}/gls`
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http:HttpClient) { }
@@ -57,7 +57,7 @@ export class MainGroupService {
  }
 
  getMainGroupByCode(groupCode:any):Observable<any>{
-   let API_URL = `${this.baseURL}/${groupCode}`
+   let API_URL = `${this.baseURL}/find/${groupCode}`
    return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(
      map(
        res =>{

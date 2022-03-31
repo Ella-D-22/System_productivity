@@ -34,7 +34,9 @@ accountsAPI: 'http://localhost:9099',
 productAPI: 'http://localhost:9100',
 systemAPI: 'http://localhost:9093',
 
-customerAPI: 'http://localhost:9097'
+customerAPI: 'http://localhost:9097',
+
+glsAPI: 'http://localhost:9910'
 
 };
 

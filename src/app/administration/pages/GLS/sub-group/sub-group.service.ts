@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SubGroupService {
 
-  baseURL = `${environment.collateralAPI}/api/v1/limit`
+  baseURL = `${environment.glsAPI}/subgroup`
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http:HttpClient) { }
@@ -57,7 +57,7 @@ export class SubGroupService {
  }
 
  getMainGroupByCode(subgroupCode:any):Observable<any>{
-   let API_URL = `${this.baseURL}/${subgroupCode}`
+   let API_URL = `${this.baseURL}/find/${subgroupCode}`
    return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(
      map(
        res =>{
