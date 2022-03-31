@@ -43,7 +43,7 @@ export class MainGroupMaintenanceComponent implements OnInit {
     onSelectFunction(event:any){
       if(event.target.value == "A-Add"){
          this.showGroupCode = false;
-         this.formData.controls.limitId.setValue("")
+         this.formData.controls.function_type.setValue("")
         //  this.formData.controls.function_type.setValue("")
       }else if (event.target.value != "A-Add"){
          this.showGroupCode = true;
