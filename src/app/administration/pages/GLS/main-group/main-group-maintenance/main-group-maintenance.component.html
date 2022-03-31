@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <div>Home/System/GLS/MainGroup/Maintenance</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+<br>
+    <div class="container-fluid">
+        <form action=""
+        [formGroup]="formData"
+        #resetRequestsForm = "ngForm"
+        (ngSubmit)="onSubmit()"
+        novalidate>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="">Function<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <select formControlName="function_type" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}" (change)="onSelectFunction($event)" >
+                                <option disabled>--Choose A function--</option>
+                                <option *ngFor="let item of functionArray" [value]="item">{{item}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="showGroupCode" class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left" for="">GroupCode<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" class="form-control" formControlName="group_code"
+                             oninput="this.value=this.value.toUpperCase()" [ngClass]="{'is-invalid': submitted && f.group_code.errors}">
+                            <mat-icon (click)="mainGroupLookup()">search</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="pull-right" mat-raised-button color="primary" type="submit">GO</button>
+        </form>
+    </div>
+</mat-card>

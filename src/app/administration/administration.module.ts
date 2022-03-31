@@ -109,6 +109,12 @@ import { ParamMainComponent } from './pages/CustomersComponent/components/params
 import { FailureComponent } from './pages/CustomersComponent/components/status/failure/failure.component';
 import { SuccessComponent } from './pages/CustomersComponent/components/status/success/success.component';
 import { CustomerLookupComponent } from './pages/CustomersComponent/customer-lookup/customer-lookup.component';
+import { MainGroupComponent } from './pages/GLS/main-group/main-group.component';
+import { MainGroupMaintenanceComponent } from './pages/GLS/main-group/main-group-maintenance/main-group-maintenance.component';
+import { SubGroupMaintenanceComponent } from './pages/GLS/sub-group/sub-group-maintenance/sub-group-maintenance.component';
+import { SubGroupComponent } from './pages/GLS/sub-group/sub-group.component';
+import { SubGroupLookupComponent } from './pages/GLS/sub-group/sub-group-lookup/sub-group-lookup.component';
+import { MainGroupLookupComponent } from './pages/GLS/main-group/main-group-lookup/main-group-lookup.component';
 
 @NgModule({
   declarations: [
@@ -224,7 +230,13 @@ import { CustomerLookupComponent } from './pages/CustomersComponent/customer-loo
     ParamAddComponent,
     ParamInquireComponent,
     ParamMainComponent,
-    CustomerLookupComponent
+    CustomerLookupComponent,
+    MainGroupComponent,
+    MainGroupMaintenanceComponent,
+    SubGroupMaintenanceComponent,
+    SubGroupComponent,
+    SubGroupLookupComponent,
+    MainGroupLookupComponent
 
     
     

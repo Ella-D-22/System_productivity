@@ -64,6 +64,10 @@ import { CollateralComponent } from './pages/collateral-limits/collateral/collat
 import { CollateralMaintenanceComponent } from './pages/collateral-limits/collateral/collateral-maintenance/collateral-maintenance.component';
 import { LimitsComponent } from './pages/collateral-limits/limits/limits.component';
 import { LimitsMaintenanceComponent } from './pages/collateral-limits/limits/limits-maintenance/limits-maintenance.component';
+import { MainGroupComponent } from './pages/GLS/main-group/main-group.component';
+import { MainGroupMaintenanceComponent } from './pages/GLS/main-group/main-group-maintenance/main-group-maintenance.component';
+import { SubGroupComponent } from './pages/GLS/sub-group/sub-group.component';
+import { SubGroupMaintenanceComponent } from './pages/GLS/sub-group/sub-group-maintenance/sub-group-maintenance.component';
 
 const routes: Routes = [{
   path: '',
@@ -525,6 +529,36 @@ const routes: Routes = [{
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
       },
+
+      
+      // *******************************************************************************************\
+      //                                         GLS Management
+      // *******************************************************************************************
+      {
+        path:'GLS/main-group/maintenance',
+        component:MainGroupMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path:'GLS/main-group/data/view',
+        component:MainGroupComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+
+      {
+        path:'GLS/sub-group/maintenance',
+        component:SubGroupMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path:'GLS/sub-group/data/view',
+        component:SubGroupComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      }
 
      
 

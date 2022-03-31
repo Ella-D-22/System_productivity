@@ -125,11 +125,27 @@
              </mat-nav-list>
            </mat-expansion-panel>
          </mat-accordion>
+           <!-- GLS -->
+         <mat-accordion class="app-nav-accordion">
+          <mat-expansion-panel class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="nav-title">
+                <mat-icon>supervised_user_circle</mat-icon>
+                GLS Management
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+             <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/GLS/main-group/maintenance" matTooltip="Main Group Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Main Group</a>
+             <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/GLS/sub-group/maintenance" matTooltip="Sub Group  Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Sub Groups</a>
+
+            </mat-nav-list>
+          </mat-expansion-panel>
+        </mat-accordion>
          
          <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/branches/maintenance">
           <mat-icon>home</mat-icon>
            Branches Management</a> 
-
+         
            <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/transactions/maintenance">
             <mat-icon>home</mat-icon>
              Transaction Maintenance</a> 
