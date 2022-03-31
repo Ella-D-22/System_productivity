@@ -15,7 +15,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label class="start pull-left">Group Code<span class="warning">*</span></label>
+                                    <label class="start pull-left">SubGroup Code<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="subGroupCode" class="form-control">
@@ -40,7 +40,7 @@
                                     <label for="" class="start pull-left">Sol ID<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="sol_id" class="form-control">
+                                    <input type="text" formControlName="sol_id" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                     <mat-icon (click)="branchLookup()">search</mat-icon>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                     <label for="" class="start pull-left" >Branch Name<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" class="form-control" formControlName="branch_name">
+                                    <input type="text" class="form-control" formControlName="branch_name" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Registration Number<span>*</span></label>
+                                    <label for="" class="start pull-left">Registration Number<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" class="form-control" formControlName="reg_no" oninput="this.value=this.value.toUpperCase()">
@@ -157,7 +157,7 @@
                                    <label for="" class="start pull-left">SubGroup Chairperson<span class="warning">*</span></label>
                                </div>
                                <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="chairperson" class="form-control">
+                                <input type="text" formControlName="chairperson" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 <mat-icon (click)="customerLookup()">search</mat-icon>
                                 <p></p>
                                </div>  
@@ -182,7 +182,7 @@
                                     <label for="" class="start pull-left">Treasurer<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="treasurer" class="form-control">
+                                    <input type="text" formControlName="treasurer" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                     <mat-icon (click)="customerLookup()">search</mat-icon>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                                            <label for="" class="start pull-left">Customer Name<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="cust_name" class="form-control">
+                                           <input type="text" formControlName="cust_name" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div>
@@ -235,7 +235,7 @@
                                     <label for="" class="start pull-left">Total Members</label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="total_members" class="form-control ">
+                                    <input type="text" formControlName="total_members" class="form-control " oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
