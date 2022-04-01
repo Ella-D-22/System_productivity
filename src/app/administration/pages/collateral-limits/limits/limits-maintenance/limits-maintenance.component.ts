@@ -13,12 +13,15 @@ import { LimitsService } from '../limits.service';
 })
 export class LimitsMaintenanceComponent implements OnInit {
 
-  showLimitId = false;
+  existingData = false;
   submitted = false
   function_type:any;
   dialogData:any;
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
+  limitCode: any;
+  limit_description: any;
+  limitDescription: any;
   
 
   constructor(private fb:FormBuilder,
@@ -36,19 +39,19 @@ export class LimitsMaintenanceComponent implements OnInit {
   
   formData = this.fb.group({
     function_type:[''],
-    limit_id : ['']
+    limitCode : [''],
+    limitDescription:['']
   })
   get f() { 
     return this.formData.controls; }
 
-
   onSelectFunction(event:any){
     if(event.target.value == "A-Add"){
-       this.showLimitId = false;
+       this.existingData = false;
        this.formData.controls.limitId.setValue("")
       //  this.formData.controls.function_type.setValue("")
     }else if (event.target.value != "A-Add"){
-       this.showLimitId = true;
+       this.existingData = true;
       //  this.formData.controls.function_type.setValue("")
        this.formData.controls.limitId.setValue("")
     }
@@ -58,29 +61,22 @@ export class LimitsMaintenanceComponent implements OnInit {
   //lookup
   limitNodesLookup():void{
     const dialogRef =  this.dialog.open(LimitsLookupComponent,{
-
     });
     dialogRef.afterClosed().subscribe(results =>{
       this.dialogData = results.data;
-      console.log(this.dialogData);
+      this.limitCode = this.dialogData.limitCode;
+      this.limitDescription = this.dialogData.limitDescription;
       
       this.formData.controls.limit_id.setValue(results.data.id)
      
     })
   }
 
-
   onSubmit(){
     this.submitted = true;
-    
     if(this.formData.valid){
       this.NodesAPI.changeMessage(this.formData.value)
-      if(this.function_type == 'A-Add'){
-
-        this.router.navigateByUrl("system/configurations/collateral-limits/Limits/data/view")
-      }else if (this.function_type != 'A-Add'){
-        this.router.navigateByUrl("system/configurations/collateral-limits/Limits/data/view")
-      }
+      this.router.navigateByUrl("system/configurations/collateral-limits/Limits/data/view")
     }else{
       this._snackbar.open("Invalid form data", "Try Again", {
         horizontalPosition: this.horizontalPosition,

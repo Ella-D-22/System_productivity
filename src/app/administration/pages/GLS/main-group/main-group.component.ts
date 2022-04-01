@@ -3,9 +3,8 @@ import { FormArray, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { timeStamp } from 'console';
 import { Subscription } from 'rxjs';
-import { MainGroupService } from '../main-group.service';
+import { MainGroupService } from './main-group.service';
 
 @Component({
   selector: 'app-main-group',

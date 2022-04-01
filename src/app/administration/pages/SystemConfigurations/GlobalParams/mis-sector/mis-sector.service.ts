@@ -12,7 +12,7 @@ export class MisSectorService {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = `${environment.accountsAPI}/api/vi/mis/sector`;
+  baseURL = `${environment.accountAPI}/api/vi/mis/sector`;
 
   //message medium
   private messageSource = new BehaviorSubject('default message');

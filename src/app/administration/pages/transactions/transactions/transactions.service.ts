@@ -13,7 +13,7 @@ export class TransactionsService {
   baseURL = `${environment.productAPI}/api/v1/product/caa`;
 
 
-  private AccountBaseUrl: string = `${environment.accountsAPI}/accounts/`;
+  private AccountBaseUrl: string = `${environment.accountAPI}/accounts/`;
 
   transactionAPI
 
