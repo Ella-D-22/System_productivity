@@ -58,7 +58,7 @@ export class SubGroupService {
 
  getSubGroupByCode(subgroupCode:any):Observable<any>{
    let API_URL = `${this.baseURL}/find/${subgroupCode}`
-   return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(
+   return this.http.get(API_URL, {withCredentials:false}).pipe(
      map(
        res =>{
          return res || {}

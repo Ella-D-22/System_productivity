@@ -145,15 +145,17 @@ export class MainGroupComponent implements OnInit {
         message =>{
           this.message = message
           this.function_type = this.message.function_type
-          this.groupCode = this.message.groupCode
-
+          this.group_code = this.message.groupCode
+           console.log(this.groupCode);
+           console.log(this.message);
+           
           if(this.function_type == "A-Add"){
             this.isEnabled =  true;
             this.formData = this.fb.group({
               branch_name: [''],
               chairperson: [''],
               first_meeting_date: [''],
-              groupCode:[this.groupCode],
+              groupCode:[this.group_code],
               groupManager_ID: [''],
               groupStatus:[''],
               group_formation_date:[''],
@@ -190,15 +192,18 @@ export class MainGroupComponent implements OnInit {
             });
           } else if(this.function_type == "I-Inquire"){
             this.disabledFormControl()
+            console.log("hellp");
+            
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.results = res
-
+                  console.log(this.results);
+                  
                 this.formData = this.fb.group({
                   branch_name: [this.results.branch_name],
                   chairperson: [this.results.chairperson],
                   first_meeting_date: [this.results.first_meeting_date],
-                  groupCode:[this.results.groupCode],
+                  groupCode:[this.results.group_code],
                   groupManager_ID: [this.results.groupManager_ID],
                   groupStatus:[this.results.groupStatus],
                   group_formation_date:[this.results.group_formation_date],
@@ -295,7 +300,7 @@ export class MainGroupComponent implements OnInit {
               }
             )
           } else if(this.function_type == "X-Delete"){
-            this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
+            this.subscription = this.mainService.getMainGroupByCode(this.groupCode).subscribe(
               res =>{
                 this.results = res
 

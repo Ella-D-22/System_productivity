@@ -119,6 +119,31 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
+                                    <label class="start pull-left">Group Formation Date<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input  [matDatepicker]="ppicker" formControlName="subgroup_formation_date" class="form-control" />
+                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #ppicker></mat-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Group Status<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="groupStatus" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
                                     <label for="" class="start pull-left">Start Meeting Date<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">

@@ -58,10 +58,12 @@ export class MainGroupService {
 
  getMainGroupByCode(groupCode:any):Observable<any>{
    let API_URL = `${this.baseURL}/find/${groupCode}`
-   return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(
+   return this.http.get(API_URL, { withCredentials:false}).pipe(
      map(
        res =>{
          return res || {}
+         
+         
        },
        catchError(this.errorMgmt)
      )

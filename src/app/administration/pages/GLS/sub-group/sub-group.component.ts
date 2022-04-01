@@ -161,7 +161,7 @@ export class SubGroupComponent implements OnInit {
         this.subGroupCode = this.message.subGroupCode
 
         if(this.function_type == "A-Add"){
-          
+          this.isEnabled = true;
           this.formData = this.fb.group({
             branch_name: [''],
             chairperson: [''],
@@ -176,13 +176,11 @@ export class SubGroupComponent implements OnInit {
             subgroup_name:[''],
             subgroup_phone:[''],
             maxAllowedMembers:[''],
-            maxAllowedSubGroups:[''],
+          
             meeting_frequency:[''],
            
             next_meeting_date:[''],
-            postedBy:["user"],
-            postedFlag:['Y'],
-            postedTime:[new Date()],
+          
             reg_no:[''],
             secretary:[''],
             sol_id:[''],
@@ -192,15 +190,17 @@ export class SubGroupComponent implements OnInit {
             total_savingBalance:[''],
             total_savingsAccs:[''],
             treasurer:[''],
-            
-            modifiedBy:[''],
-            modifiedTime:[''],
-            deleteFlag: [''],
-            deletedBy: [''],
-            deletedTime: [''],
-            verifiedBy:[''],
-            verifiedFlag:[''],
-            verifiedTime: [''],
+            postedBy:["user"],
+            postedFlag:['Y'],
+            postedTime:[new Date()],
+            modifiedBy:['user'],
+            modifiedTime:[new Date()],
+            deleteFlag: ['N'],
+            deletedBy: ['user'],
+            deletedTime: [new Date()],
+            verifiedBy:['user'],
+            verifiedFlag:['N'],
+            verifiedTime: [new Date()],
             groupMembers: new FormArray([])
 
           });
@@ -222,7 +222,7 @@ export class SubGroupComponent implements OnInit {
                 subgroup_name:[this.results.subgroup_name],
                 subgroup_phone:[this.results.subgroup_phone],
                 maxAllowedMembers:[this.results.maxAllowedMembers],
-                maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
+                // maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
                 meeting_frequency:[this.results.meeting_frequency],
                 next_meeting_date:[this.results.next_meeting_date],
                 reg_no:[this.results.reg_no],
