@@ -42,7 +42,7 @@ export class SubGroupMaintenanceComponent implements OnInit {
     onSelectFunction(event:any){
       if(event.target.value == "A-Add"){
          this.showSubgroupCode = false;
-         this.formData.controls.limitId.setValue("")
+         this.formData.controls.group_code.setValue("")
         //  this.formData.controls.function_type.setValue("")
       }else if (event.target.value != "A-Add"){
          this.showSubgroupCode = true;

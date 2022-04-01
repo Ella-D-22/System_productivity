@@ -31,6 +31,8 @@ export class MainGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPage()
+    this.onAddField()
+
   }
 
   formData = this.fb.group({
@@ -338,6 +340,7 @@ export class MainGroupComponent implements OnInit {
       if(this.formData.valid){
 
         if(this.function_type == "A-Add"){
+          this.isEnabled = true;
           this.subscription = this.mainService.createMainGroup(this.formData.value).subscribe(
             res =>{
               this.results = res
@@ -349,6 +352,61 @@ export class MainGroupComponent implements OnInit {
   
               });
               this.router.navigateByUrl("system/GLS/main-group/maintenance")
+            },
+            err =>{
+              this.error = err
+              this._snackbar.open(this.error, "Try Again",{
+                horizontalPosition:this.horizontalPosition,
+                verticalPosition:this.verticalPosition,
+                duration:3000,
+                panelClass:['red-snackbar', 'login-snackbar']
+              })
+            }
+          )
+        } else if(this.function_type == "M-Modify"){
+          this.subscription = this.mainService.updateMainGroups(this.formData.value).subscribe(
+            res =>{
+              this.results = res
+              this._snackbar.open("Executed Successfully", "X",{
+                horizontalPosition:this.horizontalPosition,
+                verticalPosition:this.verticalPosition,
+                duration:3000,
+                panelClass:['green-snackbar', 'login-snackbar']
+  
+              });
+              this.router.navigateByUrl("system/GLS/main-group/maintenance")
+            },
+            err =>{
+              this.error = err
+              this._snackbar.open(this.error, "Try Again",{
+                horizontalPosition:this.horizontalPosition,
+                verticalPosition:this.verticalPosition,
+                duration:3000,
+                panelClass:['red-snackbar', 'login-snackbar']
+              })
+            }
+          )
+        } else if(this.function_type == "X-Delete"){
+          this.subscription = this.mainService.updateMainGroups(this.formData.value).subscribe(
+            res =>{
+              this.results = res
+              this._snackbar.open("Executed Successfully", "X",{
+                horizontalPosition:this.horizontalPosition,
+                verticalPosition:this.verticalPosition,
+                duration:3000,
+                panelClass:['green-snackbar', 'login-snackbar']
+  
+              });
+              this.router.navigateByUrl("system/GLS/main-group/maintenance")
+            },
+            err =>{
+              this.error = err
+              this._snackbar.open(this.error, "Try Again",{
+                horizontalPosition:this.horizontalPosition,
+                verticalPosition:this.verticalPosition,
+                duration:3000,
+                panelClass:['red-snackbar', 'login-snackbar']
+              })
             }
           )
         }
