@@ -22,6 +22,8 @@ import { BranchComponent } from './lookup/branch/branch.component';
 import { ProductComponent } from './lookup/product/product.component';
 import { Subscription } from 'rxjs';
 import { GlSubheadLookupComponent } from '../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
+import { CustomerLookupComponent } from '../CustomersComponent/customer-lookup/customer-lookup.component';
+import { LoanproductLookupComponent } from '../ProductModule/loanproduct/loanproduct-lookup/loanproduct-lookup.component';
 
 
 @Component({
@@ -50,6 +52,10 @@ export class LoanAccountComponent implements OnInit {
   glSubheadData:any
   results:any
   error:any
+  customer_lookup: any;
+  lookupdata: any;
+  laa_scheme_code: any;
+  laa_scheme_code_desc: any;
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -127,6 +133,34 @@ export class LoanAccountComponent implements OnInit {
       this.glSubheadData.controls.laa_gl_subhead_description.setValue(this.gl_subhead_description);
     });
   }
+
+  customerLookup(): void {
+    const dialogRef = this.dialog.open(CustomerLookupComponent, {
+      // height: '400px',
+      // width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.customer_lookup = result.data;
+
+      // this.gl_subhead_description =  result.data.glSubheadDescription;
+      // this.gl_subhead_code =  result.data.glSubheadCode;     
+      //  // this.eventtypedata = result.data;
+      // this.glSubheadData.controls.laa_gl_subhead.setValue(this.gl_subhead_code);
+      // this.glSubheadData.controls.laa_gl_subhead_description.setValue(this.gl_subhead_description);
+    });
+  }
+
+  laaSchemeCodeLookup(): void {
+    const dialogRef = this.dialog.open(LoanproductLookupComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupdata= result.data;
+      this.laa_scheme_code = this.lookupdata.laa_scheme_code;
+      this.laa_scheme_code_desc = this.lookupdata.laa_scheme_code_desc;
+      this.formData.controls.scheme_code.setValue(this.laa_scheme_code);
+    });
+  }
+  
 
 
   getPage() {

@@ -11,7 +11,7 @@ export class SchemeTypeService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
     // API endpoint     /api/v1/parameters/configurations/static/params/scheme-type/
-  baseURL = `${environment.accountsAPI}/scheme-type`;
+  baseURL = `${environment.accountAPI}/scheme-type`;
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');

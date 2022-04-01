@@ -793,7 +793,6 @@ backdate_transaction_Lookup(): void {
     get t() { return this.g.laa_loanfees as FormArray; }
     get l() {return this.g.laa_glsubheads as FormArray;}
 
-
     // newFormDkkata = this.fb.group({
     //   org_lnk_event_id: ['', Validators.required],
     // });
@@ -821,6 +820,7 @@ backdate_transaction_Lookup(): void {
               this.initGlSUbheadForm();
            }
          }
+         
          updateLoanFee(i:any){
            this.feeArray[i] = this.feeFormData.value 
           // this.t.push(this.fb.group(

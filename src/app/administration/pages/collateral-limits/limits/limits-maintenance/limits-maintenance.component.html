@@ -1,9 +1,12 @@
 <mat-card>
-    <mat-card-header class="breadcrumb">
+    <mat-card-header  class="breadcrumb">
         <div>Home/Collateral Services/Limits-Maintenance</div>
     </mat-card-header>
+
     <mat-divider></mat-divider>
     <br>
+  
+    
     <div class="container-fluid">
         <form class="form"
         novalidate
@@ -27,21 +30,40 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="showLimitId"  class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
                             <label class="start pull-left"> Limit Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" formControlName="limit_id"
-                             class="form-control" [value]="limitId"
+                            <input maxlength="6" type="text" formControlName="limitCode"
+                             class="form-control" [value]="limitCode"
                              oninput="this.value=this.value.toUppercase()"
-                             [ngClass]="{'is-invalid': submitted && f.limitId.errors}">
-                            <mat-icon (click)="limitNodesLookup()">search</mat-icon>
+                             [ngClass]="{'is-invalid': submitted && f.limitCode.errors}">
+                            <mat-icon *ngIf="existingData" (click)="limitNodesLookup()">search</mat-icon>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left"> Limit Description<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input maxlength="100" type="text" formControlName="limitDescription"
+                             class="form-control" [value]="limitDescription"
+                             oninput="this.value=this.value.toUppercase()"
+                             [ngClass]="{'is-invalid': submitted && f.limitDescription.errors}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    
+                </div>
+            </div>
+
             <button class="pull-right" mat-raised-button color="primary" type="submit">GO</button>
             <br>
         </form>

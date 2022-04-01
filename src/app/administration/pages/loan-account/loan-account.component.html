@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
                       <input type="text" formControlName="accountManager" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
-                       <mat-icon>search</mat-icon>
+                       <mat-icon (click)="customerLookup()" >search</mat-icon>
                     </div>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input formControlName="customerCode" type="text" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
-                     <mat-icon>search</mat-icon>
+                    <mat-icon (click)="customerLookup()" >search</mat-icon>
                   </div>
                 </div>
               </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
                       <input type="text" formControlName="schemeCode" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
-                       <mat-icon (click)="productLookup()">search</mat-icon>
+                       <mat-icon (click)="laaSchemeCodeLookup()">search</mat-icon>
                     </div>
                   </div>
                 </div>

@@ -11,7 +11,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class LoanAccountService {
   // private baseUrl: string = 'http://127.0.0.1:9099/accounts/';
-  private baseUrl: string = `${environment.accountsAPI}/accounts/`;
+  private baseUrl: string = `${environment.accountAPI}/accounts/`;
   private testUrl: string = `${environment.productAPI}/api/v1/customer/guarantors/`
   constructor(private http: HttpClient) { }
 

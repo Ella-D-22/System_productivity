@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class MisSubSectorService {
 headers =  new HttpHeaders().set('Content-Type', 'application/json');
 
-baseURL = `${environment.accountsAPI}/api/vi/mis/subsector`
+baseURL = `${environment.accountAPI}/api/vi/mis/subsector`
   constructor(private http:HttpClient) { }
 
   //message medium
