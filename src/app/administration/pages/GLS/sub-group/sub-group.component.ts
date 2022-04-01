@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
 import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
+import { MainGroupLookupComponent } from '../main-group/main-group-lookup/main-group-lookup.component';
 import { SubGroupService } from './sub-group.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class SubGroupComponent implements OnInit {
   message:any
   subgroup_code:any
   dialogData:any
+  subGroupCode:any
   constructor(private subService:SubGroupService,
     private _snackbar:MatSnackBar,
      private router:Router,
@@ -46,6 +48,7 @@ export class SubGroupComponent implements OnInit {
     subGroupCode:[''],
     subgroupManager_ID: [''],
     groupStatus:[''],
+    maingroup_sn:[''],
     subgroup_formation_date:[''],
     subgroup_location:[''],
     subgroup_name:[''],
@@ -86,22 +89,21 @@ export class SubGroupComponent implements OnInit {
     this.g.push(this.fb.group({
       cust_code: [''],
       cust_name: [''],
-      deletedBy:[''],
-      deletedFlag:[''],
-      deletedTime:[''],
-      id:[''],
+      deletedBy:['user'],
+      deletedFlag:['N'],
+      deletedTime:[new Date()],
       main_group_id:[''],
-      modifiedBy:[''],
-      modifiedTime:[''],
-      postedBy:[''],
-      postedFlag:[''],
-      postedTime:[''],
-      present_on_mainGroup:[''],
-      present_on_subGroup:[''],
+      modifiedBy:['user'],
+      modifiedTime:[new Date()],
+      postedBy:['user'],
+      postedFlag:['Y'],
+      postedTime:[new Date()],
+      present_on_mainGroup:['N'],
+      present_on_subGroup:['Y'],
       sub_group_id:[''],
-      verifiedBy:[''],
-      verifiedFlag:[''],
-      verifiedTime:['']
+      verifiedBy:['user'],
+      verifiedFlag:['N'],
+      verifiedTime:[new Date()]
     }))
     
   }
@@ -112,7 +114,18 @@ export class SubGroupComponent implements OnInit {
     this.formData.disable()
   }
 
+  mainGroupLookup(): void {
+    const dialogRef = this.dialog.open(MainGroupLookupComponent,{
 
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.dialogData = results.data;
+      console.log(this.dialogData);
+      
+      this.formData.controls.maingroup_sn.setValue(results.data.groupCode)
+     
+    })
+  }
 
   branchLookup():void{
     const dialogRef =  this.dialog.open(BranchesLookupComponent,{
@@ -145,20 +158,19 @@ export class SubGroupComponent implements OnInit {
       message =>{
         this.message = message
         this.function_type = this.message.function_type
-        this.subgroup_code = this.message.subGroupCode
+        this.subGroupCode = this.message.subGroupCode
 
         if(this.function_type == "A-Add"){
           
           this.formData = this.fb.group({
             branch_name: [''],
             chairperson: [''],
-            deleteFlag: [''],
-            deletedBy: [''],
-            deletedTime: [''],
+          
             first_meeting_date: [''],
-            subGroupCode:[''],
+            subGroupCode:[this.subGroupCode],
             subgroupManager_ID: [''],
             groupStatus:[''],
+            maingroup_sn:[],
             subgroup_formation_date:[''],
             subgroup_location:[''],
             subgroup_name:[''],
@@ -166,8 +178,7 @@ export class SubGroupComponent implements OnInit {
             maxAllowedMembers:[''],
             maxAllowedSubGroups:[''],
             meeting_frequency:[''],
-            modifiedBy:[''],
-            modifiedTime:[''],
+           
             next_meeting_date:[''],
             postedBy:["user"],
             postedFlag:['Y'],
@@ -181,6 +192,12 @@ export class SubGroupComponent implements OnInit {
             total_savingBalance:[''],
             total_savingsAccs:[''],
             treasurer:[''],
+            
+            modifiedBy:[''],
+            modifiedTime:[''],
+            deleteFlag: [''],
+            deletedBy: [''],
+            deletedTime: [''],
             verifiedBy:[''],
             verifiedFlag:[''],
             verifiedTime: [''],

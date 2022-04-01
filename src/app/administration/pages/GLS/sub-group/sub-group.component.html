@@ -2,7 +2,19 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
         <div>Home/system/GLS/SubGroup/data/view</div>
+
     </mat-card-header>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h4>Function</h4>
+            <p>{{this.function_type}}</p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h4>Code</h4>
+            <p>{{this.subGroupCode}}</p> 
+    </div>
+    </div>
+     
     <mat-divider></mat-divider>
     <br>
     <div class="container-fluid">
@@ -15,17 +27,19 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label class="start pull-left">SubGroup Code<span class="warning">*</span></label>
+                                    <label class="start pull-left">Main Group Code<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="subGroupCode" class="form-control">
+                                    <input type="text" formControlName="maingroup_sn"  class="form-control">
+                                    <mat-icon (click)="mainGroupLookup()">search</mat-icon>
+
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label class="start pull-left">SubGroup Name<span class="warning">*</span></label>
+                                    <label class="start pull-left">subGroup Name<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="subgroup_name" class="form-control" oninput="this.value=this.value.toUpperCase()">

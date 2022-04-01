@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -33,7 +33,7 @@ export class SubGroupMaintenanceComponent implements OnInit {
 
   formData = this.fb.group({
     function_type:[''],
-    subgroup_code:['']
+    subGroupCode:['', [Validators.required]]
   })
 
   get f() { 
@@ -42,12 +42,13 @@ export class SubGroupMaintenanceComponent implements OnInit {
     onSelectFunction(event:any){
       if(event.target.value == "A-Add"){
          this.showSubgroupCode = false;
-         this.formData.controls.group_code.setValue("")
+         this.formData.controls.subGroupCode.setValue("")
+         this.formData.controls.subGroupCode.setValidators([Validators.required])
         //  this.formData.controls.function_type.setValue("")
       }else if (event.target.value != "A-Add"){
          this.showSubgroupCode = true;
-        //  this.formData.controls.function_type.setValue("")
-         this.formData.controls.group_code.setValue("")
+         this.formData.controls.subGroupCode.setValue("")
+         this.formData.controls.subGroupCode.setValidators([Validators.required])
       }
   
     }
@@ -60,7 +61,7 @@ export class SubGroupMaintenanceComponent implements OnInit {
         this.dialogData = results.data;
         console.log(this.dialogData);
         
-        this.formData.controls.subgroup_code.setValue(results.data.subgroup_code)
+        this.formData.controls.subGroupCode.setValue(results.data.subGroupCode)
        
       })
     }

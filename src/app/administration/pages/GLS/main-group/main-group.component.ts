@@ -23,6 +23,7 @@ export class MainGroupComponent implements OnInit {
  results:any
  error:any
  dialogData:any
+ groupCode:any
 
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
@@ -94,9 +95,9 @@ export class MainGroupComponent implements OnInit {
         
         this.formData.controls.sol_id.setValue(results.data.sol_id)
        
-      })
+      })}
 
-    }
+
     customerLookup():void{
       const dialogRef =  this.dialog.open(CustomerLookupComponent,{
 
@@ -107,29 +108,28 @@ export class MainGroupComponent implements OnInit {
         
         this.formData.controls.cust_code.setValue(results.data.cust_code)
        
-      })
-    }
+      }) }
+
     onAddField(){
 
       this.g.push(this.fb.group({
         cust_code: [''],
         cust_name: [''],
         deletedBy:[''],
-        deletedFlag:[''],
-        deletedTime:[''],
-        id:[''],
-        main_group_id:[''],
-        modifiedBy:[''],
-        modifiedTime:[''],
-        postedBy:[''],
-        postedFlag:[''],
-        postedTime:[''],
-        present_on_mainGroup:[''],
-        present_on_subGroup:[''],
+        deletedFlag:['N'],
+        deletedTime:[new Date()],
+        // main_group_id:[this.groupCode],
+        modifiedBy:["user"],
+        modifiedTime:[new Date()],
+        postedBy:['You'],
+        postedFlag:['Y'],
+        postedTime:[new Date()],
+        present_on_mainGroup:['Y'],
+        present_on_subGroup:['N'],
         sub_group_id:[''],
-        verifiedBy:[''],
-        verifiedFlag:[''],
-        verifiedTime:['']
+        verifiedBy:["You"],
+        verifiedFlag:['Y'],
+        verifiedTime:[new Date()]
       }))
       
     }
@@ -145,18 +145,15 @@ export class MainGroupComponent implements OnInit {
         message =>{
           this.message = message
           this.function_type = this.message.function_type
-          this.group_code = this.message.groupCode
+          this.groupCode = this.message.groupCode
 
           if(this.function_type == "A-Add"){
-            
+            this.isEnabled =  true;
             this.formData = this.fb.group({
               branch_name: [''],
               chairperson: [''],
-              deleteFlag: [''],
-              deletedBy: [''],
-              deletedTime: [''],
               first_meeting_date: [''],
-              groupCode:[''],
+              groupCode:[this.groupCode],
               groupManager_ID: [''],
               groupStatus:[''],
               group_formation_date:[''],
@@ -166,15 +163,12 @@ export class MainGroupComponent implements OnInit {
               maxAllowedMembers:[''],
               maxAllowedSubGroups:[''],
               meeting_frequency:[''],
-              modifiedBy:[''],
-              modifiedTime:[''],
+              modifiedBy:['user'],
+              modifiedTime:[new Date()],
               next_meeting_date:[''],
-              postedBy:[''],
-              postedFlag:[''],
-              postedTime:[''],
+             
               reg_no:[''],
               secretary:[''],
-              sn:[''],
               sol_id:[''],
               total_loanAccs:[''],
               total_loanBalance:[''],
@@ -182,9 +176,15 @@ export class MainGroupComponent implements OnInit {
               total_savingBalance:[''],
               total_savingsAccs:[''],
               treasurer:[''],
-              verifiedBy:[''],
-              verifiedFlag:[''],
-              verifiedTime: [''],
+              postedBy:['user'],
+              postedFlag:['Y'],
+              postedTime:[new Date()],
+              deleteFlag: ['N'],
+              deletedBy: ['None'],
+              deletedTime: [new Date()],
+              verifiedBy:['N'],
+              verifiedFlag:['N'],
+              verifiedTime: [new Date()],
               groupMembers: new FormArray([])
 
             });
@@ -225,7 +225,7 @@ export class MainGroupComponent implements OnInit {
                   postedBy:[this.results.postedBy],
                   postedFlag:[this.results.postedFlag],
                   postedTime:[this.results.postedTime],
-                  deleteFlag: [this.results.deletedFlag],
+                  deleteFlag: [this.results.deleteFlag],
                   deletedBy: [this.results.deletedBy],
                   deletedTime: [this.results.deletedTime],
                   verifiedBy:[this.results.verifiedBy],
@@ -272,7 +272,7 @@ export class MainGroupComponent implements OnInit {
                   postedBy:[this.results.postedBy],
                   postedFlag:[this.results.postedFlag],
                   postedTime:[this.results.postedTime],
-                  deleteFlag: [this.results.deletedFlag],
+                  deleteFlag: [this.results.deleteFlag],
                   deletedBy: [this.results.deletedBy],
                   deletedTime: [this.results.deletedTime],
                   verifiedBy:[this.results.verifiedBy],

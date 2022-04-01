@@ -2,6 +2,18 @@
     <mat-card-header class="breadcrumb">
         <div>Home/system/GLS/Main/data/view</div>
     </mat-card-header>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h4>Function</h4>
+            <p>{{this.function_type}}</p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h4>Code</h4>
+            <p>{{this.groupCode}}</p> 
+    </div>
+    
+    </div>
     <mat-divider></mat-divider>
     <br>
     <div class="container-fluid">
@@ -11,16 +23,7 @@
                 <mat-tab class="mat-tab" label="Group Details">
                     <br>
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label class="start pull-left">Group Code<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="groupCode" class="form-control">
-                                </div>
-                            </div>
-                        </div>
+                      
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
@@ -28,6 +31,18 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="group_name" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                </div>
+                            </div>
+                        </div>
+                          <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label class="start pull-left">Group Formation Date<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input  [matDatepicker]="ppicker" formControlName="group_formation_date" class="form-control" />
+                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #ppicker></mat-datepicker>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +84,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Registration Number<span>*</span></label>
+                                    <label for="" class="start pull-left">Registration Number<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" class="form-control" formControlName="reg_no" oninput="this.value=this.value.toUpperCase()">
@@ -116,7 +131,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Start Meeting Date<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Next Meeting Date<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input  [matDatepicker]="npicker" formControlName="next_meeting_date" class="form-control" />
