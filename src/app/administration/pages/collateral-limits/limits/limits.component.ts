@@ -29,6 +29,8 @@ export class LimitsComponent implements OnInit {
   limitDescription: any;
   non_fund_based_value: number;
   fund_based_value: number;
+  limit_code: any;
+  limit_description: any;
   constructor(private fb:FormBuilder,
     private limitAPI:LimitsService,
     private _snackbar:MatSnackBar,
@@ -86,16 +88,17 @@ export class LimitsComponent implements OnInit {
 
 
   nonFundBasedForm = this.fb.group({
+    limit_node_cust_code:[this.formData.controls.customer_code.value],
     limit_node_category:['Non Fundbased'],
     limit_node_name:[''],
     limit_node_value:['']
   })
   fundBasedForm = this.fb.group({
+    limit_node_cust_code:[this.formData.controls.customer_code.value],
     limit_node_category:['Fundbased'],
     limit_node_name:[''],
     limit_node_value:['']
   })
-
   user = "Nobody"
   // get f() { return this.formData.controls; }
   get c(){return this.f.collaterals as FormArray}
@@ -151,10 +154,13 @@ export class LimitsComponent implements OnInit {
     this.subscription = this.limitAPI.currentMessage.subscribe(
       message =>{
         this.message = message
+        console.log("message", this.message);
+        
+      
         this.function_type = this.message.function_type
-        this.limitId = this.message.limit_id
-        this.limitCode = this.message.limitCode
-        this.limitDescription = this.message.limitDescription
+        this.limitId = this.message.limit_lookup_data.id
+        this.limit_code = this.message.limit_code
+        this.limit_description = this.message.limit_description
 
         if(this.function_type ==  'A-Add'){
           this.isDeleted = false;
@@ -192,7 +198,8 @@ export class LimitsComponent implements OnInit {
           this.subscription = this.limitAPI.getLimitsNodesById(this.limitId).subscribe(
             res =>{
                 this.results = res
-                console.log(this.results, "Inquiring");
+                // Initialise arrays
+
                 this.formData = this.fb.group({
                   collateral_code: [this.results.collateral_code],
                   customer_code: [this.results.customer_code],
@@ -218,9 +225,14 @@ export class LimitsComponent implements OnInit {
                   verifiedTime: [this.results.verifiedTime],
                   collaterals: new FormArray([]),
                 });
+
                 for( let i = 0; i < this.results.collaterals.length; i++){
                   this.onReadField(this.results.collaterals[i]);
                 }
+                //reinitialise arrays
+                this.fundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Fundbased');
+                this.nonFundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Non Fundbased');
+            
             },err =>{
               this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
               this.error = err
@@ -267,6 +279,10 @@ export class LimitsComponent implements OnInit {
               for( let i = 0; i < this.results.collaterals.length; i++){
                 this.onReadField(this.results.collaterals[i]);
               }
+              //reinitialise arrays
+              this.fundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Fundbased');
+              this.nonFundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Non Fundbased');
+
             }, err =>{
               this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
               this.error = err
@@ -313,6 +329,9 @@ export class LimitsComponent implements OnInit {
               for( let i = 0; i < this.results.collaterals.length; i++){
                 this.onReadField(this.results.collaterals[i]);
               }
+              //reinitialise arrays
+              this.fundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Fundbased');
+              this.nonFundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Non Fundbased');
             },
             err =>{
               this.router.navigateByUrl("")
@@ -333,7 +352,7 @@ export class LimitsComponent implements OnInit {
             res =>{
               this.results = res
               this.formData = this.fb.group({
-              
+            
                 deletedBy: [this.results.deletedBy],
                 deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
@@ -358,6 +377,9 @@ export class LimitsComponent implements OnInit {
               for( let i = 0; i < this.results.collaterals.length; i++){
                 this.onReadField(this.results.collaterals[i]);
               }
+              //reinitialise arrays
+              this.fundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Fundbased');
+              this.nonFundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Non Fundbased');
             },
             err =>{
               this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
@@ -388,7 +410,6 @@ export class LimitsComponent implements OnInit {
     console.log("this is the total non funded", current_total_of_non_funded);
 
     let fund_based_remainder = this.non_fund_based_value - current_total_of_non_funded;
-    console.log("this is the total remdainer", fund_based_remainder);
     
   
     // Get difference between the optimum value and array value
@@ -420,14 +441,8 @@ export class LimitsComponent implements OnInit {
   onAddFundBased(){
     // Get value of non fundbased
     this.fund_based_value = (this.formData.controls.fund_based_pcnt.value * 0.01 *  this.formData.controls.limit_value.value)
-    console.log("This is the non funde based value", this.non_fund_based_value);
-
     const current_total_of_funded = this.fundedLimitsArray.reduce((sum, current) => sum + current.limit_node_value, 0);
-    console.log("this is the total non funded", current_total_of_funded);
-    
     let fund_based_remainder = this.fund_based_value - current_total_of_funded;
-    console.log("this is the total remdainer", fund_based_remainder);
-
     // Get difference between the optimum value and array value
     if(this.fundBasedForm.controls.limit_node_value.value > this.fund_based_value - current_total_of_funded){
       this._snackbar.open("You have reach 0 Limit for Fund-based Limits", "Try Again",{
@@ -441,26 +456,15 @@ export class LimitsComponent implements OnInit {
       this.fd.push(this.fb.group(
         this.fundBasedForm.value
         ));
-      
     }
     // compare the difference between difference and the new value
   }
-
   onSubmit(){
     // this.formData.controls.limit_nodes.push(this.fundedLimitsArray);
     // this.formData.controls.limit_nodes.setValue(this.nonFundedLimitsArray);
-
-
-
-    
-    console.log("thi form", this.formData.value);
-
-    
-    
+  
     if(this.formData.valid){
       if(this.function_type == "A-Add"){
-      console.log(this.formData.value);
-      
         this.subscription = this.limitAPI.createLimitNodes(this.formData.value).subscribe(
           res =>{
             this.results = res
@@ -471,11 +475,8 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
             });
             this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
-
           },
           err =>{
-            console.log(err);
-            
             this.error = err
             this._snackbar.open(this.error, "Try Again",{
               horizontalPosition:'end',

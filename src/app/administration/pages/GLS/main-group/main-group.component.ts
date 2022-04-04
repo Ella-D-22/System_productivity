@@ -17,12 +17,12 @@ export class MainGroupComponent implements OnInit {
  subscription:Subscription
  message:any
  function_type:any
- group_code:any
- results:any
+ groupCode:any
  error:any
 
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
+  results: any;
 
   constructor(private fb:FormBuilder,
     private _snackbar:MatSnackBar,
@@ -123,10 +123,9 @@ export class MainGroupComponent implements OnInit {
         message =>{
           this.message = message
           this.function_type = this.message.function_type
-          this.group_code = this.message.groupCode
+          this.groupCode = this.message.groupCode
 
           if(this.function_type == "A-Add"){
-            
             this.formData = this.fb.group({
               branch_name: [''],
               chairperson: [''],
@@ -168,10 +167,9 @@ export class MainGroupComponent implements OnInit {
             });
           } else if(this.function_type == "I-Inquire"){
             this.disabledFormControl()
-            this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
+            this.subscription = this.mainService.getMainGroupByCode(this.groupCode).subscribe(
               res =>{
                 this.results = res
-
                 this.formData = this.fb.group({
                   branch_name: [this.results.branch_name],
                   chairperson: [this.results.chairperson],
@@ -215,7 +213,7 @@ export class MainGroupComponent implements OnInit {
               }
             )
           } else if(this.function_type == "M_Modify"){
-            this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
+            this.subscription = this.mainService.getMainGroupByCode(this.groupCode).subscribe(
               res =>{
                 this.results = res
 
@@ -273,7 +271,7 @@ export class MainGroupComponent implements OnInit {
               }
             )
           } else if(this.function_type == "X-Delete"){
-            this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
+            this.subscription = this.mainService.getMainGroupByCode(this.groupCode).subscribe(
               res =>{
                 this.results = res
 

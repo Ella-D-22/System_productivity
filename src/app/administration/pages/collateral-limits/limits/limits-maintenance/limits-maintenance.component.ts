@@ -22,6 +22,7 @@ export class LimitsMaintenanceComponent implements OnInit {
   limitCode: any;
   limit_description: any;
   limitDescription: any;
+  limit_code: any;
   
 
   constructor(private fb:FormBuilder,
@@ -40,7 +41,8 @@ export class LimitsMaintenanceComponent implements OnInit {
   formData = this.fb.group({
     function_type:[''],
     limitCode : [''],
-    limitDescription:['']
+    limitDescription:[''],
+    limit_lookup_data:[''],
   })
   get f() { 
     return this.formData.controls; }
@@ -64,11 +66,11 @@ export class LimitsMaintenanceComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(results =>{
       this.dialogData = results.data;
-      this.limitCode = this.dialogData.limitCode;
-      this.limitDescription = this.dialogData.limitDescription;
+      console.log("this is the data", this.dialogData);
       
-      this.formData.controls.limit_id.setValue(results.data.id)
-     
+      this.limit_code = this.dialogData.limit_code;
+      this.limit_description = this.dialogData.limit_description;
+      this.formData.controls.limit_lookup_data.setValue(this.dialogData)
     })
   }
 
