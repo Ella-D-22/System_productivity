@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
+import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
+import { MainGroupLookupComponent } from '../main-group/main-group-lookup/main-group-lookup.component';
 import { SubGroupService } from './sub-group.service';
 
 @Component({
@@ -20,10 +24,15 @@ export class SubGroupComponent implements OnInit {
   function_type:any
   message:any
   subgroup_code:any
+  dialogData:any
+  subGroupCode:any
+  isSubmitted = false
+  isDeleted = false;
   constructor(private subService:SubGroupService,
     private _snackbar:MatSnackBar,
-    private router:Router,
-    private fb:FormBuilder) { }
+     private router:Router,
+     private fb:FormBuilder,
+    private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.getPage()
@@ -41,6 +50,7 @@ export class SubGroupComponent implements OnInit {
     subGroupCode:[''],
     subgroupManager_ID: [''],
     groupStatus:[''],
+    maingroup_sn:[''],
     subgroup_formation_date:[''],
     subgroup_location:[''],
     subgroup_name:[''],
@@ -81,24 +91,46 @@ export class SubGroupComponent implements OnInit {
     this.g.push(this.fb.group({
       cust_code: [''],
       cust_name: [''],
-      deletedBy:[''],
-      deletedFlag:[''],
-      deletedTime:[''],
-      id:[''],
+      deletedBy:['user'],
+      deletedFlag:['N'],
+      deletedTime:[new Date()],
       main_group_id:[''],
-      modifiedBy:[''],
-      modifiedTime:[''],
-      postedBy:[''],
-      postedFlag:[''],
-      postedTime:[''],
-      present_on_mainGroup:[''],
-      present_on_subGroup:[''],
+      modifiedBy:['user'],
+      modifiedTime:[new Date()],
+      postedBy:['user'],
+      postedFlag:['Y'],
+      postedTime:[new Date()],
+      present_on_mainGroup:['N'],
+      present_on_subGroup:['Y'],
       sub_group_id:[''],
-      verifiedBy:[''],
-      verifiedFlag:[''],
-      verifiedTime:['']
+      verifiedBy:['user'],
+      verifiedFlag:['N'],
+      verifiedTime:[new Date()]
     }))
     
+  }
+
+  onReadFile(e:any){
+    this.g.push(this.fb.group({
+      cust_code: [e.cust_code],
+      cust_name: [e.cust_name],
+      deletedBy:[e.deletedBy],
+      deletedFlag:[e.deletedFlag],
+      deletedTime:[e.deletedTime],
+      main_group_id:[e.main_group_id],
+      modifiedBy:[e.modifiedBy],
+      modifiedTime:[e.modifiedTime],
+      postedBy:[e.postedBy],
+      postedFlag:[e.postedFlag],
+      postedTime:[e.postedTime],
+      present_on_mainGroup:[e.present_on_mainGroup],
+      present_on_subGroup:[e.present_on_subGroup],
+      sub_group_id:[e.sub_group_id],
+      verifiedBy:[e.verifiedBy],
+      verifiedFlag:[e.verifiedFlag],
+      verifiedTime:[e.verifiedTime]
+
+    }))
   }
   onRemoveField(i:any){
     this.g.removeAt(i)
@@ -107,14 +139,43 @@ export class SubGroupComponent implements OnInit {
     this.formData.disable()
   }
 
+  mainGroupLookup(): void {
+    const dialogRef = this.dialog.open(MainGroupLookupComponent,{
 
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.dialogData = results.data;
+      console.log(this.dialogData);
+      
+      this.formData.controls.maingroup_sn.setValue(results.data.group_code)
+     
+    })
+  }
 
+  branchLookup():void{
+    const dialogRef =  this.dialog.open(BranchesLookupComponent,{
 
-  customerLookup():void{
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.dialogData = results.data;
+      console.log(this.dialogData);
+      
+      this.formData.controls.sol_id.setValue(results.data.sol_id)
+     
+    })
 
   }
-  branchLookup():void{
+  customerLookup():void{
+    const dialogRef =  this.dialog.open(CustomerLookupComponent,{
 
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.dialogData = results.data;
+      console.log(this.dialogData);
+      
+      this.formData.controls.cust_code.setValue(results.data.cust_code)
+     
+    })
   }
 
   getPage(){
@@ -123,32 +184,30 @@ export class SubGroupComponent implements OnInit {
         this.message = message
         this.function_type = this.message.function_type
         this.subgroup_code = this.message.subGroupCode
-
-        if(this.function_type == "A-Add"){
+          console.log(this.subgroup_code);
           
+        if(this.function_type == "A-Add"){
+          this.isEnabled = true;
+          this.isSubmitted = true;
           this.formData = this.fb.group({
             branch_name: [''],
             chairperson: [''],
-            deleteFlag: [''],
-            deletedBy: [''],
-            deletedTime: [''],
+          
             first_meeting_date: [''],
-            subGroupCode:[''],
+            subGroupCode:[this.subgroup_code],
             subgroupManager_ID: [''],
             groupStatus:[''],
+            maingroup_sn:[],
             subgroup_formation_date:[''],
             subgroup_location:[''],
             subgroup_name:[''],
             subgroup_phone:[''],
             maxAllowedMembers:[''],
-            maxAllowedSubGroups:[''],
+          
             meeting_frequency:[''],
-            modifiedBy:[''],
-            modifiedTime:[''],
+           
             next_meeting_date:[''],
-            postedBy:["user"],
-            postedFlag:['Y'],
-            postedTime:[new Date()],
+          
             reg_no:[''],
             secretary:[''],
             sol_id:[''],
@@ -158,18 +217,28 @@ export class SubGroupComponent implements OnInit {
             total_savingBalance:[''],
             total_savingsAccs:[''],
             treasurer:[''],
-            verifiedBy:[''],
-            verifiedFlag:[''],
-            verifiedTime: [''],
+            postedBy:["user"],
+            postedFlag:['Y'],
+            postedTime:[new Date()],
+            modifiedBy:['user'],
+            modifiedTime:[new Date()],
+            deleteFlag: ['N'],
+            deletedBy: ['user'],
+            deletedTime: [new Date()],
+            verifiedBy:['user'],
+            verifiedFlag:['N'],
+            verifiedTime: [new Date()],
             groupMembers: new FormArray([])
 
           });
         } else if(this.function_type == "I-Inquire"){
           this.disabledFormControl()
-          this.subscription = this.subService.getMainGroupByCode(this.subgroup_code).subscribe(
+          
+          this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
-
+               console.log(this.results);
+               
               this.formData = this.fb.group({
                 branch_name: [this.results.branch_name],
                 chairperson: [this.results.chairperson],
@@ -182,7 +251,7 @@ export class SubGroupComponent implements OnInit {
                 subgroup_name:[this.results.subgroup_name],
                 subgroup_phone:[this.results.subgroup_phone],
                 maxAllowedMembers:[this.results.maxAllowedMembers],
-                maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
+                // maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
                 meeting_frequency:[this.results.meeting_frequency],
                 next_meeting_date:[this.results.next_meeting_date],
                 reg_no:[this.results.reg_no],
@@ -208,12 +277,14 @@ export class SubGroupComponent implements OnInit {
                 verifiedFlag:[this.results.verifiedFlag],
                 verifiedTime: [this.results.verifiedTime],
                 groupMembers: new FormArray([])
-              })
-  
-            }
+              });
+              for(let i = 0; i<this.results.groupMembers.length; i++){
+                    this.onReadFile(this.results.groupMembers[i]);
+              }          }
           )
-        } else if(this.function_type == "M_Modify"){
-          this.subscription = this.subService.getMainGroupByCode(this.subgroup_code).subscribe(
+        } else if(this.function_type == "M-Modify"){
+          this.isSubmitted = true;
+          this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
 
@@ -256,6 +327,9 @@ export class SubGroupComponent implements OnInit {
                 verifiedTime: [this.results.verifiedTime],
                 groupMembers: new FormArray([])
               });
+              for(let i = 0; i < this.results.groupMembers.length; i++){
+                this.onReadFile(this.results.groupMembers[i]);
+          }
             },
             err =>{
 
@@ -271,7 +345,8 @@ export class SubGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "X-Delete"){
-          this.subscription = this.subService.getMainGroupByCode(this.subgroup_code).subscribe(
+          this.isDeleted = true;
+          this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
 
@@ -314,6 +389,9 @@ export class SubGroupComponent implements OnInit {
                 verifiedTime: [this.results.verifiedTime],
                 groupMembers: new FormArray([])
               });
+              for(let i = 0; i<this.results.groupMembers.length; i++){
+                this.onReadFile(this.results.groupMembers[i]);
+          }
             },
             err =>{
 
@@ -335,7 +413,81 @@ export class SubGroupComponent implements OnInit {
 
 
   onSubmit(){
+    if(this.formData.valid){
+
+      if(this.function_type == "A-Add"){
+        this.isEnabled = true;
+        this.subscription = this.subService.createSubGroup(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Executed Successfully", "X",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            });
+            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
+      } else if(this.function_type == "M-Modify"){
+        this.subscription = this.subService.updateSubGroups(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Executed Successfully", "X",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            });
+            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
+      } else if(this.function_type == "X-Delete"){
+        this.subscription = this.subService.updateSubGroups(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Executed Successfully", "X",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+
+            });
+            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+          },
+          err =>{
+            this.error = err
+            this._snackbar.open(this.error, "Try Again",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['red-snackbar', 'login-snackbar']
+            })
+          }
+        )
+      }
+    }
+  }
 
   }
 
-}

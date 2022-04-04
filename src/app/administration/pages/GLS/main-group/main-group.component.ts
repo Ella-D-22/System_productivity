@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
+import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
 import { MainGroupService } from './main-group.service';
 
 @Component({
@@ -20,6 +22,8 @@ export class MainGroupComponent implements OnInit {
  group_code:any
  results:any
  error:any
+ dialogData:any
+ groupCode:any
 
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
@@ -27,13 +31,24 @@ export class MainGroupComponent implements OnInit {
   constructor(private fb:FormBuilder,
     private _snackbar:MatSnackBar,
     private dialog:MatDialog,
-    private mainService:MainGroupService,private router:Router) { }
+    private mainService:MainGroupService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    this.getApiData()
+
     this.getPage()
     this.onAddField()
 
   }
+
+  getApiData(){
+    this.mainService.getMainGroupByCode('001').subscribe(res=>{
+      console.log("test with", res);
+      
+    })
+  }
+
 
   formData = this.fb.group({
     branch_name: [''],
@@ -82,34 +97,75 @@ export class MainGroupComponent implements OnInit {
   get g(){return this.f.groupMembers as FormArray}
   
     branchLookup():void{
+      const dialogRef =  this.dialog.open(BranchesLookupComponent,{
 
-    }
+      });
+      dialogRef.afterClosed().subscribe(results =>{
+        this.dialogData = results.data;
+        console.log(this.dialogData);
+        
+        this.formData.controls.sol_id.setValue(results.data.sol_id)
+       
+      })}
+
+
     customerLookup():void{
+      const dialogRef =  this.dialog.open(CustomerLookupComponent,{
 
-    }
+      });
+      dialogRef.afterClosed().subscribe(results =>{
+        this.dialogData = results.data;
+        console.log(this.dialogData);
+        
+        this.formData.controls.cust_code.setValue(results.data.cust_code)
+       
+      }) }
+
     onAddField(){
 
       this.g.push(this.fb.group({
         cust_code: [''],
         cust_name: [''],
         deletedBy:[''],
-        deletedFlag:[''],
-        deletedTime:[''],
-        id:[''],
-        main_group_id:[''],
-        modifiedBy:[''],
-        modifiedTime:[''],
-        postedBy:[''],
-        postedFlag:[''],
-        postedTime:[''],
-        present_on_mainGroup:[''],
-        present_on_subGroup:[''],
+        deletedFlag:['N'],
+        deletedTime:[new Date()],
+        // main_group_id:[this.groupCode],
+        modifiedBy:["user"],
+        modifiedTime:[new Date()],
+        postedBy:['You'],
+        postedFlag:['Y'],
+        postedTime:[new Date()],
+        present_on_mainGroup:['Y'],
+        present_on_subGroup:['N'],
         sub_group_id:[''],
-        verifiedBy:[''],
-        verifiedFlag:[''],
-        verifiedTime:['']
+        verifiedBy:["You"],
+        verifiedFlag:['Y'],
+        verifiedTime:[new Date()]
       }))
       
+    }
+
+    onReadField(e:any){
+      this.g.push(this.fb.group({
+        cust_code: [e.cust_code],
+        cust_name: [e.cust_name],
+        deletedBy:[e.deletedBy],
+        deletedFlag:[e.deletedFlag],
+        deletedTime:[e.deletedTime],
+        // main_group_id:[this.groupCode],
+        modifiedBy:[e.modifiedBy],
+        modifiedTime:[e.modifiedTime],
+        postedBy:[e.postedBy],
+        postedFlag:[e.postedFlag],
+        postedTime:[e.postedTime],
+        present_on_mainGroup:[e.present_on_mainGroup],
+        present_on_subGroup:[e.present_on_subGroup],
+        sub_group_id:[e.sub_group_id],
+        verifiedBy:[e.verifiedBy],
+        verifiedFlag:[e.verifiedFlag],
+        verifiedTime:[e.verifiedTime]
+
+      }))
     }
     onRemoveField(i:any){
       this.g.removeAt(i)
@@ -124,17 +180,20 @@ export class MainGroupComponent implements OnInit {
           this.message = message
           this.function_type = this.message.function_type
           this.group_code = this.message.groupCode
+           console.log(this.group_code);
+           console.log(this.message);
 
+
+        
+           
+           
           if(this.function_type == "A-Add"){
-            
+            this.isEnabled =  true;
             this.formData = this.fb.group({
               branch_name: [''],
               chairperson: [''],
-              deleteFlag: [''],
-              deletedBy: [''],
-              deletedTime: [''],
               first_meeting_date: [''],
-              groupCode:[''],
+              groupCode:[this.group_code],
               groupManager_ID: [''],
               groupStatus:[''],
               group_formation_date:[''],
@@ -144,15 +203,12 @@ export class MainGroupComponent implements OnInit {
               maxAllowedMembers:[''],
               maxAllowedSubGroups:[''],
               meeting_frequency:[''],
-              modifiedBy:[''],
-              modifiedTime:[''],
+              modifiedBy:['user'],
+              modifiedTime:[new Date()],
               next_meeting_date:[''],
-              postedBy:[''],
-              postedFlag:[''],
-              postedTime:[''],
+             
               reg_no:[''],
               secretary:[''],
-              sn:[''],
               sol_id:[''],
               total_loanAccs:[''],
               total_loanBalance:[''],
@@ -160,23 +216,32 @@ export class MainGroupComponent implements OnInit {
               total_savingBalance:[''],
               total_savingsAccs:[''],
               treasurer:[''],
-              verifiedBy:[''],
-              verifiedFlag:[''],
-              verifiedTime: [''],
+              postedBy:['user'],
+              postedFlag:['Y'],
+              postedTime:[new Date()],
+              deleteFlag: ['N'],
+              deletedBy: ['None'],
+              deletedTime: [new Date()],
+              verifiedBy:['N'],
+              verifiedFlag:['N'],
+              verifiedTime: [new Date()],
               groupMembers: new FormArray([])
 
             });
           } else if(this.function_type == "I-Inquire"){
             this.disabledFormControl()
+            console.log("hellp");
+            
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.results = res
-
+                  console.log("frontend",this.results);
+                  
                 this.formData = this.fb.group({
                   branch_name: [this.results.branch_name],
                   chairperson: [this.results.chairperson],
                   first_meeting_date: [this.results.first_meeting_date],
-                  groupCode:[this.results.groupCode],
+                  groupCode:[this.results.group_code],
                   groupManager_ID: [this.results.groupManager_ID],
                   groupStatus:[this.results.groupStatus],
                   group_formation_date:[this.results.group_formation_date],
@@ -203,22 +268,26 @@ export class MainGroupComponent implements OnInit {
                   postedBy:[this.results.postedBy],
                   postedFlag:[this.results.postedFlag],
                   postedTime:[this.results.postedTime],
-                  deleteFlag: [this.results.deletedFlag],
+                  deleteFlag: [this.results.deleteFlag],
                   deletedBy: [this.results.deletedBy],
                   deletedTime: [this.results.deletedTime],
                   verifiedBy:[this.results.verifiedBy],
                   verifiedFlag:[this.results.verifiedFlag],
                   verifiedTime: [this.results.verifiedTime],
                   groupMembers: new FormArray([])
-                })
+                });
+                for(let i = 0; i < this.results.groupMembers.length; i++){
+                  this.onReadField(this.results.groupMembers[i])
+                }
     
               }
             )
-          } else if(this.function_type == "M_Modify"){
+          } else if(this.function_type == "M-Modify"){
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.results = res
-
+                console.log(this.results);
+                
                 this.formData = this.fb.group({
                   branch_name: [this.results.branch_name],
                   chairperson: [this.results.chairperson],
@@ -250,7 +319,7 @@ export class MainGroupComponent implements OnInit {
                   postedBy:[this.results.postedBy],
                   postedFlag:[this.results.postedFlag],
                   postedTime:[this.results.postedTime],
-                  deleteFlag: [this.results.deletedFlag],
+                  deleteFlag: [this.results.deleteFlag],
                   deletedBy: [this.results.deletedBy],
                   deletedTime: [this.results.deletedTime],
                   verifiedBy:[this.results.verifiedBy],
@@ -258,6 +327,9 @@ export class MainGroupComponent implements OnInit {
                   verifiedTime: [this.results.verifiedTime],
                   groupMembers: new FormArray([])
                 });
+                for(let i = 0; i < this.results.groupMembers.length; i++){
+                  this.onReadField(this.results.groupMembers[i])
+                }
               },
               err =>{
 
@@ -273,6 +345,8 @@ export class MainGroupComponent implements OnInit {
               }
             )
           } else if(this.function_type == "X-Delete"){
+             this.disabledFormControl()
+            
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.results = res
@@ -316,6 +390,9 @@ export class MainGroupComponent implements OnInit {
                   verifiedTime: [this.results.verifiedTime],
                   groupMembers: new FormArray([])
                 });
+                for(let i = 0; i < this.results.groupMembers.length; i++){
+                  this.onReadField(this.results.groupMembers[i])
+                }
               },
               err =>{
 
@@ -364,7 +441,7 @@ export class MainGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "M-Modify"){
-          this.subscription = this.mainService.updateMainGroups(this.formData.value).subscribe(
+          this.subscription = this.mainService.updateMainGroup(this.formData.value).subscribe(
             res =>{
               this.results = res
               this._snackbar.open("Executed Successfully", "X",{
@@ -387,7 +464,7 @@ export class MainGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "X-Delete"){
-          this.subscription = this.mainService.updateMainGroups(this.formData.value).subscribe(
+          this.subscription = this.mainService.updateMainGroup(this.formData.value).subscribe(
             res =>{
               this.results = res
               this._snackbar.open("Executed Successfully", "X",{

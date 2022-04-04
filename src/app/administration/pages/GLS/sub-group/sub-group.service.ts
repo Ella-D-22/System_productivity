@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SubGroupService {
 
-  baseURL = `${environment.collateralAPI}/api/v1/limit`
+  baseURL = `${environment.glsAPI}/api/v1/group/subgroup`
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http:HttpClient) { }
@@ -35,7 +35,7 @@ export class SubGroupService {
 
  }
 
- createMainGroup(data:any):Observable<any>{
+ createSubGroup(data:any):Observable<any>{
    let API_URL = `${this.baseURL}/add`
    return this.http.post(API_URL, data, {headers:this.headers, withCredentials:false}).pipe(map(
      res =>{
@@ -46,21 +46,27 @@ export class SubGroupService {
    ))
  }
 
- getMainGroups(){
+ getSubGroups(){
    let API_URL = `${this.baseURL}/all`
    return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(map(
      res =>{
+       console.log("service data", res);
+       
        return res || {}
      },
      catchError(this.errorMgmt)
    ))
  }
 
- getMainGroupByCode(subgroupCode:any):Observable<any>{
-   let API_URL = `${this.baseURL}/${subgroupCode}`
+ getSubGroupByCode(subgroupCode:any):Observable<any>{
+   let API_URL = `${this.baseURL}/find/${subgroupCode}`
+   console.log("this code",subgroupCode); 
+   
    return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(
      map(
        res =>{
+         console.log(res);
+         
          return res || {}
        },
        catchError(this.errorMgmt)
@@ -68,7 +74,7 @@ export class SubGroupService {
    )
  }
 
- updateMainGroups(data:any):Observable<any>{
+ updateSubGroups(data:any):Observable<any>{
    let API_URL = `${this.baseURL}/update`
    return this.http.put(API_URL, data, {headers:this.headers, withCredentials:false}).pipe(map(
      res =>{

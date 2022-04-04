@@ -26,16 +26,19 @@
                     </div>
                 </div>
 
-                <div *ngIf="showGroupCode" class="col-md-6 col-sm-12">
+                <div  class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
                             <label class="start pull-left" for="">GroupCode<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" class="form-control" formControlName="group_code"
-                             oninput="this.value=this.value.toUpperCase()" [ngClass]="{'is-invalid': submitted && f.group_code.errors}">
-                            <mat-icon (click)="mainGroupLookup()">search</mat-icon>
+                            <input type="text" class="form-control" formControlName="groupCode" maxlength="6" [value]="this.groupCode"
+                             oninput="this.value=this.value.toUpperCase()" [ngClass]="{'is-invalid': submitted && f.groupCode.errors}">
+                            <mat-icon *ngIf="existingData"  (click)="mainGroupLookup()">search</mat-icon>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>

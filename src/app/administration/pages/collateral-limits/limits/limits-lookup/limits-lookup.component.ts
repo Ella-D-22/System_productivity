@@ -28,7 +28,7 @@ export class LimitsLookupComponent implements OnInit {
      private dialogRef:MatDialogRef<LimitsLookupComponent>,
      public formBuilder:FormBuilder) { 
        this.NodesApi.getLimitNodes().subscribe(
-         (data) =>{   
+         (data) =>{    
            console.log(data);
            this.results = data
            this.dataSource = new MatTableDataSource(this.results)
