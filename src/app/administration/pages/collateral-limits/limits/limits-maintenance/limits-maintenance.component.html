@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <input maxlength="6" type="text" formControlName="limitCode"
-                             class="form-control" [value]="limitCode"
+                             class="form-control" [value]="limit_code"
                              oninput="this.value=this.value.toUppercase()"
                              [ngClass]="{'is-invalid': submitted && f.limitCode.errors}">
                             <mat-icon *ngIf="existingData" (click)="limitNodesLookup()">search</mat-icon>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <input maxlength="100" type="text" formControlName="limitDescription"
-                             class="form-control" [value]="limitDescription"
+                             class="form-control" [value]="limit_description"
                              oninput="this.value=this.value.toUppercase()"
                              [ngClass]="{'is-invalid': submitted && f.limitDescription.errors}">
                         </div>
