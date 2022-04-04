@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { MainGroupService } from '../../main-group.service';
+import { MainGroupService } from '../main-group.service';
 import { MainGroupLookupComponent } from '../main-group-lookup/main-group-lookup.component';
 
 @Component({

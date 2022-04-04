@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class GlCodeService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  baseURL = `${environment.accountsAPI}/gl`;
+  baseURL = `${environment.accountAPI}/gl`;
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');

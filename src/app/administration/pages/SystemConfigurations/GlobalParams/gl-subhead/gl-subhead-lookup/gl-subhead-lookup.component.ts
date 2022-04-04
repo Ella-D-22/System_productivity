@@ -58,6 +58,7 @@ export class GlSubheadLookupComponent implements OnInit, OnDestroy {
     }
 
     getData() {
+      
       this.subscription = this.glSubheadCodeAPI.getGlSubheadCodes().subscribe(res => {
        this.respData = res;
         console.log("Getting all data",this.respData);

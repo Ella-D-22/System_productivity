@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class GlSubheadService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  baseURL = `${environment.accountsAPI}/subhead`;
+  baseURL = `${environment.accountAPI}/subhead`;
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');

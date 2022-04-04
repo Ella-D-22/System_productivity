@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
 import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
-import { MainGroupService } from '../main-group.service';
+import { MainGroupService } from './main-group.service';
 
 @Component({
   selector: 'app-main-group',
