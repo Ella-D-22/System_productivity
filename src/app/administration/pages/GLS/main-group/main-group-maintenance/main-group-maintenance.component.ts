@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -14,9 +14,11 @@ import { MainGroupLookupComponent } from '../main-group-lookup/main-group-lookup
 })
 export class MainGroupMaintenanceComponent implements OnInit {
   showGroupCode: any
+  existingData = false
   submitted = false
   function_type:any
   dialogData:any
+  groupCode:any
   horizontalPosition: MatSnackBarHorizontalPosition
   verticalPosition :MatSnackBarVerticalPosition
   constructor(private mainService:MainGroupService,
@@ -26,29 +28,41 @@ export class MainGroupMaintenanceComponent implements OnInit {
     private dialog:MatDialog) { }
 
   ngOnInit(): void {
+    this.getApiData()
   }
 
-    
+  getApiData(){
+    this.mainService.getMainGroupByCode('001').subscribe(res=>{
+      console.log("test with", res);
+      
+    })
+  }
+
   functionArray:any = [
     'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
   ]
 
   formData = this.fb.group({
     function_type:[''],
-    group_code:['']
+    groupCode:['', [Validators.required]]
   })
   get f() { 
     return this.formData.controls; }
 
     onSelectFunction(event:any){
       if(event.target.value == "A-Add"){
-         this.showGroupCode = false;
-         this.formData.controls.function_type.setValue("")
+         
+         this.existingData = false
         //  this.formData.controls.function_type.setValue("")
+         this.formData.controls.groupCode.setValue(this.groupCode)
+         this.formData.controls.groupCode.setValidators([Validators.required])
       }else if (event.target.value != "A-Add"){
+        this.existingData = true;
          this.showGroupCode = true;
         //  this.formData.controls.function_type.setValue("")
-         this.formData.controls.group_code.setValue("")
+         this.formData.controls.groupCode.setValue("")
+         this.formData.controls.groupCode.setValidators([Validators.required])
+
       }
   
     }
@@ -59,8 +73,8 @@ export class MainGroupMaintenanceComponent implements OnInit {
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
         console.log(this.dialogData);
-        
-        this.formData.controls.group_code.setValue(results.data.group_code)
+      
+        this.formData.controls.groupCode.setValue(results.data.groupCode)
        
       })
     }
@@ -70,6 +84,8 @@ export class MainGroupMaintenanceComponent implements OnInit {
       
       if(this.formData.valid){
         this.mainService.changeMessage(this.formData.value)
+        console.log(this.formData.value);
+        
         if(this.function_type == 'A-Add'){
   
           this.router.navigateByUrl("system/GLS/main-group/data/view")

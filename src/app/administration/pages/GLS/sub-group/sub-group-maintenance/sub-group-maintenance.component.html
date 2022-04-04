@@ -26,15 +26,15 @@
                     </div>
                 </div>
 
-                <div *ngIf="showSubgroupCode" class="col-md-6 col-sm-12">
+                <div  class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
                             <label class="start pull-left" for="">SubGroup Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" class="form-control" formControlName="subgroup_code"
+                            <input type="text" class="form-control" formControlName="subGroupCode"
                              oninput="this.value=this.value.toUpperCase()" [ngClass]="{'is-invalid': submitted && f.subgroup_code.errors}">
-                            <mat-icon (click)="subGroupLookup()">search</mat-icon>
+                            <mat-icon *ngIf="showSubgroupCode" (click)="subGroupLookup()">search</mat-icon>
                         </div>
                     </div>
                 </div>
