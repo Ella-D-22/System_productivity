@@ -31,13 +31,24 @@ export class MainGroupComponent implements OnInit {
   constructor(private fb:FormBuilder,
     private _snackbar:MatSnackBar,
     private dialog:MatDialog,
-    private mainService:MainGroupService,private router:Router) { }
+    private mainService:MainGroupService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    this.getApiData()
+
     this.getPage()
     this.onAddField()
 
   }
+
+  getApiData(){
+    this.mainService.getMainGroupByCode('001').subscribe(res=>{
+      console.log("test with", res);
+      
+    })
+  }
+
 
   formData = this.fb.group({
     branch_name: [''],
@@ -133,6 +144,29 @@ export class MainGroupComponent implements OnInit {
       }))
       
     }
+
+    onReadField(e:any){
+      this.g.push(this.fb.group({
+        cust_code: [e.cust_code],
+        cust_name: [e.cust_name],
+        deletedBy:[e.deletedBy],
+        deletedFlag:[e.deletedFlag],
+        deletedTime:[e.deletedTime],
+        // main_group_id:[this.groupCode],
+        modifiedBy:[e.modifiedBy],
+        modifiedTime:[e.modifiedTime],
+        postedBy:[e.postedBy],
+        postedFlag:[e.postedFlag],
+        postedTime:[e.postedTime],
+        present_on_mainGroup:[e.present_on_mainGroup],
+        present_on_subGroup:[e.present_on_subGroup],
+        sub_group_id:[e.sub_group_id],
+        verifiedBy:[e.verifiedBy],
+        verifiedFlag:[e.verifiedFlag],
+        verifiedTime:[e.verifiedTime]
+
+      }))
+    }
     onRemoveField(i:any){
       this.g.removeAt(i)
     }
@@ -146,8 +180,12 @@ export class MainGroupComponent implements OnInit {
           this.message = message
           this.function_type = this.message.function_type
           this.group_code = this.message.groupCode
-           console.log(this.groupCode);
+           console.log(this.group_code);
            console.log(this.message);
+
+
+        
+           
            
           if(this.function_type == "A-Add"){
             this.isEnabled =  true;
@@ -197,7 +235,7 @@ export class MainGroupComponent implements OnInit {
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.results = res
-                  console.log(this.results);
+                  console.log("frontend",this.results);
                   
                 this.formData = this.fb.group({
                   branch_name: [this.results.branch_name],
@@ -237,15 +275,19 @@ export class MainGroupComponent implements OnInit {
                   verifiedFlag:[this.results.verifiedFlag],
                   verifiedTime: [this.results.verifiedTime],
                   groupMembers: new FormArray([])
-                })
+                });
+                for(let i = 0; i < this.results.groupMembers.length; i++){
+                  this.onReadField(this.results.groupMembers[i])
+                }
     
               }
             )
-          } else if(this.function_type == "M_Modify"){
+          } else if(this.function_type == "M-Modify"){
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.results = res
-
+                console.log(this.results);
+                
                 this.formData = this.fb.group({
                   branch_name: [this.results.branch_name],
                   chairperson: [this.results.chairperson],
@@ -285,6 +327,9 @@ export class MainGroupComponent implements OnInit {
                   verifiedTime: [this.results.verifiedTime],
                   groupMembers: new FormArray([])
                 });
+                for(let i = 0; i < this.results.groupMembers.length; i++){
+                  this.onReadField(this.results.groupMembers[i])
+                }
               },
               err =>{
 
@@ -300,7 +345,9 @@ export class MainGroupComponent implements OnInit {
               }
             )
           } else if(this.function_type == "X-Delete"){
-            this.subscription = this.mainService.getMainGroupByCode(this.groupCode).subscribe(
+             this.disabledFormControl()
+            
+            this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.results = res
 
@@ -343,6 +390,9 @@ export class MainGroupComponent implements OnInit {
                   verifiedTime: [this.results.verifiedTime],
                   groupMembers: new FormArray([])
                 });
+                for(let i = 0; i < this.results.groupMembers.length; i++){
+                  this.onReadField(this.results.groupMembers[i])
+                }
               },
               err =>{
 
@@ -391,7 +441,7 @@ export class MainGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "M-Modify"){
-          this.subscription = this.mainService.updateMainGroups(this.formData.value).subscribe(
+          this.subscription = this.mainService.updateMainGroup(this.formData.value).subscribe(
             res =>{
               this.results = res
               this._snackbar.open("Executed Successfully", "X",{
@@ -414,7 +464,7 @@ export class MainGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "X-Delete"){
-          this.subscription = this.mainService.updateMainGroups(this.formData.value).subscribe(
+          this.subscription = this.mainService.updateMainGroup(this.formData.value).subscribe(
             res =>{
               this.results = res
               this._snackbar.open("Executed Successfully", "X",{

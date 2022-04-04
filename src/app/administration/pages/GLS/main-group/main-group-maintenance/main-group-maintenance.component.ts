@@ -28,9 +28,16 @@ export class MainGroupMaintenanceComponent implements OnInit {
     private dialog:MatDialog) { }
 
   ngOnInit(): void {
+    this.getApiData()
   }
 
-    
+  getApiData(){
+    this.mainService.getMainGroupByCode('001').subscribe(res=>{
+      console.log("test with", res);
+      
+    })
+  }
+
   functionArray:any = [
     'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
   ]
@@ -77,6 +84,8 @@ export class MainGroupMaintenanceComponent implements OnInit {
       
       if(this.formData.valid){
         this.mainService.changeMessage(this.formData.value)
+        console.log(this.formData.value);
+        
         if(this.function_type == 'A-Add'){
   
           this.router.navigateByUrl("system/GLS/main-group/data/view")

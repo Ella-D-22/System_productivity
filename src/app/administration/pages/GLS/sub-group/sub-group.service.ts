@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SubGroupService {
 
-  baseURL = `${environment.glsAPI}/subgroup`
+  baseURL = `${environment.glsAPI}/api/v1/group/subgroup`
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http:HttpClient) { }
@@ -50,6 +50,8 @@ export class SubGroupService {
    let API_URL = `${this.baseURL}/all`
    return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(map(
      res =>{
+       console.log("service data", res);
+       
        return res || {}
      },
      catchError(this.errorMgmt)
@@ -58,9 +60,13 @@ export class SubGroupService {
 
  getSubGroupByCode(subgroupCode:any):Observable<any>{
    let API_URL = `${this.baseURL}/find/${subgroupCode}`
-   return this.http.get(API_URL, {withCredentials:false}).pipe(
+   console.log("this code",subgroupCode); 
+   
+   return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(
      map(
        res =>{
+         console.log(res);
+         
          return res || {}
        },
        catchError(this.errorMgmt)

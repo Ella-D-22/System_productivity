@@ -26,6 +26,8 @@ export class SubGroupComponent implements OnInit {
   subgroup_code:any
   dialogData:any
   subGroupCode:any
+  isSubmitted = false
+  isDeleted = false;
   constructor(private subService:SubGroupService,
     private _snackbar:MatSnackBar,
      private router:Router,
@@ -107,6 +109,29 @@ export class SubGroupComponent implements OnInit {
     }))
     
   }
+
+  onReadFile(e:any){
+    this.g.push(this.fb.group({
+      cust_code: [e.cust_code],
+      cust_name: [e.cust_name],
+      deletedBy:[e.deletedBy],
+      deletedFlag:[e.deletedFlag],
+      deletedTime:[e.deletedTime],
+      main_group_id:[e.main_group_id],
+      modifiedBy:[e.modifiedBy],
+      modifiedTime:[e.modifiedTime],
+      postedBy:[e.postedBy],
+      postedFlag:[e.postedFlag],
+      postedTime:[e.postedTime],
+      present_on_mainGroup:[e.present_on_mainGroup],
+      present_on_subGroup:[e.present_on_subGroup],
+      sub_group_id:[e.sub_group_id],
+      verifiedBy:[e.verifiedBy],
+      verifiedFlag:[e.verifiedFlag],
+      verifiedTime:[e.verifiedTime]
+
+    }))
+  }
   onRemoveField(i:any){
     this.g.removeAt(i)
   }
@@ -122,7 +147,7 @@ export class SubGroupComponent implements OnInit {
       this.dialogData = results.data;
       console.log(this.dialogData);
       
-      this.formData.controls.maingroup_sn.setValue(results.data.groupCode)
+      this.formData.controls.maingroup_sn.setValue(results.data.group_code)
      
     })
   }
@@ -158,16 +183,18 @@ export class SubGroupComponent implements OnInit {
       message =>{
         this.message = message
         this.function_type = this.message.function_type
-        this.subGroupCode = this.message.subGroupCode
-
+        this.subgroup_code = this.message.subGroupCode
+          console.log(this.subgroup_code);
+          
         if(this.function_type == "A-Add"){
           this.isEnabled = true;
+          this.isSubmitted = true;
           this.formData = this.fb.group({
             branch_name: [''],
             chairperson: [''],
           
             first_meeting_date: [''],
-            subGroupCode:[this.subGroupCode],
+            subGroupCode:[this.subgroup_code],
             subgroupManager_ID: [''],
             groupStatus:[''],
             maingroup_sn:[],
@@ -206,10 +233,12 @@ export class SubGroupComponent implements OnInit {
           });
         } else if(this.function_type == "I-Inquire"){
           this.disabledFormControl()
+          
           this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
-
+               console.log(this.results);
+               
               this.formData = this.fb.group({
                 branch_name: [this.results.branch_name],
                 chairperson: [this.results.chairperson],
@@ -248,11 +277,13 @@ export class SubGroupComponent implements OnInit {
                 verifiedFlag:[this.results.verifiedFlag],
                 verifiedTime: [this.results.verifiedTime],
                 groupMembers: new FormArray([])
-              })
-  
-            }
+              });
+              for(let i = 0; i<this.results.groupMembers.length; i++){
+                    this.onReadFile(this.results.groupMembers[i]);
+              }          }
           )
-        } else if(this.function_type == "M_Modify"){
+        } else if(this.function_type == "M-Modify"){
+          this.isSubmitted = true;
           this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
@@ -296,6 +327,9 @@ export class SubGroupComponent implements OnInit {
                 verifiedTime: [this.results.verifiedTime],
                 groupMembers: new FormArray([])
               });
+              for(let i = 0; i < this.results.groupMembers.length; i++){
+                this.onReadFile(this.results.groupMembers[i]);
+          }
             },
             err =>{
 
@@ -311,6 +345,7 @@ export class SubGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "X-Delete"){
+          this.isDeleted = true;
           this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.results = res
@@ -354,6 +389,9 @@ export class SubGroupComponent implements OnInit {
                 verifiedTime: [this.results.verifiedTime],
                 groupMembers: new FormArray([])
               });
+              for(let i = 0; i<this.results.groupMembers.length; i++){
+                this.onReadFile(this.results.groupMembers[i]);
+          }
             },
             err =>{
 
@@ -389,7 +427,7 @@ export class SubGroupComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/GLS/main-group/maintenance")
+            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
           },
           err =>{
             this.error = err
@@ -412,7 +450,7 @@ export class SubGroupComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/GLS/main-group/maintenance")
+            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
           },
           err =>{
             this.error = err
@@ -435,7 +473,7 @@ export class SubGroupComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/GLS/main-group/maintenance")
+            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
           },
           err =>{
             this.error = err

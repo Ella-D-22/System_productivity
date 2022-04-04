@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MainGroupService } from '../../main-group.service';
+import { MainGroupService } from '../main-group.service';
 
 @Component({
   selector: 'app-main-group-lookup',

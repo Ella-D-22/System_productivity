@@ -59,6 +59,7 @@ export class GlCodeService {
         .pipe(
           map((res) => {
             return res || {}
+            
           }),
           catchError(this.errorMgmt)
         )

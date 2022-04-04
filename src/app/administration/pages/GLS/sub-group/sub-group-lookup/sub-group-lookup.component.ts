@@ -16,7 +16,6 @@ export class SubGroupLookupComponent implements OnInit {
 
    displayedColumns : string[]= ['sn','Subgroup Code', 'Subgroup Name']
 
-  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;
@@ -24,19 +23,24 @@ export class SubGroupLookupComponent implements OnInit {
   constructor(private fb:FormBuilder,
     private subService:SubGroupService,
     private dialogRef:MatDialogRef<SubGroupLookupComponent>) {
-      this.subService.getSubGroups().subscribe(
-        data =>{
-          this.results = data
-          this.dataSource = new MatTableDataSource(this.results)
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort; 
-        }
-      )
      }
 
   ngOnInit(): void {
+    this.getData()
   }
 
+  getData(){
+    this.subService.getSubGroups().subscribe(
+      data =>{
+        this.results = data
+        console.log(this.results, "lookup data");
+        
+        this.dataSource = new MatTableDataSource(this.results)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort; 
+      }
+    )
+  }
   applyFilter(event:Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

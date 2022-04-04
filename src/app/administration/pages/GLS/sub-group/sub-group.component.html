@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-6 col-sm-12">
             <h4>Code</h4>
-            <p>{{this.subGroupCode}}</p> 
+            <p>{{this.subgroup_code}}</p> 
     </div>
     </div>
      
@@ -338,7 +338,8 @@
             <br>
 
             <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
-            <button mat-raised-button color="primary" type="submit" class="pull-right">Submit</button>
+            <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isSubmitted">Submit</button>
+            <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
         </form>
     </div>
 </mat-card>
