@@ -71,13 +71,7 @@ export class MainGroupService {
         catchError(this.errorMgmt)
       )
   }
-  deleteMainGroup(id: any): Observable<any> {
-    var API_URL = `${this.baseURL}/delete/${id}`;
-    return this.http.delete(API_URL, { withCredentials: false })
-      .pipe(
-        catchError(this.errorMgmt)
-      )
-  }
+
   // Error handling
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';

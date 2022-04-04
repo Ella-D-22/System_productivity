@@ -298,6 +298,7 @@ export class SubGroupComponent implements OnInit {
                 subGroupCode:[this.results.subGroupCode],
                 subgroupManager_ID: [this.results.subgroupManager_ID],
                 groupStatus:[this.results.groupStatus],
+                maingroup_sn:[this.results.maingroup_sn],
                 subgroup_formation_date:[this.results.subgroup_formation_date],
                 subgroup_location:[this.results.subgroup_location],
                 subgroup_name:[this.results.subgroup_name],
@@ -360,6 +361,7 @@ export class SubGroupComponent implements OnInit {
                 subGroupCode:[this.results.subGroupCode],
                 subgroupManager_ID: [this.results.subgroupManager_ID],
                 groupStatus:[this.results.groupStatus],
+                maingroup_sn:[this.results.maingroup_sn],
                 subgroup_formation_date:[this.results.subgroup_formation_date],
                 subgroup_location:[this.results.subgroup_location],
                 subgroup_name:[this.results.subgroup_name],
@@ -390,6 +392,68 @@ export class SubGroupComponent implements OnInit {
                 verifiedBy:[this.results.verifiedBy],
                 verifiedFlag:[this.results.verifiedFlag],
                 verifiedTime: [this.results.verifiedTime],
+                groupMembers: new FormArray([])
+              });
+              for(let i = 0; i<this.results.groupMembers.length; i++){
+                this.onReadFile(this.results.groupMembers[i]);
+          }
+            },
+            err =>{
+
+              this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+              this.error = err
+              this._snackbar.open(this.error, "Try Again",{
+                horizontalPosition:this.horizontalPosition,
+                verticalPosition:this.verticalPosition,
+                duration:3000,
+                panelClass:['red-snackbar', 'login-snackbar']
+              })
+
+            } )
+        }else if(this.function_type == "V-Verify"){
+          this.isDeleted = true;
+          this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
+            res =>{
+              this.results = res
+
+              this.formData = this.fb.group({
+                branch_name: [this.results.branch_name],
+                chairperson: [this.results.chairperson],
+                first_meeting_date: [this.results.first_meeting_date],
+                subGroupCode:[this.results.subGroupCode],
+                subgroupManager_ID: [this.results.subgroupManager_ID],
+                groupStatus:[this.results.groupStatus],
+                maingroup_sn:[this.results.maingroup_sn],
+                subgroup_formation_date:[this.results.subgroup_formation_date],
+                subgroup_location:[this.results.subgroup_location],
+                subgroup_name:[this.results.subgroup_name],
+                subgroup_phone:[this.results.subgroup_phone],
+                maxAllowedMembers:[this.results.maxAllowedMembers],
+                maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
+                meeting_frequency:[this.results.meeting_frequency],
+                next_meeting_date:[this.results.next_meeting_date],
+                reg_no:[this.results.reg_no],
+                secretary:[this.results.secretary],
+                sn:[this.results.sn],
+                sol_id:[this.results.sol_id],
+                total_loanAccs:[this.results.total_loanAccs],
+                total_loanBalance:[this.results.total_loanBalance],
+                total_members:[this.results.total_members],
+                total_savingBalance:[this.results.total_savingBalance],
+                total_savingsAccs:[this.results.total_savingsAccs],
+                treasurer:[this.results.treasurer],
+                
+                modifiedBy:[this.results.modifiedBy],
+                modifiedTime:[this.results.modifiedTime],
+                postedBy:[this.results.postedBy],
+                postedFlag:[this.results.postedFlag],
+                postedTime:[this.results.postedTime],
+                deleteFlag: [this.results.deletedFlag],
+                deletedBy: [this.results.deletedBy],
+                deletedTime: [this.results.deletedTime],
+                verifiedBy:["user"],
+                verifiedFlag:["Y"],
+                verifiedTime: [new Date()],
                 groupMembers: new FormArray([])
               });
               for(let i = 0; i<this.results.groupMembers.length; i++){
@@ -469,7 +533,7 @@ export class SubGroupComponent implements OnInit {
         this.subscription = this.subService.updateSubGroups(this.formData.value).subscribe(
           res =>{
             this.results = res
-            this._snackbar.open("Executed Successfully", "X",{
+            this._snackbar.open("Deleted  Successfully", "X",{
               horizontalPosition:this.horizontalPosition,
               verticalPosition:this.verticalPosition,
               duration:3000,
@@ -486,6 +550,20 @@ export class SubGroupComponent implements OnInit {
               duration:3000,
               panelClass:['red-snackbar', 'login-snackbar']
             })
+          }
+        )
+      }else if(this.function_type == "V-Verify"){
+        this.subscription = this.subService.updateSubGroups(this.formData.value).subscribe(
+          res =>{
+            this.results = res
+            this._snackbar.open("Verified Successfully", "X",{
+              horizontalPosition:this.horizontalPosition,
+              verticalPosition:this.verticalPosition,
+              duration:3000,
+              panelClass:['green-snackbar', 'login-snackbar']
+            });
+            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+
           }
         )
       }
