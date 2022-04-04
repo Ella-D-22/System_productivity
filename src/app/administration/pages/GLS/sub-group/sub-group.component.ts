@@ -28,6 +28,8 @@ export class SubGroupComponent implements OnInit {
   subGroupCode:any
   isSubmitted = false
   isDeleted = false;
+  group_name:any
+  submitted = false
   constructor(private subService:SubGroupService,
     private _snackbar:MatSnackBar,
      private router:Router,
@@ -147,8 +149,8 @@ export class SubGroupComponent implements OnInit {
       this.dialogData = results.data;
       console.log(this.dialogData);
       
-      this.formData.controls.maingroup_sn.setValue(results.data.group_code)
-     
+      this.formData.controls.maingroup_sn.setValue(this.dialogData.groupCode)
+      this.group_name = this.dialogData.group_name
     })
   }
 
@@ -246,6 +248,7 @@ export class SubGroupComponent implements OnInit {
                 subGroupCode:[this.results.subGroupCode],
                 subgroupManager_ID: [this.results.subgroupManager_ID],
                 groupStatus:[this.results.groupStatus],
+                maingroup_sn:[this.results.maingroup_sn],
                 subgroup_formation_date:[this.results.subgroup_formation_date],
                 subgroup_location:[this.results.subgroup_location],
                 subgroup_name:[this.results.subgroup_name],
