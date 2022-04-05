@@ -107,8 +107,8 @@ export class MainGroupComponent implements OnInit {
         this.dialogData = results.data;
         console.log(this.dialogData);
         
-        this.formData.controls.sol_id.setValue(results.data.sol_code)
-        this.formData.controls.branch_name.setValue(this.dialogData.sol_description)
+        this.formData.controls.sol_id.setValue(results.data.solCode)
+        this.formData.controls.branch_name.setValue(this.dialogData.solDescription)
        
       })}
 
