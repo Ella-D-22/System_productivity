@@ -144,20 +144,6 @@
             + Add
           </button>
 
-          <!-- <button class="pull-right btn-sm" *ngIf="!existingData"   type="button" (click)="updateLoanFee(this.arrayIndex)">
-       <span
-         *ngIf="loading"
-         class="spinner-border spinner-border-sm mr-1"
-       ></span>
-      + Update
-     </button> -->
-          <!-- <button class="pull-right btn-sm"   type="button" (click)="initLoanForm()">
-       <span
-         *ngIf="loading"
-         class="spinner-border spinner-border-sm mr-1"
-       ></span>
-      Clear
-     </button> -->
           <br />
         </form>
         <br>
@@ -176,8 +162,8 @@
               <td>{{i + 1}}</td>
               <td>{{item.limit_node_name}}</td>
               <td>{{item.limit_node_value}}</td>
-              <td><a class="update btn btn-sm" color="accent">X</a>
-                <!-- <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a> -->
+              <td><a class="update btn btn-sm" (click)="onDeleteFundbased(i)" color="accent">X</a>
+                <a class="update btn btn-sm" color="accent" (click)="editFundedValue(i)">Edit</a>
               </td>
             </tr>
           </tbody>

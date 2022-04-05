@@ -115,6 +115,9 @@ import { SubGroupMaintenanceComponent } from './pages/GLS/sub-group/sub-group-ma
 import { SubGroupComponent } from './pages/GLS/sub-group/sub-group.component';
 import { SubGroupLookupComponent } from './pages/GLS/sub-group/sub-group-lookup/sub-group-lookup.component';
 import { MainGroupLookupComponent } from './pages/GLS/main-group/main-group-lookup/main-group-lookup.component';
+import { RetailCustomerComponent } from './pages/CustomersComponent/retail-customer/retail-customer.component';
+import { RetailCustomerLookupComponent } from './pages/CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
+import { RetailCustomerMaintenanceComponent } from './pages/CustomersComponent/retail-customer/retail-customer-maintenance/retail-customer-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -236,7 +239,10 @@ import { MainGroupLookupComponent } from './pages/GLS/main-group/main-group-look
     SubGroupMaintenanceComponent,
     SubGroupComponent,
     SubGroupLookupComponent,
-    MainGroupLookupComponent
+    MainGroupLookupComponent,
+    RetailCustomerComponent,
+    RetailCustomerLookupComponent,
+    RetailCustomerMaintenanceComponent
 
     
     

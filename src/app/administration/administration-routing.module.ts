@@ -68,6 +68,8 @@ import { MainGroupComponent } from './pages/GLS/main-group/main-group.component'
 import { MainGroupMaintenanceComponent } from './pages/GLS/main-group/main-group-maintenance/main-group-maintenance.component';
 import { SubGroupComponent } from './pages/GLS/sub-group/sub-group.component';
 import { SubGroupMaintenanceComponent } from './pages/GLS/sub-group/sub-group-maintenance/sub-group-maintenance.component';
+import { RetailCustomerComponent } from './pages/CustomersComponent/retail-customer/retail-customer.component';
+import { RetailCustomerMaintenanceComponent } from './pages/CustomersComponent/retail-customer/retail-customer-maintenance/retail-customer-maintenance.component';
 
 const routes: Routes = [{
   path: '',
@@ -449,6 +451,22 @@ const routes: Routes = [{
       // *******************************************************************************************\
       //                                         Customers Management
       // *******************************************************************************************
+
+      // 
+      // 
+      {
+        path: 'customer/retail/maintenance',
+        component:RetailCustomerMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+      {
+        path: 'customer/retail/data/view',
+        component:RetailCustomerComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
+      },
+
       {
         path: 'customers/param/maintenance',
         component: ParamMainComponent,
