@@ -107,7 +107,8 @@ export class MainGroupComponent implements OnInit {
         this.dialogData = results.data;
         console.log(this.dialogData);
         
-        this.formData.controls.sol_id.setValue(results.data.sol_id)
+        this.formData.controls.sol_id.setValue(results.data.sol_code)
+        this.formData.controls.branch_name.setValue(this.dialogData.sol_description)
        
       })}
 
@@ -120,7 +121,11 @@ export class MainGroupComponent implements OnInit {
         this.dialogData = results.data;
         console.log(this.dialogData);
         
-        this.formData.controls.cust_code.setValue(results.data.cust_code)
+        this.formData.controls.cust_code.setValue(results.data.customer_code)
+        this.formData.controls.chairperson.setValue(this.dialogData.customer_code)
+        this.formData.controls.secretary.setValue(this.dialogData.customer_code)
+        this.formData.controls.treasurer.setValue(this.dialogData.customer_code)
+        this.formData.controls.groupMembers['cust_name'].setValue(this.dialogData.firstName)
        
       }) }
 
