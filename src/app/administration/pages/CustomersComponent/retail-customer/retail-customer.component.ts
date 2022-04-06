@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
@@ -14,9 +17,12 @@ import { RetailCustomerService } from './retail-customer.service';
   styleUrls: ['./retail-customer.component.scss']
 })
 export class RetailCustomerComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  subscription!: Subscription;
+  authUser = "N"
   isEnabled = false;
   submitted = false;
-  subscription: Subscription
   message: any
   function_type: any
   group_code: any
@@ -26,10 +32,6 @@ export class RetailCustomerComponent implements OnInit {
   customerCode: any
   isSubmitted = false;
   isDeleted = false
-
-  horizontalPosition: MatSnackBarHorizontalPosition
-  verticalPosition: MatSnackBarVerticalPosition
-
   user = "Nobody"
   imgfile: any;
   signatureImage: string | ArrayBuffer;
@@ -37,6 +39,21 @@ export class RetailCustomerComponent implements OnInit {
   passportImage: any;
   passportImageSrc: string | ArrayBuffer;
   signatureImageSrc: string | ArrayBuffer;
+  imageTypeArray:any = [
+    'Passport', 'Signature'
+  ]
+  currImageSrc: any;
+  existingData: boolean;
+  signfile: any;
+  document_details_validity: boolean;
+  _snackBar: any;
+  index: any;
+  uploadedImages: any;
+  lookupData: any;
+  solCode: any;
+  glDescription: any;
+  solDescription: any;
+  isDisabled = false;
   constructor(private fb: FormBuilder,
     private _snackbar: MatSnackBar,
     private dialog: MatDialog,
@@ -45,19 +62,16 @@ export class RetailCustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPage()
-    this.onAddCustomerInfoField()
-    this.onAddKinsField()
-    this.onAddNominiesField()
-    this.onAddImageField();
-    this.onAddImageField();
   }
+
+  
   formData = this.fb.group({
     birthCertificate: [''],
     citizen: [''],
     customerCode: [''],
-    deletedBy: [''],
-    deletedFlag: [''],
-    deletedTime: [''],
+    deletedBy: ['N'],
+    deletedFlag: ['N'],
+    deletedTime: [new Date()],
     dob: [''],
     employerCode: [''],
     firstName: [''],
@@ -67,20 +81,20 @@ export class RetailCustomerComponent implements OnInit {
     kraPin: [''],
     middleName: [''],
     minor: [''],
-    modifiedBy: [''],
-    modifiedOn: [''],
+    modifiedBy: ['N'],
+    modifiedOn: [new Date()],
     occupation: [''],
     passportNo: [''],
-    postedBy: [''],
-    postedFlag: [''],
-    postedTime: [''],
+    postedBy: [this.authUser],
+    postedFlag: ['N'],
+    postedTime: [new Date()],
     signatureImage: [''],
-    sn: [''],
     solCode: [''],
     subGroupCode: [''],
     surname: [''],
-    verifiedFlag: [''],
-    verifiedTime: [''],
+    preferedName:[''],
+    verifiedFlag: ['N'],
+    verifiedTime: [new Date()],
     contactInformationList: new FormArray([]),
     customerImageList: new FormArray([]),
     kins: new FormArray([]),
@@ -88,7 +102,7 @@ export class RetailCustomerComponent implements OnInit {
   })
   get f() { return this.formData.controls; }
   get cinfol() { return this.f.contactInformationList as FormArray }
-  get cimgl() { return this.f.contactInformationList as FormArray }
+  get cimgl() { return this.f.customerImageList as FormArray }
   get k() { return this.f.kins as FormArray }
   get n() { return this.f.nominees as FormArray }
   // Customer Information List
@@ -112,22 +126,32 @@ export class RetailCustomerComponent implements OnInit {
       sn: [e.sn]
     }))
   }
-  onRemoveCustomerInfoField(i: any) {
-    this.cinfol.removeAt(i)
-  }
-
   // Customer Image List
   onAddImageField() {
     this.cimgl.push(this.fb.group({
       fromDate: [''],
       image: [''],
       image_name:[''],
-      modifiedBy: [''],
-      modifiedOn: [''],
-      postedBy: [''],
-      postedFlag: [''],
-      postedTime: [''],
+      modifiedBy: ['N'],
+      modifiedOn: [new Date()],
+      postedBy: [this.authUser],
+      postedFlag: ['Y'],
+      postedTime: [new Date()],
       toDate: ['']
+    }))
+  }
+  onReadImageField(e: any) {
+    this.cimgl.push(this.fb.group({
+      fromDate: [e.fromDate],
+      image: [e.image],
+      image_name:[e.image_name],
+      modifiedBy: [e.modifiedBy],
+      modifiedOn: [e.modifiedOn],
+      postedBy: [e.postedBy],
+      postedFlag: [e.postedFlag],
+      postedTime: [e.postedTime],
+      toDate: [e.toDate],
+      sn: [e.sn]
     }))
   }
   // Customer Kins
@@ -154,7 +178,8 @@ export class RetailCustomerComponent implements OnInit {
       occupation: [e.occupation],
       phoneNo: [e.phoneNo],
       relationship: [e.relationship],
-      surname: [e.surname]
+      surname: [e.surname],
+      sn: [e.sn]
     }))
   }
   onRemoveKinsField(i: any) {
@@ -183,28 +208,11 @@ export class RetailCustomerComponent implements OnInit {
       phoneNo: [e.phoneNo],
       identificationNo: [e.identificationNo],
       lastName: [e.lastName],
-      phone: [e.phone]
+      phone: [e.phone],
+      sn: [e.sn]
     }))
   }
-  onRemoveNominiesField(i: any) {
-    this.n.removeAt(i)
-  }
-
-  onPassportPhotoChange(event) {
-    this.passportImage = event.target.files[0];
-    if (event.target.files && event.target.files[0]) {
-        var reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        reader.onload = () => {
-          this.passportImageSrc = reader.result;
-          // set value to form
-          this.formData.controls.file.setValue(this.imgSignSrc);
-        }
-        reader.onerror = function (error) {
-        };
-    }
-  }
-  onSignaturePhotoChange(event) {
+  onSignaturePhotoChange(event, i:any) {
     this.signatureImage = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
         var reader = new FileReader();
@@ -212,20 +220,13 @@ export class RetailCustomerComponent implements OnInit {
         reader.onload = () => {
           this.signatureImageSrc = reader.result;
           // set value to form
-          this.formData.controls.file.setValue(this.imgSignSrc);
+          this.cimgl.at(i).get('image').setValue(this.signatureImageSrc);
+          this.currImageSrc =  this.cimgl.at(i).get('image').value
         }
         reader.onerror = function (error) {
         };
     }
   }
-
-
-
-
-
-
-
-
   branchLookup(): void {
     const dialogRef = this.dialog.open(BranchesLookupComponent, {
     });
@@ -260,6 +261,22 @@ export class RetailCustomerComponent implements OnInit {
 
   disabledFormControl() {
     this.formData.disable()
+
+    this.isDisabled = true;
+    
+  }
+
+
+  branchesCodeLookup(): void {
+    const dialogRef = this.dialog.open(BranchesLookupComponent, {
+      // height: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupData = result.data;
+      this.solCode = this.lookupData.solCode;
+      this.solDescription = this.lookupData.solDescription;
+      this.formData.controls.solCode.setValue(this.solCode);
+    });
   }
 
   getPage() {
@@ -267,109 +284,297 @@ export class RetailCustomerComponent implements OnInit {
       message => {
         this.message = message
         this.function_type = this.message.function_type
-        this.group_code = this.message.customerCode
+        this.customerCode = this.message.customerCode
         console.log(this.group_code);
         console.log(this.message);
         if (this.function_type == "A-Add") {
           this.isEnabled = true;
           this.isSubmitted = true;
           this.formData = this.fb.group({
-            birthCertificate: [''],
-            citizen: [''],
-            customerCode: [''],
-            deletedBy: [''],
-            deletedFlag: [''],
-            deletedTime: [''],
-            dob: [''],
-            employerCode: [''],
-            firstName: [''],
-            gender: [''],
-            identificationNo: [''],
-            joiningDate: [''],
-            kraPin: [''],
-            middleName: [''],
-            minor: [''],
-            modifiedBy: [''],
-            modifiedOn: [''],
-            occupation: [''],
-            passportNo: [''],
-            postedBy: [''],
-            postedFlag: [''],
-            postedTime: [''],
-            signatureImage: [''],
-            sn: [''],
-            solCode: [''],
-            subGroupCode: [''],
-            surname: [''],
-            verifiedFlag: [''],
-            verifiedTime: [''],
-            contactInformationList: new FormArray([]),
-            customerImageList: new FormArray([]),
-            kins: new FormArray([]),
-            nominees: new FormArray([]),
+              birthCertificate: [''],
+              citizen: [''],
+              customerCode: [this.customerCode],
+              deletedBy: ['N'],
+              deletedFlag: ['N'],
+              deletedTime: [new Date()],
+              dob: [''],
+              employerCode: [''],
+              firstName: [''],
+              gender: [''],
+              identificationNo: [''],
+              joiningDate: [''],
+              kraPin: [''],
+              middleName: [''],
+              minor: [''],
+              modifiedBy: ['N'],
+              modifiedOn: [new Date()],
+              occupation: [''],
+              passportNo: [''],
+              postedBy: [this.authUser],
+              postedFlag: ['N'],
+              postedTime: [new Date()],
+              signatureImage: [''],
+              solCode: [''],
+              subGroupCode: [''],
+              surname: [''],
+              preferedName:[''],
+              verifiedFlag: ['N'],
+              verifiedTime: [new Date()],
+              contactInformationList: new FormArray([]),
+              customerImageList: new FormArray([]),
+              kins: new FormArray([]),
+              nominees: new FormArray([]),
           })
+          this.onAddCustomerInfoField()
+          this.onAddKinsField()
+          this.onAddNominiesField()
+          this.onAddImageField();
+          this.onAddImageField();
         } else if (this.function_type == "I-Inquire") {
           this.disabledFormControl()
-          console.log("hellp");
-
-          this.subscription = this.retailCustAPI.getMainGroupByCode(this.group_code).subscribe(
+          this.subscription = this.retailCustAPI.getRetailCustomerByCode(this.customerCode).subscribe(
             res => {
               this.results = res
+              this.formData = this.fb.group({
+                sn:[this.results.sn],
+                birthCertificate: [this.results.birthCertificate],
+                citizen: [this.results.citizen],
+                customerCode: [this.results.customerCode],
+                deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
+                deletedTime: [this.results.deletedTime],
+                dob: [this.results.dob],
+                employerCode: [this.results.employerCode],
+                firstName: [this.results.firstName],
+                gender: [this.results.gender],
+                identificationNo: [this.results.identificationNo],
+                joiningDate: [this.results.joiningDate],
+                kraPin: [this.results.kraPin],
+                middleName: [this.results.middleName],
+                minor: [this.results.minor],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedOn: [this.results.modifiedOn],
+                occupation: [this.results.occupation],
+                passportNo: [this.results.passportNo],
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                signatureImage: [this.results.signatureImage],
+                solCode: [this.results.solCode],
+                subGroupCode: [this.results.subGroupCode],
+                surname: [this.results.surname],
+                preferedName:[this.results.preferedName],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime],
+
+                contactInformationList: new FormArray([]),
+                customerImageList: new FormArray([]),
+                kins: new FormArray([]),
+                nominees: new FormArray([]),
+            })
+            let contactInformationList = this.results.contactInformationList
+            let customerImageList = this.results.customerImageList
+            let kins =  this.results.kins
+            let nominees = this.results.nominees
+
+            for(let i=0; i<contactInformationList.length; i++){
+              this.onReadCustomerInfoField(contactInformationList[i])
+            }
+            for(let i=0; i<customerImageList.length; i++){
+              this.onReadImageField(customerImageList[i]) 
+            }
+            for(let i=0; i<kins.length; i++){
+              this.onReadKinsField(kins[i]);
+            }
+            for(let i=0; i<nominees.length; i++){
+              this.onReadNominiesField(nominees[i])
+            }
             }
           )
         } else if (this.function_type == "M-Modify") {
-          this.isSubmitted = true
-          this.subscription = this.retailCustAPI.getMainGroupByCode(this.group_code).subscribe(
+          this.isDisabled = false;
+          this.subscription = this.retailCustAPI.getRetailCustomerByCode(this.customerCode).subscribe(
             res => {
               this.results = res
-            },
-            err => {
+              this.formData = this.fb.group({
+                sn:[this.results.sn],
+                birthCertificate: [this.results.birthCertificate],
+                citizen: [this.results.citizen],
+                customerCode: [this.results.customerCode],
+                deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
+                deletedTime: [this.results.deletedTime],
+                dob: [this.results.dob],
+                employerCode: [this.results.employerCode],
+                firstName: [this.results.firstName],
+                gender: [this.results.gender],
+                identificationNo: [this.results.identificationNo],
+                joiningDate: [this.results.joiningDate],
+                kraPin: [this.results.kraPin],
+                middleName: [this.results.middleName],
+                minor: [this.results.minor],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedOn: [this.results.modifiedOn],
+                occupation: [this.results.occupation],
+                passportNo: [this.results.passportNo],
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                signatureImage: [this.results.signatureImage],
+                solCode: [this.results.solCode],
+                subGroupCode: [this.results.subGroupCode],
+                surname: [this.results.surname],
+                preferedName:[this.results.preferedName],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime],
 
-              this.router.navigateByUrl("system/customer/retail/maintenance")
-              this.error = err
-              this._snackbar.open(this.error, "Try Again", {
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-                duration: 3000,
-                panelClass: ['red-snackbar', 'login-snackbar']
-              })
+                contactInformationList: new FormArray([]),
+                customerImageList: new FormArray([]),
+                kins: new FormArray([]),
+                nominees: new FormArray([]),
+            })
+            let contactInformationList = this.results.contactInformationList
+            let customerImageList = this.results.customerImageList
+            let kins =  this.results.kins
+            let nominees = this.results.nominees
+
+            for(let i=0; i<contactInformationList.length; i++){
+              this.onReadCustomerInfoField(contactInformationList[i])
+            }
+            for(let i=0; i<customerImageList.length; i++){
+              this.onReadImageField(customerImageList[i]) 
+            }
+            for(let i=0; i<kins.length; i++){
+              this.onReadKinsField(kins[i]);
+            }
+            for(let i=0; i<nominees.length; i++){
+              this.onReadNominiesField(nominees[i])
+            }
             }
           )
+
         } else if (this.function_type == "X-Delete") {
-          this.disabledFormControl()
-          this.isDeleted = true
-          this.subscription = this.retailCustAPI.getMainGroupByCode(this.group_code).subscribe(
+          this.subscription = this.retailCustAPI.getRetailCustomerByCode(this.customerCode).subscribe(
             res => {
               this.results = res
-            },
-            err => {
-              this.router.navigateByUrl("system/customer/retail/maintenance")
-              this.error = err
-              this._snackbar.open(this.error, "Try Again", {
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-                duration: 3000,
-                panelClass: ['red-snackbar', 'login-snackbar']
-              })
+              this.formData = this.fb.group({
+                sn:[this.results.sn],
+                birthCertificate: [this.results.birthCertificate],
+                citizen: [this.results.citizen],
+                customerCode: [this.results.customerCode],
+                deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
+                deletedTime: [this.results.deletedTime],
+                dob: [this.results.dob],
+                employerCode: [this.results.employerCode],
+                firstName: [this.results.firstName],
+                gender: [this.results.gender],
+                identificationNo: [this.results.identificationNo],
+                joiningDate: [this.results.joiningDate],
+                kraPin: [this.results.kraPin],
+                middleName: [this.results.middleName],
+                minor: [this.results.minor],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedOn: [this.results.modifiedOn],
+                occupation: [this.results.occupation],
+                passportNo: [this.results.passportNo],
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                signatureImage: [this.results.signatureImage],
+                solCode: [this.results.solCode],
+                subGroupCode: [this.results.subGroupCode],
+                surname: [this.results.surname],
+                preferedName:[this.results.preferedName],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime],
 
+                contactInformationList: new FormArray([]),
+                customerImageList: new FormArray([]),
+                kins: new FormArray([]),
+                nominees: new FormArray([]),
             })
+            let contactInformationList = this.results.contactInformationList
+            let customerImageList = this.results.customerImageList
+            let kins =  this.results.kins
+            let nominees = this.results.nominees
+
+            for(let i=0; i<contactInformationList.length; i++){
+              this.onReadCustomerInfoField(contactInformationList[i])
+            }
+            for(let i=0; i<customerImageList.length; i++){
+              this.onReadImageField(customerImageList[i]) 
+            }
+            for(let i=0; i<kins.length; i++){
+              this.onReadKinsField(kins[i]);
+            }
+            for(let i=0; i<nominees.length; i++){
+              this.onReadNominiesField(nominees[i])
+            }
+            }
+          )
+         
         } else if (this.function_type == "V-Verify") {
-          this.isSubmitted = true;
-          this.subscription = this.retailCustAPI.getMainGroupByCode(this.group_code).subscribe(
+          this.subscription = this.retailCustAPI.getRetailCustomerByCode(this.customerCode).subscribe(
             res => {
-              this.results = res;
-            },
-            err => {
+              this.results = res
+              this.formData = this.fb.group({
+                sn:[this.results.sn],
+                birthCertificate: [this.results.birthCertificate],
+                citizen: [this.results.citizen],
+                customerCode: [this.results.customerCode],
+                deletedBy: [this.results.deletedBy],
+                deletedFlag: [this.results.deletedFlag],
+                deletedTime: [this.results.deletedTime],
+                dob: [this.results.dob],
+                employerCode: [this.results.employerCode],
+                firstName: [this.results.firstName],
+                gender: [this.results.gender],
+                identificationNo: [this.results.identificationNo],
+                joiningDate: [this.results.joiningDate],
+                kraPin: [this.results.kraPin],
+                middleName: [this.results.middleName],
+                minor: [this.results.minor],
+                modifiedBy: [this.results.modifiedBy],
+                modifiedOn: [this.results.modifiedOn],
+                occupation: [this.results.occupation],
+                passportNo: [this.results.passportNo],
+                postedBy: [this.results.postedBy],
+                postedFlag: [this.results.postedFlag],
+                postedTime: [this.results.postedTime],
+                signatureImage: [this.results.signatureImage],
+                solCode: [this.results.solCode],
+                subGroupCode: [this.results.subGroupCode],
+                surname: [this.results.surname],
+                preferedName:[this.results.preferedName],
+                verifiedFlag: [this.results.verifiedFlag],
+                verifiedTime: [this.results.verifiedTime],
 
-              this.router.navigateByUrl("system/customer/retail/maintenance")
-              this.error = err
-              this._snackbar.open(this.error, "Try Again", {
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-                duration: 3000,
-                panelClass: ['red-snackbar', 'login-snackbar']
-              })
+                contactInformationList: new FormArray([]),
+                customerImageList: new FormArray([]),
+                kins: new FormArray([]),
+                nominees: new FormArray([]),
             })
+            let contactInformationList = this.results.contactInformationList
+            let customerImageList = this.results.customerImageList
+            let kins =  this.results.kins
+            let nominees = this.results.nominees
+
+            for(let i=0; i<contactInformationList.length; i++){
+              this.onReadCustomerInfoField(contactInformationList[i])
+            }
+            for(let i=0; i<customerImageList.length; i++){
+              this.onReadImageField(customerImageList[i]) 
+            }
+            for(let i=0; i<kins.length; i++){
+              this.onReadKinsField(kins[i]);
+            }
+            for(let i=0; i<nominees.length; i++){
+              this.onReadNominiesField(nominees[i])
+            }
+            }
+          )
+          
         }
       }
     )
@@ -381,7 +586,7 @@ export class RetailCustomerComponent implements OnInit {
     if (this.formData.valid) {
       if (this.function_type == "A-Add") {
         this.isEnabled = true;
-        this.subscription = this.retailCustAPI.createMainGroup(this.formData.value).subscribe(
+        this.subscription = this.retailCustAPI.createRetailCustomer(this.formData.value).subscribe(
           res => {
             this.results = res
             this._snackbar.open("Executed Successfully", "X", {
@@ -403,8 +608,8 @@ export class RetailCustomerComponent implements OnInit {
             })
           }
         )
-      } else if (this.function_type == "M-Modify") {
-        this.subscription = this.retailCustAPI.updateMainGroup(this.formData.value).subscribe(
+      } else{
+        this.subscription = this.retailCustAPI.updateRetailCustomer(this.formData.value).subscribe(
           res => {
             this.results = res
             this._snackbar.open("Executed Successfully", "X", {
@@ -426,30 +631,10 @@ export class RetailCustomerComponent implements OnInit {
             })
           }
         )
-      } else if (this.function_type == "X-Delete") {
-        this.subscription = this.retailCustAPI.updateMainGroup(this.formData.value).subscribe(
-          res => {
-            this.results = res
-            this._snackbar.open("Executed Successfully", "X", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: ['green-snackbar', 'login-snackbar']
-
-            });
-            this.router.navigateByUrl("system/customer/retail/maintenance")
-          },
-          err => {
-            this.error = err
-            this._snackbar.open(this.error, "Try Again", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: ['red-snackbar', 'login-snackbar']
-            })
-          }
-        )
-      }
+      } 
     }
   }
+
+
+
 }
