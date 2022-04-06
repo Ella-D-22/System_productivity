@@ -106,6 +106,23 @@
       <mat-icon>supervisor_account</mat-icon>
        Customers Management</a> 
 
+       <mat-accordion class="app-nav-accordion">
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="nav-title">
+              <mat-icon>supervised_user_circle</mat-icon>
+              CUstomers Management - New
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/customer/retail/maintenance" matTooltip="Customer Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Retail Customer</a>
+           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/collateral-limits/Collateral/maintenance" matTooltip="Collaterals Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Cooprate Customer</a>
+
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
     <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/account/maintenance">
       <mat-icon>account_balance_wallet</mat-icon>
        Accounts Management</a> 

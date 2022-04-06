@@ -53,7 +53,7 @@ export class CustomerService {
   retrieveRetailCustmersPerSolCode(params:any): Observable<Response>{
     console.log("params", params);
     
-    return this.http.get<Response>(this.baseUrl+'/retail/all/by/solcode',{params:params});
+    return this.http.get<Response>(this.baseUrl+'retail/all/by/solcode',{params:params});
     
   }
   updateRetail(retail: retailKyc): Observable<Response>{

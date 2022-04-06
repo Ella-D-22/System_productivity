@@ -32,6 +32,7 @@ export class LimitsComponent implements OnInit {
   limit_code: any;
   limit_description: any;
   constructor(private fb:FormBuilder,
+    private _snackBar: MatSnackBar,
     private limitAPI:LimitsService,
     private _snackbar:MatSnackBar,
     private router:Router, 
@@ -426,17 +427,6 @@ export class LimitsComponent implements OnInit {
         this.nonFundBasedForm.value
         ));
     }
-
-    // this.l.push(this.fb.group(
-    //   this.glSubheadData.value
-    //   ));
-    //   this.glSubheadArray.push(this.glSubheadData.value);
-    //   this.initGlSUbheadForm();
-
-    //   get fd() { return this.f.limit_nodes as FormArray;}
-    //   get nfd() {return this.f.limit_nodes as FormArray;}
-
-    // compare the difference between difference and the new value
   }
   onAddFundBased(){
     // Get value of non fundbased
@@ -453,12 +443,60 @@ export class LimitsComponent implements OnInit {
       })
     }else{
       this.fundedLimitsArray.push(this.fundBasedForm.value)
-      this.fd.push(this.fb.group(
-        this.fundBasedForm.value
-        ));
+      // this.fd.push(this.fb.group(
+      //   this.fundBasedForm.value
+      //   ));
+    window.localStorage.setItem("Funded_based_Details", JSON.stringify(this.fundedLimitsArray));
+
     }
     // compare the difference between difference and the new value
   }
+  editFundedValue(i){
+    this.fundBasedForm = this.fb.group({
+      limit_node_cust_code:[this.formData.controls.customer_code.value],
+      limit_node_category:['Fundbased'],
+      limit_node_name:[this.fundedLimitsArray[i].limit_node_name],
+      limit_node_value:[this.fundedLimitsArray[i].limit_node_value]
+    })
+  }
+  onUpdateFundbased(i:any){
+    // let element = this.documentsArray.findIndex(i);
+    this.fundedLimitsArray[i] = this.formData.value
+
+    window.localStorage.removeItem("Funded_based_Details");
+    window.localStorage.setItem("Funded_based_Details", JSON.stringify(this.fundedLimitsArray));
+    this._snackBar.open('Updated', 'X', {
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      duration: 3000,
+      panelClass: ['green-snackbar', 'login-snackbar'],
+    });
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+  }
+  onDeleteFundbased(i:any){
+    this.fundedLimitsArray.splice(i, 1);
+    console.log("Funded based array slice", this.fundedLimitsArray );
+
+    this.fundedLimitsArray = this.fundedLimitsArray;
+    console.log("Funded based array", this.fundedLimitsArray );
+    
+    window.localStorage.removeItem("Funded_based_Details");
+    window.localStorage.setItem("Funded_based_Details", JSON.stringify(this.fundedLimitsArray));
+    this._snackBar.open('Deleted', 'X', {
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      duration: 3000,
+      panelClass: ['green-snackbar', 'login-snackbar'],
+    });
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+  }
+
   onSubmit(){
     // this.formData.controls.limit_nodes.push(this.fundedLimitsArray);
     // this.formData.controls.limit_nodes.setValue(this.nonFundedLimitsArray);
