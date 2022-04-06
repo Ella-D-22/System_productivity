@@ -5,7 +5,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
-import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
+import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
 import { MainGroupLookupComponent } from '../main-group/main-group-lookup/main-group-lookup.component';
 import { SubGroupService } from './sub-group.service';
 
@@ -169,7 +169,7 @@ export class SubGroupComponent implements OnInit {
 
   }
   customerLookup():void{
-    const dialogRef =  this.dialog.open(CustomerLookupComponent,{
+    const dialogRef =  this.dialog.open(RetailCustomerLookupComponent,{
 
     });
     dialogRef.afterClosed().subscribe(results =>{

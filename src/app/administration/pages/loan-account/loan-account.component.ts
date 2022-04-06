@@ -22,8 +22,8 @@ import { BranchComponent } from './lookup/branch/branch.component';
 import { ProductComponent } from './lookup/product/product.component';
 import { Subscription } from 'rxjs';
 import { GlSubheadLookupComponent } from '../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
-import { CustomerLookupComponent } from '../CustomersComponent/customer-lookup/customer-lookup.component';
 import { LoanproductLookupComponent } from '../ProductModule/loanproduct/loanproduct-lookup/loanproduct-lookup.component';
+import { RetailCustomerLookupComponent } from '../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
 
 
 @Component({
@@ -135,7 +135,7 @@ export class LoanAccountComponent implements OnInit {
   }
 
   customerLookup(): void {
-    const dialogRef = this.dialog.open(CustomerLookupComponent, {
+    const dialogRef = this.dialog.open(RetailCustomerLookupComponent, {
       // height: '400px',
       // width: '600px',
     });

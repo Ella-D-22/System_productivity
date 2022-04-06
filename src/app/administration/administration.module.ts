@@ -91,24 +91,7 @@ import { GuarantosMaintenanceComponent } from './pages/SystemConfigurations/Glob
 import { LimitsComponent } from './pages/collateral-limits/limits/limits.component';
 import { LimitsMaintenanceComponent } from './pages/collateral-limits/limits/limits-maintenance/limits-maintenance.component';
 import { LimitsLookupComponent } from './pages/collateral-limits/limits/limits-lookup/limits-lookup.component';
-import { CorporateComponent } from './pages/CustomersComponent/components/lookup/corporate/corporate.component';
-import { EmployerComponent } from './pages/CustomersComponent/components/lookup/employer/employer.component';
-import { RetailComponent } from './pages/CustomersComponent/components/lookup/retail/retail.component';
-import { CorporateAddComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-add/corporate-add.component';
-import { CorporateDeleteComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-delete/corporate-delete.component';
-import { CorporateInquireComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-inquire/corporate-inquire.component';
-import { CorporateModifyComponent } from './pages/CustomersComponent/components/main/corporate-kyc/corporate-modify/corporate-modify.component';
-import { MainKycComponent } from './pages/CustomersComponent/components/main/main-kyc/main-kyc.component';
-import { RetailAddComponent } from './pages/CustomersComponent/components/main/retail-kyc/retail-add/retail-add.component';
-import { RetailDeleteComponent } from './pages/CustomersComponent/components/main/retail-kyc/retail-delete/retail-delete.component';
-import { RetailInquireComponent } from './pages/CustomersComponent/components/main/retail-kyc/retail-inquire/retail-inquire.component';
-import { RetailModifyComponent } from './pages/CustomersComponent/components/main/retail-kyc/retail-modify/retail-modify.component';
-import { ParamAddComponent } from './pages/CustomersComponent/components/params/param-add/param-add.component';
-import { ParamInquireComponent } from './pages/CustomersComponent/components/params/param-inquire/param-inquire.component';
-import { ParamMainComponent } from './pages/CustomersComponent/components/params/param-main/param-main.component';
-import { FailureComponent } from './pages/CustomersComponent/components/status/failure/failure.component';
-import { SuccessComponent } from './pages/CustomersComponent/components/status/success/success.component';
-import { CustomerLookupComponent } from './pages/CustomersComponent/customer-lookup/customer-lookup.component';
+
 import { MainGroupComponent } from './pages/GLS/main-group/main-group.component';
 import { MainGroupMaintenanceComponent } from './pages/GLS/main-group/main-group-maintenance/main-group-maintenance.component';
 import { SubGroupMaintenanceComponent } from './pages/GLS/sub-group/sub-group-maintenance/sub-group-maintenance.component';
@@ -219,24 +202,7 @@ import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponen
 
     // Customers
 
-    MainKycComponent,
-    RetailAddComponent,
-    RetailModifyComponent,
-    RetailInquireComponent,
-    RetailDeleteComponent,
-    CorporateDeleteComponent,
-    CorporateAddComponent,
-    CorporateInquireComponent,
-    CorporateModifyComponent,
-    CorporateComponent,
-    RetailComponent,
-    EmployerComponent,
-    FailureComponent,
-    SuccessComponent,
-    ParamAddComponent,
-    ParamInquireComponent,
-    ParamMainComponent,
-    CustomerLookupComponent,
+ 
     MainGroupComponent,
     MainGroupMaintenanceComponent,
     SubGroupMaintenanceComponent,

@@ -4,8 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
+import { RetailCustomerComponent } from '../../CustomersComponent/retail-customer/retail-customer.component';
 import { CollateralLookupComponent } from '../collateral/collateral-lookup/collateral-lookup.component';
-import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
 import { LimitsService } from './limits.service';
 
 @Component({
@@ -130,7 +131,7 @@ export class LimitsComponent implements OnInit {
       this.formData.disable()
     }
     customerLookup(){
-     const dialogRef = this.dialog.open(CustomerLookupComponent,{
+     const dialogRef = this.dialog.open(RetailCustomerLookupComponent,{
      
     });
     dialogRef.afterClosed().subscribe(result => {
