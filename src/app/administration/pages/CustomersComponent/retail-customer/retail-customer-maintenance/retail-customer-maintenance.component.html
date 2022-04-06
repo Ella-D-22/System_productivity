@@ -26,14 +26,14 @@
                     </div>
                 </div>
                 <div  class="col-md-6 col-sm-12">
-                    <div class="form-group">
+                    <div  *ngIf="existingData" class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
                             <label class="start pull-left" for="">Customer Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <input type="text" class="form-control" formControlName="customerCode" maxlength="6" [value]="this.customerCode"
                              oninput="this.value=this.value.toUpperCase()" [ngClass]="{'is-invalid': submitted && f.customerCode.errors}">
-                            <mat-icon *ngIf="existingData"  (click)="mainGroupLookup()">search</mat-icon>
+                            <mat-icon  (click)="customerLookup()">search</mat-icon>
                         </div>
                     </div>
                 </div>
