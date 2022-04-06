@@ -21,12 +21,7 @@ export const environment = {
     menutreeAPI: 'http://localhost:9091/menutree-service',
     reportAPI:'http://localhost:9091/report-service',
     glsAPI: 'http://localhost:9910/group-service'
-    glsAPI: 'http://localhost:9910',
 
-
-
-
-    // production: true,  
     // userAPI: 'http://52.15.152.26:9091',
     // accountAPI: 'http://52.15.152.26:9091/account-service',
     // productAPI: 'http://52.15.152.26:9091/product-service',
