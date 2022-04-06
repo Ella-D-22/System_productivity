@@ -1,0 +1,44 @@
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <div>Home/Customer/Corporate/Maintenance</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form [formGroup]="formData"
+        (ngSubmit)="onSubmit()"
+        novalidate>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Function<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <select name="" id="" formControlName="function_type" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}" (change)="onSelectFunction($event)">
+                            <option value="" disabled>--Choose Function--</option>
+                            <option *ngFor="let flag of functionArray" [value]="flag">{{flag}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngIf="showCustCode" class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Customer Code<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="cust_code" class="form-control" 
+                        [ngClass]="{ 'is-invalid': submitted && f.cust_code.errors}" oninput="this.value=this.value.toUpperCase()">
+                        <mat-icon (click)="corporateCustomerLookup()" >search</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button mat-raised-button color="primary" class=" start pull-right" type="submit">GO</button>
+        </form>
+    </div>
+</mat-card>

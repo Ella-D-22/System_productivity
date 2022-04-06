@@ -13,7 +13,9 @@ export class RetailCustomerService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   baseURL = `${environment.glsAPI}/api/v1/group/main`;
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+      
+     }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');
   currentMessage = this.messageSource.asObservable();
