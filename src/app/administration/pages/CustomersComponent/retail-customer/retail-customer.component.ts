@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
-import { CustomerLookupComponent } from '../../CustomersComponent/customer-lookup/customer-lookup.component';
+import { RetailCustomerLookupComponent } from './retail-customer-lookup/retail-customer-lookup.component';
 import { RetailCustomerService } from './retail-customer.service';
 
 @Component({
@@ -241,22 +241,7 @@ export class RetailCustomerComponent implements OnInit {
   }
 
 
-  customerLookup(): void {
-    const dialogRef = this.dialog.open(CustomerLookupComponent, {
 
-    });
-    dialogRef.afterClosed().subscribe(results => {
-      this.dialogData = results.data;
-      console.log(this.dialogData);
-
-      this.formData.controls.cust_code.setValue(results.data.customer_code)
-      this.formData.controls.chairperson.setValue(this.dialogData.customer_code)
-      this.formData.controls.secretary.setValue(this.dialogData.customer_code)
-      this.formData.controls.treasurer.setValue(this.dialogData.customer_code)
-      this.formData.controls.groupMembers['cust_name'].setValue(this.dialogData.firstName)
-
-    })
-  }
 
 
   disabledFormControl() {
