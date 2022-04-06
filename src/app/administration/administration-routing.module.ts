@@ -70,6 +70,8 @@ import { SubGroupComponent } from './pages/GLS/sub-group/sub-group.component';
 import { SubGroupMaintenanceComponent } from './pages/GLS/sub-group/sub-group-maintenance/sub-group-maintenance.component';
 import { RetailCustomerComponent } from './pages/CustomersComponent/retail-customer/retail-customer.component';
 import { RetailCustomerMaintenanceComponent } from './pages/CustomersComponent/retail-customer/retail-customer-maintenance/retail-customer-maintenance.component';
+import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer-maintenance/corporate-customer-maintenance.component';
+import { CorporateCustomerComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer.component';
 
 const routes: Routes = [{
   path: '',
@@ -546,6 +548,18 @@ const routes: Routes = [{
         component: CorporateInquireComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true },
+      },
+      {
+         path: 'customers/corporate/maintenance',
+         component:CorporateCustomerMaintenanceComponent,
+        //  canActivate: [CanActivateModuleGuard],
+        //  data:{ preload:true},
+      },
+      {
+        path:'customers/corporate/data/view',
+        component:CorporateCustomerComponent,
+        // canActivate:[CanActivateModuleGuard],
+        // data:{preload:true},
       },
 
       

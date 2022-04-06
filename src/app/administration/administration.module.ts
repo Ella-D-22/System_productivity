@@ -118,6 +118,9 @@ import { MainGroupLookupComponent } from './pages/GLS/main-group/main-group-look
 import { RetailCustomerComponent } from './pages/CustomersComponent/retail-customer/retail-customer.component';
 import { RetailCustomerLookupComponent } from './pages/CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
 import { RetailCustomerMaintenanceComponent } from './pages/CustomersComponent/retail-customer/retail-customer-maintenance/retail-customer-maintenance.component';
+import { CorporateCustomerComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer.component';
+import { CorporateCustomerLookupComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer-lookup/corporate-customer-lookup.component';
+import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer-maintenance/corporate-customer-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -242,7 +245,10 @@ import { RetailCustomerMaintenanceComponent } from './pages/CustomersComponent/r
     MainGroupLookupComponent,
     RetailCustomerComponent,
     RetailCustomerLookupComponent,
-    RetailCustomerMaintenanceComponent
+    RetailCustomerMaintenanceComponent,
+    CorporateCustomerComponent,
+    CorporateCustomerLookupComponent,
+    CorporateCustomerMaintenanceComponent
 
     
     

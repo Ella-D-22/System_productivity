@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class RetailCustomerService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+
   baseURL = `${environment.customerAPI}`;
     constructor(private http: HttpClient) { }
      // Message Medium

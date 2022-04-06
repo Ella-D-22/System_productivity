@@ -483,7 +483,7 @@ export class SubGroupComponent implements OnInit {
   }
 
 
-  onSubmit(){
+  onSubmit(){ 
     if(this.formData.valid){
 
       if(this.function_type == "A-Add"){

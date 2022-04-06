@@ -1,0 +1,167 @@
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <div>Home/system/customers/corporate/data/view</div>
+    </mat-card-header>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form [formGroup]="formData"
+        novalidate
+        (ngSubmit)="onSubmit()"
+        class="form">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Customer Code<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="custCode" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Organisation Name<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="organisationName" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+               <div class="form-group">
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <label for="" class="start pull-left">Corporate Segment<span class="warning">*</span></label>
+                   </div>
+                   <div class="col-md-6 col-sm-12 form-column">
+                       <input type="text" formControlName="corporateSegment" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                   </div>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Short Name<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="shortName" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="class pull-left">Sub Segment<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="subSegment" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Joining Date<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input  [matDatepicker]="jpicker" formControlName="joiningDate" class="form-control" />
+                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="jpicker"></mat-datepicker-toggle>
+                        <mat-datepicker #jpicker></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">inCorporation Date<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input  [matDatepicker]="npicker" formControlName="inCorporationDate" class="form-control" />
+                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="npicker"></mat-datepicker-toggle>
+                        <mat-datepicker #npicker></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">KRA PIN<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="kraPin" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Registration PIN<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="registrationPin" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Legal Entity Type<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="legalEntityType" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Contact Person Name<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="contactPersonName" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Head Office<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="headOffice" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Region<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="region" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
+        <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isSubmitted">Submit</button>
+        <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>    </form>
+    </div>
+</mat-card>

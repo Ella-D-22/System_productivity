@@ -14,7 +14,7 @@ export const environment = {
     // transactionexecutorAPI:'http://localhost:9091/transaction-executor-service',
     // alertAPI: 'http://localhost:9091/alert-service',
     // chargeAPI: 'http://localhost:9091/charge-service',
-    // customerAPI:'http://localhost:9091/customer-service',
+    // customerAPI:'http://localhost:9097',
     // eodAPI:'http://localhost:9091/eod-service',
     // groupAPI: 'http://localhost:9091/group-service',
     // interestCalculatorAPI: 'http://localhost:9091/interest-calculator-service',
