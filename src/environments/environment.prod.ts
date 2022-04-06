@@ -1,6 +1,6 @@
 export const environment = {
   production: true,  
-    userAPI: 'http://52.15.152.26:9091/user-service',
+    userAPI: 'http://52.15.152.26:9091',
     accountAPI: 'http://52.15.152.26:9091/account-service',
     productAPI: 'http://52.15.152.26:9091/product-service',
     collateralAPI: 'http://52.15.152.26:9091/collateral-service',
@@ -15,5 +15,7 @@ export const environment = {
     groupAPI: 'http://52.15.152.26:9091/group-service',
     interestCalculatorAPI: 'http://52.15.152.26:9091/interest-calculator-service',
     menutreeAPI: 'http://52.15.152.26:9091/menutree-service',
-    reportAPI:'http://52.15.152.26:9091/report-service' 
+    reportAPI:'http://52.15.152.26:9091/report-service',
+    glsAPI: 'http://52.15.152.26:9091/group-service'
+
 };

@@ -1,0 +1,79 @@
+{
+    "birthCertificateNo": "string",
+    "citizen": "string",
+    "contactInformationList": [
+      {
+        "boxOfficeNo": "string",
+        "emailAddress": "string",
+        "phoneNumber": "string",
+        "postalCode": "string",
+        "residentialTown": "string",
+        "sn": 0
+      }
+    ],
+    "customerCode": "string",
+    "customerImageList": [
+      {
+        "fromDate": "2022-04-05T10:12:39.320Z",
+        "image": "string",
+        "modifiedBy": "string",
+        "modifiedOn": "2022-04-05T10:12:39.320Z",
+        "postedBy": "string",
+        "postedFlag": "string",
+        "postedTime": "2022-04-05T10:12:39.320Z",
+        "sn": 0,
+        "toDate": "2022-04-05T10:12:39.320Z"
+      }
+    ],
+    "deletedBy": "string",
+    "deletedFlag": "string",
+    "deletedTime": "2022-04-05T10:12:39.320Z",
+    "dob": "2022-04-05T10:12:39.320Z",
+    "employerCode": "string",
+    "firstName": "string",
+    "gender": "string",
+    "identificationNo": "string",
+    "joiningDate": "2022-04-05T10:12:39.320Z",
+    "kins": [
+      {
+        "dob": "2022-04-05T10:12:39.320Z",
+        "emailAddress": "string",
+        "firstName": "string",
+        "idNo": "string",
+        "middleName": "string",
+        "occupation": "string",
+        "phoneNo": "string",
+        "relationship": "string",
+        "surname": "string"
+      }
+    ],
+    "kraPin": "string",
+    "middleName": "string",
+    "minor": "string",
+    "modifiedBy": "string",
+    "modifiedOn": "2022-04-05T10:12:39.320Z",
+    "nominees": [
+      {
+        "dob": "2022-04-05T10:12:39.320Z",
+        "emailAddress": "string",
+        "firstName": "string",
+        "identificationNo": "string",
+        "lastName": "string",
+        "middleName": "string",
+        "occupation": "string",
+        "phone": "string"
+      }
+    ],
+    "occupation": "string",
+    "passportNo": "string",
+    "postedBy": "string",
+    "postedFlag": "string",
+    "postedTime": "2022-04-05T10:12:39.321Z",
+    "signatureImage": "string",
+    "sn": 0,
+    "solCode": "string",
+    "subGroupCode": "string",
+    "surname": "string",
+    "verifiedFlag": "string",
+    "verifiedTime": "2022-04-05T10:12:39.321Z"
+  }
