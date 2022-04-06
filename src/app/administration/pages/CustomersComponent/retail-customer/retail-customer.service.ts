@@ -12,10 +12,9 @@ import { environment } from 'src/environments/environment';
 export class RetailCustomerService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  baseURL = `${environment.glsAPI}/api/v1/group/main`;
-    constructor(private http: HttpClient) {
-      
-     }
+
+  baseURL = `${environment.customerAPI}`;
+    constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');
   currentMessage = this.messageSource.asObservable();
@@ -23,9 +22,8 @@ export class RetailCustomerService {
     this.messageSource.next(message)
   }
   // Add
-  createMainGroup(data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/add`;
-    
+  createRetailCustomer(data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/retail/register`;
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
         return res || {}
       }),
@@ -33,7 +31,7 @@ export class RetailCustomerService {
     )
   }
   // Get all
-  getMainGroups() {
+  getRetailCustomers() {
     let API_URL = `${this.baseURL}/all`;
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
     .pipe(
@@ -44,7 +42,7 @@ export class RetailCustomerService {
     )
   }
   // Get by id
-  getMainGroupId(id: any): Observable<any> {
+  getRetailCustomerId(id: any): Observable<any> {
     let API_URL = `${this.baseURL}/find/${id}`;
     return this.http.get(API_URL, { withCredentials: false })
       .pipe(
@@ -54,9 +52,30 @@ export class RetailCustomerService {
         catchError(this.errorMgmt)
       )
   }
+  getRetailCustomerPerSolCode(params: any): Observable<any> {
+    let API_URL = `${this.baseURL}/retail/all/by/solcode`;
+    return this.http.get(API_URL, { params:params, withCredentials: false })
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
+  }
+  getCorporateCustomerPerSolCode(params: any): Observable<any> {
+    let API_URL = `${this.baseURL}/retail/all/by/solcode`;
+    return this.http.get(API_URL, { params:params, withCredentials: false })
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
+  }
+
     // Get by Code
-    getMainGroupByCode(groupCode: any): Observable<any> {
-      let API_URL = `${this.baseURL}/find/${groupCode}`;
+    getRetailCustomerByCode(customerCode: any): Observable<any> {
+      let API_URL = `${this.baseURL}/retail/${customerCode}`;
       return this.http.get(API_URL, { withCredentials: false })
         .pipe(
           map((res) => {
@@ -67,8 +86,10 @@ export class RetailCustomerService {
     }
 
 
-  updateMainGroup(data:any): Observable<any> {
-    let API_URL = `${this.baseURL}/update/`;
+  updateRetailCustomer(data:any): Observable<any> {
+    console.log("Got called", data);
+    
+    let API_URL = `${this.baseURL}/retail/update/`;
     return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
       .pipe(
         catchError(this.errorMgmt)

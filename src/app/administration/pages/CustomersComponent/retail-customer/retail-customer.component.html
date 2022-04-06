@@ -29,7 +29,7 @@
                                     <label class="start pull-left">First Name<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="firstName" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input maxlength="20" type="text" formControlName="firstName" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                     <label class="start pull-left">Middle Name<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">  
+                                    <input maxlength="20" type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">  
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                     <label class="start pull-left">Surname<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="surname" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input maxlength="20" type="text" formControlName="surname" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                     <label class="start pull-left">Prefered Name<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="surname" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input maxlength="20" type="text" formControlName="surname" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                                     <label class="start pull-left">Citizen<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="citizen" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input maxlength="20" type="text" formControlName="citizen" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                                     <label class="start pull-left">Birth Certificate No.<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="birthCertificate" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input maxlength="15" type="text" formControlName="birthCertificate" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                     <label class="start pull-left">National ID <span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="identificationNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input maxlength="8" type="text" formControlName="identificationNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                                     <label class="start pull-left">KRA Pin.<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="kraPin" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input maxlength="11" type="text" formControlName="kraPin" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -145,8 +145,8 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="minor">
-                                        <mat-radio-button value="YES">YES</mat-radio-button>
-                                        <mat-radio-button value="NO">NO</mat-radio-button>
+                                        <mat-radio-button value="Y">YES</mat-radio-button>
+                                        <mat-radio-button value="N">NO</mat-radio-button>
                                       </mat-radio-group>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                                     <label class="start pull-left">Passport No<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="passportNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input maxlength="15" type="text" formControlName="passportNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,15 @@
                                     <label class="start pull-left">Branch Code <span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="solCode" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input [attr.disabled]="true" maxlength="6" type="text" [value]="this.solCode" formControlName="solCode" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <mat-icon (click)=" branchesCodeLookup()">search</mat-icon>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <mat-hint><small>{{this.solDescription}}</small></mat-hint>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +204,7 @@
                                         <label for="" class="start pull-left">Phone Number<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="phoneNumber" class="form-control">
+                                        <input maxlength="12" type="text" formControlName="phoneNumber" class="form-control">
                                     </div>
                                   </div>
                                </div>
@@ -206,7 +214,7 @@
                                            <label for="" class="start pull-left">Email Address<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="20" type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 
@@ -218,7 +226,7 @@
                                         <label for="" class="start pull-left">Postal Address<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="boxOfficeNo" class="form-control">
+                                        <input maxlength="20" type="text" formControlName="boxOfficeNo" class="form-control">
                                     </div>
                                   </div>
                                </div>
@@ -228,7 +236,7 @@
                                            <label for="" class="start pull-left">Residential<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="residentialTown" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="20" type="text" formControlName="residentialTown" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 
@@ -247,7 +255,7 @@
                                         <label for="" class="start pull-left">First Name<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="firstName" class="form-control">
+                                        <input maxlength="20" type="text" formControlName="firstName" class="form-control">
                                     </div>
                                   </div>
                                </div>
@@ -257,7 +265,7 @@
                                            <label for="" class="start pull-left">Middle Name<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="20" type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 
@@ -269,7 +277,7 @@
                                         <label for="" class="start pull-left">Surname<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="surname" class="form-control">
+                                        <input maxlength="20" type="text" formControlName="surname" class="form-control">
                                     </div>
                                   </div>
                                </div>
@@ -279,7 +287,7 @@
                                            <label for="" class="start pull-left">Relationship<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="relationship" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="20" type="text" formControlName="relationship" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 
@@ -291,7 +299,7 @@
                                         <label for="" class="start pull-left">Phone Number<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="phoneNo" class="form-control">
+                                        <input maxlength="12" type="text" formControlName="phoneNo" class="form-control">
                                     </div>
                                   </div>
                                </div>
@@ -301,7 +309,7 @@
                                            <label for="" class="start pull-left">Email Address<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="20" type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 
@@ -314,7 +322,9 @@
                                         <label for="" class="start pull-left">Date of Birth<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="dob" class="form-control">
+                                        <input [matDatepicker]="ppicker" formControlName="dob" class="form-control" />
+                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #ppicker></mat-datepicker>
                                     </div>
                                   </div>
                                </div>
@@ -343,7 +353,7 @@
                                         <label for="" class="start pull-left">First Name<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="firstName" class="form-control">
+                                        <input maxlength="20" type="text" formControlName="firstName" class="form-control">
                                     </div>
                                   </div>
                                </div>
@@ -353,7 +363,7 @@
                                            <label for="" class="start pull-left">Middle Name<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="20" type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 
@@ -365,7 +375,7 @@
                                         <label for="" class="start pull-left">Last Name<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="lastName" class="form-control">
+                                        <input maxlength="20" type="text" formControlName="lastName" class="form-control">
                                     </div>
                                   </div>
                                </div>
@@ -375,7 +385,7 @@
                                            <label for="" class="start pull-left">National ID<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="identificationNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="9" type="text" formControlName="identificationNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 
@@ -387,7 +397,7 @@
                                         <label for="" class="start pull-left">Phone Number<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="phone" class="form-control">
+                                        <input maxlength="12" type="text" formControlName="phone" class="form-control">
                                     </div>
                                   </div>
                                </div>
@@ -397,7 +407,7 @@
                                            <label for="" class="start pull-left">Email Address<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="20" type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 
@@ -409,7 +419,9 @@
                                         <label for="" class="start pull-left">Date of Birth<span class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="dob" class="form-control">
+                                        <input [matDatepicker]="ppicker" formControlName="dob" class="form-control" />
+                                        <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #ppicker></mat-datepicker>
                                     </div>
                                   </div>
                                </div>
@@ -438,28 +450,32 @@
                                             <label for="" class="start pull-left">Image Type<span class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="image_name" class="form-control">
+                                            <select formControlName="image_name" class="form-control"  >
+                                                <option disabled>--Select--</option>
+                                                <option *ngFor="let item of imageTypeArray" [value]="item">{{item}}</option>
+                                            </select>
                                         </div>
                                       </div>
                                </div>
                                <div class="col-md-6 col-sm-12">
                                    <div class="form-group">
                                        <div class="col-md-12 col-sm-12 form-column">
-                                        <input class="form-controls" type="file" required (change)="onSignaturePhotoChange($event)"><br>
-                                        <mat-hint><small>Only png, jpeg accepted</small></mat-hint>
+                                        <input  class="form-controls" type="file" required (change)="onSignaturePhotoChange($event, i)">
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <img [src]="this.signatureImageSrc" class="col-md-6"/>
-                                    </div>
+                                    <mat-hint><small>Only png, jpeg accepted</small></mat-hint>
+                                   </div>
+                                   <div class="form-group">
+                                        <img [src]="form.controls.image.value" class="col-md-6 img-preview"/>
                                 </div>
                                </div> 
                             </div>
                         </div>
+                        <br>
+                        
                     </div>
+
                 </mat-tab>
             </mat-tab-group>
             <br>

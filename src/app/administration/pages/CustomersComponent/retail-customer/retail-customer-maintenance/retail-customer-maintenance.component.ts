@@ -37,7 +37,7 @@ export class RetailCustomerMaintenanceComponent implements OnInit {
 
   formData = this.fb.group({
     function_type:[''],
-    customerCode:['', [Validators.required]],
+    customerCode:[''],
     customer_info:['']
   })
   get f() {return this.formData.controls; }
@@ -54,6 +54,7 @@ export class RetailCustomerMaintenanceComponent implements OnInit {
          this.formData.controls.customerCode.setValidators([Validators.required])
       }
     }
+
     customerLookup():void{
       const dialogRef =  this.dialog.open(RetailCustomerLookupComponent,{
       });
