@@ -100,7 +100,10 @@
                                     <label class="start pull-left">Citizen<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input maxlength="20" type="text" formControlName="citizen" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="citizen">
+                                        <mat-radio-button value="Y">YES</mat-radio-button>
+                                        <mat-radio-button value="N">NO</mat-radio-button>
+                                      </mat-radio-group>
                                 </div>
                             </div>
                         </div>
@@ -385,7 +388,7 @@
                                            <label for="" class="start pull-left">National ID<span class="warning">*</span></label>
                                        </div>
                                        <div class="col-md-6 col-sm-12 form-column">
-                                           <input maxlength="9" type="text" formControlName="identificationNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                           <input maxlength="8" type="text" formControlName="identificationNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
                                </div> 

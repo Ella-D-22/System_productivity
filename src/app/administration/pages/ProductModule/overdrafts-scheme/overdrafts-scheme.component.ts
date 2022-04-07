@@ -154,6 +154,7 @@ export class OverdraftsSchemeComponent implements OnInit {
   interest_calc_description: any;
   insufficient_exception_description: any;
   backdate_transaction_description: any;
+  event_id_desc: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -161,8 +162,12 @@ export class OverdraftsSchemeComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.event_id = result.data;
-      this.feeFormData.controls.oda_fee_event.setValue(result.data);
+      this.event_id = result.data.event_id;
+      this.event_id_desc = result.data.event_id_desc
+      this.event_type = result.data.event_type
+      this.event_type_desc = result.data.event_type_desc 
+      this.feeFormData.controls.sba_fee_event.setValue(this.event_id);
+      this.feeFormData.controls.sba_fee_type.setValue(this.event_type_code);
     });
   }
   eventTypeLookup(): void {

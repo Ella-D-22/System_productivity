@@ -775,24 +775,24 @@
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">Fee Type<span class="warning">*</span></label>
+                 <label class="start pull-left">Fee Event</label>
                 </div>
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <input [value]="this.event_type_desc" type="text" formControlName="caa_fee_type" class="pull-right form-control"/>
-                 <mat-icon (click)="eventTypeLookup()">search</mat-icon>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input [value]="this.event_id" type="text" formControlName="caa_fee_event" class="pull-right form-control"/>
+                  <mat-icon (click)="eventidLookup()">search</mat-icon>
                 </div>
-             </div> 
+             </div>
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Fee Event</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input [value]="this.event_id" type="text" formControlName="caa_fee_event" class="pull-right form-control"/>
-                    <mat-icon (click)="eventidLookup()">search</mat-icon>
-                  </div>
-               </div>            
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Fee Type<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <input [attr.disabled]="true"  [value]="this.event_type_desc" type="text" formControlName="caa_fee_type" class="pull-right form-control"/>
+                 <!-- <mat-icon (click)="eventTypeLookup()">search</mat-icon> -->
+                </div>
+             </div>       
           </div>
           </div>
            <div class="row">
