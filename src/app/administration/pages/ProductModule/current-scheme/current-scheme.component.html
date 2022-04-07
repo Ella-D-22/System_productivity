@@ -600,7 +600,7 @@
       <label class="start pull-left">Account is frozed</label>
      </div>
      <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_is_froozed_value" type="text" formControlName="caa_ac_is_froozed" class="pull-right form-control"/>
+      <input [value]="this.ac_is_froozed_value" type="text" formControlName="caa_ac_is_froozed_value" class="pull-right form-control"/>
       <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
      </div>
   </div> 
@@ -1023,6 +1023,8 @@
   
     </mat-tab-group>
         <br />
+        <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
+
         <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Submit

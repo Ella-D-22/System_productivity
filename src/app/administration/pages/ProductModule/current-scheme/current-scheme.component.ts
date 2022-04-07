@@ -1716,7 +1716,10 @@ export class CurrentSchemeComponent implements OnInit {
                 duration: 3000,
                 panelClass: ['green-snackbar', 'login-snackbar'],
               });
+            this.router.navigateByUrl('system/configurations/product/current-scheme/maintenance')
+
             },
+
             (err) => {
               this.error = err;
               this._snackBar.open(this.error, 'Try again!', {
@@ -1740,6 +1743,8 @@ export class CurrentSchemeComponent implements OnInit {
                 duration: 3000,
                 panelClass: ['green-snackbar', 'login-snackbar'],
               });
+              this.router.navigateByUrl('system/configurations/product/current-scheme/maintenance')
+
             },
             (err) => {
               this.error = err;

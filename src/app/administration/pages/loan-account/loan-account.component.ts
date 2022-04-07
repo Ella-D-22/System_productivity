@@ -1,29 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {LoanAccountService} from './loan-account.service'
-
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 import { FormBuilder, Validators,FormArray,FormGroup, FormControl } from '@angular/forms';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
-} from '@angular/common/http';
-
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { GlSubheadLookup2Component } from './lookup/gl-subhead/gl-subhead.component';
+import { HttpClient} from '@angular/common/http';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import { BranchComponent } from './lookup/branch/branch.component';
 import { ProductComponent } from './lookup/product/product.component';
 import { Subscription } from 'rxjs';
 import { GlSubheadLookupComponent } from '../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
 import { LoanproductLookupComponent } from '../ProductModule/loanproduct/loanproduct-lookup/loanproduct-lookup.component';
 import { RetailCustomerLookupComponent } from '../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
+import { CurrentSchemeLookupComponent } from '../ProductModule/current-scheme/current-scheme-lookup/current-scheme-lookup.component';
+import { OverdraftSchemeLookupComponent } from '../ProductModule/overdrafts-scheme/overdraft-scheme-lookup/overdraft-scheme-lookup.component';
+import { SavingschemeLookupComponent } from '../ProductModule/savings-scheme/savingscheme-lookup/savingscheme-lookup.component';
+import { TermDepositLookupComponent } from '../ProductModule/term-deposit/term-deposit-lookup/term-deposit-lookup.component';
 
 
 @Component({
@@ -162,8 +153,47 @@ export class LoanAccountComponent implements OnInit {
       this.formData.controls.scheme_code.setValue(this.laa_scheme_code);
     });
   }
-  
+  caaSchemeCodeLookup():void{
+   const dialogRef = this.dialog.open(CurrentSchemeLookupComponent,{
 
+   });
+   dialogRef.afterClosed().subscribe(result =>{
+     this.lookupdata = result.data;
+     
+     this.formData.controls.schemeCode.setValue(this.lookupdata.caa_scheme_code)
+   })
+  }
+  odaSchemeCodeLookup():void{
+    const dialogRef = this.dialog.open(OverdraftSchemeLookupComponent,{
+
+    });
+    dialogRef.afterClosed().subscribe(result =>{
+      this.lookupdata = result.data;
+      
+      this.formData.controls.schemeCode.setValue(this.lookupdata.oda_scheme_code)
+    })
+  }
+  sbaSchemeCodeLookup():void{
+    const dialogRef = this.dialog.open(SavingschemeLookupComponent,{
+
+    });
+    dialogRef.afterClosed().subscribe(result =>{
+      this.lookupdata = result.data;
+      console.log(this.lookupdata);
+      
+      this.formData.controls.schemeCode.setValue(this.lookupdata.sba_scheme_code)
+    })
+  }
+  tdaSchemeCodeLookup():void{
+    const dialogRef = this.dialog.open(TermDepositLookupComponent,{
+
+    });
+    dialogRef.afterClosed().subscribe(result =>{
+      this.lookupdata = result.data;
+      
+      this.formData.controls.schemeCode.setValue(this.lookupdata.tda_scheme_code)
+    })
+  }
 
   getPage() {
     if (
