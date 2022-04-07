@@ -166,8 +166,8 @@ export class OverdraftsSchemeComponent implements OnInit {
       this.event_id_desc = result.data.event_id_desc
       this.event_type = result.data.event_type
       this.event_type_desc = result.data.event_type_desc 
-      this.feeFormData.controls.sba_fee_event.setValue(this.event_id);
-      this.feeFormData.controls.sba_fee_type.setValue(this.event_type_code);
+      this.feeFormData.controls.oda_fee_event.setValue(this.event_id);
+      this.feeFormData.controls.oda_fee_type.setValue(this.event_type_code);
     });
   }
   eventTypeLookup(): void {

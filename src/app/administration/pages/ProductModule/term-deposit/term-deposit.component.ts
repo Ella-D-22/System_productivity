@@ -172,12 +172,14 @@ export class TermDepositComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result.data);
+      
       this.event_id = result.data.event_id;
       this.event_id_desc = result.data.event_id_desc
       this.event_type = result.data.event_type
       this.event_type_desc = result.data.event_type_desc 
-      this.feeFormData.controls.sba_fee_event.setValue(this.event_id);
-      this.feeFormData.controls.sba_fee_type.setValue(this.event_type_code);
+      this.feeFormData.controls.tda_fee_event.setValue(this.event_id);
+      this.feeFormData.controls.tda_fee_type.setValue(this.event_type);
     });
   }
   eventTypeLookup(): void {
@@ -397,8 +399,8 @@ tda_fee_amortize_credit_phLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.tda_fee_amortize_credit_ph = result.data.acid;
     this.tda_fee_amortize_credit_ph_desc = result.data.accountName;
-    this.formData.controls.tda_fee_amortize_credit_ph.setValue(result.data.acid);
-  });
+    this.feeFormData.controls.tda_fee_amortize_credit_ph.setValue(result.data.acid);
+  }); 
 }
 
 
@@ -412,7 +414,7 @@ tda_fee_amortize_debit_phLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.tda_fee_amortize_debit_ph = result.data.acid;
     this.tda_fee_amortize_debit_ph_desc = result.data.accountName;
-    this.formData.controls.tda_fee_amortize_debit_ph.setValue(result.data.acid);
+    this.feeFormData.controls.tda_fee_amortize_debit_ph.setValue(result.data.acid);
   });
 }
 
@@ -426,7 +428,7 @@ tda_fee_dr_placeholderLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.tda_fee_dr_placeholder = result.data.acid;
     this.tda_fee_dr_placeholder_desc = result.data.accountName;
-    this.formData.controls.tda_fee_dr_placeholder.setValue(result.data.acid);
+    this.feeFormData.controls.tda_fee_dr_placeholder.setValue(result.data.acid);
   });
 }
 
@@ -441,7 +443,7 @@ tda_fee_cr_placeholderLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.tda_fee_cr_placeholder = result.data.acid;
     this.tda_fee_cr_placeholder_desc = result.data.accountName;
-    this.formData.controls.tda_fee_cr_placeholder.setValue(result.data.acid);
+    this.feeFormData.controls.tda_fee_cr_placeholder.setValue(result.data.acid);
   });
 }
 
@@ -732,9 +734,6 @@ tda_fee_cr_placeholderLookup(): void {
     tda_fee_demand_flow: [''],
     tda_fee_dr_placeholder: [''],
     tda_fee_cr_placeholder: [''],
-    tda_fee_apr: [''],
-    tda_fee_eir: [''],
-    tda_fee_amort_tenor: [''],
     tda_fee_max_no_of_assesment: [''],
   });
 
@@ -759,9 +758,7 @@ tda_fee_cr_placeholderLookup(): void {
       tda_fee_demand_flow: [''],
       tda_fee_dr_placeholder: [''],
       tda_fee_cr_placeholder: [''],
-      tda_fee_apr: [''],
-      tda_fee_eir: [''],
-      tda_fee_amort_tenor: [''],
+
       tda_fee_max_no_of_assesment: [''],
     });
   }
@@ -791,9 +788,6 @@ tda_fee_cr_placeholderLookup(): void {
       tda_fee_demand_flow: [this.feeArray[i].tda_fee_demand_flow],
       tda_fee_dr_placeholder: [this.feeArray[i].tda_fee_dr_placeholder],
       tda_fee_cr_placeholder: [this.feeArray[i].tda_fee_cr_placeholder],
-      tda_fee_apr: [this.feeArray[i].tda_fee_apr],
-      tda_fee_eir: [this.feeArray[i].tda_fee_eir],
-      tda_fee_amort_tenor: [this.feeArray[i].tda_fee_amort_tenor],
       tda_fee_max_no_of_assesment: [this.feeArray[i].tda_fee_max_no_of_assessment],
     });
 
@@ -809,6 +803,8 @@ tda_fee_cr_placeholderLookup(): void {
 
 
   preview() {
+    console.log(this.feeFormData.value);
+    
     if (this.feeFormData.valid) {
       this.t.push(this.fb.group(
         this.feeFormData.value
