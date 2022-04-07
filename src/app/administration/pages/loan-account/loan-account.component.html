@@ -72,6 +72,7 @@
                     <div class="col-md-6 col-sm-12 form-column">
                       <input type="text" formControlName="schemeCode" class="pull-right form-control" oninput="this.value=this.value.toUpperCase()"/>
                        <mat-icon *ngIf="message.account_type == 'Loan'" (click)="laaSchemeCodeLookup()">search</mat-icon>
+                       
                        <mat-icon *ngIf="message.account_type == 'Current'" (click)="caaSchemeCodeLookup()">search</mat-icon>
                        <mat-icon *ngIf="message.account_type == 'Overdraft'" (click)="odaSchemeCodeLookup()">search</mat-icon>
                        <mat-icon *ngIf="message.account_type == 'Savings' " (click)="sbaSchemeCodeLookup()">search</mat-icon>
@@ -90,9 +91,18 @@
                    <mat-icon (click)="glSubheadLookup()">search</mat-icon>
                   </div>
                </div> 
+               <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  
+
+                  </mat-hint>
+                </div>
+             </div> 
               </div>
             </div>
-  
+             
             <div class="row">
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">

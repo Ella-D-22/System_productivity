@@ -160,7 +160,7 @@ export class LoanAccountComponent implements OnInit {
    dialogRef.afterClosed().subscribe(result =>{
      this.lookupdata = result.data;
      
-     this.formData.controls.scheme_code.setValue(this.lookupdata.caa_scheme_code)
+     this.formData.controls.schemeCode.setValue(this.lookupdata.caa_scheme_code)
    })
   }
   odaSchemeCodeLookup():void{
@@ -170,7 +170,7 @@ export class LoanAccountComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
       
-      this.formData.controls.scheme_code.setValue(this.lookupdata.oda_scheme_code)
+      this.formData.controls.schemeCode.setValue(this.lookupdata.oda_scheme_code)
     })
   }
   sbaSchemeCodeLookup():void{
@@ -179,8 +179,9 @@ export class LoanAccountComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
+      console.log(this.lookupdata);
       
-      this.formData.controls.scheme_code.setValue(this.lookupdata.sba_scheme_code)
+      this.formData.controls.schemeCode.setValue(this.lookupdata.sba_scheme_code)
     })
   }
   tdaSchemeCodeLookup():void{
@@ -190,7 +191,7 @@ export class LoanAccountComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
       
-      this.formData.controls.scheme_code.setValue(this.lookupdata.tda_scheme_code)
+      this.formData.controls.schemeCode.setValue(this.lookupdata.tda_scheme_code)
     })
   }
 
