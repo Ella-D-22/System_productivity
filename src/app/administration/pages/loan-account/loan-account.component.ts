@@ -126,11 +126,14 @@ export class LoanAccountComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.gl_subhead = result.data;
+      console.log("GlSubhead", result.data);
+      
       this.gl_subhead_description =  result.data.glSubheadDescription;
       this.gl_subhead_code =  result.data.glSubheadCode;     
        // this.eventtypedata = result.data;
       this.glSubheadData.controls.laa_gl_subhead.setValue(this.gl_subhead_code);
       this.glSubheadData.controls.laa_gl_subhead_description.setValue(this.gl_subhead_description);
+      this.formData.controls.glSubhead.setValue(result.data.glSubheadCode)
     });
   }
 
@@ -141,12 +144,11 @@ export class LoanAccountComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.customer_lookup = result.data;
+      console.log(this.customer_lookup);
 
-      // this.gl_subhead_description =  result.data.glSubheadDescription;
-      // this.gl_subhead_code =  result.data.glSubheadCode;     
-      //  // this.eventtypedata = result.data;
-      // this.glSubheadData.controls.laa_gl_subhead.setValue(this.gl_subhead_code);
-      // this.glSubheadData.controls.laa_gl_subhead_description.setValue(this.gl_subhead_description);
+      this.formData.controls.accountManager.setValue(this.customer_lookup.firstName)
+      this.formData.controls.customerCode.setValue(this.customer_lookup.customerCode)
+      
     });
   }
 
@@ -228,7 +230,7 @@ export class LoanAccountComponent implements OnInit {
       this.message.account_type == 'Term-Deposit'
     ) {
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         customerCode: [''],
         currency: [''],
         glSubhead: [''],
@@ -246,7 +248,7 @@ export class LoanAccountComponent implements OnInit {
         postedTime: [new Date()],
         modifiedBy: ['P'],
         modifiedTime: [new Date()],
-        accountName: ['KAMAU'],
+        accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
       });
@@ -255,7 +257,7 @@ export class LoanAccountComponent implements OnInit {
       this.message.account_type == 'Overdraft'
     ) {
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         customerCode: [''],
         currency: [''],
         glSubhead: [''],
@@ -273,7 +275,7 @@ export class LoanAccountComponent implements OnInit {
         postedTime: [new Date()],
         modifiedBy: ['P'],
         modifiedTime: [new Date()],
-        accountName: ['KAMAU'],
+        accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
       });
@@ -282,7 +284,7 @@ export class LoanAccountComponent implements OnInit {
       this.message.account_type == 'Current'
     ) {
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         customerCode: [''],
         currency: [''],
         glSubhead: [''],
@@ -300,7 +302,7 @@ export class LoanAccountComponent implements OnInit {
         postedTime: [new Date()],
         modifiedBy: ['P'],
         modifiedTime: [new Date()],
-        accountName: ['KAMAU'],
+        accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
       });
@@ -311,7 +313,7 @@ export class LoanAccountComponent implements OnInit {
       this.message.account_type == 'Office'
     ) {
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         currency: [''],
         glSubhead: [''],
         lienAmount: [''],
@@ -328,7 +330,7 @@ export class LoanAccountComponent implements OnInit {
         postedTime: [new Date()],
         modifiedBy: ['P'],
         modifiedTime: [new Date()],
-        accountName: ['KAMAU'],
+        accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
       });
@@ -342,11 +344,11 @@ export class LoanAccountComponent implements OnInit {
       console.log("kibet")
 
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         currency: ['kes'],
         glSubhead: [''],
         lienAmount: [''],
-        referredBy: ['CHEGE'],
+        referredBy: ['user'],
         schemeCode: ['test'],
         solCode: [''],
         withholdingTax: [''],
@@ -580,7 +582,7 @@ export class LoanAccountComponent implements OnInit {
       this.message.account_type == 'Loan'
     ) {
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         currency: [''],
         glSubhead: [''],
         lienAmount: [''],
@@ -908,13 +910,13 @@ export class LoanAccountComponent implements OnInit {
     ) {
 
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         currency: [''],
         glSubhead: [''],
         lienAmount: [''],
         referredBy: [''],
         schemeCode: [''],
-        solCode: ['S001'],
+        solCode: [''],
         withholdingTax: [''],
         amountDisbursed: [''],
         repaymentPeriod: [''],
@@ -989,13 +991,13 @@ export class LoanAccountComponent implements OnInit {
     ) {
 
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         currency: [''],
         glSubhead: [''],
         lienAmount: [''],
         referredBy: [''],
         schemeCode: [''],
-        solCode: ['S001'],
+        solCode: [''],
         withholdingTax: [''],
         amountDisbursed: [''],
         repaymentPeriod: [''],
@@ -1199,7 +1201,7 @@ export class LoanAccountComponent implements OnInit {
       this.message.account_type == 'Loan'
     ) {
       this.formData = this.fb.group({
-        accountManager: ['KAMAU'],
+        accountManager: [''],
         currency: ['KES'],
         glSubhead: [''],
         lienAmount: [''],
@@ -1565,12 +1567,8 @@ export class LoanAccountComponent implements OnInit {
               duration: 10000,
               panelClass: ['red-snackbar'],
             });
-        }
-      )
-      
-    }
-
-    }
+        } ) }
+ }
     else{
       this.loading=false
         this._snackBar.open("Invalid Form Data", "Try again!", {
@@ -1612,27 +1610,6 @@ initGlSUbheadForm(){
       })
     }
   )
-
-  // this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
-  //   res =>{
-  //       this.results = res
-  //       this.l.push(this.fb.group
-  //         this.glSubheadData).value
-  //         this.glSubheadArray.push(this.glSubheadData.value);
-
-        
-  //   },
-  //   err=>{
-  //     this.error = err
-  //     this._snackBar.open(this.error, "Try Again",{
-  //       horizontalPosition:this.horizontalPosition,
-  //       verticalPosition:this.verticalPosition,
-  //       duration:3000,
-  //       panelClass:['red-snackbar', 'login-snackbar']
-  //     })
-  //   }
-  // )
-
   }
 
   onPhotoChange(event: any) {

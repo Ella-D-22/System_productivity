@@ -93,11 +93,6 @@ export class LoanAccountMaintainanceComponent implements OnInit {
     this.customer_type = event.target.value;
   }
 
-
-
-
-
- 
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
 
@@ -114,7 +109,7 @@ export class LoanAccountMaintainanceComponent implements OnInit {
               this.router.navigate(['system/accounts/data/view'], {
                 state: this.formData.value
                   
-                ,
+                
               });
             
            }
@@ -128,37 +123,9 @@ export class LoanAccountMaintainanceComponent implements OnInit {
         else{
           this.loading = false;
           console.log("invalid form")
-          // this._snackBar.open("Invalid Form Data", "Try again!", {
-          //   horizontalPosition: this.horizontalPosition,
-          //   verticalPosition: this.verticalPosition,
-          //   duration: 3000,
-          //   panelClass: ['red-snackbar','login-snackbar'],
-          // });
+        
         }
         }
-
-        // type(): string{  
-        //   if(this.account_type=="Loan"){
-        //     this.dtype="la"
-        //   }
-        //   else if(this.account_type=="Office"){
-        //     this.dtype="aa"           
-        //   }
-        //   else if(this.account_type=="Savings"){   
-        //     this.dtype="sb"         
-        //   }
-        //   else if(this.account_type=="Overdraft"){
-        //     this.dtype="oa"            
-        //   }
-        //   else if(this.account_type=="Current"){  
-        //     this.dtype="ca"         
-        //   }
-        //   else if(this.account_type=="Term-Deposit"){ 
-        //     this.dtype="td"          
-        //   }
-        //   return this.dtype
-        //   console.log("chege")
-        // }
 
         accountLookup(): void {
           if(this.account_type=="Loan"){
