@@ -15,6 +15,7 @@ export class CorporateCustomerMaintenanceComponent implements OnInit {
    function_type:any
    submitted = false
    dialogData:any
+   organisationName:any
    showCustCode = false
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
@@ -58,7 +59,8 @@ export class CorporateCustomerMaintenanceComponent implements OnInit {
           this.dialogData = results
           console.log(results);
           
-          this.formData.controls.cust_code.setValue(this.dialogData.custCode)
+          this.formData.controls.cust_code.setValue(this.dialogData.data.custCode)
+          this.organisationName = this.dialogData.data.organisationName
         } )
     }
     onSubmit(){

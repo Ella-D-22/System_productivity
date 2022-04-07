@@ -162,6 +162,7 @@ export class SavingsSchemeComponent implements OnInit {
   sba_fee_cr_placeholder_desc: any;
   sba_advance_int_ac_desc: any;
   sba_normal_int_receivable_ac_desc: any;
+  event_id_desc: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -169,8 +170,12 @@ export class SavingsSchemeComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.event_id = result.data;
-      this.feeFormData.controls.sba_fee_event.setValue(result.data);
+      this.event_id = result.data.event_id;
+      this.event_id_desc = result.data.event_id_desc
+      this.event_type = result.data.event_type
+      this.event_type_desc = result.data.event_type_desc 
+      this.feeFormData.controls.sba_fee_event.setValue(this.event_id);
+      this.feeFormData.controls.sba_fee_type.setValue(this.event_type_code);
     });
   }
   eventTypeLookup(): void {

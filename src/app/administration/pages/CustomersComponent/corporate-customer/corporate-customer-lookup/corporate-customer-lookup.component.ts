@@ -12,7 +12,7 @@ import { CorporateCustomerService } from '../corporate-customer.service';
 })
 export class CorporateCustomerLookupComponent implements OnInit {
   results:any
-
+  entity:any
   displayedColumns : string[]= ['sn','Customer Code','Organisation Name']
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -22,6 +22,7 @@ export class CorporateCustomerLookupComponent implements OnInit {
     private dialogRef:MatDialogRef<CorporateCustomerLookupComponent>) { }
 
   ngOnInit(): void {
+    this.getData()
   }
 
 
@@ -29,7 +30,9 @@ export class CorporateCustomerLookupComponent implements OnInit {
     this.corpService.getAllCorporates().subscribe(
       data =>{
         this.results = data
-        this.dataSource = new MatTableDataSource(this.results)
+        console.log(data);
+        
+        this.dataSource = new MatTableDataSource(this.results.entity)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
