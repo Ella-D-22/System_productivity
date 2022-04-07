@@ -74,8 +74,9 @@ export class CorporateCustomerComponent implements OnInit {
         this.function_type = this.message.function_type
         console.log("message", this.message);
         console.log(this.function_type);
-        this.cust_code = this.message.custCode
-
+        this.cust_code = this.message.cust_code
+         console.log("code",this.cust_code);
+         
         if(this.function_type == "A-Add"){
           this.isSubmitted = true;
           this.isEnabled = true;
@@ -111,7 +112,7 @@ export class CorporateCustomerComponent implements OnInit {
           this.disabledFormControl()
           this.subscription = this.corpService.getCorporateByCode(this.cust_code).subscribe(
             res =>{
-              this.results = res;
+              this.results = res.entity;
 
               this.formData = this.fb.group({
                 contactPersonName: [this.results.contactPersonName],
@@ -132,7 +133,7 @@ export class CorporateCustomerComponent implements OnInit {
                 postedFlag: [this.results.postedFlag],
                 postedTime: [this.results.postedTime],
                 deletedBy:[this.results.deletedBy],
-                deletedFlag: [this.results.deleteFlag],
+                deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
                 verifiedFlag: [this.results.verifiedFlag],
                 verifiedTime: [this.results.verifiedTime],
@@ -145,7 +146,7 @@ export class CorporateCustomerComponent implements OnInit {
           this.isEnabled = true;
           this.subscription = this.corpService.getCorporateByCode(this.cust_code).subscribe(
             res =>{
-              this.results = res;
+              this.results = res.entity;
               this.formData = this.fb.group({
                 contactPersonName: [this.results.contactPersonName],
                 corporateSegment: [this.results.corporateSegment],
@@ -165,7 +166,7 @@ export class CorporateCustomerComponent implements OnInit {
                 postedFlag: [this.results.postedFlag],
                 postedTime: [this.results.postedTime],
                 deletedBy:[this.results.deletedBy],
-                deletedFlag: [this.results.deleteFlag],
+                deletedFlag: [this.results.deletedFlag],
                 deletedTime: [this.results.deletedTime],
                 verifiedFlag: [this.results.verifiedFlag],
                 verifiedTime: [this.results.verifiedTime],
@@ -180,7 +181,7 @@ export class CorporateCustomerComponent implements OnInit {
           this.disabledFormControl()
           this.subscription = this.corpService.getCorporateByCode(this.cust_code).subscribe(
             res =>{
-              this.results = res
+              this.results = res.entity
               this.formData = this.fb.group({
                 contactPersonName: [this.results.contactPersonName],
                 corporateSegment: [this.results.corporateSegment],
@@ -215,7 +216,7 @@ export class CorporateCustomerComponent implements OnInit {
           this.disabledFormControl()
           this.subscription = this.corpService.getCorporateByCode(this.cust_code).subscribe(
             res =>{
-              this.results = res
+              this.results = res.entity
               this.formData = this.fb.group({
                 contactPersonName: [this.results.contactPersonName],
                 corporateSegment: [this.results.corporateSegment],
@@ -261,7 +262,8 @@ export class CorporateCustomerComponent implements OnInit {
               verticalPosition:this.verticalPosition,
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
-            })
+            });
+            this.router.navigateByUrl("system/customers/corporate/maintenance")
           }
         )
       }else if(this.function_type != "A-Add"){
@@ -275,7 +277,9 @@ export class CorporateCustomerComponent implements OnInit {
               verticalPosition:this.verticalPosition,
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
-            })
+            });
+            this.router.navigateByUrl("system/customers/corporate/maintenance")
+
           }
         )
       }
