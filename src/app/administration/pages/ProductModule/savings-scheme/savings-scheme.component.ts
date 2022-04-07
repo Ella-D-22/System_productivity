@@ -651,14 +651,14 @@ BackdatedTransactionLookup(): void {
         sba_int_method:[''],
         sba_bal_frm_date:[''],
         sba_bal_to_date:[''],
-        sba_allow_sweeps:[''],
-        sba_allow_debit_against_unclear_bal:[''],
+        
+        
         sba_dormant_calc_freq_dr_week:[''],
         sba_dormant_calc_freq_dr_day:[''],
-        sba_dormant_calc_freq_dr_date:[''],
+        
         sba_dormant_calc_freq_dr_holiday:[''],
         // sba_dormant_calc_freq_dr_week:[''],
-        sba_chq_allowed:[''],
+        
         sba_nomination:[''],
         sba_recover_fee_for_chq_issue:[''],
         // sba_dr_bal_limit:[''],
@@ -666,7 +666,7 @@ BackdatedTransactionLookup(): void {
         sba_max_allowed_limit:[''],
         sba_sanction_limit:[''],
         sba_expiry_date:[''],
-        sba_credit_file_no:[''],
+        
         sba_paid_chq_return_freq_week:[''],
         sba_paid_chq_return_freq_day:[''],
         sba_paid_chq_return_freq_date:[''],
@@ -674,14 +674,13 @@ BackdatedTransactionLookup(): void {
         // sba_paid_chq_return_freq_day:[''],
         // sba_paid_chq_return_freq_date:[''],
         int_cal_freq_dr_holiday:[''],
-        sba_ac_health_code:[''],
-        sba_debt_ack_date:[''],
+        
         sba_int_amt:[''],
         sba_dr_or_cr:[''],
         sba_min_bal:[''],
         sba_loan_int_compounded_till:[''],
         sba_provision_amt:[''],
-        sba_adhoc_provisioned_amt:[''],
+        
         // Exceptions 
         sba_exc_ac_in_debit_bal:[''],
         sba_exc_ac_in_cr_bal:[''],
@@ -953,14 +952,14 @@ BackdatedTransactionLookup(): void {
             sba_int_method:[''],
             sba_bal_frm_date:[''],
             sba_bal_to_date:[''],
-            sba_allow_sweeps:[''],
-            sba_allow_debit_against_unclear_bal:[''],
+            
+            
             sba_dormant_calc_freq_dr_week:[''],
             sba_dormant_calc_freq_dr_day:[''],
-            sba_dormant_calc_freq_dr_date:[''],
+            
             sba_dormant_calc_freq_dr_holiday:[''],
             // sba_dormant_calc_freq_dr_week:[''],
-            sba_chq_allowed:[''],
+            
             sba_nomination:[''],
             sba_recover_fee_for_chq_issue:[''],
             // sba_dr_bal_limit:[''],
@@ -968,7 +967,7 @@ BackdatedTransactionLookup(): void {
             sba_max_allowed_limit:[''],
             sba_sanction_limit:[''],
             sba_expiry_date:[''],
-            sba_credit_file_no:[''],
+            
             sba_paid_chq_return_freq_week:[''],
             sba_paid_chq_return_freq_day:[''],
             sba_paid_chq_return_freq_date:[''],
@@ -976,14 +975,14 @@ BackdatedTransactionLookup(): void {
             // sba_paid_chq_return_freq_day:[''],
             // sba_paid_chq_return_freq_date:[''],
             int_cal_freq_dr_holiday:[''],
-            sba_ac_health_code:[''],
-            sba_debt_ack_date:[''],
+
+    
             sba_int_amt:[''],
             sba_dr_or_cr:[''],
             sba_min_bal:[''],
             sba_loan_int_compounded_till:[''],
             sba_provision_amt:[''],
-            sba_adhoc_provisioned_amt:[''],
+            
             // Exceptions 
             sba_exc_ac_in_debit_bal:[''],
             sba_exc_ac_in_cr_bal:[''],
@@ -1079,14 +1078,14 @@ BackdatedTransactionLookup(): void {
               sba_int_method:[this.results.sba_int_method],
               sba_bal_frm_date:[this.results.sba_bal_frm_date],
               sba_bal_to_date:[this.results.sba_bal_to_date],
-              sba_allow_sweeps:[this.results.sba_allow_sweeps],
-              sba_allow_debit_against_unclear_bal:[this.results.sba_allow_debit_against_unclear_bal],
+              
+              
               sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
               sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
-              sba_dormant_calc_freq_dr_date:[this.results.sba_dormant_calc_freq_dr_date],
+              
               sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
 
-              sba_chq_allowed:[this.results.sba_chq_allowed],
+              
               sba_nomination:[this.results.sba_nomination],
               sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
               // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
@@ -1094,7 +1093,7 @@ BackdatedTransactionLookup(): void {
               sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
               sba_sanction_limit:[this.results.sba_sanction_limit],
               sba_expiry_date:[this.results.sba_expiry_date],
-              sba_credit_file_no:[this.results.sba_credit_file_no],
+              
               sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
               sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
               sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
@@ -1102,14 +1101,14 @@ BackdatedTransactionLookup(): void {
               // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
               // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
               int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-              sba_ac_health_code:[this.results.sba_ac_health_code],
-              sba_debt_ack_date:[this.results.sba_debt_ack_date],
+              
+              
               sba_int_amt:[this.results.sba_int_amt],
               sba_dr_or_cr:[this.results.sba_dr_or_cr],
               sba_min_bal:[this.results.sba_min_bal],
               sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
               sba_provision_amt:[this.results.sba_provision_amt],
-              sba_adhoc_provisioned_amt:[this.results.sba_adhoc_provisioned_amt],
+              
               // Exceptithis.results.              // Exceptithis.results.s s 
               sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
               sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
@@ -1198,14 +1197,13 @@ BackdatedTransactionLookup(): void {
                 sba_int_method:[this.results.sba_int_method],
                 sba_bal_frm_date:[this.results.sba_bal_frm_date],
                 sba_bal_to_date:[this.results.sba_bal_to_date],
-                sba_allow_sweeps:[this.results.sba_allow_sweeps],
-                sba_allow_debit_against_unclear_bal:[this.results.sba_allow_debit_against_unclear_bal],
+                
                 sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
                 sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
-                sba_dormant_calc_freq_dr_date:[this.results.sba_dormant_calc_freq_dr_date],
+                
                 sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
   
-                sba_chq_allowed:[this.results.sba_chq_allowed],
+                
                 sba_nomination:[this.results.sba_nomination],
                 sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
                 // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
@@ -1213,7 +1211,7 @@ BackdatedTransactionLookup(): void {
                 sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
                 sba_sanction_limit:[this.results.sba_sanction_limit],
                 sba_expiry_date:[this.results.sba_expiry_date],
-                sba_credit_file_no:[this.results.sba_credit_file_no],
+                
                 sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
                 sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
                 sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
@@ -1221,14 +1219,14 @@ BackdatedTransactionLookup(): void {
                 // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
                 // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
                 int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-                sba_ac_health_code:[this.results.sba_ac_health_code],
-                sba_debt_ack_date:[this.results.sba_debt_ack_date],
+                
+                
                 sba_int_amt:[this.results.sba_int_amt],
                 sba_dr_or_cr:[this.results.sba_dr_or_cr],
                 sba_min_bal:[this.results.sba_min_bal],
                 sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
                 sba_provision_amt:[this.results.sba_provision_amt],
-                sba_adhoc_provisioned_amt:[this.results.sba_adhoc_provisioned_amt],
+                
                 // Exceptithis.results.              // Exceptithis.results.s s 
                 sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
                 sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
@@ -1332,14 +1330,14 @@ BackdatedTransactionLookup(): void {
                 sba_int_method:[this.results.sba_int_method],
                 sba_bal_frm_date:[this.results.sba_bal_frm_date],
                 sba_bal_to_date:[this.results.sba_bal_to_date],
-                sba_allow_sweeps:[this.results.sba_allow_sweeps],
-                sba_allow_debit_against_unclear_bal:[this.results.sba_allow_debit_against_unclear_bal],
+                
+                
                 sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
                 sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
-                sba_dormant_calc_freq_dr_date:[this.results.sba_dormant_calc_freq_dr_date],
+                
                 sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
   
-                sba_chq_allowed:[this.results.sba_chq_allowed],
+                
                 sba_nomination:[this.results.sba_nomination],
                 sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
                 // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
@@ -1347,7 +1345,7 @@ BackdatedTransactionLookup(): void {
                 sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
                 sba_sanction_limit:[this.results.sba_sanction_limit],
                 sba_expiry_date:[this.results.sba_expiry_date],
-                sba_credit_file_no:[this.results.sba_credit_file_no],
+                
                 sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
                 sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
                 sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
@@ -1355,14 +1353,14 @@ BackdatedTransactionLookup(): void {
                 // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
                 // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
                 int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-                sba_ac_health_code:[this.results.sba_ac_health_code],
-                sba_debt_ack_date:[this.results.sba_debt_ack_date],
+                
+                
                 sba_int_amt:[this.results.sba_int_amt],
                 sba_dr_or_cr:[this.results.sba_dr_or_cr],
                 sba_min_bal:[this.results.sba_min_bal],
                 sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
                 sba_provision_amt:[this.results.sba_provision_amt],
-                sba_adhoc_provisioned_amt:[this.results.sba_adhoc_provisioned_amt],
+                
                 // Exceptithis.results.              // Exceptithis.results.s s 
                 sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
                 sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
@@ -1462,14 +1460,14 @@ BackdatedTransactionLookup(): void {
                 sba_int_method:[this.results.sba_int_method],
                 sba_bal_frm_date:[this.results.sba_bal_frm_date],
                 sba_bal_to_date:[this.results.sba_bal_to_date],
-                sba_allow_sweeps:[this.results.sba_allow_sweeps],
-                sba_allow_debit_against_unclear_bal:[this.results.sba_allow_debit_against_unclear_bal],
+                
+                
                 sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
                 sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
-                sba_dormant_calc_freq_dr_date:[this.results.sba_dormant_calc_freq_dr_date],
+                
                 sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
   
-                sba_chq_allowed:[this.results.sba_chq_allowed],
+                
                 sba_nomination:[this.results.sba_nomination],
                 sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
                 // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
@@ -1477,7 +1475,7 @@ BackdatedTransactionLookup(): void {
                 sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
                 sba_sanction_limit:[this.results.sba_sanction_limit],
                 sba_expiry_date:[this.results.sba_expiry_date],
-                sba_credit_file_no:[this.results.sba_credit_file_no],
+                
                 sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
                 sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
                 sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
@@ -1485,14 +1483,14 @@ BackdatedTransactionLookup(): void {
                 // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
                 // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
                 int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-                sba_ac_health_code:[this.results.sba_ac_health_code],
-                sba_debt_ack_date:[this.results.sba_debt_ack_date],
+                
+                
                 sba_int_amt:[this.results.sba_int_amt],
                 sba_dr_or_cr:[this.results.sba_dr_or_cr],
                 sba_min_bal:[this.results.sba_min_bal],
                 sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
                 sba_provision_amt:[this.results.sba_provision_amt],
-                sba_adhoc_provisioned_amt:[this.results.sba_adhoc_provisioned_amt],
+                
                 // Exceptithis.results.              // Exceptithis.results.s s 
                 sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
                 sba_exc_ac_in_cr_bal:[this.results.sba_exc_ac_in_cr_bal],
