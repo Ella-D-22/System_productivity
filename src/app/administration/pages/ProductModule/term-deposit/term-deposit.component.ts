@@ -23,14 +23,12 @@ import { TermDepositServiceService } from './term-deposit-service.service';
 export class TermDepositComponent implements OnInit {
   currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
   auth_user = this.currentUser.username;
-
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   loading = false;
   isDisabled = false;
   isEnabled = true;
   flagArray: any = [
-
     'Y', 'N'
   ]
   amt_derivation_Array: any = [
@@ -81,10 +79,6 @@ export class TermDepositComponent implements OnInit {
   depositTypeArray: any = [
     'T-Other Deposits','R-Recurring','C-Certificate of Deposit','N-Notice Deposit'
   ]
-  //  debitIntCompFreqArray: any = [
-  //   'Daily','Monthly', 'Quarterly','No compounding'
-  //  ]=
-
   daysArray: any = [
     'Moday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
   ]
@@ -103,7 +97,6 @@ export class TermDepositComponent implements OnInit {
     'S – Recover from Salary',
     'T – Recover by Granting TOD'
   ]
-
   months = Array.from({ length: 12 }, (item, i) => {
     return new Date(0, i).toLocaleString('en-US', { month: 'long' })
   });
@@ -165,15 +158,12 @@ export class TermDepositComponent implements OnInit {
   tda_fee_cr_placeholder_desc: any;
   event_id_desc: any;
   tda_int_table_code: any;
-
+  element: any;
+  loanElement: any;
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
-      // height: '400px',
-      // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result.data);
-      
       this.event_id = result.data.event_id;
       this.event_id_desc = result.data.event_id_desc
       this.event_type = result.data.event_type
@@ -184,9 +174,7 @@ export class TermDepositComponent implements OnInit {
   }
   eventTypeLookup(): void {
     const dialogRef = this.dialog.open(EventTypeLookupComponent, {
-      height: '400px',
-      // width: '600px',
-    });
+     });
     dialogRef.afterClosed().subscribe(result => {
       this.eventtypedata = result.data;
       this.event_type_code = result.data.code;
@@ -207,7 +195,6 @@ tda_principal_lossline_acLookup(): void {
     this.formData.controls.tda_principal_lossline_ac.setValue(result.data.acid);
   });
 }
-
 tda_recovery_lossline_acLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -221,7 +208,6 @@ tda_recovery_lossline_acLookup(): void {
     this.formData.controls.tda_recovery_lossline_ac.setValue(result.data.acid);
   });
 }
-
 tda_charge_off_acLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -235,7 +221,6 @@ tda_charge_off_acLookup(): void {
     this.formData.controls.tda_charge_off_ac.setValue(result.data.acid);
   });
 }
-
 tda_normal_int_receivable_acLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -249,8 +234,6 @@ tda_normal_int_receivable_acLookup(): void {
     this.formData.controls.tda_normal_int_receivable_ac.setValue(result.data.acid);
   });
 }
-
-
 tda_penal_int_receivable_acLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -264,8 +247,6 @@ tda_penal_int_receivable_acLookup(): void {
     this.formData.controls.tda_penal_int_receivable_ac.setValue(result.data.acid);
   });
 }
-
-
 tda_normal_int_received_acLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -669,7 +650,7 @@ tda_fee_cr_placeholderLookup(): void {
     tda_is_gl_subhead_deleted: ['']
   })
 
-  initLoanForm() {
+  initLoanFeeForm() {
     this.newData = true;
     this.feeFormData = this.fb.group({
       tda_fee_type: [''],
@@ -698,7 +679,83 @@ tda_fee_cr_placeholderLookup(): void {
     })
   }
 
+
+  get g() { return this.formData.controls; }
+  get t() { return this.g.tda_fees as FormArray; }
+  get l() { return this.g.tda_glsubheads as FormArray; }
+
+
+
+  previewGlSubheads(){
+    if(this.glSubheadData.valid){
+      if(this.glSubheadArray.length<1){
+        this.glSubheadData.controls.tda_gl_subhead_deafault.setValue("Yes");
+      }else{
+        this.glSubheadData.controls.tda_gl_subhead_deafault.setValue("No");
+      }
+      this.l.push(this.fb.group(
+        this.glSubheadData.value
+        ));
+        this.glSubheadArray.push(this.glSubheadData.value);
+        this.initGlSUbheadForm();
+     }
+   }
+      
+    editGlSubhead(i: any) {
+      this.element = i
+      this.newData = false;
+      this.arrayIndex = this.glSubheadArray[i];
+      this.glSubheadData = this.fb.group({
+        tda_gl_subhead: [this.glSubheadArray[i].tda_gl_subhead],
+        tda_gl_subhead_description: [
+          this.glSubheadArray[i].tda_gl_subhead_description,
+        ],
+        tda_gl_subhead_deafault: [this.glSubheadArray[i].tda_gl_subhead_deafault],
+        tda_is_gl_subhead_deleted: [
+          this.glSubheadArray[i].tda_is_gl_subhead_deleted,
+        ],
+      });
+    }
+    onGlSubheadUpdate(){
+      let i = this.element;
+      this.glSubheadArray[i] = this.glSubheadData.value
+  } 
+  onGlSubheadClear(){
+    this.initGlSUbheadForm();
+    this.glSubheadArray = new Array();
+  }
+  
+  onRemoveGLSubhead(i: any,) {
+    const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
+    this.glSubheadArray.splice(index, i);
+    this.glSubheadArray = this.glSubheadArray
+  }
+//Loan Fee Operations
+  onPreviewFees(){    
+    
+    if (this.feeFormData.valid) {
+      this.t.push(this.fb.group(
+        this.feeFormData.value
+      ));
+      this.feeArray.push(this.feeFormData.value);
+      this.initLoanFeeForm();
+    }
+  }
+  onUpdateFees(){
+    let i = this.loanElement;
+    this.feeArray[i] = this.feeFormData.value
+  }
+  onClearFees(){
+    this.initLoanFeeForm();
+    this.feeArray = new Array();
+  }
+  onRemove(i: any,) {
+    const index: number = this.feeArray.indexOf(this.feeArray.values);
+    this.feeArray.splice(index, i);
+    this.feeArray = this.feeArray;
+  }
   editLoanFeeForm(i: any) {
+    this.loanElement = i;
     this.newData = false;
     this.arrayIndex = this.feeArray[i];
     this.feeFormData = this.fb.group({
@@ -715,65 +772,14 @@ tda_fee_cr_placeholderLookup(): void {
       tda_fee_cr_placeholder: [this.feeArray[i].tda_fee_cr_placeholder],
       tda_fee_max_no_of_assesment: [this.feeArray[i].tda_fee_max_no_of_assessment],
     });
-
-    const index: number = this.feeArray.indexOf(this.feeArray.values);
-    this.feeArray.splice(index, i);
-
   }
 
-  get g() { return this.formData.controls; }
-  get t() { return this.g.tda_fees as FormArray; }
-  get l() { return this.g.tda_glsubheads as FormArray; }
 
 
 
-  preview() {
-    console.log(this.feeFormData.value);
-    
-    if (this.feeFormData.valid) {
-      this.t.push(this.fb.group(
-        this.feeFormData.value
-      ));
-      this.feeArray.push(this.feeFormData.value);
-      console.log("form fee", this.feeArray);
-      this.initLoanForm();
-    }
-  }
-  previewGlSubheads(){
-    if(this.glSubheadData.valid){
-      if(this.glSubheadArray.length<1){
-        this.glSubheadData.controls.tda_gl_subhead_deafault.setValue("Yes");
-      }else{
-        this.glSubheadData.controls.tda_gl_subhead_deafault.setValue("No");
-      }
-      this.l.push(this.fb.group(
-        this.glSubheadData.value
-        ));
-        this.glSubheadArray.push(this.glSubheadData.value);
-        this.initGlSUbheadForm();
-     }
-   }
-  updateLoanFee(i: any) {
-    this.feeArray[i] = this.feeFormData.value
-    // this.t.push(this.fb.group(
-    //   this.feeFormData.value
-    // ));
-    // this.feeArray.push(this.feeFormData.value);
-    // this.initLoanForm();
-  }
-  updateGlSubheads(i: any){
-    this.glSubheadArray[i] = this.glSubheadData.value
-  }
-  onRemove(i: any,) {
-    const index: number = this.feeArray.indexOf(this.feeArray.values);
-    this.feeArray.splice(index, i);
-    this.feeArray = this.feeArray;
-  }
-  onRemoveGLSubhead(i: any,) {
-    const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
-    this.glSubheadArray.splice(index, i);
-    this.glSubheadArray = this.glSubheadArray
-  }
+
+
+
 
   onSystem_generated_no(event: any){
     this.showSystem_gen_no = true;
@@ -847,7 +853,6 @@ tda_fee_cr_placeholderLookup(): void {
           tda_renewal_allowed_within_days:[''],
           int_cal_freq_dr_week:[''],
          
-
           // Exceptions
           tda_ac_debit_balance:[''],
           tda_ac_credit_balance:[''],
@@ -877,9 +882,7 @@ tda_fee_cr_placeholderLookup(): void {
         });
       }
       else if (this.function_type == "I-Inquire") {
-        // console.log("Got Called!");
         
-        //load the page with form data submit disabled
         // find by event id
         this.showContractInput = true;
         // call to disable edit
@@ -890,10 +893,8 @@ tda_fee_cr_placeholderLookup(): void {
         .set("scheme_code", this.scheme_code);     
         this.subscription = this.tdaAPI.getproductBySchemeCode(params).subscribe(res=>{
           this.results = res;
-          console.log("this are the results from the form", res);
 // Initialise the glsubheads
           this.glSubheadArray = this.results.tda_glsubheads;
-          console.log("Hey these are tds gl subhead",this.glSubheadArray);
           
           this.feeArray = this.results.tda_fees;
           
@@ -1305,15 +1306,10 @@ tda_fee_cr_placeholderLookup(): void {
   }
   // convenience getter for easy access to form fields
   get f() { return this.formData.controls; }
-
   onSubmit() {                 
     this.formData.controls.tda_effective_from_date.setValue(this.datepipe.transform(this.f.tda_effective_from_date.value, 'yyyy-MM-ddTHH:mm:ss'));
     this.formData.controls.tda_effective_to_date.setValue(this.datepipe.transform(this.f.tda_effective_to_date.value, 'yyyy-MM-ddTHH:mm:ss'));
-
     this.submitted = true;
-
-    console.log("this is the form Data", this.formData.value);
-    
     // stop here if form is invalid
     if (this.formData.valid) {
       if (this.function_type == "A-Add") {
@@ -1336,7 +1332,6 @@ tda_fee_cr_placeholderLookup(): void {
         })
       } else if (this.function_type != "A-Add") {
         this.subscription = this.tdaAPI.updateproduct(this.formData.value).subscribe(res => {
-          console.log("delete form data", this.formData.value);
           
           this.results = res;
           this._snackBar.open("Executed Successfully!", "X", {

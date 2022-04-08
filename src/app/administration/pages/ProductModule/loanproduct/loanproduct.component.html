@@ -965,34 +965,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column ">
-                     <label class="start pull-left">No Penal Interest on Penal Interest Demand;</label>
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="laa_no_penal_int_on_penal_int_demand">
-                        <mat-radio-button value="Yes">Yes.</mat-radio-button>
-                        <mat-radio-button value="No">No. </mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-                 </div>             -->
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Penal Int. from Dmd.Eff.Date<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="laa_penal_int_frm_dmd_eff_date">
-                      <mat-radio-button value="Yes">Yes.</mat-radio-button>
-                      <mat-radio-button value="No">No. </mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-               </div>             -->
-            </div>
-          </div>
+         
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -1008,17 +981,7 @@
               </div>
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Consider Tolerance For Late Fee<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="laa_consider_tolerance_for_late_fee">
-                      <mat-radio-button value="Yes">Yes.</mat-radio-button>
-                      <mat-radio-button value="No">No. </mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-               </div>             -->
+            
             </div>
           </div>
           <div class="row">
@@ -1317,33 +1280,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column ">
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-coldumn">
-                      <div class="form-group">
-                          <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="maturity_date_if_hldy">
-                            <mat-radio-button value="Flatrate">Flat Rate.</mat-radio-button>
-                            <mat-radio-button value="Reducing">Reducing. </mat-radio-button>
-                            <mat-radio-button value="None">None. </mat-radio-button>
-                          </mat-radio-group>
-                          <mat-checkbox class="example-margin" formControlName="Upfront Intere">Upfront Interest Collection</mat-checkbox>
-                      </div> 
-                    </div>
-                 </div>  -->
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                      <div class="col-md-6 col-sm-12 form-column ">
-                      </div>
-                      <div class="col-md-6 col-sm-12 form-column">
-                      <mat-checkbox class="example-margin" formControlName="laa_int_amort_rule_78">Int. Amortization by Rule of 78</mat-checkbox>
-                      </div>
-                   </div>      -->
-            </div>
-          </div>
+         
 
 
           <mat-divider></mat-divider>
@@ -1360,13 +1297,7 @@
                   <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
                 </div>
               </div>
-              <!-- <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column ">
-      <mat-hint>{{this.laa_int_table_code_desc}}</mat-hint>
-    </div>
- </div> -->
+             
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -1379,13 +1310,7 @@
                   <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
                 </div>
               </div>
-              <!-- <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column">
-      <mat-hint>{{this.laa_int_table_code_desc}}</mat-hint>
-    </div>
- </div>  -->
+          
 
             </div>
           </div>
@@ -1495,25 +1420,18 @@
             </div>
 
             <br />
-            <button class="pull-right btn-sm" *ngIf="newData" type="button" (click)="previewGlSubheads()">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <button class="pull-right btn-sm"  *ngIf="newData"  type="button" (click)="previewGlSubheads()">
               + Add
-            </button>
-
-            <button class="pull-right btn-sm" *ngIf="!newData"   type="button" (click)="updateLoanFee(this.arrayIndex)">
-         <span
-           *ngIf="loading"
-           class="spinner-border spinner-border-sm mr-1"
-         ></span>
-        + Update
+        </button>
+        <button class="pull-right btn-sm"  *ngIf="!newData"  type="button" (click)="onGlSubheadUpdate()">
+              + Update
        </button>
-            <!-- <button class="pull-right btn-sm"   type="button" (click)="initLoanForm()">
-         <span
-           *ngIf="loading"
-           class="spinner-border spinner-border-sm mr-1"
-         ></span>
-        Clear
-       </button> -->
+       <button class="pull-right btn-sm"   type="button" (click)="initGlSUbheadForm()">
+        Reset form
+        </button>
+        <button class="pull-right btn-sm"   type="button" (click)="onGlSubheadClear()">
+          Clear All
+          </button>
             <br />
           </form>
           <br>
@@ -1535,7 +1453,7 @@
                 <td>{{item.laa_gl_subhead_description}}</td>
                 <td>{{item.laa_gl_subhead_deafault}}</td>
                 <td><a class="update btn btn-sm" color="accent" (click)="onRemoveGLSubhead(i)">X</a>
-                  <!-- <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a> -->
+                  <a class="update btn btn-sm" color="accent" (click)="editGlSubhead(i)">Edit</a>
                 </td>
               </tr>
             </tbody>
@@ -1878,31 +1796,23 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12">
-                <!-- <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Record</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input type="text" formControlName="class_main" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
-              </div>
-           </div>             -->
+                
               </div>
             </div>
-            <br />
-            <button class="pull-right btn-sm" *ngIf="newData" type="button" (click)="preview()">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <br/>
+            <button class="pull-right btn-sm" *ngIf="newData" type="button" (click)="onPreviewFees()">
               + Add
             </button>
-
-            <button class="pull-right btn-sm" *ngIf="!newData" type="button" (click)="updateLoanFee(this.arrayIndex)">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <button class="pull-right btn-sm" *ngIf="!newData" type="button" (click)="onUpdateFees()">
               + Update
             </button>
-            <button class="pull-right btn-sm" type="button" (click)="initLoanForm()">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Clear
+            <button class="pull-right btn-sm" type="button" (click)="initLoanFeeForm()">
+              Reset form
             </button>
-            <br />
+            <button class="pull-right btn-sm" type="button" (click)="onClearFees()">
+              Clear All
+            </button>
+            <br/>
           </form>
           <br>
 

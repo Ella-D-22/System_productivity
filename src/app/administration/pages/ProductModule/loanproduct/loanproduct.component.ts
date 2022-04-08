@@ -138,6 +138,8 @@ export class LoanproductComponent implements OnInit {
   event_id_desc: any;
   laa_fee_dr_placeholder_desc: any;
   laa_fee_cr_placeholder_desc: any;
+  element: any;
+  loanElement: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -646,7 +648,6 @@ backdate_transaction_Lookup(): void {
         laa_penal_int_on_principal_demand_overdue:[''],
         laa_penal_int_on_int_demand_overdue:[''],
         laa_no_penal_int_on_penal_int_demand:[''],
-        laa_penal_int_frm_dmd_eff_date:[''],
         laa_penal_int_based_on:[''],
         laa_penal_int_prod_mthd:[''],
         laa_norm_int_prod_mthd:[''],
@@ -669,7 +670,6 @@ backdate_transaction_Lookup(): void {
         laa_maturity_date_if_hldy:[''],
         laa_upfront_int_based_on_int_coll:[''],
         laa_discounted_int:[''],
-        laa_int_amort_rule_78:[''],
         laa_dpd:[''],
         laa_class_main:[''],
         laa_class_sub:[''],
@@ -736,7 +736,7 @@ backdate_transaction_Lookup(): void {
            laa_gl_subhead_deafault:[''],
            laa_is_gl_subhead_deleted:['']
          })
-         initLoanForm(){
+         initLoanFeeForm(){
          this.newData = true;
           this.feeFormData = this.fb.group({
             laa_fee_type:['',[Validators.required]],
@@ -765,30 +765,6 @@ backdate_transaction_Lookup(): void {
           })
          }
 
-         editLoanFeeForm(i:any){
-           this.newData = false;
-          //  this.arrayIndex = this.feeArray[i];`
-          this.feeFormData = this.fb.group({          
-            laa_fee_type:[this.feeArray[i].laa_fee_type],
-            laa_fee_event:[this.feeArray[i].laa_fee_event],
-            laa_fee_frequency:[this.feeArray[i].laa_fee_frequency],
-            laa_fee_amortize_credit_ph:[this.feeArray[i].laa_fee_amortize_credit_ph],
-            laa_fee_amortize_debit_ph:[this.feeArray[i].laa_fee_amortize_debit_ph],
-            laa_fee_deductable:[this.feeArray[i].laa_fee_deductable],
-            laa_fee_multiple:[this.feeArray[i].laa_fee_multiple],
-            laa_fee_amortize:[this.feeArray[i].laa_fee_amortize],
-            laa_fee_demand_flow:[this.feeArray[i].laa_fee_demand_flow],
-            laa_fee_dr_placeholder:[this.feeArray[i].laa_fee_dr_placeholder],
-            laa_fee_cr_placeholder:[this.feeArray[i].laa_fee_cr_placeholder],
-            laa_fee_amort_tenor:[this.feeArray[i].laa_fee_amort_tenor],
-            laa_fee_max_no_of_assesment:[this.feeArray[i].laa_fee_max_no_of_assesment],
-   });
-
-   const index: number = this.feeArray.indexOf(this.feeArray.values);
-   this.feeArray.splice(index, i);
-   this.feeArray = this.feeArray;
-    
-         }
     get g() { return this.formData.controls; }
     get t() { return this.g.laa_loanfees as FormArray; }
     get l() {return this.g.laa_glsubheads as FormArray;}
@@ -802,7 +778,7 @@ backdate_transaction_Lookup(): void {
               this.feeFormData.value
               ));
              this.feeArray.push(this.feeFormData.value);
-             this.initLoanForm();
+             this.initLoanFeeForm();
            }
          }
 
@@ -820,15 +796,36 @@ backdate_transaction_Lookup(): void {
               this.initGlSUbheadForm();
            }
          }
-         
+          
+          editGlSubhead(i: any) {
+            this.element = i
+            this.newData = false;
+            this.arrayIndex = this.glSubheadArray[i];
+            this.glSubheadData = this.fb.group({
+              laa_gl_subhead: [this.glSubheadArray[i].laa_gl_subhead],
+              laa_gl_subhead_description: [
+                this.glSubheadArray[i].laa_gl_subhead_description,
+              ],
+              laa_gl_subhead_deafault: [this.glSubheadArray[i].laa_gl_subhead_deafault],
+              laa_is_gl_subhead_deleted: [
+                this.glSubheadArray[i].laa_is_gl_subhead_deleted,
+              ],
+            });
+          }
+          onGlSubheadUpdate(){
+            let i = this.element;
+            this.glSubheadArray[i] = this.glSubheadData.value
+        } 
+      
+        onGlSubheadClear(){
+          this.initGlSUbheadForm();
+          this.glSubheadArray = new Array();
+        }
+
+
          updateLoanFee(i:any){
            this.feeArray[i] = this.feeFormData.value 
-          // this.t.push(this.fb.group(
-          //   this.feeFormData.value
-          //   ));
-          //  this.feeArray.push(this.feeFormData.value);
-          //  console.log("form fee", this.feeArray);
-          //  this.initLoanForm();
+    
          }
          onRemove(i:any,){
           const index: number = this.feeArray.indexOf(this.feeArray.values);
@@ -841,6 +838,52 @@ backdate_transaction_Lookup(): void {
           this.glSubheadArray.splice(index, i);
           this.glSubheadArray = this.glSubheadArray
          }
+
+
+           //Loan Fee Operations
+  onPreviewFees(){    
+    
+    if (this.feeFormData.valid) {
+      this.t.push(this.fb.group(
+        this.feeFormData.value
+      ));
+      this.feeArray.push(this.feeFormData.value);
+      this.initLoanFeeForm();
+    }
+  }
+  onUpdateFees(){
+    let i = this.loanElement;
+    this.feeArray[i] = this.feeFormData.value
+  }
+  onClearFees(){
+    this.initLoanFeeForm();
+    this.feeArray = new Array();
+  }
+  onRemoveLoanFee(i: any) {
+    const index: number = this.feeArray.indexOf(this.feeArray.values);
+    this.feeArray.splice(index, i);
+    this.feeArray = this.feeArray;
+  }
+  editLoanFeeForm(i: any) {
+    this.loanElement = i;
+    this.newData = false;
+    this.arrayIndex = this.feeArray[i];
+    this.feeFormData = this.fb.group({
+      laa_fee_type: [this.feeArray[i].laa_fee_type],
+      laa_fee_event: [this.feeArray[i].laa_fee_event],
+      laa_fee_frequency: [this.feeArray[i].laa_fee_frequency],
+      laa_fee_deductable: [this.feeArray[i].laa_fee_deductable],
+      laa_fee_multiple: [this.feeArray[i].laa_fee_multiple],
+      laa_fee_amortize: [this.feeArray[i].laa_fee_amortize],
+      laa_fee_amortize_credit_ph:[this.feeArray[i].laa_fee_amortize_credit_ph],
+      laa_fee_amortize_debit_ph:[this.feeArray[i].laa_fee_amortize_debit_ph],
+      laa_fee_demand_flow: [this.feeArray[i].laa_fee_demand_flow],
+      laa_fee_dr_placeholder: [this.feeArray[i].laa_fee_dr_placeholder],
+      laa_fee_cr_placeholder: [this.feeArray[i].laa_fee_cr_placeholder],
+      laa_fee_max_no_of_assesment: [this.feeArray[i].laa_fee_max_no_of_assessment],
+    });
+  }
+
          
 
          onSystem_generated_no(event: any){
@@ -855,40 +898,6 @@ backdate_transaction_Lookup(): void {
       disabledFormControll(){
         this.formData.disable();
       }
-        // MAKE API CALLS FOR RELATED DATA
-  getAllAccounts(){
-    let type = 'oa'
-    this.subscription = this.accountsAPI.retrieveAllAccounts(type).subscribe(res=>{
-      this.data = res;
-      switch (this.data.entity.acid) {
-        case 0:
-            console.log("It is a Sunday.");
-            break;
-        case 1:
-            console.log("It is a Monday.");
-            break;
-        case 2:
-            console.log("It is a Tuesday.");
-            break;
-        case 3:
-            console.log("It is a Wednesday.");
-            break;
-        case 4:
-            console.log("It is a Thursday.");
-            break;
-        case 5:
-            console.log("It is a Friday.");
-            break;
-        case 6:
-            console.log("It is a Saturday.");
-            break;
-        default:
-            console.log("No such day exists!");
-            break;
-    }
-    })
-  }
-
 
       getPage(){
         this.subscription = this.loanproductAPI.currentMessage.subscribe(message =>{
@@ -972,7 +981,6 @@ backdate_transaction_Lookup(): void {
             laa_penal_int_on_principal_demand_overdue:[''],
             laa_penal_int_on_int_demand_overdue:[''],
             laa_no_penal_int_on_penal_int_demand:[''],
-            laa_penal_int_frm_dmd_eff_date:[''],
             laa_penal_int_based_on:[''],
             laa_penal_int_prod_mthd:[''],
             laa_norm_int_prod_mthd:[''],
@@ -995,7 +1003,6 @@ backdate_transaction_Lookup(): void {
             laa_maturity_date_if_hldy:[''],
             laa_upfront_int_based_on_int_coll:[''],
             laa_discounted_int:[''],
-            laa_int_amort_rule_78:[''],
             laa_dpd:[''],
             laa_class_main:[''],
             laa_class_sub:[''],
@@ -1046,7 +1053,6 @@ backdate_transaction_Lookup(): void {
           .set("scheme_code", this.scheme_code);     
           this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
-              console.log(this.results);
               
             this.feeArray = this.results.laa_loanfees;
             this.glSubheadArray = this.results.laa_glsubheads;
@@ -1127,7 +1133,6 @@ backdate_transaction_Lookup(): void {
               laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
-              laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
               laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
               laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
               laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
@@ -1150,7 +1155,6 @@ backdate_transaction_Lookup(): void {
               laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
               laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
               laa_discounted_int:[this.results.laa_discounted_int],
-              laa_int_amort_rule_78:[this.results.laa_int_amort_rule_78],
               laa_dpd:[this.results.laa_dpd],
               laa_class_main:[this.results.laa_class_main],
               laa_class_sub:[this.results.laa_class_sub],
@@ -1285,7 +1289,6 @@ backdate_transaction_Lookup(): void {
               laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
-              laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
               laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
               laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
               laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
@@ -1308,7 +1311,6 @@ backdate_transaction_Lookup(): void {
               laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
               laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
               laa_discounted_int:[this.results.laa_discounted_int],
-              laa_int_amort_rule_78:[this.results.laa_int_amort_rule_78],
               laa_dpd:[this.results.laa_dpd],
               laa_class_main:[this.results.laa_class_main],
               laa_class_sub:[this.results.laa_class_sub],
@@ -1452,7 +1454,6 @@ backdate_transaction_Lookup(): void {
               laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
-              laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
               laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
               
               laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
@@ -1476,7 +1477,6 @@ backdate_transaction_Lookup(): void {
               laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
               laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
               laa_discounted_int:[this.results.laa_discounted_int],
-              laa_int_amort_rule_78:[this.results.laa_int_amort_rule_78],
               laa_dpd:[this.results.laa_dpd],
               laa_class_main:[this.results.laa_class_main],
               laa_class_sub:[this.results.laa_class_sub],
@@ -1543,8 +1543,6 @@ backdate_transaction_Lookup(): void {
           .set("scheme_code", this.scheme_code);     
           this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
-            console.log("Got Called!");
-            console.log("Data from Backend", this.results);
             
             this.formData = this.fb.group({
               // cr_normal_int:[this.results.cr_normal_int],
@@ -1621,7 +1619,6 @@ backdate_transaction_Lookup(): void {
               laa_penal_int_on_principal_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_penal_int_on_int_demand_overdue:[this.results.laa_penal_int_on_principal_demand_overdue],
               laa_no_penal_int_on_penal_int_demand:[this.results.laa_no_penal_int_on_penal_int_demand],
-              laa_penal_int_frm_dmd_eff_date:[this.results.laa_penal_int_frm_dmd_eff_date],
               laa_penal_int_based_on:[this.results.laa_penal_int_based_on],
               laa_penal_int_prod_mthd:[this.results.laa_penal_int_prod_mthd],
               laa_norm_int_prod_mthd:[this.results.laa_norm_int_prod_mthd],
@@ -1644,7 +1641,6 @@ backdate_transaction_Lookup(): void {
               laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
               laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
               laa_discounted_int:[this.results.laa_discounted_int],
-              laa_int_amort_rule_78:[this.results.laa_int_amort_rule_78],
               laa_dpd:[this.results.laa_dpd],
               laa_class_main:[this.results.laa_class_main],
               laa_class_sub:[this.results.laa_class_sub],
@@ -1727,7 +1723,6 @@ backdate_transaction_Lookup(): void {
       this.formData.controls.laa_effective_from_date.setValue(this.datepipe.transform(this.f.laa_effective_from_date.value, 'yyyy-MM-ddTHH:mm:ss'));
       this.formData.controls.laa_effective_to_date.setValue(this.datepipe.transform(this.f.laa_effective_to_date.value, 'yyyy-MM-ddTHH:mm:ss'));
 
-        console.log("huge form data",this.formData.value);
         
           this.submitted = true;
           // stop here if form is invalid
