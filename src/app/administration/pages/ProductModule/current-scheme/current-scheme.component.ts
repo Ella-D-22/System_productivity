@@ -330,7 +330,6 @@ export class CurrentSchemeComponent implements OnInit {
   glSubheadArray = new Array();
 
   formData = this.fb.group({
-    caa_function_type: [''],
     caa_scheme_code: [''],
     caa_scheme_type: [''],
     caa_scheme_code_desc: [''],
@@ -363,30 +362,13 @@ export class CurrentSchemeComponent implements OnInit {
     caa_max_sanction_limit: [''],
     caa_norm_int_product_method: [''],
     caa_ac_statement_charged_by: [''],
-    // caa_max_sanction_limit:[''],
-    caa_dr_bal_limit: [''],
-    caa_max_penal_int: [''],
     caa_ledger_follio_fee: [''],
-    caa_inactive_ac_abnormal_trans_limit: [''],
     caa_dormant_ac_abnormal_trans_limit: [''],
     caa_duration_to_mark_ac_inactive: [''],
     caa_duration_from_inactive_to_dormant: [''],
     caa_dormant_fee: [''],
-    caa_inactive_fee: [''],
-    // caa_norm_int_product_method:[''],
     caa_calc_freq_dr_week: [''],
-    // caa_calc_freq_dr_week:[''],
-    // caa_calc_freq_dr_week:[''],
-    caa_allow_sweeps: [''],
     caa_allow_debit_against_unclear_bal: [''],
-    // caa_calc_freq_dr_week:[''],
-    caa_calc_freq_dr_day: [''],
-    caa_calc_freq_dr_date: [''],
-    caa_calc_freq_dr_holiday: [''],
-    // caa_calc_freq_dr_week:[''],
-    // caa_calc_freq_dr_day:[''],
-    // caa_calc_freq_dr_date:[''],
-    // caa_calc_freq_dr_holiday:[''],
 
     caa_fees: new FormArray([]),
     caa_glsubheads: new FormArray([]),
@@ -395,7 +377,6 @@ export class CurrentSchemeComponent implements OnInit {
      caa_ac_debit_balance:[''],
      caa_ac_credit_balance:[''],
      caa_liability_exceed_group:[''],
-     caa_ac_is_froozed_value:[''],
      caa_sanction_limit_expired:[''],
      caa_interest_calc:[''],
      caa_insufficient_exception:[''],
@@ -927,7 +908,6 @@ export class CurrentSchemeComponent implements OnInit {
           this.scheme_code_desc = this.message.scheme_code_desc;
           // open empty forms
           this.formData = this.fb.group({
-            caa_function_type: [''],
             caa_scheme_code: [this.scheme_code],
             caa_scheme_type: [this.scheme_type],
             caa_scheme_code_desc: [this.scheme_code_desc],
@@ -961,30 +941,13 @@ export class CurrentSchemeComponent implements OnInit {
             caa_ac_statement_charged_by: [''],
             caa_ac_stmt_chrg_fixed_amt: [''],
             caa_ac_stmt_chrg_per_page: [''],
-            // caa_max_sanction_limit:[''],
-            caa_dr_bal_limit: [''],
-            caa_max_penal_int: [''],
             caa_ledger_follio_fee: [''],
-            caa_inactive_ac_abnormal_trans_limit: [''],
             caa_dormant_ac_abnormal_trans_limit: [''],
             caa_duration_to_mark_ac_inactive: [''],
             caa_duration_from_inactive_to_dormant: [''],
             caa_dormant_fee: [''],
-            caa_inactive_fee: [''],
-            // caa_norm_int_product_method:[''],
             caa_calc_freq_dr_week: [''],
-            // caa_calc_freq_dr_week:[''],
-            // caa_calc_freq_dr_week:[''],
-            caa_allow_sweeps: [''],
             caa_allow_debit_against_unclear_bal: [''],
-            // caa_calc_freq_dr_week:[''],
-            caa_calc_freq_dr_day: [''],
-            caa_calc_freq_dr_date: [''],
-            caa_calc_freq_dr_holiday: [''],
-            // caa_calc_freq_dr_week:[''],
-            // caa_calc_freq_dr_day:[''],
-            // caa_calc_freq_dr_date:[''],
-            // caa_calc_freq_dr_holiday:[''],
 
             caa_fees: new FormArray([]),
             caa_glsubheads: new FormArray([]),
@@ -993,7 +956,6 @@ export class CurrentSchemeComponent implements OnInit {
             caa_ac_debit_balance:[''],
             caa_ac_credit_balance:[''],
             caa_liability_exceed_group:[''],
-            caa_ac_is_froozed_value:[''],
             caa_sanction_limit_expired:[''],
             caa_interest_calc:[''],
             caa_insufficient_exception:[''],
@@ -1030,7 +992,6 @@ export class CurrentSchemeComponent implements OnInit {
                 this.feeArray = this.results.caa_fees;
                 this.glSubheadArray = this.results.caa_glsubheads;
                 this.formData = this.fb.group({
-                  caa_function_type: [this.function_type],
                   caa_scheme_code: [this.scheme_code],
                   caa_scheme_type: [this.scheme_type],
                   caa_scheme_code_desc: [this.scheme_code_desc],
@@ -1100,13 +1061,7 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_ac_statement_charged_by: [
                     this.results.caa_ac_statement_charged_by,
                   ],
-                  // caa_max_sanction_limit:[''],
-                  caa_dr_bal_limit: [this.results.caa_dr_bal_limit],
-                  caa_max_penal_int: [this.results.caa_max_penal_int],
                   caa_ledger_follio_fee: [this.results.caa_ledger_follio_fee],
-                  caa_inactive_ac_abnormal_trans_limit: [
-                    this.results.caa_inactive_ac_abnormal_trans_limit,
-                  ],
                   caa_dormant_ac_abnormal_trans_limit: [
                     this.results.caa_dormant_ac_abnormal_trans_limit,
                   ],
@@ -1117,25 +1072,11 @@ export class CurrentSchemeComponent implements OnInit {
                     this.results.caa_duration_from_inactive_to_dormant,
                   ],
                   caa_dormant_fee: [this.results.caa_dormant_fee],
-                  caa_inactive_fee: [this.results.caa_inactive_fee],
-                  // caa_norm_int_product_method:[''],
                   caa_calc_freq_dr_week: [this.results.caa_calc_freq_dr_week],
-                  // caa_calc_freq_dr_week:[''],
-                  // caa_calc_freq_dr_week:[''],
-                  caa_allow_sweeps: [this.results.caa_allow_sweeps],
+                  
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
                   ],
-                  // caa_calc_freq_dr_week:[''],
-                  caa_calc_freq_dr_day: [this.results.caa_calc_freq_dr_day],
-                  caa_calc_freq_dr_date: [this.results.caa_calc_freq_dr_date],
-                  caa_calc_freq_dr_holiday: [
-                    this.results.caa_calc_freq_dr_holiday,
-                  ],
-                  // caa_calc_freq_dr_week:[''],
-                  // caa_calc_freq_dr_day:[''],
-                  // caa_calc_freq_dr_date:[''],
-                  // caa_calc_freq_dr_holiday:[''],
 
                   // caa_fees: new FormArray([]),
                   // caa_glsubheads: new FormArray([])
@@ -1172,7 +1113,6 @@ export class CurrentSchemeComponent implements OnInit {
 
                 this.formData = this.fb.group({
                   id: [this.results.id],
-                  caa_function_type: [this.results.caa_function_type],
                   caa_scheme_code: [this.results.caa_scheme_code],
                   caa_scheme_type: [this.results.caa_scheme_type],
                   caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
@@ -1242,13 +1182,7 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_ac_statement_charged_by: [
                     this.results.caa_ac_statement_charged_by,
                   ],
-                  // caa_max_sanction_limit:[''],
-                  caa_dr_bal_limit: [this.results.caa_dr_bal_limit],
-                  caa_max_penal_int: [this.results.caa_max_penal_int],
                   caa_ledger_follio_fee: [this.results.caa_ledger_follio_fee],
-                  caa_inactive_ac_abnormal_trans_limit: [
-                    this.results.caa_inactive_ac_abnormal_trans_limit,
-                  ],
                   caa_dormant_ac_abnormal_trans_limit: [
                     this.results.caa_dormant_ac_abnormal_trans_limit,
                   ],
@@ -1259,20 +1193,12 @@ export class CurrentSchemeComponent implements OnInit {
                     this.results.caa_duration_from_inactive_to_dormant,
                   ],
                   caa_dormant_fee: [this.results.caa_dormant_fee],
-                  caa_inactive_fee: [this.results.caa_inactive_fee],
                   // caa_norm_int_product_method:[''],
                   caa_calc_freq_dr_week: [this.results.caa_calc_freq_dr_week],
                   // caa_calc_freq_dr_week:[''],
                   // caa_calc_freq_dr_week:[''],
-                  caa_allow_sweeps: [this.results.caa_allow_sweeps],
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
-                  ],
-                  // caa_calc_freq_dr_week:[''],
-                  caa_calc_freq_dr_day: [this.results.caa_calc_freq_dr_day],
-                  caa_calc_freq_dr_date: [this.results.caa_calc_freq_dr_date],
-                  caa_calc_freq_dr_holiday: [
-                    this.results.caa_calc_freq_dr_holiday,
                   ],
          
 
@@ -1283,7 +1209,6 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
                   caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
                   caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
-                  caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
                   caa_sanction_limit_expired:[this.results.caa_sanction_limit_expired],
                   caa_interest_calc:[this.results.caa_interest_calc],
                   caa_insufficient_exception:[this.results.caa_insufficient_exception],
@@ -1336,7 +1261,6 @@ export class CurrentSchemeComponent implements OnInit {
 
                 this.formData = this.fb.group({
                   id: [this.results.id],
-                  caa_function_type: [this.results.caa_function_type],
                   caa_scheme_code: [this.results.caa_scheme_code],
                   caa_scheme_type: [this.results.caa_scheme_type],
                   caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
@@ -1406,13 +1330,7 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_ac_statement_charged_by: [
                     this.results.caa_ac_statement_charged_by,
                   ],
-                  // caa_max_sanction_limit:[''],
-                  caa_dr_bal_limit: [this.results.caa_dr_bal_limit],
-                  caa_max_penal_int: [this.results.caa_max_penal_int],
                   caa_ledger_follio_fee: [this.results.caa_ledger_follio_fee],
-                  caa_inactive_ac_abnormal_trans_limit: [
-                    this.results.caa_inactive_ac_abnormal_trans_limit,
-                  ],
                   caa_dormant_ac_abnormal_trans_limit: [
                     this.results.caa_dormant_ac_abnormal_trans_limit,
                   ],
@@ -1423,27 +1341,15 @@ export class CurrentSchemeComponent implements OnInit {
                     this.results.caa_duration_from_inactive_to_dormant,
                   ],
                   caa_dormant_fee: [this.results.caa_dormant_fee],
-                  caa_inactive_fee: [this.results.caa_inactive_fee],
                   // caa_norm_int_product_method:[''],
                   caa_calc_freq_dr_week: [this.results.caa_calc_freq_dr_week],
                   // caa_calc_freq_dr_week:[''],
                   // caa_calc_freq_dr_week:[''],
-                  caa_allow_sweeps: [this.results.caa_allow_sweeps],
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
                   ],
-                  // caa_calc_freq_dr_week:[''],
-                  caa_calc_freq_dr_day: [this.results.caa_calc_freq_dr_day],
-                  caa_calc_freq_dr_date: [this.results.caa_calc_freq_dr_date],
-                  caa_calc_freq_dr_holiday: [
-                    this.results.caa_calc_freq_dr_holiday,
-                  ],
                   is_verified: [true],
                   is_deleted: [this.results.is_deleted],
-                  // caa_calc_freq_dr_week:[''],
-                  // caa_calc_freq_dr_day:[''],
-                  // caa_calc_freq_dr_date:[''],
-                  // caa_calc_freq_dr_holiday:[''],
 
                   caa_fees: new FormArray([]),
                   caa_glsubheads: new FormArray([]),
@@ -1452,7 +1358,6 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
                   caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
                   caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
-                  caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
                   caa_sanction_limit_expired:[this.results.caa_sanction_limit_expired],
                   caa_interest_calc:[this.results.caa_interest_calc],
                   caa_insufficient_exception:[this.results.caa_insufficient_exception],
@@ -1506,7 +1411,6 @@ export class CurrentSchemeComponent implements OnInit {
 
                 this.formData = this.fb.group({
                   id: [this.results.id],
-                  caa_function_type: [this.results.caa_function_type],
                   caa_scheme_code: [this.results.caa_scheme_code],
                   caa_scheme_type: [this.results.caa_scheme_type],
                   caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
@@ -1576,13 +1480,7 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_ac_statement_charged_by: [
                     this.results.caa_ac_statement_charged_by,
                   ],
-                  // caa_max_sanction_limit:[''],
-                  caa_dr_bal_limit: [this.results.caa_dr_bal_limit],
-                  caa_max_penal_int: [this.results.caa_max_penal_int],
                   caa_ledger_follio_fee: [this.results.caa_ledger_follio_fee],
-                  caa_inactive_ac_abnormal_trans_limit: [
-                    this.results.caa_inactive_ac_abnormal_trans_limit,
-                  ],
                   caa_dormant_ac_abnormal_trans_limit: [
                     this.results.caa_dormant_ac_abnormal_trans_limit,
                   ],
@@ -1593,27 +1491,12 @@ export class CurrentSchemeComponent implements OnInit {
                     this.results.caa_duration_from_inactive_to_dormant,
                   ],
                   caa_dormant_fee: [this.results.caa_dormant_fee],
-                  caa_inactive_fee: [this.results.caa_inactive_fee],
-                  // caa_norm_int_product_method:[''],
                   caa_calc_freq_dr_week: [this.results.caa_calc_freq_dr_week],
-                  // caa_calc_freq_dr_week:[''],
-                  // caa_calc_freq_dr_week:[''],
-                  caa_allow_sweeps: [this.results.caa_allow_sweeps],
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
                   ],
-                  // caa_calc_freq_dr_week:[''],
-                  caa_calc_freq_dr_day: [this.results.caa_calc_freq_dr_day],
-                  caa_calc_freq_dr_date: [this.results.caa_calc_freq_dr_date],
-                  caa_calc_freq_dr_holiday: [
-                    this.results.caa_calc_freq_dr_holiday,
-                  ],
                   is_verified: [this.results.is_verified],
                   is_deleted: [true],
-                  // caa_calc_freq_dr_week:[''],
-                  // caa_calc_freq_dr_day:[''],
-                  // caa_calc_freq_dr_date:[''],
-                  // caa_calc_freq_dr_holiday:[''],
 
                   caa_fees: new FormArray([]),
                   caa_glsubheads: new FormArray([]),
@@ -1622,7 +1505,6 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
                   caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
                   caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
-                  caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
                   caa_sanction_limit_expired:[this.results.caa_sanction_limit_expired],
                   caa_interest_calc:[this.results.caa_interest_calc],
                   caa_insufficient_exception:[this.results.caa_insufficient_exception],
