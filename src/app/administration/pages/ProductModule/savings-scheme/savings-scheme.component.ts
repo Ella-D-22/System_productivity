@@ -616,12 +616,10 @@ BackdatedTransactionLookup(): void {
 
         sba_effective_from_date:[''],
         sba_effective_to_date:[''],
-        sba_system_generated_no:[''],
         sba_principal_lossline_ac:[''],
         sba_recovery_lossline_ac:[''],
         sba_charge_off_ac:[''],
         sba_number_generation:[''],
-        sba_system_gen_no:[''],
         sba_number_generation_code:[''],
 
         // Interest Details
@@ -642,49 +640,22 @@ BackdatedTransactionLookup(): void {
         sba_no__of_withdrawals:[''],
         sba_no_int_if_withdwl_exceeded:[''],
         sba_ac_statement_charged_by:[''],
-        sba_min_balance_with_chq:[''],
-        sba_dr_bal_limit:[''],
-        sba_ledger_folio_fee:[''],
         sba_fee_withrawal:[''],
         sba_inactive_ac_abnormal_tran_limit:[''],
         sba_dormant_ac_abnormal_trans_limit:[''],
         sba_duration_to_mark_ac_as_inactive:[''],
         sba_duration_from_inactive_to_dormant:[''],
-        sba_dormant_fee:[''],
-        sba_inactive_fee:[''],
         sba_int_calc_based_local_calender:[''],
         sba_int_method:[''],
         sba_bal_frm_date:[''],
         sba_bal_to_date:[''],
         
         
-        sba_dormant_calc_freq_dr_week:[''],
-        sba_dormant_calc_freq_dr_day:[''],
         
-        sba_dormant_calc_freq_dr_holiday:[''],
-        // sba_dormant_calc_freq_dr_week:[''],
         
-        sba_nomination:[''],
         sba_recover_fee_for_chq_issue:[''],
-        // sba_dr_bal_limit:[''],
-        sba_return_paid_chq:[''],
-        sba_max_allowed_limit:[''],
-        sba_sanction_limit:[''],
-        sba_expiry_date:[''],
         
-        sba_paid_chq_return_freq_week:[''],
-        sba_paid_chq_return_freq_day:[''],
-        sba_paid_chq_return_freq_date:[''],
-        sba_paid_chq_return_freq_holiday:[''],
-        // sba_paid_chq_return_freq_day:[''],
-        // sba_paid_chq_return_freq_date:[''],
-        int_cal_freq_dr_holiday:[''],
         
-        sba_int_amt:[''],
-        sba_dr_or_cr:[''],
-        sba_min_bal:[''],
-        sba_loan_int_compounded_till:[''],
-        sba_provision_amt:[''],
         
         // Exceptions 
         sba_exc_ac_in_debit_bal:[''],
@@ -917,12 +888,10 @@ BackdatedTransactionLookup(): void {
                 
             sba_effective_from_date:[''],
             sba_effective_to_date:[''],
-            sba_system_generated_no:[''],
             sba_principal_lossline_ac:[''],
             sba_recovery_lossline_ac:[''],
             sba_charge_off_ac:[''],
             sba_number_generation:[''],
-            sba_system_gen_no:[''],
             sba_number_generation_code:[''],
     
             // Interest Details
@@ -943,51 +912,19 @@ BackdatedTransactionLookup(): void {
             sba_no__of_withdrawals:[''],
             sba_no_int_if_withdwl_exceeded:[''],
             sba_ac_statement_charged_by:[''],
-            sba_min_balance_with_chq:[''],
-            sba_dr_bal_limit:[''],
-            sba_ledger_folio_fee:[''],
             sba_fee_withrawal:[''],
             sba_inactive_ac_abnormal_tran_limit:[''],
             sba_dormant_ac_abnormal_trans_limit:[''],
             sba_duration_to_mark_ac_as_inactive:[''],
             sba_duration_from_inactive_to_dormant:[''],
-            sba_dormant_fee:[''],
-            sba_inactive_fee:[''],
             sba_int_calc_based_local_calender:[''],
             sba_int_method:[''],
             sba_bal_frm_date:[''],
             sba_bal_to_date:[''],
-            
-            
-            sba_dormant_calc_freq_dr_week:[''],
-            sba_dormant_calc_freq_dr_day:[''],
-            
-            sba_dormant_calc_freq_dr_holiday:[''],
-            // sba_dormant_calc_freq_dr_week:[''],
-            
-            sba_nomination:[''],
+          
+          
             sba_recover_fee_for_chq_issue:[''],
-            // sba_dr_bal_limit:[''],
-            sba_return_paid_chq:[''],
-            sba_max_allowed_limit:[''],
-            sba_sanction_limit:[''],
-            sba_expiry_date:[''],
-            
-            sba_paid_chq_return_freq_week:[''],
-            sba_paid_chq_return_freq_day:[''],
-            sba_paid_chq_return_freq_date:[''],
-            sba_paid_chq_return_freq_holiday:[''],
-            // sba_paid_chq_return_freq_day:[''],
-            // sba_paid_chq_return_freq_date:[''],
-            int_cal_freq_dr_holiday:[''],
-
-    
-            sba_int_amt:[''],
-            sba_dr_or_cr:[''],
-            sba_min_bal:[''],
-            sba_loan_int_compounded_till:[''],
-            sba_provision_amt:[''],
-            
+        
             // Exceptions 
             sba_exc_ac_in_debit_bal:[''],
             sba_exc_ac_in_cr_bal:[''],
@@ -1044,12 +981,10 @@ BackdatedTransactionLookup(): void {
                   
               sba_effective_from_date:[this.results.sba_effective_from_date],
               sba_effective_to_date:[this.results.sba_effective_to_date],
-              sba_system_generated_no:[this.results.sba_system_generated_no],
               sba_principal_lossline_ac:[this.results.sba_principal_lossline_ac],
               sba_recovery_lossline_ac:[this.results.sba_recovery_lossline_ac],
               sba_charge_off_ac:[this.results.sba_charge_off_ac],
               sba_number_generation:[this.results.sba_number_generation],
-              sba_system_gen_no:[this.results.sba_system_gen_no],
               sba_number_generation_code:[this.results.sba_number_generation_code],
 
               sba_pl_ac_ccy:[this.results.sba_pl_ac_ccy],
@@ -1069,50 +1004,22 @@ BackdatedTransactionLookup(): void {
               sba_no__of_withdrawals:[this.results.sba_no__of_withdrawals],
               sba_no_int_if_withdwl_exceeded:[this.results.sba_no_int_if_withdwl_exceeded],
               sba_ac_statement_charged_by:[this.results.sba_ac_statement_charged_by],
-              sba_min_balance_with_chq:[this.results.sba_min_balance_with_chq],
-              sba_dr_bal_limit:[this.results.sba_dr_bal_limit],
-              sba_ledger_folio_fee:[this.results.sba_ledger_folio_fee],
               sba_fee_withrawal:[this.results.sba_fee_withrawal],
               sba_inactive_ac_abnormal_tran_limit:[this.results.sba_inactive_ac_abnormal_tran_limit],
               sba_dormant_ac_abnormal_trans_limit:[this.results.sba_dormant_ac_abnormal_trans_limit],
               sba_duration_to_mark_ac_as_inactive:[this.results.sba_duration_to_mark_ac_as_inactive],
               sba_duration_from_inactive_to_dormant:[this.results.sba_duration_from_inactive_to_dormant],
-              sba_dormant_fee:[this.results.sba_dormant_fee],
-              sba_inactive_fee:[this.results.sba_inactive_fee],
               sba_int_calc_based_local_calender:[this.results.sba_int_calc_based_local_calender],
               sba_int_method:[this.results.sba_int_method],
               sba_bal_frm_date:[this.results.sba_bal_frm_date],
               sba_bal_to_date:[this.results.sba_bal_to_date],
               
-              
-              sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
-              sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
-              
-              sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
 
               
-              sba_nomination:[this.results.sba_nomination],
               sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
-              // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
-              sba_return_paid_chq:[this.results.sba_return_paid_chq],
-              sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
-              sba_sanction_limit:[this.results.sba_sanction_limit],
-              sba_expiry_date:[this.results.sba_expiry_date],
-              
-              sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
-              sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
-              sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
-              sba_paid_chq_return_freq_holiday:[this.results.sba_paid_chq_return_freq_holiday],
-              // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
-              // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
-              int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
               
               
-              sba_int_amt:[this.results.sba_int_amt],
-              sba_dr_or_cr:[this.results.sba_dr_or_cr],
-              sba_min_bal:[this.results.sba_min_bal],
-              sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
-              sba_provision_amt:[this.results.sba_provision_amt],
+              
               
               // Exceptithis.results.              // Exceptithis.results.s s 
               sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
@@ -1163,12 +1070,10 @@ BackdatedTransactionLookup(): void {
                     
                 sba_effective_from_date:[this.results.sba_effective_from_date],
                 sba_effective_to_date:[this.results.sba_effective_to_date],
-                sba_system_generated_no:[this.results.sba_system_generated_no],
                 sba_principal_lossline_ac:[this.results.sba_principal_lossline_ac],
                 sba_recovery_lossline_ac:[this.results.sba_recovery_lossline_ac],
                 sba_charge_off_ac:[this.results.sba_charge_off_ac],
                 sba_number_generation:[this.results.sba_number_generation],
-                sba_system_gen_no:[this.results.sba_system_gen_no],
                 sba_number_generation_code:[this.results.sba_number_generation_code],
   
                 sba_pl_ac_ccy:[this.results.sba_pl_ac_ccy],
@@ -1188,49 +1093,22 @@ BackdatedTransactionLookup(): void {
                 sba_no__of_withdrawals:[this.results.sba_no__of_withdrawals],
                 sba_no_int_if_withdwl_exceeded:[this.results.sba_no_int_if_withdwl_exceeded],
                 sba_ac_statement_charged_by:[this.results.sba_ac_statement_charged_by],
-                sba_min_balance_with_chq:[this.results.sba_min_balance_with_chq],
-                sba_dr_bal_limit:[this.results.sba_dr_bal_limit],
-                sba_ledger_folio_fee:[this.results.sba_ledger_folio_fee],
                 sba_fee_withrawal:[this.results.sba_fee_withrawal],
                 sba_inactive_ac_abnormal_tran_limit:[this.results.sba_inactive_ac_abnormal_tran_limit],
                 sba_dormant_ac_abnormal_trans_limit:[this.results.sba_dormant_ac_abnormal_trans_limit],
                 sba_duration_to_mark_ac_as_inactive:[this.results.sba_duration_to_mark_ac_as_inactive],
                 sba_duration_from_inactive_to_dormant:[this.results.sba_duration_from_inactive_to_dormant],
-                sba_dormant_fee:[this.results.sba_dormant_fee],
-                sba_inactive_fee:[this.results.sba_inactive_fee],
                 sba_int_calc_based_local_calender:[this.results.sba_int_calc_based_local_calender],
                 sba_int_method:[this.results.sba_int_method],
                 sba_bal_frm_date:[this.results.sba_bal_frm_date],
                 sba_bal_to_date:[this.results.sba_bal_to_date],
                 
-                sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
-                sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
-                
-                sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
   
-                
-                sba_nomination:[this.results.sba_nomination],
+            
                 sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
-                // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
-                sba_return_paid_chq:[this.results.sba_return_paid_chq],
-                sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
-                sba_sanction_limit:[this.results.sba_sanction_limit],
-                sba_expiry_date:[this.results.sba_expiry_date],
-                
-                sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
-                sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
-                sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
-                sba_paid_chq_return_freq_holiday:[this.results.sba_paid_chq_return_freq_holiday],
-                // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
-                // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
-                int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
                 
                 
-                sba_int_amt:[this.results.sba_int_amt],
-                sba_dr_or_cr:[this.results.sba_dr_or_cr],
-                sba_min_bal:[this.results.sba_min_bal],
-                sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
-                sba_provision_amt:[this.results.sba_provision_amt],
+                
                 
                 // Exceptithis.results.              // Exceptithis.results.s s 
                 sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
@@ -1296,12 +1174,10 @@ BackdatedTransactionLookup(): void {
                     
                 sba_effective_from_date:[this.results.sba_effective_from_date],
                 sba_effective_to_date:[this.results.sba_effective_to_date],
-                sba_system_generated_no:[this.results.sba_system_generated_no],
                 sba_principal_lossline_ac:[this.results.sba_principal_lossline_ac],
                 sba_recovery_lossline_ac:[this.results.sba_recovery_lossline_ac],
                 sba_charge_off_ac:[this.results.sba_charge_off_ac],
                 sba_number_generation:[this.results.sba_number_generation],
-                sba_system_gen_no:[this.results.sba_system_gen_no],
                 sba_number_generation_code:[this.results.sba_number_generation_code],
   
                 sba_pl_ac_ccy:[this.results.sba_pl_ac_ccy],
@@ -1321,50 +1197,23 @@ BackdatedTransactionLookup(): void {
                 sba_no__of_withdrawals:[this.results.sba_no__of_withdrawals],
                 sba_no_int_if_withdwl_exceeded:[this.results.sba_no_int_if_withdwl_exceeded],
                 sba_ac_statement_charged_by:[this.results.sba_ac_statement_charged_by],
-                sba_min_balance_with_chq:[this.results.sba_min_balance_with_chq],
-                sba_dr_bal_limit:[this.results.sba_dr_bal_limit],
-                sba_ledger_folio_fee:[this.results.sba_ledger_folio_fee],
                 sba_fee_withrawal:[this.results.sba_fee_withrawal],
                 sba_inactive_ac_abnormal_tran_limit:[this.results.sba_inactive_ac_abnormal_tran_limit],
                 sba_dormant_ac_abnormal_trans_limit:[this.results.sba_dormant_ac_abnormal_trans_limit],
                 sba_duration_to_mark_ac_as_inactive:[this.results.sba_duration_to_mark_ac_as_inactive],
                 sba_duration_from_inactive_to_dormant:[this.results.sba_duration_from_inactive_to_dormant],
-                sba_dormant_fee:[this.results.sba_dormant_fee],
-                sba_inactive_fee:[this.results.sba_inactive_fee],
                 sba_int_calc_based_local_calender:[this.results.sba_int_calc_based_local_calender],
                 sba_int_method:[this.results.sba_int_method],
                 sba_bal_frm_date:[this.results.sba_bal_frm_date],
                 sba_bal_to_date:[this.results.sba_bal_to_date],
                 
                 
-                sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
-                sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
-                
-                sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
   
                 
-                sba_nomination:[this.results.sba_nomination],
                 sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
-                // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
-                sba_return_paid_chq:[this.results.sba_return_paid_chq],
-                sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
-                sba_sanction_limit:[this.results.sba_sanction_limit],
-                sba_expiry_date:[this.results.sba_expiry_date],
-                
-                sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
-                sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
-                sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
-                sba_paid_chq_return_freq_holiday:[this.results.sba_paid_chq_return_freq_holiday],
-                // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
-                // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
-                int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
                 
                 
-                sba_int_amt:[this.results.sba_int_amt],
-                sba_dr_or_cr:[this.results.sba_dr_or_cr],
-                sba_min_bal:[this.results.sba_min_bal],
-                sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
-                sba_provision_amt:[this.results.sba_provision_amt],
+                
                 
                 // Exceptithis.results.              // Exceptithis.results.s s 
                 sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
@@ -1426,12 +1275,10 @@ BackdatedTransactionLookup(): void {
                     
                 sba_effective_from_date:[this.results.sba_effective_from_date],
                 sba_effective_to_date:[this.results.sba_effective_to_date],
-                sba_system_generated_no:[this.results.sba_system_generated_no],
                 sba_principal_lossline_ac:[this.results.sba_principal_lossline_ac],
                 sba_recovery_lossline_ac:[this.results.sba_recovery_lossline_ac],
                 sba_charge_off_ac:[this.results.sba_charge_off_ac],
                 sba_number_generation:[this.results.sba_number_generation],
-                sba_system_gen_no:[this.results.sba_system_gen_no],
                 sba_number_generation_code:[this.results.sba_number_generation_code],
   
                 sba_pl_ac_ccy:[this.results.sba_pl_ac_ccy],
@@ -1451,50 +1298,24 @@ BackdatedTransactionLookup(): void {
                 sba_no__of_withdrawals:[this.results.sba_no__of_withdrawals],
                 sba_no_int_if_withdwl_exceeded:[this.results.sba_no_int_if_withdwl_exceeded],
                 sba_ac_statement_charged_by:[this.results.sba_ac_statement_charged_by],
-                sba_min_balance_with_chq:[this.results.sba_min_balance_with_chq],
-                sba_dr_bal_limit:[this.results.sba_dr_bal_limit],
-                sba_ledger_folio_fee:[this.results.sba_ledger_folio_fee],
                 sba_fee_withrawal:[this.results.sba_fee_withrawal],
                 sba_inactive_ac_abnormal_tran_limit:[this.results.sba_inactive_ac_abnormal_tran_limit],
                 sba_dormant_ac_abnormal_trans_limit:[this.results.sba_dormant_ac_abnormal_trans_limit],
                 sba_duration_to_mark_ac_as_inactive:[this.results.sba_duration_to_mark_ac_as_inactive],
                 sba_duration_from_inactive_to_dormant:[this.results.sba_duration_from_inactive_to_dormant],
-                sba_dormant_fee:[this.results.sba_dormant_fee],
-                sba_inactive_fee:[this.results.sba_inactive_fee],
                 sba_int_calc_based_local_calender:[this.results.sba_int_calc_based_local_calender],
                 sba_int_method:[this.results.sba_int_method],
                 sba_bal_frm_date:[this.results.sba_bal_frm_date],
                 sba_bal_to_date:[this.results.sba_bal_to_date],
                 
                 
-                sba_dormant_calc_freq_dr_week:[this.results.sba_dormant_calc_freq_dr_week],
-                sba_dormant_calc_freq_dr_day:[this.results.sba_dormant_calc_freq_dr_day],
                 
-                sba_dormant_calc_freq_dr_holiday:[this.results.sba_dormant_calc_freq_dr_holiday],
   
                 
-                sba_nomination:[this.results.sba_nomination],
                 sba_recover_fee_for_chq_issue:[this.results.sba_recover_fee_for_chq_issue],
-                // sba_dr_bal_limit:[this.results.              // sba_dr_bal_limit:[this.results.],],
-                sba_return_paid_chq:[this.results.sba_return_paid_chq],
-                sba_max_allowed_limit:[this.results.sba_max_allowed_limit],
-                sba_sanction_limit:[this.results.sba_sanction_limit],
-                sba_expiry_date:[this.results.sba_expiry_date],
-                
-                sba_paid_chq_return_freq_week:[this.results.sba_paid_chq_return_freq_week],
-                sba_paid_chq_return_freq_day:[this.results.sba_paid_chq_return_freq_day],
-                sba_paid_chq_return_freq_date:[this.results.sba_paid_chq_return_freq_date],
-                sba_paid_chq_return_freq_holiday:[this.results.sba_paid_chq_return_freq_holiday],
-                // sba_paid_chq_return_freq_day:[this.results.              // sba_paid_chq_return_freq_day:[this.results.],],
-                // sba_paid_chq_return_freq_date:[this.results.              // sba_paid_chq_return_freq_date:[this.results.],],
-                int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
                 
                 
-                sba_int_amt:[this.results.sba_int_amt],
-                sba_dr_or_cr:[this.results.sba_dr_or_cr],
-                sba_min_bal:[this.results.sba_min_bal],
-                sba_loan_int_compounded_till:[this.results.sba_loan_int_compounded_till],
-                sba_provision_amt:[this.results.sba_provision_amt],
+                
                 
                 // Exceptithis.results.              // Exceptithis.results.s s 
                 sba_exc_ac_in_debit_bal:[this.results.sba_exc_ac_in_debit_bal],
