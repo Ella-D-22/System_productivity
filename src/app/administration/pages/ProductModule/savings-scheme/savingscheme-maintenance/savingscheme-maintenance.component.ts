@@ -103,8 +103,6 @@ export class SavingschemeMaintenanceComponent implements OnInit {
   }
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
-
-
         onSubmit(){
           console.log(this.formData.value)
           this.loading = true;
@@ -130,61 +128,7 @@ export class SavingschemeMaintenanceComponent implements OnInit {
         }
         }
 
-        // onSubmit(){
-        //   console.log(this.formData.value)
-        //   this.loading = true;
-        //   this.submitted = true;
-        //   if(this.formData.valid){
-        //     // this.int_tbl_code = this.f.int_tbl_code.value;
-        //     this.function_type =  this.f.function_type.value;
-        //     if(this.function_type == "A-Add"){
-        //       // console.log("found here", this.int_tbl_code)
-        //       // check if code exists
-        //       this.params = new HttpParams()
-        //       .set('scheme_code', this.f.scheme_code.value);
-        //       this.subscription = this.sbaAPI.checkExistence(this.params).subscribe(res=>{
-        //         // not available else proceed
-        //       this.sbaAPI.changeMessage(this.formData.value)
-        //      this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/saving-scheme/data/view'));
-        //       }, err=>{
-
-
-        //         // TODO:
-        //         //Remove
-        //       // this.sbaAPI.changeMessage(this.formData.value)
-        //       // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
-
-        //         // exist else show error
-        //         this.error = err;
-        //           this.loading = false;
-        //           this._snackBar.open(this.error, "Try again!", {
-        //             horizontalPosition: this.horizontalPosition,
-        //             verticalPosition: this.verticalPosition,
-        //             duration: 3000,
-        //             panelClass: ['red-snackbar','login-snackbar'],
-        //           });
-      
-        //       })
-        //     }else{
-        //       this.sbaAPI.changeMessage(this.formData.value)
-        //       // this.dialogRef.close({ event: 'close', data:this.formData.value });
-        //     //  this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
-        //     }
-      
-        //     // checkHitcm
-      
-        //     // check if adding 
-        // }else{
-        //   this.loading = false;
-        //   this._snackBar.open("Invalid Form Data", "Try again!", {
-        //     horizontalPosition: this.horizontalPosition,
-        //     verticalPosition: this.verticalPosition,
-        //     duration: 3000,
-        //     panelClass: ['red-snackbar','login-snackbar'],
-        //   });
-        // }
-        // }
-
+       
 
 }
 

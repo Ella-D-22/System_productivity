@@ -110,13 +110,8 @@ export class OverdraftSchemeMaintenanceComponent implements OnInit {
           if(this.formData.valid){
             // this.int_tbl_code = this.f.int_tbl_code.value;
             this.function_type =  this.f.function_type.value;
-      
             this.odaAPI.changeMessage(this.formData.value)
             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/overdraft-scheme/data/view'));
-      
-            // checkHitcm
-      
-            // check if adding 
         }else{
           this.loading = false;
           this._snackBar.open("Invalid Form Data", "Try again!", {
@@ -128,53 +123,6 @@ export class OverdraftSchemeMaintenanceComponent implements OnInit {
         }
         }
 
-        // onSubmit(){
-        //   console.log(this.formData.value)
-        //   this.loading = true;
-        //   this.submitted = true;
-        //   if(this.formData.valid){
-        //     // this.int_tbl_code = this.f.int_tbl_code.value;
-        //     this.function_type =  this.f.function_type.value;
-        //     if(this.function_type == "A-Add"){
-        //       // console.log("found here", this.int_tbl_code)
-        //       // check if code exists
-        //       // this.params = new HttpParams()
-        //       // .set('int_tbl_code',this.int_tbl_code);
-        //       this.subscription = this.odaAPI.checkExistence(this.formData.value).subscribe(res=>{
-        //         // not available else proceed
-        //       this.odaAPI.changeMessage(this.formData.value)
-        //      this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
-        //       }, err=>{
-        //         // exist else show error
-        //         this.error = err;
-        //           this.loading = false;
-        //           this._snackBar.open(this.error, "Try again!", {
-        //             horizontalPosition: this.horizontalPosition,
-        //             verticalPosition: this.verticalPosition,
-        //             duration: 3000,
-        //             panelClass: ['red-snackbar','login-snackbar'],
-        //           });
       
-        //       })
-        //     }else{
-        //       this.odaAPI.changeMessage(this.formData.value)
-        //       // this.dialogRef.close({ event: 'close', data:this.formData.value });
-        //      this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
-        //     }
-      
-        //     // checkHitcm
-      
-        //     // check if adding 
-        // }else{
-        //   this.loading = false;
-        //   this._snackBar.open("Invalid Form Data", "Try again!", {
-        //     horizontalPosition: this.horizontalPosition,
-        //     verticalPosition: this.verticalPosition,
-        //     duration: 3000,
-        //     panelClass: ['red-snackbar','login-snackbar'],
-        //   });
-        // }
-        // }
-
 }
 

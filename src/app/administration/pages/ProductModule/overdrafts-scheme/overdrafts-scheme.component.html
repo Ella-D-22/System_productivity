@@ -1035,6 +1035,7 @@
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Submit
         </button>
+        <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
         <br />
       </form>
     </div>

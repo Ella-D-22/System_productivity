@@ -964,6 +964,7 @@ export class CurrentSchemeComponent implements OnInit {
             caa_glsubheads: new FormArray([]),
 
                  // Exceptions
+            caa_ac_is_froozed_value:[''],
             caa_ac_debit_balance:[''],
             caa_ac_credit_balance:[''],
             caa_liability_exceed_group:[''],
@@ -1088,6 +1089,16 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
                   ],
+
+                      // Exceptions
+                      caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
+                      caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
+                      caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
+                      caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
+                      caa_sanction_limit_expired:[this.results.caa_sanction_limit_expired],
+                      caa_interest_calc:[this.results.caa_interest_calc],
+                      caa_insufficient_exception:[this.results.caa_insufficient_exception],
+                      caa_backdate_transaction:[this.results.caa_backdate_transaction],
 
                   // caa_fees: new FormArray([]),
                   // caa_glsubheads: new FormArray([])
@@ -1215,6 +1226,8 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_glsubheads: [this.glSubheadArray],
 
                        // Exceptions
+                       caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
+
                   caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
                   caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
                   caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
@@ -1363,6 +1376,7 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_glsubheads: new FormArray([]),
 
                   // Exceptions
+                  caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
                   caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
                   caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
                   caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
@@ -1510,6 +1524,7 @@ export class CurrentSchemeComponent implements OnInit {
                   caa_glsubheads: new FormArray([]),
 
                   // Exceptions
+                  caa_ac_is_froozed_value:[this.results.caa_ac_is_froozed_value],
                   caa_ac_debit_balance:[this.results.caa_ac_debit_balance],
                   caa_ac_credit_balance:[this.results.caa_ac_credit_balance],
                   caa_liability_exceed_group:[this.results.caa_liability_exceed_group],
