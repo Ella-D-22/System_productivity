@@ -43,6 +43,7 @@
     "json-server": "^0.16.3",
     "jszip": "^3.7.1",
     "mat-icon-import": "^0.1.1",
+    "mat-table-exporter": "^10.2.4",
     "moment": "^2.29.1",
     "ngx-bootstrap": "^7.0.0",
     "ngx-echarts": "^7.0.2",
