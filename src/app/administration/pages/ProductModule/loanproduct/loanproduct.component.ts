@@ -523,7 +523,8 @@ backdate_transaction_Lookup(): void {
   base_indicator: any;
   version: any;
   newData = true;
-
+  isDeleted = false
+  isSubmitted = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -909,6 +910,7 @@ backdate_transaction_Lookup(): void {
 
         if(this.function_type == "A-Add"){
           // open empty forms
+          this.isSubmitted = true;
           this.formData = this.fb.group({
             laa_function_type: [this.function_type],
             laa_scheme_code: [this.scheme_code],
@@ -1044,7 +1046,7 @@ backdate_transaction_Lookup(): void {
           });
         }
         else if(this.function_type == "I-Inquire"){
-          
+        
           this.showContractInput = true;
           this.disabledFormControll();
           // hide Buttons
@@ -1206,6 +1208,7 @@ backdate_transaction_Lookup(): void {
           
           this.showContractInput = true;
           this.isEnabled = false;
+          this.isSubmitted = true;
           let params = new HttpParams()
           .set("scheme_code", this.scheme_code);     
           this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
@@ -1373,8 +1376,9 @@ backdate_transaction_Lookup(): void {
           this.showContractInput = true;
           // call to disable edit
           // this.disabledFormControll();
-          // hide Buttons
+          // hide Buttons & datePicker
           this.isEnabled = false;
+          this.isSubmitted = true;
           let params = new HttpParams()
           .set("scheme_code", this.scheme_code);     
           this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{
@@ -1539,6 +1543,7 @@ backdate_transaction_Lookup(): void {
           // this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
+          this.isDeleted = true;
           let params = new HttpParams()
           .set("scheme_code", this.scheme_code);     
           this.subscription = this.loanproductAPI.getLoanproductBySchemeCode(params).subscribe(res=>{

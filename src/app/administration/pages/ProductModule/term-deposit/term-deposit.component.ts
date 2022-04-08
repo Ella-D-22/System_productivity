@@ -792,13 +792,6 @@ tda_fee_cr_placeholderLookup(): void {
     });
   }
 
-
-
-
-
-
-
-
   onSystem_generated_no(event: any){
     this.showSystem_gen_no = true;
     this.showNumber_gen_code = false;;
@@ -892,13 +885,11 @@ tda_fee_cr_placeholderLookup(): void {
           deletedTime: [new Date()],
         });
       }
-      else if (this.function_type == "I-Inquire") {
-        
+      else if (this.function_type == "I-Inquire") {     
         // find by event id
         this.showContractInput = true;
         // call to disable edit
-        this.disabledFormControll();
-      
+        this.disabledFormControll();    
         this.isEnabled = false;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
