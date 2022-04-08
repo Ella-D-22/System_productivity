@@ -31,6 +31,8 @@ export class OverdraftsSchemeComponent implements OnInit {
   loading = false;
   isDisabled = false;
   isEnabled = true;
+  isDeleted = false;
+  isSubmitted = false;
   flagArray: any = [
 
     'Y', 'N'
@@ -1459,6 +1461,8 @@ oda_fee_cr_placeholderLookup(): void {
             duration: 3000,
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
+        this.router.navigateByUrl('system/configurations/product/overdraft-scheme/maintenance');
+
         }, err => {
           this.error = err;
           this._snackBar.open(this.error, "Try again!", {
@@ -1478,6 +1482,8 @@ oda_fee_cr_placeholderLookup(): void {
             duration: 3000,
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
+          this.router.navigateByUrl('system/configurations/product/overdraft-scheme/maintenance');
+
         }, err => {
           this.error = err;
           this._snackBar.open(this.error, "Try again!", {

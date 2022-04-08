@@ -1741,6 +1741,8 @@ backdate_transaction_Lookup(): void {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
+                this.router.navigateByUrl('system/configurations/product/loan-product/maintenance');
+
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -1760,6 +1762,7 @@ backdate_transaction_Lookup(): void {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
+                  this.router.navigateByUrl('system/configurations/product/loan-product/maintenance');
               },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {

@@ -30,6 +30,8 @@ export class SavingsSchemeComponent implements OnInit {
   loading = false;
   isDisabled = false;
   isEnabled = true;
+  isSubmitted = false;
+  isDeleted = false
   flagArray: any = [
     'Y','N'
   ]
@@ -205,57 +207,7 @@ export class SavingsSchemeComponent implements OnInit {
       this.glsubheadFormData.controls.sba_gl_subhead_description.setValue(this.gl_subhead_description);
     });
   }
-// Account lookups
 
-
-// penalIntRecAcLookup(): void {
-//   this.dtype="oa"
-//   const dconfig= new MatDialogConfig()
-//   dconfig.data={
-//     type:this.dtype
-//   }
-//   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-//   cdialogRef.afterClosed().subscribe((result) => {
-//     this.sba_penal_int_receivable_ac = result.data.acid;
-//     this.formData.controls.sba_penal_int_receivable_ac.setValue(result.data.acid);
-//   });
-// }
-// normIntReceivedaccountLookup(): void {
-//   this.dtype="oa"
-//   const dconfig= new MatDialogConfig()
-//   dconfig.data={
-//     type:this.dtype
-//   }
-//   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-//   cdialogRef.afterClosed().subscribe((result) => {
-//     this.sba_normal_int_received_ac = result.data.acid;
-//     this.formData.controls.sba_normal_int_received_ac.setValue(result.data.acid);
-//   });
-// }
-// penalIntReceivedaccountLookup(): void {
-//   this.dtype="oa"
-//   const dconfig= new MatDialogConfig()
-//   dconfig.data={
-//     type:this.dtype
-//   }
-//   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-//   cdialogRef.afterClosed().subscribe((result) => {
-//     this.sba_penal_int_received_ac = result.data.acid;
-//     this.formData.controls.sba_penal_int_received_ac.setValue(result.data.acid);
-//   });
-// }
-// advanceIntAcLookup(): void {
-//   this.dtype="oa"
-//   const dconfig= new MatDialogConfig()
-//   dconfig.data={
-//     type:this.dtype
-//   }
-//   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-//   cdialogRef.afterClosed().subscribe((result) => {
-//     this.sba_advance_int_ac = result.data.acid;
-//     this.formData.controls.sba_advance_int_ac.setValue(result.data.acid);
-//   });
-// }
 
 
 principal_lossline_acLookup(): void {
@@ -908,6 +860,8 @@ BackdatedTransactionLookup(): void {
 
         if(this.function_type == "A-Add"){
           // open empty forms
+           this.isSubmitted = true;
+        
           this.formData = this.fb.group({
 
             sba_function_type: [this.function_type],
@@ -1025,10 +979,8 @@ BackdatedTransactionLookup(): void {
           // call to disable edit
           this.disabledFormControll();
           // hide Buttons
-          this.isEnabled = false;
-
-        let params = new HttpParams()
-        .set("scheme_code", this.scheme_code);     
+        this.isEnabled = false
+        let params = new HttpParams() .set("scheme_code", this.scheme_code);     
           this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
             this.results = res;
 
@@ -1148,6 +1100,7 @@ BackdatedTransactionLookup(): void {
           })
         }
         else if(this.function_type == "M-Modify"){
+          this.isSubmitted = true;
           let params = new HttpParams()
           .set("scheme_code", this.scheme_code);     
             this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
@@ -1276,6 +1229,7 @@ BackdatedTransactionLookup(): void {
         }
         
         else if(this.function_type == "V-Verify"){
+          this.isEnabled = true;
           let params = new HttpParams()
           .set("scheme_code", this.scheme_code);     
             this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
@@ -1407,6 +1361,8 @@ BackdatedTransactionLookup(): void {
         }
         
         else if(this.function_type == "X-Delete"){
+          this.isDeleted = true;
+          this.isEnabled = false;
           let params = new HttpParams()
           .set("scheme_code", this.scheme_code);     
             this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
@@ -1581,6 +1537,8 @@ BackdatedTransactionLookup(): void {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
+                this.router.navigateByUrl('system/configurations/product/saving-scheme/maintenance');
+
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -1599,6 +1557,8 @@ BackdatedTransactionLookup(): void {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
+                  this.router.navigateByUrl('system/configurations/product/saving-scheme/maintenance');
+
               },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {

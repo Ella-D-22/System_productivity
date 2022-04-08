@@ -10,8 +10,7 @@
         <p>{{this.function_type}}</p>
       </div>
       <div class="col-md-3 col-sm-12">
-        <!-- <h4>Product ID</h4>
-        <p>{{this.product_id}}</p> -->
+
       </div>
       <div class="col-md-3 col-sm-12">
         <h4>Scheme Code</h4>
@@ -123,14 +122,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12">
-                <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Expiry Date.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input  type="number" formControlName="tda_dr_int_prcnt_min" class="form-control" />
-                  </div>
-                </div> -->
+               
               </div>
             </div>
             <div class="row">
@@ -153,7 +145,7 @@
                     <label class="start pull-left">System Generated No.</label>
                   </div>
                   <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" formControlName="tda_system_gen_no" class="form-control" />
+                    <input  type="number" formControlName="tda_system_generated_no" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group" *ngIf="this.showSystem_gen_no">
@@ -494,15 +486,7 @@
       </div>
        <div class="row">
         <div class="col-md-6 col-sm-12">
-          <!-- <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Sundry Deposit Placeholder</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input type="number" formControlName="tda_sundry_deposit_ph" class="pull-right form-control"/>
-                <mat-icon>search</mat-icon>
-              </div>
-           </div>                   -->
+         
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -559,7 +543,7 @@
     <div class="col-md-6 col-sm-12 form-column ">
     </div>
     <div class="col-md-6 col-sm-12 form-column ">
-      <mat-hint>{{this.tda_int_table_code_desc}}</mat-hint>
+      <mat-hint>{{this.tda_ac_debit_description}}</mat-hint>
     </div>
  </div>
   </div>
@@ -577,7 +561,7 @@
     <div class="col-md-6 col-sm-12 form-column ">
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-      <mat-hint>{{this.tda_int_table_code_desc}}</mat-hint>
+      <mat-hint>{{this.tda_ac_credit_balance_description}}</mat-hint>
     </div>
  </div> 
 
@@ -593,7 +577,14 @@
        <input [value]="this.liability_exceed_group_value" type="text" formControlName="tda_liability_exceed_group" class="pull-right form-control"/>
        <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
       </div>
-   </div> 
+   </div>
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.tda_liability_exceed_group_desc}}</mat-hint>
+    </div>
+ </div> 
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -604,7 +595,14 @@
       <input [value]="this.ac_is_froozed_value" type="text" formControlName="tda_ac_is_froozed" class="pull-right form-control"/>
       <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div> 
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.tda_ac_is_froozed_description}}</mat-hint>
+    </div>
+ </div>             
 </div>
 </div>
 <div class="row">
@@ -618,6 +616,13 @@
        <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.tda_sanction_limit_expired_desc}}</mat-hint>
+    </div>
+ </div>
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -628,7 +633,14 @@
       <input [value]="this.interest_calc_value" type="text" formControlName="tda_interest_calc" class="pull-right form-control"/>
       <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.tda_interest_calc_desc}}</mat-hint>
+    </div>
+ </div>              
 </div>
 </div>
 
@@ -643,6 +655,13 @@
        <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
       </div>
    </div> 
+   <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.tda_insufficient_exception_desc}}</mat-hint>
+    </div>
+ </div>
   </div>
   <div class="col-md-6 col-sm-12">
    <div class="form-group">
@@ -653,7 +672,14 @@
       <input [value]="this.backdate_transaction_value" type="text" formControlName="tda_backdate_transaction" class="pull-right form-control"/>
       <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
      </div>
-  </div>              
+  </div> 
+  <div class="form-group">
+    <div class="col-md-6 col-sm-12 form-column ">
+    </div>
+    <div class="col-md-6 col-sm-12 form-column ">
+      <mat-hint>{{this.tda_backdate_transaction_desc}}</mat-hint>
+    </div>
+ </div>             
 </div>
 </div>
     </mat-tab>
@@ -711,13 +737,6 @@
           ></span>
          + Update
         </button>
-        <!-- <button class="pull-right btn-sm"   type="button" (click)="initLoanForm()">
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-         Clear
-        </button> -->
         <br />
       </form>
       <br>
@@ -913,7 +932,6 @@
            </div>          
         </div>
         </div>
-       
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
@@ -926,14 +944,6 @@
            </div> 
           </div>
           <div class="col-md-6 col-sm-12">
-            <!-- <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">Record</label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column">
-                  <input type="text" formControlName="class_main" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
-                </div>
-             </div>             -->
         </div>
         </div>
         <br />
@@ -1012,13 +1022,8 @@
   </mat-tab-group>
     <br />
     <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
-    <button  class="pull-right" mat-raised-button color="primary" type="submit">
-      <span
-        *ngIf="loading"
-        class="spinner-border spinner-border-sm mr-1"
-      ></span>
-      Submit
-    </button>
+    <button  class="pull-right" mat-raised-button color="primary" type="submit"> **ngIf="isSubmitted">Submit</button>
+    <button mat-raised-button color="warn" type="submit" *ngIf="isDeleted" class="pull-right">Delete</button>
     <br />
   </form>
     </div>
