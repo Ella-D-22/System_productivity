@@ -163,6 +163,9 @@ export class SavingsSchemeComponent implements OnInit {
   sba_advance_int_ac_desc: any;
   sba_normal_int_receivable_ac_desc: any;
   event_id_desc: any;
+  glSubheadData: any;
+  element: any;
+  loanElement: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -710,7 +713,7 @@ BackdatedTransactionLookup(): void {
            sba_is_gl_subhead_deleted:['']
          })
 
-         initLoanForm(){
+         initLoanFeeForm(){
          this.newData = true;
         this.feeFormData = this.fb.group({
           sba_fee_type:[''],
@@ -738,62 +741,13 @@ BackdatedTransactionLookup(): void {
             sba_is_gl_subhead_deleted:['']
           })
          }
-
-         editLoanFeeForm(i:any){
-           this.newData = false;
-           this.arrayIndex = this.feeArray[i];
-          this.feeFormData = this.fb.group({
-            sba_fee_type:[this.feeArray[i].sba_fee_type],
-            sba_fee_event:[this.feeArray[i].sba_fee_event],
-            sba_fee_frequency:[this.feeArray[i].sba_fee_frequency],
-            sba_fee_amortize_credit_ph:[this.feeArray[i].sba_fee_amortize_credit_ph],
-            sba_fee_amortize_debit_ph:[this.feeArray[i].sba_fee_amortize_debit_ph],
-            sba_fee_deductable:[this.feeArray[i].sba_fee_deductable],
-            sba_fee_multiple:[this.feeArray[i].sba_fee_multiple],
-            sba_fee_amortize:[this.feeArray[i].sba_fee_amortize],
-            sba_fee_demand_flow:[this.feeArray[i].sba_fee_demand_flow],
-            sba_fee_dr_placeholder:[this.feeArray[i].sba_fee_dr_placeholder],
-            sba_fee_cr_placeholder:[this.feeArray[i].sba_fee_cr_placeholder],
-            sba_fee_apr:[this.feeArray[i].sba_fee_apr],
-            sba_fee_eir:[this.feeArray[i].sba_fee_eir],
-            sba_fee_amort_tenor:[this.feeArray[i].sba_fee_amort_tenor],
-            sba_fee_max_no_of_assesment:[this.feeArray[i].sba_fee_max_no_of_assesment],
-        });
-
-   const index: number = this.feeArray.indexOf(this.feeArray.values);
-   this.feeArray.splice(index, i);
-         }
-
-     get g() { return this.formData.controls; }
+    get g() { return this.formData.controls; }
     get t() { return this.g.sba_fees as FormArray; }
     get l() {return this.g.sba_glsubheads as FormArray;}
-
-
     newFormDkkata = this.fb.group({
       org_lnk_event_id: ['', Validators.required],
     });
-         preview(){
-           if(this.feeFormData.valid){
-            this.t.push(this.fb.group(
-              this.feeFormData.value
-              ));
-             this.feeArray.push(this.feeFormData.value);
-             console.log("form fee", this.feeArray);
-             this.initLoanForm();
-           }
-         }
-
-        //  previewGlSubheads(){
-        //   if(this.glsubheadFormData.valid){
-        //     this.l.push(this.fb.group(
-        //       this.glsubheadFormData.value
-        //       ));
-        //       this.glSubheadArray.push(this.glsubheadFormData.value);
-        //       console.log("Gl Subheads", this.glSubheadArray);
-        //       this.initLoanForm();
-        //    }
-        //  }
-
+    
          previewGlSubheads(){
           if(this.glsubheadFormData.valid){
             if(this.glSubheadArray.length<1){
@@ -808,37 +762,75 @@ BackdatedTransactionLookup(): void {
               this.initGlSUbheadForm();
            }
          }
+          
+      editGlSubhead(i: any) {
+        this.element = i
+        this.newData = false;
+        this.arrayIndex = this.glSubheadArray[i];
+        this.glSubheadData = this.fb.group({
+          sba_gl_subhead: [this.glSubheadArray[i].sba_gl_subhead],
+          sba_gl_subhead_description: [
+            this.glSubheadArray[i].sba_gl_subhead_description,
+          ],
+          sba_gl_subhead_deafault: [this.glSubheadArray[i].sba_gl_subhead_deafault],
+          sba_is_gl_subhead_deleted: [
+            this.glSubheadArray[i].sba_is_gl_subhead_deleted,
+          ],
+        });
+      }
+      onGlSubheadUpdate(){
+        let i = this.element;
+        this.glSubheadArray[i] = this.glSubheadData.value
+    } 
+    onGlSubheadClear(){
+      this.initGlSUbheadForm();
+      this.glSubheadArray = new Array();
+    }
         
-         updateLoanFee(i:any){
-           this.feeArray[i] = this.feeFormData.value
-          // this.t.push(this.fb.group(
-          //   this.feeFormData.value
-          //   ));
-          //  this.feeArray.push(this.feeFormData.value);
-          //  console.log("form fee", this.feeArray);
-          //  this.initLoanForm();
-         }
-         updateGlSubheads(i:any){
-           this.glSubheadArray[i] = this.glsubheadFormData.value
-         }
-
-         onRemove(i:any,){
-          const index: number = this.feeArray.indexOf(this.feeArray.values);
-            this.feeArray.splice(index, i);
-            console.log("new", this.feeArray);
-            this.feeArray = this.feeArray;
-           console.log("click", i);
-         }
-
-
-         onRemoveGLSubhead(i:any,){
-          const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
-          console.log("Number", index);
-          console.log("Index", i);
-
-          this.glSubheadArray.splice(index, i);
-          this.glSubheadArray = this.glSubheadArray
-         }
+               //Loan Fee Operations
+               onPreviewFees(){    
+                
+                if (this.feeFormData.valid) {
+                  this.t.push(this.fb.group(
+                    this.feeFormData.value
+                  ));
+                  this.feeArray.push(this.feeFormData.value);
+                  this.initLoanFeeForm();
+                }
+              }
+              onUpdateFees(){
+                let i = this.loanElement;
+                this.feeArray[i] = this.feeFormData.value
+              }
+              onClearFees(){
+                this.initLoanFeeForm();
+                this.feeArray = new Array();
+              }
+              onRemoveLoanFee(i: any) {
+                const index: number = this.feeArray.indexOf(this.feeArray.values);
+                this.feeArray.splice(index, i);
+                this.feeArray = this.feeArray;
+              }
+              editLoanFeeForm(i: any) {
+                this.loanElement = i;
+                this.newData = false;
+                this.arrayIndex = this.feeArray[i];
+                this.feeFormData = this.fb.group({
+                  sba_fee_type: [this.feeArray[i].sba_fee_type],
+                  sba_fee_event: [this.feeArray[i].sba_fee_event],
+                  sba_fee_frequency: [this.feeArray[i].sba_fee_frequency],
+                  sba_fee_deductable: [this.feeArray[i].sba_fee_deductable],
+                  sba_fee_multiple: [this.feeArray[i].sba_fee_multiple],
+                  sba_fee_amortize: [this.feeArray[i].sba_fee_amortize],
+                  sba_fee_amortize_credit_ph:[this.feeArray[i].sba_fee_amortize_credit_ph],
+                  sba_fee_amortize_debit_ph:[this.feeArray[i].sba_fee_amortize_debit_ph],
+                  sba_fee_demand_flow: [this.feeArray[i].sba_fee_demand_flow],
+                  sba_fee_dr_placeholder: [this.feeArray[i].sba_fee_dr_placeholder],
+                  sba_fee_cr_placeholder: [this.feeArray[i].sba_fee_cr_placeholder],
+                  sba_fee_max_no_of_assesment: [this.feeArray[i].sba_fee_max_no_of_assessment],
+                });
+              }
+   
 
          onfixed_amt(event:any){
            this.showFixed_amt = true;
@@ -1388,7 +1380,6 @@ BackdatedTransactionLookup(): void {
         this.formData.controls.sba_effective_to_date.setValue(this.datepipe.transform(this.f.sba_effective_to_date.value, 'yyyy-MM-ddTHH:mm:ss'));
   
 
-        console.log(this.formData.value);
         
           this.submitted = true;
           // stop here if form is invalid

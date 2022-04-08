@@ -721,13 +721,17 @@
   
          <br />
          <button class="pull-right btn-sm"  *ngIf="newData"  type="button" (click)="previewGlSubheads()">
-           <span
-             *ngIf="loading"
-             class="spinner-border spinner-border-sm mr-1"
-           ></span>
-          + Add
-         </button>
-   
+           + Add
+     </button>
+     <button class="pull-right btn-sm"  *ngIf="!newData"  type="button" (click)="onGlSubheadUpdate()">
+           + Update
+    </button>
+    <button class="pull-right btn-sm"   type="button" (click)="initGlSubheadForm()">
+     Reset form
+     </button>
+     <button class="pull-right btn-sm"   type="button" (click)="onGlSubheadClear()">
+       Clear All
+       </button>
          <br />
        </form>
        <br>
@@ -752,7 +756,6 @@
                  <td>{{item.caa_is_gl_subhead_deleted}}</td>
                  <td><a class="update btn btn-sm" color="accent" (click)="onRemoveGLSubhead(i)">X</a>
                    <a class="update btn btn-sm" color="accent" (click)="editGlSubhead(i)">Edit</a>
-                   <a class="update btn btn-sm" color="accent" (click)="onUpdate(this.index)" >Update</a>
                  </td>
              </tr>
          </tbody>
@@ -948,30 +951,20 @@
                </div>             -->
           </div>
           </div>
-          <br />
-          <button class="pull-right btn-sm"  *ngIf="newData"  type="button" (click)="preview()">
-            <span
-              *ngIf="loading"
-              class="spinner-border spinner-border-sm mr-1"
-            ></span>
-           + Add
-          </button>
-    
-          <button class="pull-right btn-sm" *ngIf="!newData"   type="button" (click)="updateLoanFee(this.arrayIndex)">
-            <span
-              *ngIf="loading"
-              class="spinner-border spinner-border-sm mr-1"
-            ></span>
-           + Update
-          </button>
-          <button class="pull-right btn-sm"   type="button" (click)="initLoanForm()">
-            <span
-              *ngIf="loading"
-              class="spinner-border spinner-border-sm mr-1"
-            ></span>
-           Clear
-          </button>
-          <br />
+           <br/>
+            <button class="pull-right btn-sm" *ngIf="newData" type="button" (click)="onPreviewFees()">
+              + Add
+            </button>
+            <button class="pull-right btn-sm" *ngIf="!newData" type="button" (click)="onUpdateFees()">
+              + Update
+            </button>
+            <button class="pull-right btn-sm" type="button" (click)="initLoanFeeForm()">
+              Reset form
+            </button>
+            <button class="pull-right btn-sm" type="button" (click)="onClearFees()">
+              Clear All
+            </button>
+            <br/>
         </form>
         <br>
     
@@ -1012,7 +1005,7 @@
                     <td>{{item.caa_fee_cr_placeholder}}</td>
                     <td>{{item.caa_fee_amort_tenor}}</td>
                     <td>{{item.caa_fee_max_no_of_assesment}}</td> 
-                    <td><a class="update btn btn-sm" color="accent" (click)="onRemove(i)">X</a>
+                    <td><a class="update btn btn-sm" color="accent" (click)="onRemoveLoanFee(i)">X</a>
                       <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a>
                     </td>
                 </tr>

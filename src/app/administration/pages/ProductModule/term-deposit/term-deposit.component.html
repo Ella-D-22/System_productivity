@@ -1,129 +1,124 @@
+<mat-card>
+  <mat-card-header class="breadcrumb">
+    <div>Home/Configuration/Term-Deposit</div>
+  </mat-card-header>
 
-  <mat-card>
-    <mat-card-header  class="breadcrumb">
-        <div>Home/Configuration/Term-Deposit</div>
-    </mat-card-header>
-  
-    <div class="row">
-      <div class="col-md-3 col-sm-12">
-        <h4>Function</h4>
-        <p>{{this.function_type}}</p>
-      </div>
-      <div class="col-md-3 col-sm-12">
-        <!-- <h4>Product ID</h4>
-        <p>{{this.product_id}}</p> -->
-      </div>
-      <div class="col-md-3 col-sm-12">
-        <h4>Scheme Code</h4>
-        <p>{{this.scheme_code}}</p>      
-      </div>
-      <div class="col-md-3 col-sm-12">
-        <h4>Scheme Type</h4>
-        <p>{{this.scheme_type}}</p>      
-      </div>
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <h4>Function</h4>
+      <p>{{this.function_type}}</p>
     </div>
-    <mat-divider></mat-divider>
-    <br>
-  
+    <div class="col-md-3 col-sm-12">
+      <!-- <h4>Product ID</h4>
+        <p>{{this.product_id}}</p> -->
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <h4>Scheme Code</h4>
+      <p>{{this.scheme_code}}</p>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <h4>Scheme Type</h4>
+      <p>{{this.scheme_type}}</p>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
   <div class="container-fluid">
-    <form
-    class="form"
-    [formGroup]="formData"
-    (ngSubmit)="onSubmit()"
-    #resetRequestsForm="ngForm"
-    novalidate
-  >
-  <mat-tab-group mat-align-tabs="center">
-          <!-- end of General Details -- Begining of Credit Details -->
-          <mat-tab class="mat-tab" label="General Details">
-            <br>
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Effective From</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <input  [matDatepicker]="zpicker" formControlName="tda_effective_from_date" class="form-control" />
-                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="zpicker"></mat-datepicker-toggle>
-                    <mat-datepicker #zpicker></mat-datepicker>
-                    </div>
+    <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+      <mat-tab-group mat-align-tabs="center">
+        <!-- end of General Details -- Begining of Credit Details -->
+        <mat-tab class="mat-tab" label="General Details">
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Effective From</label>
                 </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Expiry Date.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input  [matDatepicker]="kpickerm" formControlName="tda_effective_to_date" class="form-control" />
-                   <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="kpickerm"></mat-datepicker-toggle>
-                   <mat-datepicker #kpickerm></mat-datepicker>
-                  </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input [matDatepicker]="zpicker" formControlName="tda_effective_from_date" class="form-control" />
+                  <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="zpicker"></mat-datepicker-toggle>
+                  <mat-datepicker #zpicker></mat-datepicker>
                 </div>
               </div>
             </div>
-            
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Principal Lossline A/c.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" [value]="this.tda_principal_lossline_ac" formControlName="tda_principal_lossline_ac" class="form-control"/>
-                    <mat-icon *ngIf="isEnabled" (click)="tda_principal_lossline_acLookup()">search</mat-icon>
-                    </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Expiry Date.</label>
                 </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <mat-hint>{{this.tda_principal_lossline_ac_desc}}</mat-hint>
-                    </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input [matDatepicker]="kpickerm" formControlName="tda_effective_to_date" class="form-control" />
+                  <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="kpickerm"></mat-datepicker-toggle>
+                  <mat-datepicker #kpickerm></mat-datepicker>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Recovery Lossline A/c.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input  type="number" [value]="this.tda_recovery_lossline_ac" formControlName="tda_recovery_lossline_ac" class="form-control" />
-                    <mat-icon *ngIf="isEnabled" (click)="tda_recovery_lossline_acLookup()">search</mat-icon>
-                  </div>
-                </div>
+            </div>
+          </div>
 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-hint>{{this.tda_recovery_lossline_ac_desc}}</mat-hint>
-                  </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Principal Lossline A/c.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="number" [value]="this.tda_principal_lossline_ac"
+                    formControlName="tda_principal_lossline_ac" class="form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_principal_lossline_acLookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.tda_principal_lossline_ac_desc}}</mat-hint>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Charge Off A/c.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" [value]="this.tda_charge_off_ac" formControlName="tda_charge_off_ac" class="form-control" />
-                    <mat-icon *ngIf="isEnabled" (click)="tda_charge_off_acLookup()">search</mat-icon>
-                    </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Recovery Lossline A/c.</label>
                 </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <mat-hint>{{this.tda_charge_off_ac_desc}}</mat-hint>
-                    </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" [value]="this.tda_recovery_lossline_ac"
+                    formControlName="tda_recovery_lossline_ac" class="form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_recovery_lossline_acLookup()">search</mat-icon>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12">
-                <!-- <div class="form-group">
+
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.tda_recovery_lossline_ac_desc}}</mat-hint>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Charge Off A/c.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="number" [value]="this.tda_charge_off_ac" formControlName="tda_charge_off_ac"
+                    class="form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_charge_off_acLookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.tda_charge_off_ac_desc}}</mat-hint>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <!-- <div class="form-group">
                   <div class="col-md-6 col-sm-12 form-column ">
                     <label class="start pull-left">Expiry Date.</label>
                   </div>
@@ -131,64 +126,67 @@
                     <input  type="number" formControlName="tda_dr_int_prcnt_min" class="form-control" />
                   </div>
                 </div> -->
-              </div>
             </div>
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Number Generation</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tda_number_generation">
-                      <mat-radio-button (change)="onSystem_generated_no($event)" value="System_g_No">System Generated No.</mat-radio-button>
-                      <mat-radio-button (change)="onNumber_generation_code($event)" value="Number_g_code">Number Generation Code.</mat-radio-button>
-                    </mat-radio-group>
-                    </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Number Generation</label>
                 </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group" *ngIf="this.showNumber_gen_code">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">System Generated No.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <input  type="number" formControlName="tda_system_gen_no" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group" *ngIf="this.showSystem_gen_no">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Number Generation Code</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input  type="number" formControlName="tda_number_generation_code" class="form-control" />
-                  </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-radio-group class="pull-right" aria-label="Select an option"
+                    formControlName="tda_number_generation">
+                    <mat-radio-button (change)="onSystem_generated_no($event)" value="System_g_No">System Generated No.
+                    </mat-radio-button>
+                    <mat-radio-button (change)="onNumber_generation_code($event)" value="Number_g_code">Number
+                      Generation Code.</mat-radio-button>
+                  </mat-radio-group>
                 </div>
               </div>
             </div>
-
-            </mat-tab>
-   
-
-              <!-- End of General Detals  -->
-
-              <mat-tab class="mat-tab" label="Interest Details">
-                <br>
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">P&L A/c. CCY<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tda_pl_ac_ccy">
-                      <mat-radio-button value="A/c. CCY">A/c. CCY</mat-radio-button>
-                      <mat-radio-button value="Home CCY">Home CCY</mat-radio-button>
-                    </mat-radio-group>
-                  </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group" *ngIf="this.showNumber_gen_code">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">System Generated No.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="number" formControlName="tda_system_gen_no" class="form-control" />
                 </div>
               </div>
-              <!-- <div class="col-md-6 col-sm-12">
+              <div class="form-group" *ngIf="this.showSystem_gen_no">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Number Generation Code</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" formControlName="tda_number_generation_code" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </mat-tab>
+
+
+        <!-- End of General Detals  -->
+
+        <mat-tab class="mat-tab" label="Interest Details">
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">P&L A/c. CCY<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tda_pl_ac_ccy">
+                    <mat-radio-button value="A/c. CCY">A/c. CCY</mat-radio-button>
+                    <mat-radio-button value="Home CCY">Home CCY</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-6 col-sm-12">
               <div class="form-group">
                   <div class="col-md-6 col-sm-12 form-column ">
                    <label class="start pull-left">Base Int Pcnt Cr<span class="warning">*</span></label>
@@ -198,303 +196,317 @@
                   </div>
                </div>   
             </div> -->
-            </div>
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Int. Receivable  Applicable</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tda_int_receivale_applicable">
-                        <mat-radio-button value="Yes">Yes</mat-radio-button>
-                        <mat-radio-button value="No">No</mat-radio-button>
-                      </mat-radio-group>
-                  </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Int. Receivable Applicable</label>
                 </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Normal Int. Receivable A/c.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" [value]="this.tda_normal_int_receivable_ac" formControlName="tda_normal_int_receivable_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="tda_normal_int_receivable_acLookup()">search</mat-icon>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-hint>{{this.tda_normal_int_receivable_ac_desc}}</mat-hint>
-                  </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-radio-group class="pull-right" aria-label="Select an option"
+                    formControlName="tda_int_receivale_applicable">
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                  </mat-radio-group>
                 </div>
               </div>
             </div>
-      
-      
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Penal Int. Receivable A/c.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <input type="text" [value]="this.tda_penal_int_receivable_ac" formControlName="tda_penal_int_receivable_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="tda_penal_int_receivable_acLookup()">search</mat-icon>
-                  </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Normal Int. Receivable A/c.</label>
                 </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <mat-hint>{{this.tda_penal_int_receivable_ac_desc}}</mat-hint>
-                  </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="text" [value]="this.tda_normal_int_receivable_ac"
+                    formControlName="tda_normal_int_receivable_ac" class="pull-right form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_normal_int_receivable_acLookup()">search</mat-icon>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Normal Int. Received A/c.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" [value]="this.tda_normal_int_received_ac" formControlName="tda_normal_int_received_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="tda_normal_int_received_acLookup()">search</mat-icon>
-                  </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
                 </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-hint>{{this.tda_normal_int_received_ac_desc}}</mat-hint>
-                  </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.tda_normal_int_receivable_ac_desc}}</mat-hint>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Penal Int. Received A/c.<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <input type="text" [value]="this.tda_penal_int_received_ac" formControlName="tda_penal_int_received_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="tda_penal_int_received_acLookup()">search</mat-icon>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <mat-hint>{{this.tda_penal_int_received_ac_desc}}</mat-hint>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Advance Int. A/c.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" [value]="this.tda_advance_int_ac" formControlName="tda_advance_int_ac" class="pull-right form-control"/>
-                     <mat-icon *ngIf="isEnabled" (click)="tda_advance_int_acLookup()">search</mat-icon>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-hint>{{this.tda_advance_int_ac_desc}}</mat-hint>
-                  </div>
-                </div>
+          </div>
 
-              </div>
-            </div>
-      
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Dr.Int.Compounding Freq.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <select   class="form-control" formControlName="tda_dr_int_compounding_freq">
-                      <option value="" disabled>-- Select --</option>
-                      <option *ngFor="let flag of debitIntCompFreqArray" [value]="flag">{{ flag }}</option>
-                    </select>
-                  </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Penal Int. Receivable A/c.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="text" [value]="this.tda_penal_int_receivable_ac"
+                    formControlName="tda_penal_int_receivable_ac" class="pull-right form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_penal_int_receivable_acLookup()">search</mat-icon>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Int. Cal. Freq.-Dr.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column dates ">
-                    <!-- <select   class="pull-right-dates form-control" formControlName="int_cal_freq_dr" [ngClass]="{ 'is-invalid': submitted && f.int_cal_freq_dr.errors }" >
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.tda_penal_int_receivable_ac_desc}}</mat-hint>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Normal Int. Received A/c.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="text" [value]="this.tda_normal_int_received_ac"
+                    formControlName="tda_normal_int_received_ac" class="pull-right form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_normal_int_received_acLookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.tda_normal_int_received_ac_desc}}</mat-hint>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Penal Int. Received A/c.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="text" [value]="this.tda_penal_int_received_ac"
+                    formControlName="tda_penal_int_received_ac" class="pull-right form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_penal_int_received_acLookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.tda_penal_int_received_ac_desc}}</mat-hint>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Advance Int. A/c.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="text" [value]="this.tda_advance_int_ac" formControlName="tda_advance_int_ac"
+                    class="pull-right form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_advance_int_acLookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.tda_advance_int_ac_desc}}</mat-hint>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Dr.Int.Compounding Freq.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <select class="form-control" formControlName="tda_dr_int_compounding_freq">
+                    <option value="" disabled>-- Select --</option>
+                    <option *ngFor="let flag of debitIntCompFreqArray" [value]="flag">{{ flag }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Int. Cal. Freq.-Dr.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column dates ">
+                  <!-- <select   class="pull-right-dates form-control" formControlName="int_cal_freq_dr" [ngClass]="{ 'is-invalid': submitted && f.int_cal_freq_dr.errors }" >
                       <option value="" disabled>-- Select --</option>
                       <option *ngFor="let flag of months" [value]="flag">{{ flag }}</option>
                     </select> -->
-                    <select   class="pull-right form-control" formControlName="tda_int_cal_freq_dr_week" >
-                      <option value="" disabled>-- Week --</option>
-                      <option *ngFor="let flag of weeksArray" [value]="flag">{{ flag }}</option>
-                    </select>
-                  </div>
+                  <select class="pull-right form-control" formControlName="tda_int_cal_freq_dr_week">
+                    <option value="" disabled>-- Week --</option>
+                    <option *ngFor="let flag of weeksArray" [value]="flag">{{ flag }}</option>
+                  </select>
                 </div>
               </div>
             </div>
-      
-            <div class="row">
-              <div class="col-md-6 col-sm-12"> 
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <label class="start pull-left">Apply Discounted Int. Rate</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tda_app_discounted_int_rate">
-                      <mat-radio-button value="Yes">Yes</mat-radio-button>
-                      <mat-radio-button value="No">No</mat-radio-button>
-                    </mat-radio-group>
-                  </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Apply Discounted Int. Rate</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option"
+                    formControlName="tda_app_discounted_int_rate">
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                  </mat-radio-group>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                    <!-- <label class="start pull-left">Int. Cal. Freq.-Dr.</label> -->
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column dates ">
-                      <select   class="pull-right-dates-3 form-control" formControlName="tda_int_cal_freq_dr_day" >
-                        <option value="" disabled>-- Day --</option>
-                        <option *ngFor="let flag of months" [value]="flag">{{ flag }}</option>
-                      </select>
-                      <select   class="pull-right-dates-3 form-control" formControlName="tda_int_cal_freq_dr_date" >
-                        <option value="" disabled>-- Date --</option>
-                        <option *ngFor="let flag of datesArray" [value]="flag">{{ flag }}</option>
-                      </select>
-                      <input type="text" formControlName="tda_int_cal_freq_dr_holiday" class="pull-right-dates-3 form-control" placeholder="Holiday"/>
-      
-                  </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <!-- <label class="start pull-left">Int. Cal. Freq.-Dr.</label> -->
+                </div>
+                <div class="col-md-6 col-sm-12 form-column dates ">
+                  <select class="pull-right-dates-3 form-control" formControlName="tda_int_cal_freq_dr_day">
+                    <option value="" disabled>-- Day --</option>
+                    <option *ngFor="let flag of months" [value]="flag">{{ flag }}</option>
+                  </select>
+                  <select class="pull-right-dates-3 form-control" formControlName="tda_int_cal_freq_dr_date">
+                    <option value="" disabled>-- Date --</option>
+                    <option *ngFor="let flag of datesArray" [value]="flag">{{ flag }}</option>
+                  </select>
+                  <input type="text" formControlName="tda_int_cal_freq_dr_holiday"
+                    class="pull-right-dates-3 form-control" placeholder="Holiday" />
+
                 </div>
               </div>
-            </div> 
-          </mat-tab>
-            <!-- End of Interest Details -->
+            </div>
+          </div>
+        </mat-tab>
+        <!-- End of Interest Details -->
 
-    <mat-tab label="Scheme Details">
-      <h3>Scheme Details</h3>
-      <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Deposit Amt. Min.</label>
+        <mat-tab label="Scheme Details">
+          <h3>Scheme Details</h3>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Deposit Amt. Min.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" formControlName="tda_deposit_amt_min" class="pull-right form-control" />
+                </div>
               </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input type="number" formControlName="tda_deposit_amt_min" class="pull-right form-control"/>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Deposit Amt. Max.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="number" formControlName="tda_deposit_amt_max" class="pull-right form-control" />
+                </div>
               </div>
-           </div>                  
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Deposit Amt. Max.</label>
             </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-             <input type="number" formControlName="tda_deposit_amt_max" class="pull-right form-control"/>
-            </div>
-         </div>    
-        </div>
-      </div>
-   
-      <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Period (MM/DD) Min.</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input type="number" formControlName="tda_period_mm_min"  class="form-control form-control-sub" />
-                <input type="number" formControlName="tda_period_dd_min"  class="form-control form-control-sub" />
-              </div>
-           </div>                  
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Period (MM/DD) Max.</label>
-            </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <input type="number" formControlName="tda_period_mm_max"  class="form-control form-control-sub" />
-              <input type="number" formControlName="tda_period_dd_max"  class="form-control form-control-sub" />
-            </div>
-         </div>    
-        </div>
-      </div>
+          </div>
 
-  
-      <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Sundry Deposit Placeholder</label>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Period (MM/DD) Min.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" formControlName="tda_period_mm_min" class="form-control form-control-sub" />
+                  <input type="number" formControlName="tda_period_dd_min" class="form-control form-control-sub" />
+                </div>
               </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input type="number" [value]="this.tda_sundry_deposit_ph" formControlName="tda_sundry_deposit_ph" class="pull-right form-control"/>
-                <mat-icon *ngIf="isEnabled" (click)="tda_sundry_deposit_phLookup()">search</mat-icon>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Period (MM/DD) Max.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="number" formControlName="tda_period_mm_max" class="form-control form-control-sub" />
+                  <input type="number" formControlName="tda_period_dd_max" class="form-control form-control-sub" />
+                </div>
               </div>
-           </div>   
-           <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
             </div>
-            <div class="col-md-6 col-sm-12 form-column">
-              <mat-hint>{{this.tda_sundry_deposit_ph_desc}}</mat-hint>
-            </div>
-         </div>                
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Repayment Report Code</label>
-            </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <input type="number" formControlName="tda_repayment_report_code" class="pull-right form-control"/>
-            </div>
-         </div>    
-        </div>
-      </div>
+          </div>
 
-      <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Pre.Closure Rate</label>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Sundry Deposit Placeholder</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" [value]="this.tda_sundry_deposit_ph" formControlName="tda_sundry_deposit_ph"
+                    class="pull-right form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_sundry_deposit_phLookup()">search</mat-icon>
+                </div>
               </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <mat-radio-group class="pull-right" formControlName="tda_pre_closure_rate" aria-label="Select an option">
-                  <mat-radio-button value="Min.of Contract and Penalty Int. Code">Min.of Contract and Penalty Int. Code.</mat-radio-button>
-                  <mat-radio-button value="Max. Of Contract and Penalty Int.Code">Max. Of Contract and Penalty Int.Code</mat-radio-button>
-                </mat-radio-group>
-               </div>
-           </div>                  
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Pre.Closure Penalty Rate</label>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.tda_sundry_deposit_ph_desc}}</mat-hint>
+                </div>
+              </div>
             </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <mat-radio-group class="pull-right" formControlName="tda_pre_closure_penalty_rate" aria-label="Select an option">
-                <mat-radio-button value="Min. Of Contract and Period Run Rate">Min. Of Contract and Period Run Rate</mat-radio-button>
-                <mat-radio-button value="Period Run Rate">Period Run Rate.</mat-radio-button>
-              </mat-radio-group>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Repayment Report Code</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="number" formControlName="tda_repayment_report_code" class="pull-right form-control" />
+                </div>
+              </div>
             </div>
-         </div>    
-        </div>
-      </div>
-       <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <!-- <div class="form-group">
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Pre.Closure Rate</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" formControlName="tda_pre_closure_rate"
+                    aria-label="Select an option">
+                    <mat-radio-button value="Min.of Contract and Penalty Int. Code">Min.of Contract and Penalty Int.
+                      Code.</mat-radio-button>
+                    <mat-radio-button value="Max. Of Contract and Penalty Int.Code">Max. Of Contract and Penalty
+                      Int.Code</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Pre.Closure Penalty Rate</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-radio-group class="pull-right" formControlName="tda_pre_closure_penalty_rate"
+                    aria-label="Select an option">
+                    <mat-radio-button value="Min. Of Contract and Period Run Rate">Min. Of Contract and Period Run Rate
+                    </mat-radio-button>
+                    <mat-radio-button value="Period Run Rate">Period Run Rate.</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <!-- <div class="form-group">
               <div class="col-md-6 col-sm-12 form-column ">
                <label class="start pull-left">Sundry Deposit Placeholder</label>
               </div>
@@ -503,525 +515,485 @@
                 <mat-icon>search</mat-icon>
               </div>
            </div>                   -->
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Repayment Report Code</label>
             </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <input type="number" formControlName="tda_repayment_report_code" class="pull-right form-control"/>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Repayment Report Code</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input type="number" formControlName="tda_repayment_report_code" class="pull-right form-control" />
+                </div>
+              </div>
             </div>
-         </div>    
-        </div>
-      </div>
-  
- 
-  
-      <div class="row">
-        <div class="col-md-6 col-sm-12">
-         
-        </div>
-        <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column">
-             <label class="start pull-left">Repayment A/c. Placeholder</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input type="number" [value]="this.tda_repayment_ac_ph" formControlName="tda_repayment_ac_ph" class="pull-right form-control"/>
-                <mat-icon *ngIf="isEnabled" (click)="tda_repayment_ac_phLookup()">search</mat-icon>
-              </div>
-           </div>   
-           <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column">
-            </div>
-            <div class="col-md-6 col-sm-12 form-column">
-              <mat-hint>{{this.tda_repayment_ac_ph_desc}}</mat-hint>
-            </div>
-         </div>   
-        </div>
-      </div>
-
-<mat-divider></mat-divider>
-<h3>Exceptions Handling</h3>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Account in Debit Balance<span class="warning">*</span></label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.ac_debit_balance_value" type="text" formControlName="tda_ac_debit_balance" class="pull-right form-control"/>
-       <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
-      </div>
-   </div> 
-   <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column ">
-      <mat-hint>{{this.tda_int_table_code_desc}}</mat-hint>
-    </div>
- </div>
-  </div>
-  <div class="col-md-6 col-sm-12">
-   <div class="form-group">
-     <div class="col-md-6 col-sm-12 form-column ">
-      <label class="start pull-left">Account in Credit Balance</label>
-     </div>
-     <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_credit_balance_value" type="text" formControlName="tda_ac_credit_balance" class="pull-right form-control"/>
-      <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
-     </div>
-  </div> 
-  <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column">
-      <mat-hint>{{this.tda_int_table_code_desc}}</mat-hint>
-    </div>
- </div> 
-
-</div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Liability exceeds group limit<span class="warning">*</span></label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.liability_exceed_group_value" type="text" formControlName="tda_liability_exceed_group" class="pull-right form-control"/>
-       <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
-      </div>
-   </div> 
-  </div>
-  <div class="col-md-6 col-sm-12">
-   <div class="form-group">
-     <div class="col-md-6 col-sm-12 form-column ">
-      <label class="start pull-left">Account is frozed</label>
-     </div>
-     <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_is_froozed_value" type="text" formControlName="tda_ac_is_froozed" class="pull-right form-control"/>
-      <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
-     </div>
-  </div>              
-</div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Sanction Limit Expired<span class="warning">*</span></label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.sanction_limit_expired_value" type="text" formControlName="tda_sanction_limit_expired" class="pull-right form-control"/>
-       <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
-      </div>
-   </div> 
-  </div>
-  <div class="col-md-6 col-sm-12">
-   <div class="form-group">
-     <div class="col-md-6 col-sm-12 form-column ">
-      <label class="start pull-left">Interest Calculation not upto date</label>
-     </div>
-     <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.interest_calc_value" type="text" formControlName="tda_interest_calc" class="pull-right form-control"/>
-      <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
-     </div>
-  </div>              
-</div>
-</div>
-
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Insufficient available balance<span class="warning">*</span></label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.insufficient_exception_value" type="text" formControlName="tda_insufficient_exception" class="pull-right form-control"/>
-       <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
-      </div>
-   </div> 
-  </div>
-  <div class="col-md-6 col-sm-12">
-   <div class="form-group">
-     <div class="col-md-6 col-sm-12 form-column ">
-      <label class="start pull-left">Backdated transaction</label>
-     </div>
-     <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.backdate_transaction_value" type="text" formControlName="tda_backdate_transaction" class="pull-right form-control"/>
-      <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
-     </div>
-  </div>              
-</div>
-</div>
-    </mat-tab>
-      <!-- GL Subhead -->
-      <mat-tab class="mat-tab" label="GL-Subhead">
-        <br>
-        <form
-        class="form"
-        [formGroup]="glSubheadData"
-        (ngSubmit)="onSubmit()"
-        #resetRequestsForm="ngForm"
-        novalidate 
-      >
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Gl Subhead<span class="warning">*</span></label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-               <input [value]="this.gl_subhead_description" type="text" formControlName="tda_gl_subhead" class="pull-right form-control"/>
-               <mat-icon (click)="glSubheadLookup()">search</mat-icon>
-              </div>
-           </div> 
           </div>
-          <div class="col-md-6 col-sm-12">
-           <div class="form-group">
-             <div class="col-md-6 col-sm-12 form-column ">
-              <label class="start pull-left">Default</label>
-             </div>
-             <div class="col-md-6 col-sm-12 form-column">
-               <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tda_gl_subhead_deafault">
-                 <mat-radio-button value="Yes">Yes.</mat-radio-button>
-                 <mat-radio-button value="No">No. </mat-radio-button>
-               </mat-radio-group>
-               <mat-checkbox class="example-margin" formControlName="tda_is_gl_subhead_deleted">Del Record</mat-checkbox>
-             </div>
-          </div>              
-        </div>
-        </div>
- 
-        <br />
-        <button class="pull-right btn-sm"  *ngIf="newData"  type="button" (click)="previewGlSubheads()">
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-         + Add
-        </button>
-  
-        <button class="pull-right btn-sm" *ngIf="!newData"   type="button" (click)="updateGlSubheads(this.arrayIndex)">
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-         + Update
-        </button>
-        <!-- <button class="pull-right btn-sm"   type="button" (click)="initLoanForm()">
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-         Clear
-        </button> -->
-        <br />
-      </form>
-      <br>
-      <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
-        <thead>
-            <tr>
+
+
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                  <label class="start pull-left">Repayment A/c. Placeholder</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" [value]="this.tda_repayment_ac_ph" formControlName="tda_repayment_ac_ph"
+                    class="pull-right form-control" />
+                  <mat-icon *ngIf="isEnabled" (click)="tda_repayment_ac_phLookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.tda_repayment_ac_ph_desc}}</mat-hint>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+          <h3>Exceptions Handling</h3>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Account in Debit Balance<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input [value]="this.ac_debit_balance_value" type="text" formControlName="tda_ac_debit_balance"
+                    class="pull-right form-control" />
+                  <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <mat-hint>{{this.tda_int_table_code_desc}}</mat-hint>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Account in Credit Balance</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input [value]="this.ac_credit_balance_value" type="text" formControlName="tda_ac_credit_balance"
+                    class="pull-right form-control" />
+                  <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-hint>{{this.tda_int_table_code_desc}}</mat-hint>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Liability exceeds group limit<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input [value]="this.liability_exceed_group_value" type="text"
+                    formControlName="tda_liability_exceed_group" class="pull-right form-control" />
+                  <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Account is frozed</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input [value]="this.ac_is_froozed_value" type="text" formControlName="tda_ac_is_froozed"
+                    class="pull-right form-control" />
+                  <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Sanction Limit Expired<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input [value]="this.sanction_limit_expired_value" type="text"
+                    formControlName="tda_sanction_limit_expired" class="pull-right form-control" />
+                  <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Interest Calculation not upto date</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input [value]="this.interest_calc_value" type="text" formControlName="tda_interest_calc"
+                    class="pull-right form-control" />
+                  <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Insufficient available balance<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <input [value]="this.insufficient_exception_value" type="text"
+                    formControlName="tda_insufficient_exception" class="pull-right form-control" />
+                  <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                  <label class="start pull-left">Backdated transaction</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input [value]="this.backdate_transaction_value" type="text"
+                    formControlName="tda_backdate_transaction" class="pull-right form-control" />
+                  <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- GL Subhead -->
+        <mat-tab class="mat-tab" label="GL-Subhead">
+          <br>
+          <form class="form" [formGroup]="glSubheadData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Gl Subhead<span class="warning">*</span></label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <input [value]="this.gl_subhead_description" type="text" formControlName="tda_gl_subhead"
+                      class="pull-right form-control" />
+                    <mat-icon (click)="glSubheadLookup()">search</mat-icon>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Default</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-radio-group class="pull-right" aria-label="Select an option"
+                      formControlName="tda_gl_subhead_deafault">
+                      <mat-radio-button value="Yes">Yes.</mat-radio-button>
+                      <mat-radio-button value="No">No. </mat-radio-button>
+                    </mat-radio-group>
+                    <mat-checkbox class="example-margin" formControlName="tda_is_gl_subhead_deleted">Del Record
+                    </mat-checkbox>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <button class="pull-right btn-sm" *ngIf="newData" type="button" (click)="previewGlSubheads()">
+              + Add
+            </button>
+            <button class="pull-right btn-sm" *ngIf="!newData" type="button" (click)="onGlSubheadUpdate()">
+              + Update
+            </button>
+            <button class="pull-right btn-sm" type="button" (click)="initGlSUbheadForm()">
+              Reset form
+            </button>
+            <button class="pull-right btn-sm" type="button" (click)="onGlSubheadClear()">
+              Clear All
+            </button>
+            <br/>
+          </form>
+          <br>
+          <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
+            <thead>
+              <tr>
                 <th>No.</th>
                 <th>GL Subhead Code</th>
                 <th>GL Subhead Description</th>
                 <th>Default Value</th>
-                <th>Del</th>
                 <th>Operation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of this.glSubheadArray, let i = index">
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of this.glSubheadArray, let i = index">
                 <td>{{i + 1}}</td>
                 <td>{{item.tda_gl_subhead}}</td>
                 <td>{{item.tda_gl_subhead_description}}</td>
                 <td>{{item.tda_gl_subhead_deafault}}</td>
-                <td>{{item.tda_is_gl_subhead_deleted}}</td>
                 <td><a class="update btn btn-sm" color="accent" (click)="onRemoveGLSubhead(i)">X</a>
-                  <!-- <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a> -->
+                  <a class="update btn btn-sm" color="accent" (click)="editGlSubhead(i)">Edit</a>
                 </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+        <mat-tab class="mat-tab" label="Fee Details">
+          <br>
+          <form class="form" [formGroup]="feeFormData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Fee Event</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input [value]="this.event_id" type="text" formControlName="tda_fee_event"
+                      class="pull-right form-control" />
+                    <mat-icon (click)="eventidLookup()">search</mat-icon>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Fee Type<span class="warning">*</span></label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <input [attr.disabled]="true" [value]="this.event_type_desc" type="text"
+                      formControlName="tda_fee_type" class="pull-right form-control" />
+                    <mat-icon (click)="eventTypeLookup()">search</mat-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Amortize Charge</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-radio-group class="pull-right" aria-label="Select an option"
+                      formControlName="tda_fee_amortize">
+                      <mat-radio-button (change)="onYes($event)" value="Yes">Yes.</mat-radio-button>
+                      <mat-radio-button (change)="onNo($event)" value="Yes">No.</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Frequency</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <select class="form-control" formControlName="tda_fee_frequency">
+                      <option value="" disabled>-- Select --</option>
+                      <option *ngFor="let flag of debitIntCompFreqArray" [value]="flag">{{ flag }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="this.showAmortizedPH">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Amortize Credit PH.</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <input type="number" [value]="this.tda_fee_amortize_credit_ph"
+                      formControlName="tda_fee_amortize_credit_ph" class="form-control" />
+                    <mat-icon (click)="tda_fee_amortize_credit_phLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.tda_fee_amortize_credit_ph_desc}}</mat-hint>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Amortize Debit PH</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="number" [value]="this.tda_fee_amortize_debit_ph"
+                      formControlName="tda_fee_amortize_debit_ph" class="form-control" />
+                    <mat-icon (click)="tda_fee_amortize_debit_phLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.tda_fee_amortize_debit_ph_desc}}</mat-hint>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-checkbox class="example-margin" formControlName="tda_fee_deductable">Deductable.</mat-checkbox>
+                    <mat-checkbox class="example-margin" formControlName="tda_fee_multiple">Multiple.</mat-checkbox>
 
-                
-            </tr>
-        </tbody>
-    </table>
-       </mat-tab>
-       <mat-tab class="mat-tab" label="Fee Details">
-        <br>
-  
-        <form
-        class="form"
-        [formGroup]="feeFormData"
-        (ngSubmit)="onSubmit()"
-        #resetRequestsForm="ngForm"
-        novalidate
-      >
-  
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Fee Event</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input [value]="this.event_id" type="text" formControlName="tda_fee_event" class="pull-right form-control"/>
-                <mat-icon (click)="eventidLookup()">search</mat-icon>
-              </div>
-           </div> 
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Fee Type<span class="warning">*</span></label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-               <input [attr.disabled]="true" [value]="this.event_type_desc" type="text" formControlName="tda_fee_type" class="pull-right form-control"/>
-               <mat-icon (click)="eventTypeLookup()">search</mat-icon>
-              </div>
-           </div>            
-        </div>
-        </div>
-         <div class="row">
-          <div class="col-md-6 col-sm-12"> 
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-                <label class="start pull-left">Amortize Charge</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-                <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tda_fee_amortize">
-                  <mat-radio-button (change)="onYes($event)" value="Yes">Yes.</mat-radio-button>
-                  <mat-radio-button (change)="onNo($event)" value="Yes">No.</mat-radio-button>
-                </mat-radio-group>
+                  </div>
                 </div>
-            </div>
-          </div>
-          
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Frequency</label>
               </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <select   class="form-control" formControlName="tda_fee_frequency" >
-                  <option value="" disabled>-- Select --</option>
-                  <option *ngFor="let flag of debitIntCompFreqArray" [value]="flag">{{ flag }}</option>
-                </select>
-              </div>
-           </div> 
-          </div>
-        </div>
-        <div class="row" *ngIf="this.showAmortizedPH">
-          <div class="col-md-6 col-sm-12"> 
-            <div class="form-group"  >
-              <div class="col-md-6 col-sm-12 form-column ">
-                <label class="start pull-left">Amortize Credit PH.</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-                <input  type="number" [value]="this.tda_fee_amortize_credit_ph" formControlName="tda_fee_amortize_credit_ph" class="form-control"/>
-               <mat-icon (click)="tda_fee_amortize_credit_phLookup()">search</mat-icon>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Demand Flow ID</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" formControlName="tda_fee_demand_flow" class="pull-right form-control" />
+                  </div>
                 </div>
-            </div>
-            <div class="form-group"  >
-              <div class="col-md-6 col-sm-12 form-column ">
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-                <mat-hint>{{this.tda_fee_amortize_credit_ph_desc}}</mat-hint>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">             
-             <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-                <label class="start pull-left">Amortize Debit PH</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input  type="number" [value]="this.tda_fee_amortize_debit_ph" formControlName="tda_fee_amortize_debit_ph" class="form-control"/>
-               <mat-icon (click)="tda_fee_amortize_debit_phLookup()">search</mat-icon>
               </div>
             </div>
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Dr.Placeholder<span class="warning">*</span></label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <input type="text" [value]="this.tda_fee_dr_placeholder" formControlName="tda_fee_dr_placeholder"
+                      class="pull-right form-control" />
+                    <mat-icon (click)="tda_fee_dr_placeholderLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <mat-hint>{{this.tda_fee_dr_placeholder_desc}}</mat-hint>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <mat-hint>{{this.tda_fee_amortize_debit_ph_desc}}</mat-hint>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Cr.Placeholder</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <input type="text" [value]="this.tda_fee_cr_placeholder" formControlName="tda_fee_cr_placeholder"
+                      class="pull-right form-control" />
+                    <mat-icon (click)="tda_fee_cr_placeholderLookup()">search</mat-icon>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column">
+                    <mat-hint>{{this.tda_fee_cr_placeholder_desc}}</mat-hint>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-                <mat-checkbox class="example-margin" formControlName="tda_fee_deductable">Deductable.</mat-checkbox>
-                <mat-checkbox class="example-margin" formControlName="tda_fee_multiple">Multiple.</mat-checkbox>
-         
-               </div>
-           </div> 
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">Demand Flow ID</label>
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label class="start pull-left">Max.No.Of Assesments<span class="warning">*</span></label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <input type="text" formControlName="tda_fee_max_no_of_assesment" class="pull-right form-control" />
+                  </div>
                 </div>
-                <div class="col-md-6 col-sm-12 form-column">
-                  <input type="text" formControlName="tda_fee_demand_flow" class="pull-right form-control"/>
-                </div>
-             </div>            
-        </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Dr.Placeholder<span class="warning">*</span></label>
               </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-               <input type="text" [value]="this.tda_fee_dr_placeholder" formControlName="tda_fee_dr_placeholder" class="pull-right form-control"/>
-               <mat-icon (click)="tda_fee_dr_placeholderLookup()">search</mat-icon>
+              <div class="col-md-6 col-sm-12">
               </div>
-           </div> 
-           <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
             </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <mat-hint>{{this.tda_fee_dr_placeholder_desc}}</mat-hint>
-            </div>
-         </div> 
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">Cr.Placeholder</label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column">
-                  <input type="text" [value]="this.tda_fee_cr_placeholder" formControlName="tda_fee_cr_placeholder" class="pull-right form-control"/>
-                  <mat-icon (click)="tda_fee_cr_placeholderLookup()">search</mat-icon>
-                </div>
-             </div>   
-             <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-              </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <mat-hint>{{this.tda_fee_cr_placeholder_desc}}</mat-hint>
-              </div>
-           </div>          
-        </div>
-        </div>
-       
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Max.No.Of Assesments<span class="warning">*</span></label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-               <input type="text" formControlName="tda_fee_max_no_of_assesment" class="pull-right form-control"/>
-              </div>
-           </div> 
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <!-- <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">Record</label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column">
-                  <input type="text" formControlName="class_main" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
-                </div>
-             </div>             -->
-        </div>
-        </div>
-        <br />
-        <button class="pull-right btn-sm"  *ngIf="newData"  type="button" (click)="preview()">
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-         + Add
-        </button>
-  
-        <button class="pull-right btn-sm" *ngIf="!newData"   type="button" (click)="updateLoanFee(this.arrayIndex)">
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-         + Update
-        </button>
-        <button class="pull-right btn-sm"   type="button" (click)="initLoanForm()">
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-         Clear
-        </button>
-        <br />
-      </form>
-      <br>
-  
-        <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
-          <thead>
+            <br/>
+            <button class="pull-right btn-sm" *ngIf="newData" type="button" (click)="onPreviewFees()">
+              + Add
+            </button>
+            <button class="pull-right btn-sm" *ngIf="!newData" type="button" (click)="onUpdateFees()">
+              + Update
+            </button>
+            <button class="pull-right btn-sm" type="button" (click)="initLoanFeeForm()">
+              Reset form
+            </button>
+            <button class="pull-right btn-sm" type="button" (click)="onClearFees()">
+              Clear All
+            </button>
+            <br/>
+          </form>
+          <br>
+          <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
+            <thead>
               <tr>
-                  <th>No.</th>
-                  <th>fee_type</th>
-                  <th>fee_event</th>
-                  <th>Frequency</th>
-                  <th>Amortized Charge</th>
-                  <th>Amortized Credit PH</th>
-                  <th>AMortized Debit PH</th>
-                  <th>deductable</th>
-                  <th>multiple</th>
-                  <th>amortize</th>
-                  <th>demand_flow</th>
-                  <th>dr_placeholder</th>
-                  <th>cr_placeholder</th>
-                  <th>amort_tenor</th>
-                  <th>max_no_of_assesment</th>     
-                  <th>Operation</th>
+                <th>No.</th>
+                <th>fee_type</th>
+                <th>fee_event</th>
+                <th>Frequency</th>
+                <th>Amortized Charge</th>
+                <th>Amortized Credit PH</th>
+                <th>AMortized Debit PH</th>
+                <th>deductable</th>
+                <th>multiple</th>
+                <th>demand_flow</th>
+                <th>dr_placeholder</th>
+                <th>cr_placeholder</th>
+                <th>amort_tenor</th>
+                <th>max_no_of_assesment</th>
+                <th>Operation</th>
               </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
               <tr *ngFor="let item of this.feeArray, let i = index">
-                  <td>{{i + 1}}</td>
-                  <td>{{item.tda_fee_type}}</td>
-                  <td>{{item.tda_fee_event}}</td>
-                  <td>{{item.tda_fee_frequency}}</td>
-                  <td>{{item.tda_fee_amortize}}</td>
-                  <td>{{item.tda_fee_amortize_credit_ph}}</td>
-                  <td>{{item.tda_fee_amortize_debit_ph}}</td>
-                  <td>{{item.tda_fee_deductable}}</td>
-                  <td>{{item.tda_fee_multiple}}</td>
-                  <td>{{item.tda_fee_demand_flow}}</td>
-                  <td>{{item.tda_fee_dr_placeholder}}</td>
-                  <td>{{item.tda_fee_cr_placeholder}}</td>
-                  <td>{{item.tda_fee_amort_tenor}}</td>
-                  <td>{{item.tda_fee_max_no_of_assesment}}</td> 
-                  <td><a class="update btn btn-sm" color="accent" (click)="onRemove(i)">X</a>
-                    <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a>
-                  </td>
+                <td>{{i + 1}}</td>
+                <td>{{item.tda_fee_type}}</td>
+                <td>{{item.tda_fee_event}}</td>
+                <td>{{item.tda_fee_frequency}}</td>
+                <td>{{item.tda_fee_amortize}}</td>
+                <td>{{item.tda_fee_amortize_credit_ph}}</td>
+                <td>{{item.tda_fee_amortize_debit_ph}}</td>
+                <td>{{item.tda_fee_deductable}}</td>
+                <td>{{item.tda_fee_multiple}}</td>
+                <td>{{item.tda_fee_demand_flow}}</td>
+                <td>{{item.tda_fee_dr_placeholder}}</td>
+                <td>{{item.tda_fee_cr_placeholder}}</td>
+                <td>{{item.tda_fee_amort_tenor}}</td>
+                <td>{{item.tda_fee_max_no_of_assesment}}</td>
+                <td><a class="update btn btn-sm" color="accent" (click)="onRemove(i)">X</a>
+                  <a class="update btn btn-sm" color="accent" (click)="editLoanFeeForm(i)">Edit</a>
+                </td>
               </tr>
-          </tbody>
-      </table>
-  
-      </mat-tab>
-      
-  </mat-tab-group>
-    <br />
-    <button  class="pull-right" mat-raised-button color="primary" type="submit">
-      <span
-        *ngIf="loading"
-        class="spinner-border spinner-border-sm mr-1"
-      ></span>
-      Submit
-    </button>
-    <br />
-  </form>
-    </div>
-  </mat-card>
-  
-  
-  
+            </tbody>
+          </table>
+
+        </mat-tab>
+
+      </mat-tab-group>
+      <br />
+      <button class="pull-right" mat-raised-button color="primary" type="submit">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Submit
+      </button>
+      <br />
+    </form>
+  </div>
+</mat-card>

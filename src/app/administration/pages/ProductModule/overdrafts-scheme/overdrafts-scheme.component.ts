@@ -155,6 +155,8 @@ export class OverdraftsSchemeComponent implements OnInit {
   insufficient_exception_description: any;
   backdate_transaction_description: any;
   event_id_desc: any;
+  element: any;
+  loanElement: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -280,7 +282,6 @@ export class OverdraftsSchemeComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("Gl Subhead data", result);
       this.gl_subhead = result.data;
       this.gl_subhead_description = result.data.glSubheadDescription;
       this.gl_subhead_code = result.data.glSubheadCode;
@@ -678,7 +679,7 @@ oda_fee_cr_placeholderLookup(): void {
     oda_is_gl_subhead_deleted: ['']
   })
 
-  initLoanForm() {
+  initLoanFeeForm() {
     this.newData = true;
     this.feeFormData = this.fb.group({
       oda_fee_type:[''],
@@ -708,52 +709,9 @@ oda_fee_cr_placeholderLookup(): void {
       oda_is_gl_subhead_deleted: ['']
     })
   }
-
-  editLoanFeeForm(i: any) {
-    this.newData = false;
-    this.arrayIndex = this.feeArray[i];
-    this.feeFormData = this.fb.group({
-      oda_fee_type:[this.feeArray[i].oda_fee_type],
-      oda_fee_event:[this.feeArray[i].oda_fee_event],
-
-    oda_fee_frequency:[this.feeArray[i].oda_fee_frequency],
-    oda_fee_amortize_credit_ph:[this.feeArray[i].oda_fee_amortize_credit_ph],
-    oda_fee_amortize_debit_ph:[this.feeArray[i].oda_fee_amortize_debit_ph],
-
-      oda_fee_deductable:[this.feeArray[i].oda_fee_deductable],
-      oda_fee_multiple:[this.feeArray[i].oda_fee_multiple],
-      oda_fee_amortize:[this.feeArray[i].oda_fee_amortize],
-      oda_fee_demand_flow_id:[this.feeArray[i].oda_fee_demand_flow_id],
-      oda_fee_dr_placeholder:[this.feeArray[i].oda_fee_dr_placeholder],
-      oda_fee_cr_placeholder:[this.feeArray[i].oda_fee_cr_placeholder],
-      oda_fee_apr:[this.feeArray[i].oda_fee_apr],
-      oda_fee_eir:[this.feeArray[i].oda_fee_eir],
-      oda_fee_amort_tenor:[this.feeArray[i].oda_fee_amort_tenor],
-      oda_fee_max_no_of_assesment:[this.feeArray[i].oda_fee_max_no_of_assesment],
-
-    });
-
-    const index: number = this.feeArray.indexOf(this.feeArray.values);
-    this.feeArray.splice(index, i);
-
-  }
-
   get g() { return this.formData.controls; }
   get t() { return this.g.oda_fees as FormArray; }
   get l() { return this.g.oda_glsubheads as FormArray; }
-
-  preview() {
-    if (this.feeFormData.valid) {
-      console.log("form data");
-      
-      this.t.push(this.fb.group(
-        this.feeFormData.value
-      ));
-      this.feeArray.push(this.feeFormData.value);
-      console.log("form fee", this.feeArray);
-      this.initLoanForm();
-    }
-  }
 
   previewGlSubheads(){
     if(this.glSubheadData.valid){
@@ -769,25 +727,83 @@ oda_fee_cr_placeholderLookup(): void {
         this.initGlSUbheadForm();
      }
    }
-
-
-  updateLoanFee(i: any) {
-    this.feeArray[i] = this.feeFormData.value
-    // this.t.push(this.fb.group(
-    //   this.feeFormData.value
-    // ));
-    // this.feeArray.push(this.feeFormData.value);
-    // console.log("form fee", this.feeArray);
-    // this.initLoanForm();
+    
+    editGlSubhead(i: any) {
+      this.element = i
+      this.newData = false;
+      this.arrayIndex = this.glSubheadArray[i];
+      this.glSubheadData = this.fb.group({
+        oda_gl_subhead: [this.glSubheadArray[i].oda_gl_subhead],
+        oda_gl_subhead_description: [
+          this.glSubheadArray[i].oda_gl_subhead_description,
+        ],
+        oda_gl_subhead_deafault: [this.glSubheadArray[i].oda_gl_subhead_deafault],
+        oda_is_gl_subhead_deleted: [
+          this.glSubheadArray[i].oda_is_gl_subhead_deleted,
+        ],
+      });
+    }
+    onGlSubheadUpdate(){
+      let i = this.element;
+      this.glSubheadArray[i] = this.glSubheadData.value
+  } 
+  onGlSubheadClear(){
+    this.initGlSUbheadForm();
+    this.glSubheadArray = new Array();
   }
+
+
+  
+           //Loan Fee Operations
+           onPreviewFees(){    
+            
+            if (this.feeFormData.valid) {
+              this.t.push(this.fb.group(
+                this.feeFormData.value
+              ));
+              this.feeArray.push(this.feeFormData.value);
+              this.initLoanFeeForm();
+            }
+          }
+          onUpdateFees(){
+            let i = this.loanElement;
+            this.feeArray[i] = this.feeFormData.value
+          }
+          onClearFees(){
+            this.initLoanFeeForm();
+            this.feeArray = new Array();
+          }
+          onRemoveLoanFee(i: any) {
+            const index: number = this.feeArray.indexOf(this.feeArray.values);
+            this.feeArray.splice(index, i);
+            this.feeArray = this.feeArray;
+          }
+          editLoanFeeForm(i: any) {
+            this.loanElement = i;
+            this.newData = false;
+            this.arrayIndex = this.feeArray[i];
+            this.feeFormData = this.fb.group({
+              oda_fee_type: [this.feeArray[i].oda_fee_type],
+              oda_fee_event: [this.feeArray[i].oda_fee_event],
+              oda_fee_frequency: [this.feeArray[i].oda_fee_frequency],
+              oda_fee_deductable: [this.feeArray[i].oda_fee_deductable],
+              oda_fee_multiple: [this.feeArray[i].oda_fee_multiple],
+              oda_fee_amortize: [this.feeArray[i].oda_fee_amortize],
+              oda_fee_amortize_credit_ph:[this.feeArray[i].oda_fee_amortize_credit_ph],
+              oda_fee_amortize_debit_ph:[this.feeArray[i].oda_fee_amortize_debit_ph],
+              oda_fee_demand_flow: [this.feeArray[i].oda_fee_demand_flow],
+              oda_fee_dr_placeholder: [this.feeArray[i].oda_fee_dr_placeholder],
+              oda_fee_cr_placeholder: [this.feeArray[i].oda_fee_cr_placeholder],
+              oda_fee_max_no_of_assesment: [this.feeArray[i].oda_fee_max_no_of_assessment],
+            });
+          }
+
 
 
   onRemove(i: any,) {
     const index: number = this.feeArray.indexOf(this.feeArray.values);
     this.feeArray.splice(index, i);
-    console.log("new", this.feeArray);
     this.feeArray = this.feeArray;
-    console.log("click", i);
   }
 
   onYes(event:any){
@@ -798,11 +814,9 @@ oda_fee_cr_placeholderLookup(): void {
   }
 
 
-  onRemoveGLSubhead(i: any,) {
-    const index: number = this.glSubheadArray.indexOf(this.glSubheadArray.values);
-    this.glSubheadArray.splice(index, i);
-    this.glSubheadArray = this.glSubheadArray
-  }
+
+
+  
 
   onfixed_amt(event:any){
     this.showFixed_amt = true;

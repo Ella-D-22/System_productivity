@@ -217,6 +217,8 @@ export class CurrentSchemeComponent implements OnInit {
   insufficient_exception_description: any;
   backdate_transaction_description: any;
   event_id_desc: any;
+  element: any;
+  loanElement: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -252,7 +254,6 @@ export class CurrentSchemeComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Gl Subhead data', result);
       this.gl_subhead = result.data;
       this.gl_subhead_description = result.data.glSubheadDescription;
       this.gl_subhead_code = result.data.glSubheadCode;
@@ -420,7 +421,7 @@ export class CurrentSchemeComponent implements OnInit {
     caa_is_gl_subhead_deleted: [''],
   });
 
-  initLoanForm() {
+  initLoanFeeForm() {
     this.newData = true;
     this.feeFormData = this.fb.group({
       caa_fee_type: [''],
@@ -771,37 +772,9 @@ export class CurrentSchemeComponent implements OnInit {
       this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
     });
   }
-  
-  editLoanFeeForm(i: any) {
-    this.newData = false;
-    this.arrayIndex = this.feeArray[i];
 
-    this.feeFormData = this.fb.group({
-      caa_fee_type: [this.feeArray[i].caa_fee_type],
-      caa_fee_event: [this.feeArray[i].caa_fee_event],
-      caa_fee_frequency: [this.feeArray[i].caa_fee_frequency],
-      caa_fee_amortize_credit_ph: [this.feeArray[i].caa_fee_amortize_credit_ph],
-      caa_fee_amortize_debit_ph: [this.feeArray[i].caa_fee_amortize_debit_ph],
-      caa_fee_deductable: [this.feeArray[i].caa_fee_deductable],
-      caa_fee_multiple: [this.feeArray[i].caa_fee_multiple],
-      caa_fee_amortize: [this.feeArray[i].caa_fee_amortize],
-      caa_fee_demand_flow: [this.feeArray[i].caa_fee_demand_flow],
-      caa_fee_dr_placeholder: [this.feeArray[i].caa_fee_dr_placeholder],
-      caa_fee_cr_placeholder: [this.feeArray[i].caa_fee_cr_placeholder],
-      caa_fee_amort_tenor: [this.feeArray[i].caa_fee_amort_tenor],
-      caa_fee_max_no_of_assesment: [
-      this.feeArray[i].caa_fee_max_no_of_assesment,
-      ],
-    });
-    const index: number = this.feeArray.indexOf(this.feeArray.values);
-    this.feeArray.splice(index, i);
-  }
-
-  onUpdate(i:any){
-     this.feeArray[i] = this.feeFormData.value
-     this.glSubheadArray[i] = this.glSubheadData.value
-  }  
   editGlSubhead(i: any) {
+    this.element = i
     this.newData = false;
     this.arrayIndex = this.glSubheadArray[i];
     this.glSubheadData = this.fb.group({
@@ -814,11 +787,16 @@ export class CurrentSchemeComponent implements OnInit {
         this.glSubheadArray[i].caa_is_gl_subhead_deleted,
       ],
     });
-    const index: number = this.glSubheadArray.indexOf(
-      this.glSubheadArray.values
-    );
-    this.glSubheadArray.splice(index, i);
   }
+  onGlSubheadUpdate(){
+    let i = this.element;
+    this.glSubheadArray[i] = this.glSubheadData.value
+ } 
+ onGlSubheadClear(){
+  this.initGlSubheadForm();
+  this.glSubheadArray = new Array();
+}
+
   get g() {
     return this.formData.controls;
   }
@@ -828,14 +806,7 @@ export class CurrentSchemeComponent implements OnInit {
   get l() {
     return this.g.caa_glsubheads as FormArray;
   }
-  preview() {
-    if (this.feeFormData.valid) {
-      this.t.push(this.fb.group(this.feeFormData.value));
-      this.feeArray.push(this.feeFormData.value);
-      console.log('form fee', this.feeArray);
-      this.initLoanForm();
-    }
-  }
+
 
   previewGlSubheads() {
     if (this.glSubheadData.valid) {
@@ -849,19 +820,59 @@ export class CurrentSchemeComponent implements OnInit {
       this.initGlSubheadForm();
     }
   }
+
+  //Loan Fee Operations
+  onPreviewFees(){        
+    if (this.feeFormData.valid) {
+      this.t.push(this.fb.group(
+        this.feeFormData.value
+      ));
+      this.feeArray.push(this.feeFormData.value);
+      this.initLoanFeeForm();
+    }
+  }
+  onUpdateFees(){
+    let i = this.loanElement;
+    this.feeArray[i] = this.feeFormData.value
+  }
+  onClearFees(){
+    this.initLoanFeeForm();
+    this.feeArray = new Array();
+  }
+  onRemoveLoanFee(i: any) {
+    const index: number = this.feeArray.indexOf(this.feeArray.values);
+    this.feeArray.splice(index, i);
+    this.feeArray = this.feeArray;
+  }
+  editLoanFeeForm(i: any) {
+    this.loanElement = i;
+    this.newData = false;
+    this.arrayIndex = this.feeArray[i];
+    this.feeFormData = this.fb.group({
+      caa_fee_type: [this.feeArray[i].caa_fee_type],
+      caa_fee_event: [this.feeArray[i].caa_fee_event],
+      caa_fee_frequency: [this.feeArray[i].caa_fee_frequency],
+      caa_fee_deductable: [this.feeArray[i].caa_fee_deductable],
+      caa_fee_multiple: [this.feeArray[i].caa_fee_multiple],
+      caa_fee_amortize: [this.feeArray[i].caa_fee_amortize],
+      caa_fee_amortize_credit_ph:[this.feeArray[i].caa_fee_amortize_credit_ph],
+      caa_fee_amortize_debit_ph:[this.feeArray[i].caa_fee_amortize_debit_ph],
+      caa_fee_demand_flow: [this.feeArray[i].caa_fee_demand_flow],
+      caa_fee_dr_placeholder: [this.feeArray[i].caa_fee_dr_placeholder],
+      caa_fee_cr_placeholder: [this.feeArray[i].caa_fee_cr_placeholder],
+      caa_fee_max_no_of_assesment: [this.feeArray[i].caa_fee_max_no_of_assessment],
+    });
+  }
+
+
+
   updateLoanFee(i: any) {
     this.feeArray[i] = this.feeFormData.value
-    // this.t.push(this.fb.group(this.feeFormData.value));
-    // this.feeArray.push(this.feeFormData.value);
-    // console.log('form fee', this.feeArray);
-    // this.initLoanForm();
-  }
+    }
   onRemove(i: any) {
     const index: number = this.feeArray.indexOf(this.feeArray.values);
     this.feeArray.splice(index, i);
-    console.log('new', this.feeArray);
     this.feeArray = this.feeArray;
-    console.log('click', i);
   }
   onYes(event: any) {
     this.showAmortizedPH = true;
@@ -1107,10 +1118,8 @@ export class CurrentSchemeComponent implements OnInit {
             .subscribe(
               (res) => {
                 this.results = res;
-                console.log('modifying data', this.results);
                 this.feeArray = this.results.caa_fees;
                 this.glSubheadArray = this.results.caa_glsubheads;
-
                 this.formData = this.fb.group({
                   id: [this.results.id],
                   caa_scheme_code: [this.results.caa_scheme_code],
@@ -1255,7 +1264,6 @@ export class CurrentSchemeComponent implements OnInit {
               (res) => {
                 this.results = res;
 
-                console.log(this.results);
                 this.feeArray = this.results.caa_fees;
                 this.glSubheadArray = this.results.caa_glsubheads;
 
@@ -1580,9 +1588,6 @@ export class CurrentSchemeComponent implements OnInit {
         'yyyy-MM-ddTHH:mm:ss'
       )
     );
-
-    console.log(this.formData.value);
-
     this.submitted = true;
     // stop here if form is invalid
     if (this.formData.valid) {
