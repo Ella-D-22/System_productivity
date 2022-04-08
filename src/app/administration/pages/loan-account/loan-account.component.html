@@ -188,16 +188,7 @@
                   </div>
                </div> 
               </div>
-              <!-- <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Branch Code</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="solCode" class="pull-right form-control" />
-                  </div>
-               </div> 
-              </div> -->
+           
             </div>
           </mat-tab>
 
@@ -207,28 +198,17 @@
             <div class="container-fluid row mt-4">
               <div  class="col-md-3">
                 <input  class="form-control" type="file" required 
-                        (change)="onPhotoChange($event)"
-                        >
-                <p>Loan Application Form</p>
-                
-              </div>
-            
-              
-                <img [src]="customerImage" class="col-md-6"/>
-            
+                        (change)="onPhotoChange($event)">
+                <p>Loan Application Form</p>  
+              </div>                
+                <img [src]="customerImage" class="col-md-6"/>        
             </div>
             <div class="container-fluid row mt-4">
               <div  class="col-md-3">
-                <input class="form-control" type="file" required 
-                
-                        (change)="onSignatureChange($event)"
-                        >
+                <input class="form-control" type="file" required  (change)="onSignatureChange($event)" >
                 <p>Extra Document</p>
-            
               </div>
-              
                 <img [src]="signatureImage" class="col-md-6"/>
-            
             </div>
           </mat-tab>
           <mat-tab class="mat-tab" label="Guarantors" *ngIf="message.account_type == 'Loan'">
@@ -309,10 +289,7 @@
     </div>
 </mat-card>
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button> -->
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

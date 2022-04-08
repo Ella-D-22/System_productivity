@@ -122,14 +122,7 @@
               </div>
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                  <label class="start pull-left">Expiry Date.</label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column">
-                  <input  type="number" formControlName="laa_dr_int_prcnt_min" class="form-control" />
-                </div>
-              </div> -->
+           
             </div>
           </div>
           <div class="row">
@@ -303,10 +296,7 @@
                   <label class="start pull-left">Int. Cal. Freq.-Dr.</label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column dates ">
-                  <!-- <select   class="pull-right-dates form-control" formControlName="int_cal_freq_dr" [ngClass]="{ 'is-invalid': submitted && f.int_cal_freq_dr.errors }" >
-                <option value="" disabled>-- Select --</option>
-                <option *ngFor="let flag of months" [value]="flag">{{ flag }}</option>
-              </select> -->
+                
                   <select class="pull-right form-control" formControlName="laa_int_cal_freq_dr_week">
                     <option value="" disabled>-- Week --</option>
                     <option *ngFor="let flag of weeksArray" [value]="flag">{{ flag }}</option>
@@ -356,28 +346,7 @@
         </mat-tab>
         <mat-tab class="mat-tab" label="Scheme Details">
 
-          <!-- <div class="row">
-            <div class="col-md-6 col-sm-12">
-              <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">CCY</label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column ">
-                  :---
-                </div>
-             </div> 
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Del.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    :---
-                  </div>
-               </div>     
-            </div>
-          </div> -->
+        
           <h3>Loan Threshold</h3>
           <div class="row">
             <div class="col-md-6 col-sm-12">
@@ -458,14 +427,7 @@
 
           <div class="row">
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Loan Repayment Method<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="version_desc_repo" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
-                  </div>
-               </div>  -->
+           
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -718,15 +680,7 @@
               </div>
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Principal Demand Overdue at end Month <span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="ei_payment_freq" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ei_payment_freq.errors }" />
-                    <input type="text" formControlName="ei_payment_freq" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ei_payment_freq.errors }" />   
-                  </div>
-               </div>             -->
+              
             </div>
           </div>
 
@@ -822,17 +776,7 @@
           </div>
           <div class="row">
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column ">
-                     <label class="start pull-left">Grace Period for Late Fee(MMM/DDD)</label>
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="int_on_principal">
-                        <mat-radio-button value="Yes">Yes.</mat-radio-button>
-                        <mat-radio-button value="No">No. </mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-                 </div>             -->
+            
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -865,71 +809,24 @@
               </div>
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Tolerance Limit for DPD Cycle.<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input type="number" formControlName="laa_tolerance_limit_for_dpd_cycle" class="pull-right form-control"  />
-                  </div>
-               </div>             -->
+              
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column ">
-                     <label class="start pull-left">Charge Demand Overdue at end of Month</label>
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="int_on_principal">
-                        <mat-radio-button value="Yes">Yes.</mat-radio-button>
-                        <mat-radio-button value="No">No. </mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-                 </div>             -->
+            
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Int. Rate Based on Loan Amt.<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="tolerance_limit_for_dpd_cycle_form">
-                      <mat-radio-button value="Fixed">Fixed.</mat-radio-button>
-                      <mat-radio-button value="Percentage">Percentage. </mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-               </div>             -->
+            
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column ">
-                     <label class="start pull-left">Charge Demand Overdue at end of Month</label>
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                      <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="int_on_principal">
-                        <mat-radio-button value="Yes">Yes.</mat-radio-button>
-                        <mat-radio-button value="No">No. </mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-                 </div>             -->
+             
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Consider Tolerance For Late Fee.</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="laa_consdr_tolerance_for_late_fee">
-                      <mat-radio-button value="Yes">Yes.</mat-radio-button>
-                      <mat-radio-button value="No">No.</mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-               </div>             -->
+            
             </div>
           </div>
 
@@ -1000,17 +897,7 @@
               </div>
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Penal Int. from Dmd.Eff.DAte<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="int_on_principal">
-                      <mat-radio-button value="Yes">Fixed.</mat-radio-button>
-                      <mat-radio-button value="No">Percentage. </mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-               </div>             -->
+                  
             </div>
           </div>
 
@@ -1060,18 +947,7 @@
               </div>
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Penal Int. Rate Method<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="int_on_principal">
-                      <mat-radio-button value="Full">Full.</mat-radio-button>
-                      <mat-radio-button value="Differential">Differential. </mat-radio-button>
-                      <mat-radio-button value="Base_and_penal">Base+Penal. </mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-               </div>             -->
+              
             </div>
           </div>
           <h3>Equated Installment</h3>
@@ -1859,10 +1735,11 @@
       <br />
       <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
 
-      <button class="pull-right" mat-raised-button color="primary" type="submit">
+      <button class="pull-right" mat-raised-button color="primary" type="submit" **ngIf="isSubmitted">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Submit
       </button>
+      <button mat-raised-button color="warn" type="submit" **ngIf="isDeleted" class="pull-right">Delete</button>
       <br />
     </form>
   </div>
