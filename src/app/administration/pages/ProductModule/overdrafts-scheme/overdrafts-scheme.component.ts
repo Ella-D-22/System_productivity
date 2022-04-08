@@ -849,6 +849,7 @@ oda_fee_cr_placeholderLookup(): void {
       this.scheme_code_desc = this.message.scheme_code_desc;
 
       if (this.function_type == "A-Add") {
+        this.isSubmitted = true;
         // open empty forms
         this.formData = this.fb.group({
           oda_function_type: [this.function_type],
@@ -926,23 +927,18 @@ oda_fee_cr_placeholderLookup(): void {
         });
       }
       else if (this.function_type == "I-Inquire") {
-        //load the page with form data submit disabled
-        // find by event id
         this.showContractInput = true;
         // call to disable edit
         this.disabledFormControll();
-        // hide Buttons
+        // hide datepickers
         this.isEnabled = false;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
         this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
           this.results = res;
-
           this.feeArray = this.results.oda_fees;
-          this.glSubheadArray = this.results.oda_glsubheads;
-          
+          this.glSubheadArray = this.results.oda_glsubheads; 
           this.formData = this.fb.group({
-
             id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
             oda_scheme_type: [this.results.oda_scheme_type],
@@ -958,7 +954,6 @@ oda_fee_cr_placeholderLookup(): void {
             oda_system_gen_no:[this.results.oda_system_gen_no],
             oda_number_generation_code:[this.results.oda_number_generation_code],
             // Interest Details
-  
             oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
             oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
             oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],
@@ -1031,6 +1026,7 @@ oda_fee_cr_placeholderLookup(): void {
         // find by event id
         this.showContractInput = true;
         // hide Buttons
+        this.isSubmitted = true;
         this.isEnabled = false;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
@@ -1138,6 +1134,7 @@ oda_fee_cr_placeholderLookup(): void {
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
+        this.isSubmitted = true;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
         this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
@@ -1240,22 +1237,18 @@ oda_fee_cr_placeholderLookup(): void {
         this.disabledFormControll();
         // hide Buttons
         this.isEnabled = false;
+        this.isDeleted = true;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
         this.subscription = this.odaAPI.getproductBySchemeCode(params).subscribe(res => {
           this.results = res;
-
           this.feeArray = this.results.oda_fees;
           this.glSubheadArray = this.results.oda_glsubheads;
-          
           this.formData = this.fb.group({
-
-            
             id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
             oda_scheme_type: [this.results.oda_scheme_type],
             oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
-
             oda_effective_to_date: [this.results.oda_effective_to_date],
             oda_effective_from_date: [this.results.oda_effective_from_date],
             oda_system_generated_no: [this.results.oda_system_generated_no],
@@ -1266,7 +1259,6 @@ oda_fee_cr_placeholderLookup(): void {
             oda_system_gen_no:[this.results.oda_system_gen_no],
             oda_number_generation_code:[this.results.oda_number_generation_code],
             // Interest Details
-  
             oda_pl_ac_ccy:[this.results.oda_pl_ac_ccy],
             oda_int_receivale_applicable:[this.results.oda_int_receivale_applicable],
             oda_normal_int_receivable_ac:[this.results.oda_normal_int_receivable_ac],

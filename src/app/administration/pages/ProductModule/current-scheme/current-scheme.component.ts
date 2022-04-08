@@ -3,11 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
@@ -33,7 +29,8 @@ export class CurrentSchemeComponent implements OnInit {
   loading = false;
   isDisabled = false;
   isEnabled = true;
-  deleting = false;
+  isDeleted = false;
+  isSubmitted = false
   flagArray: any = ['Y', 'N'];
   amt_derivation_Array: any = [
     { code: 'CHRG', description: 'Free Code' },
@@ -918,6 +915,7 @@ export class CurrentSchemeComponent implements OnInit {
         if (this.function_type == 'A-Add') {
           this.scheme_code_desc = this.message.scheme_code_desc;
           // open empty forms
+          this.isSubmitted = true;
           this.formData = this.fb.group({
             caa_scheme_code: [this.scheme_code],
             caa_scheme_type: [this.scheme_type],
@@ -995,6 +993,7 @@ export class CurrentSchemeComponent implements OnInit {
           this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
+          
           let params = new HttpParams().set('scheme_code', this.scheme_code);
           this.subscription = this.currentSchemeAPI
             .getCurrentschemeByCurrentschemeCode(params)
@@ -1121,6 +1120,7 @@ export class CurrentSchemeComponent implements OnInit {
           //load the page with form data submit disabled
           // find by event id
           this.isEnabled = true;
+          this.isSubmitted = true;
           this.showContractInput = true;
           let params = new HttpParams().set('scheme_code', this.scheme_code);
           // call to disable edit
@@ -1270,6 +1270,7 @@ export class CurrentSchemeComponent implements OnInit {
           this.disabledFormControll();
           // hide Buttons
           this.isEnabled = true;
+          this.isSubmitted = true;
           let params = new HttpParams().set('scheme_code', this.scheme_code);
           this.subscription = this.currentSchemeAPI
             .getCurrentschemeByCurrentschemeCode(params)
@@ -1421,7 +1422,7 @@ export class CurrentSchemeComponent implements OnInit {
           this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
-          this.deleting = true;
+          this.isDeleted = true;
           let params = new HttpParams().set('scheme_code', this.scheme_code);
           this.subscription = this.currentSchemeAPI
             .getCurrentschemeByCurrentschemeCode(params)

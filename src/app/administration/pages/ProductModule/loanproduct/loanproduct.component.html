@@ -1735,10 +1735,11 @@
       <br />
       <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
 
-      <button class="pull-right" mat-raised-button color="primary" type="submit">
+      <button class="pull-right" mat-raised-button color="primary" type="submit" **ngIf="isSubmitted">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Submit
       </button>
+      <button mat-raised-button color="warn" type="submit" **ngIf="isDeleted" class="pull-right">Delete</button>
       <br />
     </form>
   </div>

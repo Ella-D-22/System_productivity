@@ -1011,13 +1011,13 @@
         <br />
         <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
 
-        <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+        <button *ngIf="isSubmitted" class="pull-right" mat-raised-button color="primary" type="submit">
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Submit
         </button>
         <br>
      <!-- Button trigger modal -->
-      <button type="submit"  *ngIf="deleting" class="pull-right" 
+      <button type="submit"  *ngIf="isDeleted" class="pull-right" 
       mat-raised-button color="warn">
         Delete
       </button>

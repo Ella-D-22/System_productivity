@@ -1099,7 +1099,8 @@ BackdatedTransactionLookup(): void {
         }
         
         else if(this.function_type == "V-Verify"){
-          this.isEnabled = true;
+          this.isEnabled = false
+          this.isSubmitted = true;
           let params = new HttpParams()
           .set("scheme_code", this.scheme_code);     
             this.subscription = this.sbaAPI.getproductBySchemeCode(params).subscribe(res=>{
