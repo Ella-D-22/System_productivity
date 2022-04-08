@@ -154,7 +154,6 @@ export class TermDepositComponent implements OnInit {
   tda_sundry_deposit_ph_desc: any;
   tda_repayment_ac_ph: any;
   tda_repayment_ac_ph_desc: any;
-  tda_int_table_code: any;
   tda_int_table_code_desc: any;
   tda_fee_amortize_credit_ph: any;
   tda_fee_amortize_credit_ph_desc: any;
@@ -165,6 +164,7 @@ export class TermDepositComponent implements OnInit {
   tda_fee_cr_placeholder: any;
   tda_fee_cr_placeholder_desc: any;
   event_id_desc: any;
+  tda_int_table_code: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -172,12 +172,14 @@ export class TermDepositComponent implements OnInit {
       // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result.data);
+      
       this.event_id = result.data.event_id;
       this.event_id_desc = result.data.event_id_desc
       this.event_type = result.data.event_type
       this.event_type_desc = result.data.event_type_desc 
-      this.feeFormData.controls.sba_fee_event.setValue(this.event_id);
-      this.feeFormData.controls.sba_fee_type.setValue(this.event_type_code);
+      this.feeFormData.controls.tda_fee_event.setValue(this.event_id);
+      this.feeFormData.controls.tda_fee_type.setValue(this.event_type);
     });
   }
   eventTypeLookup(): void {
@@ -192,26 +194,6 @@ export class TermDepositComponent implements OnInit {
       this.feeFormData.controls.tda_fee_type.setValue(this.event_type_code);
     });
   }
-
-
-
-// All accounts lookups
-// tda_principal_lossline_acLookup(): void {
-//   this.dtype="oa"
-//   const dconfig= new MatDialogConfig()
-//   dconfig.data={
-//     type:this.dtype
-//   }
-//   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-//   cdialogRef.afterClosed().subscribe((result) => {
-//     this.tda_principal_lossline_ac = result.data.acid;
-//     this.tda_principal_lossline_ac_desc = result.data.accountName;
-//     this.formData.controls.tda_principal_lossline_ac.setValue(result.data.acid);
-//   });
-// }
-
-
-
 tda_principal_lossline_acLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -354,22 +336,6 @@ tda_repayment_ac_phLookup(): void {
   });
 }
 
-
-// tda_int_table_codeLookup(): void {
-//   this.dtype="oa"
-//   const dconfig= new MatDialogConfig()
-//   dconfig.data={
-//     type:this.dtype
-//   }
-//   const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
-//   cdialogRef.afterClosed().subscribe((result) => {
-//     this.tda_int_table_code = result.data.acid;
-//     this.tda_int_table_code_desc = result.data.accountName;
-//     this.formData.controls.tda_int_table_code.setValue(result.data.acid);
-//   });
-// }
-
-
 tda_int_table_codeLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -383,10 +349,6 @@ tda_int_table_codeLookup(): void {
     this.formData.controls.tda_int_table_code.setValue(result.data.acid);
   });
 }
-
-
-
-
 tda_fee_amortize_credit_phLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -397,8 +359,8 @@ tda_fee_amortize_credit_phLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.tda_fee_amortize_credit_ph = result.data.acid;
     this.tda_fee_amortize_credit_ph_desc = result.data.accountName;
-    this.formData.controls.tda_fee_amortize_credit_ph.setValue(result.data.acid);
-  });
+    this.feeFormData.controls.tda_fee_amortize_credit_ph.setValue(result.data.acid);
+  }); 
 }
 
 
@@ -412,7 +374,7 @@ tda_fee_amortize_debit_phLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.tda_fee_amortize_debit_ph = result.data.acid;
     this.tda_fee_amortize_debit_ph_desc = result.data.accountName;
-    this.formData.controls.tda_fee_amortize_debit_ph.setValue(result.data.acid);
+    this.feeFormData.controls.tda_fee_amortize_debit_ph.setValue(result.data.acid);
   });
 }
 
@@ -426,11 +388,9 @@ tda_fee_dr_placeholderLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.tda_fee_dr_placeholder = result.data.acid;
     this.tda_fee_dr_placeholder_desc = result.data.accountName;
-    this.formData.controls.tda_fee_dr_placeholder.setValue(result.data.acid);
+    this.feeFormData.controls.tda_fee_dr_placeholder.setValue(result.data.acid);
   });
 }
-
-
 tda_fee_cr_placeholderLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
@@ -441,7 +401,7 @@ tda_fee_cr_placeholderLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.tda_fee_cr_placeholder = result.data.acid;
     this.tda_fee_cr_placeholder_desc = result.data.accountName;
-    this.formData.controls.tda_fee_cr_placeholder.setValue(result.data.acid);
+    this.feeFormData.controls.tda_fee_cr_placeholder.setValue(result.data.acid);
   });
 }
 
@@ -624,16 +584,13 @@ tda_fee_cr_placeholderLookup(): void {
     scheme_code: [''],
     scheme_type: [''],
     scheme_code_desc: [''],
-
     tda_effective_from_date:[''],
     tda_effective_to_date:[''],
-    tda_system_generated_no:[''],
     tda_number_generation_code:[''],
     tda_principal_lossline_ac:[''],
     tda_recovery_lossline_ac:[''],
     tda_charge_off_ac:[''],
     tda_number_generation:[''],
-
     // interest details
     tda_pl_ac_ccy:[''],
     tda_int_receivale_applicable:[''],
@@ -648,51 +605,21 @@ tda_fee_cr_placeholderLookup(): void {
     tda_int_cal_freq_dr_day:[''],
     tda_int_cal_freq_dr_date:[''],
     tda_int_cal_freq_dr_holiday:[''],
-    tda_int_table_code:[''],
-
     // end of interest details
     tda_deposit_amt_min:[''],
     tda_deposit_amt_max:[''],
-    tda_deposit_amt_steps:[''],
     tda_period_mm_min:[''],
     tda_period_dd_min:[''],
     tda_period_mm_max:[''],
     tda_period_dd_max:[''],
-    tda_period_steps_mm:[''],
-    tda_period_steps_dd:[''],
-    tda_deposit_type:[''],
     tda_sundry_deposit_ph:[''],
     tda_repayment_report_code:[''],
-    tda_duration_to_mrk_ac_inactive:[''],
-    tda_duration_frm_inactive_to_dormant:[''],
     tda_pre_closure_rate:[''],
     tda_pre_closure_penalty_rate:[''],
-    // tda_sundry_deposit_ph:[''],
-    // tda_repayment_report_code:[''],
     tda_frequency_for_int_calc_on_preclosure_month:[''],
-    tda_sweeps:[''],
-    tda_part_closure:[''],
-    tda_value_dated_closure:[''],
     tda_repayment_ac_ph:[''],
-    tda_auto_renewal:[''],
-    tda_max_no_of_renewal:[''],
-    tda_renewal_period_mm:[''],
-    tda_renewal_period_dd:[''],
     tda_renewal_allowed_within_days:[''],
-    tda_renewal_period:[''],
-    tda_automatically_create_dep:[''],
-    tda_link_to_operative_ac:[''],
-    tda_auto_cr_period_mm:[''],
-    tda_auto_cr_period_dd:[''],
     int_cal_freq_dr_week:[''],
-    // int_cal_freq_dr_week:[''],
-    int_cal_freq_dr_day:[''],
-    int_cal_freq_dr_date:[''],
-    int_cal_freq_dr_holiday:[''],
-    // int_cal_freq_dr_day:[''],
-    // int_cal_freq_dr_date:[''],
-    // int_cal_freq_dr_holiday:[''],
-
     // Exceptions
     tda_ac_debit_balance:[''],
     tda_ac_credit_balance:[''],
@@ -732,9 +659,6 @@ tda_fee_cr_placeholderLookup(): void {
     tda_fee_demand_flow: [''],
     tda_fee_dr_placeholder: [''],
     tda_fee_cr_placeholder: [''],
-    tda_fee_apr: [''],
-    tda_fee_eir: [''],
-    tda_fee_amort_tenor: [''],
     tda_fee_max_no_of_assesment: [''],
   });
 
@@ -759,9 +683,7 @@ tda_fee_cr_placeholderLookup(): void {
       tda_fee_demand_flow: [''],
       tda_fee_dr_placeholder: [''],
       tda_fee_cr_placeholder: [''],
-      tda_fee_apr: [''],
-      tda_fee_eir: [''],
-      tda_fee_amort_tenor: [''],
+
       tda_fee_max_no_of_assesment: [''],
     });
   }
@@ -791,9 +713,6 @@ tda_fee_cr_placeholderLookup(): void {
       tda_fee_demand_flow: [this.feeArray[i].tda_fee_demand_flow],
       tda_fee_dr_placeholder: [this.feeArray[i].tda_fee_dr_placeholder],
       tda_fee_cr_placeholder: [this.feeArray[i].tda_fee_cr_placeholder],
-      tda_fee_apr: [this.feeArray[i].tda_fee_apr],
-      tda_fee_eir: [this.feeArray[i].tda_fee_eir],
-      tda_fee_amort_tenor: [this.feeArray[i].tda_fee_amort_tenor],
       tda_fee_max_no_of_assesment: [this.feeArray[i].tda_fee_max_no_of_assessment],
     });
 
@@ -809,6 +728,8 @@ tda_fee_cr_placeholderLookup(): void {
 
 
   preview() {
+    console.log(this.feeFormData.value);
+    
     if (this.feeFormData.valid) {
       this.t.push(this.fb.group(
         this.feeFormData.value
@@ -886,7 +807,6 @@ tda_fee_cr_placeholderLookup(): void {
   
           tda_effective_from_date:[''],
           tda_effective_to_date:[''],
-          tda_system_generated_no:[''],
           tda_number_generation_code:[''],
           tda_principal_lossline_ac:[''],
           tda_recovery_lossline_ac:[''],
@@ -907,50 +827,26 @@ tda_fee_cr_placeholderLookup(): void {
           tda_int_cal_freq_dr_day:[''],
           tda_int_cal_freq_dr_date:[''],
           tda_int_cal_freq_dr_holiday:[''],
-          tda_int_table_code:[''],
 
           // end of interest details
           tda_deposit_amt_min:[''],
           tda_deposit_amt_max:[''],
-          tda_deposit_amt_steps:[''],
           tda_period_mm_min:[''],
           tda_period_dd_min:[''],
           tda_period_mm_max:[''],
           tda_period_dd_max:[''],
-          tda_period_steps_mm:[''],
-          tda_period_steps_dd:[''],
-          tda_deposit_type:[''],
+          
           tda_sundry_deposit_ph:[''],
           tda_repayment_report_code:[''],
-          tda_duration_to_mrk_ac_inactive:[''],
-          tda_duration_frm_inactive_to_dormant:[''],
           tda_pre_closure_rate:[''],
           tda_pre_closure_penalty_rate:[''],
           // tda_sundry_deposit_ph:[''],
           // tda_repayment_report_code:[''],
           tda_frequency_for_int_calc_on_preclosure_month:[''],
-          tda_sweeps:[''],
-          tda_part_closure:[''],
-          tda_value_dated_closure:[''],
           tda_repayment_ac_ph:[''],
-          tda_auto_renewal:[''],
-          tda_max_no_of_renewal:[''],
-          tda_renewal_period_mm:[''],
-          tda_renewal_period_dd:[''],
           tda_renewal_allowed_within_days:[''],
-          tda_renewal_period:[''],
-          tda_automatically_create_dep:[''],
-          tda_link_to_operative_ac:[''],
-          tda_auto_cr_period_mm:[''],
-          tda_auto_cr_period_dd:[''],
           int_cal_freq_dr_week:[''],
-          // int_cal_freq_dr_week:[''],
-          int_cal_freq_dr_day:[''],
-          int_cal_freq_dr_date:[''],
-          int_cal_freq_dr_holiday:[''],
-          // int_cal_freq_dr_day:[''],
-          // int_cal_freq_dr_date:[''],
-          // int_cal_freq_dr_holiday:[''],
+         
 
           // Exceptions
           tda_ac_debit_balance:[''],
@@ -1010,7 +906,6 @@ tda_fee_cr_placeholderLookup(): void {
   
             tda_effective_from_date:[this.results.tda_effective_from_date],
             tda_effective_to_date:[this.results.tda_effective_to_date],
-            tda_system_generated_no:[this.results.tda_system_generated_no],
             tda_number_generation_code:[this.results.tda_number_generation_code],
             tda_principal_lossline_ac:[this.results.tda_principal_lossline_ac],
             tda_recovery_lossline_ac:[this.results.tda_recovery_lossline_ac],
@@ -1031,51 +926,23 @@ tda_fee_cr_placeholderLookup(): void {
             tda_int_cal_freq_dr_day:[this.results.tda_int_cal_freq_dr_day],
             tda_int_cal_freq_dr_date:[this.results.tda_int_cal_freq_dr_date],
             tda_int_cal_freq_dr_holiday:[this.results.tda_int_cal_freq_dr_holiday],
-            tda_int_table_code:[this.results.tda_int_table_code],
   
             // end of interest details
             tda_deposit_amt_min:[this.results.tda_deposit_amt_min],
             tda_deposit_amt_max:[this.results.tda_deposit_amt_max],
-            tda_deposit_amt_steps:[this.results.tda_deposit_amt_steps],
             tda_period_mm_min:[this.results.tda_period_mm_min],
             tda_period_dd_min:[this.results.tda_period_dd_min],
             tda_period_mm_max:[this.results.tda_period_mm_max],
             tda_period_dd_max:[this.results.tda_period_dd_max],
-            tda_period_steps_mm:[this.results.tda_period_steps_mm],
-            tda_period_steps_dd:[this.results.tda_period_steps_dd],
-            tda_deposit_type:[this.results.tda_deposit_type],
             tda_sundry_deposit_ph:[this.results.tda_sundry_deposit_ph],
             tda_repayment_report_code:[this.results.tda_repayment_report_code],
-            tda_duration_to_mrk_ac_inactive:[this.results.tda_duration_to_mrk_ac_inactive],
-            tda_duration_frm_inactive_to_dormant:[this.results.tda_duration_frm_inactive_to_dormant],
             tda_pre_closure_rate:[this.results.tda_pre_closure_rate],
             tda_pre_closure_penalty_rate:[this.results.tda_pre_closure_penalty_rate],
             // tda_sundry_deposit_ph:[this.results.],
             // tda_repayment_report_code:[this.results.],
             tda_frequency_for_int_calc_on_preclosure_month:[this.results.tda_frequency_for_int_calc_on_preclosure_month],
-            tda_sweeps:[this.results.tda_sweeps],
-            tda_part_closure:[this.results.tda_part_closure],
-            tda_value_dated_closure:[this.results.tda_value_dated_closure],
             tda_repayment_ac_ph:[this.results.tda_repayment_ac_ph],
-            tda_auto_renewal:[this.results.tda_auto_renewal],
-            tda_max_no_of_renewal:[this.results.tda_max_no_of_renewal],
-            tda_renewal_period_mm:[this.results.tda_renewal_period_mm],
-            tda_renewal_period_dd:[this.results.tda_renewal_period_dd],
             tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],
-            tda_renewal_period:[this.results.tda_renewal_period],
-            tda_automatically_create_dep:[this.results.tda_automatically_create_dep],
-            tda_link_to_operative_ac:[this.results.tda_link_to_operative_ac],
-            tda_auto_cr_period_mm:[this.results.tda_auto_cr_period_mm],
-            tda_auto_cr_period_dd:[this.results.tda_auto_cr_period_dd],
-            int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-            // int_cal_freq_dr_week:[this.results.],
-            int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
-            int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
-            int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-            // int_cal_freq_dr_day:[this.results.],
-            // int_cal_freq_dr_date:[this.results.],
-            // int_cal_freq_dr_holiday:[this.results.],
-            
             // Exceptions
             tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
             tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
@@ -1137,7 +1004,6 @@ tda_fee_cr_placeholderLookup(): void {
 
             tda_effective_from_date:[this.results.tda_effective_from_date],
             tda_effective_to_date:[this.results.tda_effective_to_date],
-            tda_system_generated_no:[this.results.tda_system_generated_no],
             tda_number_generation_code:[this.results.tda_number_generation_code],
             tda_principal_lossline_ac:[this.results.tda_principal_lossline_ac],
             tda_recovery_lossline_ac:[this.results.tda_recovery_lossline_ac],
@@ -1158,47 +1024,23 @@ tda_fee_cr_placeholderLookup(): void {
             tda_int_cal_freq_dr_day:[this.results.tda_int_cal_freq_dr_day],
             tda_int_cal_freq_dr_date:[this.results.tda_int_cal_freq_dr_date],
             tda_int_cal_freq_dr_holiday:[this.results.tda_int_cal_freq_dr_holiday],
-            tda_int_table_code:[this.results.tda_int_table_code],
   
             // end of interest details
             tda_deposit_amt_min:[this.results.tda_deposit_amt_min],
             tda_deposit_amt_max:[this.results.tda_deposit_amt_max],
-            tda_deposit_amt_steps:[this.results.tda_deposit_amt_steps],
             tda_period_mm_min:[this.results.tda_period_mm_min],
             tda_period_dd_min:[this.results.tda_period_dd_min],
             tda_period_mm_max:[this.results.tda_period_mm_max],
             tda_period_dd_max:[this.results.tda_period_dd_max],
-            tda_period_steps_mm:[this.results.tda_period_steps_mm],
-            tda_period_steps_dd:[this.results.tda_period_steps_dd],
-            tda_deposit_type:[this.results.tda_deposit_type],
             tda_sundry_deposit_ph:[this.results.tda_sundry_deposit_ph],
             tda_repayment_report_code:[this.results.tda_repayment_report_code],
-            tda_duration_to_mrk_ac_inactive:[this.results.tda_duration_to_mrk_ac_inactive],
-            tda_duration_frm_inactive_to_dormant:[this.results.tda_duration_frm_inactive_to_dormant],
             tda_pre_closure_rate:[this.results.tda_pre_closure_rate],
             tda_pre_closure_penalty_rate:[this.results.tda_pre_closure_penalty_rate],
             // tda_sundry_deposit_ph:[this.results.],
             // tda_repayment_report_code:[this.results.],
             tda_frequency_for_int_calc_on_preclosure_month:[this.results.tda_frequency_for_int_calc_on_preclosure_month],
-            tda_sweeps:[this.results.tda_sweeps],
-            tda_part_closure:[this.results.tda_part_closure],
-            tda_value_dated_closure:[this.results.tda_value_dated_closure],
             tda_repayment_ac_ph:[this.results.tda_repayment_ac_ph],
-            tda_auto_renewal:[this.results.tda_auto_renewal],
-            tda_max_no_of_renewal:[this.results.tda_max_no_of_renewal],
-            tda_renewal_period_mm:[this.results.tda_renewal_period_mm],
-            tda_renewal_period_dd:[this.results.tda_renewal_period_dd],
-            tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],
-            tda_renewal_period:[this.results.tda_renewal_period],
-            tda_automatically_create_dep:[this.results.tda_automatically_create_dep],
-            tda_link_to_operative_ac:[this.results.tda_link_to_operative_ac],
-            tda_auto_cr_period_mm:[this.results.tda_auto_cr_period_mm],
-            tda_auto_cr_period_dd:[this.results.tda_auto_cr_period_dd],
-            int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-            int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
-            int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
-            int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
-           
+            tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],           
             // Exceptions
             tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
             tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
@@ -1265,7 +1107,6 @@ tda_fee_cr_placeholderLookup(): void {
 
             tda_effective_from_date:[this.results.tda_effective_from_date],
             tda_effective_to_date:[this.results.tda_effective_to_date],
-            tda_system_generated_no:[this.results.tda_system_generated_no],
             tda_number_generation_code:[this.results.tda_number_generation_code],
             tda_principal_lossline_ac:[this.results.tda_principal_lossline_ac],
             tda_recovery_lossline_ac:[this.results.tda_recovery_lossline_ac],
@@ -1286,46 +1127,23 @@ tda_fee_cr_placeholderLookup(): void {
             tda_int_cal_freq_dr_day:[this.results.tda_int_cal_freq_dr_day],
             tda_int_cal_freq_dr_date:[this.results.tda_int_cal_freq_dr_date],
             tda_int_cal_freq_dr_holiday:[this.results.tda_int_cal_freq_dr_holiday],
-            tda_int_table_code:[this.results.tda_int_table_code],
   
             // end of interest details
             tda_deposit_amt_min:[this.results.tda_deposit_amt_min],
             tda_deposit_amt_max:[this.results.tda_deposit_amt_max],
-            tda_deposit_amt_steps:[this.results.tda_deposit_amt_steps],
             tda_period_mm_min:[this.results.tda_period_mm_min],
             tda_period_dd_min:[this.results.tda_period_dd_min],
             tda_period_mm_max:[this.results.tda_period_mm_max],
             tda_period_dd_max:[this.results.tda_period_dd_max],
-            tda_period_steps_mm:[this.results.tda_period_steps_mm],
-            tda_period_steps_dd:[this.results.tda_period_steps_dd],
-            tda_deposit_type:[this.results.tda_deposit_type],
             tda_sundry_deposit_ph:[this.results.tda_sundry_deposit_ph],
             tda_repayment_report_code:[this.results.tda_repayment_report_code],
-            tda_duration_to_mrk_ac_inactive:[this.results.tda_duration_to_mrk_ac_inactive],
-            tda_duration_frm_inactive_to_dormant:[this.results.tda_duration_frm_inactive_to_dormant],
             tda_pre_closure_rate:[this.results.tda_pre_closure_rate],
             tda_pre_closure_penalty_rate:[this.results.tda_pre_closure_penalty_rate],
             // tda_sundry_deposit_ph:[this.results.],
             // tda_repayment_report_code:[this.results.],
             tda_frequency_for_int_calc_on_preclosure_month:[this.results.tda_frequency_for_int_calc_on_preclosure_month],
-            tda_sweeps:[this.results.tda_sweeps],
-            tda_part_closure:[this.results.tda_part_closure],
-            tda_value_dated_closure:[this.results.tda_value_dated_closure],
             tda_repayment_ac_ph:[this.results.tda_repayment_ac_ph],
-            tda_auto_renewal:[this.results.tda_auto_renewal],
-            tda_max_no_of_renewal:[this.results.tda_max_no_of_renewal],
-            tda_renewal_period_mm:[this.results.tda_renewal_period_mm],
-            tda_renewal_period_dd:[this.results.tda_renewal_period_dd],
             tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],
-            tda_renewal_period:[this.results.tda_renewal_period],
-            tda_automatically_create_dep:[this.results.tda_automatically_create_dep],
-            tda_link_to_operative_ac:[this.results.tda_link_to_operative_ac],
-            tda_auto_cr_period_mm:[this.results.tda_auto_cr_period_mm],
-            tda_auto_cr_period_dd:[this.results.tda_auto_cr_period_dd],
-            int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-            int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
-            int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
-            int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
             is_verified:[true],
             tda_fees: new FormArray([]),
             tda_glsubheads: new FormArray([]),
@@ -1388,7 +1206,6 @@ tda_fee_cr_placeholderLookup(): void {
 
             tda_effective_from_date:[this.results.tda_effective_from_date],
             tda_effective_to_date:[this.results.tda_effective_to_date],
-            tda_system_generated_no:[this.results.tda_system_generated_no],
             tda_number_generation_code:[this.results.tda_number_generation_code],
             tda_principal_lossline_ac:[this.results.tda_principal_lossline_ac],
             tda_recovery_lossline_ac:[this.results.tda_recovery_lossline_ac],
@@ -1409,52 +1226,23 @@ tda_fee_cr_placeholderLookup(): void {
             tda_int_cal_freq_dr_day:[this.results.tda_int_cal_freq_dr_day],
             tda_int_cal_freq_dr_date:[this.results.tda_int_cal_freq_dr_date],
             tda_int_cal_freq_dr_holiday:[this.results.tda_int_cal_freq_dr_holiday],
-            tda_int_table_code:[this.results.tda_int_table_code],
   
             // end of interest details
             tda_deposit_amt_min:[this.results.tda_deposit_amt_min],
             tda_deposit_amt_max:[this.results.tda_deposit_amt_max],
-            tda_deposit_amt_steps:[this.results.tda_deposit_amt_steps],
             tda_period_mm_min:[this.results.tda_period_mm_min],
             tda_period_dd_min:[this.results.tda_period_dd_min],
             tda_period_mm_max:[this.results.tda_period_mm_max],
             tda_period_dd_max:[this.results.tda_period_dd_max],
-            tda_period_steps_mm:[this.results.tda_period_steps_mm],
-            tda_period_steps_dd:[this.results.tda_period_steps_dd],
-            tda_deposit_type:[this.results.tda_deposit_type],
             tda_sundry_deposit_ph:[this.results.tda_sundry_deposit_ph],
             tda_repayment_report_code:[this.results.tda_repayment_report_code],
-            tda_duration_to_mrk_ac_inactive:[this.results.tda_duration_to_mrk_ac_inactive],
-            tda_duration_frm_inactive_to_dormant:[this.results.tda_duration_frm_inactive_to_dormant],
             tda_pre_closure_rate:[this.results.tda_pre_closure_rate],
             tda_pre_closure_penalty_rate:[this.results.tda_pre_closure_penalty_rate],
-            // tda_sundry_deposit_ph:[this.results.],
-            // tda_repayment_report_code:[this.results.],
             tda_frequency_for_int_calc_on_preclosure_month:[this.results.tda_frequency_for_int_calc_on_preclosure_month],
-            tda_sweeps:[this.results.tda_sweeps],
-            tda_part_closure:[this.results.tda_part_closure],
-            tda_value_dated_closure:[this.results.tda_value_dated_closure],
             tda_repayment_ac_ph:[this.results.tda_repayment_ac_ph],
-            tda_auto_renewal:[this.results.tda_auto_renewal],
-            tda_max_no_of_renewal:[this.results.tda_max_no_of_renewal],
-            tda_renewal_period_mm:[this.results.tda_renewal_period_mm],
-            tda_renewal_period_dd:[this.results.tda_renewal_period_dd],
             tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],
-            tda_renewal_period:[this.results.tda_renewal_period],
-            tda_automatically_create_dep:[this.results.tda_automatically_create_dep],
-            tda_link_to_operative_ac:[this.results.tda_link_to_operative_ac],
-            tda_auto_cr_period_mm:[this.results.tda_auto_cr_period_mm],
-            tda_auto_cr_period_dd:[this.results.tda_auto_cr_period_dd],
-            int_cal_freq_dr_week:[this.results.int_cal_freq_dr_week],
-            // int_cal_freq_dr_week:[this.results.],
-            int_cal_freq_dr_day:[this.results.int_cal_freq_dr_day],
-            int_cal_freq_dr_date:[this.results.int_cal_freq_dr_date],
-            int_cal_freq_dr_holiday:[this.results.int_cal_freq_dr_holiday],
             is_verified:[this.results.is_verified],
             is_deleted:[true],
-            // int_cal_freq_dr_day:[this.results.],
-            // int_cal_freq_dr_date:[this.results.],
-            // int_cal_freq_dr_holiday:[this.results.],
             tda_fees: new FormArray([]),
             tda_glsubheads: new FormArray([]),
 
