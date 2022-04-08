@@ -16,7 +16,7 @@ import { OverdraftSchemeLookupComponent } from '../ProductModule/overdrafts-sche
 import { SavingschemeLookupComponent } from '../ProductModule/savings-scheme/savingscheme-lookup/savingscheme-lookup.component';
 import { TermDepositLookupComponent } from '../ProductModule/term-deposit/term-deposit-lookup/term-deposit-lookup.component';
 
-
+ 
 @Component({
   selector: 'app-loan-account',
   templateUrl: './loan-account.component.html',
