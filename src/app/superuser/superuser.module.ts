@@ -13,6 +13,8 @@ import { UserManagementComponent } from './pages/user-management/user-management
 import { RolesManagementComponent } from './pages/roles-management/roles-management.component';
 import { PrivilegeManagementComponent } from './pages/privilege-management/privilege-management.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { CreateUserComponent } from './pages/user-management/create-user/create-user.component';
+import { UpdateUserComponent } from './pages/user-management/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     UserManagementComponent,
     RolesManagementComponent,
     PrivilegeManagementComponent,
+    CreateUserComponent,
+    UpdateUserComponent,
   ],
   imports: [
     CommonModule,

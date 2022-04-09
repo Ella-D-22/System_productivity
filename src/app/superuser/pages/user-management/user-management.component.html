@@ -8,7 +8,7 @@
           <div class="row table-action-row">
             <div class="col-md-6 col-sm-12">
           <div>
-            <button class="table-main-action-btn"  class="table-main-action-btn" mat-stroked-button color="primary" routerLink="/administration/create/new/department"  >+ Create </button>
+            <button class="table-main-action-btn"  class="table-main-action-btn" mat-stroked-button color="primary" routerLink="/superuser/manage/user/create">+ Create </button>
             <button class="table-main-action-btn" color="accent" mat-raised-button (click)="exporter.exportTable('csv',{fileName:'Exported Data'})"><i class="fas fa-file-csv"></i> - CSV</button>
             <button class="table-main-action-btn" color="primary" mat-raised-button (click)="exporter.exportTable('xlsx',{fileName:'Exported Data'})"><i class="fas fa-file-excel"></i> - Excel</button>
             <button class="table-main-action-btn" color="warn" mat-raised-button (click)="exporter.exportTable('json',{fileName:'Exported Data'})"><i class="fas fa-file-code"></i> - JSON</button>
@@ -93,9 +93,9 @@
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> Action </th>   
               <td mat-cell *matCellDef="let row"> 
-                <a class="update"  color="black"  matTooltip="View Department Employees" [routerLink]="['/administration/employee/departments/', row.id]" ><mat-icon>supervisor_account</mat-icon></a>
-                <a class="update"  color="accent" matTooltip="Update Department"  [routerLink]="['/administration/update/department/', row.id]" ><mat-icon>launch</mat-icon></a>
-                <a class="danger"  color="accent" matTooltip="Delete Department" (click)="onDelete(row.id)" routerLinkActive="list-item-active" ><mat-icon>delete_outline</mat-icon></a>
+                <a class="update"  color="black"  matTooltip="View Department Employees" (click)="onResetPassword(row)" ><mat-icon>autorenew</mat-icon></a>
+                <a class="update"  color="accent" matTooltip="Update Department"  [routerLink]="['/superuser/manage/user/update/', row.username]" ><mat-icon>launch</mat-icon></a>
+                <a class="danger"  color="accent" matTooltip="Delete Department" (click)="onDelete(row.username)" routerLinkActive="list-item-active" ><mat-icon>delete_outline</mat-icon></a>
               </td>
             </ng-container>
         

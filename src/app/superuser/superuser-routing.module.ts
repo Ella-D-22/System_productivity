@@ -4,6 +4,8 @@ import { CanActivateModuleGuard } from 'src/@core/helpers/CanActivateModule.guar
 import { PrivilegeManagementComponent } from './pages/privilege-management/privilege-management.component';
 import { RolesManagementComponent } from './pages/roles-management/roles-management.component';
 import { SuDashboardComponent } from './pages/su-dashboard/su-dashboard.component';
+import { CreateUserComponent } from './pages/user-management/create-user/create-user.component';
+import { UpdateUserComponent } from './pages/user-management/update-user/update-user.component';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
 import { SuperuserComponent } from './superuser.component';
 
@@ -27,6 +29,20 @@ const routes: Routes = [{
       // canActivate: [CanActivateModuleGuard],
       // data: {preload:true },
     },
+    {
+      path: 'manage/user/create',
+      component:CreateUserComponent,
+      // canActivate: [CanActivateModuleGuard],
+      // data: {preload:true },
+    },
+    {
+      path: 'manage/user/update/:username',
+      component:UpdateUserComponent,
+      // canActivate: [CanActivateModuleGuard],
+      // data: {preload:true },
+    },
+    
+    
     {
       path: 'manage/roles',
       component:RolesManagementComponent,
