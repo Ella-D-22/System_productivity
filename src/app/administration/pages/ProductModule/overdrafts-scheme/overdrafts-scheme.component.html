@@ -954,14 +954,7 @@
              </div> 
             </div>
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Record</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input type="text" formControlName="class_main" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.version_desc_repo.errors }" />
-                  </div>
-               </div>             -->
+           
           </div>
           </div>
           <br/>
@@ -1031,10 +1024,11 @@
     </mat-tab-group>
         <br />
         <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
-        <button class="pull-right" mat-raised-button color="primary" type="submit">
+        <button class="pull-right" mat-raised-button color="primary" type="submit" *ngIf="isSubmitted"> 
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Submit
         </button>
+        <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
         <br />
       </form>
     </div>

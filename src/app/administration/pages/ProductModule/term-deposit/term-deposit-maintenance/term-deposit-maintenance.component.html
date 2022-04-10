@@ -46,7 +46,8 @@
            <label class="start pull-left">Scheme Code<span class="warning">*</span></label>
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
-            <input maxlength="6" type="text" [value]="this.scheme_code" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
+            <input maxlength="6" type="text" [value]="this.scheme_code" oninput="this.value=this.value.toUpperCase()" formControlName="scheme_code" class="pull-right form-control"
+             [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
             <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
           </div>
        </div>            
@@ -57,7 +58,8 @@
            <label class="start pull-left">Scheme Code Desc</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
-             <textarea [value]="this.scheme_code_desc" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"></textarea>
+             <textarea [value]="this.scheme_code_desc" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"
+             oninput="this.value=this.value.toUpperCase()"></textarea>
           </div>
        </div>            
   </div>
@@ -71,7 +73,7 @@
       *ngIf="loading"
       class="spinner-border spinner-border-sm mr-1"
     ></span>
-    Submit
+    GO
   </button>
   <br />
 </form>

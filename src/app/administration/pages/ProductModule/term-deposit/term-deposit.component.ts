@@ -28,9 +28,9 @@ export class TermDepositComponent implements OnInit {
   loading = false;
   isDisabled = false;
   isEnabled = true;
-  flagArray: any = [
-    'Y', 'N'
-  ]
+  flagArray: any = [ 'Y','N']
+  isSubmitted = false;
+  isDeleted = false;
   amt_derivation_Array: any = [
     { code: 'CHRG', description: 'Free Code' },
     { code: 'FIXED', description: 'Fixed Amt' },
@@ -158,8 +158,16 @@ export class TermDepositComponent implements OnInit {
   tda_fee_cr_placeholder_desc: any;
   event_id_desc: any;
   tda_int_table_code: any;
+  tda_ac_credit_balance_description:any
+  tda_liability_exceed_group_desc:any
+  tda_ac_is_froozed_description:any
+  tda_sanction_limit_expired_desc:any
+  tda_interest_calc_desc:any
+  tda_insufficient_exception_desc:any
+  tda_backdate_transaction_desc:any
   element: any;
   loanElement: any;
+
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
     });
@@ -395,6 +403,7 @@ tda_fee_cr_placeholderLookup(): void {
       this.exception_lookupData = result.data;
       this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
       this.formData.controls.tda_ac_debit_balance.setValue(this.exception_lookupData .id);
+      this.tda_ac_debit_description = this.exception_lookupData.exce_description
     });
   }
   ac_credit_balance_Lookup(): void {
@@ -404,7 +413,9 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_ac_credit_balance.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_ac_credit_balance.setValue(this.exception_lookupData.id);
+      this.tda_ac_credit_balance_description = this.exception_lookupData.exce_description
+      
     });
   }
   liability_exceed_group_Lookup(): void {
@@ -415,6 +426,7 @@ tda_fee_cr_placeholderLookup(): void {
       this.exception_lookupData = result.data;
       this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
       this.formData.controls.tda_liability_exceed_group.setValue(this.exception_lookupData .id);
+      this.tda_liability_exceed_group_desc = this.exception_lookupData.exce_description
     });
   }
   ac_is_froozed_Lookup(): void {
@@ -424,7 +436,8 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_ac_is_froozed.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_ac_is_froozed.setValue(this.exception_lookupData.id);
+      this.tda_ac_is_froozed_description = this.exception_lookupData.exce_description
     });
   }
   sanction_limit_expired_Lookup(): void {
@@ -434,7 +447,8 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_sanction_limit_expired.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_sanction_limit_expired.setValue(this.exception_lookupData.id);
+      this.tda_sanction_limit_expired_desc =  this.exception_lookupData.exce_description
     });
   }
   interest_calc_Lookup(): void {
@@ -444,7 +458,8 @@ tda_fee_cr_placeholderLookup(): void {
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       this.interest_calc_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_interest_calc.setValue(this.exception_lookupData .id);
+      this.formData.controls.tda_interest_calc.setValue(this.exception_lookupData.id);
+      this.tda_interest_calc_desc = this.exception_lookupData.exce_description
     });
   }
   insufficient_exception_Lookup(): void {
@@ -455,6 +470,7 @@ tda_fee_cr_placeholderLookup(): void {
       this.exception_lookupData = result.data;
       this.insufficient_exception_value =  this.exception_lookupData.exception_code;
       this.formData.controls.tda_insufficient_exception.setValue(this.exception_lookupData .id);
+      this.tda_insufficient_exception_desc = this.exception_lookupData.exce_description
     });
   }
   backdate_transaction_Lookup(): void {
@@ -465,6 +481,7 @@ tda_fee_cr_placeholderLookup(): void {
       this.exception_lookupData = result.data;
       this.backdate_transaction_value =  this.exception_lookupData.exception_code;
       this.formData.controls.tda_backdate_transaction.setValue(this.exception_lookupData .id);
+      this.tda_backdate_transaction_desc = this.exception_lookupData.exce_description
     });
   }
   
@@ -538,6 +555,7 @@ tda_fee_cr_placeholderLookup(): void {
   base_indicator: any;
   version: any;
   newData = true;
+  tda_ac_debit_description:any;
 
   constructor(
     public fb: FormBuilder,
@@ -774,13 +792,6 @@ tda_fee_cr_placeholderLookup(): void {
     });
   }
 
-
-
-
-
-
-
-
   onSystem_generated_no(event: any){
     this.showSystem_gen_no = true;
     this.showNumber_gen_code = false;;
@@ -789,7 +800,6 @@ tda_fee_cr_placeholderLookup(): void {
     this.showNumber_gen_code = true;
     this.showSystem_gen_no = false;;
   }
-
   disabledFormControll() {
     this.formData.disable()
   }
@@ -800,17 +810,14 @@ tda_fee_cr_placeholderLookup(): void {
       this.scheme_code = this.message.scheme_code;
       this.scheme_type = this.message.scheme_type;
       this.scheme_code_desc = this.message.scheme_code_desc;
-
       if (this.function_type == "A-Add") {
         // open empty forms
+        this.isSubmitted = true;
         this.formData = this.fb.group({
-
           function_type: [this.function_type],
           scheme_code: [this.scheme_code],
           scheme_type: [this.scheme_type],
           scheme_code_desc: [this.scheme_code_desc],
-
-  
           tda_effective_from_date:[''],
           tda_effective_to_date:[''],
           tda_number_generation_code:[''],
@@ -818,7 +825,6 @@ tda_fee_cr_placeholderLookup(): void {
           tda_recovery_lossline_ac:[''],
           tda_charge_off_ac:[''],
           tda_number_generation:[''],
-    
           // interest details
           tda_pl_ac_ccy:[''],
           tda_int_receivale_applicable:[''],
@@ -833,7 +839,6 @@ tda_fee_cr_placeholderLookup(): void {
           tda_int_cal_freq_dr_day:[''],
           tda_int_cal_freq_dr_date:[''],
           tda_int_cal_freq_dr_holiday:[''],
-
           // end of interest details
           tda_deposit_amt_min:[''],
           tda_deposit_amt_max:[''],
@@ -862,7 +867,6 @@ tda_fee_cr_placeholderLookup(): void {
           tda_interest_calc:[''],
           tda_insufficient_exception:[''],
           tda_backdate_transaction:[''],
-
           tda_fees: new FormArray([]),
           tda_glsubheads: new FormArray([]),
 
@@ -881,13 +885,11 @@ tda_fee_cr_placeholderLookup(): void {
           deletedTime: [new Date()],
         });
       }
-      else if (this.function_type == "I-Inquire") {
-        
+      else if (this.function_type == "I-Inquire") {     
         // find by event id
         this.showContractInput = true;
         // call to disable edit
-        this.disabledFormControll();
-        // hide Buttons
+        this.disabledFormControll();    
         this.isEnabled = false;
         let params = new HttpParams()
         .set("scheme_code", this.scheme_code);     
@@ -899,12 +901,11 @@ tda_fee_cr_placeholderLookup(): void {
           this.feeArray = this.results.tda_fees;
           
           this.formData = this.fb.group({
-
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
             scheme_type: [this.results.scheme_type],
             scheme_code_desc: [this.results.scheme_code_desc],
-  
+
             tda_effective_from_date:[this.results.tda_effective_from_date],
             tda_effective_to_date:[this.results.tda_effective_to_date],
             tda_number_generation_code:[this.results.tda_number_generation_code],
@@ -912,7 +913,6 @@ tda_fee_cr_placeholderLookup(): void {
             tda_recovery_lossline_ac:[this.results.tda_recovery_lossline_ac],
             tda_charge_off_ac:[this.results.tda_charge_off_ac],
             tda_number_generation:[this.results.tda_number_generation],
-    
             // interest details
             tda_pl_ac_ccy:[this.results.tda_pl_ac_ccy],
             tda_int_receivale_applicable:[this.results.tda_int_receivale_applicable],
@@ -927,7 +927,6 @@ tda_fee_cr_placeholderLookup(): void {
             tda_int_cal_freq_dr_day:[this.results.tda_int_cal_freq_dr_day],
             tda_int_cal_freq_dr_date:[this.results.tda_int_cal_freq_dr_date],
             tda_int_cal_freq_dr_holiday:[this.results.tda_int_cal_freq_dr_holiday],
-  
             // end of interest details
             tda_deposit_amt_min:[this.results.tda_deposit_amt_min],
             tda_deposit_amt_max:[this.results.tda_deposit_amt_max],
@@ -939,8 +938,7 @@ tda_fee_cr_placeholderLookup(): void {
             tda_repayment_report_code:[this.results.tda_repayment_report_code],
             tda_pre_closure_rate:[this.results.tda_pre_closure_rate],
             tda_pre_closure_penalty_rate:[this.results.tda_pre_closure_penalty_rate],
-            // tda_sundry_deposit_ph:[this.results.],
-            // tda_repayment_report_code:[this.results.],
+          
             tda_frequency_for_int_calc_on_preclosure_month:[this.results.tda_frequency_for_int_calc_on_preclosure_month],
             tda_repayment_ac_ph:[this.results.tda_repayment_ac_ph],
             tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],
@@ -982,15 +980,10 @@ tda_fee_cr_placeholderLookup(): void {
         })
       }
       else if (this.function_type == "M-Modify") {
-        //load the page wit
-        // find by event id
+      this.isSubmitted = true
         this.showContractInput = true;
-        // call to disable edit
-        // this.disabledFormControll();
-        // hide Buttons
         this.isEnabled = false;
-        let params = new HttpParams()
-        .set("scheme_code", this.scheme_code);     
+        let params = new HttpParams().set("scheme_code", this.scheme_code);     
         this.subscription = this.tdaAPI.getproductBySchemeCode(params).subscribe(res=>{
           this.results = res;
           // Initialise the glsubheads
@@ -1037,8 +1030,7 @@ tda_fee_cr_placeholderLookup(): void {
             tda_repayment_report_code:[this.results.tda_repayment_report_code],
             tda_pre_closure_rate:[this.results.tda_pre_closure_rate],
             tda_pre_closure_penalty_rate:[this.results.tda_pre_closure_penalty_rate],
-            // tda_sundry_deposit_ph:[this.results.],
-            // tda_repayment_report_code:[this.results.],
+          
             tda_frequency_for_int_calc_on_preclosure_month:[this.results.tda_frequency_for_int_calc_on_preclosure_month],
             tda_repayment_ac_ph:[this.results.tda_repayment_ac_ph],
             tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],           
@@ -1081,26 +1073,16 @@ tda_fee_cr_placeholderLookup(): void {
       }
       else if (this.function_type == "V-Verify") {
         this.disabledFormControll();
-        //load the page with form data submit disabled
-        // find by event id
-        this.showContractInput = true;
-        // call to disable edit
-        // this.disabledFormControll();
-        // hide Buttons
+      this.isSubmitted = true
+        this.showContractInput = true; 
         this.isEnabled = false;
-        let params = new HttpParams()
-        .set("scheme_code", this.scheme_code);     
+        let params = new HttpParams().set("scheme_code", this.scheme_code);     
         this.subscription = this.tdaAPI.getproductBySchemeCode(params).subscribe(res=>{
-
           this.results = res;
-
           // Initialise the glsubheads
           this.glSubheadArray = this.results.tda_glsubheads;
           this.tda_fees = this.results.tda_fees;
-
-
           this.formData = this.fb.group({
-  
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
             scheme_type: [this.results.scheme_type],
@@ -1113,7 +1095,6 @@ tda_fee_cr_placeholderLookup(): void {
             tda_recovery_lossline_ac:[this.results.tda_recovery_lossline_ac],
             tda_charge_off_ac:[this.results.tda_charge_off_ac],
             tda_number_generation:[this.results.tda_number_generation],
-      
             // interest details
             tda_pl_ac_ccy:[this.results.tda_pl_ac_ccy],
             tda_int_receivale_applicable:[this.results.tda_int_receivale_applicable],
@@ -1180,26 +1161,19 @@ tda_fee_cr_placeholderLookup(): void {
             verticalPosition: this.verticalPosition,
             duration: 3000,
             panelClass: ['red-snackbar', 'login-snackbar'],
-          });
-        })
-
+          }); })
       }
       else if (this.function_type == "X-Delete") {
         this.disabledFormControll();
         this.isEnabled = false;
-        let params = new HttpParams()
-        .set("scheme_code", this.scheme_code);     
+        this.isDeleted = true;
+        let params = new HttpParams().set("scheme_code", this.scheme_code);     
         this.subscription = this.tdaAPI.getproductBySchemeCode(params).subscribe(res=>{
-
           this.results = res;
-
           // Initialise the glsubheads
           this.glSubheadArray = this.results.tda_glsubheads;
           this.tda_fees = this.results.tda_fees;
-
-
           this.formData = this.fb.group({
-
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
             scheme_type: [this.results.scheme_type],
@@ -1279,10 +1253,7 @@ tda_fee_cr_placeholderLookup(): void {
             duration: 3000,
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
-        })
-
-      }
-    })
+        }) } })
   }
   chrgCalcCrncyLookup(): void {
     const dialogRef = this.dialog.open(CurrencyLookupComponent, {
@@ -1313,6 +1284,7 @@ tda_fee_cr_placeholderLookup(): void {
     // stop here if form is invalid
     if (this.formData.valid) {
       if (this.function_type == "A-Add") {
+      
         this.subscription = this.tdaAPI.createTermDeposit(this.formData.value).subscribe(res => {
           this.results = res;
           this._snackBar.open("Executed Successfully!", "X", {
@@ -1321,6 +1293,8 @@ tda_fee_cr_placeholderLookup(): void {
             duration: 3000,
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
+          this.router.navigateByUrl('system/configurations/product/term-deposit/maintenance');
+
         }, err => {
           this.error = err;
           this._snackBar.open(this.error, "Try again!", {
@@ -1340,6 +1314,8 @@ tda_fee_cr_placeholderLookup(): void {
             duration: 3000,
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
+                    this.router.navigateByUrl('system/configurations/product/term-deposit/maintenance');
+
         }, err => {
           this.error = err;
           this._snackBar.open(this.error, "Try again!", {
