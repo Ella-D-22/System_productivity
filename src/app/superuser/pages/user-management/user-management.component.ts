@@ -24,6 +24,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   data: any;
   error: any;
+  loading = false;
   constructor(    
         private authService: AuthService,
         private fb: FormBuilder,
@@ -59,6 +60,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
       }
     }
     onResetPassword(data){
+      this.loading = true;
       let password = Math.random().toString(36).slice(-8);
       let resetPassForm  = this.fb.group({    
           emailAddress: [data.email],
@@ -72,6 +74,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
           duration: 3000,
           panelClass: ['green-snackbar','login-snackbar'],
         });
+      this.loading = false;
       }, err=>{
         this._snackBar.open(this.error, "Try again!", {
           horizontalPosition: 'end',
@@ -79,6 +82,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
           duration: 3000,
           panelClass: ['red-snackbar','login-snackbar'],
         });
+      this.loading = false;
       })
       
     }

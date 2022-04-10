@@ -105,6 +105,7 @@ export class UpdateUserComponent implements OnInit {
         duration: 3000,
         panelClass: ['green-snackbar','login-snackbar'],
       });
+      this.loading = false;
       // /superuser/manage/user
     this.ngZone.run(() => this.router.navigateByUrl('superuser/manage/user'));
     },err=>{
@@ -114,6 +115,7 @@ export class UpdateUserComponent implements OnInit {
         duration: 3000,
         panelClass: ['red-snackbar','login-snackbar'],
       });
+      this.loading = false;
     })
 
   }

@@ -60,6 +60,7 @@ export class CreateUserComponent implements OnInit {
         duration: 3000,
         panelClass: ['green-snackbar','login-snackbar'],
       });
+      this.loading = false;
     this.ngZone.run(() => this.router.navigateByUrl('superuser/manage/user'));
     },err=>{
       this._snackBar.open(this.error, "Try again!", {
@@ -68,6 +69,7 @@ export class CreateUserComponent implements OnInit {
         duration: 3000,
         panelClass: ['red-snackbar','login-snackbar'],
       });
+      this.loading = false;
     })
 
   }

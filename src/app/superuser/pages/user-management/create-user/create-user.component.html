@@ -1,4 +1,9 @@
 <mat-card>
+  <div *ngIf="loading" >
+    <p><small>Sending Email, Please wait...</small></p>
+    <p><mat-progress-bar mode="query"></mat-progress-bar></p>
+  </div>
+  
     <mat-card-header  class="breadcrumb">
       <div>Home/User Management/ Create</div>
   </mat-card-header>
