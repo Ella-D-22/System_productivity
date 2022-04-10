@@ -104,6 +104,9 @@ import { RetailCustomerMaintenanceComponent } from './pages/CustomersComponent/r
 import { CorporateCustomerComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer.component';
 import { CorporateCustomerLookupComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer-lookup/corporate-customer-lookup.component';
 import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer-maintenance/corporate-customer-maintenance.component';
+import { TransactionExecutionLookupComponent } from './pages/transaction-execution/transaction-execution-lookup/transaction-execution-lookup.component';
+import { TransactionExecutionMainComponent } from './pages/transaction-execution/transaction-execution-main/transaction-execution-main.component';
+import { TransactionExecutionComponent } from './pages/transaction-execution/transaction-execution.component';
 
 @NgModule({
   declarations: [
@@ -164,26 +167,21 @@ import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponen
     BranchesComponent,
     BranchesLookupComponent,
     BranchesMaintenanceComponent,
-
     CashTransactionsComponent,
     TransactionMaintainanceComponent,
     AccountComponent,
-
     LoanAccountComponent,
     LoanAccountMaintainanceComponent,
     LoanAccountLookupComponent,
-
     BranchComponent,
     CustomerComponent,
     GlSubheadLookup2Component,
     ProductComponent,
     UserComponent,
     EventIdLookupComponent,
-    
     InterestComponent,
     InterestMaintainanceComponent,
     InterestLookupComponent,
-
     //MIS-Codes
     MisSectorComponent,
     MisSectorLookupComponent,
@@ -193,16 +191,10 @@ import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponen
     MisSubSectorLookupComponent,
     GuarantosComponent,
     GuarantosMaintenanceComponent,
-
     LimitsComponent,
     LimitsMaintenanceComponent,
-
     LimitsLookupComponent,
-
-
     // Customers
-
- 
     MainGroupComponent,
     MainGroupMaintenanceComponent,
     SubGroupMaintenanceComponent,
@@ -214,13 +206,10 @@ import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponen
     RetailCustomerMaintenanceComponent,
     CorporateCustomerComponent,
     CorporateCustomerLookupComponent,
-    CorporateCustomerMaintenanceComponent
-
-    
-    
- 
-
-    
+    CorporateCustomerMaintenanceComponent,
+    TransactionExecutionComponent,
+    TransactionExecutionLookupComponent,
+    TransactionExecutionMainComponent,
   ],
   imports: [
     CommonModule,

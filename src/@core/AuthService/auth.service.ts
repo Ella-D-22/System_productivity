@@ -63,10 +63,27 @@ allUsers(): Observable<any> {
 }
 
 getUserByUsername(username:any): Observable<any> {
-  return this.http.get(AUTH_API + `users​/${username}`, httpOptions);
+  return this.http.get(AUTH_API+`account/${username}`, httpOptions);
 }
+
+
+// getUserByUsername(username:any): Observable<any> {
+//   let API_URL = `${environment.userAPI}/account/${username}`;
+//   return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
+//     .pipe(
+//       map((res) => {
+//         return res || {}
+//       }),
+//       catchError(this.errorMgmt)
+//     )
+// }
+
+
+
 updateUser(data:any): Observable<any> {
-  return this.http.put(AUTH_API + 'update',data,httpOptions);
+  console.log(data);
+  
+  return this.http.put(AUTH_API + 'users/update',data,httpOptions);
 }
 
   getToken(){

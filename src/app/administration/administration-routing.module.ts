@@ -61,6 +61,8 @@ import { RetailCustomerComponent } from './pages/CustomersComponent/retail-custo
 import { RetailCustomerMaintenanceComponent } from './pages/CustomersComponent/retail-customer/retail-customer-maintenance/retail-customer-maintenance.component';
 import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer-maintenance/corporate-customer-maintenance.component';
 import { CorporateCustomerComponent } from './pages/CustomersComponent/corporate-customer/corporate-customer.component';
+import { TransactionExecutionComponent } from './pages/transaction-execution/transaction-execution.component';
+import { TransactionExecutionMainComponent } from './pages/transaction-execution/transaction-execution-main/transaction-execution-main.component';
 
 const routes: Routes = [{
   path: '',
@@ -70,8 +72,6 @@ const routes: Routes = [{
       path: '',
       component: DashboardComponent
     },
-    
-    
     {
       path: 'configurations/global/linked/organization/maintenance',
       component:LinkedOrganizationMaintenanceComponent,
@@ -410,13 +410,13 @@ const routes: Routes = [{
       
       {
         path: 'transactions/maintenance',
-        component:TransactionMaintainanceComponent,
+        component:TransactionExecutionComponent,
         canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'transactions/cash/data/view',
-        component:CashTransactionsComponent,
+        component:TransactionExecutionMainComponent,
         canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },

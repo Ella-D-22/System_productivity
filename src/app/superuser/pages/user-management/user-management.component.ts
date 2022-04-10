@@ -1,6 +1,6 @@
 import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
 import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -24,15 +24,10 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   data: any;
   error: any;
-
-
-  
-
-
-
-
+  loading = false;
   constructor(    
         private authService: AuthService,
+        private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     ) { }
     ngOnInit() {
@@ -64,5 +59,31 @@ export class UserManagementComponent implements OnInit, OnDestroy {
      
       }
     }
-
+    onResetPassword(data){
+      this.loading = true;
+      let password = Math.random().toString(36).slice(-8);
+      let resetPassForm  = this.fb.group({    
+          emailAddress: [data.email],
+          password: [password],
+          confirmPassword: [password],
+      });
+      this.subscription = this.authService.resetPassword(resetPassForm.value).subscribe(res=>{
+        this._snackBar.open("Successfull!", "X", {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: ['green-snackbar','login-snackbar'],
+        });
+      this.loading = false;
+      }, err=>{
+        this._snackBar.open(this.error, "Try again!", {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: ['red-snackbar','login-snackbar'],
+        });
+      this.loading = false;
+      })
+      
+    }
 }

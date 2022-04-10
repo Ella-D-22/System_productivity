@@ -56,24 +56,7 @@
           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/charge/preferentials/maintenance"><mat-icon>subdirectory_arrow_right</mat-icon>Charge Preferentials</a>   
         </mat-nav-list>
     </mat-expansion-panel>
-    </mat-accordion>
-    <!-- Interest Params -->
-    <!-- <mat-accordion class="app-nav-accordion">
-      <mat-expansion-panel class="mat-elevation-z0">
-        <mat-expansion-panel-header>
-            <mat-panel-title class="nav-title">
-              Interests Params </mat-panel-title>
-        </mat-expansion-panel-header> 
-        <mat-nav-list>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/interest/hitcm/maintenance" matTooltip="Interest Table Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Loan Interest Rate</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/interest/hbivsm/maintenance" matTooltip="Interest Table Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Base Interest Table C.</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/interest/hivsm/maintenance" matTooltip="General Interest Module Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>General Interest M.</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/interest/hlvsm/maintenance" matTooltip="Loan Interest Version Slab Maintenance"> <mat-icon>subdirectory_arrow_right</mat-icon>Loan Interest Slab M.</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/interest/htvsm/maintenance" matTooltip="Term Deposit Interest Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Term Deposit Interest M.</a>
-        </mat-nav-list>
-    </mat-expansion-panel>
-    </mat-accordion> -->
-   
+    </mat-accordion> 
         </mat-nav-list>
     </mat-expansion-panel>
     </mat-accordion>
@@ -81,9 +64,6 @@
     <a mat-list-item class="nav-title main-link" routerLinkActive="list-item-active" routerLink="/system/interest/maintenance">
       <mat-icon>home</mat-icon>
        Interest Maintenance</a> 
-       
-
-      
       <!-- Product -->
 
     <mat-accordion class="app-nav-accordion">
@@ -160,8 +140,24 @@
            Branches Management</a> 
          
            <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/transactions/maintenance">
-            <mat-icon>home</mat-icon>
+            <mat-icon>perm_data_setting</mat-icon>
              Transaction Maintenance</a> 
+
+
+
+            <mat-accordion class="app-nav-accordion">
+              <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="nav-title">
+                      <mat-icon>library_books</mat-icon>Reports </mat-panel-title>
+                </mat-expansion-panel-header> 
+                <mat-nav-list>       
+                  <a mat-list-item routerLinkActive="list-item-active" routerLink="#"> <mat-icon>subdirectory_arrow_right</mat-icon> Create Report</a>
+                  <a mat-list-item routerLinkActive="list-item-active" routerLink="#" matTooltip="General Ledger Code Maintenance"> <mat-icon>subdirectory_arrow_right</mat-icon>Generate Report</a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+            </mat-accordion>
+             
     <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/scheme_component">Scheme Module</a> -->
 
 </mat-nav-list>

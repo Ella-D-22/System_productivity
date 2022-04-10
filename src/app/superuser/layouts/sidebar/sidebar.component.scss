@@ -23,10 +23,6 @@
   margin: 0px !important;
 }
 .mat-list-item{
-  // padding-top: 10px;
-  // font-size: 8px;
-  // padding-bottom: 10px;
-  // font-family: monospace;
   height: min-content !important;
   flex: block !important;
 }
@@ -36,7 +32,7 @@ h2{
 }
 .online{
   color: greenyellow;
-  font-family: monospace;
+  // font-family: monospace;
   font-weight: 600;
   text-align: left;
 }
@@ -50,8 +46,8 @@ mat-menu{
 }
 
 a{
-  font-size: 12px !important;
-  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 2px !important;
+  margin-bottom: 1px !important;
 }
 h5{
   font-size: 12px !important;
@@ -82,13 +78,13 @@ h5{
 
     .mat-expansion-panel-header-title {
       color: rgba(0,0,0,0.54);
-      font-size: 14px;
-      font-weight: 500;
+      // font-size: 14px;
+      // font-weight: 500;
     }
   }
   .nav-title{
-    font-size: 12px !important;
-    font-family: monospace !important;
+    // font-size: 12px !important;
+    // font-family: monospace !important;
     color: black !important;
   }
 }
