@@ -25,6 +25,7 @@ export class RetailCustomerComponent implements OnInit {
   submitted = false;
   message: any
   function_type: any
+  loading = false;
   group_code: any
   results: any
   error: any
@@ -239,19 +240,10 @@ export class RetailCustomerComponent implements OnInit {
 
     })
   }
-
-
-
-
-
   disabledFormControl() {
     this.formData.disable()
-
     this.isDisabled = true;
-    
   }
-
-
   branchesCodeLookup(): void {
     const dialogRef = this.dialog.open(BranchesLookupComponent, {
       // height: '400px',
@@ -316,6 +308,7 @@ export class RetailCustomerComponent implements OnInit {
           this.onAddImageField();
           this.onAddImageField();
         } else if (this.function_type == "I-Inquire") {
+          this.loading = true;
           this.disabledFormControl()
           this.subscription = this.retailCustAPI.getRetailCustomerByCode(this.customerCode).subscribe(
             res => {
@@ -374,12 +367,15 @@ export class RetailCustomerComponent implements OnInit {
             for(let i=0; i<nominees.length; i++){
               this.onReadNominiesField(nominees[i])
             }
+            this.loading = false;
             }
           )
         } else if (this.function_type == "M-Modify") {
+          this.loading = true;
           this.isDisabled = false;
           this.subscription = this.retailCustAPI.getRetailCustomerByCode(this.customerCode).subscribe(
             res => {
+              this.loading = false
               this.results = res
               this.formData = this.fb.group({
                 sn:[this.results.sn],
@@ -439,8 +435,10 @@ export class RetailCustomerComponent implements OnInit {
           )
 
         } else if (this.function_type == "X-Delete") {
+          this.loading = true;
           this.subscription = this.retailCustAPI.getRetailCustomerByCode(this.customerCode).subscribe(
             res => {
+              this.loading = false;
               this.results = res
               this.formData = this.fb.group({
                 sn:[this.results.sn],

@@ -1,4 +1,3 @@
-import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
 import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,7 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/@core/AuthService/auth.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-management',

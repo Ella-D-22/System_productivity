@@ -24,6 +24,7 @@ export class CollateralComponent implements OnInit {
   event_id:any;
   params:any;
   eventId:any;
+  loading = false;
   LodgingDesc: any;
   withdrawalDesc: any;
   function_type:any;
@@ -84,9 +85,7 @@ export class CollateralComponent implements OnInit {
 // charge event for withdrawal
   withdrawalLookup(){
     const dialogRef = this.dialog.open(EventIdLookupComponent,{
-      height: '400px',
-      width:'600px'
-
+     
     });
     dialogRef.afterClosed().subscribe(
       result =>{
@@ -103,9 +102,7 @@ export class CollateralComponent implements OnInit {
   //charge event for Lodging
   LodgingLookup(){
     const dialogRef = this.dialog.open(EventIdLookupComponent,{
-      height: '400px',
-      width:'600px'
-
+      
     });
     dialogRef.afterClosed().subscribe(
       result =>{
@@ -420,14 +417,13 @@ export class CollateralComponent implements OnInit {
        
         }
           else if(this.message.function_type == "I-Inquire"){
-           console.log(this.message);
+            this.loading = true
            
           // let code = 'rete'
           this.collateralService.getCollateralByCode(this.message.collateralCode).subscribe(
             res =>{
-              this.resData = res;         
-              console.log(this.resData);
-
+              this.loading = false
+              this.resData = res;    
               this.collateralType= this.resData.entity.collateralType;
               if(this.collateralType == "VEHICLE & MACHINERIES"){
                 this.disabledFormControl()
@@ -585,10 +581,11 @@ export class CollateralComponent implements OnInit {
 
           }
           else if(this.message.function_type == "M-Modify"){
-            console.log("Modifying",this.message);
+            this.loading = true
             
             this.collateralService.getCollateralByCode(this.message.collateralCode).subscribe(
               res =>{
+                this.loading = false
 
                 // this.results = res['entity']
               this.resData = res;
@@ -745,18 +742,13 @@ export class CollateralComponent implements OnInit {
                 });
               }
             )
-       
-              
-        
-
-          
           }  else if(this.message.function_type == "D-Delete"){
+            this.loading = true
             this.collateralService.getCollateralByCode(this.message.collateralCode).subscribe(
               res =>{
-
+                this.loading = false
                 // this.results = res['entity']
               this.resData = res;
-
               this.collateralType= this.resData.entity.collateralType;
               if(this.collateralType == "VEHICLE & MACHINERIES"){
                 this.vehicle_and_machineries = true;

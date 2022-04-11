@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-    userAPI: 'http://localhost:9091',
+    // userAPI: 'http://localhost:9091',
     // accountAPI: 'http://localhost:9091/account-service',
     // productAPI: 'http://localhost:9100',
     // collateralAPI: 'http://localhost:9091/collateral-service',
@@ -22,7 +22,7 @@ export const environment = {
     // reportAPI:'http://localhost:9091/report-service',
     // glsAPI: 'http://localhost:9910/group-service',
 
-    // userAPI: 'http://52.15.152.26:9091',
+    userAPI: 'http://52.15.152.26:9091',
     accountAPI: 'http://52.15.152.26:9091/account-service',
     productAPI: 'http://52.15.152.26:9091/product-service',
     collateralAPI: 'http://52.15.152.26:9091/collateral-service',

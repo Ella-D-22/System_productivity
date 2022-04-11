@@ -12,6 +12,7 @@ import { CorporateCustomerService } from '../corporate-customer.service';
 })
 export class CorporateCustomerLookupComponent implements OnInit {
   results:any
+  loading = false
   entity:any
   displayedColumns : string[]= ['sn','Customer Code','Organisation Name']
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -27,11 +28,11 @@ export class CorporateCustomerLookupComponent implements OnInit {
 
 
   getData(){
+    this.loading = true;
     this.corpService.getAllCorporates().subscribe(
       data =>{
+        this.loading = false
         this.results = data
-        console.log(data);
-        
         this.dataSource = new MatTableDataSource(this.results.entity)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

@@ -52,7 +52,6 @@ export class CorporateCustomerMaintenanceComponent implements OnInit {
     }
     corporateCustomerLookup():void{
       const dialogRef = this.dialog.open(CorporateCustomerLookupComponent,{
-
       });
       dialogRef.afterClosed().subscribe(
         results =>{
