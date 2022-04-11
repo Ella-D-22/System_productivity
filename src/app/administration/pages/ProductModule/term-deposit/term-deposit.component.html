@@ -19,20 +19,12 @@
         <p>{{this.scheme_type}}</p>      
       </div>
     </div>
+    <div class="container-fluid">
     <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+      <mat-tab-group mat-align-tabs="center">
         <mat-tab class="mat-tab" label="General Details">
-            <div class="col-md-6 col-sm-12">
-                  <label class="start pull-left">Effective From</label>
-                  <input [matDatepicker]="zpicker" formControlName="tda_effective_from_date" class="form-control" />
-                </div>
-            <div class="col-md-6 col-sm-12">
-                  <label class="start pull-left">Expiry Date.</label>
-                  <input [matDatepicker]="kpickerm" formControlName="tda_effective_to_date" class="form-control" />
-                </div>
-              
-            
-          
-
+          <br>
+      
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
