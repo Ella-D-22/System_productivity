@@ -11,7 +11,11 @@ const routes: Routes = [
   { path: 'system', loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule),
     // canLoad: [CanLoadModuleGuard],
     data: {preload:true },
-  }
+  },
+  { path: 'superuser', loadChildren: () => import('./superuser/superuser.module').then(m => m.SuperuserModule),
+    // canLoad: [CanLoadModuleGuard],
+    // data: {preload:true },
+ }
 ];
 
 

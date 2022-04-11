@@ -39,20 +39,44 @@
                             <span *ngIf="this.showCode==true && this.function_type !='A-Add' " style="color: red; font: size 6px;">Collateral Code doesn't exists</span> 
                         </div>
                     </div>
-
-                </div>
-                <br>
-                <div class="col-md-1 offset-md-9">
-                      <button class="pull-right " mat-raised-button color="primary" type="submit">
-                    <span
-                      *ngIf="loading"
-                      class="spinner-border spinner-border-sm mr-1"
-                    ></span>
-                    Submit
-                  </button>
-                </div>
-              
+                </div>              
             </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div   class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="" >Customer Ref<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" oninput="this.value=this.value.toUpperCase()" [value]="this.customerCode" formControlName="customerCode" maxlength="6"
+                            class="pull-right form-control">
+                            <mat-icon (click)="customerLookup()">search</mat-icon>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                           <mat-hint>{{this.customerName}}</mat-hint>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <br>
+                    <div class="col-md-1 offset-md-9">
+                        
+                    </div>
+                </div>              
+            </div>
+            <button class="pull-right " mat-raised-button color="primary" type="submit">
+                <span
+                  *ngIf="loading"
+                  class="spinner-border spinner-border-sm mr-1"
+                ></span>
+                Submit
+              </button>
         </form>
     </div>
 </mat-card>

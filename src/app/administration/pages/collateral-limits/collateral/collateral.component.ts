@@ -26,7 +26,6 @@ export class CollateralComponent implements OnInit {
   eventId:any;
   LodgingDesc: any;
   withdrawalDesc: any;
-
   function_type:any;
   description:any;
   collateralType:any;
@@ -35,13 +34,10 @@ export class CollateralComponent implements OnInit {
   results:any
   error: any;
   lookupdata: any;
-
   showContractInput =false;
-
   horizontalPosition :MatSnackBarHorizontalPosition = 'end';
   verticalPosition : MatSnackBarVerticalPosition = 'top';
   flagArray: any = [
-
     'Y','N'
   ]
   resData: any;
@@ -49,8 +45,8 @@ export class CollateralComponent implements OnInit {
   with_description: any;
   lodge_collateralCode: any;
   lodge_description: any;
- 
-
+  customerName: any;
+  customerCode: any;
   constructor(private formBuilder:FormBuilder,
     private router:Router,
     private http:HttpClient,
@@ -61,21 +57,12 @@ export class CollateralComponent implements OnInit {
     private route:ActivatedRoute
     ) {
     this.message = this.router.getCurrentNavigation()?.extras.state;
-  
-    console.log(this.message);
-    
-   
      }
-
-   
-
      vehicle_and_machineries = false;
      immovable = false;
      shares = false;
      stocks = false;
      term_deposits = false;
-
-  
      onSelectionType(event:any){
        this.collateralType= event.target.value
        if(this.collateralType == "VEHICLE & MACHINERIES"){
@@ -90,8 +77,6 @@ export class CollateralComponent implements OnInit {
          this.term_deposits = true;
        }
      }
-  
-  
   ngOnInit(): void {
     this.getPage()
   }
@@ -290,6 +275,8 @@ export class CollateralComponent implements OnInit {
   getPage(){
     this.function_type = this.message.function_type;
     this.collateralCode = this.message.collateralCode;
+    this.customerName = this.message.customerName;
+    this.customerCode = this.message.customerCode;
         if(this.message.function_type == "A-Add"){
             console.log(this.message);
                 this.formData = this.formBuilder.group({
