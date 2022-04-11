@@ -64,6 +64,7 @@ import { CorporateCustomerComponent } from './pages/CustomersComponent/corporate
 import { TransactionExecutionComponent } from './pages/transaction-execution/transaction-execution.component';
 import { TransactionExecutionMainComponent } from './pages/transaction-execution/transaction-execution-main/transaction-execution-main.component';
 import { ShareCapitalParamsComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params.component';
+import { ShareCapitalComponent } from './pages/share-capital/share-capital.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -513,6 +514,13 @@ const routes: Routes = [{
       {
         path: 'configurations/global/share-capital/params',
         component:ShareCapitalParamsComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+
+      },
+      {
+        path: 'share-capital/data/view',
+        component:ShareCapitalComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
 
