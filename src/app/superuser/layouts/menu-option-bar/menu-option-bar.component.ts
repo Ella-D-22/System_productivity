@@ -52,13 +52,6 @@ export class MenuOptionBarComponent implements OnInit {
     event_id: ['', [Validators.required]]
   });
 
-  // closeDialog(){
-  //   this.dialogRef.close();
-  // }
-
-  // onSelect(data:any){
-  //   this.dialogRef.close({ event: 'close', data:data });
-  // }
 
   addEventId(){
     this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
@@ -81,27 +74,6 @@ export class MenuOptionBarComponent implements OnInit {
     // this.dialogRef.close({ event: 'close', data:this.formData.value });
     this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/'+this.function_type_data+'/'+this.event_type+'/'+this.event_id));
 
-    // event_id_module/:function_type/:event_type/:event_id
-    // console.log("function_type Type", function_type_type)
-    // console.log("Event Type", event_type )
-    // console.log("Event Id", event_id)
-
-    // console.log(this.function_type)
-    // console.log(this.event_type)
-    // // this.dialogRef.close();
-    // this.dialogRef.close({ event: 'close', data:this.formData.value });
-    // // if(this.function_type = "1: add"){
-    //   this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/'+this.function_type_data+'/'+this.event_type+'/'+this.event_id));
-    // }else if(this.function_type =  "2: enquire"){
-    //   this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
-
-    // }else if(this.function_type =  "3: update"){
-    //   this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
-
-    // }else if(this.function_type = "4: remove"){
-    //   this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
-
-    // }
   }else{
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {
