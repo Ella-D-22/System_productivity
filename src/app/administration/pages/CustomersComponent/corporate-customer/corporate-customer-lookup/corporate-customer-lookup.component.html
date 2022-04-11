@@ -1,4 +1,9 @@
 <div class="">
+  <div *ngIf="loading" >
+    <p><small>Loading, please wait...</small></p>
+    <p><mat-progress-bar mode="query"></mat-progress-bar></p>
+  </div>
+
     <div class="row table-action-row">
       <div class="col-md-6 col-sm-12">
     <div>

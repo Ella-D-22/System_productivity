@@ -1,4 +1,8 @@
 <mat-card>
+    <div *ngIf="loading" >
+        <p><small>loading, Please wait...</small></p>
+        <p><mat-progress-bar mode="query"></mat-progress-bar></p>
+      </div>
     <mat-card-header class="breadcrumb">
         <div>Home/Customers/Retail/data/view</div>
     </mat-card-header>

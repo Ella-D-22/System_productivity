@@ -1,4 +1,8 @@
 <div class="">
+  <div *ngIf="loading" >
+    <p><small>Loading, please wait...</small></p>
+    <p><mat-progress-bar mode="query"></mat-progress-bar></p>
+  </div>
     <div class="row breadcrumb">
       <div class="col-md-6 col-sm-12">
         <p><strong>Customers Lookup</strong></p>
@@ -8,9 +12,7 @@
     </div>
     <br>  
     <div class="row filter-form">
-
-            <p>
-                
+            <p>     
         Filtres by
             </p>
             <form action="" [formGroup]="formData" novalidate class="form"

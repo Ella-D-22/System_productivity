@@ -7,7 +7,6 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { param } from 'jquery';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/@core/AuthService/auth.service';
 import { BranchesService } from '../../../branches/branches.service';
@@ -84,34 +83,33 @@ export class RetailCustomerLookupComponent implements OnInit, OnDestroy {
      let params = new HttpParams()
      .set('solCode',branch_code);
       if(customer_type = 'Retail Customer'){
+        this.loading = true;
         this.subscription = this.retailCustAPI.getRetailCustomerPerSolCode(params).subscribe(res=>{
+          this.loading = false;
           this.respData = res;
-              console.log("Getting all data",this.respData);
           this.dataSource = new MatTableDataSource(this.respData.entity);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }, err=>{
+          this.loading = false;
   
         });
       }else if(customer_type = 'Coorporate Customer'){
+        this.loading = true;
         this.subscription = this.retailCustAPI.getRetailCustomerPerSolCode(params).subscribe(res=>{
+          this.loading = false;
           this.respData = res;
           //     console.log("Getting all data",this.respData);
           this.dataSource = new MatTableDataSource(this.respData.entity);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }, err=>{
-  
+          this.loading = false;
         });
       } 
     }
 
-
-
-
-
     onSubmit(){
-
     }
     
     applyFilter(event: Event) {
@@ -121,17 +119,7 @@ export class RetailCustomerLookupComponent implements OnInit, OnDestroy {
         this.dataSource.paginator.firstPage();
       }
     }
-    // getData() {
-    //   this.subscription = this.retailCustAPI.retrieveAllRetail().subscribe(res => {
-    //    this.respData = res;
-    //     console.log("Getting all data",this.respData);
-        
-    //     // Binding with the datasource
-    //     this.dataSource = new MatTableDataSource(this.respData.entity);
-    //     this.dataSource.paginator = this.paginator;
-    //     this.dataSource.sort = this.sort;
-    //   })
-    // }
+  
     onSelect(data:any){
       this.dialogRef.close({ event: 'close', data:data });
     } 

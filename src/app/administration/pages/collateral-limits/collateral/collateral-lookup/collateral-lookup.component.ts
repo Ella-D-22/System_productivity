@@ -46,6 +46,7 @@ export interface ApiData{
   styleUrls: ['./collateral-lookup.component.scss']
 })
 export class CollateralLookupComponent implements OnInit {
+  loading = false
 
  
   formData : any;
@@ -60,24 +61,26 @@ export class CollateralLookupComponent implements OnInit {
    constructor(private collateralService:CollateralService,
      private dialogRef:MatDialogRef<CollateralLookupComponent>,
      public formBuilder:FormBuilder) { 
-       this.collateralService.retrieveAllColletaralsDefinitions().subscribe(
-         (data) =>{   
-           console.log(data);
-           
-           console.log(data.entity);
-           this.dataSource = new MatTableDataSource(data.entity)
-           this.dataSource.paginator = this.paginator;
-           this.dataSource.sort = this.sort;  
-         },
-         (error) =>{}
-       )
-     
+      
      }
  
    ngOnInit(): void {
-     // this.getData();
+     this.getData();
    }
   
+   getData(){
+     this.loading = true;
+    this.collateralService.retrieveAllColletaralsDefinitions().subscribe(
+      (data) =>{   
+        this.loading = false
+        this.dataSource = new MatTableDataSource(data.entity)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;  
+      },
+      (error) =>{}
+    )
+  
+   }
    
    applyFilter(event:Event){
      const filterValue = (event.target as HTMLInputElement).value;

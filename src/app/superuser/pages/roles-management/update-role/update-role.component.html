@@ -1,0 +1,119 @@
+<mat-card>
+    <div *ngIf="loading" >
+      <p><small>Sending Email, Please wait...</small></p>
+      <p><mat-progress-bar mode="query"></mat-progress-bar></p>
+    </div>
+    
+      <mat-card-header  class="breadcrumb">
+        <div>Home/User Management/ Update</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    
+    <div class="container-fluid">
+      <form
+      class="form"
+      [formGroup]="formData"
+      (ngSubmit)="onSubmit()"
+      #resetRequestsForm="ngForm" 
+      novalidate
+    >
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Firstname<span class="warning">*</span></label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" maxlength="60" oninput ="this.value=this.value.toUpperCase()"
+              formControlName="firstName" class="form-control" />
+          </div>
+       </div> 
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div  class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Lastname<span class="warning">*</span></label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" maxlength="60" oninput ="this.value=this.value.toUpperCase()"
+              formControlName="lastName" class="form-control" />
+          </div>
+       </div>    
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Email<span class="warning">*</span></label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" maxlength="60" oninput ="this.value=this.value.toUpperCase()"
+              formControlName="email" class="form-control" />
+          </div>
+       </div> 
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div  class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Username<span class="warning">*</span></label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" maxlength="60" oninput ="this.value=this.value.toUpperCase()"
+              formControlName="username" class="form-control" />
+          </div>
+       </div>    
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Phone Number<span class="warning">*</span></label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" maxlength="60" oninput ="this.value=this.value.toUpperCase()"
+              formControlName="phoneNo" class="form-control" />
+          </div>
+       </div> 
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div  class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Branch<span class="warning">*</span></label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" maxlength="60" oninput ="this.value=this.value.toUpperCase()"
+              formControlName="solCode" class="form-control" />
+            <mat-icon (click)="branchesCodeLookup()">search</mat-icon><br>
+          </div>
+       </div>    
+      </div>
+    </div>
+  
+  
+  
+  
+      <br />
+      <button class="pull-left"  mat-raised-button color="default" type="submit">
+          Close
+        </button>
+      <button class="pull-right" mat-raised-button color="primary" type="submit">
+        <span
+          *ngIf="loading"
+          class="spinner-border spinner-border-sm mr-1"
+        ></span>
+        Submit
+      </button>
+      <br />
+    </form>
+      </div>
+    </mat-card>
+    
+    
+    
+    
+    
+  

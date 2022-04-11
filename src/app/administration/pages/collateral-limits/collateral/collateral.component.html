@@ -1,4 +1,8 @@
 <mat-card>
+  <div *ngIf="loading" >
+    <p><small>Loading, please wait...</small></p>
+    <p><mat-progress-bar mode="query"></mat-progress-bar></p>
+  </div>
     <mat-card-header class="breadcrump">
         <div>Home/Collateral</div>
     </mat-card-header>
@@ -23,9 +27,6 @@
             <p>{{this.customerCode}}</p>
         </div>
     </div>
-    
-   
-    
     <br>
     <div class="container-fluid">
         <form action="" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>

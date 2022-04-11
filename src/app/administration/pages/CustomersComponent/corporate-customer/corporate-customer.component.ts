@@ -18,6 +18,7 @@ export class CorporateCustomerComponent implements OnInit {
   cust_code:any
   error:any
   isDeleted = false;
+  loading 
   isSubmitted = false;
   submitted = false;
   isEnabled = false
@@ -109,9 +110,11 @@ export class CorporateCustomerComponent implements OnInit {
           });
 
         }else if(this.function_type == "I-Inquire"){
+          this.loading = true
           this.disabledFormControl()
           this.subscription = this.corpService.getCorporateByCode(this.cust_code).subscribe(
             res =>{
+              this.loading = false
               this.results = res.entity;
 
               this.formData = this.fb.group({
@@ -142,10 +145,12 @@ export class CorporateCustomerComponent implements OnInit {
               })
             }, )
         } else if(this.function_type == "M-Modify"){
+          this.loading = true
           this.isSubmitted = true;
           this.isEnabled = true;
           this.subscription = this.corpService.getCorporateByCode(this.cust_code).subscribe(
             res =>{
+              this.loading = false
               this.results = res.entity;
               this.formData = this.fb.group({
                 contactPersonName: [this.results.contactPersonName],
@@ -177,10 +182,12 @@ export class CorporateCustomerComponent implements OnInit {
           )
 
         }else if(this.function_type == "X-Delete"){
+          this.loading = true
           this.isDeleted = true;
           this.disabledFormControl()
           this.subscription = this.corpService.getCorporateByCode(this.cust_code).subscribe(
             res =>{
+              this.loading = false
               this.results = res.entity
               this.formData = this.fb.group({
                 contactPersonName: [this.results.contactPersonName],

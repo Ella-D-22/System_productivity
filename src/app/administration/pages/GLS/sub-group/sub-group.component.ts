@@ -21,6 +21,7 @@ export class SubGroupComponent implements OnInit {
   verticalPosition:MatSnackBarVerticalPosition
   results: any
   error: any
+  loading = false
   function_type:any
   message:any
   subgroup_code:any
@@ -39,7 +40,6 @@ export class SubGroupComponent implements OnInit {
   ngOnInit(): void {
     this.getPage()
     this.onAddField()
-
   }
 
   formData = this.fb.group({
@@ -183,15 +183,12 @@ export class SubGroupComponent implements OnInit {
      
     })
   }
-
   getPage(){
     this.subscription = this.subService.currentMessage.subscribe(
       message =>{
         this.message = message
         this.function_type = this.message.function_type
         this.subgroup_code = this.message.subGroupCode
-          console.log(this.subgroup_code);
-          
         if(this.function_type == "A-Add"){
           this.isEnabled = true;
           this.isSubmitted = true;
@@ -238,10 +235,12 @@ export class SubGroupComponent implements OnInit {
 
           });
         } else if(this.function_type == "I-Inquire"){
+          this.loading = true
           this.disabledFormControl()
           
           this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
+              this.loading = false
               this.results = res
                console.log(this.results);
                
@@ -290,9 +289,11 @@ export class SubGroupComponent implements OnInit {
               }          }
           )
         } else if(this.function_type == "M-Modify"){
+          this.loading = true
           this.isSubmitted = true;
           this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
+              this.loading = false
               this.results = res
 
               this.formData = this.fb.group({
@@ -353,9 +354,11 @@ export class SubGroupComponent implements OnInit {
             }
           )
         } else if(this.function_type == "X-Delete"){
+          this.loading = true
           this.isDeleted = true;
           this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
+              this.loading = false
               this.results = res
 
               this.formData = this.fb.group({
@@ -415,9 +418,11 @@ export class SubGroupComponent implements OnInit {
 
             } )
         }else if(this.function_type == "V-Verify"){
+          this.loading = true
           this.isDeleted = true;
           this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
+              this.loading = false
               this.results = res
 
               this.formData = this.fb.group({
@@ -479,10 +484,7 @@ export class SubGroupComponent implements OnInit {
         }
       }
     )
-
   }
-
-
   onSubmit(){ 
     if(this.formData.valid){
 
