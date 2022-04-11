@@ -1,0 +1,62 @@
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <div>Home/system/configurations/global/share-capital-params</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form action="" class="form" (ngSubmit)="onSubmit()" 
+        novalidate
+        [formGroup]="formData">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="" class="start pull-right">Minimum Shares<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="number" class="form-control" formControlName="min_shares">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="" class="start pull-right">Shares Quantity<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="number" class="form-control" formControlName="share_quantity">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="" class="start pull-right">Shares Capital<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="number" class="form-control" formControlName="share_value">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="" class="start pull-right">Share Office Account</label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" class="form-control" formControlName="shares_office_ac">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <button mat-raised-button color="primary" type="submit" class="pull-right">Submit</button>
+        </form>
+     
+    </div>
+</mat-card>

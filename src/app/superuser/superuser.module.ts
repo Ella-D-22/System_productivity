@@ -12,11 +12,11 @@ import { MaterialModule } from '../material.module';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
 import { RolesManagementComponent } from './pages/roles-management/roles-management.component';
 import { PrivilegeManagementComponent } from './pages/privilege-management/privilege-management.component';
-// import { MatTableExporterModule } from 'mat-table-exporter';
 import { CreateUserComponent } from './pages/user-management/create-user/create-user.component';
 import { UpdateUserComponent } from './pages/user-management/update-user/update-user.component';
 import { CreateRoleComponent } from './pages/roles-management/create-role/create-role.component';
 import { UpdateRoleComponent } from './pages/roles-management/update-role/update-role.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { UpdateRoleComponent } from './pages/roles-management/update-role/update
     CommonModule,
     SuperuserRoutingModule,
     MaterialModule,
-    // MatTableExporterModule
+    MatTableExporterModule
 
   ]
 })

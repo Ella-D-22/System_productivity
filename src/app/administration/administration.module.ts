@@ -107,6 +107,7 @@ import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponen
 import { TransactionExecutionLookupComponent } from './pages/transaction-execution/transaction-execution-lookup/transaction-execution-lookup.component';
 import { TransactionExecutionMainComponent } from './pages/transaction-execution/transaction-execution-main/transaction-execution-main.component';
 import { TransactionExecutionComponent } from './pages/transaction-execution/transaction-execution.component';
+import { ShareCapitalParamsComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params.component';
 
 @NgModule({
   declarations: [
@@ -210,6 +211,7 @@ import { TransactionExecutionComponent } from './pages/transaction-execution/tra
     TransactionExecutionComponent,
     TransactionExecutionLookupComponent,
     TransactionExecutionMainComponent,
+    ShareCapitalParamsComponent,
   ],
   imports: [
     CommonModule,
