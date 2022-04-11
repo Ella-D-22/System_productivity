@@ -19,41 +19,12 @@
         <p>{{this.scheme_type}}</p>      
       </div>
     </div>
-  <mat-divider></mat-divider>
-  <br>
-  <div class="container-fluid">
+    <div class="container-fluid">
     <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
       <mat-tab-group mat-align-tabs="center">
-        <!-- end of General Details -- Begining of Credit Details -->
         <mat-tab class="mat-tab" label="General Details">
           <br>
-          <div class="row">
-            <div class="col-md-6 col-sm-12">
-              <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                  <label class="start pull-left">Effective From</label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column ">
-                  <input [matDatepicker]="zpicker" formControlName="tda_effective_from_date" class="form-control" />
-                  <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="zpicker"></mat-datepicker-toggle>
-                  <mat-datepicker #zpicker></mat-datepicker>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                  <label class="start pull-left">Expiry Date.</label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column">
-                  <input [matDatepicker]="kpickerm" formControlName="tda_effective_to_date" class="form-control" />
-                  <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="kpickerm"></mat-datepicker-toggle>
-                  <mat-datepicker #kpickerm></mat-datepicker>
-                </div>
-              </div>
-            </div>
-          </div>
-
+      
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -501,15 +472,7 @@
           </div>
           <div class="row">
             <div class="col-md-6 col-sm-12">
-              <!-- <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Sundry Deposit Placeholder</label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column">
-                <input type="number" formControlName="tda_sundry_deposit_ph" class="pull-right form-control"/>
-                <mat-icon>search</mat-icon>
-              </div>
-           </div>                   -->
+            
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -1069,6 +1032,7 @@
             </div>
          </div>   
         </div>
+    
 
 <mat-divider></mat-divider>
 <h3>Exceptions Handling</h3>
@@ -1235,8 +1199,7 @@
         [formGroup]="glSubheadData"
         (ngSubmit)="onSubmit()"
         #resetRequestsForm="ngForm"
-        novalidate 
-      >
+        novalidate  >
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
