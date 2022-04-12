@@ -180,6 +180,8 @@ export class ShareCapitalComponent implements OnInit {
  onSubmit(){
    
   if(this.formData.valid){
+    console.log(this.formData.value);
+    
     if(this.function_type == "A-Add"){
       this.subscription = this.shareService.createShareCapital(this.formData.value).subscribe(
         res =>{ this.results = res
