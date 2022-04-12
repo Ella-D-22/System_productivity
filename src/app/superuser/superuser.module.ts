@@ -16,7 +16,12 @@ import { CreateUserComponent } from './pages/user-management/create-user/create-
 import { UpdateUserComponent } from './pages/user-management/update-user/update-user.component';
 import { CreateRoleComponent } from './pages/roles-management/create-role/create-role.component';
 import { UpdateRoleComponent } from './pages/roles-management/update-role/update-role.component';
+
 import { MatTableExporterModule } from 'mat-table-exporter';
+
+import { PrivilegeManagementMaintenanceComponent } from './pages/privilege-management/privilege-management-maintenance/privilege-management-maintenance.component';
+import { PrivilegeManagementLookupComponent } from './pages/privilege-management/privilege-management-lookup/privilege-management-lookup.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +38,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     UpdateUserComponent,
     CreateRoleComponent,
     UpdateRoleComponent,
+    PrivilegeManagementMaintenanceComponent,
+    PrivilegeManagementLookupComponent,
   ],
   imports: [
     CommonModule,

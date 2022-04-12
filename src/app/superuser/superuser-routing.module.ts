@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanActivateModuleGuard } from 'src/@core/helpers/CanActivateModule.guard';
+import { PrivilegeManagementMaintenanceComponent } from './pages/privilege-management/privilege-management-maintenance/privilege-management-maintenance.component';
 import { PrivilegeManagementComponent } from './pages/privilege-management/privilege-management.component';
 import { CreateRoleComponent } from './pages/roles-management/create-role/create-role.component';
 import { RolesManagementComponent } from './pages/roles-management/roles-management.component';
@@ -65,6 +66,12 @@ const routes: Routes = [{
     },
 
     
+    {
+      path: 'manage/preveleges/maintenance',
+      component:PrivilegeManagementMaintenanceComponent,
+      // canActivate: [CanActivateModuleGuard],
+      // data: {preload:true },
+    },
 
     {
       path: 'manage/preveleges',
@@ -72,6 +79,8 @@ const routes: Routes = [{
       // canActivate: [CanActivateModuleGuard],
       // data: {preload:true },
     },
+
+    
 
 
   ],

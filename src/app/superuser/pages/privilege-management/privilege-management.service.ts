@@ -7,33 +7,19 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CurrencyService {
-
+export class PrivilegeManagementService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-    // API endpoint
-  baseURL = `${environment.productAPI}/currency`;
+  baseURL = `${environment.userAPI}/privileges`;
     constructor(private http: HttpClient) { }
-        // Message Medium
+     // Message Medium
   private messageSource = new BehaviorSubject('default message');
   currentMessage = this.messageSource.asObservable();
   changeMessage(message: string) {
     this.messageSource.next(message)
   }
-     // Get all Active
-     getAllCountries() {
-      let API_URL = `${environment.countryAPI}`;
-      return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
-      .pipe(
-        map((res) => {
-          return res || {}
-        }),
-        catchError(this.errorMgmt)
-      )
-    }
-
   // Add
-  createCurrency(data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/add`;
+  createPrivilege(data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/rolePrivilege`;
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
         return res || {}
       }),
@@ -41,7 +27,7 @@ export class CurrencyService {
     )
   }
   // Get all
-  getCurrencys() {
+  getPrivileges() {
     let API_URL = `${this.baseURL}/all`;
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
     .pipe(
@@ -51,30 +37,8 @@ export class CurrencyService {
       catchError(this.errorMgmt)
     )
   }
-    // Get all Active
-    getAllActiveCurrencys() {
-      let API_URL = `${this.baseURL}/all`;
-      return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
-      .pipe(
-        map((res) => {
-          return res || {}
-        }),
-        catchError(this.errorMgmt)
-      )
-    }
-    // Get by ccy
-    getCurrencyCcy(ccy: any): Observable<any> {
-      let API_URL = `${this.baseURL}/find/by/ccy/${ccy}`;
-      return this.http.get(API_URL, { withCredentials: false })
-        .pipe(
-          map((res) => {
-            return res || {}
-          }),
-          catchError(this.errorMgmt)
-        )
-    }
   // Get by id
-  getCurrencyId(id: any): Observable<any> {
+  getPrivilegeId(id: any): Observable<any> {
     let API_URL = `${this.baseURL}/find/${id}`;
     return this.http.get(API_URL, { withCredentials: false })
       .pipe(
@@ -84,20 +48,27 @@ export class CurrencyService {
         catchError(this.errorMgmt)
       )
   }
-  updateCurrency(id: string | null, data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/update/${id}`;
+    // Get by Code
+    getPrivilegeByCode(groupCode: any): Observable<any> {
+      let API_URL = `${this.baseURL}/find/${groupCode}`;
+      return this.http.get(API_URL, { withCredentials: false })
+        .pipe(
+          map((res) => {
+            return res || {}
+          }),
+          catchError(this.errorMgmt)
+        )
+    }
+
+
+  updatePrivilege(data:any): Observable<any> {
+    let API_URL = `${this.baseURL}/update/`;
     return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
       .pipe(
         catchError(this.errorMgmt)
       )
   }
-  deleteCurrency(id: any): Observable<any> {
-    var API_URL = `${this.baseURL}/delete/${id}`;
-    return this.http.delete(API_URL, { withCredentials: false })
-      .pipe(
-        catchError(this.errorMgmt)
-      )
-  }
+
   // Error handling
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';

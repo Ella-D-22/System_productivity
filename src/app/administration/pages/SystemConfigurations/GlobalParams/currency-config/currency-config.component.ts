@@ -6,6 +6,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
+import { CountriesLookupComponent } from './countries-lookup/countries-lookup.component';
 import { CurrencyService } from './currency.service';
 
 @Component({
@@ -44,6 +45,7 @@ export class CurrencyConfigComponent implements OnInit {
   message: any;
   ccy_id: any;
   ccy_name: any;
+  respData: Object;
 
   constructor(
     public fb: FormBuilder,
@@ -59,6 +61,7 @@ export class CurrencyConfigComponent implements OnInit {
     ngOnInit() {
       this.redirectToMaintenancePage();
       this.getPage();
+      this.getData();
     }
     currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
     auth_user = this.currentUser.username;
@@ -74,6 +77,23 @@ export class CurrencyConfigComponent implements OnInit {
         }
       })
     }
+
+    countryLookup(): void {
+        const dialogRef = this.dialog.open(CountriesLookupComponent, {
+          // height: '400px',
+          // width: '600px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.dialogData = result.data;
+          this.ccy_name = this.dialogData.ccy_name;
+          this.formData.controls.currency_ccy.setValue(result.data);
+        });
+      }
+      getData() {
+        this.subscription = this.currencyAPI.getAllCountries().subscribe(res => {
+         this.respData = res;
+        })
+      }
       ac_placeholder = "";
       min_amt_ccy = "";
       max_amt_ccy = "";

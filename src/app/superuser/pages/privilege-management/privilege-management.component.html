@@ -1,1 +1,80 @@
-<p>privilege-management works!</p>
+<mat-card>
+    <div *ngIf="loading" >
+        <p><small>Loading, please wait...</small></p>
+        <p><mat-progress-bar mode="query"></mat-progress-bar></p>
+      </div>
+      
+    <mat-card-header class="breadcrumb">
+        <div>Home/system/GLS/Main/data/view</div>
+    </mat-card-header>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h4>Function</h4>
+            <p>{{this.function_type}}</p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h4>Role</h4>
+            <p>{{ this.names }}</p> 
+    </div>
+    
+    </div>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <br>
+        <form action="" class="form" [formGroup]="formData" novalidate (ngSubmit)="onSubmit()">
+            <div *ngFor=" let groupMember of g.controls; let i = index">
+                <div [formGroup]="groupMember">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="">Module<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <select formControlName="name" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors}">
+                                        <option disabled>--Select Module--</option>
+                                        <option *ngFor="let item of modulesArray" [value]="item">{{item}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                       </div>
+                       <div class="col-md-6 col-sm-12">
+                           <div class="form-group">
+                               <div class="col-md-4 col-sm-12 form-column">
+                                   <label for="" class="start pull-left">Previleges<span class="warning">*</span></label>
+                               </div>
+                               <div class="col-md-8 col-sm-12 form-column">
+                                <mat-accordion>
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                                         (closed)="panelOpenState = false">
+                                      <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                         Attach Previleges
+                                        </mat-panel-title>
+                                      </mat-expansion-panel-header>
+                                      <form action="" class="formNew" [formGroup]="form" novalidate>
+                                        <div class="newforme row" *ngFor="let privilage of privilegesArray">
+                                            <input class="form-controll-data"  type="checkbox" formArrayName="previleges" [value]="privilage.value" (change)="onCheckboxChange(i, $event)"/>
+                                            {{ privilage.name}}
+                                        </div>
+                                    </form>
+                                    </mat-expansion-panel>
+                                  </mat-accordion>
+                    <mat-icon class="pull-right" (click)="onAddField()" color="primary">add_circle</mat-icon>
+                    <mat-icon class="pull-right" (click)="onRemoveField(i)" color="warn">remove_circle</mat-icon>
+                               </div>
+                           </div>
+                       </div> 
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
+            <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isSubmitted">Submit</button>
+            <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
+        </form>
+    </div>
+</mat-card>
