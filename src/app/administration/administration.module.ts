@@ -107,7 +107,13 @@ import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponen
 import { TransactionExecutionLookupComponent } from './pages/transaction-execution/transaction-execution-lookup/transaction-execution-lookup.component';
 import { TransactionExecutionMainComponent } from './pages/transaction-execution/transaction-execution-main/transaction-execution-main.component';
 import { TransactionExecutionComponent } from './pages/transaction-execution/transaction-execution.component';
+
+import { ShareCapitalParamsComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params.component';
+import { ShareCapitalComponent } from './pages/share-capital/share-capital.component';
+import { ShareCapitalMaintenanceComponent } from './pages/share-capital/share-capital-maintenance/share-capital-maintenance.component';
+
 import { CountriesLookupComponent } from './pages/SystemConfigurations/GlobalParams/currency-config/countries-lookup/countries-lookup.component';
+
 
 @NgModule({
   declarations: [
@@ -211,7 +217,13 @@ import { CountriesLookupComponent } from './pages/SystemConfigurations/GlobalPar
     TransactionExecutionComponent,
     TransactionExecutionLookupComponent,
     TransactionExecutionMainComponent,
+
+    ShareCapitalParamsComponent,
+    ShareCapitalComponent,
+    ShareCapitalMaintenanceComponent,
+
     CountriesLookupComponent,
+
   ],
   imports: [
     CommonModule,
