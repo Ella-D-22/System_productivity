@@ -107,6 +107,7 @@ import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponen
 import { TransactionExecutionLookupComponent } from './pages/transaction-execution/transaction-execution-lookup/transaction-execution-lookup.component';
 import { TransactionExecutionMainComponent } from './pages/transaction-execution/transaction-execution-main/transaction-execution-main.component';
 import { TransactionExecutionComponent } from './pages/transaction-execution/transaction-execution.component';
+import { CountriesLookupComponent } from './pages/SystemConfigurations/GlobalParams/currency-config/countries-lookup/countries-lookup.component';
 
 @NgModule({
   declarations: [
@@ -210,6 +211,7 @@ import { TransactionExecutionComponent } from './pages/transaction-execution/tra
     TransactionExecutionComponent,
     TransactionExecutionLookupComponent,
     TransactionExecutionMainComponent,
+    CountriesLookupComponent,
   ],
   imports: [
     CommonModule,
