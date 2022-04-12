@@ -13,7 +13,7 @@ export class ShareCapitalParamsService {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = `${environment.sharesCapitalAPI}/api/vi/sharecapital/params`;
+  baseURL = `${environment.accountAPI}/api/vi/sharecapital/params`;
 
   //message medium
   private messageSource = new BehaviorSubject('default message');

@@ -22,7 +22,6 @@ export const environment = {
     // reportAPI:'http://localhost:9091/report-service',
     // glsAPI: 'http://localhost:9910/group-service',
 
-    sharesCapitalAPI: 'http://localhost:9055/shares-capital-service',
     userAPI: 'http://52.15.152.26:9091',
     accountAPI: 'http://52.15.152.26:9091/account-service',
     productAPI: 'http://52.15.152.26:9091/product-service',

@@ -109,6 +109,7 @@ import { TransactionExecutionMainComponent } from './pages/transaction-execution
 import { TransactionExecutionComponent } from './pages/transaction-execution/transaction-execution.component';
 import { ShareCapitalParamsComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params.component';
 import { ShareCapitalComponent } from './pages/share-capital/share-capital.component';
+import { ShareCapitalMaintenanceComponent } from './pages/share-capital/share-capital-maintenance/share-capital-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -214,6 +215,7 @@ import { ShareCapitalComponent } from './pages/share-capital/share-capital.compo
     TransactionExecutionMainComponent,
     ShareCapitalParamsComponent,
     ShareCapitalComponent,
+    ShareCapitalMaintenanceComponent,
   ],
   imports: [
     CommonModule,

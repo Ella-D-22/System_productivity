@@ -65,6 +65,7 @@ import { TransactionExecutionComponent } from './pages/transaction-execution/tra
 import { TransactionExecutionMainComponent } from './pages/transaction-execution/transaction-execution-main/transaction-execution-main.component';
 import { ShareCapitalParamsComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params.component';
 import { ShareCapitalComponent } from './pages/share-capital/share-capital.component';
+import { ShareCapitalMaintenanceComponent } from './pages/share-capital/share-capital-maintenance/share-capital-maintenance.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -521,6 +522,13 @@ const routes: Routes = [{
       {
         path: 'share-capital/data/view',
         component:ShareCapitalComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+
+      },
+      {
+        path: 'share-capital/maintenance',
+        component:ShareCapitalMaintenanceComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
 
