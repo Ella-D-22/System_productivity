@@ -19,6 +19,18 @@ export class CurrencyService {
   changeMessage(message: string) {
     this.messageSource.next(message)
   }
+     // Get all Active
+     getAllCountries() {
+      let API_URL = `${environment.countryAPI}`;
+      return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
+    }
+
   // Add
   createCurrency(data: any): Observable<any> {
     let API_URL = `${this.baseURL}/add`;

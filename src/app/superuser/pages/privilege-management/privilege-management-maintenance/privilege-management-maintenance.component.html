@@ -31,7 +31,7 @@
                             <label class="start pull-left" for="">Role<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" class="form-control" formControlName="names" maxlength="6"
+                            <input type="text" class="form-control" formControlName="names" maxlength="50"
                              oninput="this.value=this.value.toUpperCase()">
                             <mat-icon *ngIf="existingData"  (click)="mainGroupLookup()">search</mat-icon>
                         </div>

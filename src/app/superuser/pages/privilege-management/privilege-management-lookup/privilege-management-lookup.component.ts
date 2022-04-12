@@ -32,7 +32,7 @@ export class PrivilegeManagementLookupComponent implements OnInit {
   }
 
   getData(){
-    this.privilegeService.getPrivilegeManagements().subscribe(
+    this.privilegeService.getPrivileges().subscribe(
       data =>{
           this.results = data
           this.dataSource = new MatTableDataSource(this.results)

@@ -15,7 +15,6 @@
 </div>
 <mat-divider></mat-divider>
 <br>
-
 <div class="container-fluid">
   <form
   class="form"
@@ -31,7 +30,7 @@
      <label class="start pull-left">CCY</label>
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-      <input type="text" maxlength = "4" formControlName="ccy" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy.errors }" />
+      <input type="text" maxlength = "3" formControlName="ccy" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy.errors }" />
     </div>
  </div>            
 </div>
@@ -41,7 +40,11 @@
      <label class="start pull-left">Country</label>
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-      <input type="text" maxlength = "30" formControlName="country" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+     <select class="form-control" formControlName="country"
+      [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
+       <option value="" disabled>-- Select Country --</option>
+       <option *ngFor="let flag of this.respData " [value]="flag">{{ flag.name.common }}</option>
+     </select>
     </div>
  </div>   
 </div>
@@ -54,10 +57,21 @@
           </div>
           <div class="col-md-6 col-sm-12 form-column">
             <input type="text" maxlength = "30" formControlName="ccy_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
+            <mat-icon (click)="countryLookup()">search</mat-icon>
+        
           </div>
        </div>           
   </div>
   <div class="col-md-6 col-sm-12">
+    <div class="form-group">
+      <div class="col-md-6 col-sm-12 form-column ">
+       <label class="start pull-left">Decimal Precision</label>
+      </div>
+      <div class="col-md-6 col-sm-12 form-column">
+        <input type="number" maxlength = "30" formControlName="ccy_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
+    
+      </div>
+   </div> 
   </div>
 </div>
   <br />

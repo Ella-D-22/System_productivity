@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PrivilegeManagementService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  baseURL = `${environment.glsAPI}/api/v1/group/main`;
+  baseURL = `${environment.userAPI}/privileges`;
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');
@@ -18,9 +18,8 @@ export class PrivilegeManagementService {
     this.messageSource.next(message)
   }
   // Add
-  createPrivilegeManagement(data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/add`;
-    
+  createPrivilege(data: any): Observable<any> {
+    let API_URL = `${this.baseURL}/rolePrivilege`;
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
         return res || {}
       }),
@@ -28,7 +27,7 @@ export class PrivilegeManagementService {
     )
   }
   // Get all
-  getPrivilegeManagements() {
+  getPrivileges() {
     let API_URL = `${this.baseURL}/all`;
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
     .pipe(
@@ -39,7 +38,7 @@ export class PrivilegeManagementService {
     )
   }
   // Get by id
-  getPrivilegeManagementId(id: any): Observable<any> {
+  getPrivilegeId(id: any): Observable<any> {
     let API_URL = `${this.baseURL}/find/${id}`;
     return this.http.get(API_URL, { withCredentials: false })
       .pipe(
@@ -50,7 +49,7 @@ export class PrivilegeManagementService {
       )
   }
     // Get by Code
-    getPrivilegeManagementByCode(groupCode: any): Observable<any> {
+    getPrivilegeByCode(groupCode: any): Observable<any> {
       let API_URL = `${this.baseURL}/find/${groupCode}`;
       return this.http.get(API_URL, { withCredentials: false })
         .pipe(
@@ -62,7 +61,7 @@ export class PrivilegeManagementService {
     }
 
 
-  updatePrivilegeManagement(data:any): Observable<any> {
+  updatePrivilege(data:any): Observable<any> {
     let API_URL = `${this.baseURL}/update/`;
     return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
       .pipe(

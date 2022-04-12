@@ -238,9 +238,23 @@ h3{
 .mat-checkbox{
     margin: 2px auto !important;
 }
-.form-controll-data{
-  display: flex !important;
-}
+// .form-controll-data{
+//   display: flex !important;
+// }
 .data-flow{
-  display: flex !important;
+  // display: inline !important
+  margin: 5px auto !important ;
 }
+.formNew{
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+
+}
+
+
+.newforme{
+  display: inline-block !important;
+}
+
+// input { display: inline; }

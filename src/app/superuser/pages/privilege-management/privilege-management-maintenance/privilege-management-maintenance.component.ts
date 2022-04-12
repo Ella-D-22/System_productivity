@@ -43,16 +43,10 @@ export class PrivilegeManagementMaintenanceComponent implements OnInit {
 
     onSelectFunction(event:any){
       if(event.target.value == "A-Add"){
-         this.existingData = false
-        //  this.formData.controls.function_type.setValue("")
-         this.formData.controls.groupCode.setValue(this.groupCode)
-         this.formData.controls.groupCode.setValidators([Validators.required])
+         this.existingData = false;
       }else if (event.target.value != "A-Add"){
         this.existingData = true;
          this.showGroupCode = true;
-        //  this.formData.controls.function_type.setValue("")
-         this.formData.controls.groupCode.setValue("")
-         this.formData.controls.groupCode.setValidators([Validators.required])
       }
     }
     mainGroupLookup():void{

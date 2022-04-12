@@ -36,16 +36,13 @@ export class PrivilegeManagementComponent implements OnInit {
     private dialog:MatDialog,
     private privilegeService: PrivilegeManagementService,
     private router:Router) { 
-      this.form = fb.group({
-        selectedCountries:  new FormArray([])
-       });
+      
     }
 
   ngOnInit(): void {
     this.getPage()
     this.onAddField()
   }
-
   modulesArray:any = [
     'Transaction Maintenance', 'Group Module', 'Customer Maintenance', 'Collateral Maintenance', 'Limits Maintenance'
   ]
@@ -67,70 +64,45 @@ export class PrivilegeManagementComponent implements OnInit {
   }
 ];
 
-form: FormGroup;
-countries: Array<any> = [
-  { name: 'India', value: 'india' },
-  { name: 'France', value: 'france' },
-  { name: 'USA', value: 'USA' },
-  { name: 'Germany', value: 'germany' },
-  { name: 'Japan', value: 'Japan' }
-];
+form = this.fb.group({
+  previleges:  new FormArray([])
+ });
 
 
-onCheckboxChange(event: any) {
-  const selectedCountries = (this.form.controls.selectedCountries as FormArray);
-  if (event.target.checked) {
-    selectedCountries.push(new FormControl(event.target.value));
-  } else {
-    const index = selectedCountries.controls
-    .findIndex(x => x.value === event.target.value);
-    selectedCountries.removeAt(index);
-  }
-}
-
-
-onGetsubmit() {
-  console.log(this.form.value);
-}
-
-
-
-
+// main 
   formData = this.fb.group({
     name: [''],
     modules: new FormArray([])
   })
-  previlageData = this.fb.group({
-    Add: [''],
-    Inquire:[''],
-    Modify:[''],
-    Verify:[''],
-    Delete:['']
-  })
 
-
+ 
   get f() { return this.formData.controls; }
   get g(){return this.f.modules as FormArray}
-  // {
-  //   "name": "Customer"
-  //   "modules": [
-  //     {
-  //       "name": "Transactions",
-  //       "privileges": [
-  //         "ADD","INQUIRE","DELETE"
-  //       ]
-  //     }
-  //   ],
-  // }
+
 
     onAddField(){
       this.g.push(this.fb.group({
         name: [''],
         privileges: new FormArray([])
       }))
+    }
+    
+    onCheckboxChange(i: any, event: any) {
+      const previleges = (this.g.at(i).get("privileges") as FormArray);
+      if (event.target.checked) {
+        previleges.push(new FormControl(event.target.value));
+      } else {
+        const index = previleges.controls
+        .findIndex(x => x.value === event.target.value);
+        previleges.removeAt(index);
+      }
+    }
 
-      
-      
+    newSkill(): FormGroup {
+      return this.fb.group({
+        skill: '',
+        exp: '',
+      })
     }
     onRemoveField(i:any){
       this.g.removeAt(i)
@@ -144,13 +116,15 @@ onGetsubmit() {
           this.message = message
           this.function_type = this.message.function_type
           this.names = this.message.names
+          
           if(this.function_type == "A-Add"){
             this.isEnabled =  true;
             this.isSubmitted = true;
             this.formData = this.fb.group({
-              name: [''],
+              name: [this.names],
               modules: new FormArray([])
             });
+
           } else if(this.function_type == "I-Inquire"){
             this.loading = true
             this.disabledFormControl()
@@ -179,7 +153,7 @@ onGetsubmit() {
       if(this.formData.valid){
         if(this.function_type == "A-Add"){
           this.isEnabled = true;
-          this.subscription = this.privilegeService.createPrivilegeManagement(this.formData.value).subscribe(
+          this.subscription = this.privilegeService.createPrivilege(this.formData.value).subscribe(
             res =>{
               this.results = res
               this._snackbar.open("Executed Successfully", "X",{
@@ -189,7 +163,7 @@ onGetsubmit() {
                 panelClass:['green-snackbar', 'login-snackbar']
   
               });
-              this.router.navigateByUrl("system/GLS/main-group/maintenance")
+              this.router.navigateByUrl("superuser/manage/preveleges/maintenance")
             },
             err =>{
               this.error = err
@@ -202,7 +176,7 @@ onGetsubmit() {
             }
           )
         } else if(this.function_type != "A-Add"){
-          this.subscription = this.privilegeService.updatePrivilegeManagement(this.formData.value).subscribe(
+          this.subscription = this.privilegeService.updatePrivilege(this.formData.value).subscribe(
             res =>{
               this.results = res
               this._snackbar.open("Executed Successfully", "X",{
@@ -212,7 +186,7 @@ onGetsubmit() {
                 panelClass:['green-snackbar', 'login-snackbar']
   
               });
-              this.router.navigateByUrl("system/GLS/main-group/maintenance")
+              this.router.navigateByUrl("superuser/manage/preveleges/maintenance")
             },
             err =>{
               this.error = err

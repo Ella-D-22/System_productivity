@@ -14,8 +14,8 @@
             <p>{{this.function_type}}</p>
         </div>
         <div class="col-md-6 col-sm-12">
-            <h4>Code</h4>
-            <p>{{this.group_code}}</p> 
+            <h4>Role</h4>
+            <p>{{ this.names }}</p> 
     </div>
     
     </div>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="name" class="form-control"
-                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors}" (change)="onSelectFunction($event)" >
+                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors}">
                                         <option disabled>--Select Module--</option>
                                         <option *ngFor="let item of modulesArray" [value]="item">{{item}}</option>
                                     </select>
@@ -47,18 +47,22 @@
                                    <label for="" class="start pull-left">Previleges<span class="warning">*</span></label>
                                </div>
                                <div class="col-md-8 col-sm-12 form-column">
-                                <form cla [formGroup]="form" novalidate>
-                                    <div class="data-flow" *ngFor="let privilage of privilegesArray; let i=index">
-                                      <input class="form-controll-data"  type="checkbox" formArrayName="selectedCountries" [value]="privilage.value" (change)="onCheckboxChange($event)" 
-                                      />
-                                <!-- <mat-checkbox type="checkbox" formArrayName="selectedCountries" [value]="privilage.value" (change)="onCheckboxChange($event)"></mat-checkbox> -->
-
-                                      {{ privilage.name}}
-                                    </div>
-                                  </form>
-                                
-                        
-
+                                <mat-accordion>
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                                         (closed)="panelOpenState = false">
+                                      <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                         Attach Previleges
+                                        </mat-panel-title>
+                                      </mat-expansion-panel-header>
+                                      <form action="" class="formNew" [formGroup]="form" novalidate>
+                                        <div class="newforme row" *ngFor="let privilage of privilegesArray">
+                                            <input class="form-controll-data"  type="checkbox" formArrayName="previleges" [value]="privilage.value" (change)="onCheckboxChange(i, $event)"/>
+                                            {{ privilage.name}}
+                                        </div>
+                                    </form>
+                                    </mat-expansion-panel>
+                                  </mat-accordion>
                     <mat-icon class="pull-right" (click)="onAddField()" color="primary">add_circle</mat-icon>
                     <mat-icon class="pull-right" (click)="onRemoveField(i)" color="warn">remove_circle</mat-icon>
                                </div>
@@ -68,9 +72,6 @@
                 </div>
             </div>
             <br>
-
-            <p>{{ form.value | json }}</p>
-
             <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
             <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isSubmitted">Submit</button>
             <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
