@@ -216,6 +216,8 @@ export class CurrentSchemeComponent implements OnInit {
   event_id_desc: any;
   element: any;
   loanElement: any;
+  exception_code:any
+  exception_description:any
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -326,6 +328,7 @@ export class CurrentSchemeComponent implements OnInit {
 
   feeArray = new Array();
   glSubheadArray = new Array();
+  exceptionsArray = new Array();
 
   formData = this.fb.group({
     caa_scheme_code: [''],
@@ -372,13 +375,14 @@ export class CurrentSchemeComponent implements OnInit {
     caa_glsubheads: new FormArray([]),
 
      // Exceptions
-     caa_ac_debit_balance:[''],
-     caa_ac_credit_balance:[''],
-     caa_liability_exceed_group:[''],
-     caa_sanction_limit_expired:[''],
-     caa_interest_calc:[''],
-     caa_insufficient_exception:[''],
-     caa_backdate_transaction:[''],
+     caa_exceptions: new FormArray([]),
+    //  caa_ac_debit_balance:[''],
+    //  caa_ac_credit_balance:[''],
+    //  caa_liability_exceed_group:[''],
+    //  caa_sanction_limit_expired:[''],
+    //  caa_interest_calc:[''],
+    //  caa_insufficient_exception:[''],
+    //  caa_backdate_transaction:[''],
 
     // Audits
     postedBy: [''],
@@ -418,6 +422,13 @@ export class CurrentSchemeComponent implements OnInit {
     caa_is_gl_subhead_deleted: [''],
   });
 
+  exceptionsFormData = this.fb.group({
+    // caa_exception_id:[''],
+    caa_exception_code:[''],
+    caa_exception_description:['']
+
+  })
+
   initLoanFeeForm() {
     this.newData = true;
     this.feeFormData = this.fb.group({
@@ -447,7 +458,13 @@ export class CurrentSchemeComponent implements OnInit {
     });
   }
 
-
+initExceptionForm(){
+  this.newData = true;
+  this.exceptionsFormData = this.fb.group({
+    caa_exception_code:[''],
+    caa_exception_description:['']
+  })
+}
 
   // Account lookups
   penalIntRecAcLookup(): void {
@@ -687,9 +704,13 @@ export class CurrentSchemeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
-      this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
-      this.ac_debit_balance_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+      console.log(this.exception_lookupData);
+      
+      this.exception_description =  this.exception_lookupData.exce_description;
+      this.exception_code_value = this.exception_lookupData.exception_code
+
+      this.exceptionsFormData.controls.caa_exception_code.setValue(this.exception_code_value)
+      this.exceptionsFormData.controls.caa_exception_description.setValue(this.exception_description)
     });
   }
   ac_credit_balance_Lookup(): void {
@@ -794,6 +815,32 @@ export class CurrentSchemeComponent implements OnInit {
   this.glSubheadArray = new Array();
 }
 
+editExceptions(i:any){
+  this.element = i
+  this.newData = true;
+  this.arrayIndex = this.exceptionsArray[i]
+  this.exceptionsFormData = this.fb.group({
+    caa_exception_code:[this.exceptionsArray[i].caa_exception_code],
+    caa_exception_description:[this.exceptionsArray[i].caa_exception_description]
+
+  })
+}
+onExceptionUpdate(){
+  let i = this.element;
+  this.exceptionsArray[i] = this.exceptionsFormData.value
+}
+onExceptionClear(){
+  this.initExceptionForm();
+  this.exceptionsArray = new Array();
+}
+onRemoveExceptions(i:any){
+  const index: number = this.exceptionsArray.indexOf(
+    this.exceptionsArray.values
+  );
+  this.exceptionsArray.splice(index, i);
+  this.exceptionsArray = this.exceptionsArray;
+}
+
   get g() {
     return this.formData.controls;
   }
@@ -803,10 +850,10 @@ export class CurrentSchemeComponent implements OnInit {
   get l() {
     return this.g.caa_glsubheads as FormArray;
   }
-  get e(){
-    return this.g.
-  }
 
+  get e(){
+    return this.g.caa_exceptions as FormArray;
+  }
 
   previewGlSubheads() {
     if (this.glSubheadData.valid) {
@@ -819,6 +866,18 @@ export class CurrentSchemeComponent implements OnInit {
       this.glSubheadArray.push(this.glSubheadData.value);
       this.initGlSubheadForm();
     }
+  }
+
+  onPreviewExceptions(){
+     if(this.exceptionsFormData.valid){
+       console.log(this.exceptionsFormData.value);
+       
+       this.e.push(this.fb.group(this.exceptionsFormData.value));
+       this.exceptionsArray.push(this.exceptionsFormData.value);
+       console.log("Array", this.exceptionsArray);
+       
+       this.initExceptionForm();
+     }
   }
 
   //Loan Fee Operations

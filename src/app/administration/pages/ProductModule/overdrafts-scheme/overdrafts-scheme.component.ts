@@ -159,6 +159,8 @@ export class OverdraftsSchemeComponent implements OnInit {
   event_id_desc: any;
   element: any;
   loanElement: any;
+  exception_code_value:any;
+  
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -194,88 +196,88 @@ export class OverdraftsSchemeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
-      this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
-      this.ac_debit_balance_description = this.exception_lookupData.exce_description
-      this.formData.controls.oda_ac_debit_balance.setValue(this.exception_lookupData .id);
+      this.exception_code_value =  this.exception_lookupData.exception_code;
+      this.exceptionsFormData.controls.oda_exception_code.setValue(this.exception_code_value)
+      this.exceptionsFormData.controls.oda_exception_description.setValue(this.exception_lookupData.exce_description)
     });
   }
-  ac_credit_balance_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
-      this.ac_credit_balance_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.oda_ac_credit_balance.setValue(this.exception_lookupData .id);
-    });
-  }
-  liability_exceed_group_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
-      this.liability_exceed_group_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.oda_liability_exceed_group.setValue(this.exception_lookupData .id);
-    });
-  }
-  ac_is_froozed_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
-      this.ac_is_froozed_description=  this.exception_lookupData.exce_description;
-      this.formData.controls.oda_ac_is_froozed.setValue(this.exception_lookupData .id);
-    });
-  }
-  sanction_limit_expired_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
-      this.sanction_limit_expired_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.oda_sanction_limit_expired.setValue(this.exception_lookupData .id);
-    });
-  }
-  interest_calc_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.interest_calc_value =  this.exception_lookupData.exception_code;
-      this.interest_calc_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.oda_interest_calc.setValue(this.exception_lookupData .id);
-    });
-  }
-  insufficient_exception_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.insufficient_exception_value =  this.exception_lookupData.exception_code;
-      this.insufficient_exception_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.oda_insufficient_exception.setValue(this.exception_lookupData .id);
-    });
-  }
-  backdate_transaction_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.backdate_transaction_value =  this.exception_lookupData.exception_code;
-      this.backdate_transaction_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.oda_backdate_transaction.setValue(this.exception_lookupData .id);
-    });
-  }
+  // ac_credit_balance_Lookup(): void {
+  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.exception_lookupData = result.data;
+  //     this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
+  //     this.ac_credit_balance_description =  this.exception_lookupData.exce_description;
+  //     this.formData.controls.oda_ac_credit_balance.setValue(this.exception_lookupData .id);
+  //   });
+  // }
+  // liability_exceed_group_Lookup(): void {
+  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.exception_lookupData = result.data;
+  //     this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
+  //     this.liability_exceed_group_description =  this.exception_lookupData.exce_description;
+  //     this.formData.controls.oda_liability_exceed_group.setValue(this.exception_lookupData .id);
+  //   });
+  // }
+  // ac_is_froozed_Lookup(): void {
+  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.exception_lookupData = result.data;
+  //     this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
+  //     this.ac_is_froozed_description=  this.exception_lookupData.exce_description;
+  //     this.formData.controls.oda_ac_is_froozed.setValue(this.exception_lookupData .id);
+  //   });
+  // }
+  // sanction_limit_expired_Lookup(): void {
+  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.exception_lookupData = result.data;
+  //     this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
+  //     this.sanction_limit_expired_description =  this.exception_lookupData.exce_description;
+  //     this.formData.controls.oda_sanction_limit_expired.setValue(this.exception_lookupData .id);
+  //   });
+  // }
+  // interest_calc_Lookup(): void {
+  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.exception_lookupData = result.data;
+  //     this.interest_calc_value =  this.exception_lookupData.exception_code;
+  //     this.interest_calc_description =  this.exception_lookupData.exce_description;
+  //     this.formData.controls.oda_interest_calc.setValue(this.exception_lookupData .id);
+  //   });
+  // }
+  // insufficient_exception_Lookup(): void {
+  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.exception_lookupData = result.data;
+  //     this.insufficient_exception_value =  this.exception_lookupData.exception_code;
+  //     this.insufficient_exception_description =  this.exception_lookupData.exce_description;
+  //     this.formData.controls.oda_insufficient_exception.setValue(this.exception_lookupData .id);
+  //   });
+  // }
+  // backdate_transaction_Lookup(): void {
+  //   const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.exception_lookupData = result.data;
+  //     this.backdate_transaction_value =  this.exception_lookupData.exception_code;
+  //     this.backdate_transaction_description =  this.exception_lookupData.exce_description;
+  //     this.formData.controls.oda_backdate_transaction.setValue(this.exception_lookupData .id);
+  //   });
+  // }
 
 
   glSubheadLookup(): void {
@@ -582,7 +584,7 @@ oda_fee_cr_placeholderLookup(): void {
 
   feeArray = new Array();
   glSubheadArray = new Array();
-
+  exceptionArray = new Array();
   formData = this.fb.group({
     oda_scheme_code: [''],
     oda_scheme_type: [''],
@@ -629,14 +631,15 @@ oda_fee_cr_placeholderLookup(): void {
     oda_glsubheads: new FormArray([]),
 
     // Exceptions 
-    oda_exc_ac_in_debit_bal:[''],
-    oda_exc_ac_in_cr_bal:[''],
-    oda_exc_liability_exceeds_group_limit:[''],
-    oda_exc_ac_is_frozed:[''],
-    oda_exc_sanction_limit_expired:[''],
-    oda_exc_int_cal_not_upto_date:[''],
-    oda_exc_insufficient_available_bal:[''],
-    oda_exc_backdated_transaction:[''],
+    oda_exceptions: new FormArray([]),
+    // oda_exc_ac_in_debit_bal:[''],
+    // oda_exc_ac_in_cr_bal:[''],
+    // oda_exc_liability_exceeds_group_limit:[''],
+    // oda_exc_ac_is_frozed:[''],
+    // oda_exc_sanction_limit_expired:[''],
+    // oda_exc_int_cal_not_upto_date:[''],
+    // oda_exc_insufficient_available_bal:[''],
+    // oda_exc_backdated_transaction:[''],
 
     // Create Audits
     postedBy: ['N'],
@@ -681,6 +684,12 @@ oda_fee_cr_placeholderLookup(): void {
     oda_is_gl_subhead_deleted: ['']
   })
 
+  
+  exceptionsFormData = this.fb.group({
+    // caa_exception_id:[''],
+    oda_exception_code:[''],
+    oda_exception_description:['']
+  })
   initLoanFeeForm() {
     this.newData = true;
     this.feeFormData = this.fb.group({
@@ -711,10 +720,18 @@ oda_fee_cr_placeholderLookup(): void {
       oda_is_gl_subhead_deleted: ['']
     })
   }
+
+  initExceptionForm(){
+    this.newData = true;
+    this.exceptionsFormData = this.fb.group({
+      oda_exception_code:[''],
+      oda_exception_description:['']
+    })
+  }
   get g() { return this.formData.controls; }
   get t() { return this.g.oda_fees as FormArray; }
   get l() { return this.g.oda_glsubheads as FormArray; }
-
+  get e(){ return this.g.oda_exceptions as FormArray;}
   previewGlSubheads(){
     if(this.glSubheadData.valid){
       if(this.glSubheadArray.length<1){
@@ -754,7 +771,37 @@ oda_fee_cr_placeholderLookup(): void {
     this.glSubheadArray = new Array();
   }
 
+  //Exceptions Operations
+  previewExceptions(){
+    if(this.exceptionsFormData.valid){
+      this.e.push(this.fb.group(this.exceptionsFormData.value));
+      this.exceptionArray.push(this.exceptionsFormData.value);
+      this.initExceptionForm()
+    }
+  }
 
+  editExceptions(i:any){
+    this.element = i
+    this.newData = false;
+    this.arrayIndex = this.exceptionArray[i];
+    this.exceptionsFormData = this.fb.group({
+      oda_exception_code:[this.exceptionArray[i].oda_exception_code],
+      oda_exception_description:[this.exceptionArray[i].oda_exception_description]
+    })
+  }
+  onExceptionUpdate(){
+    let i = this.element;
+    this.exceptionArray[i] = this.exceptionsFormData.value
+  }
+  onExceptionClear(){
+    this.initExceptionForm();
+    this.exceptionArray = new Array();
+  }
+  onRemoveException(i:any){
+    const index: number = this.exceptionArray.indexOf(this.exceptionArray.values);
+    this.exceptionArray.splice(index, i);
+    this.exceptionArray = this.exceptionArray;
+  }
   
            //Loan Fee Operations
            onPreviewFees(){    
