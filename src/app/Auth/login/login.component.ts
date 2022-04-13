@@ -76,8 +76,8 @@ export class LoginComponent implements OnInit {
           panelClass: ['green-snackbar','login-snackbar'],
         });
         this.loading = false;
-        // To OTP Auth
-        this.ngZone.run(() => this.router.navigateByUrl('otp'));
+        // To OTP Auth;
+        this.router.navigate(['/otp'], { skipLocationChange: true });
       },
       err => {
         this.loading = false;

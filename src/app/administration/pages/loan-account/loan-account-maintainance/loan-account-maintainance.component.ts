@@ -40,13 +40,10 @@ export class LoanAccountMaintainanceComponent implements OnInit {
     private dialog: MatDialog,
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
 
-  }
-
-
-   loading = false;
+  loading = false;
   submitted = false;
   account_code: any; 
   functionArray: any = [

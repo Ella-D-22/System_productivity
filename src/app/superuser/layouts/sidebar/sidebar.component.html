@@ -11,11 +11,11 @@
   <mat-divider></mat-divider>
   <h2 matSubheader>Pages</h2>
 
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/superuser/dashboard">
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/superuser/dashboard" skipLocationChange>
     <mat-icon>dashboard</mat-icon>
     Dashboard
   </a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/superuser/manage/user">
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/superuser/manage/user" skipLocationChange>
     <mat-icon>supervised_user_circle</mat-icon>
     User Management
   </a>
@@ -23,7 +23,7 @@
     <mat-icon>swap_horizontal_circle</mat-icon>
     Roles Management
   </a> -->
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/superuser/manage/preveleges/maintenance">
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/superuser/manage/preveleges/maintenance" skipLocationChange>
     <mat-icon>thumb_up</mat-icon>
     Privilege Management
   </a>

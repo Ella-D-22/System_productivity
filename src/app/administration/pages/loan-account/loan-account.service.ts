@@ -22,9 +22,6 @@ export class LoanAccountService {
     return this.http.put<Response>(this.baseUrl+'/update/', interest);
    }
 
-
-
-  
   retrieveAllAccounts(type: string): Observable<Response> {
 
     return this.http.get<Response>(this.baseUrl+type+'/all/');
@@ -33,6 +30,13 @@ export class LoanAccountService {
   retriveAccount(id: string) { 
 return this.http.get<Response>(this.baseUrl+id);
   }
+  getCaaCustomerAccount(customerCode) { 
+    return this.http.get<Response>(this.baseUrl+`ca/customer/${customerCode}`);
+      }
+    
+
+    // /accounts/ca/customer/{customerCode}
+
 
   //testing guarantor eligibility
   getCustomerEligibility(customer_code:any):Observable<any>{

@@ -21,6 +21,7 @@ export class LoanAccountLookupComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  account_type: string;
 
   constructor(public dialogRef: MatDialogRef<LoanAccountLookupComponent>,private accountService: LoanAccountService,@Inject(MAT_DIALOG_DATA) data: any ) { 
     this.accountService.retrieveAllAccounts(data.type).subscribe(
@@ -34,6 +35,28 @@ export class LoanAccountLookupComponent implements OnInit {
       },
       (error) => {}
     );
+    console.log("this is data type", data.type)
+
+    if(data.type=="la"){
+      this.account_type="LOAN"
+    }
+    else if(data.type=="oa"){
+      this.account_type="OFFICE"       
+    }
+    else if(data.type=="sb"){ 
+      this.account_type="SAVINGS"  
+    }
+    else if(data.type=="od"){
+      this.account_type="OVERDRAFTS"          
+    }
+    else if(data.type=="ca"){  
+      this.account_type="CURRENT"       
+    }
+    else if(data.type=="td"){ 
+      this.account_type="TERM-DEPOSIT"         
+    }
+    
+
   }
 
   ngOnInit(): void {
