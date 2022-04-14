@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LoanAccountLookupComponent } from '../../../loan-account/loan-account-lookup/loan-account-lookup.component';
 import { ShareCapitalParamsService } from './share-capital-params.service';
 
 @Component({
@@ -23,14 +25,30 @@ export class ShareCapitalParamsComponent implements OnInit {
   isEnabled: boolean;
   _snackBar: any;
   ngZone: any;
+  dtype: any;
   constructor(
     private ParamsService:ShareCapitalParamsService,
     private fb:FormBuilder,
+    private dialog:MatDialog,
     private _snackbar:MatSnackBar,
     private router:Router) { }
   ngOnInit(){
     this.getPage()
   }
+
+  officeAccountLookup(): void {
+    this.dtype="oa"  
+    const dconfig= new MatDialogConfig()
+    dconfig.data={
+      type:this.dtype
+    }
+    const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+    cdialogRef.afterClosed().subscribe((result) => {
+      console.log(result.data);
+      this.formData.controls.account_code.setValue(result.data.acid);
+    });
+  }
+  
   formData = this.fb.group({
     id: [''],
     share_capital_unit:[''],
