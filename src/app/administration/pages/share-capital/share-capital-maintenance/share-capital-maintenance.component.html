@@ -46,6 +46,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label for="" class="start pull-left">Customer Account(ca)<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text"  [attr.disabled]="true" formControlName="cust_account_caa" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                        </div>
+                    </div>
+                </div>
             </div>
             <br>
             <button mat-raised-button color="primary" class="pull-right" type="submit">GO</button>

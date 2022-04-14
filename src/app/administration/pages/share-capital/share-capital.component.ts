@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { RetailCustomerLookupComponent } from '../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
+import { LoanAccountLookupComponent } from '../loan-account/loan-account-lookup/loan-account-lookup.component';
+import { LoanAccountService } from '../loan-account/loan-account.service';
+import { ShareCapitalParamsService } from '../SystemConfigurations/GlobalParams/share-capital-params/share-capital-params.service';
 import { ShareCapitalService } from './share-capital.service';
 
 @Component({
@@ -23,32 +26,54 @@ export class ShareCapitalComponent implements OnInit {
  subscription:Subscription
  horizontalPosition:MatSnackBarHorizontalPosition
  verticalPosition:MatSnackBarVerticalPosition
+  requireMemberAc: boolean;
+  requireSaccoAc: boolean;
+  account_type: string;
+  dtype: string;
+  cust_account_caa: any;
+  currentAcctiveShare: any;
   constructor(private fb:FormBuilder,
     private dialog:MatDialog,
     private shareService:ShareCapitalService, 
+    private ParamsService:ShareCapitalParamsService,
     private _snackbar:MatSnackBar) { }
-
+    
+  
   ngOnInit(): void {
+    this.getCurrentShareValue()
     this.getPage()
   }
- formData = this.fb.group({
 
+  getCurrentShareValue(){
+    this.subscription = this.ParamsService.getLastEntry().subscribe(res=>{
+      this.currentAcctiveShare = res;
+    })
+  }
+  
+   authuser  = "P"
+ formData = this.fb.group({
   id: 0,
-  share_capital_amount: [''],
-  shares: [''],
-  cust_code: [''],
-  cust_name: [''],
-  modifiedBy: [''],
-  modifiedTime: [''],
-  postedBy: [''],
-  postedFlag: [''],
-  postedTime: [''],
-  verifiedBy: [''],
-  verifiedFlag: [''],
-  verifiedTime: [''],
-  deleteFlag: [''],
-  deletedBy: [''],
-  deletedTime: [''],
+  buy_shares_from: [''],
+  cust_code:[''],
+  deleteFlag:['N'],
+  deletedBy:['N'],
+  deletedTime:[new Date()],
+  modifiedBy:['N'],
+  modifiedTime:[new Date()],
+  partner_customer_account:[''],
+  payment_account:[''],
+  payment_means:[''],
+  postedBy:[this.authuser],
+  postedFlag:['Y'],
+  postedTime:[new Date()],
+  share_capital:[''],
+  share_capital_paid:[''],
+  shareholder_account:[''],
+  shares_office_account:[''],
+  shares_amount:[''],
+  verifiedBy:['N'],
+  verifiedFlag:['N'],
+  verifiedTime:[new Date]
  })
 
  customerLookup():void{
@@ -57,8 +82,6 @@ export class ShareCapitalComponent implements OnInit {
   });
   dialogRef.afterClosed().subscribe(results =>{
     this.dialogData = results.data;
-    console.log(this.dialogData);
-    
     this.formData.controls.cust_code.setValue(this.dialogData.customerCode)
     this.formData.controls.cust_name.setValue(this.dialogData.middleName)
   })
@@ -66,36 +89,96 @@ export class ShareCapitalComponent implements OnInit {
   disabledFormData(){
     return this.formData.disable
   }
- 
+  onBuyFrmSacco(event:any){
+    this.requireMemberAc = false
+    this.requireSaccoAc = true
+  }
+  onBuyFrmMember(event:any){
+    this.requireSaccoAc = false
+    this.requireMemberAc = true
+  }
+  onSharesKeypressEvent(event){
+    let shares_qt = event.target.value;
+    let min_share_qt = this.currentAcctiveShare.share_min_unit
+    let current_share_value = (this.currentAcctiveShare.share_capital_amount_per_unit/this.currentAcctiveShare.share_capital_unit)
+
+    if(shares_qt<min_share_qt){
+      this._snackbar.open("Current Minimum Shares is "+min_share_qt, "Try Again",{
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration:3000,
+        panelClass:['red-snackbar', 'login-snackbar']
+      })
+    }else{
+      let share_cal_amount = shares_qt * current_share_value
+      this.formData.controls.shares_amount.setValue(share_cal_amount);
+    }
+  }
+
+  officeAccountLookup(): void {
+    this.dtype="oa"  
+    const dconfig= new MatDialogConfig()
+    dconfig.data={
+      type:this.dtype
+    }
+    const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+    cdialogRef.afterClosed().subscribe((result) => {
+      console.log(result.data);
+      this.formData.controls.account_code.setValue(result.data.acid);
+    });
+  }
+  customerAccountLookup(): void {
+    this.dtype="ca"
+    const dconfig= new MatDialogConfig()
+    dconfig.data={
+      type:this.dtype
+    }
+    const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+    cdialogRef.afterClosed().subscribe((result) => {
+      console.log(result.data);
+      this.formData.controls.account_code.setValue(result.data.acid);
+    });
+  }
+
+
+  
  getPage(){
    this.subscription = this.shareService.currentMessage.subscribe(
      message =>{
        this.message = message
-       console.log(message);
        this.function_type = this.message.function_type
        this.cust_code = this.message.cust_code
        this.cust_name = this.message.cust_name
+       this.cust_account_caa = this.message.cust_account_caa
+      //  call to get account
+
        if(this.function_type == "A-Add"){
         this.formData = this.fb.group({
-
         })
         this.formData = this.fb.group({
-          
-          share_capital_amount: [''],
-          shares: [''],
-          cust_code: [this.cust_code],
-          cust_name: [this.cust_name],
-          modifiedBy: ['user'],
-          modifiedTime: [new Date()],
-          postedBy: ['user'],
-          postedFlag: ['Y'],
-          postedTime: [new Date()],
-          verifiedBy: ['user'],
-          verifiedFlag: ['N'],
-          verifiedTime: [new Date()],
-          deleteFlag: ['N'],
-          deletedBy: ['user'],
-          deletedTime: [new Date()],
+          id: 0,
+          buy_shares_from: [''],
+          cust_code:[this.cust_code],
+          cust_name:[this.cust_name],
+          deleteFlag:['N'],
+          deletedBy:['N'],
+          deletedTime:[new Date()],                                                                                                                                                                     
+          modifiedBy:['N'],
+          modifiedTime:[new Date()],
+          partner_customer_account:[''],
+          payment_account:[''],
+          payment_means:[''],
+          postedBy:[this.authuser],
+          postedFlag:['Y'],
+          postedTime:[new Date()],
+          share_capital:[''],
+          share_capital_paid:[''],
+          shareholder_account:[''],
+          shares_office_account:[''],
+          shares_amount:[''],
+          verifiedBy:['N'],
+          verifiedFlag:['N'],
+          verifiedTime:[new Date]
         })
        }else if(this.function_type == 'I-Inquire'){
          this.disabledFormData()

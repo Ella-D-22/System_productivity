@@ -21,43 +21,76 @@
             <h4>Customer Name</h4>
             <p>{{this.cust_name}}</p>
          </div>
-        
+         <div class="col-md-6 col-sm-12">
+            <h4>Customer Account (caa)</h4>
+            <p>{{this.cust_account_caa}}</p>
+         </div>
      </div>
-   
-
     <mat-divider></mat-divider>
     <br>
     <div class="container-fluid">
         <form action="" (ngSubmit)="onSubmit()" 
         novalidate
         [formGroup]="formData">
-      
-        <div class="row">
+
+        <div  class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Buy From </label> <span class="warning">*</span>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="buy_shares_from">
+                    <mat-radio-button (change)="onBuyFrmSacco($event)" value="All">Sacco. </mat-radio-button>
+                    <mat-radio-button (change)="onBuyFrmMember($event)" value="Specific">Member. </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+             </div>          
+            </div>
+            <div class="col-md-6 col-sm-12">
+            <div *ngIf="this.requireSaccoAc" class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                    <label for="" class="start pull-left">Sacco P&L a/c<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                    <input type="number" formControlName="share_capital_amount" class="form-control">
+                    <mat-icon (click)="officeAccountLookup()">search</mat-icon>
+                </div>
+            </div>
+            <div  *ngIf="this.requireMemberAc" class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                    <label for="" class="start pull-left">Member ac<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                    <input type="number" formControlName="share_capital_amount" class="form-control">
+                    <mat-icon (click)="customerAccountLookup()">search</mat-icon>
+                </div>
+            </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <div class="col-md-6 col-sm-12 form-column">
                         <label for="" class="start pull-left">Shares<span class="warning">*</span></label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                        <input type="number" class="form-control" formControlName="shares">
+                        <input (keyup)="onSharesKeypressEvent($event)" type="number" class="form-control" formControlName="shares">
                     </div>
-
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
+                
                 <div class="form-group">
                     <div class="col-md-6 col-sm-12 form-column">
-                        <label for="" class="start pull-left">Shares Capital Amount<span class="warning">*</span></label>
+                        <label for="" class="start pull-left">Shares Amount<span class="warning">*</span></label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                        <input type="number" formControlName="share_capital_amount" class="form-control">
+                        <input [attr.disabled]="true" type="number" class="form-control" formControlName="shares_amount">
                     </div>
-
                 </div>
             </div>
         </div>
-      
-
         <br>
         <button mat-raised-button class="pull-left" color="default" type="submit" routerLink="../../maintenance">Back</button>
         <button mat-raised-button class="pull-right" color="primary" type="submit">Buy</button>

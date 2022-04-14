@@ -11,63 +11,145 @@ import { ShareCapitalParamsService } from './share-capital-params.service';
   styleUrls: ['./share-capital-params.component.scss']
 })
 export class ShareCapitalParamsComponent implements OnInit {
-
  subscription:Subscription
  results:any
  error:any
  horizontalPosition:MatSnackBarHorizontalPosition
  verticalPosition:MatSnackBarVerticalPosition
-
-  constructor(private ParamsService:ShareCapitalParamsService,
+  message: any;
+  function_type: any;
+  scheme_id: any;
+  organization_id: any;
+  isEnabled: boolean;
+  _snackBar: any;
+  ngZone: any;
+  constructor(
+    private ParamsService:ShareCapitalParamsService,
     private fb:FormBuilder,
     private _snackbar:MatSnackBar,
     private router:Router) { }
-
-  ngOnInit(): void {
-    
+  ngOnInit(){
+    this.getPage()
   }
-
   formData = this.fb.group({
-  
     id: [''],
-    min_shares: [''],
-    share_quantity:[''] ,
-    share_value: [''],
-    shares_office_ac: [''],
-    modifiedBy: [''],
-    modifiedTime: [''],
-    postedBy: [''],
-    postedFlag: [''],
-    postedTime:[''],
-    verifiedBy:[''],
-    verifiedFlag: [''],
-    verifiedTime:[''],
-    deleteFlag: [''],
-    deletedBy: [''],
-    deletedTime: [''],
+    share_capital_unit:[''],
+    share_capital_amount_per_unit:[''],
+    share_min_unit:[''],
+    shares_office_ac:[''],
+    modifiedBy: ['N'],
+    modifiedTime: [new Date()],
+    postedBy: ['N'],
+    postedFlag: ['Y'],
+    postedTime:[new Date()],
+    verifiedBy:['N'],
+    verifiedFlag: ['N'],
+    verifiedTime:[new Date()],
+    deleteFlag: ['N'],
+    deletedBy: ['N'],
+    deletedTime: [new Date()],
   })
   get f() { return this.formData.controls; }
 
 getPage(){
-  this.formData = this.fb.group({
-  
-    min_shares: [''],
-    share_quantity:[''] ,
-    share_value: [''],
-    shares_office_ac: [''],
-    modifiedBy: [''],
-    modifiedTime: [''],
-    postedBy: ["user"],
-    postedFlag: ['Y'],
-    postedTime:[new Date()],
-    verifiedBy:['user'],
-    verifiedFlag: ['N'],
-    verifiedTime:[new Date()],
-    deleteFlag: ['N'],
-    deletedBy: ['User'],
-    deletedTime: [new Date()],
-  })
+  this.subscription = this.ParamsService.currentMessage.subscribe(message =>{
+    this.message = message;      
+    this.function_type = this.message.function_type
+  if(this.function_type == "A-Add"){
+    this.isEnabled = true;
+    this.formData = this.fb.group({
+      id: [''],
+      share_capital_unit:[''],
+      share_capital_amount_per_unit:[''],
+      share_min_unit:[''],
+      shares_office_ac:[''],
+      modifiedBy: ['N'],
+      modifiedTime: [new Date()],
+      postedBy: ['N'],
+      postedFlag: ['Y'],
+      postedTime:[new Date()],
+      verifiedBy:['N'],
+      verifiedFlag: ['N'],
+      verifiedTime:[new Date()],
+      deleteFlag: ['N'],
+      deletedBy: ['N'],
+      deletedTime: [new Date()],
+    });
+  this.formData.controls.is_verified.disable();
+  this.formData.controls.is_deleted.disable();
+  }
+  else if(this.function_type == "I-Inquire"){
+    this.formData.disable()
+    this.isEnabled = false;
+    this.subscription = this.ParamsService.getLastEntry().subscribe(res=>{
+      this.results = res;
+      this.formData = this.fb.group({
+        id: [this.results.id],
+        share_capital_unit:[this.results.share_capital_unit],
+        share_capital_amount_per_unit:[this.results.share_capital_amount_per_unit],
+        share_min_unit:[this.results.share_min_unit],
+        shares_office_ac:[this.results.shares_office_ac],
+        modifiedBy: [this.results.modifiedBy],
+        modifiedTime: [this.results.modifiedTime],
+        postedBy: [this.results.postedBy],
+        postedFlag: [this.results.postedFlag],
+        postedTime:[this.results.postedTime],
+        verifiedBy:[this.results.verifiedBy],
+        verifiedFlag: [this.results.verifiedFlag],
+        verifiedTime:[this.results.verifiedTime],
+        deleteFlag: [this.results.deleteFlag],
+        deletedBy: [this.results.deletedBy],
+        deletedTime: [this.results.deletedTime],
+      });
+    }, err=>{
+      this.error = err;
+      this._snackBar.open(this.error, "Try again!", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000,
+        panelClass: ['red-snackbar','login-snackbar'],
+      });
+    })
+  }
+  else if(this.function_type == "V-Verify"){
+    this.formData.disable()
+    this.isEnabled = true;
+    this.subscription = this.ParamsService.getLastEntry().subscribe(res=>{
+      this.results = res;
+      this.formData = this.fb.group({
+        id: [this.results.id],
+        share_capital_unit:[this.results.share_capital_unit],
+        share_capital_amount_per_unit:[this.results.share_capital_amount_per_unit],
+        share_min_unit:[this.results.share_min_unit],
+        shares_office_ac:[this.results.shares_office_ac],
+        modifiedBy: [this.results.modifiedBy],
+        modifiedTime: [this.results.modifiedTime],
+        postedBy: [this.results.postedBy],
+        postedFlag: [this.results.postedFlag],
+        postedTime:[this.results.postedTime],
+        verifiedBy:[this.results.verifiedBy],
+        verifiedFlag: [this.results.verifiedFlag],
+        verifiedTime:[this.results.verifiedTime],
+        deleteFlag: [this.results.deleteFlag],
+        deletedBy: [this.results.deletedBy],
+        deletedTime: [this.results.deletedTime],
+      });
+      }, err=>{
+        this.error = err;
+          this._snackBar.open(this.error, "Try again!", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 3000,
+            panelClass: ['red-snackbar','login-snackbar'],
+          });
+      })
+  }
+})
 }
+  disabledFormControll() {
+    throw new Error('Method not implemented.');
+  }
+
   onSubmit(){
     
     if(this.formData.valid){
@@ -80,7 +162,7 @@ getPage(){
             duration:3000,
             panelClass:['green-snackbar', 'login-snackbar']
           });
-          this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
+          this.router.navigateByUrl("system/configurations/global/share-capital/params/maintenance")
         },
         err =>{
           this.error = err

@@ -5,6 +5,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
+import { LoanAccountService } from '../../loan-account/loan-account.service';
 import { ShareCapitalService } from '../share-capital.service';
 
 @Component({
@@ -16,10 +17,13 @@ export class ShareCapitalMaintenanceComponent implements OnInit {
   function_type:any
   dialogData:any
   submitted = false
+  resAccountData: any
   subscription:Subscription
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
-  constructor(private shareService:ShareCapitalService,
+  constructor(
+    private shareService:ShareCapitalService,
+    private accountAPI:LoanAccountService,
     private fb:FormBuilder,
     private _snackbar:MatSnackBar,
     private dialog:MatDialog, 
@@ -33,9 +37,10 @@ export class ShareCapitalMaintenanceComponent implements OnInit {
   ]
 
   formData = this.fb.group({
-    function_type:[''],
-    cust_code:[''],
-    cust_name:['']
+    function_type:['',[Validators.required]],
+    cust_code:['',[Validators.required]],
+    cust_name:['',[Validators.required]],
+    cust_account_caa:['',[Validators.required]],
   })
   get f(){return this.formData.controls; }
 
@@ -49,15 +54,36 @@ export class ShareCapitalMaintenanceComponent implements OnInit {
     }
   }
 
+  getCaaCustomerAccount(customerCode){
+    console.log("this is customer code",customerCode);
+    
+    this.subscription = this.accountAPI.getCaaCustomerAccount(customerCode).subscribe(res=>{
+      console.log(res);
+      this.resAccountData = res;
+    this.formData.controls.cust_account_caa.setValue(this.resAccountData.entity.acid)
+
+      
+    },err=>{
+      this._snackbar.open("No Customer Current Account!Kindly Open a Current Account or Consult your Account Manager", "X",{
+        horizontalPosition:this.horizontalPosition,
+        verticalPosition:this.verticalPosition,
+        duration:3000,
+        panelClass:['red-snackbar', 'login-snackbar']
+      })
+    });
+   }
+
+
   customerLookup():void{
      const dialogRef = this.dialog.open(RetailCustomerLookupComponent,{
       
      });
      dialogRef.afterClosed().subscribe(results =>{
-       this.dialogData = results.data
-       console.log(this.dialogData);    
+       this.dialogData = results.data 
     this.formData.controls.cust_code.setValue(this.dialogData.customerCode)
     this.formData.controls.cust_name.setValue(this.dialogData.firstName +" " + this.dialogData.middleName +" "+ this.dialogData.surname)
+    this.getCaaCustomerAccount(this.dialogData.customerCode)
+
 
      })
   }

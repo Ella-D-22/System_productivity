@@ -13,7 +13,7 @@ export class ShareCapitalParamsService {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = `${environment.accountAPI}/api/vi/sharecapital/params`;
+  baseURL = `${environment.accountAPI}/api/v1/sharecapital/params`;
 
   //message medium
   private messageSource = new BehaviorSubject('default message');
@@ -56,6 +56,16 @@ getAllShareCapitalParams(){
   catchError(this.errorMgmt)
   )
 }
+getLastEntry(){
+  let API_URL = `${this.baseURL}/find/last/entry`
+  return this.http.get(API_URL, {headers:this.headers,
+  withCredentials:false}).pipe(map(res =>{
+    return res || {}
+  }),
+  catchError(this.errorMgmt)
+  )
+}
+
 
 
 
