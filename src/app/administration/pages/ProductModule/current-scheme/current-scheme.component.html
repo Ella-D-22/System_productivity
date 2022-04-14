@@ -517,6 +517,10 @@
 
         <mat-divider></mat-divider>
 <h3>Exceptions Handling</h3>
+
+<form action="" [formGroup]="exceptionsFormData" class="form"
+ novalidate (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm"
+>
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <div class="form-group">
@@ -524,52 +528,55 @@
        <label class="start pull-left">Exception Code<span class="warning">*</span></label>
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.ac_debit_balance_value" type="text" formControlName="caa_ac_debit_balance" class="pull-right form-control"/>
+  
+  <input [value]="this.exception_code_value" type="text" formControlName="caa_exception_code" class="pull-right form-control"/>
        <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
       </div>
    </div> 
 
-  </div>
-  
-</div>
-<br />
-<button class="pull-right btn-sm"  *ngIf="newData"  type="button" (click)="previewGlSubheads()">
-  + Add
-</button>
-<button class="pull-right btn-sm"  *ngIf="!newData"  type="button" (click)="onGlSubheadUpdate()">
-  + Update
-</button>
-<button class="pull-right btn-sm"   type="button" (click)="initGlSubheadForm()">
-Reset form
-</button>
-<button class="pull-right btn-sm"   type="button" (click)="onGlSubheadClear()">
-Clear All
-</button>
-<br />
-<table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
-  <thead>
+          </div>
+          
+        </div>
+        <br />
+        <button class="pull-right btn-sm"  *ngIf="newData"  type="button" (click)="onPreviewExceptions()">
+          + Add
+        </button>
+        <button class="pull-right btn-sm"  *ngIf="!newData"  type="button" (click)="onExceptionUpdate()">
+          + Update
+        </button>
+        <button class="pull-right btn-sm"   type="button" (click)="initExceptionForm()">
+        Reset form
+        </button>
+        <button class="pull-right btn-sm"   type="button" (click)="onExceptionClear()">
+        Clear All
+        </button>
+   </form>
+        <br />
+    <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
+          <thead>
       <tr>
           <th>No.</th>
           <th>Exception Code</th>
           <th>Exception Description</th>
           <th>Exception Code Type</th>
-          <th>Del</th>
-          <th>Operation</th>
+          <!-- <th>Del</th>
+          <th>Operation</th> -->
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let item of this.glSubheadArray, let i = index">
+      <tr *ngFor="let item of this.exceptionsArray, let i = index">
           <td>{{i + 1}}</td>
-          <td>{{item.caa_gl_subhead}}</td>
-          <td>{{item.caa_gl_subhead_description}}</td>
-          <td>{{item.caa_gl_subhead_deafault}}</td>
-          <td>{{item.caa_is_gl_subhead_deleted}}</td>
-          <td><a class="update btn btn-sm" color="accent" (click)="onRemoveGLSubhead(i)">X</a>
-            <a class="update btn btn-sm" color="accent" (click)="editGlSubhead(i)">Edit</a>
+          <td>{{item.caa_exception_code}}</td>
+          <td>{{item.caa_exception_description}}</td>
+          <!-- <td>{{item.caa_gl_subhead_deafault}}</td>
+          <td>{{item.caa_is_gl_subhead_deleted}}</td> -->
+          <td><a class="update btn btn-sm" color="accent" (click)="onRemoveExceptions(i)">X</a>
+            <a class="update btn btn-sm" color="accent" (click)="editExceptions(i)">Edit</a>
           </td>
       </tr>
   </tbody>
 </table>
+
 <!-- <div class="row">
   <div class="col-md-6 col-sm-12">
     <div class="form-group">

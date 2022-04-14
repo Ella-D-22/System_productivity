@@ -8,17 +8,17 @@
         <p>{{this.function_type}}</p>
       </div>
       <div class="col-md-6 col-sm-12">
-        <h4>Scheme Description</h4>
+        <h4>Product Description</h4>
         <p>{{this.scheme_code_desc}}</p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <h4>Scheme Code</h4>
+        <h4>Product Code</h4>
         <p>{{this.scheme_code}}</p>
       </div>
       <div class="col-md-6 col-sm-12">
-        <h4>Scheme Type</h4>
+        <h4>Product Type</h4>
         <p>{{this.scheme_type}}</p>
       </div>
     </div>
@@ -547,162 +547,183 @@
 
 <mat-divider></mat-divider>
 <h3>Exceptions Handling</h3>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Account in Debit Balance<span class="warning">*</span></label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.ac_debit_balance_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_ac_in_debit_bal" class="pull-right form-control"/>
-       <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
-      </div>
-   </div> 
-   <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column ">
-      <mat-hint>{{this.ac_debit_balance_description}}</mat-hint>
-    </div>
- </div> 
-  </div>
-  <div class="col-md-6 col-sm-12">
-   <div class="form-group">
-     <div class="col-md-6 col-sm-12 form-column ">
-      <label class="start pull-left">Account in Credit Balance</label>
-     </div>
-     <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_credit_balance_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_ac_in_cr_bal" class="pull-right form-control"/>
-      <mat-icon (click)="ac_credit_balance_Lookup()">search</mat-icon>
-     </div>
-  </div>    
-  <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column">
-      <mat-hint>{{this.ac_credit_balance_description}}</mat-hint>
-    </div>
- </div> 
+        <form action="" [formGroup]="exceptionsFormData" (ngSubmit)="onSubmit" novalidate class="form">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                <label class="start pull-left">Exceptions<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column ">
+                <input [value]="this.exception_code_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exception_code" class="pull-right form-control"/>
+                <mat-icon (click)="ac_debit_balance_Lookup()">search</mat-icon>
+                </div>
+            </div> 
+          
+            </div>
+          </div>
 
-</div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Liability exceeds group limit<span class="warning">*</span></label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.liability_exceed_group_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_liability_exceeds_group_limit" class="pull-right form-control"/>
-       <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
-      </div>
-   </div> 
-   <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column ">
-      <mat-hint>{{this.liability_exceed_group_description}}</mat-hint>
-    </div>
- </div> 
-  </div>
-  <div class="col-md-6 col-sm-12">
-   <div class="form-group">
-     <div class="col-md-6 col-sm-12 form-column ">
-      <label class="start pull-left">Account is frozed</label>
-     </div>
-     <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.ac_is_froozed_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_ac_is_frozed" class="pull-right form-control"/>
-      <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
-     </div>
-  </div>    
-  <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column">
-      <mat-hint>{{this.ac_is_froozed_descpription}}</mat-hint>
-    </div>
- </div> 
+          
+          <br />
+            <button class="pull-right btn-sm"  *ngIf="newData"  type="button" (click)="previewExceptions()">
+              + Add
+        </button>
+        <button class="pull-right btn-sm"  *ngIf="!newData"  type="button" (click)="onExceptionUpdate()">
+              + Update
+       </button>
+       <button class="pull-right btn-sm"   type="button" (click)="initExceptionForm()">
+        Reset form
+        </button>
+        <button class="pull-right btn-sm"   type="button" (click)="onExceptionClear()">
+          Clear All
+          </button>
+            <br />
+       
+       <br>
+        </form>
+        <br>
+        <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
+          <thead>
+              <tr>
+                  <th>No.</th>
+                  <th>Exception Code</th>
+                  <th>Exception Description</th>
+                  <!-- <th>Default Value</th>
+                  <th>Del</th>
+                  <th>Operation</th> -->
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of this.exceptionArray, let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>{{item.oda_exception_code}}</td>
+                  <td>{{item.oda_exception_description}}</td>
+                  <!-- <td>{{item.oda_gl_subhead_deafault}}</td>
+                  <td>{{item.oda_is_gl_subhead_deleted}}</td> -->
+                  <td><a class="update btn btn-sm" color="accent" (click)="onRemoveGLSubhead(i)">X</a>
+                    <a class="update btn btn-sm" color="accent" (click)="editExceptions(i)">Edit</a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+       
+        <!-- <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Liability exceeds group limit<span class="warning">*</span></label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+              <input [value]="this.liability_exceed_group_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_liability_exceeds_group_limit" class="pull-right form-control"/>
+              <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
+              </div>
+          </div> 
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <mat-hint>{{this.liability_exceed_group_description}}</mat-hint>
+            </div>
+        </div> 
+          </div>
+          <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Account is frozed</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input [value]="this.ac_is_froozed_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_ac_is_frozed" class="pull-right form-control"/>
+              <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
+            </div>
+          </div>    
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <mat-hint>{{this.ac_is_froozed_descpription}}</mat-hint>
+            </div>
+        </div> 
 
-</div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Sanction Limit Expired<span class="warning">*</span></label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.sanction_limit_expired_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_sanction_limit_expired" class="pull-right form-control"/>
-       <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
-      </div>
-   </div> 
-   <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column ">
-      <mat-hint>{{this.sanction_limit_expired_description}}</mat-hint>
-    </div>
- </div> 
-  </div>
-  <div class="col-md-6 col-sm-12">
-   <div class="form-group">
-     <div class="col-md-6 col-sm-12 form-column ">
-      <label class="start pull-left">Interest Calculation not upto date</label>
-     </div>
-     <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.interest_calc_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_int_cal_not_upto_date" class="pull-right form-control"/>
-      <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
-     </div>
-  </div> 
-  <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column">
-      <mat-hint>{{this.interest_calc_description}}</mat-hint>
-    </div>
- </div>              
-</div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Insufficient available balance<span class="warning">*</span></label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column ">
-       <input [value]="this.insufficient_exception_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_insufficient_available_bal" class="pull-right form-control"/>
-       <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
-      </div>
-   </div> 
-   <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column ">
-      <mat-hint>{{this.insufficient_exception_description}}</mat-hint>
-    </div>
- </div> 
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Sanction Limit Expired<span class="warning">*</span></label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+              <input [value]="this.sanction_limit_expired_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_sanction_limit_expired" class="pull-right form-control"/>
+              <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
+              </div>
+          </div> 
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <mat-hint>{{this.sanction_limit_expired_description}}</mat-hint>
+            </div>
+        </div> 
+          </div>
+          <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Interest Calculation not upto date</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input [value]="this.interest_calc_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_int_cal_not_upto_date" class="pull-right form-control"/>
+              <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
+            </div>
+          </div> 
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <mat-hint>{{this.interest_calc_description}}</mat-hint>
+            </div>
+        </div>              
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Insufficient available balance<span class="warning">*</span></label>
+              </div>
+              <div class="col-md-6 col-sm-12 form-column ">
+              <input [value]="this.insufficient_exception_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_insufficient_available_bal" class="pull-right form-control"/>
+              <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
+              </div>
+          </div> 
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <mat-hint>{{this.insufficient_exception_description}}</mat-hint>
+            </div>
+        </div> 
 
-  </div>
-  <div class="col-md-6 col-sm-12">
-   <div class="form-group">
-     <div class="col-md-6 col-sm-12 form-column ">
-      <label class="start pull-left">Backdated transaction</label>
-     </div>
-     <div class="col-md-6 col-sm-12 form-column">
-      <input [value]="this.backdate_transaction_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_backdated_transaction" class="pull-right form-control"/>
-      <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
-     </div>
-  </div> 
-  <div class="form-group">
-    <div class="col-md-6 col-sm-12 form-column ">
-    </div>
-    <div class="col-md-6 col-sm-12 form-column">
-     <mat-hint>{{this.backdate_transaction_description}}</mat-hint>
-    </div>
- </div> 
+          </div>
+          <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Backdated transaction</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input [value]="this.backdate_transaction_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_backdated_transaction" class="pull-right form-control"/>
+              <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
+            </div>
+          </div> 
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+            <mat-hint>{{this.backdate_transaction_description}}</mat-hint>
+            </div>
+        </div> 
 
-</div>
-</div>
+        </div>
+        </div> -->
       </mat-tab>
   
       <!-- GL Subhead -->

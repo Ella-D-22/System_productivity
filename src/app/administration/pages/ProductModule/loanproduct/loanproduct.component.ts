@@ -140,6 +140,8 @@ export class LoanproductComponent implements OnInit {
   laa_fee_cr_placeholder_desc: any;
   element: any;
   loanElement: any;
+  exception_code_value:any
+  exception_description:any
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -399,8 +401,13 @@ ac_debit_balance_Lookup(): void {
   });
   dialogRef.afterClosed().subscribe(result => {
     this.exception_lookupData = result.data;
-    this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
-    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
+    console.log(this.exception_lookupData);
+    
+    this.exception_code_value = this.exception_lookupData.exception_code
+    this.exception_description = this.exception_lookupData.exce_description
+    
+    this.exceptionsFormData.controls.laa_exception_code.setValue(this.exception_code_value)
+    this.exceptionsFormData.controls.laa_exception_description.setValue(this.exception_description)
   });
 }
 ac_credit_balance_Lookup(): void {
@@ -575,6 +582,7 @@ backdate_transaction_Lookup(): void {
       }
       feeArray= new Array();
       glSubheadArray = new Array();
+      exceptionArray = new Array()
     //  this.feeArray
       formData = this.fb.group({
         laa_function_type: [''],
@@ -687,14 +695,15 @@ backdate_transaction_Lookup(): void {
         laa_loanfees: new FormArray([]),
         laa_glsubheads: new FormArray([]),
         // Exceptions
-        laa_ac_debit_balance:[''],
-        laa_ac_credit_balance:[''],
-        laa_liability_exceed_group:[''],
-        laa_ac_is_froozed:[''],
-        laa_sanction_limit_expired:[''],
-        laa_interest_calc:[''],
-        laa_insufficient_exception:[''],
-        laa_backdate_transaction:[''],
+        laa_exceptions: new FormArray([]),
+        // laa_ac_debit_balance:[''],
+        // laa_ac_credit_balance:[''],
+        // laa_liability_exceed_group:[''],
+        // laa_ac_is_froozed:[''],
+        // laa_sanction_limit_expired:[''],
+        // laa_interest_calc:[''],
+        // laa_insufficient_exception:[''],
+        // laa_backdate_transaction:[''],
 
 
 
@@ -737,6 +746,12 @@ backdate_transaction_Lookup(): void {
            laa_gl_subhead_deafault:[''],
            laa_is_gl_subhead_deleted:['']
          })
+
+         exceptionsFormData = this.fb.group({
+          laa_exception_code:[''],
+          laa_exception_description:['']
+
+  })
          initLoanFeeForm(){
          this.newData = true;
           this.feeFormData = this.fb.group({
@@ -766,9 +781,18 @@ backdate_transaction_Lookup(): void {
           })
          }
 
+         initExceptionForm(){
+          this.newData = true;
+          this.exceptionsFormData = this.fb.group({
+            laa_exception_code:[''],
+            laa_exception_description:['']
+          })
+        }        
+
     get g() { return this.formData.controls; }
     get t() { return this.g.laa_loanfees as FormArray; }
     get l() {return this.g.laa_glsubheads as FormArray;}
+    get e(){ return this.g.laa_exceptions as FormArray;}
 
     // newFormDkkata = this.fb.group({
     //   org_lnk_event_id: ['', Validators.required],
@@ -798,6 +822,7 @@ backdate_transaction_Lookup(): void {
            }
          }
           
+       
           editGlSubhead(i: any) {
             this.element = i
             this.newData = false;
@@ -822,7 +847,36 @@ backdate_transaction_Lookup(): void {
           this.initGlSUbheadForm();
           this.glSubheadArray = new Array();
         }
+       
+        previewExceptions(){
+          if(this.exceptionsFormData.valid){
+            this.e.push(this.fb.group(this.exceptionsFormData.value));
+            this.exceptionArray.push(this.exceptionsFormData.value);
+            this.initExceptionForm();
+          }
+        }
+        editException(i:any){
+          this.element = i
+          this.newData = false;
+          this.arrayIndex = this.exceptionArray[i];
+          this.exceptionsFormData = this.fb.group({
+            laa_exception_code:[this.exceptionArray[i].laa_exception_code],
+            laa_exception_description:[this.exceptionArray[i].laa_exception_description]
+          })
+        }
 
+        updateException(i:any){
+          this.exceptionArray[i] = this.exceptionsFormData.value
+        }
+        onRemoveExceptions(i:any){
+          const index: number = this.exceptionArray.indexOf(this.exceptionArray.values);
+          this.exceptionArray.splice(index, i);
+          this.exceptionArray = this.exceptionArray;
+        }
+        onClearExceptions(){
+          this.initExceptionForm();
+          this.exceptionArray = new Array();
+        }
 
          updateLoanFee(i:any){
            this.feeArray[i] = this.feeFormData.value 
