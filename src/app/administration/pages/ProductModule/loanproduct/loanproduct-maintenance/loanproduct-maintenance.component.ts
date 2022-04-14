@@ -34,6 +34,8 @@ export class LoanproductMaintenanceComponent implements OnInit {
   laa_scheme_code: any;
   laa_scheme_code_desc: any;
   existingData = false;
+  scheme_id: any;
+  laa_scheme_type_id: any;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -62,8 +64,7 @@ export class LoanproductMaintenanceComponent implements OnInit {
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
     scheme_code: ['', [Validators.required]],
-    scheme_type:[''],
-    scheme_code_desc:['']
+    scheme_code_desc:[''],
   });
 
   schemeCodeLookup(): void {
@@ -74,19 +75,26 @@ export class LoanproductMaintenanceComponent implements OnInit {
       this.laa_scheme_code = this.lookupdata.laa_scheme_code;
       this.laa_scheme_code_desc = this.lookupdata.laa_scheme_code_desc;
       this.formData.controls.scheme_code.setValue(this.laa_scheme_code);
+
     });
   }
 
-  schemeTypeLookup(): void {
-    const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.lookupData = result.data;
-      this.scheme_type = this.lookupData.scheme_type;
-      this.formData.controls.scheme_type.setValue(this.scheme_type);
-    });
-  }
+  // schemeTypeLookup(): void {
+  //   const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.lookupData = result.data;
+      
+      
+  //     this.scheme_type = this.lookupData.scheme_type;
+  //     this.laa_scheme_type_id = this.lookupData.id;
+
+  //     this.formData.controls.scheme_type.setValue(this.scheme_id);
+  //     this.formData.controls.laa_scheme_type_id.setValue(this.laa_scheme_type_id);
+
+  //   });
+  // }
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.existingData = true;
@@ -94,9 +102,6 @@ export class LoanproductMaintenanceComponent implements OnInit {
     }else if(event.target.value == "A-Add"){
       this.formData.controls.scheme_code_desc.enable()
       this.existingData = false;
-
-      // this.formData.controls.currency_ccy.setValidators([])
-      // this.formData.controls.currency_ccy.setValue("");
     }
   }
         // convenience getter for easy access to form fields
@@ -122,13 +127,6 @@ export class LoanproductMaintenanceComponent implements OnInit {
              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
               }, err=>{
 
-
-                // TODO:
-                //Remove
-              // this.loanproductAPI.changeMessage(this.formData.value)
-              // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
-
-                // exist else show error
                 this.error = err;
                   this.loading = false;
                   this._snackBar.open(this.error, "Try again!", {
@@ -142,14 +140,10 @@ export class LoanproductMaintenanceComponent implements OnInit {
             }else{
               this.newData = false;
               this.loanproductAPI.changeMessage(this.formData.value)
-              // this.dialogRef.close({ event: 'close', data:this.formData.value });
              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
               
             }
-      
-            // checkHitcm
-      
-            // check if adding 
+    
         }else{
           this.loading = false;
           this._snackBar.open("Invalid Form Data", "Try again!", {
@@ -160,54 +154,6 @@ export class LoanproductMaintenanceComponent implements OnInit {
           });
         }
         }
-
-        // onSubmit(){
-        //   console.log(this.formData.value)
-        //   this.loading = true;
-        //   this.submitted = true;
-        //   if(this.formData.valid){
-        //     // this.int_tbl_code = this.f.int_tbl_code.value;
-        //     this.function_type =  this.f.function_type.value;
-        //     if(this.function_type == "A-Add"){
-        //       // console.log("found here", this.int_tbl_code)
-        //       // check if code exists
-        //       // this.params = new HttpParams()
-        //       // .set('int_tbl_code',this.int_tbl_code);
-        //       this.subscription = this.loanproductAPI.checkExistence(this.formData.value).subscribe(res=>{
-        //         // not available else proceed
-        //       this.loanproductAPI.changeMessage(this.formData.value)
-        //      this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
-        //       }, err=>{
-        //         // exist else show error
-        //         this.error = err;
-        //           this.loading = false;
-        //           this._snackBar.open(this.error, "Try again!", {
-        //             horizontalPosition: this.horizontalPosition,
-        //             verticalPosition: this.verticalPosition,
-        //             duration: 3000,
-        //             panelClass: ['red-snackbar','login-snackbar'],
-        //           });
-      
-        //       })
-        //     }else{
-        //       this.loanproductAPI.changeMessage(this.formData.value)
-        //       // this.dialogRef.close({ event: 'close', data:this.formData.value });
-        //      this.ngZone.run(() => this.router.navigateByUrl('system/configurations/charge/event-id/data/view'));
-        //     }
-      
-        //     // checkHitcm
-      
-        //     // check if adding 
-        // }else{
-        //   this.loading = false;
-        //   this._snackBar.open("Invalid Form Data", "Try again!", {
-        //     horizontalPosition: this.horizontalPosition,
-        //     verticalPosition: this.verticalPosition,
-        //     duration: 3000,
-        //     panelClass: ['red-snackbar','login-snackbar'],
-        //   });
-        // }
-        // }
 
 }
 

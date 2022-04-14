@@ -16,7 +16,7 @@ export interface ApiData{}
 export class CurrentSchemeLookupComponent implements OnInit {
   results:any;
   formData : any;
-  displayedColumns : string[]= ['Scheme Code', 'Scheme Type','Scheme Description']
+  displayedColumns : string[]= ['Scheme Code','Scheme Description']
   dataSource !: MatTableDataSource<any>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

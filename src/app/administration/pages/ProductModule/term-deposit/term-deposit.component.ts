@@ -407,84 +407,7 @@ tda_fee_cr_placeholderLookup(): void {
       this.exceptionFormData.controls.tda_exception_description.setValue(this.exception_lookupData.exce_description)
     });
   }
-  ac_credit_balance_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_ac_credit_balance.setValue(this.exception_lookupData.id);
-      this.tda_ac_credit_balance_description = this.exception_lookupData.exce_description
-      
-    });
-  }
-  liability_exceed_group_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_liability_exceed_group.setValue(this.exception_lookupData .id);
-      this.tda_liability_exceed_group_desc = this.exception_lookupData.exce_description
-    });
-  }
-  ac_is_froozed_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_ac_is_froozed.setValue(this.exception_lookupData.id);
-      this.tda_ac_is_froozed_description = this.exception_lookupData.exce_description
-    });
-  }
-  sanction_limit_expired_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_sanction_limit_expired.setValue(this.exception_lookupData.id);
-      this.tda_sanction_limit_expired_desc =  this.exception_lookupData.exce_description
-    });
-  }
-  interest_calc_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.interest_calc_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_interest_calc.setValue(this.exception_lookupData.id);
-      this.tda_interest_calc_desc = this.exception_lookupData.exce_description
-    });
-  }
-  insufficient_exception_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.insufficient_exception_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_insufficient_exception.setValue(this.exception_lookupData .id);
-      this.tda_insufficient_exception_desc = this.exception_lookupData.exce_description
-    });
-  }
-  backdate_transaction_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.backdate_transaction_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_backdate_transaction.setValue(this.exception_lookupData .id);
-      this.tda_backdate_transaction_desc = this.exception_lookupData.exce_description
-    });
-  }
+ 
   
   glSubheadLookup(): void {
     const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
@@ -582,7 +505,7 @@ tda_fee_cr_placeholderLookup(): void {
   formData = this.fb.group({
     function_type: [''],
     scheme_code: [''],
-    scheme_type: [''],
+    // scheme_type: [''],
     scheme_code_desc: [''],
     tda_effective_from_date:[''],
     tda_effective_to_date:[''],
@@ -854,7 +777,7 @@ onPreviewFees(){
       this.message = message;
       this.function_type = this.message.function_type;
       this.scheme_code = this.message.scheme_code;
-      this.scheme_type = this.message.scheme_type;
+      // this.scheme_type = this.message.scheme_type;
       this.scheme_code_desc = this.message.scheme_code_desc;
       if (this.function_type == "A-Add") {
         // open empty forms
@@ -862,7 +785,7 @@ onPreviewFees(){
         this.formData = this.fb.group({
           function_type: [this.function_type],
           scheme_code: [this.scheme_code],
-          scheme_type: [this.scheme_type],
+          // scheme_type: [this.scheme_type],
           scheme_code_desc: [this.scheme_code_desc],
           tda_effective_from_date:[''],
           tda_effective_to_date:[''],
@@ -942,7 +865,7 @@ onPreviewFees(){
           this.formData = this.fb.group({
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
-            scheme_type: [this.results.scheme_type],
+            // scheme_type: [this.results.scheme_type],
             scheme_code_desc: [this.results.scheme_code_desc],
 
             tda_effective_from_date:[this.results.tda_effective_from_date],
@@ -1025,7 +948,7 @@ onPreviewFees(){
           this.formData = this.fb.group({
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
-            scheme_type: [this.results.scheme_type],
+            // scheme_type: [this.results.scheme_type],
             scheme_code_desc: [this.results.scheme_code_desc],
 
             tda_effective_from_date:[this.results.tda_effective_from_date],
@@ -1110,7 +1033,7 @@ onPreviewFees(){
           this.formData = this.fb.group({
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
-            scheme_type: [this.results.scheme_type],
+            // scheme_type: [this.results.scheme_type],
             scheme_code_desc: [this.results.scheme_code_desc],
 
             tda_effective_from_date:[this.results.tda_effective_from_date],
@@ -1201,7 +1124,7 @@ onPreviewFees(){
           this.formData = this.fb.group({
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
-            scheme_type: [this.results.scheme_type],
+            // scheme_type: [this.results.scheme_type],
             scheme_code_desc: [this.results.scheme_code_desc],
 
             tda_effective_from_date:[this.results.tda_effective_from_date],

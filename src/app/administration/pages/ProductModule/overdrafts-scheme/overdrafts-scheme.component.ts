@@ -589,7 +589,7 @@ oda_fee_cr_placeholderLookup(): void {
   exceptionArray = new Array();
   formData = this.fb.group({
     oda_scheme_code: [''],
-    oda_scheme_type: [''],
+    // oda_scheme_type: [''],
     oda_scheme_code_desc: [''],
 
     oda_effective_from_date: [''],
@@ -885,7 +885,7 @@ oda_fee_cr_placeholderLookup(): void {
       this.message = message;
       this.function_type = this.message.function_type;
       this.scheme_code = this.message.scheme_code;
-      this.scheme_type = this.message.scheme_type;
+      // this.scheme_type = this.message.scheme_type;
       this.scheme_code_desc = this.message.scheme_code_desc;
 
       if (this.function_type == "A-Add") {
@@ -894,7 +894,7 @@ oda_fee_cr_placeholderLookup(): void {
         this.formData = this.fb.group({
           oda_function_type: [this.function_type],
           oda_scheme_code: [this.scheme_code],
-          oda_scheme_type: [this.scheme_type],
+          // oda_scheme_type: [this.scheme_type],
           oda_scheme_code_desc: [this.scheme_code_desc],
       
           oda_effective_from_date: [''],
@@ -974,7 +974,7 @@ oda_fee_cr_placeholderLookup(): void {
           this.formData = this.fb.group({
             id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
-            oda_scheme_type: [this.results.oda_scheme_type],
+            // oda_scheme_type: [this.results.oda_scheme_type],
             oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
 
             oda_effective_to_date: [this.results.oda_effective_to_date],
@@ -1067,7 +1067,7 @@ oda_fee_cr_placeholderLookup(): void {
 
             id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
-            oda_scheme_type: [this.results.oda_scheme_type],
+            // oda_scheme_type: [this.results.oda_scheme_type],
             oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
 
             oda_effective_to_date: [this.results.oda_effective_to_date],
@@ -1166,7 +1166,7 @@ oda_fee_cr_placeholderLookup(): void {
 
             id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
-            oda_scheme_type: [this.results.oda_scheme_type],
+            // oda_scheme_type: [this.results.oda_scheme_type],
             oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
 
             oda_effective_to_date: [this.results.oda_effective_to_date],
@@ -1266,7 +1266,7 @@ oda_fee_cr_placeholderLookup(): void {
           this.formData = this.fb.group({
             id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
-            oda_scheme_type: [this.results.oda_scheme_type],
+            // oda_scheme_type: [this.results.oda_scheme_type],
             oda_scheme_code_desc: [this.results.oda_scheme_code_desc],
             oda_effective_to_date: [this.results.oda_effective_to_date],
             oda_effective_from_date: [this.results.oda_effective_from_date],

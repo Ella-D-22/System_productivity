@@ -61,7 +61,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
     scheme_code: ['', [Validators.required]],
-    scheme_type:[''],
+    // scheme_type:[''],
     scheme_code_desc:['']
   });
 
@@ -76,16 +76,16 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
       this.formData.controls.scheme_code.setValue(this.scheme_code);
     });
   }
-  schemeTypeLookup(): void {
-    const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.lookupData = result.data;
-      this.scheme_type = this.lookupData.scheme_type;
-      this.formData.controls.scheme_type.setValue(this.scheme_type);
-    });
-  }
+  // schemeTypeLookup(): void {
+  //   const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.lookupData = result.data;
+  //     this.scheme_type = this.lookupData.scheme_type;
+  //     this.formData.controls.scheme_type.setValue(this.scheme_type);
+  //   });
+  // }
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.existingData = true;

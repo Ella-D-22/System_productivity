@@ -28,6 +28,17 @@
      </div>
     </div>
     <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+          <div class="col-md-6 col-sm-12 form-column ">
+           <label class="start pull-left">Product Code<span class="warning">*</span></label>
+          </div>
+          <div class="col-md-6 col-sm-12 form-column ">
+            <input type="text" maxlength="6" [value]="this.scheme_code" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
+            <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
+          </div>
+       </div>            
+  </div>
+    <!-- <div class="col-md-6 col-sm-12">
       <div *ngIf="!this.existingData" class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
            <label class="start pull-left">Product Type<span class="warning">*</span></label>
@@ -37,20 +48,10 @@
             <mat-icon (click)="schemeTypeLookup()">search</mat-icon>
           </div>
        </div>            
-  </div>
+  </div> -->
   </div>
   <div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">ProductCode<span class="warning">*</span></label>
-            </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <input type="text" maxlength="6" [value]="this.scheme_code" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
-              <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
-            </div>
-         </div>            
-    </div>
+   
     <div class="col-md-6 col-sm-12">
         <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">

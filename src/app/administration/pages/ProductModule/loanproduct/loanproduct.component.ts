@@ -142,6 +142,7 @@ export class LoanproductComponent implements OnInit {
   loanElement: any;
   exception_code_value:any
   exception_description:any
+  laa_scheme_type_id: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -410,77 +411,6 @@ ac_debit_balance_Lookup(): void {
     this.exceptionsFormData.controls.laa_exception_description.setValue(this.exception_description)
   });
 }
-ac_credit_balance_Lookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-    // height: '400px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.exception_lookupData = result.data;
-    this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
-    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-  });
-}
-liability_exceed_group_Lookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-    // height: '400px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.exception_lookupData = result.data;
-    this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
-    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-  });
-}
-ac_is_froozed_Lookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-    // height: '400px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.exception_lookupData = result.data;
-    this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
-    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-  });
-}
-sanction_limit_expired_Lookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-    // height: '400px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.exception_lookupData = result.data;
-    this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
-    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-  });
-}
-interest_calc_Lookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-    // height: '400px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.exception_lookupData = result.data;
-    this.interest_calc_value =  this.exception_lookupData.exception_code;
-    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-  });
-}
-insufficient_exception_Lookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-    // height: '400px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.exception_lookupData = result.data;
-    this.insufficient_exception_value =  this.exception_lookupData.exception_code;
-    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-  });
-}
-backdate_transaction_Lookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-    // height: '400px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.exception_lookupData = result.data;
-    this.backdate_transaction_value =  this.exception_lookupData.exception_code;
-    this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-  });
-}
-
 
   dt = new Date();
   month = this.dt.getMonth();
@@ -587,9 +517,9 @@ backdate_transaction_Lookup(): void {
       formData = this.fb.group({
         laa_function_type: [''],
         laa_scheme_code: [''],
-        laa_scheme_type:[''],
+        // laa_scheme_type:[''],
         laa_scheme_code_desc:[''],
-
+        
         laa_effective_from_date:[''],
         laa_effective_to_date:[''],
         laa_num_gen_code:[''],
@@ -715,8 +645,8 @@ backdate_transaction_Lookup(): void {
               //  Form ends
 
          feeFormData = this.fb.group({
-                  laa_fee_type:['',[Validators.required]],
-                  laa_fee_event:['',[Validators.required]],
+                  laa_fee_type:[''],
+                  laa_fee_event:[''],
                   laa_fee_frequency:[''],
                   laa_fee_amortize_credit_ph:[''],
                   laa_fee_amortize_debit_ph:[''],
@@ -887,11 +817,8 @@ backdate_transaction_Lookup(): void {
 
            //Loan Fee Operations
   onPreviewFees(){    
-    
-    if (this.feeFormData.valid) {
-      this.t.push(this.fb.group(
-        this.feeFormData.value
-      ));
+    if (this.feeFormData.valid) {      
+      this.t.push(this.fb.group(this.feeFormData.value));
       this.feeArray.push(this.feeFormData.value);
       this.initLoanFeeForm();
     }
@@ -949,19 +876,19 @@ backdate_transaction_Lookup(): void {
           this.message = message;  
         this.function_type = this.message.function_type;
         this.scheme_code = this.message.scheme_code;
-        this.scheme_type = this.message.scheme_type;
+        // this.scheme_type = this.message.scheme_type;
         this.scheme_code_desc = this.message.scheme_code_desc;
-
+    
         if(this.function_type == "A-Add"){
           // open empty forms
           this.isSubmitted = true;
           this.formData = this.fb.group({
             laa_function_type: [this.function_type],
             laa_scheme_code: [this.scheme_code],
-            laa_scheme_type:[this.scheme_type],
+            // laa_scheme_type:[this.scheme_type],
             laa_scheme_code_desc:[this.scheme_code_desc],
       
-            id:[''],
+      
             laa_effective_from_date:[''],
             laa_effective_to_date:[''],
             laa_num_gen_code:[''],
@@ -1103,7 +1030,7 @@ backdate_transaction_Lookup(): void {
 
               id:[this.results.id],
               laa_scheme_code: [this.results.laa_int_tbl_code],
-              laa_scheme_type:[this.results.laa_scheme_type],
+              // laa_scheme_type:[this.results.laa_scheme_type],
               laa_scheme_code_desc:[this.results.laa_scheme_code_desc],
               
               laa_effective_from_date:[this.results.laa_effective_from_date],
@@ -1251,7 +1178,7 @@ backdate_transaction_Lookup(): void {
               // cr_normal_int:[this.results.cr_normal_int],
               id:[this.results.id],
               laa_scheme_code: [this.results.laa_int_tbl_code],
-              laa_scheme_type:[this.results.laa_scheme_type],
+              // laa_scheme_type:[this.results.laa_scheme_type],
               laa_scheme_code_desc:[this.results.laa_scheme_code_desc],
 
               laa_effective_from_date:[this.results.laa_effective_from_date],
@@ -1411,7 +1338,7 @@ backdate_transaction_Lookup(): void {
               // cr_normal_int:[this.results.cr_normal_int],
               id:[this.results.id],
               laa_scheme_code: [this.results.laa_int_tbl_code],
-              laa_scheme_type:[this.results.laa_scheme_type],
+              // laa_scheme_type:[this.results.laa_scheme_type],
               laa_scheme_code_desc:[this.results.laa_scheme_code_desc],
 
               laa_effective_from_date:[this.results.laa_effective_from_date],
@@ -1569,7 +1496,7 @@ backdate_transaction_Lookup(): void {
               // cr_normal_int:[this.results.cr_normal_int],
               id:[this.results.id],
               laa_scheme_code: [this.results.laa_int_tbl_code],
-              laa_scheme_type:[this.results.laa_scheme_type],
+              // laa_scheme_type:[this.results.laa_scheme_type],
               laa_scheme_code_desc:[this.results.laa_scheme_code_desc],
 
               laa_effective_from_date:[this.results.laa_effective_from_date],

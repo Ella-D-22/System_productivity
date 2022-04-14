@@ -713,83 +713,8 @@ initExceptionForm(){
       this.exceptionsFormData.controls.caa_exception_description.setValue(this.exception_description)
     });
   }
-  ac_credit_balance_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.ac_credit_balance_value =  this.exception_lookupData.exception_code;
-      this.ac_credit_balance_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-    });
-  }
-  liability_exceed_group_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.liability_exceed_group_value =  this.exception_lookupData.exception_code;
-      this.liability_exceed_group_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-    });
-  }
-  ac_is_froozed_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.ac_is_froozed_value =  this.exception_lookupData.exception_code;
-      this.ac_is_froozed_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-    });
-  }
-  sanction_limit_expired_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.sanction_limit_expired_value =  this.exception_lookupData.exception_code;
-      this.sanction_limit_expired_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-    });
-  }
-  interest_calc_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.interest_calc_value =  this.exception_lookupData.exception_code;
-      this.interest_calc_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-    });
-  }
-  insufficient_exception_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.insufficient_exception_value =  this.exception_lookupData.exception_code;
-      this.insufficient_exception_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-    });
-  }
-  backdate_transaction_Lookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.exception_lookupData = result.data;
-      this.backdate_transaction_value =  this.exception_lookupData.exception_code;
-      this.backdate_transaction_description =  this.exception_lookupData.exce_description;
-      this.formData.controls.exception_code.setValue(this.exception_lookupData .id);
-    });
-  }
+
+
 
   editGlSubhead(i: any) {
     this.element = i
@@ -973,7 +898,7 @@ onRemoveExceptions(i:any){
         this.message = message;
         this.function_type = this.message.function_type;
         this.scheme_code = this.message.scheme_code;
-        this.scheme_type = this.message.scheme_type;
+        // this.scheme_type = this.message.scheme_type;
 
         if (this.function_type == 'A-Add') {
           this.scheme_code_desc = this.message.scheme_code_desc;
@@ -981,7 +906,7 @@ onRemoveExceptions(i:any){
           this.isSubmitted = true;
           this.formData = this.fb.group({
             caa_scheme_code: [this.scheme_code],
-            caa_scheme_type: [this.scheme_type],
+            // caa_scheme_type: [this.scheme_type],
             caa_scheme_code_desc: [this.scheme_code_desc],
             //General Details
             caa_effective_from_date: [''],
@@ -1067,7 +992,7 @@ onRemoveExceptions(i:any){
                 this.glSubheadArray = this.results.caa_glsubheads;
                 this.formData = this.fb.group({
                   caa_scheme_code: [this.scheme_code],
-                  caa_scheme_type: [this.scheme_type],
+                  // caa_scheme_type: [this.scheme_type],
                   caa_scheme_code_desc: [this.scheme_code_desc],
 
                   id: [this.results.id],
@@ -1197,7 +1122,7 @@ onRemoveExceptions(i:any){
                 this.formData = this.fb.group({
                   id: [this.results.id],
                   caa_scheme_code: [this.results.caa_scheme_code],
-                  caa_scheme_type: [this.results.caa_scheme_type],
+                  // caa_scheme_type: [this.results.caa_scheme_type],
                   caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
                   //General Details
                   caa_effective_from_date: [
@@ -1347,7 +1272,7 @@ onRemoveExceptions(i:any){
                 this.formData = this.fb.group({
                   id: [this.results.id],
                   caa_scheme_code: [this.results.caa_scheme_code],
-                  caa_scheme_type: [this.results.caa_scheme_type],
+                  // caa_scheme_type: [this.results.caa_scheme_type],
                   caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
 
                   caa_effective_from_date: [
@@ -1498,7 +1423,7 @@ onRemoveExceptions(i:any){
                 this.formData = this.fb.group({
                   id: [this.results.id],
                   caa_scheme_code: [this.results.caa_scheme_code],
-                  caa_scheme_type: [this.results.caa_scheme_type],
+                  // caa_scheme_type: [this.results.caa_scheme_type],
                   caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
                   //General Details
                   caa_effective_from_date: [
