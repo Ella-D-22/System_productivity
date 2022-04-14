@@ -17,17 +17,17 @@
       <td (click)="onSelect(row)" mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
     </ng-container>
     <ng-container matColumnDef="scheme_code">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheme Code</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Code</th>
       <td  (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.oda_scheme_code}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="scheme_type">
+    <!-- <ng-container matColumnDef="scheme_type">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Scheme Type </th>
       <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.oda_scheme_type}} </td>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="scheme_code_desc">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Scheme Description</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Description</th>
       <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.oda_scheme_code_desc}} </td>
     </ng-container>
         

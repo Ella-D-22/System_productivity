@@ -58,7 +58,7 @@ export class TermDepositMaintenanceComponent implements OnInit {
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
     scheme_code: ['', [Validators.required]],
-    scheme_type:[''],
+    // scheme_type:[''],
     scheme_code_desc:['']
   });
   onSelectFunction(event:any){
@@ -84,16 +84,16 @@ export class TermDepositMaintenanceComponent implements OnInit {
     });
   }
 
-  schemeTypeLookup(): void {
-    const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-      // height: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.lookupData = result.data;
-      this.scheme_type = this.lookupData.scheme_type;
-      this.formData.controls.scheme_type.setValue(this.scheme_type);
-    });
-  }
+  // schemeTypeLookup(): void {
+  //   const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
+  //     // height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.lookupData = result.data;
+  //     this.scheme_type = this.lookupData.scheme_type;
+  //     this.formData.controls.scheme_type.setValue(this.scheme_type);
+  //   });
+  // }
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
 
@@ -103,12 +103,10 @@ export class TermDepositMaintenanceComponent implements OnInit {
           this.loading = true;
           this.submitted = true;
           if(this.formData.valid){
-            // this.int_tbl_code = this.f.int_tbl_code.value;
             this.function_type =  this.f.function_type.value;
             if(this.function_type == "A-Add"){
               // check if code exists
-              this.params = new HttpParams()
-              .set('scheme_code', this.f.scheme_code.value);
+              this.params = new HttpParams().set('scheme_code', this.f.scheme_code.value);
               this.subscription = this.tdaAPI.checkTermDeposit(this.params).subscribe(res=>{
                 // not available else proceed
               this.tdaAPI.changeMessage(this.formData.value)
