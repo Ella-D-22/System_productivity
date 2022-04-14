@@ -696,17 +696,7 @@ backdate_transaction_Lookup(): void {
         laa_glsubheads: new FormArray([]),
         // Exceptions
         laa_exceptions: new FormArray([]),
-        // laa_ac_debit_balance:[''],
-        // laa_ac_credit_balance:[''],
-        // laa_liability_exceed_group:[''],
-        // laa_ac_is_froozed:[''],
-        // laa_sanction_limit_expired:[''],
-        // laa_interest_calc:[''],
-        // laa_insufficient_exception:[''],
-        // laa_backdate_transaction:[''],
-
-
-
+       
         // Create Audits
         postedBy: ['N'],
         postedFlag: ['N'],
@@ -1075,14 +1065,7 @@ backdate_transaction_Lookup(): void {
             laa_loanfees: new FormArray([]),
             laa_glsubheads: new FormArray([]),
                 // Exceptions
-            laa_ac_debit_balance:[''],
-            laa_ac_credit_balance:[''],
-            laa_liability_exceed_group:[''],
-            laa_ac_is_froozed:[''],
-            laa_sanction_limit_expired:[''],
-            laa_interest_calc:[''],
-            laa_insufficient_exception:[''],
-            laa_backdate_transaction:[''],
+            laa_exceptions: new FormArray([]),
 
             // Create Audits
             postedBy: ['N'],
@@ -1112,7 +1095,7 @@ backdate_transaction_Lookup(): void {
               
             this.feeArray = this.results.laa_loanfees;
             this.glSubheadArray = this.results.laa_glsubheads;
-          
+            this.exceptionArray = this.results.laa_exceptions;
             
             this.formData = this.fb.group({
 
@@ -1225,14 +1208,7 @@ backdate_transaction_Lookup(): void {
               laa_prov_cr:[this.results.laa_prov_cr],
 
                   // Exceptions
-              laa_ac_debit_balance:[this.results.laa_ac_debit_balance],
-              laa_ac_credit_balance:[this.results.laa_ac_credit_balance],
-              laa_liability_exceed_group:[this.results.laa_liability_exceed_group],
-              laa_ac_is_froozed_value:[this.results.laa_ac_is_froozed_value],
-              laa_sanction_limit_expired:[this.results.laa_sanction_limit_expired],
-              laa_interest_calc:[this.results.laa_interest_calc],
-              laa_insufficient_exception:[this.results.laa_insufficient_exception],
-              laa_backdate_transaction:[this.results.laa_backdate_transaction],
+            
 
                 // Audits
                 postedBy: [this.results.postedBy],
@@ -1270,7 +1246,7 @@ backdate_transaction_Lookup(): void {
             
             this.feeArray = this.results.laa_loanfees;
             this.glSubheadArray = this.results.laa_glsubheads;
-
+            this.exceptionArray = this.results.laa_exceptions;
             this.formData = this.fb.group({
               // cr_normal_int:[this.results.cr_normal_int],
               id:[this.results.id],
@@ -1388,14 +1364,7 @@ backdate_transaction_Lookup(): void {
 
 
               // Exceptions
-              laa_ac_debit_balance:[this.results.laa_ac_debit_balance],
-              laa_ac_credit_balance:[this.results.laa_ac_credit_balance],
-              laa_liability_exceed_group:[this.results.laa_liability_exceed_group],
-              laa_ac_is_froozed_value:[this.results.laa_ac_is_froozed_value],
-              laa_sanction_limit_expired:[this.results.laa_sanction_limit_expired],
-              laa_interest_calc:[this.results.laa_interest_calc],
-              laa_insufficient_exception:[this.results.laa_insufficient_exception],
-              laa_backdate_transaction:[this.results.laa_backdate_transaction],
+           
 
                 // Audits
                 postedBy: [this.results.postedBy],
@@ -1554,14 +1523,7 @@ backdate_transaction_Lookup(): void {
               laa_glsubheads: [this.results.laa_glsubheads],
 
               // Exceptions
-              laa_ac_debit_balance:[this.results.laa_ac_debit_balance],
-              laa_ac_credit_balance:[this.results.laa_ac_credit_balance],
-              laa_liability_exceed_group:[this.results.laa_liability_exceed_group],
-              laa_ac_is_froozed_value:[this.results.laa_ac_is_froozed_value],
-              laa_sanction_limit_expired:[this.results.laa_sanction_limit_expired],
-              laa_interest_calc:[this.results.laa_interest_calc],
-              laa_insufficient_exception:[this.results.laa_insufficient_exception],
-              laa_backdate_transaction:[this.results.laa_backdate_transaction],
+             
 
                // Audits
                postedBy: [this.results.postedBy],
@@ -1719,14 +1681,7 @@ backdate_transaction_Lookup(): void {
               laa_glsubheads: [this.results.laa_glsubheads],
 
               // Exceptions
-              laa_ac_debit_balance:[this.results.laa_ac_debit_balance],
-              laa_ac_credit_balance:[this.results.laa_ac_credit_balance],
-              laa_liability_exceed_group:[this.results.laa_liability_exceed_group],
-              laa_ac_is_froozed_value:[this.results.laa_ac_is_froozed_value],
-              laa_sanction_limit_expired:[this.results.laa_sanction_limit_expired],
-              laa_interest_calc:[this.results.laa_interest_calc],
-              laa_insufficient_exception:[this.results.laa_insufficient_exception],
-              laa_backdate_transaction:[this.results.laa_backdate_transaction],
+            
 
                // Audits
                postedBy: [this.results.postedBy],
