@@ -502,8 +502,6 @@ backdate_transaction_Lookup(): void {
   }
   return days;
 }
-
-  
   dialogValue: any;
   dialogData: any;
   function_type: any;
@@ -546,7 +544,6 @@ backdate_transaction_Lookup(): void {
     public datepipe: DatePipe
 
     ) { }
-
         chronologicalOrderArray = new Array();
         // Init Array
         iniChronologicalList(){
@@ -582,7 +579,7 @@ backdate_transaction_Lookup(): void {
       }
       feeArray= new Array();
       glSubheadArray = new Array();
-      exceptionArray = new Array()
+      exceptionArray = new Array();
     //  this.feeArray
       formData = this.fb.group({
         laa_function_type: [''],

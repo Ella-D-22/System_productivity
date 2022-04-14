@@ -25,7 +25,7 @@ export const environment = {
     // glsAPI: 'http://localhost:9910/group-service',
 
     userAPI: 'http://52.15.152.26:9091',
-    // accountAPI: 'http://52.15.152.26:9091/account-service',
+    accountAPI: 'http://52.15.152.26:9091/account-service',
     productAPI: 'http://52.15.152.26:9091/product-service',
     collateralAPI: 'http://52.15.152.26:9091/collateral-service',
     systemAPI: 'http://52.15.152.26:9091/system-service',
@@ -42,6 +42,7 @@ export const environment = {
     reportAPI:'http://52.15.152.26:9091/report-service',
     glsAPI: 'http://52.15.152.26:9091/group-service',
     countryAPI: 'https://restcountries.com/v3.1/all'
+    
 };
 
 /*

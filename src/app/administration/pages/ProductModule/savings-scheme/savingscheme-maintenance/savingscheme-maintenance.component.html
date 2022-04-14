@@ -28,37 +28,33 @@
      </div>
     </div>
     <div class="col-md-6 col-sm-12">
-      <div *ngIf="!this.existingData" class="form-group">
-          <div class="col-md-6 col-sm-12 form-column ">
-           <label class="start pull-left">Product Type</label>
-          </div>
-          <div class="col-md-6 col-sm-12 form-column ">
-            <input type="text" [value]="this.scheme_type" formControlName="scheme_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_type.errors }" />
-            <mat-icon (click)="schemeTypeLookup()">search</mat-icon>
-          </div>
-       </div>            
+        
+      <div class="form-group">
+        <div class="col-md-6 col-sm-12 form-column ">
+         <label class="start pull-left">Product Code<span class="warning">*</span></label>
+        </div>
+        <div class="col-md-6 col-sm-12 form-column ">
+          <input  type="text" maxlength="6"  [value]="this.sba_scheme_code" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
+          <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()" oninput="this.value=this.value.toUpperCase()">search</mat-icon>
+        </div>
+     </div>        
   </div>
   </div>
   <div class="row">
     <div class="col-md-6 col-sm-12">
-        <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Product Code<span class="warning">*</span></label>
-            </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <input type="text" maxlength="6"  [value]="this.sba_scheme_code" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
-              <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()" oninput="this.value=this.value.toUpperCase()">search</mat-icon>
-            </div>
-         </div>            
+      <div *ngIf="!this.existingData" class="form-group">
+        <div class="col-md-6 col-sm-12 form-column ">
+          <label class="start pull-left">Product Description</label>
+         </div>
+         <div class="col-md-6 col-sm-12 form-column ">
+            <textarea maxlength="200" [value]="this.sba_scheme_code_desc" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"></textarea>
+         </div>
+       </div>  
+                 
     </div>
     <div class="col-md-6 col-sm-12">
         <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Product Description</label>
-            </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-               <textarea maxlength="200" [value]="this.sba_scheme_code_desc" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"></textarea>
-            </div>
+            
          </div>            
     </div>
   </div>

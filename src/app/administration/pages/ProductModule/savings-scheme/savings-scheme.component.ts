@@ -168,6 +168,9 @@ export class SavingsSchemeComponent implements OnInit {
   glSubheadData: any;
   element: any;
   loanElement: any;
+  exception_lookupData: any;
+  exception_code_value: any;
+  exception_description: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -450,118 +453,27 @@ sba_fee_cr_placeholderLookup(): void {
       //**********************************
       // Exception Lookups
       //**********************************
-      // sba_exc_ac_in_debit_bal
-// sba_exc_ac_in_cr_bal
-// sba_exc_liability_exceeds_group_limit
-// sba_exc_ac_if_frozed
-// sba_exc_sanction_limit_expired
-// sba_exc_int_cal_not_upto_date
-// sba_exc_insufficient_available_bal
-// sba_exc_backdated_transaction
-
-AccountInDebitBalLookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-    height: '400px',
-    width: '600px',
+  
+exceptionLookup(): void {
+  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    // height: '400px',
   });
   dialogRef.afterClosed().subscribe(result => {
-    this.lookupdata = result;
-    this.sba_exc_ac_in_debit_bal_exce_description = this.lookupdata.data.exce_description
-    this.sba_exc_ac_in_debit_bal_exce_code = this.lookupdata.data.exception_code 
-    this.formData.controls.sba_exc_ac_in_debit_bal.setValue(this.sba_exc_ac_in_debit_bal_exce_code);
-  });
-}
-AccountInCreditBalLookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-    height: '400px',
-    width: '600px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.lookupdata = result;
-    this.sba_exc_ac_in_cr_bal_exce_description = this.lookupdata.data.exce_description
-    this.sba_exc_ac_in_cr_bal_exce_code = this.lookupdata.data.exception_code 
-    this.formData.controls.sba_exc_ac_in_cr_bal.setValue(this.sba_exc_ac_in_cr_bal_exce_code);
-  });
-}
-LiabilityExceedGroupLimitLookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-    height: '400px',
-    width: '600px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.lookupdata = result;
-    this.sba_exc_liability_exceeds_group_limit_exce_description = this.lookupdata.data.exce_description
-    this.sba_exc_liability_exceeds_group_limit_exce_code = this.lookupdata.data.exception_code 
-    this.formData.controls.sba_exc_liability_exceeds_group_limit.setValue(this.sba_exc_liability_exceeds_group_limit_exce_code);
-  });
-}
-AccountIsFrozedLookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-    height: '400px',
-    width: '600px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.lookupdata = result;
-    this.sba_exc_ac_if_frozed_exce_description = this.lookupdata.data.exce_description
-    this.sba_exc_ac_if_frozed_exce_code = this.lookupdata.data.exception_code 
-    this.formData.controls.sba_exc_ac_if_frozed.setValue(this.sba_exc_ac_if_frozed_exce_code);
-  });
-}
-SactionedLimitExpiredLookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-    height: '400px',
-    width: '600px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.lookupdata = result;
-    this.sba_exc_sanction_limit_expired_exce_description = this.lookupdata.data.exce_description
-    this.sba_exc_sanction_limit_expired_exce_code = this.lookupdata.data.exception_code 
-    this.formData.controls.sba_exc_sanction_limit_expired.setValue(this.sba_exc_sanction_limit_expired_exce_code);
-  });
-}
-InterestCalculationNotUptodateLookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-    height: '400px',
-    width: '600px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.lookupdata = result;
-    this.sba_exc_int_cal_not_upto_date_exce_description = this.lookupdata.data.exce_description
-    this.sba_exc_int_cal_not_upto_date_exce_code = this.lookupdata.data.exception_code 
-    this.formData.controls.sba_exc_int_cal_not_upto_date.setValue(this.sba_exc_int_cal_not_upto_date_exce_code_);
-  });
-}
-  sba_exc_int_cal_not_upto_date_exce_code_(sba_exc_int_cal_not_upto_date_exce_code_: any) {
-    throw new Error('Method not implemented.');
-  }
-InsufficientAvailabbleBalanceLookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-    height: '400px',
-    width: '600px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.lookupdata = result;
-    this.sba_exc_insufficient_available_bal_exce_description = this.lookupdata.data.exce_description
-    this.sba_exc_insufficient_available_bal_exce_code = this.lookupdata.data.exception_code 
-    this.formData.controls.sba_exc_insufficient_available_bal.setValue(this.sba_exc_insufficient_available_bal_exce_code);
-  });
-}
-
-BackdatedTransactionLookup(): void {
-  const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
-    height: '400px',
-    width: '600px',
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.lookupdata = result;
-    this.sba_exc_backdated_transaction_exce_description = this.lookupdata.data.exce_description
-    this.sba_exc_backdated_transaction_exce_code = this.lookupdata.data.exception_code 
-    this.formData.controls.sba_exc_backdated_transaction.setValue(this.sba_exc_backdated_transaction_exce_code);
+    this.exception_lookupData = result.data;
+    console.log(this.exception_lookupData);
+    
+    this.exception_code_value = this.exception_lookupData.exception_code
+    this.exception_description = this.exception_lookupData.exce_description
+    
+    this.exceptionsFormData.controls.laa_exception_code.setValue(this.exception_code_value)
+    this.exceptionsFormData.controls.laa_exception_description.setValue(this.exception_description)
   });
 }
 
      feeArray = new Array();
      glSubheadArray = new Array();
+     exceptionArray = new Array();
+
      
       formData = this.fb.group({
         sba_function_type: [''],
@@ -591,7 +503,6 @@ BackdatedTransactionLookup(): void {
         sba_int_cal_freq_dr_day:[''],
         sba_int_cal_freq_dr_date:[''],
         sba_int_cal_freq_dr_holiday:[''],
-
         sba_no__of_withdrawals:[''],
         sba_no_int_if_withdwl_exceeded:[''],
         sba_ac_statement_charged_by:[''],
@@ -604,27 +515,10 @@ BackdatedTransactionLookup(): void {
         sba_int_method:[''],
         sba_bal_frm_date:[''],
         sba_bal_to_date:[''],
-        
-        
-        
-        
         sba_recover_fee_for_chq_issue:[''],
-        
-        
-        
-        // Exceptions 
-        sba_exc_ac_in_debit_bal:[''],
-        sba_exc_ac_in_cr_bal:[''],
-        sba_exc_liability_exceeds_group_limit:[''],
-        sba_exc_ac_if_frozed:[''],
-        sba_exc_sanction_limit_expired:[''],
-        sba_exc_int_cal_not_upto_date:[''],
-        sba_exc_insufficient_available_bal:[''],
-        sba_exc_backdated_transaction:[''],
-      
         sba_fees: new FormArray([]),
         sba_glsubheads: new FormArray([]),
-
+        sba_exceptions: new FormArray([]),
         // Create Audits
         postedBy: ['N'],
         postedFlag: ['N'],
@@ -638,9 +532,7 @@ BackdatedTransactionLookup(): void {
         deletedBy: ['N'],
         deletedFlag: ['N'],
         deletedTime: [new Date()],
-
                });
-
          feeFormData = this.fb.group({
                   sba_fee_type:[''],
                   sba_fee_event:[''],
@@ -656,14 +548,16 @@ BackdatedTransactionLookup(): void {
                   sba_fee_amort_tenor:[''],
                   sba_fee_max_no_of_assesment:[''],
          });
-
-
          glsubheadFormData = this.fb.group({
            sba_gl_subhead:[''],
            sba_gl_subhead_description:[''],
            sba_gl_subhead_deafault:[''],
            sba_is_gl_subhead_deleted:['']
          })
+         exceptionsFormData = this.fb.group({
+          sba_exception_code:[''],
+          sba_exception_description:['']
+          })
 
          initLoanFeeForm(){
          this.newData = true;
@@ -684,7 +578,7 @@ BackdatedTransactionLookup(): void {
       });
          }
 
-         initGlSUbheadForm(){
+         initGlSubheadForm(){
            this.newData = true;
           this.glsubheadFormData = this.fb.group({
             sba_gl_subhead:[''],
@@ -693,13 +587,17 @@ BackdatedTransactionLookup(): void {
             sba_is_gl_subhead_deleted:['']
           })
          }
+         initExceptionForm(){
+          this.newData = true;
+          this.exceptionsFormData = this.fb.group({
+            sba_exception_code:[''],
+            sba_exception_description:['']
+          })
+        }
     get g() { return this.formData.controls; }
     get t() { return this.g.sba_fees as FormArray; }
     get l() {return this.g.sba_glsubheads as FormArray;}
-    newFormDkkata = this.fb.group({
-      org_lnk_event_id: ['', Validators.required],
-    });
-    
+    get e(){ return this.g.sba_exceptions as FormArray;}
          previewGlSubheads(){
           if(this.glsubheadFormData.valid){
             if(this.glSubheadArray.length<1){
@@ -711,7 +609,7 @@ BackdatedTransactionLookup(): void {
               this.glsubheadFormData.value
               ));
               this.glSubheadArray.push(this.glsubheadFormData.value);
-              this.initGlSUbheadForm();
+              this.initGlSubheadForm();
            }
          }
           
@@ -735,7 +633,7 @@ BackdatedTransactionLookup(): void {
         this.glSubheadArray[i] = this.glSubheadData.value
     } 
     onGlSubheadClear(){
-      this.initGlSUbheadForm();
+      this.initGlSubheadForm();
       this.glSubheadArray = new Array();
     }
         
@@ -781,6 +679,35 @@ BackdatedTransactionLookup(): void {
                   sba_fee_cr_placeholder: [this.feeArray[i].sba_fee_cr_placeholder],
                   sba_fee_max_no_of_assesment: [this.feeArray[i].sba_fee_max_no_of_assessment],
                 });
+              }
+              previewExceptions(){
+                if(this.exceptionsFormData.valid){
+                  this.e.push(this.fb.group(this.exceptionsFormData.value));
+                  this.exceptionArray.push(this.exceptionsFormData.value);
+                  this.initExceptionForm();
+                }
+              }
+              editException(i:any){
+                this.element = i
+                this.newData = false;
+                this.arrayIndex = this.exceptionArray[i];
+                this.exceptionsFormData = this.fb.group({
+                  sba_exception_code:[this.exceptionArray[i].sba_exception_code],
+                  sba_exception_description:[this.exceptionArray[i].sba_exception_description]
+                })
+              }
+      
+              updateException(i:any){
+                this.exceptionArray[i] = this.exceptionsFormData.value
+              }
+              onRemoveExceptions(i:any){
+                const index: number = this.exceptionArray.indexOf(this.exceptionArray.values);
+                this.exceptionArray.splice(index, i);
+                this.exceptionArray = this.exceptionArray;
+              }
+              onClearExceptions(){
+                this.initExceptionForm();
+                this.exceptionArray = new Array();
               }
    
 
