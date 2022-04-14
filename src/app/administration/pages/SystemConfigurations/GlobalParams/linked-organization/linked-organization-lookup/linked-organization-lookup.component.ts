@@ -1,38 +1,71 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/@core/AuthService/auth.service';
+import { GlCodeLookupComponent } from '../../gl-code/gl-code-lookup/gl-code-lookup.component';
 import { LinkedorganizationService } from '../linkedorganization.service';
+
+
+
 
 @Component({
   selector: 'app-linked-organization-lookup',
   templateUrl: './linked-organization-lookup.component.html',
   styleUrls: ['./linked-organization-lookup.component.scss']
 })
-export class LinkedOrganizationLookupComponent implements OnInit {
-  fromDialog: any;
-  subscription!:Subscription;
-  organizationData: any;
-  constructor(
-    public dialogRef: MatDialogRef<LinkedOrganizationLookupComponent>,
-    private linkedOrgAPI: LinkedorganizationService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  displayedColumns: string[] = [ 'index','organization_name','organization_mail','organization_address','organization_country','organization_main_office'];
 
-  ngOnInit(): void {
-    this.getData();
-  }
-  getData(){
-    this.subscription = this.linkedOrgAPI.getLinkedorganizations().subscribe(res=>{
-      this.organizationData = res;
-    })
-  }
+  dataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  subscription!: Subscription;
+  respData: any;
 
-  onSelect(data:any){
-    this.dialogRef.close({ event: 'close', data:data });
-  }
 
-  closeDialog() {
-    this.dialogRef.close({ event: 'close', data: this.fromDialog });
-  }
+  constructor(    
+    public dialogRef: MatDialogRef<GlCodeLookupComponent>,
+    private router: Router,
+    private ngZone: NgZone,
+    private _snackBar: MatSnackBar,
+    private authAPI: AuthService,
+    public fb: FormBuilder,
+    private linkedOrgAPI: LinkedorganizationService
 
+    ) { }
+    ngOnInit() {
+      this.getData();
+    }
+    ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+    }
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
+    getData() {
+      this.subscription = this.linkedOrgAPI.getLinkedorganizations().subscribe(res=>{
+       this.respData = res;
+        
+        // Binding with the datasource
+        this.dataSource = new MatTableDataSource(this.respData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+    }
+
+    onSelect(data:any){
+      this.dialogRef.close({ event: 'close', data:data });
+    } 
 }

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { RetailCustomerLookupComponent } from '../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
 import { LoanAccountLookupComponent } from '../loan-account/loan-account-lookup/loan-account-lookup.component';
@@ -15,6 +18,31 @@ import { ShareCapitalService } from './share-capital.service';
   styleUrls: ['./share-capital.component.scss']
 })
 export class ShareCapitalComponent implements OnInit {
+  displayedColumns: string[] = [ 'index', 
+  'cust_code',
+  'buySharesFrom',
+  // 'custBuyerAc',
+  'custSellerAc',
+  'cust_name',
+  // 'officeAc',
+  'sharesAmount',
+  'sharesQuantity',
+  'postedTime',
+]
+
+
+
+  
+  dataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  subscription!: Subscription;
+  data: any;
+  error: any;
+  employeeEmail: any;
+  employee_id: any;
+  creatingAccount = false;
+  
  dialogData:any
  loading = false
  function_type:any
@@ -22,8 +50,6 @@ export class ShareCapitalComponent implements OnInit {
  cust_name:any
  message:any
  results:any
- error:any
- subscription:Subscription
  horizontalPosition:MatSnackBarHorizontalPosition
  verticalPosition:MatSnackBarVerticalPosition
   requireMemberAc: boolean;
@@ -53,39 +79,35 @@ export class ShareCapitalComponent implements OnInit {
    authuser  = "P"
  formData = this.fb.group({
   id: 0,
-  buy_shares_from: [''],
   cust_code:[''],
   deleteFlag:['N'],
   deletedBy:['N'],
   deletedTime:[new Date()],
   modifiedBy:['N'],
   modifiedTime:[new Date()],
-  partner_customer_account:[''],
-  payment_account:[''],
   payment_means:[''],
   postedBy:[this.authuser],
   postedFlag:['Y'],
   postedTime:[new Date()],
-  share_capital:[''],
-  share_capital_paid:[''],
-  shareholder_account:[''],
-  shares_office_account:[''],
-  shares_amount:[''],
+  buySharesFrom:[''],
+  officeAc:[''],
+  custSellerAc:[''],
+  sharesQuantity:[''],
+  sharesAmount:[''],
   verifiedBy:['N'],
   verifiedFlag:['N'],
   verifiedTime:[new Date]
  })
 
- customerLookup():void{
-  const dialogRef = this.dialog.open(RetailCustomerLookupComponent,{
-
-  });
-  dialogRef.afterClosed().subscribe(results =>{
-    this.dialogData = results.data;
-    this.formData.controls.cust_code.setValue(this.dialogData.customerCode)
-    this.formData.controls.cust_name.setValue(this.dialogData.middleName)
-  })
- }
+//  customerLookup():void{
+//   const dialogRef = this.dialog.open(RetailCustomerLookupComponent,{
+//   });
+//   dialogRef.afterClosed().subscribe(results =>{
+//     this.dialogData = results.data;
+//     this.formData.controls.cust_code.setValue(this.dialogData.customerCode)
+//     this.formData.controls.cust_name.setValue(this.dialogData.middleName)
+//   })
+//  }
   disabledFormData(){
     return this.formData.disable
   }
@@ -111,7 +133,9 @@ export class ShareCapitalComponent implements OnInit {
       })
     }else{
       let share_cal_amount = shares_qt * current_share_value
-      this.formData.controls.shares_amount.setValue(share_cal_amount);
+      this.formData.controls.sharesAmount.setValue(share_cal_amount);
+
+
     }
   }
 
@@ -123,8 +147,7 @@ export class ShareCapitalComponent implements OnInit {
     }
     const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
     cdialogRef.afterClosed().subscribe((result) => {
-      console.log(result.data);
-      this.formData.controls.account_code.setValue(result.data.acid);
+      this.formData.controls.officeAc.setValue(result.data.acid);
     });
   }
   customerAccountLookup(): void {
@@ -136,7 +159,7 @@ export class ShareCapitalComponent implements OnInit {
     const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
     cdialogRef.afterClosed().subscribe((result) => {
       console.log(result.data);
-      this.formData.controls.account_code.setValue(result.data.acid);
+      this.formData.controls.custSellerAc.setValue(result.data.acid);
     });
   }
 
@@ -150,6 +173,9 @@ export class ShareCapitalComponent implements OnInit {
        this.cust_code = this.message.cust_code
        this.cust_name = this.message.cust_name
        this.cust_account_caa = this.message.cust_account_caa
+      //  Get Table Data
+        this.getData(this.cust_code);
+
       //  call to get account
 
        if(this.function_type == "A-Add"){
@@ -157,25 +183,23 @@ export class ShareCapitalComponent implements OnInit {
         })
         this.formData = this.fb.group({
           id: 0,
-          buy_shares_from: [''],
           cust_code:[this.cust_code],
           cust_name:[this.cust_name],
+          custBuyerAc:[this.cust_account_caa],
           deleteFlag:['N'],
           deletedBy:['N'],
           deletedTime:[new Date()],                                                                                                                                                                     
           modifiedBy:['N'],
           modifiedTime:[new Date()],
-          partner_customer_account:[''],
-          payment_account:[''],
           payment_means:[''],
           postedBy:[this.authuser],
           postedFlag:['Y'],
           postedTime:[new Date()],
-          share_capital:[''],
-          share_capital_paid:[''],
-          shareholder_account:[''],
-          shares_office_account:[''],
-          shares_amount:[''],
+          buySharesFrom:[''],
+          officeAc:[''],
+          custSellerAc:[''],
+          sharesQuantity:[''],
+          sharesAmount:[''],
           verifiedBy:['N'],
           verifiedFlag:['N'],
           verifiedTime:[new Date]
@@ -185,13 +209,15 @@ export class ShareCapitalComponent implements OnInit {
       this.subscription = this.shareService.getShareCapitalByCode(this.cust_code).subscribe(
         res =>{
             this.results = res
-
             this.formData = this.fb.group({
               id:[this.results.id],
-              share_capital_amount: [this.results.share_capital_amount],
-              shares: [this.results.shares],
-              cust_code: [this.results.cust_code],
-              cust_name: [this.results.cust_name],
+              custBuyerAc:[this.cust_account_caa],
+              payment_means:[this.results.payment_means],
+              buySharesFrom:[this.results.buySharesFrom],
+              officeAc:[this.results.officeAc],
+              custSellerAc:[this.results.custSellerAc],
+              sharesQuantity:[this.results.sharesQuantity],
+              sharesAmount:[this.results.sharesAmount],
               modifiedBy: [this.results.modifiedBy],
               modifiedTime: [this.results.modifiedTime],
               postedBy: [this.results.postedBy],
@@ -211,15 +237,17 @@ export class ShareCapitalComponent implements OnInit {
          this.subscription = this.shareService.getShareCapitalByCode(this.cust_code).subscribe(
            res=>{
             this.results = res
-
             this.formData = this.fb.group({
               id:[this.results.id],
-              share_capital_amount: [this.results.share_capital_amount],
-              shares: [this.results.shares],
-              cust_code: [this.results.cust_code],
-              cust_name: [this.results.cust_name],
-              modifiedBy: ['user'],
-              modifiedTime: [new Date()],
+              custBuyerAc:[this.cust_account_caa],
+              payment_means:[this.results.payment_means],
+              buySharesFrom:[this.results.buySharesFrom],
+              officeAc:[this.results.officeAc],
+              custSellerAc:[this.results.custSellerAc],
+              sharesQuantity:[this.results.sharesQuantity],
+              sharesAmount:[this.results.sharesAmount],
+              modifiedBy: [this.results.modifiedBy],
+              modifiedTime: [this.results.modifiedTime],
               postedBy: [this.results.postedBy],
               postedFlag: [this.results.postedFlag],
               postedTime: [this.results.postedTime],
@@ -232,36 +260,36 @@ export class ShareCapitalComponent implements OnInit {
             })
            }
          )
-
        }else if(this.function_type == 'X-Delete'){
         this.subscription = this.shareService.getShareCapitalByCode(this.cust_code).subscribe(
           res=>{
            this.results = res
-
            this.formData = this.fb.group({
-             id:[this.results.id],
-             share_capital_amount: [this.results.share_capital_amount],
-             shares: [this.results.shares],
-             cust_code: [this.results.cust_code],
-             cust_name: [this.results.cust_name],
-             modifiedBy: [this.results.modifiedBy],
-             modifiedTime: [this.results.modifiedTime],
-             postedBy: [this.results.postedBy],
-             postedFlag: [this.results.postedFlag],
-             postedTime: [this.results.postedTime],
-             verifiedBy: [this.results.verifiedBy],
-             verifiedFlag: [this.results.verifiedFlag],
-             verifiedTime: [this.results.verifiedTime],
-             deleteFlag: ['Y'],
-             deletedBy: ['user'],
-             deletedTime: [new Date()],
+            id:[this.results.id],
+            custBuyerAc:[this.cust_account_caa],
+            payment_means:[this.results.payment_means],
+            buySharesFrom:[this.results.buySharesFrom],
+            officeAc:[this.results.officeAc],
+            custSellerAc:[this.results.custSellerAc],
+            sharesQuantity:[this.results.sharesQuantity],
+            sharesAmount:[this.results.sharesAmount],
+            modifiedBy: [this.results.modifiedBy],
+            modifiedTime: [this.results.modifiedTime],
+            postedBy: [this.results.postedBy],
+            postedFlag: [this.results.postedFlag],
+            postedTime: [this.results.postedTime],
+            verifiedBy: [this.results.verifiedBy],
+            verifiedFlag: [this.results.verifiedFlag],
+            verifiedTime: [this.results.verifiedTime],
+            deleteFlag: [this.results.deleteFlag],
+            deletedBy: [this.results.deletedBy],
+            deletedTime: [this.results.deletedTime],
            })
           } ) }
        
      }) }
-
  onSubmit(){
-   
+   console.log("This is form data", this.formData.value);
   if(this.formData.valid){
     console.log(this.formData.value);
     
@@ -299,4 +327,33 @@ export class ShareCapitalComponent implements OnInit {
     }
   }
  }
+
+
+
+
+//  Get Data for Table
+ngOnDestroy(): void {
+  this.subscription.unsubscribe();
+}
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
+  }
+}
+getData(data:any) {
+  this.subscription = this.shareService.getShareCapitalByCustomerCode(data).subscribe(res => {
+   this.data = res;
+   console.log("These are data from the res", res);
+   
+    // Binding with the datasource
+    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  })
+}
+onSelect(data:any){
+  // this.dialogRef.close({ event: 'close', data:data });
+}
 }

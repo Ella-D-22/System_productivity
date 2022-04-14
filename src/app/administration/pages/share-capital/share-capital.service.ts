@@ -14,7 +14,7 @@ export class ShareCapitalService {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = `${environment.accountAPI}/api/v1/sharecapital`;
+  baseURL = `${environment.accountAPI}/api/v1/customer/sharecapitalinstallments`;
 
   //message medium
   private messageSource = new BehaviorSubject('default message');
@@ -58,6 +58,16 @@ getShareCapital(){
 }
 getShareCapitalByCode(id:any):Observable<any>{
   let API_URL = `${this.baseURL}/find/${id}`
+  return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(map(
+    res =>{
+      return res || {}
+    },
+    catchError(this.errorMgmt)
+  ))
+}
+
+getShareCapitalByCustomerCode(customerCode:any):Observable<any>{
+  let API_URL = `${this.baseURL}/find/by/customerCode/${customerCode}`
   return this.http.get(API_URL, {headers:this.headers, withCredentials:false}).pipe(map(
     res =>{
       return res || {}
