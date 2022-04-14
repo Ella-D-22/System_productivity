@@ -6,13 +6,14 @@ import { Role } from 'src/@core/Models/role/role.model';
 
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./Auth/auth.module').then(m => m.AuthModule) },
+  { path: '', loadChildren: () => import('./Auth/auth.module').then(m => m.AuthModule),  },
   { path: 'sso', loadChildren: () => import('./Auth/auth.module').then(m => m.AuthModule) },
   { path: 'system', loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule),
     // canLoad: [CanLoadModuleGuard],
     data: {preload:true },
   },
   { path: 'superuser', loadChildren: () => import('./superuser/superuser.module').then(m => m.SuperuserModule),
+  
     // canLoad: [CanLoadModuleGuard],
     // data: {preload:true },
  }
@@ -21,7 +22,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{ useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

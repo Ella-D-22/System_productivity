@@ -803,9 +803,9 @@ export class CurrentSchemeComponent implements OnInit {
   get l() {
     return this.g.caa_glsubheads as FormArray;
   }
-  get e(){
-    return this.g.
-  }
+  // get e(){
+  //   return this.g.
+  // }
 
 
   previewGlSubheads() {

@@ -16,6 +16,8 @@ export const environment = {
     interestCalculatorAPI: 'http://52.15.152.26:9091/interest-calculator-service',
     menutreeAPI: 'http://52.15.152.26:9091/menutree-service',
     reportAPI:'http://52.15.152.26:9091/report-service',
-    glsAPI: 'http://52.15.152.26:9091/group-service'
+    glsAPI: 'http://52.15.152.26:9091/group-service',
+    countryAPI: 'https://restcountries.com/v3.1/all'
+
 
 };

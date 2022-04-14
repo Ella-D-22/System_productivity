@@ -113,6 +113,11 @@ import { ShareCapitalComponent } from './pages/share-capital/share-capital.compo
 import { ShareCapitalMaintenanceComponent } from './pages/share-capital/share-capital-maintenance/share-capital-maintenance.component';
 
 import { CountriesLookupComponent } from './pages/SystemConfigurations/GlobalParams/currency-config/countries-lookup/countries-lookup.component';
+import { ShareCapitalParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params-maintenance/share-capital-params-maintenance.component';
+import { ShareCapitalParamsLookupComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params-lookup/share-capital-params-lookup.component';
+import { GuarantorsParamsComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params.component';
+import { GuarantorsParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-maintenance/guarantors-params-maintenance.component';
+import { GuarantorsParamsLookupComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-lookup/guarantors-params-lookup.component';
 
 
 @NgModule({
@@ -223,6 +228,11 @@ import { CountriesLookupComponent } from './pages/SystemConfigurations/GlobalPar
     ShareCapitalMaintenanceComponent,
 
     CountriesLookupComponent,
+     ShareCapitalParamsMaintenanceComponent,
+     ShareCapitalParamsLookupComponent,
+     GuarantorsParamsComponent,
+     GuarantorsParamsMaintenanceComponent,
+     GuarantorsParamsLookupComponent,
 
   ],
   imports: [

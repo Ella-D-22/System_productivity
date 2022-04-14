@@ -66,6 +66,9 @@ import { TransactionExecutionMainComponent } from './pages/transaction-execution
 import { ShareCapitalParamsComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params.component';
 import { ShareCapitalComponent } from './pages/share-capital/share-capital.component';
 import { ShareCapitalMaintenanceComponent } from './pages/share-capital/share-capital-maintenance/share-capital-maintenance.component';
+import { ShareCapitalParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params-maintenance/share-capital-params-maintenance.component';
+import { GuarantorsParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-maintenance/guarantors-params-maintenance.component';
+import { GuarantorsParamsComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -151,13 +154,20 @@ const routes: Routes = [{
       data:{preload:true},
     },
 
-    //guarantos configurations
+    //Guarantors Config
     {
-       path:'configurations/global/guarantors-config/data/view',
-       component:GuarantosComponent,
+       path:'configurations/global/guarantors/maintenance',
+       component:GuarantorsParamsMaintenanceComponent,
       //  canActivate:[CanActivateModuleGuard],
        data:{preload:true},
     },
+
+    {
+      path:'configurations/global/guarantors/data/view',
+      component:GuarantorsParamsComponent,
+     //  canActivate:[CanActivateModuleGuard],
+      data:{preload:true},
+   },
     
     {
       path:'configurations/global/mis-sub-sector/data/view',
@@ -166,6 +176,8 @@ const routes: Routes = [{
       data:{preload:true},
 
     },
+
+
 
 
     // GL Code Maintenance
@@ -513,12 +525,19 @@ const routes: Routes = [{
 
       // Share capital Configurations
       {
+        path: 'configurations/global/share-capital/params/maintenance',
+        component:ShareCapitalParamsMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+            // Share capital Configurations
+      {
         path: 'configurations/global/share-capital/params',
         component:ShareCapitalParamsComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
-
       },
+      
       {
         path: 'share-capital/data/view',
         component:ShareCapitalComponent,

@@ -1,8 +1,12 @@
 
   <div class="">
+    <div *ngIf="isLoadingResults" >
+      <p><small>Loading, please wait...</small></p>
+      <p><mat-progress-bar mode="query"></mat-progress-bar></p>
+    </div>
     <div class="row breadcrumb">
       <div class="col-md-6 col-sm-12">
-        <h3>ACCOUNTS LOOKUP</h3>
+        <h3>{{this.account_type}} ACCOUNTS LOOKUP</h3>
         </div>
       <div class="col-md-6 col-sm-12">
       <mat-icon class="pull-right">search</mat-icon>
@@ -11,7 +15,6 @@
     </div>
     <br> 
     <div class="table-row">
-      <mat-progress-bar *ngIf="isLoadingResults" mode="query"></mat-progress-bar>
       <table class="y-scrollable-table"mat-table matSort matTableExporter [dataSource] = "dataSource">
        <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
