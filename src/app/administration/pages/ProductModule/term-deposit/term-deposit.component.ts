@@ -167,6 +167,7 @@ export class TermDepositComponent implements OnInit {
   tda_backdate_transaction_desc:any
   element: any;
   loanElement: any;
+  tda_exception_code_value: any;
 
   eventidLookup(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
@@ -401,9 +402,9 @@ tda_fee_cr_placeholderLookup(): void {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
-      this.ac_debit_balance_value =  this.exception_lookupData.exception_code;
-      this.formData.controls.tda_ac_debit_balance.setValue(this.exception_lookupData .id);
-      this.tda_ac_debit_description = this.exception_lookupData.exce_description
+      this.tda_exception_code_value =  this.exception_lookupData.exception_code;
+      this.exceptionFormData.controls.tda_exception_code.setValue(this.tda_exception_code_value)
+      this.exceptionFormData.controls.tda_exception_description.setValue(this.exception_lookupData.exce_description)
     });
   }
   ac_credit_balance_Lookup(): void {
@@ -577,7 +578,7 @@ tda_fee_cr_placeholderLookup(): void {
   }
   feeArray = new Array();
   glSubheadArray = new Array();
-
+  exceptionArray = new Array();
   formData = this.fb.group({
     function_type: [''],
     scheme_code: [''],
@@ -620,14 +621,7 @@ tda_fee_cr_placeholderLookup(): void {
     tda_renewal_allowed_within_days:[''],
     int_cal_freq_dr_week:[''],
     // Exceptions
-    tda_ac_debit_balance:[''],
-    tda_ac_credit_balance:[''],
-    tda_liability_exceed_group:[''],
-    tda_ac_is_froozed:[''],
-    tda_sanction_limit_expired:[''],
-    tda_interest_calc:[''],
-    tda_insufficient_exception:[''],
-    tda_backdate_transaction:[''],
+    tda_exceptions: new FormArray([]),
 
     tda_fees: new FormArray([]),
     tda_glsubheads: new FormArray([]),
@@ -647,11 +641,11 @@ tda_fee_cr_placeholderLookup(): void {
   });
 
   feeFormData = this.fb.group({
-    tda_fee_type: ['', [Validators.required]],
-    tda_fee_event: ['', [Validators.required]],
-    tda_fee_frequency: ['', [Validators.required]],
-    tda_fee_deductable: ['', [Validators.required]],
-    tda_fee_multiple: ['', [Validators.required]],
+    tda_fee_type: [''],
+    tda_fee_event: [''],
+    tda_fee_frequency: [''],
+    tda_fee_deductable: [''],
+    tda_fee_multiple: [''],
     tda_fee_amortize: [''],
     tda_fee_amortize_credit_ph:[''],
     tda_fee_amortize_debit_ph:[''],
@@ -666,6 +660,11 @@ tda_fee_cr_placeholderLookup(): void {
     tda_gl_subhead_description: [''],
     tda_gl_subhead_deafault: [''],
     tda_is_gl_subhead_deleted: ['']
+  })
+
+  exceptionFormData = this.fb.group({
+    tda_exception_code:[''],
+    tda_exception_description:['']
   })
 
   initLoanFeeForm() {
@@ -697,11 +696,19 @@ tda_fee_cr_placeholderLookup(): void {
     })
   }
 
+  initExceptionFormData(){
+    this.newData = true;
+    this.exceptionFormData = this.fb.group({
+      tda_exception_code:[''],
+      tda_exception_description:['']
+    })
+  }
+
 
   get g() { return this.formData.controls; }
   get t() { return this.g.tda_fees as FormArray; }
   get l() { return this.g.tda_glsubheads as FormArray; }
-
+  get e() { return this.g.tda_exceptions as FormArray;}
 
 
   previewGlSubheads(){
@@ -711,9 +718,7 @@ tda_fee_cr_placeholderLookup(): void {
       }else{
         this.glSubheadData.controls.tda_gl_subhead_deafault.setValue("No");
       }
-      this.l.push(this.fb.group(
-        this.glSubheadData.value
-        ));
+      this.l.push(this.fb.group(this.glSubheadData.value));
         this.glSubheadArray.push(this.glSubheadData.value);
         this.initGlSUbheadForm();
      }
@@ -748,17 +753,58 @@ tda_fee_cr_placeholderLookup(): void {
     this.glSubheadArray.splice(index, i);
     this.glSubheadArray = this.glSubheadArray
   }
-//Loan Fee Operations
-  onPreviewFees(){    
-    
-    if (this.feeFormData.valid) {
-      this.t.push(this.fb.group(
-        this.feeFormData.value
+
+  // EXceptions Operations
+  onPreviewExceptions(){
+    if (this.exceptionFormData.valid) {
+      this.e.push(this.fb.group(
+        this.exceptionFormData.value
       ));
-      this.feeArray.push(this.feeFormData.value);
-      this.initLoanFeeForm();
+      this.exceptionArray.push(this.exceptionFormData.value);
+      this.initExceptionFormData();
     }
   }
+
+  onUpdateException(){
+    let i = this.element
+    this.exceptionArray[i] = this.exceptionFormData.value
+  }
+
+  onClearException(){
+    this.initExceptionFormData();
+    this.exceptionArray = new Array();
+  }
+  onRemoveException(i:any){
+    const index: number = this.exceptionArray.indexOf(this.exceptionArray.values);
+    this.exceptionArray.splice(index, i);
+    this.exceptionArray = this.exceptionArray;
+  }
+
+  editException(i:any){
+    this.element = i;
+    this.newData = false;
+    this.arrayIndex = this.exceptionArray[i];
+    this.exceptionFormData = this.fb.group({
+      tda_exception_code:[this.exceptionArray[i].tda_exception_code],
+      tda_exception_description:[this.exceptionArray[i].tda_exception_description]
+    })
+
+  }
+//Loan Fee Operations
+onPreviewFees(){  
+  console.log("output");  
+  console.log("FormData", this.feeFormData.value);
+       
+  if (this.feeFormData.valid) {
+
+    console.log("Form");   
+    this.t.push(this.fb.group(this.feeFormData.value));
+    this.feeArray.push(this.feeFormData.value);
+    console.log(this.feeFormData.value);
+    
+    this.initLoanFeeForm();
+  }
+}
   onUpdateFees(){
     let i = this.loanElement;
     this.feeArray[i] = this.feeFormData.value
@@ -859,14 +905,8 @@ tda_fee_cr_placeholderLookup(): void {
           int_cal_freq_dr_week:[''],
          
           // Exceptions
-          tda_ac_debit_balance:[''],
-          tda_ac_credit_balance:[''],
-          tda_liability_exceed_group:[''],
-          tda_ac_is_froozed:[''],
-          tda_sanction_limit_expired:[''],
-          tda_interest_calc:[''],
-          tda_insufficient_exception:[''],
-          tda_backdate_transaction:[''],
+         tda_exceptions: new FormArray([]),
+
           tda_fees: new FormArray([]),
           tda_glsubheads: new FormArray([]),
 
@@ -897,9 +937,8 @@ tda_fee_cr_placeholderLookup(): void {
           this.results = res;
 // Initialise the glsubheads
           this.glSubheadArray = this.results.tda_glsubheads;
-          
           this.feeArray = this.results.tda_fees;
-          
+          this.exceptionArray = this.results.tda_exceptions
           this.formData = this.fb.group({
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
@@ -943,17 +982,10 @@ tda_fee_cr_placeholderLookup(): void {
             tda_repayment_ac_ph:[this.results.tda_repayment_ac_ph],
             tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],
             // Exceptions
-            tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
-            tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
-            tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
-            tda_ac_is_froozed:[this.results.tda_ac_is_froozed],
-            tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
-            tda_interest_calc:[this.results.tda_interest_calc],
-            tda_insufficient_exception:[this.results.tda_insufficient_exception],
-            tda_backdate_transaction:[this.results.tda_backdate_transaction],
+          //  tda_exceptions:[this.results.tda_exceptions],
 
-            tda_fees: new FormArray([]),
-            tda_glsubheads: new FormArray([]),
+          //   tda_fees: new FormArray([]),
+          //   tda_glsubheads: new FormArray([]),
             // Audits
             postedBy: [this.results.postedBy],
             postedFlag: [this.results.postedFlag],
@@ -988,8 +1020,8 @@ tda_fee_cr_placeholderLookup(): void {
           this.results = res;
           // Initialise the glsubheads
           this.glSubheadArray = this.results.tda_glsubheads;
-          this.tda_fees = this.results.tda_fees;
-
+          this.feeArray = this.results.tda_fees;
+          this.exceptionArray = this.results.tda_exceptions 
           this.formData = this.fb.group({
             id:[this.results.id],
             scheme_code: [this.results.scheme_code],
@@ -1035,14 +1067,7 @@ tda_fee_cr_placeholderLookup(): void {
             tda_repayment_ac_ph:[this.results.tda_repayment_ac_ph],
             tda_renewal_allowed_within_days:[this.results.tda_renewal_allowed_within_days],           
             // Exceptions
-            tda_ac_debit_balance:[this.results.tda_ac_debit_balance],
-            tda_ac_credit_balance:[this.results.tda_ac_credit_balance],
-            tda_liability_exceed_group:[this.results.tda_liability_exceed_group],
-            tda_ac_is_froozed:[this.results.tda_ac_is_froozed],
-            tda_sanction_limit_expired:[this.results.tda_sanction_limit_expired],
-            tda_interest_calc:[this.results.tda_interest_calc],
-            tda_insufficient_exception:[this.results.tda_insufficient_exception],
-            tda_backdate_transaction:[this.results.tda_backdate_transaction],
+           
 
             tda_fees: new FormArray([]),
             tda_glsubheads: new FormArray([]),

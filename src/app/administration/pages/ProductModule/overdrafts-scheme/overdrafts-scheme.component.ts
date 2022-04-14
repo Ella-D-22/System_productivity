@@ -146,6 +146,7 @@ export class OverdraftsSchemeComponent implements OnInit {
   oda_fee_amortize_debit_ph: any;
   oda_fee_amortize_debit_ph_desc: any;
   oda_fee_dr_placeholder_desc: any;
+  oda_fee_dr_placeholder:any
   oda_fee_cr_placeholder: any;
   oda_fee_cr_placeholder_desc: any;
   ac_debit_balance_description: any;
@@ -470,7 +471,7 @@ oda_fee_amortize_credit_phLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.oda_fee_amortize_credit_ph = result.data.acid;
     this.oda_fee_amortize_credit_ph_desc = result.data.accountName;
-    this.formData.controls.oda_fee_amortize_credit_ph.setValue(result.data.acid);
+    this.feeFormData.controls.oda_fee_amortize_credit_ph.setValue(result.data.acid);
   });
 }
 
@@ -484,11 +485,12 @@ oda_fee_amortize_debit_phLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.oda_fee_amortize_debit_ph = result.data.acid;
     this.oda_fee_amortize_debit_ph_desc = result.data.accountName;
-    this.formData.controls.oda_fee_amortize_debit_ph.setValue(result.data.acid);
+    this.feeFormData.controls.oda_fee_amortize_debit_ph.setValue(result.data.acid);
+
   });
 }
 
-oda_fee_dr_placeholder(): void {
+oda_fee_dr_placeholderLookup(): void {
   this.dtype="oa"
   const dconfig= new MatDialogConfig()
   dconfig.data={
@@ -498,7 +500,7 @@ oda_fee_dr_placeholder(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.oda_fee_dr_placeholder = result.data.acid;
     this.oda_fee_dr_placeholder_desc = result.data.accountName;
-    this.formData.controls.oda_fee_dr_placeholder.setValue(result.data.acid);
+    this.feeFormData.controls.oda_fee_dr_placeholder.setValue(result.data.acid);
   });
 }
 
@@ -512,7 +514,7 @@ oda_fee_cr_placeholderLookup(): void {
   cdialogRef.afterClosed().subscribe((result) => {
     this.oda_fee_cr_placeholder = result.data.acid;
     this.oda_fee_cr_placeholder_desc = result.data.accountName;
-    this.formData.controls.oda_fee_cr_placeholder.setValue(result.data.acid);
+    this.feeFormData.controls.oda_fee_cr_placeholder.setValue(result.data.acid);
   });
 }
 
@@ -620,6 +622,8 @@ oda_fee_cr_placeholderLookup(): void {
     oda_dr_bal_limit: [''],
     oda_max_penal_int: [''],
     ac_statement_charged_by: [''],
+    oda_ac_stmt_chrg_per_page:[''],
+    oda_ac_stmt_chrg_fixed_amt:[''],
     oda_inactive_ac_abnormal_trans_limit: [''],
     oda_dormant_ac_abnormal_trans_limit: [''],
     oda_duration_to_mark_ac_inactive: [''],
@@ -632,14 +636,7 @@ oda_fee_cr_placeholderLookup(): void {
 
     // Exceptions 
     oda_exceptions: new FormArray([]),
-    // oda_exc_ac_in_debit_bal:[''],
-    // oda_exc_ac_in_cr_bal:[''],
-    // oda_exc_liability_exceeds_group_limit:[''],
-    // oda_exc_ac_is_frozed:[''],
-    // oda_exc_sanction_limit_expired:[''],
-    // oda_exc_int_cal_not_upto_date:[''],
-    // oda_exc_insufficient_available_bal:[''],
-    // oda_exc_backdated_transaction:[''],
+   
 
     // Create Audits
     postedBy: ['N'],
@@ -802,15 +799,15 @@ oda_fee_cr_placeholderLookup(): void {
     this.exceptionArray.splice(index, i);
     this.exceptionArray = this.exceptionArray;
   }
-  
            //Loan Fee Operations
            onPreviewFees(){    
             
-            if (this.feeFormData.valid) {
-              this.t.push(this.fb.group(
-                this.feeFormData.value
-              ));
+            if (this.feeFormData.valid) 
+            
+            {this.t.push(this.fb.group(this.feeFormData.value));
               this.feeArray.push(this.feeFormData.value);
+              console.log(this.feeFormData.value);
+              
               this.initLoanFeeForm();
             }
           }
@@ -840,9 +837,10 @@ oda_fee_cr_placeholderLookup(): void {
               oda_fee_amortize: [this.feeArray[i].oda_fee_amortize],
               oda_fee_amortize_credit_ph:[this.feeArray[i].oda_fee_amortize_credit_ph],
               oda_fee_amortize_debit_ph:[this.feeArray[i].oda_fee_amortize_debit_ph],
-              oda_fee_demand_flow: [this.feeArray[i].oda_fee_demand_flow],
+              oda_fee_demand_flow_id: [this.feeArray[i].oda_fee_demand_flow_id],
               oda_fee_dr_placeholder: [this.feeArray[i].oda_fee_dr_placeholder],
               oda_fee_cr_placeholder: [this.feeArray[i].oda_fee_cr_placeholder],
+              oda_fee_amort_tenor:[this.feeArray[i].oda_fee_amort_tenor],
               oda_fee_max_no_of_assesment: [this.feeArray[i].oda_fee_max_no_of_assessment],
             });
           }
@@ -861,11 +859,6 @@ oda_fee_cr_placeholderLookup(): void {
   onNo(event:any){
     this.showAmortizedPH = false;
   }
-
-
-
-
-  
 
   onfixed_amt(event:any){
     this.showFixed_amt = true;
@@ -948,16 +941,8 @@ oda_fee_cr_placeholderLookup(): void {
           oda_glsubheads: new FormArray([]),
 
               // Exceptions 
-          oda_exc_ac_in_debit_bal:[''],
-          oda_exc_ac_in_cr_bal:[''],
-          oda_exc_liability_exceeds_group_limit:[''],
-          oda_exc_ac_is_frozed:[''],
-          oda_exc_sanction_limit_expired:[''],
-          oda_exc_int_cal_not_upto_date:[''],
-          oda_exc_insufficient_available_bal:[''],
-          oda_exc_backdated_transaction:[''],
-
-                  // Create Audits
+          oda_exceptions: new FormArray([]),
+             // Create Audits
                   postedBy: ['N'],
                   postedFlag: ['N'],
                   postedTime: [new Date()],
@@ -985,6 +970,7 @@ oda_fee_cr_placeholderLookup(): void {
           this.results = res;
           this.feeArray = this.results.oda_fees;
           this.glSubheadArray = this.results.oda_glsubheads; 
+          this.exceptionArray = this.results.oda_exceptions;
           this.formData = this.fb.group({
             id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
@@ -1034,14 +1020,7 @@ oda_fee_cr_placeholderLookup(): void {
            oda_glsubheads:[this.results.oda_glsubheads],
 
                // Exceptions 
-            oda_exc_ac_in_debit_bal:[this.results.oda_exc_ac_in_debit_bal],
-            oda_exc_ac_in_cr_bal:[this.results.oda_exc_ac_in_cr_bal],
-            oda_exc_liability_exceeds_group_limit:[this.results.oda_exc_liability_exceeds_group_limit],
-            oda_exc_ac_is_frozed:[this.results.oda_exc_ac_is_frozed],
-            oda_exc_sanction_limit_expired:[this.results.oda_exc_sanction_limit_expired],
-            oda_exc_int_cal_not_upto_date:[this.results.oda_exc_int_cal_not_upto_date],
-            oda_exc_insufficient_available_bal:[this.results.oda_exc_insufficient_available_bal],
-            oda_exc_backdated_transaction:[this.results.oda_exc_backdated_transaction],
+          oda_exceptions:[this.results.oda_exceptions],
 
            // Audits
            postedBy: [this.results.postedBy],
@@ -1082,7 +1061,7 @@ oda_fee_cr_placeholderLookup(): void {
 
           this.feeArray = this.results.oda_fees;
           this.glSubheadArray = this.results.oda_glsubheads;
-          
+          this.exceptionArray = this.results.oda_exceptions
           this.formData = this.fb.group({
 
 
@@ -1134,18 +1113,10 @@ oda_fee_cr_placeholderLookup(): void {
 
            oda_fees: [this.results.oda_fees],
            oda_glsubheads:[this.results.oda_glsubheads],
-           
+          
 
           // Exceptions 
-          oda_exc_ac_in_debit_bal:[this.results.oda_exc_ac_in_debit_bal],
-          oda_exc_ac_in_cr_bal:[this.results.oda_exc_ac_in_cr_bal],
-          oda_exc_liability_exceeds_group_limit:[this.results.oda_exc_liability_exceeds_group_limit],
-          oda_exc_ac_is_frozed:[this.results.oda_exc_ac_is_frozed],
-          oda_exc_sanction_limit_expired:[this.results.oda_exc_sanction_limit_expired],
-          oda_exc_int_cal_not_upto_date:[this.results.oda_exc_int_cal_not_upto_date],
-          oda_exc_insufficient_available_bal:[this.results.oda_exc_insufficient_available_bal],
-          oda_exc_backdated_transaction:[this.results.oda_exc_backdated_transaction],
-
+           oda_exceptions:[this.results.oda_exceptions],
           
 
            // Audits
@@ -1291,6 +1262,7 @@ oda_fee_cr_placeholderLookup(): void {
           this.results = res;
           this.feeArray = this.results.oda_fees;
           this.glSubheadArray = this.results.oda_glsubheads;
+          this.exceptionArray = this.results.oda_exceptions
           this.formData = this.fb.group({
             id: [this.results.id],
             oda_scheme_code: [this.results.oda_scheme_code],
@@ -1341,14 +1313,7 @@ oda_fee_cr_placeholderLookup(): void {
            oda_glsubheads:[this.results.oda_glsubheads],
 
               // Exceptions 
-          oda_exc_ac_in_debit_bal:[this.results.oda_exc_ac_in_debit_bal],
-          oda_exc_ac_in_cr_bal:[this.results.oda_exc_ac_in_cr_bal],
-          oda_exc_liability_exceeds_group_limit:[this.results.oda_exc_liability_exceeds_group_limit],
-          oda_exc_ac_is_frozed:[this.results.oda_exc_ac_is_frozed],
-          oda_exc_sanction_limit_expired:[this.results.oda_exc_sanction_limit_expired],
-          oda_exc_int_cal_not_upto_date:[this.results.oda_exc_int_cal_not_upto_date],
-          oda_exc_insufficient_available_bal:[this.results.oda_exc_insufficient_available_bal],
-          oda_exc_backdated_transaction:[this.results.oda_exc_backdated_transaction],
+           oda_exceptions:[this.results.oda_exceptions],
 
            // Audits
            postedBy: [this.results.postedBy],

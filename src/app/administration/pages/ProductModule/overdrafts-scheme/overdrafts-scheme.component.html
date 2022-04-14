@@ -381,7 +381,7 @@
 
       <mat-tab class="mat-tab" label="Scheme Details">
           <br>
-          <h3>Scheme Details</h3>
+          <h3>Product Details</h3>
         <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -442,7 +442,7 @@
               <label class="start pull-left">Amount</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="number"   formControlName="odaac_stmt_chrg_per_page" class="pull-right form-control"/>
+              <input type="number"   formControlName="oda_ac_stmt_chrg_per_page" class="pull-right form-control"/>
             </div>
          </div>     
          <div class="form-group" *ngIf="this.showPer_page" >
@@ -450,14 +450,21 @@
             <label class="start pull-left">Page</label>
           </div>
           <div class="col-md-6 col-sm-12 form-column"> 
-            <input type="number"  formControlName="odaac_stmt_chrg_fixed_amt" class="pull-right form-control"/>
+            <input type="number"  formControlName="oda_ac_stmt_chrg_fixed_amt" class="pull-right form-control"/>
           </div>
        </div> 
       </div>
       </div>
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                         
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column ">
+                 <label class="start pull-left">Duration to Mark A/c. as Inactive.(Months)</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" formControlName="oda_duration_to_mark_ac_inactive" class="pull-right form-control"/>
+                </div>
+             </div>        
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
@@ -470,31 +477,17 @@
                </div>            
         </div>
         </div>
-
         <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Duration to Mark A/c. as Inactive .</label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column">
-                    <input type="number" formControlName="oda_duration_to_mark_ac_inactive" class="pull-right form-control"/>
-                  </div>
-               </div>            
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
                 <div class="col-md-6 col-sm-12 form-column ">
-                 <label class="start pull-left">Duration from Inactive to dormant<span class="warning">*</span></label>
+                 <label class="start pull-left">Duration from Inactive to dormant(Months)<span class="warning">*</span></label>
                 </div>
                 <div class="col-md-6 col-sm-12 form-column">
                     <input type="number" formControlName="oda_duration_from_inactive_to_dormant" class="pull-right form-control"/>
                 </div>
-               </div>            
-        </div>
-        </div>
-
-        <div class="row">
+               </div>       
+          </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
                   <div class="col-md-6 col-sm-12 form-column ">
@@ -502,13 +495,12 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <input type="number" formControlName="oda_dormant_fee" class="pull-right form-control"/>
-                  </div>
-               </div>            
-          </div>
-          <div class="col-md-6 col-sm-12">
-                       
+                </div>             
+          </div>        
         </div>
         </div>
+
+    
 
 
 <mat-divider></mat-divider>
@@ -522,7 +514,7 @@
                   </div>
                   <div class="col-md-6 col-sm-12 form-column">
                     <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="oda_norm_int_product_method">
-                        <mat-radio-button value="Full">Full</mat-radio-button>
+                        <mat-radio-button  value="Full">Full</mat-radio-button><br>
                         <mat-radio-button value="Differential">Differential</mat-radio-button>
                       </mat-radio-group>
                   </div>
@@ -607,123 +599,6 @@
           </tbody>
       </table>
        
-        <!-- <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-              <label class="start pull-left">Liability exceeds group limit<span class="warning">*</span></label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-              <input [value]="this.liability_exceed_group_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_liability_exceeds_group_limit" class="pull-right form-control"/>
-              <mat-icon (click)="liability_exceed_group_Lookup()">search</mat-icon>
-              </div>
-          </div> 
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-            </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <mat-hint>{{this.liability_exceed_group_description}}</mat-hint>
-            </div>
-        </div> 
-          </div>
-          <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-              <label class="start pull-left">Account is frozed</label>
-            </div>
-            <div class="col-md-6 col-sm-12 form-column">
-              <input [value]="this.ac_is_froozed_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_ac_is_frozed" class="pull-right form-control"/>
-              <mat-icon (click)="ac_is_froozed_Lookup()">search</mat-icon>
-            </div>
-          </div>    
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-            </div>
-            <div class="col-md-6 col-sm-12 form-column">
-              <mat-hint>{{this.ac_is_froozed_descpription}}</mat-hint>
-            </div>
-        </div> 
-
-        </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-              <label class="start pull-left">Sanction Limit Expired<span class="warning">*</span></label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-              <input [value]="this.sanction_limit_expired_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_sanction_limit_expired" class="pull-right form-control"/>
-              <mat-icon (click)="sanction_limit_expired_Lookup()">search</mat-icon>
-              </div>
-          </div> 
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-            </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <mat-hint>{{this.sanction_limit_expired_description}}</mat-hint>
-            </div>
-        </div> 
-          </div>
-          <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-              <label class="start pull-left">Interest Calculation not upto date</label>
-            </div>
-            <div class="col-md-6 col-sm-12 form-column">
-              <input [value]="this.interest_calc_value" type="text" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_exc_int_cal_not_upto_date" class="pull-right form-control"/>
-              <mat-icon (click)="interest_calc_Lookup()">search</mat-icon>
-            </div>
-          </div> 
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-            </div>
-            <div class="col-md-6 col-sm-12 form-column">
-              <mat-hint>{{this.interest_calc_description}}</mat-hint>
-            </div>
-        </div>              
-        </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-              <label class="start pull-left">Insufficient available balance<span class="warning">*</span></label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-              <input [value]="this.insufficient_exception_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_insufficient_available_bal" class="pull-right form-control"/>
-              <mat-icon (click)="insufficient_exception_Lookup()">search</mat-icon>
-              </div>
-          </div> 
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-            </div>
-            <div class="col-md-6 col-sm-12 form-column ">
-              <mat-hint>{{this.insufficient_exception_description}}</mat-hint>
-            </div>
-        </div> 
-
-          </div>
-          <div class="col-md-6 col-sm-12">
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-              <label class="start pull-left">Backdated transaction</label>
-            </div>
-            <div class="col-md-6 col-sm-12 form-column">
-              <input [value]="this.backdate_transaction_value" oninput ="this.value=this.value.toUpperCase()" type="text" formControlName="oda_exc_backdated_transaction" class="pull-right form-control"/>
-              <mat-icon (click)="backdate_transaction_Lookup()">search</mat-icon>
-            </div>
-          </div> 
-          <div class="form-group">
-            <div class="col-md-6 col-sm-12 form-column ">
-            </div>
-            <div class="col-md-6 col-sm-12 form-column">
-            <mat-hint>{{this.backdate_transaction_description}}</mat-hint>
-            </div>
-        </div> 
-
-        </div>
-        </div> -->
       </mat-tab>
   
       <!-- GL Subhead -->
@@ -931,7 +806,7 @@
                 </div>
                 <div class="col-md-6 col-sm-12 form-column ">
                  <input type="text" [value]="this.oda_fee_dr_placeholder" oninput ="this.value=this.value.toUpperCase()" formControlName="oda_fee_dr_placeholder" class="pull-right form-control" />
-                 <mat-icon (click)="oda_fee_dr_placeholder()">search</mat-icon>
+                 <mat-icon (click)="oda_fee_dr_placeholderLookup()">search</mat-icon>
                 </div>
              </div> 
              <div class="form-group">
@@ -1007,7 +882,7 @@
                     <th>AMortized Debit PH</th>
                     <th>deductable</th>
                     <th>multiple</th>
-                    <th>amortize</th>
+                    <!-- <th>amortize</th> -->
                     <th>demand_flow</th>
                     <th>dr_placeholder</th>
                     <th>cr_placeholder</th>
@@ -1027,7 +902,7 @@
                     <td>{{item.oda_fee_amortize_debit_ph}}</td>
                     <td>{{item.oda_fee_deductable}}</td>
                     <td>{{item.oda_fee_multiple}}</td>
-                    <td>{{item.oda_fee_demand_flow}}</td>
+                    <td>{{item.oda_fee_demand_flow_id}}</td>
                     <td>{{item.oda_fee_dr_placeholder}}</td>
                     <td>{{item.oda_fee_cr_placeholder}}</td>
                     <td>{{item.oda_fee_amort_tenor}}</td>
