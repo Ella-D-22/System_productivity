@@ -432,8 +432,6 @@ ac_debit_balance_Lookup(): void {
   }
   return days;
 }
-
-  
   dialogValue: any;
   dialogData: any;
   function_type: any;
@@ -476,7 +474,6 @@ ac_debit_balance_Lookup(): void {
     public datepipe: DatePipe
 
     ) { }
-
         chronologicalOrderArray = new Array();
         // Init Array
         iniChronologicalList(){
@@ -512,7 +509,7 @@ ac_debit_balance_Lookup(): void {
       }
       feeArray= new Array();
       glSubheadArray = new Array();
-      exceptionArray = new Array()
+      exceptionArray = new Array();
     //  this.feeArray
       formData = this.fb.group({
         laa_function_type: [''],

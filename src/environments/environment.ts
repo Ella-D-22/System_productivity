@@ -42,6 +42,7 @@ export const environment = {
     reportAPI:'http://52.15.152.26:9091/report-service',
     glsAPI: 'http://52.15.152.26:9091/group-service',
     countryAPI: 'https://restcountries.com/v3.1/all'
+    
 };
 
 /*
