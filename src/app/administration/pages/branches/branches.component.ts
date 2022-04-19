@@ -50,8 +50,6 @@ export class BranchesComponent implements OnInit {
   formcontrOrg: any;
   infosecdes: any;
   invalid:any;
-
-
   messageData: any;
   code: any;
   glCode: any;
@@ -60,7 +58,6 @@ export class BranchesComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    private ngZone: NgZone,
     private _snackBar: MatSnackBar,
     private http: HttpClient,
     private actRoute: ActivatedRoute,
@@ -82,7 +79,7 @@ export class BranchesComponent implements OnInit {
       
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+          this.router.navigate([`/system/configurations/global/gl-code/maintenance`], { skipLocationChange: true });
         }else{
           null;
         }
@@ -172,7 +169,8 @@ export class BranchesComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/branches/maintenance'));
+            this.router.navigate([`/system/branches/maintenance`], { skipLocationChange: true });
+
           })
         }
         else if(this.function_type == "M-Modify"){          
@@ -203,7 +201,7 @@ export class BranchesComponent implements OnInit {
             // this.formData.controls.solCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/branches/maintenance'));
+              this.router.navigate([`/system/branches/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -288,7 +286,8 @@ export class BranchesComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/branches/maintenance'));
+              this.router.navigate([`/system/branches/maintenance`], { skipLocationChange: true });
+
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -307,8 +306,7 @@ export class BranchesComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/branches/maintenance'));
-                  // system/configurations/global/linked/organization/maintenance
+              this.router.navigate([`/system/branches/maintenance`], { skipLocationChange: true });
               },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {

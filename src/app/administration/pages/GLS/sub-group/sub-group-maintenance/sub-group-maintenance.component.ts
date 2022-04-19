@@ -26,56 +26,42 @@ export class SubGroupMaintenanceComponent implements OnInit {
 
   ngOnInit(): void {
   }
-     
   functionArray:any = [
     'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
   ]
-
   formData = this.fb.group({
     function_type:[''],
     subGroupCode:['', [Validators.required]]
   })
-
   get f() { 
     return this.formData.controls; }
-
     onSelectFunction(event:any){
       if(event.target.value == "A-Add"){
          this.showSubgroupCode = false;
          this.formData.controls.subGroupCode.setValue("")
          this.formData.controls.subGroupCode.setValidators([Validators.required])
-        //  this.formData.controls.function_type.setValue("")
       }else if (event.target.value != "A-Add"){
          this.showSubgroupCode = true;
          this.formData.controls.subGroupCode.setValue("")
          this.formData.controls.subGroupCode.setValidators([Validators.required])
       }
-  
     }
-  
     subGroupLookup():void{
       const dialogRef =  this.dialog.open(SubGroupLookupComponent,{
-
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
-        console.log(this.dialogData);
-        
         this.formData.controls.subGroupCode.setValue(results.data.subGroupCode)
-       
       })
     }
-    
     onSubmit(){
       this.submitted = true;
-      
       if(this.formData.valid){
         this.subService.changeMessage(this.formData.value)
         if(this.function_type == 'A-Add'){
-  
-          this.router.navigateByUrl("system/GLS/sub-group/data/view")
+          this.router.navigate([`/system/GLS/sub-group/data/view`], { skipLocationChange: true });
         }else if (this.function_type != 'A-Add'){
-          this.router.navigateByUrl("system/GLS/sub-group/data/view")
+          this.router.navigate([`/system/GLS/sub-group/data/view`], { skipLocationChange: true });
         }
       }else{
         this._snackbar.open("Invalid form data", "Try Again", {
@@ -84,8 +70,6 @@ export class SubGroupMaintenanceComponent implements OnInit {
           duration: 3000,
           panelClass: ['red-snackbar', 'login-snackbar']
         })
-  
       }
     }
-
 }

@@ -13,28 +13,21 @@ import { SubGroupService } from '../sub-group.service';
 })
 export class SubGroupLookupComponent implements OnInit {
    results:any
-
    displayedColumns : string[]= ['sn','Subgroup Code', 'Subgroup Name']
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;
-
   constructor(private fb:FormBuilder,
     private subService:SubGroupService,
     private dialogRef:MatDialogRef<SubGroupLookupComponent>) {
      }
-
   ngOnInit(): void {
     this.getData()
   }
-
   getData(){
     this.subService.getSubGroups().subscribe(
       data =>{
         this.results = data
-        console.log(this.results, "lookup data");
-        
         this.dataSource = new MatTableDataSource(this.results)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort; 
@@ -48,7 +41,6 @@ export class SubGroupLookupComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
   onSelect(data:any){
     this.dialogRef.close({ event: 'close', data:data });
   }

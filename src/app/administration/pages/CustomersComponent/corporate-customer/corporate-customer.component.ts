@@ -270,7 +270,8 @@ export class CorporateCustomerComponent implements OnInit {
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
             });
-            this.router.navigateByUrl("system/customers/corporate/maintenance")
+        this.router.navigate([`/system/customers/corporate/maintenance`], { skipLocationChange: true });
+
           }
         )
       }else if(this.function_type != "A-Add"){
@@ -285,7 +286,8 @@ export class CorporateCustomerComponent implements OnInit {
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
             });
-            this.router.navigateByUrl("system/customers/corporate/maintenance")
+        this.router.navigate([`/system/customers/corporate/maintenance`], { skipLocationChange: true });
+
 
           }
         )

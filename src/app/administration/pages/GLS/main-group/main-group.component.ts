@@ -327,7 +327,8 @@ export class MainGroupComponent implements OnInit {
               },
               err =>{
 
-                this.router.navigateByUrl("system/GLS/main-group/maintenance")
+        this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
+
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizontalPosition,
@@ -391,8 +392,7 @@ export class MainGroupComponent implements OnInit {
                 }
               },
               err =>{
-
-                this.router.navigateByUrl("system/GLS/main-group/maintenance")
+               this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizontalPosition,
@@ -400,7 +400,6 @@ export class MainGroupComponent implements OnInit {
                   duration:3000,
                   panelClass:['red-snackbar', 'login-snackbar']
                 })
-
               } )
           }else if(this.function_type == "V-Verify"){
             this.loading = true
@@ -454,8 +453,7 @@ export class MainGroupComponent implements OnInit {
 
               },
               err =>{
-
-                this.router.navigateByUrl("system/GLS/main-group/maintenance")
+               this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
                 this.error = err
                 this._snackbar.open(this.error, "Try Again",{
                   horizontalPosition:this.horizontalPosition,
@@ -471,7 +469,6 @@ export class MainGroupComponent implements OnInit {
         }
       )
     }
-
     onSubmit(){
       if(this.formData.valid){
         if(this.function_type == "A-Add"){
@@ -484,9 +481,8 @@ export class MainGroupComponent implements OnInit {
                 verticalPosition:this.verticalPosition,
                 duration:3000,
                 panelClass:['green-snackbar', 'login-snackbar']
-  
               });
-              this.router.navigateByUrl("system/GLS/main-group/maintenance")
+              this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
             },
             err =>{
               this.error = err
@@ -509,7 +505,7 @@ export class MainGroupComponent implements OnInit {
                 panelClass:['green-snackbar', 'login-snackbar']
   
               });
-              this.router.navigateByUrl("system/GLS/main-group/maintenance")
+              this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
             },
             err =>{
               this.error = err
@@ -532,7 +528,7 @@ export class MainGroupComponent implements OnInit {
                 panelClass:['green-snackbar', 'login-snackbar']
   
               });
-              this.router.navigateByUrl("system/GLS/main-group/maintenance")
+              this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
             },
             err =>{
               this.error = err

@@ -75,10 +75,10 @@ export class RetailCustomerMaintenanceComponent implements OnInit {
         console.log(this.formData.value);
         
         if(this.function_type == 'A-Add'){
-  
-          this.router.navigateByUrl("system/customer/retail/data/view")
+        this.router.navigate([`/system/customer/retail/data/view`], { skipLocationChange: true });
+
         }else if (this.function_type != 'A-Add'){
-          this.router.navigateByUrl("system/customer/retail/data/view")
+        this.router.navigate([`/system/customer/retail/data/view`], { skipLocationChange: true });
         }
       }else{
         this._snackbar.open("Invalid form data", "Try Again", {
