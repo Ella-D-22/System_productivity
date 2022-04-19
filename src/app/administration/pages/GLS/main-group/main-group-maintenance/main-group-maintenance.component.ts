@@ -72,7 +72,6 @@ export class MainGroupMaintenanceComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
-        console.log(this.dialogData);
       
         this.formData.controls.groupCode.setValue(results.data.groupCode)
        
@@ -84,13 +83,12 @@ export class MainGroupMaintenanceComponent implements OnInit {
       
       if(this.formData.valid){
         this.mainService.changeMessage(this.formData.value)
-        console.log(this.formData.value);
         
         if(this.function_type == 'A-Add'){
-  
-          this.router.navigateByUrl("system/GLS/main-group/data/view")
+        this.router.navigate([`/system/GLS/main-group/data/view`], { skipLocationChange: true });
+
         }else if (this.function_type != 'A-Add'){
-          this.router.navigateByUrl("system/GLS/main-group/data/view")
+        this.router.navigate([`/system/GLS/main-group/data/view`], { skipLocationChange: true });
         }
       }else{
         this._snackbar.open("Invalid form data", "Try Again", {

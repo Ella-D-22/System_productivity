@@ -32,8 +32,6 @@ export class CorporateCustomerMaintenanceComponent implements OnInit {
   functionArray:any = [
     'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
   ]
-
-
   formData = this.fb.group({
     function_type:[''],
     cust_code:['']
@@ -67,9 +65,9 @@ export class CorporateCustomerMaintenanceComponent implements OnInit {
       if(this.formData.valid){
         this.corpService.changeMessage(this.formData.value)
         if(this.function_type == "A-Add"){
-          this.router.navigateByUrl("system/customers/corporate/data/view")
+        this.router.navigate([`/system/customers/corporate/data/view`], { skipLocationChange: true });
         }else if( this.function_type != "A-Add"){
-          this.router.navigateByUrl("system/customers/corporate/data/view")
+        this.router.navigate([`/system/customers/corporate/data/view`], { skipLocationChange: true });
         }
       }else{
         this._snackbar.open("Invalid form Data", "X",{

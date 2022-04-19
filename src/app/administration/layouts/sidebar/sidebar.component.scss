@@ -25,6 +25,9 @@
 .mat-list-item{
   height: min-content !important;
   flex: block !important;
+  font-size: 16px !important;
+  font-weight: 450 !important;
+  letter-spacing: normal !important;
 }
 h2{
   font-family: muli;
@@ -48,6 +51,9 @@ mat-menu{
 a{
   padding-bottom: 2px !important;
   margin-bottom: 1px !important;
+  font-size: 16px !important;
+  font-weight: 450 !important;
+  letter-spacing: normal !important;
 }
 h5{
   font-size: 12px !important;
@@ -74,6 +80,9 @@ h5{
     .mat-expansion-panel-header {
       height: 40px;
       padding: 0px 24px 0px 16px;
+      font-size: 16px !important;
+      font-weight: 450 !important;
+      letter-spacing: normal !important;
     }
 
     .mat-expansion-panel-header-title {
