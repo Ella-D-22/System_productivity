@@ -30,7 +30,6 @@ export class GuarantorsParamsLookupComponent implements OnInit, OnDestroy {
   employee_id: any;
   creatingAccount = false;
   formData:any;
-
   constructor(    
     private router: Router,
     private ngZone: NgZone,

@@ -125,6 +125,10 @@ import { SegmentMaintenanceComponent } from './pages/SystemConfigurations/Global
 import { SubSegmentLookupComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment-lookup/sub-segment-lookup.component';
 import { SubSegmentMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment-maintenance/sub-segment-maintenance.component';
 import { SubSegmentComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment/sub-segment.component';
+import { ReportMaintainanceComponent } from './pages/reports/report-maintainance/report-maintainance.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
+import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
 
 
 @NgModule({
@@ -248,6 +252,11 @@ import { SubSegmentComponent } from './pages/SystemConfigurations/GlobalParams/s
      SubSegmentMaintenanceComponent,
      SubSegmentComponent,
  
+
+    ReportsComponent,
+    ReportMaintainanceComponent,
+    ViewReportComponent,
+    SpecificReportComponent
 
   ],
   imports: [

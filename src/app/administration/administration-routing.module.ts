@@ -73,6 +73,9 @@ import { SegmentMaintenanceComponent } from './pages/SystemConfigurations/Global
 import { SegmentsComponent } from './pages/SystemConfigurations/GlobalParams/segments/segments.component';
 import { SubSegmentMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment-maintenance/sub-segment-maintenance.component';
 import { SubSegmentComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment/sub-segment.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
+import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -554,7 +557,6 @@ const routes: Routes = [{
         component:ShareCapitalMaintenanceComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
-
       },
 
       //Segments
@@ -586,6 +588,26 @@ const routes: Routes = [{
         // data: {preload:true},
 
       },
+    //  Reports
+      {
+        path: 'add-report', 
+        component: ReportsComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'view-report', 
+        component: ViewReportComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'specific-report', 
+        component: SpecificReportComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+
 
   ],
 }];
