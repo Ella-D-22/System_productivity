@@ -83,9 +83,13 @@ export class BranchesMaintenanceComponent implements OnInit {
     this.submitted = true;
     if(this.formData.valid){   
     this.branchAPI.changeMessage(this.formData.value)
-    this.ngZone.run(() => this.router.navigateByUrl('system/branches/data/view'));
+    this.router.navigate([`/system/branches/data/view`], { skipLocationChange: true });
   }else{
-    this.ngZone.run(() => this.router.navigateByUrl('system/branches/data/view'));
+
+    this.router.navigate([`/system/branches/data/view`], { skipLocationChange: true });
+
+
+
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {
       horizontalPosition: this.horizontalPosition,
@@ -95,5 +99,5 @@ export class BranchesMaintenanceComponent implements OnInit {
     });
   }
   }
-
 }
+

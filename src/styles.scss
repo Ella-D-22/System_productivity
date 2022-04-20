@@ -3,11 +3,6 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
-
-
-
-
 .green-snackbar {
   background: rgb(65, 252, 134);
   color: black;
@@ -23,63 +18,127 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .red-snackbar button {
   background-color: #ff766d;;
-  color: white !important;
+  color: white;
   border: none;
 }
 
-@media screen and (max-width: 1440px) and (max-height: 810px) {
-  html {
-    //  transform: scale(.9);   
-    zoom: 80% !important;
-     // or simply zoom: 90%
-  }
-}
-
-td{
-  color: black !important;
-}
-
-
-
-// Products CSS
-.container-fluid{
-  width: 100% !important;
-  margin: 0px !important;
-}
-.row{
-  width: 100% !important;
-}
-// .form{
-//     margin-top: 10px !important;
-//     margin-bottom: 10px !important;
-//     padding-top: 10px !important;
-//     padding-bottom: 10px !important;
-// }
-.mat-tab-group {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.mat-tab{
-  width: 100% !important;
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-}
 mat-card{
   width: 100%;
   height: 100%;
 }
+.container-fluid{
+  width: 100%;
+  margin: 0px;
+}
+.mat-tab-group {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mat-tab{
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+label{
+  font-size: 15px;
+  font-weight: 410;
+  letter-spacing: normal;
+}
+
+// Products CSS
+h5{
+  color: rgb(0, 183, 255);
+  // text-decoration: underline;
+  letter-spacing: 1px;
+  font-size: 22px;
+  font-weight: 450;
+}
+form{
+  padding-bottom: 10px;
+}
+.form-group{
+  display: flex;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-bottom: 2px;
+  margin-top: 0px;
+  font-size: 12px;
+  font-weight: 410;
+}
+.form-group-block{
+  display: block;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-bottom: 2px;
+  margin-top: 0px;
+  font-size: 12px;
+  font-weight: 410;
+}
+.form-column {
+  display: flex;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  font-size: 12px;
+  font-weight: 410;
+}
+.form-control{
+  width: 80%;
+  height: 26px;
+  font-size: 12px;
+  font-weight: 410;
+  border-radius:  0px;
+}
+.form-control-sub{
+  width: 40%;
+  height: 26px;
+  font-size: 12px;
+  font-weight: 410;
+  border-radius:  0px;
+}
+.form-column-dates{
+  display: flex;
+  width: 80%;
+  height: 26px;
+  font-size: 12px;
+  font-weight: 410;
+  border-radius:  0px;
+}
+.row{
+  width: 100%;
+}
+.mat-radio-button{
+        padding: 3px !important;
+    }
+
+
+
+// Tables CSS
 
 th{
-  text-align: left !important;
+  text-align: left;
+}
+.search {
+  width: 50%;
+  height: 26px;
+  font-size: 12px;
+  font-weight: 410;
+  border-radius:  100px;
+  float: right;
 }
 table{
-  font-weight: 100px;
+  font-weight: 410px;
   font-size: 12px;
-  // font-family: monospace;
 }
-
+mat-icon {
+  font-size: 18px;
+  height: 18px;
+  line-height: 25px;
+}
 .actionButton {
-  min-width: unset!important;
+  min-width: unse;
   height: 25px;
   line-height: 25px;
   padding: auto;
@@ -91,187 +150,105 @@ table{
     line-height: 25px;
   }
 }
-
-mat-form-field{
-    width: 100%;
+.searchyear{
+float: right;
 }
-// .form-data{
-//     text-align: justify !important;
-// }
-.form-input {
-    width: max-content !important;
+td{
+font-size: 12px;
 }
-.form-group{
-  display: flex !important;
-  padding-bottom: 0px !important;
-  padding-top: 0px !important;
-  margin-bottom: 2px !important;
-  margin-top: 0px !important;
-  font-size: 12px !important;
+.table-action-row{
+margin-top: 5px;
+padding-top: 5px;
 }
-.form-group-block{
-  display: block !important;
-  padding-bottom: 0px !important;
-  padding-top: 0px !important;
-  margin-bottom: 2px !important;
-  margin-top: 0px !important;
-  font-size: 12px !important;
+.table-main-action-btn{
+margin: 2px;
+padding: 2px;
+height: 25px;
+width:min-content;
+line-height: 20px;
+text-align: center;
+font-size: 10px;
+margin-top: 0px;
+padding-left: 2px;
+padding-right: 2px;
 }
-.row{
-  padding-bottom: 0px !important;
-  padding-top: 0px !important;
-  margin-bottom: 0px !important;
-  margin-top: 0px !important;
-  font-size: 12px !important;
+.ng-container{
+font-size: 12px;
 }
-
-.form-column {
-  display: flex;
-  padding-bottom: 0px !important;
-  padding-top: 0px !important;
-  margin-bottom: 0px !important;
-  margin-top: 0px !important;
-  font-size: 12px !important;
+th{
+background-color: rgb(243, 243, 243);
 }
-.form-column-block{
-  display: block !important;
-  padding-bottom: 0px !important;
-  padding-top: 0px !important;
-  margin-bottom: 0px !important;
-  margin-top: 0px !important;
-  font-size: 12px !important;
+.mat-column-index{
+word-wrap: break-word;
+white-space: unset;
+flex: 0 0 28%;
+width: 3%;
+overflow-wrap: break-word;
+word-wrap: break-word;
+word-break: break-word;
+-ms-hyphens: auto;
+-moz-hyphens: auto;
+-webkit-hyphens: auto;
+hyphens: auto;
 }
-.form-control{
-  width: 80%;
-  height: 24px;
-  font-size: 10px;
-  // font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  border-radius:  0px;
+.mat-column-firstName,
+.mat-column-middleName,
+.mat-column-lastName,
+.mat-column-personalPhone,
+.mat-column-personalEmail,
+.mat-column-basic_salary
+{
+word-wrap: break-word;
+white-space: unset;
+flex: 0 0 28%;
+width:max-content;
+overflow-wrap: break-word;
+word-wrap: break-word;
+word-break: break-word;
+-ms-hyphens: auto;
+-moz-hyphens: auto;
+-webkit-hyphens: auto;
+hyphens: auto;
 }
-.form-control-sub{
-  width: 40%;
-  height: 24px;
-  font-size: 10px;
-  // font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  border-radius:  0px;
-}
-.form-column-dates{
-  display: flex !important;
-  width: 80% !important;
-  height: 24px;
-  font-size: 10px;
-  // font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  border-radius:  0px;
-}
-.sub-form-control{
-  width: 26%;
-  height: 24px;
-  font-size: 10px;
-  // font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  border-radius:  0px;
-}
-.dates{
-  width: 40% !important;
-}
-.pull-right-dates{
-  width: 40% !important;
-}
-.pull-right-dates-3{
-  width: 26.7% !important;
-}
-
-// .pull-right{
-//   float: right !important;
-// }
-textarea{
-  height: 50px !important;
-}
-mat-icon{
-  cursor: pointer;
-  // justify-content: unset !important;
-}
-label{
-  padding-left: 20px !important;
-}
-
-.form-data-fixed {
-  width: 57% !important;
-}
-.custom{
-  background-color: red;;
-}
-.currency{
-  width: 15%;
-}
-.currency-value{
-  width: 58%;
-}
-.warning{
-  color: rgb(255, 127, 77);;
-}
-.drop-down{
-  font-size: 8px !important;
-  color: black !important;
-  padding: 0px !important;
-}
-p{
-  color: rgb(145, 181, 252);
-  font-family: sans-serif;
-  font-weight: 600;
-}
-.block{
-display: block !important;
-padding-bottom: 0px !important;
-padding-top: 0px !important;
-margin-bottom: 0px !important;
-margin-top: 0px !important;
-font-size: 12px !important;
-}
-
-
-/* Styles for tab labels */
-.mat-tab-label {
-  min-width: 1px !important;
-  background-color: transparent;
-  font-weight: 700;
-}
-.child{
-background-color: transparent;
-width: 3px !important;
-margin: 0px;
+.table-row{
+width: 100%;
+overflow-x: auto;
 padding: 0px;
-font-weight: 700;
+margin: 0px;
 }
-
-/* Styles for the active tab label */
-.mat-tab-label.mat-tab-label-active {
-  min-width: 1px !important;
-  background-color: transparent;
-  font-weight: 700;
+.y-scrollable-table{
+min-width: 1300px;
 }
-
-/* Styles for the ink bar */
-.mat-ink-bar {
-  background-color: green;
-}
-h3{
-color: rgb(15, 133, 230);
-font-weight: 500;
-}
-.col-md-4{
-margin: 0px !important;
-padding: 0px !important;
-width: 10px !important;
-}
-
-.display-block{
-display: block !important;
-flex-direction: column;
+tr:hover {
+  background: whitesmoke;
+  -webkit-transform: scale(1.0);
+  -moz-transform: scale(1.0);
+  -o-transform: scale(1.0);
+  transform: scale(1.0);
+  -webkit-box-shadow: 2px 2px 4px rgb(199, 199, 199);
+  -moz-box-shadow: 2px 2px 4px rgb(199, 199, 199);
+  box-shadow: 2px 2px 4px rgb(199, 199, 199);
 }
 input, textarea{
-  text-transform: uppercase !important;
+  text-transform: uppercase;
 }
+
+
+
+
+
+
+
+@media screen and (max-width: 1440px) and (max-height: 810px) {
+  html {
+    //  transform: scale(.9);   
+    zoom: 80%;
+     // or simply zoom: 90%
+  }
+}
+
+td{
+  color: black;
+}
+
+

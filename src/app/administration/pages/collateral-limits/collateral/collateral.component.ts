@@ -258,11 +258,6 @@ export class CollateralComponent implements OnInit {
     //fees
     percentage_amount_collected:[''],
     collected_amount:['']
-
-
-
-    
-
   })
   
 
@@ -886,7 +881,8 @@ export class CollateralComponent implements OnInit {
               panelClass: ['green-snackbar','login-snackbar'],
             });
         },err=>{
-          this.router.navigateByUrl("/system/configurations/limits and collateral/Collateral/maintenance")
+        this.router.navigate([`/system/configurations/limits and collateral/Collateral/maintenance`], { skipLocationChange: true });
+
           this.error = err;
           this._snackBar.open(this.error, "Try again!", {
             horizontalPosition: this.horizontalPosition,
@@ -914,7 +910,8 @@ export class CollateralComponent implements OnInit {
                 panelClass: ['green-snackbar','login-snackbar'],
               });
           },err=>{
-            this.router.navigateByUrl("/system/configurations/limits and collateral/Collateral/maintenance")
+        this.router.navigate([`/system/configurations/limits and collateral/Collateral/maintenance`], { skipLocationChange: true });
+
             this.error = err;
             this._snackBar.open(this.error, "Try again!", {
               horizontalPosition: this.horizontalPosition,
@@ -949,7 +946,7 @@ export class CollateralComponent implements OnInit {
         }
 
       }else{
-        this.router.navigateByUrl("/system/configurations/limits and collateral/Collateral/maintenance")
+        this.router.navigate([`/system/configurations/limits and collateral/Collateral/maintenance`], { skipLocationChange: true });
         this._snackBar.open("Invalid Form Data", "Try again!", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,

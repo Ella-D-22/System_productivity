@@ -119,6 +119,10 @@ import { GuarantorsParamsComponent } from './pages/SystemConfigurations/GlobalPa
 import { GuarantorsParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-maintenance/guarantors-params-maintenance.component';
 import { GuarantorsParamsLookupComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-lookup/guarantors-params-lookup.component';
 import { ShareCapitalInstallmentsComponent } from './pages/share-capital/share-capital-installments/share-capital-installments.component';
+import { ReportMaintainanceComponent } from './pages/reports/report-maintainance/report-maintainance.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
+import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
 
 
 @NgModule({
@@ -235,6 +239,11 @@ import { ShareCapitalInstallmentsComponent } from './pages/share-capital/share-c
      GuarantorsParamsMaintenanceComponent,
      GuarantorsParamsLookupComponent,
      ShareCapitalInstallmentsComponent,
+
+    ReportsComponent,
+    ReportMaintainanceComponent,
+    ViewReportComponent,
+    SpecificReportComponent
 
   ],
   imports: [

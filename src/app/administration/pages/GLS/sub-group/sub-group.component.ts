@@ -41,7 +41,6 @@ export class SubGroupComponent implements OnInit {
     this.getPage()
     this.onAddField()
   }
-
   formData = this.fb.group({
     branch_name: [''],
     chairperson: [''],
@@ -81,15 +80,10 @@ export class SubGroupComponent implements OnInit {
     verifiedTime: [''],
     groupMembers: new FormArray([])
   })
-
   get f() { 
     return this.formData.controls; }
-
   get g(){return this.f.groupMembers as FormArray}
-
-
   onAddField(){
-
     this.g.push(this.fb.group({
       cust_code: [''],
       cust_name: [''],
@@ -109,9 +103,7 @@ export class SubGroupComponent implements OnInit {
       verifiedFlag:['N'],
       verifiedTime:[new Date()]
     }))
-    
   }
-
   onReadFile(e:any){
     this.g.push(this.fb.group({
       cust_code: [e.cust_code],
@@ -131,7 +123,6 @@ export class SubGroupComponent implements OnInit {
       verifiedBy:[e.verifiedBy],
       verifiedFlag:[e.verifiedFlag],
       verifiedTime:[e.verifiedTime]
-
     }))
   }
   onRemoveField(i:any){
@@ -140,47 +131,33 @@ export class SubGroupComponent implements OnInit {
   disabledFormControl(){
     this.formData.disable()
   }
-
   mainGroupLookup(): void {
     const dialogRef = this.dialog.open(MainGroupLookupComponent,{
-
     });
     dialogRef.afterClosed().subscribe(results =>{
       this.dialogData = results.data;
-      console.log(this.dialogData);
-      
       this.formData.controls.maingroup_sn.setValue(this.dialogData.groupCode)
       this.group_name = this.dialogData.group_name
     })
   }
-
   branchLookup():void{
     const dialogRef =  this.dialog.open(BranchesLookupComponent,{
-
     });
     dialogRef.afterClosed().subscribe(results =>{
       this.dialogData = results.data;
-      console.log(this.dialogData);
-      
       this.formData.controls.sol_id.setValue(results.data.sol_code)
         this.formData.controls.branch_name.setValue(this.dialogData.sol_description)
-     
     })
-
   }
   customerLookup():void{
     const dialogRef =  this.dialog.open(RetailCustomerLookupComponent,{
-
     });
     dialogRef.afterClosed().subscribe(results =>{
       this.dialogData = results.data;
-      console.log(this.dialogData);
-
       this.formData.controls.cust_code.setValue(this.dialogData.customer_code)
       this.formData.controls.chairperson.setValue(this.dialogData.customer_code)
       this.formData.controls.secretary.setValue(this.dialogData.customer_code)
       this.formData.controls.treasurer.setValue(this.dialogData.customer_code)
-     
     })
   }
   getPage(){
@@ -195,7 +172,6 @@ export class SubGroupComponent implements OnInit {
           this.formData = this.fb.group({
             branch_name: [''],
             chairperson: [''],
-          
             first_meeting_date: [''],
             subGroupCode:[this.subgroup_code],
             subgroupManager_ID: [''],
@@ -206,11 +182,8 @@ export class SubGroupComponent implements OnInit {
             subgroup_name:[''],
             subgroup_phone:[''],
             maxAllowedMembers:[''],
-          
             meeting_frequency:[''],
-           
             next_meeting_date:[''],
-          
             reg_no:[''],
             secretary:[''],
             sol_id:[''],
@@ -232,18 +205,14 @@ export class SubGroupComponent implements OnInit {
             verifiedFlag:['N'],
             verifiedTime: [new Date()],
             groupMembers: new FormArray([])
-
           });
         } else if(this.function_type == "I-Inquire"){
           this.loading = true
           this.disabledFormControl()
-          
           this.subscription = this.subService.getSubGroupByCode(this.subgroup_code).subscribe(
             res =>{
               this.loading = false
               this.results = res
-               console.log(this.results);
-               
               this.formData = this.fb.group({
                 branch_name: [this.results.branch_name],
                 chairperson: [this.results.chairperson],
@@ -257,7 +226,6 @@ export class SubGroupComponent implements OnInit {
                 subgroup_name:[this.results.subgroup_name],
                 subgroup_phone:[this.results.subgroup_phone],
                 maxAllowedMembers:[this.results.maxAllowedMembers],
-                // maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
                 meeting_frequency:[this.results.meeting_frequency],
                 next_meeting_date:[this.results.next_meeting_date],
                 reg_no:[this.results.reg_no],
@@ -270,7 +238,6 @@ export class SubGroupComponent implements OnInit {
                 total_savingBalance:[this.results.total_savingBalance],
                 total_savingsAccs:[this.results.total_savingsAccs],
                 treasurer:[this.results.treasurer],
-                
                 modifiedBy:[this.results.modifiedBy],
                 modifiedTime:[this.results.modifiedTime],
                 postedBy:[this.results.postedBy],
@@ -295,7 +262,6 @@ export class SubGroupComponent implements OnInit {
             res =>{
               this.loading = false
               this.results = res
-
               this.formData = this.fb.group({
                 branch_name: [this.results.branch_name],
                 chairperson: [this.results.chairperson],
@@ -322,7 +288,6 @@ export class SubGroupComponent implements OnInit {
                 total_savingBalance:[this.results.total_savingBalance],
                 total_savingsAccs:[this.results.total_savingsAccs],
                 treasurer:[this.results.treasurer],
-                
                 modifiedBy:["user"],
                 modifiedTime:[new Date()],
                 postedBy:[this.results.postedBy],
@@ -341,8 +306,7 @@ export class SubGroupComponent implements OnInit {
           }
             },
             err =>{
-
-              this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+              this.router.navigate([`/system/GLS/sub-group/maintenance`], { skipLocationChange: true });
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
                 horizontalPosition:this.horizontalPosition,
@@ -350,7 +314,6 @@ export class SubGroupComponent implements OnInit {
                 duration:3000,
                 panelClass:['red-snackbar', 'login-snackbar']
               })
-
             }
           )
         } else if(this.function_type == "X-Delete"){
@@ -360,7 +323,6 @@ export class SubGroupComponent implements OnInit {
             res =>{
               this.loading = false
               this.results = res
-
               this.formData = this.fb.group({
                 branch_name: [this.results.branch_name],
                 chairperson: [this.results.chairperson],
@@ -387,7 +349,6 @@ export class SubGroupComponent implements OnInit {
                 total_savingBalance:[this.results.total_savingBalance],
                 total_savingsAccs:[this.results.total_savingsAccs],
                 treasurer:[this.results.treasurer],
-                
                 modifiedBy:[this.results.modifiedBy],
                 modifiedTime:[this.results.modifiedTime],
                 postedBy:[this.results.postedBy],
@@ -406,8 +367,7 @@ export class SubGroupComponent implements OnInit {
           }
             },
             err =>{
-
-              this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+              this.router.navigate([`/system/GLS/sub-group/maintenance`], { skipLocationChange: true });
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
                 horizontalPosition:this.horizontalPosition,
@@ -415,7 +375,6 @@ export class SubGroupComponent implements OnInit {
                 duration:3000,
                 panelClass:['red-snackbar', 'login-snackbar']
               })
-
             } )
         }else if(this.function_type == "V-Verify"){
           this.loading = true
@@ -424,7 +383,6 @@ export class SubGroupComponent implements OnInit {
             res =>{
               this.loading = false
               this.results = res
-
               this.formData = this.fb.group({
                 branch_name: [this.results.branch_name],
                 chairperson: [this.results.chairperson],
@@ -451,7 +409,6 @@ export class SubGroupComponent implements OnInit {
                 total_savingBalance:[this.results.total_savingBalance],
                 total_savingsAccs:[this.results.total_savingsAccs],
                 treasurer:[this.results.treasurer],
-                
                 modifiedBy:[this.results.modifiedBy],
                 modifiedTime:[this.results.modifiedTime],
                 postedBy:[this.results.postedBy],
@@ -470,8 +427,7 @@ export class SubGroupComponent implements OnInit {
           }
             },
             err =>{
-
-              this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+              this.router.navigate([`/system/GLS/sub-group/maintenance`], { skipLocationChange: true });
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
                 horizontalPosition:this.horizontalPosition,
@@ -479,7 +435,6 @@ export class SubGroupComponent implements OnInit {
                 duration:3000,
                 panelClass:['red-snackbar', 'login-snackbar']
               })
-
             } )
         }
       }
@@ -487,7 +442,6 @@ export class SubGroupComponent implements OnInit {
   }
   onSubmit(){ 
     if(this.formData.valid){
-
       if(this.function_type == "A-Add"){
         this.isEnabled = true;
         this.subscription = this.subService.createSubGroup(this.formData.value).subscribe(
@@ -498,9 +452,8 @@ export class SubGroupComponent implements OnInit {
               verticalPosition:this.verticalPosition,
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
-
             });
-            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+            this.router.navigate([`/system/GLS/sub-group/maintenance`], { skipLocationChange: true });
           },
           err =>{
             this.error = err
@@ -523,7 +476,7 @@ export class SubGroupComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/GLS/sub-group/maintenance")
+            this.router.navigate([`/system/GLS/sub-group/maintenance`], { skipLocationChange: true });
           },
           err =>{
             this.error = err

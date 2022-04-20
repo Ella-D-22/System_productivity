@@ -1,10 +1,11 @@
-
 <mat-card>
-    <div *ngIf="loading" >
+    <div *ngIf="loading">
         <p><small>Loading, please wait...</small></p>
-        <p><mat-progress-bar mode="query"></mat-progress-bar></p>
-      </div>
-      
+        <p>
+            <mat-progress-bar mode="query"></mat-progress-bar>
+        </p>
+    </div>
+
     <mat-card-header class="breadcrumb">
         <div>Home/system/GLS/SubGroup/data/view</div>
 
@@ -16,10 +17,10 @@
         </div>
         <div class="col-md-6 col-sm-12">
             <h4>Code</h4>
-            <p>{{this.subgroup_code}}</p> 
+            <p>{{this.subgroup_code}}</p>
+        </div>
     </div>
-    </div>
-     
+
     <mat-divider></mat-divider>
     <br>
     <div class="container-fluid">
@@ -34,13 +35,14 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <label class="start pull-left">Main Group Code<span class="warning">*</span></label>
                                 </div>
-                                
+
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="maingroup_sn"  class="form-control" [ngClass]="{'is-invalid': submitted && f.group_code.errors}">
+                                    <input type="text" formControlName="maingroup_sn" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f.group_code.errors}">
                                     <mat-icon (click)="mainGroupLookup()">search</mat-icon>
-                                
+
                                 </div>
-                               
+
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
@@ -57,12 +59,13 @@
                                     <label class="start pull-left">subGroup Name<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="subgroup_name" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input type="text" formControlName="subgroup_name" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
                     </div>
-                
+
 
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
@@ -71,7 +74,8 @@
                                     <label for="" class="start pull-left">Sol ID<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="sol_id" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input type="text" formControlName="sol_id" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
                                     <mat-icon (click)="branchLookup()">search</mat-icon>
                                 </div>
                             </div>
@@ -79,32 +83,12 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left" >Branch Name<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Branch Name<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" class="form-control" formControlName="branch_name" oninput="this.value=this.value.toUpperCase()" [value]="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">SubGroup Manager ID<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="subgroupManager_ID" class="form-control" oninput="this.value=this.value.toUpperCase()">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Registration Number<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" class="form-control" formControlName="reg_no" oninput="this.value=this.value.toUpperCase()">
+                                    <input type="text" class="form-control" formControlName="branch_name"
+                                        oninput="this.value=this.value.toUpperCase()" [value]="">
                                 </div>
                             </div>
                         </div>
@@ -113,21 +97,24 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">SubGroup Location<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">SubGroup Manager ID<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="subgroup_location" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input type="text" formControlName="subgroupManager_ID" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
                                 </div>
-                                
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Group Phone Number<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Registration Number<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="number" formControlName="subgroup_phone" class="form-control" >
+                                    <input type="text" class="form-control" formControlName="reg_no"
+                                        oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -136,11 +123,40 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label class="start pull-left">Group Formation Date<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">SubGroup Location<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input  [matDatepicker]="ppicker" formControlName="subgroup_formation_date" class="form-control" />
-                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker"></mat-datepicker-toggle>
+                                    <input type="text" formControlName="subgroup_location" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Group Phone Number<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="subgroup_phone" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label class="start pull-left">Group Formation Date<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input [matDatepicker]="ppicker" formControlName="subgroup_formation_date"
+                                        class="form-control" />
+                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker">
+                                    </mat-datepicker-toggle>
                                     <mat-datepicker #ppicker></mat-datepicker>
                                 </div>
                             </div>
@@ -148,24 +164,28 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Group Status<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Group Status<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="groupStatus" oninput="this.value=this.value.toUpperCase()" class="form-control">
+                                    <input type="text" formControlName="groupStatus"
+                                        oninput="this.value=this.value.toUpperCase()" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Start Meeting Date<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Start Meeting Date<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input  [matDatepicker]="mpicker" formControlName="first_meeting_date" class="form-control" />
-                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="mpicker"></mat-datepicker-toggle>
+                                    <input [matDatepicker]="mpicker" formControlName="first_meeting_date"
+                                        class="form-control" />
+                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="mpicker">
+                                    </mat-datepicker-toggle>
                                     <mat-datepicker #mpicker></mat-datepicker>
                                 </div>
                             </div>
@@ -173,11 +193,14 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Next Meeting Date<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Next Meeting Date<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input  [matDatepicker]="npicker" formControlName="next_meeting_date" class="form-control" />
-                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="npicker"></mat-datepicker-toggle>
+                                    <input [matDatepicker]="npicker" formControlName="next_meeting_date"
+                                        class="form-control" />
+                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="npicker">
+                                    </mat-datepicker-toggle>
                                     <mat-datepicker #npicker></mat-datepicker>
                                 </div>
                             </div>
@@ -187,58 +210,55 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Max Allowed Members<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Max Allowed Members<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="number" formControlName="maxAllowedMembers" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input type="number" formControlName="maxAllowedMembers" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
                                 </div>
-                                
+
                             </div>
-                        </div>
-                        <!-- <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Max Allowed SubGroups<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="number" formControlName="maxAllowedSubGroups" class="form-control" >
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                           <div class="form-group">
-                               <div class="col-md-6 col-sm-12 form-column">
-                                   <label for="" class="start pull-left">SubGroup Chairperson<span class="warning">*</span></label>
-                               </div>
-                               <div class="col-md-6 col-sm-12 form-column">
-                                <input type="text" formControlName="chairperson" class="form-control" oninput="this.value=this.value.toUpperCase()">
-                                <mat-icon (click)="customerLookup()">search</mat-icon>
-                                <p></p>
-                               </div>  
-                           </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                           <div class="form-group">
-                               <div class="col-md-6 col-sm-12 form-column">
-                                   <label for="" class="start pull-left">Group Secretary<span class="warning">*</span></label>
-                               </div>
-                               <div class="col-md-6 col-sm-12 form-column">
-                                   <input type="text" formControlName="secretary" class="form-control">
-                                   <mat-icon (click)="customerLookup()">search</mat-icon>
-                               </div>
-                           </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Treasurer<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">SubGroup Chairperson<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="treasurer" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input type="text" formControlName="chairperson" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    <mat-icon (click)="customerLookup()">search</mat-icon>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Group Secretary<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="secretary" class="form-control">
+                                    <mat-icon (click)="customerLookup()">search</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Treasurer<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="treasurer" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
                                     <mat-icon (click)="customerLookup()">search</mat-icon>
                                 </div>
                             </div>
@@ -251,37 +271,36 @@
                         <div [formGroup]="groupMember">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                  <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Customer Code<span class="warning">*</span></label>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Customer Code<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="cust_code" class="form-control">
+                                            <mat-icon (click)="customerLookup()">search</mat-icon>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="text" formControlName="cust_code" class="form-control">
-                                        <mat-icon (click)="customerLookup()">search</mat-icon>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Customer Name<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="cust_name" class="form-control"
+                                                oninput="this.value=this.value.toUpperCase()">
+                                        </div>
                                     </div>
-                                  </div>
-                               </div>
-                               <div class="col-md-6 col-sm-12">
-                                   <div class="form-group">
-                                       <div class="col-md-6 col-sm-12 form-column">
-                                           <label for="" class="start pull-left">Customer Name<span class="warning">*</span></label>
-                                       </div>
-                                       <div class="col-md-6 col-sm-12 form-column">
-                                           <input type="text" formControlName="cust_name" class="form-control" oninput="this.value=this.value.toUpperCase()">
-                                       </div>
-                                   </div>
-                               </div>
-                                
+                                </div>
                             </div>
-                           
-                              
                             <mat-icon class="pull-right" (click)="onAddField()" color="primary">add_circle</mat-icon>
-                            <mat-icon class="pull-right" (click)="onRemoveField(i)" color="warn">remove_circle</mat-icon>
+                            <mat-icon class="pull-right" (click)="onRemoveField(i)" color="warn">remove_circle
+                            </mat-icon>
                         </div>
-                   
                     </div>
                 </mat-tab>
-
                 <mat-tab class="mat-tab" label="Financial Details">
                     <br>
                     <div class="row">
@@ -291,7 +310,8 @@
                                     <label for="" class="start pull-left">Total Members</label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="total_members" class="form-control " oninput="this.value=this.value.toUpperCase()">
+                                    <input type="text" formControlName="total_members" class="form-control "
+                                        oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -301,7 +321,8 @@
                                     <label for="" class="start pull-left">Meeting Frequency</label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="meeting_frequency" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                    <input type="text" formControlName="meeting_frequency" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -310,7 +331,8 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Total Savings A/Cs<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Total Savings A/Cs<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="number" formControlName="total_savingsAccs" class="form-control">
@@ -320,7 +342,8 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Total Savings Balance<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Total Savings Balance<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="number" formControlName="total_savingBalance" class="form-control">
@@ -332,7 +355,8 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Total Loan A/Cs<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Total Loan A/Cs<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="number" formControlName="total_loanAccs" class="form-control">
@@ -354,8 +378,9 @@
             </mat-tab-group>
             <br>
 
-            <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
-            <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isSubmitted">Submit</button>
+            <button mat-raised-button color="default" routerLink="../../maintenance" type="submit">Back</button>
+            <button mat-raised-button color="primary" type="submit" class="pull-right"
+                *ngIf="isSubmitted">Submit</button>
             <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
         </form>
     </div>

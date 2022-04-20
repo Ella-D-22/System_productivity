@@ -579,7 +579,8 @@ export class RetailCustomerComponent implements OnInit {
               panelClass: ['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/customer/retail/maintenance")
+        this.router.navigate([`/system/customer/retail/maintenance`], { skipLocationChange: true });
+
           },
           err => {
             this.error = err
@@ -602,7 +603,8 @@ export class RetailCustomerComponent implements OnInit {
               panelClass: ['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/customer/retail/maintenance")
+        this.router.navigate([`/system/customer/retail/maintenance`], { skipLocationChange: true });
+
           },
           err => {
             this.error = err

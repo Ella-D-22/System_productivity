@@ -75,6 +75,7 @@ export class CurrencyMaintenanceComponent implements OnInit {
   }
   addEventId(){
     this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
+    
   }
       // convenience getter for easy access to form fields
       get f() { return this.formData.controls; }

@@ -152,9 +152,11 @@ export class CollateralMaintenanceComponent implements OnInit {
         this.router.navigate(
           ['configurations/collateral-limits/Collateral/data/view'],
           {
-            state: this.formData.value,
-          }
+            state: this.formData.value,skipLocationChange: true
+          },
         );
+
+
       } else if (this.available == false && this.function_type != 'A-Add') {
         // this.available = false;
         this.showCode = true;
@@ -167,7 +169,7 @@ export class CollateralMaintenanceComponent implements OnInit {
         this.router.navigate(
           ['configurations/collateral-limits/Collateral/data/view'],
           {
-            state: this.formData.value,
+            state: this.formData.value, skipLocationChange: true
           }
         );
       }
