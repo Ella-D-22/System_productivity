@@ -5,6 +5,7 @@ import { MatDialog} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ShareCapitalParamsService } from '../../share-capital-params/share-capital-params.service';
+import { GuarantorsParamsService } from '../guarantors-params.service';
 
 @Component({
   selector: 'app-guarantors-params-maintenance',
@@ -20,7 +21,7 @@ export class GuarantorsParamsMaintenanceComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private http: HttpClient,
     private actRoute: ActivatedRoute,
-    private shareCapitalParams: ShareCapitalParamsService,
+    private guarantorsConfigAPI: GuarantorsParamsService,
     private dialog: MatDialog,
     ) { }
   ngOnInit(): void {
@@ -47,7 +48,7 @@ export class GuarantorsParamsMaintenanceComponent implements OnInit {
         this.loading = true;
         this.submitted = true;
         if(this.formData.valid){
-        this.shareCapitalParams.changeMessage(this.formData.value)
+        this.guarantorsConfigAPI.changeMessage(this.formData.value)
         this.router.navigate(['/system/configurations/global/guarantors/data/view'], { skipLocationChange: true });
       }else{
         this.loading = false;

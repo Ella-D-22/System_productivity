@@ -69,6 +69,9 @@ import { ShareCapitalMaintenanceComponent } from './pages/share-capital/share-ca
 import { ShareCapitalParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params-maintenance/share-capital-params-maintenance.component';
 import { GuarantorsParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-maintenance/guarantors-params-maintenance.component';
 import { GuarantorsParamsComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
+import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -550,9 +553,27 @@ const routes: Routes = [{
         component:ShareCapitalMaintenanceComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
-
       },
-     
+    //  Reports
+      {
+        path: 'add-report', 
+        component: ReportsComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'view-report', 
+        component: ViewReportComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'specific-report', 
+        component: SpecificReportComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+
 
   ],
 }];
