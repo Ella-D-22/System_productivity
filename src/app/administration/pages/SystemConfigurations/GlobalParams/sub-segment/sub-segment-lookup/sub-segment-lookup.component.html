@@ -1,1 +1,21 @@
-<p>sub-segment-lookup works!</p>
+
+<div class="breadcrumb">
+    <h4 >List of Sub Segments</h4>
+</div>
+    <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Sub Segment id</th>
+                <th>SUb Segment Code</th>
+                <th>Sub Segment Description</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr (click)="onSelect(item)"  *ngFor="let item of subSegmentData">
+                <td><a class="update btn btn-sm" color="accent">{{item.id}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.subSegmentCode}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.subSegmentDescription}}</a></td>
+            </tr>
+        </tbody>
+    </table>

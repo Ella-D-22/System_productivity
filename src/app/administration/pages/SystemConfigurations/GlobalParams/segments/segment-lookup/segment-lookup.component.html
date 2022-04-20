@@ -1,1 +1,21 @@
-<p>segment-lookup works!</p>
+
+<div class="breadcrumb">
+    <h4 >List of Segments</h4>
+</div>
+    <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Segment id</th>
+                <th>Segment Code</th>
+                <th>Segment Description</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr (click)="onSelect(item)"  *ngFor="let item of segmentData">
+                <td><a class="update btn btn-sm" color="accent">{{item.id}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.segmentCode}}</a></td>
+                <td><a class="update btn btn-sm" color="accent">{{item.segmentDescription}}</a></td>
+            </tr>
+        </tbody>
+    </table>

@@ -32,6 +32,7 @@ export class SubSegmentMaintenanceComponent implements OnInit {
 formData = this.fb.group({
   function_type:[''],
   subSegmentCode:[''],
+  segment_id:[''],
   segmentCode:['']
 })
 
@@ -59,6 +60,8 @@ segmentLookup():void{
   });
   dialogRef.afterClosed().subscribe(results =>{
     this.dialogData = results.data;
+    this.formData.controls.segmentCode.setValue(this.dialogData.segmentCode)
+    this.formData.controls.segment_id.setValue(this.dialogData.id)
   })
 }
 
@@ -67,6 +70,7 @@ subSegmentLookup():void{
   });
   dialogRef.afterClosed().subscribe(results =>{
     this.dialogData = results.data
+    this.formData.controls.subSegmentCode.setValue(this.dialogData.subSegmentCode)
   })
 }
   ngOnInit(): void {

@@ -63,7 +63,7 @@ export class SegmentsComponent implements OnInit {
         message =>{
           this.message = message;
           if(this.message == 'default message'){
-            this.router.navigateByUrl("system/configurations/global/segment/maintenance")
+            this.router.navigate(['system/configurations/global/segment/maintenance'], {skipLocationChange:true})
           }else{
             null;
           }
@@ -116,6 +116,7 @@ export class SegmentsComponent implements OnInit {
                     postedTime:[this.results.postedTime],
                     modifiedBy:[this.results.modifiedBy],
                     modifiedTime:[this.results.modifiedTime],
+                    modifiedFlag:[this.results.modifiedFlag],
                     id:[this.results.id]
                   })
                }
@@ -139,6 +140,7 @@ export class SegmentsComponent implements OnInit {
                   postedTime:[this.results.postedTime],
                   modifiedBy:[this.auth_user],
                   modifiedTime:[new Date()],
+                  modifiedFlag:["Y"],
                   id:[this.results.id]
                 })
               }
@@ -163,6 +165,7 @@ export class SegmentsComponent implements OnInit {
                   postedTime:[this.results.postedTime],
                   modifiedBy:[this.results.modifiedBy],
                   modifiedTime:[this.results.modifiedTime],
+                  modifiedFlag:[this.results.modifiedFlag],
                   id:[this.results.id]
                 })
               }
@@ -187,6 +190,7 @@ export class SegmentsComponent implements OnInit {
                   postedTime:[this.results.postedTime],
                   modifiedBy:[this.results.modifiedBy],
                   modifiedTime:[this.results.modifiedTime],
+                  modifiedFlag:[this.results.modifiedFlag],
                   id:[this.results.id]
 
                 })

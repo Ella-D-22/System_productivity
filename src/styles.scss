@@ -81,15 +81,20 @@ form{
   padding-top: 0px;
   margin-bottom: 0px;
   margin-top: 0px;
-  font-size: 12px;
-  font-weight: 410;
+  // font-size: 12px;
+  // font-weight: 410;
 }
 .form-control{
   width: 80%;
   height: 26px;
-  font-size: 12px;
-  font-weight: 410;
   border-radius:  0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  font-size: 14px;
+  font-weight: 410;
+  letter-spacing: normal;
 }
 .form-control-sub{
   width: 40%;
@@ -232,12 +237,6 @@ tr:hover {
 input, textarea{
   text-transform: uppercase;
 }
-
-
-
-
-
-
 
 @media screen and (max-width: 1440px) and (max-height: 810px) {
   html {

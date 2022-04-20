@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
+import { SegmentsService } from '../../SystemConfigurations/GlobalParams/segments/segments.service';
 import { RetailCustomerLookupComponent } from './retail-customer-lookup/retail-customer-lookup.component';
 import { RetailCustomerService } from './retail-customer.service';
 
@@ -55,14 +56,19 @@ export class RetailCustomerComponent implements OnInit {
   glDescription: any;
   solDescription: any;
   isDisabled = false;
+  segmentData:any
+  subSegments:any
+  subSegmentData:any
   constructor(private fb: FormBuilder,
     private _snackbar: MatSnackBar,
     private dialog: MatDialog,
     private retailCustAPI: RetailCustomerService,
-    private router: Router) { }
+    private router: Router,
+    private segmentService:SegmentsService) { }
 
   ngOnInit(): void {
     this.getPage()
+    this.getData()
   }
 
   
@@ -100,12 +106,37 @@ export class RetailCustomerComponent implements OnInit {
     customerImageList: new FormArray([]),
     kins: new FormArray([]),
     nominees: new FormArray([]),
+    segment:[''],
+    subSegment:['']
   })
   get f() { return this.formData.controls; }
   get cinfol() { return this.f.contactInformationList as FormArray }
   get cimgl() { return this.f.customerImageList as FormArray }
   get k() { return this.f.kins as FormArray }
   get n() { return this.f.nominees as FormArray }
+
+
+  //Getting the segments
+
+  getData(){
+    this.subscription = this.segmentService.getAllSegments().subscribe(
+      res =>{
+        this.segmentData = res
+      }
+    )
+  }
+
+  onInputSelection(event:any){
+    let segment_code = event.target.value
+    this.subscription = this.segmentService.getSegmentByCode(segment_code).subscribe(
+      res =>{
+        this.subSegmentData =res
+        this.subSegments = this.subSegmentData.subSegments  
+      }
+    )
+    
+
+  }
   // Customer Information List
   onAddCustomerInfoField() {
     this.cinfol.push(this.fb.group({
@@ -301,6 +332,8 @@ export class RetailCustomerComponent implements OnInit {
               customerImageList: new FormArray([]),
               kins: new FormArray([]),
               nominees: new FormArray([]),
+              segment:[''],
+              subSegment:['']
           })
           this.onAddCustomerInfoField()
           this.onAddKinsField()
@@ -349,6 +382,9 @@ export class RetailCustomerComponent implements OnInit {
                 customerImageList: new FormArray([]),
                 kins: new FormArray([]),
                 nominees: new FormArray([]),
+
+                segment:[this.results.segment],
+                subSegment:[this.results.subSegment]
             })
             let contactInformationList = this.results.contactInformationList
             let customerImageList = this.results.customerImageList
@@ -413,6 +449,8 @@ export class RetailCustomerComponent implements OnInit {
                 customerImageList: new FormArray([]),
                 kins: new FormArray([]),
                 nominees: new FormArray([]),
+                segment:[this.results.segment],
+                subSegment:[this.results.subSegment]
             })
             let contactInformationList = this.results.contactInformationList
             let customerImageList = this.results.customerImageList
@@ -476,6 +514,8 @@ export class RetailCustomerComponent implements OnInit {
                 customerImageList: new FormArray([]),
                 kins: new FormArray([]),
                 nominees: new FormArray([]),
+                segment:[this.results.segment],
+                subSegment:[this.results.subSegment]
             })
             let contactInformationList = this.results.contactInformationList
             let customerImageList = this.results.customerImageList
@@ -537,6 +577,8 @@ export class RetailCustomerComponent implements OnInit {
                 customerImageList: new FormArray([]),
                 kins: new FormArray([]),
                 nominees: new FormArray([]),
+                segment:[this.results.segment],
+                subSegment:[this.results.subSegment]
             })
             let contactInformationList = this.results.contactInformationList
             let customerImageList = this.results.customerImageList

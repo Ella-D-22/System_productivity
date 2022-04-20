@@ -13,8 +13,10 @@
         </div>
     </div>
     <div class="row">
-        <h4>Segment Code</h4>
-        <p>{{this.segment_code}}</p>
+        <div class="col-md-6 col-sm-12">
+            <h4>Segment Code</h4>
+            <p>{{this.segment_code}}</p>
+        </div>  
     </div>
     <mat-divider></mat-divider>
     <br>
@@ -27,7 +29,7 @@
                             <label class="start pull-left">Sub-Segment Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" maxlength="4" formControlName="subSegmentCode"
+                            <input type="text" maxlength="6" formControlName="subSegmentCode"
                                 oninput="this.value=this.value.toUpperCase()" class="form-control">
                         </div>
                     </div>

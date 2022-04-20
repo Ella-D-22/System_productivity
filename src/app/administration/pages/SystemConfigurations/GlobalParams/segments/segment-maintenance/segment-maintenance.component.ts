@@ -4,6 +4,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { SubSegmentService } from '../../sub-segment/sub-segment.service';
 import { SegmentLookupComponent } from '../segment-lookup/segment-lookup.component';
 import { SegmentsService } from '../segments.service';
 
@@ -18,21 +20,29 @@ export class SegmentMaintenanceComponent implements OnInit {
   dialogData:any
   function_type:any
   showSegmentCode = false
+  segmentData:any
+  segmentDescription:any
+  subSegmentData:any
+  subscription:Subscription
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
+  dialogRef: any;
 
   constructor(private fb:FormBuilder,
     private segService:SegmentsService,
     private _snackbar:MatSnackBar,
     private dialog:MatDialog,
-    private router:Router) { }
+    private router:Router,
+    private subSegmentAPI:SubSegmentService) { }
 
   ngOnInit(): void {
   }
 
   formData = this.fb.group({
     function_type:[''],
-    segmentCode:['']
+    segmentCode:[''],
+  
+
   })
   
   functionArray:any = [
@@ -44,8 +54,7 @@ export class SegmentMaintenanceComponent implements OnInit {
       this.formData.controls.segmentCode.setValidators([])
       this.formData.controls.segmentCode.setValue("")
     }else if(event.target.value == "A-Add"){
-      // this.formData.controls.segmentCode.setValidators([])
-      // this.formData.controls.segmentCode.setValue("")
+    
     }
   }
   get f() { 
@@ -56,8 +65,10 @@ export class SegmentMaintenanceComponent implements OnInit {
 
       });
       dialogRef.afterClosed().subscribe(results =>{
-        this.dialogData = results;
-        this.formData.controls.segment_id.setValue(this.dialogData.id)
+        this.dialogData = results.data;
+        console.log(results.data);
+        
+        this.formData.controls.segmentCode.setValue(this.dialogData.segmentCode)
       })
 
     }
@@ -66,9 +77,9 @@ export class SegmentMaintenanceComponent implements OnInit {
       if(this.formData.valid){
         this.segService.changeMessage(this.formData.value)
         if(this.function_type == "A-Add"){
-          this.router.navigateByUrl("system/configurations/global/segment/data/view")
+          this.router.navigate(['system/configurations/global/segment/data/view'], {skipLocationChange:true})
         }else if(this.function_type != "A-Add"){
-          this.router.navigateByUrl("system/configurations/global/segment/data/view")
+          this.router.navigate(['system/configurations/global/segment/data/view'], {skipLocationChange:true})
         }
       }else{
         // this.loading = false;
@@ -82,4 +93,5 @@ export class SegmentMaintenanceComponent implements OnInit {
       }
 
     }
+  
 }
