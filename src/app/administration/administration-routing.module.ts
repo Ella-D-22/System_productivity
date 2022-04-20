@@ -69,6 +69,10 @@ import { ShareCapitalMaintenanceComponent } from './pages/share-capital/share-ca
 import { ShareCapitalParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params-maintenance/share-capital-params-maintenance.component';
 import { GuarantorsParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-maintenance/guarantors-params-maintenance.component';
 import { GuarantorsParamsComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params.component';
+import { SegmentMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/segments/segment-maintenance/segment-maintenance.component';
+import { SegmentsComponent } from './pages/SystemConfigurations/GlobalParams/segments/segments.component';
+import { SubSegmentMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment-maintenance/sub-segment-maintenance.component';
+import { SubSegmentComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment/sub-segment.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
 import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
@@ -553,6 +557,36 @@ const routes: Routes = [{
         component:ShareCapitalMaintenanceComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
+      },
+
+      //Segments
+      {
+        path: 'configurations/global/segment/maintenance',
+        component:SegmentMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+
+      },
+      {
+        path: 'configurations/global/segment/data/view',
+        component:SegmentsComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+
+      },
+      {
+        path: 'configurations/global/sub-segment/maintenance',
+        component:SubSegmentMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+
+      },
+      {
+        path: 'configurations/global/sub-segment/data/view',
+        component:SubSegmentComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+
       },
     //  Reports
       {

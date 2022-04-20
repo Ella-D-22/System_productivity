@@ -119,6 +119,12 @@ import { GuarantorsParamsComponent } from './pages/SystemConfigurations/GlobalPa
 import { GuarantorsParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-maintenance/guarantors-params-maintenance.component';
 import { GuarantorsParamsLookupComponent } from './pages/SystemConfigurations/GlobalParams/guarantors-params/guarantors-params-lookup/guarantors-params-lookup.component';
 import { ShareCapitalInstallmentsComponent } from './pages/share-capital/share-capital-installments/share-capital-installments.component';
+import { SegmentsComponent } from './pages/SystemConfigurations/GlobalParams/segments/segments.component';
+import { SegmentLookupComponent } from './pages/SystemConfigurations/GlobalParams/segments/segment-lookup/segment-lookup.component';
+import { SegmentMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/segments/segment-maintenance/segment-maintenance.component';
+import { SubSegmentLookupComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment-lookup/sub-segment-lookup.component';
+import { SubSegmentMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment-maintenance/sub-segment-maintenance.component';
+import { SubSegmentComponent } from './pages/SystemConfigurations/GlobalParams/sub-segment/sub-segment/sub-segment.component';
 import { ReportMaintainanceComponent } from './pages/reports/report-maintainance/report-maintainance.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
@@ -239,6 +245,13 @@ import { ViewReportComponent } from './pages/reports/view-report/view-report.com
      GuarantorsParamsMaintenanceComponent,
      GuarantorsParamsLookupComponent,
      ShareCapitalInstallmentsComponent,
+     SegmentsComponent,
+     SegmentLookupComponent,
+     SegmentMaintenanceComponent,
+     SubSegmentLookupComponent,
+     SubSegmentMaintenanceComponent,
+     SubSegmentComponent,
+ 
 
     ReportsComponent,
     ReportMaintainanceComponent,
