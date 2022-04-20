@@ -63,7 +63,7 @@ export class SegmentsComponent implements OnInit {
         message =>{
           this.message = message;
           if(this.message == 'default message'){
-            this.router.navigateByUrl("system/configurations/global/segment/maintenance")
+            this.router.navigate(['system/configurations/global/segment/maintenance'], {skipLocationChange:true})
           }else{
             null;
           }

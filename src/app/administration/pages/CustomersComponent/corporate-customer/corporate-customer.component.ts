@@ -5,7 +5,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CorporateCustomerService } from './corporate-customer.service';
-
+import { SegmentsService } from '../../SystemConfigurations/GlobalParams/segments/segments.service';
 @Component({
   selector: 'app-corporate-customer',
   templateUrl: './corporate-customer.component.html',
@@ -22,6 +22,9 @@ export class CorporateCustomerComponent implements OnInit {
   isSubmitted = false;
   submitted = false;
   isEnabled = false
+  segmentData:any
+  subSegmentData:any
+  subSegments:any
   subscription:Subscription
   horizontalPosition:MatSnackBarHorizontalPosition
   verticalPosition:MatSnackBarVerticalPosition
@@ -29,10 +32,12 @@ export class CorporateCustomerComponent implements OnInit {
     private router:Router,
     private _snackbar:MatSnackBar,
     private dialog:MatDialog,
-    private fb:FormBuilder) { }
+    private fb:FormBuilder,
+    private segmentService:SegmentsService) { }
 
   ngOnInit(): void {
     this.getPage()
+    this.getData()
   }
   user = "Nobody"
 
@@ -61,7 +66,31 @@ export class CorporateCustomerComponent implements OnInit {
   verifiedTime: [''],
   modifiedBy: [''],
   modifiedOn: [''],
+ 
+  
   })
+  
+  //Getting the segments
+  getData(){
+    this.subscription = this.segmentService.getAllSegments().subscribe(
+      res =>{
+        this.segmentData = res
+      }
+    )
+  }
+  onInputSelection(event:any){
+    let segment_code = event.target.value    
+    this.subscription = this.segmentService.getSegmentByCode(segment_code).subscribe(
+      res =>{
+        this.subSegmentData =res
+        this.subSegments = this.subSegmentData.subSegments  
+      }
+    )
+    
+
+  }
+
+
    get f(){
     return this.formData.controls;
    }
@@ -96,7 +125,6 @@ export class CorporateCustomerComponent implements OnInit {
             registrationPin: [''],
             shortName: [''],
             subSegment: [''],
-
             postedBy: [this.user],
             postedFlag: ['Y'],
             postedTime: [new Date()],
