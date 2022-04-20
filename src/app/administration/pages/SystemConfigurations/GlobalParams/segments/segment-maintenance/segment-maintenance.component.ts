@@ -56,8 +56,10 @@ export class SegmentMaintenanceComponent implements OnInit {
 
       });
       dialogRef.afterClosed().subscribe(results =>{
-        this.dialogData = results;
-        this.formData.controls.segment_id.setValue(this.dialogData.id)
+        this.dialogData = results.data;
+        console.log(results.data);
+        
+        this.formData.controls.segmentCode.setValue(this.dialogData.segmentCode)
       })
 
     }
