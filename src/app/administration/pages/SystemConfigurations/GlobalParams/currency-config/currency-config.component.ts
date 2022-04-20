@@ -46,7 +46,6 @@ export class CurrencyConfigComponent implements OnInit {
   ccy_id: any;
   ccy_name: any;
   respData: Object;
-
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -71,17 +70,14 @@ export class CurrencyConfigComponent implements OnInit {
         this.message = message;
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
+          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
         }else{
           null;
         }
       })
     }
-
     countryLookup(): void {
         const dialogRef = this.dialog.open(CountriesLookupComponent, {
-          // height: '400px',
-          // width: '600px',
         });
         dialogRef.afterClosed().subscribe(result => {
           this.dialogData = result.data;
@@ -98,7 +94,6 @@ export class CurrencyConfigComponent implements OnInit {
       min_amt_ccy = "";
       max_amt_ccy = "";
       linked_event_id = "";
-      
       formData = this.fb.group({
         ccy: ['', [Validators.required]],
         country: ['', [Validators.required]],
@@ -113,7 +108,6 @@ export class CurrencyConfigComponent implements OnInit {
         this.formData.controls.is_deleted.disable();
         this.formData.controls.is_verified.disable();
       }
-
       getPage(){
         this.subscription = this.currencyAPI.currentMessage.subscribe(message =>{
           this.message = message;    
@@ -122,9 +116,7 @@ export class CurrencyConfigComponent implements OnInit {
         this.ccy_name = this.message.currency_ccy.ccy_name
         this.currency_ccy = this.message.currency_ccy;
         this.formData.controls.is_verified.disable();
-
         if(this.function_type == "A-Add"){
-          
           // open empty forms
           this.formData = this.fb.group({
             id:[''],
@@ -158,13 +150,12 @@ export class CurrencyConfigComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
+          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
           })
         }
         else if(this.function_type == "M-Modify"){
           this.formData.controls.is_deleted.disable();
           this.formData.controls.is_verified.disable();
-
           this.subscription = this.currencyAPI.getCurrencyId(this.ccy_id).subscribe(res=>{
             this.results = res;
             this.currency_id = this.results.id;
@@ -178,7 +169,7 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
+          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -201,7 +192,7 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
+          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -224,7 +215,7 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
+          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -253,7 +244,7 @@ export class CurrencyConfigComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
+          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -265,7 +256,6 @@ export class CurrencyConfigComponent implements OnInit {
             })
             }
             else if(this.function_type != "A-Add"){
-
               this.subscription = this.currencyAPI.updateCurrency(this.currency_id, this.formData.value).subscribe(res=>{
                 this.results = res;
                   this._snackBar.open("Executed Successfully!", "X", {
@@ -274,7 +264,7 @@ export class CurrencyConfigComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/maintenance'));
+          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
               },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {
@@ -285,7 +275,6 @@ export class CurrencyConfigComponent implements OnInit {
                 });
               })  
             }
-            
           }else{
             this._snackBar.open("Invalid Form Data", "Try again!", {
               horizontalPosition: this.horizontalPosition,

@@ -31,15 +31,12 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
   ccy: any;
   sol_id = 0;
   subhead_code   = 0;
-  
-
   newData = false;
   exception_code_value: any;
   exce_description: any;
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    private ngZone: NgZone,
     private _snackBar: MatSnackBar,
     private http: HttpClient,
     private actRoute: ActivatedRoute,
@@ -57,11 +54,8 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
     function_type: ['', [Validators.required]],
     exception_code: ['', [Validators.required]],
   });
-
-
   exception_codeLookup(): void {
     const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
-      // height: '400px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
@@ -70,10 +64,6 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
       this.formData.controls.exception_code.setValue(this.lookupData.id);
     });
   }
-
-  
-
-
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.newData = true;
@@ -81,7 +71,6 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
       this.newData= false;
     }
   }
- 
       // convenience getter for easy access to form fields
       get f() { return this.formData.controls; }
   onSubmit(){
@@ -89,7 +78,7 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
     this.submitted = true;
     if(this.formData.valid){
     this.exceptionCodeApi.changeMessage(this.formData.value)
-    this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/exceptions-codes/data/view'));
+    this.router.navigate([`/system/configurations/global/exceptions-codes/data/view`], { skipLocationChange: true });
   }else{
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {

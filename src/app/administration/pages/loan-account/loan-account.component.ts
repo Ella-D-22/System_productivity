@@ -20,12 +20,12 @@ import { TermDepositLookupComponent } from '../ProductModule/term-deposit/term-d
 @Component({
   selector: 'app-loan-account',
   templateUrl: './loan-account.component.html',
-  styleUrls: ['./loan-account.component.css'],
+  styleUrls: ['./loan-account.component.scss'],
 })
 export class LoanAccountComponent implements OnInit {
   // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
   // auth_user = this.currentUser.username;
-     auth_user = "User"
+  auth_user = "User"
   message!: any;
   resData: any;
   dtype!:string
@@ -47,6 +47,8 @@ export class LoanAccountComponent implements OnInit {
   lookupdata: any;
   laa_scheme_code: any;
   laa_scheme_code_desc: any;
+  customer_name: string;
+  customer_code: any;
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -64,9 +66,14 @@ export class LoanAccountComponent implements OnInit {
     this.getPage();
   }
   loading = false;
+  addGurantorsFormData = this.fb.group({
+    customer_code: ['',Validators.required],
+    customer_name: [''],
+    customer_data: [''],
 
+  });
   formData = this.fb.group({
-    accountManager: [],
+    accountManager: [''],
     customerCode: [''],
     accountName: [''],
     accountOwnership: [''],
@@ -112,37 +119,37 @@ export class LoanAccountComponent implements OnInit {
 
   glSubheadLookup(): void {
     const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
-      // height: '400px',
-      // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.gl_subhead = result.data;
-      console.log("GlSubhead", result.data);
-      
       this.gl_subhead_description =  result.data.glSubheadDescription;
-      this.gl_subhead_code =  result.data.glSubheadCode;     
-       // this.eventtypedata = result.data;
+      this.gl_subhead_code =  result.data.glSubheadCode;   
       this.glSubheadData.controls.laa_gl_subhead.setValue(this.gl_subhead_code);
       this.glSubheadData.controls.laa_gl_subhead_description.setValue(this.gl_subhead_description);
       this.formData.controls.glSubhead.setValue(result.data.glSubheadCode)
     });
   }
-
   customerLookup(): void {
     const dialogRef = this.dialog.open(RetailCustomerLookupComponent, {
-      // height: '400px',
-      // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.customer_lookup = result.data;
-      console.log(this.customer_lookup);
-
+      this.customer_code = this.customer_lookup.customerCode;
+      this.customer_name = this.customer_lookup.firstName +" "+this.customer_lookup.middleName +" "+this.customer_lookup.surname
       this.formData.controls.accountManager.setValue(this.customer_lookup.firstName)
       this.formData.controls.customerCode.setValue(this.customer_lookup.customerCode)
-      
     });
   }
-
+  guarantorsCustomerLookup(): void {
+    const dialogRef = this.dialog.open(RetailCustomerLookupComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.customer_lookup = result.data;
+      this.customer_code = this.customer_lookup.customerCode;
+      this.customer_name = this.customer_lookup.firstName +" "+this.customer_lookup.middleName +" "+this.customer_lookup.surname
+      this.addGurantorsFormData.controls.customer_code.setValue(this.customer_code);
+    });
+  }
   laaSchemeCodeLookup(): void {
     const dialogRef = this.dialog.open(LoanproductLookupComponent, {
     });
@@ -155,46 +162,36 @@ export class LoanAccountComponent implements OnInit {
   }
   caaSchemeCodeLookup():void{
    const dialogRef = this.dialog.open(CurrentSchemeLookupComponent,{
-
    });
    dialogRef.afterClosed().subscribe(result =>{
      this.lookupdata = result.data;
-     
      this.formData.controls.schemeCode.setValue(this.lookupdata.caa_scheme_code)
    })
   }
   odaSchemeCodeLookup():void{
     const dialogRef = this.dialog.open(OverdraftSchemeLookupComponent,{
-
     });
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
-      
       this.formData.controls.schemeCode.setValue(this.lookupdata.oda_scheme_code)
     })
   }
   sbaSchemeCodeLookup():void{
     const dialogRef = this.dialog.open(SavingschemeLookupComponent,{
-
     });
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
-      console.log(this.lookupdata);
-      
       this.formData.controls.schemeCode.setValue(this.lookupdata.sba_scheme_code)
     })
   }
   tdaSchemeCodeLookup():void{
     const dialogRef = this.dialog.open(TermDepositLookupComponent,{
-
     });
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
-      
       this.formData.controls.schemeCode.setValue(this.lookupdata.tda_scheme_code)
     })
   }
-
   getPage() {
     if (
       this.message.function_type == 'A-Add' &&
@@ -211,7 +208,6 @@ export class LoanAccountComponent implements OnInit {
         solCode: [''],
         withholdingTax: [''],
         amountDisbursed: [''],
-
         repaymentPeriod: [''],
         accountOwnership:[''],
         schemeType:[''],
@@ -337,7 +333,6 @@ export class LoanAccountComponent implements OnInit {
         accountStatus: ['P'],
       });
     }
-
     else if (
       this.message.function_type == 'A-Add' &&
       this.message.account_type == 'Office'
@@ -365,14 +360,10 @@ export class LoanAccountComponent implements OnInit {
         accountStatus: ['P'],
       });
     }
-    
-    //'A-Add','I-Inquire','M-Modify','V-Verify','X-Cancel'
     else if (
       this.message.function_type == 'I-Inquire' &&
       this.message.account_type == 'Loan'
     ) {
-      console.log("kibet")
-
       this.formData = this.fb.group({
         accountManager: [''],
         currency: ['kes'],
@@ -386,22 +377,12 @@ export class LoanAccountComponent implements OnInit {
         repaymentPeriod: [''],
       });
       this.disabledFormControll();
-      
     } else if (
       this.message.function_type == 'I-Inquire' &&
       this.message.account_type == 'Savings'
     ) {
-
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -418,22 +399,12 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
 
       )
-
-
-
-
-
       this.disabledFormControll();
     } else if (
       this.message.function_type == 'I-Inquire' &&
@@ -441,14 +412,6 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -465,33 +428,18 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
-
       )
       this.disabledFormControll();
     } else if (
       this.message.function_type == 'I-Inquire' &&
       this.message.account_type == 'Term-Deposit'
     ) {
-
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -508,16 +456,10 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
-
       )
       this.disabledFormControll();
     } else if (
@@ -527,13 +469,6 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -550,16 +485,10 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
-
       )
       this.disabledFormControll();
     }
@@ -569,14 +498,6 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -593,20 +514,13 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
-
       )
       this.disabledFormControll();
     }
-    
     else if (
       this.message.function_type == 'M-Modify' &&
       this.message.account_type == 'Loan'
@@ -629,14 +543,6 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -653,9 +559,7 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
-
             accountBalance:[data.entity.accountBalance],
-
             accountOwnership:[data.entity.accountOwnership],
             deleteFlag: [data.entity.deleteFlag],
             postedBy: [data.entity.postedBy],
@@ -669,21 +573,13 @@ export class LoanAccountComponent implements OnInit {
             accountStatus: [data.entity.accountStatus],
             acid:[data.entity.acid],
             sn:[data.entity.sn],
-
             verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
-
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
-
       )
     } else if (
       this.message.function_type == 'M-Modify' &&
@@ -691,14 +587,6 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -716,7 +604,6 @@ export class LoanAccountComponent implements OnInit {
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
             accountBalance:[data.entity.accountBalance],
-
             accountOwnership:[data.entity.accountOwnership],
             deleteFlag: [data.entity.deleteFlag],
             postedBy: [data.entity.postedBy],
@@ -730,19 +617,12 @@ export class LoanAccountComponent implements OnInit {
             accountStatus: [data.entity.accountStatus],
             acid:[data.entity.acid],
             sn:[data.entity.sn],
-
             verifiedBy:["P"],
             verifiedFlag:["N"],
             verifiedTime:[new Date()]
-
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
-
         },
         error=>{
-
         }
 
       )
@@ -1548,12 +1428,10 @@ export class LoanAccountComponent implements OnInit {
      delete this.formData.value.amountDisbursed
     delete this.formData.value.repaymentPeriod
     }
-    console.log(this.formData.value);
     if( this.message.function_type == 'A-Add'){
       this.accountservice.createAccount(this.formData.value).subscribe(
         data=>{
           this.loading=false
-          console.log(data.message)
           this.resMessage=data.message
                 this._snackBar.open(this.resMessage, "X", {
                 horizontalPosition: this.horizontalPosition,
@@ -1608,38 +1486,41 @@ export class LoanAccountComponent implements OnInit {
           panelClass: ['red-snackbar'],
         });
     }
-
-
-    console.log(this.formData.value);
   }
-customer_code:any
 glSubheadArray:any
 
 initGlSUbheadForm(){
   
-  // this.glSubheadData = this.fb.group({
 
-  // })
 }
-
-  //Checking for eligibility of a guarantors
+  //Checking for eligibility of a guarantors customer_code
   eligibilityTest(){
-
-  this.accountservice.getCustomerEligibility(this.customer_code).subscribe(
-    res =>{
-        this.results = res
-          this.glSubheadArray.push(this.glSubheadData.value);
-    },
-    err=>{
-      this.error = err
-      this._snackBar.open(this.error, "Try Again",{
+    if(this.addGurantorsFormData.valid){
+      let customer_code = this.addGurantorsFormData.controls.customer_code.value;
+      this.accountservice.getCustomerEligibility(customer_code).subscribe(
+        res =>{
+            this.results = res
+              this.glSubheadArray.push(this.glSubheadData.value);
+        },
+        err=>{
+          this.error = err.error
+          this._snackBar.open(this.error.message, "Try Another",{
+            horizontalPosition:this.horizontalPosition,
+            verticalPosition:this.verticalPosition,
+            duration:3000,
+            panelClass:['red-snackbar', 'login-snackbar']
+          })
+        }
+      )
+    }else{
+      this._snackBar.open("Invalid Form Data", "Try Again",{
         horizontalPosition:this.horizontalPosition,
         verticalPosition:this.verticalPosition,
         duration:3000,
         panelClass:['red-snackbar', 'login-snackbar']
       })
     }
-  )
+
   }
 
   onPhotoChange(event: any) {
