@@ -19,8 +19,6 @@ export class ExceptionsCodesComponent implements OnInit {
   subscription!:Subscription;
   canVerify = false;
   canDeleted = false;
-
-
   prioritizationArray: any = [
     'Customer Level','Account Level','Charge Level','Contract Level'
   ]
@@ -37,7 +35,6 @@ export class ExceptionsCodesComponent implements OnInit {
   isLookupDisabled = false;
   submitted = false;
   isDeleting = false;
-
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -52,7 +49,6 @@ export class ExceptionsCodesComponent implements OnInit {
       // this.redirectToMaintenancePage();
       this.getPage();
     }
-    
       formData = this.fb.group({
         id:[''],
         exception_code: ['', [Validators.required]],
@@ -65,7 +61,6 @@ export class ExceptionsCodesComponent implements OnInit {
       });
 
     get f() { return this.formData.controls; }
-
       disabledFormControll(){
         this.formData.disable()
       }
@@ -74,7 +69,6 @@ export class ExceptionsCodesComponent implements OnInit {
           this.messageData = message;      
           this.function_type = this.messageData.function_type
           this.exception_code = this.messageData.exception_code
-          
         if(this.function_type == "A-Add"){
           this.canVerify = false;
           this.canDeleted = false;
@@ -121,7 +115,7 @@ export class ExceptionsCodesComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/exceptions-codes/maintenance'));
+          this.router.navigate([`/system/configurations/global/exceptions-codes/maintenance`], { skipLocationChange: true });
           })
         }
         else if(this.function_type == "M-Modify"){
@@ -143,7 +137,7 @@ export class ExceptionsCodesComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/exceptions-codes/maintenance'));
+          this.router.navigate([`/system/configurations/global/exceptions-codes/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -171,7 +165,7 @@ export class ExceptionsCodesComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/exceptions-codes/maintenance'));
+          this.router.navigate([`/system/configurations/global/exceptions-codes/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -199,7 +193,7 @@ export class ExceptionsCodesComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/exceptions-codes/maintenance'));
+          this.router.navigate([`/system/configurations/global/exceptions-codes/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -211,7 +205,6 @@ export class ExceptionsCodesComponent implements OnInit {
       })
       }
       // convenience getter for easy access to form fields
-
       onSubmit() {
           this.submitted = true;
           console.log("all data ",this.formData.value)
@@ -244,8 +237,7 @@ export class ExceptionsCodesComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/exceptions-codes/maintenance'));
-                  // system/configurations/global/linked/organization/maintenance
+          this.router.navigate([`/system/configurations/global/exceptions-codes/maintenance`], { skipLocationChange: true });
               },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {
@@ -266,8 +258,7 @@ export class ExceptionsCodesComponent implements OnInit {
                       duration: 3000,
                       panelClass: ['green-snackbar','login-snackbar'],
                     });
-                this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/exceptions-codes/maintenance'));
-                    // system/configurations/global/linked/organization/maintenance
+          this.router.navigate([`/system/configurations/global/exceptions-codes/maintenance`], { skipLocationChange: true });
                 },err=>{
                   this.error = err;
                   this._snackBar.open(this.error, "Try again!", {
@@ -277,9 +268,7 @@ export class ExceptionsCodesComponent implements OnInit {
                     panelClass: ['red-snackbar','login-snackbar'],
                   });
                 })  
-              
             }
-            
           }else{
             this._snackBar.open("Invalid Form Data", "Try again!", {
               horizontalPosition: this.horizontalPosition,

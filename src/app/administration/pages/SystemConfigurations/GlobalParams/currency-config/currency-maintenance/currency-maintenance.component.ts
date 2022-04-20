@@ -31,11 +31,9 @@ export class CurrencyMaintenanceComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    private ngZone: NgZone,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
     private currencyAPI: CurrencyService,
-
     ) { }
   ngOnInit(): void {
   }
@@ -49,11 +47,8 @@ export class CurrencyMaintenanceComponent implements OnInit {
     function_type: ['', [Validators.required]],
     currency_ccy: [''],
   });
-
   currencyLookup(): void {
     const dialogRef = this.dialog.open(CurrencyLookupComponent, {
-      // height: '400px',
-      // width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.dialogData = result.data;
@@ -61,7 +56,6 @@ export class CurrencyMaintenanceComponent implements OnInit {
       this.formData.controls.currency_ccy.setValue(result.data);
     });
   }
-
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.showCurrencyId = true;
@@ -73,10 +67,6 @@ export class CurrencyMaintenanceComponent implements OnInit {
       this.showCurrencyId= false;
     }
   }
-  addEventId(){
-    this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
-    
-  }
       // convenience getter for easy access to form fields
       get f() { return this.formData.controls; }
   onSubmit(){
@@ -84,7 +74,7 @@ export class CurrencyMaintenanceComponent implements OnInit {
     this.submitted = true;
     if(this.formData.valid){
     this.currencyAPI.changeMessage(this.formData.value)
-    this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/currency/data/view')); 
+    this.router.navigate([`/system/configurations/global/currency/data/view`], { skipLocationChange: true });
   }else{
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {
