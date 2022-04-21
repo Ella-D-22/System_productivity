@@ -129,6 +129,12 @@ import { ReportMaintainanceComponent } from './pages/reports/report-maintainance
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
 import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
+import { MainClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classifications.component';
+import { MainClassificationLookupComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classification-lookup/main-classification-lookup.component';
+import { MainClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classification-maintenance/main-classification-maintenance.component';
+import { SubClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classifications.component';
+import { SubClassificationLookupComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-lookup/sub-classification-lookup.component';
+import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
 
 
 @NgModule({
@@ -256,7 +262,13 @@ import { ViewReportComponent } from './pages/reports/view-report/view-report.com
     ReportsComponent,
     ReportMaintainanceComponent,
     ViewReportComponent,
-    SpecificReportComponent
+    SpecificReportComponent,
+    MainClassificationsComponent,
+    MainClassificationLookupComponent,
+    MainClassificationMaintenanceComponent,
+    SubClassificationsComponent,
+    SubClassificationLookupComponent,
+    SubClassificationMaintenanceComponent
 
   ],
   imports: [

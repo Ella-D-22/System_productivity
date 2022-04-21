@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Segments/Maintenance</div>
+        <div>Main-Classification-Maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -21,15 +21,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12" *ngIf="showSegmentCode">
+                <div class="col-md-6 col-sm-12" *ngIf="showMainCode">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
-                            <label for="">Segment Code<span class="warning">*</span></label>
+                            <label for="">Main Classification Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" class="form-control" formControlName="segmentCode"
-                            [ngClass]="{'is-invalid': submitted && f.miscode.errors}">
-                            <mat-icon  (click)="segmentLookup()">search</mat-icon>
+                            <input type="text" class="form-control" formControlName="main_classification_code"
+                            [ngClass]="{'is-invalid': submitted && f.main_classification_code.errors}">
+                            <mat-icon  (click)="mainLookup()">search</mat-icon>
                         </div>
                     </div>
                 </div>

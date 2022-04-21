@@ -76,6 +76,10 @@ import { SubSegmentComponent } from './pages/SystemConfigurations/GlobalParams/s
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
 import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
+import { MainClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classification-maintenance/main-classification-maintenance.component';
+import { MainClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classifications.component';
+import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
+import { SubClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classifications.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -604,6 +608,31 @@ const routes: Routes = [{
       {
         path: 'specific-report', 
         component: SpecificReportComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      // Asset Classification
+      {
+        path: 'configurations/global/main-classification/maintenance',
+        component: MainClassificationMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'configurations/global/main-classification/data/view',
+        component: MainClassificationsComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'configurations/global/sub-classification/maintenance',
+        component: SubClassificationMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'configurations/global/sub-classification/data/view',
+        component: SubClassificationsComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
       },
