@@ -129,6 +129,9 @@ import { ReportMaintainanceComponent } from './pages/reports/report-maintainance
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
 import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
+import { AccountsModuleComponent } from './pages/accounts-module/accounts-module.component';
+import { AccountsMaintenanceComponent } from './pages/accounts-module/accounts-maintenance/accounts-maintenance.component';
+import { AccountsLookupComponent } from './pages/accounts-module/accounts-lookup/accounts-lookup.component';
 
 
 @NgModule({
@@ -256,7 +259,10 @@ import { ViewReportComponent } from './pages/reports/view-report/view-report.com
     ReportsComponent,
     ReportMaintainanceComponent,
     ViewReportComponent,
-    SpecificReportComponent
+    SpecificReportComponent,
+    AccountsModuleComponent,
+    AccountsMaintenanceComponent,
+    AccountsLookupComponent
 
   ],
   imports: [
