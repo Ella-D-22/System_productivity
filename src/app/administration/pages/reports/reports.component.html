@@ -32,8 +32,10 @@
     <label class="form-check-label text-left" for="exampleCheck1">{{param.parameterName}}<i *ngIf="containsObject(param, params)" class="fa fa-check" aria-hidden="true"></i></label>
   </div>
   <div class="col-md-4">
-    <button class="btn btn-sm btn-light mr-1" type="button" (click)="add(param)">ADD</button>
-    <button class="btn btn-sm btn-danger" type="button" (click)="remove(param)">REMOVE</button>
+    <mat-icon class="Primary" (click)="add(param)">add_circle</mat-icon>
+    <mat-icon class="Warning" (click)="remove(param)">remove_circle</mat-icon>
+    <!-- <button class="btn btn-sm btn-light mr-1" type="button" (click)="add(param)">ADD</button>
+    <button class="btn btn-sm btn-danger" type="button" (click)="remove(param)">REMOVE</button> -->
   </div>
 </div>
 
