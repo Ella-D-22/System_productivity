@@ -263,7 +263,6 @@ import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurati
     AccountsModuleComponent,
     AccountsMaintenanceComponent,
     AccountsLookupComponent,
-    AccountsLookupComponent,
     MainClassificationsComponent,
     MainClassificationLookupComponent,
     MainClassificationMaintenanceComponent,
