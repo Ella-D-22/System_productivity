@@ -76,6 +76,8 @@ import { SubSegmentComponent } from './pages/SystemConfigurations/GlobalParams/s
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
 import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
+import { AccountsMaintenanceComponent } from './pages/accounts-module/accounts-maintenance/accounts-maintenance.component';
+import { AccountsModuleComponent } from './pages/accounts-module/accounts-module.component';
 import { MainClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classification-maintenance/main-classification-maintenance.component';
 import { MainClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classifications.component';
 import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
@@ -379,17 +381,18 @@ const routes: Routes = [{
 
       // Loan Product
       {
-        path: 'account/maintenance',
-        component:LoanAccountMaintainanceComponent,
+        path: 'accounts/maintenance',
+        component:AccountsMaintenanceComponent,
         // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
       {
         path: 'accounts/data/view',
-        component:LoanAccountComponent,
+        component:AccountsModuleComponent,
         // canActivate: [CanActivateModuleGuard],
         data: {preload:true },
       },
+
       // collateral
       {
         path: 'configurations/collateral-limits/Collateral/maintenance',

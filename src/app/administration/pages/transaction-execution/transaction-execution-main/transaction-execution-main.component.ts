@@ -9,6 +9,9 @@ import { DatePipe } from '@angular/common';
 import { TransactionExecutionLookupComponent } from '../transaction-execution-lookup/transaction-execution-lookup.component';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { LoanAccountComponent } from '../../loan-account/loan-account.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-transaction-execution-main',
@@ -18,28 +21,38 @@ import { LoanAccountComponent } from '../../loan-account/loan-account.component'
 export class TransactionExecutionMainComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  // Data Table
+  displayedColumns: string[] = ['index','acid','partTranType','transactionAmount','transactionDate','transactionParticulars','exchangeRate'];
+  dataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  debit_value = 0.00;
+  credit_value = 0.00;
+  total_value = 0.00;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   spinnerVisible: boolean = true;
   errorVisible: boolean = false;
-
   transactionTabIndex: number = 1;
   selection: number = 1;
-
-
   transactionType: string = 'NC';
   transactionNumber!: string;
   customerCode!: string;
+  Valid = false;
   // transaction!: Transac
-
   selectedFiles?: FileList;
   currentFile?: File;
   progress = 0;
   message = '';
-
   fileInfos?: Observable<any>;
-
   //unverified Transactions
   existingData: boolean;
   loading = false;
@@ -61,16 +74,16 @@ export class TransactionExecutionMainComponent implements OnInit {
   transactionId: any;
   resData: any;
   isDisable = false;
-
   constructor(private router: Router,
     private _snackBar: MatSnackBar,
     private datepipe: DatePipe,
     private dialog :MatDialog,
     private fb: FormBuilder,
     private transactionAPI:TransactionExecutionService) { }
-
   ngOnInit(): void {
     this.getPage();
+    this.initTransactionArray();
+    this.getTransactions();
   }
   functionArray: any = [
     'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
@@ -81,9 +94,7 @@ export class TransactionExecutionMainComponent implements OnInit {
   transactionTypeArray: any = [
     'Normal Cash','Transfet Normal','Loan Repayment','Loan Disbursement','Kopo Kopo Batch','KCB Batch'
   ]
-
   user = "P"
-
   formData = this.fb.group({
     transactionId: [''],
     chequeNo: [''],
@@ -100,11 +111,36 @@ export class TransactionExecutionMainComponent implements OnInit {
     verifiedTime: [new Date()],
     partTrans: new FormArray([]),
   })
+  
+  transactionForm = this.fb.group({
+    sn:[''],
+    acid: ['', [Validators.required]],
+    isoFlag: ['Y', [Validators.required]],
+    partTranSn: [''],
+    exchangeRate: [''],
+    partTranType: ['', [Validators.required]],
+    transactionAmount: ['', [Validators.required]],
+    transactionDate: ['', [Validators.required]],
+    transactionParticulars: ['', [Validators.required]],
+  })
+  initTransactionForm(){
+    this.transactionForm = this.fb.group({
+      sn:[''],
+      acid: [''],
+      isoFlag: ['Y'],
+      partTranSn: [''],
+      exchangeRate: [''],
+      partTranType: [''],
+      transactionAmount: [''],
+      transactionDate: [''],
+      transactionParticulars: [''],
+    })
+  }
+
   get f() { return this.formData.controls; }
   get p() { return this.f.partTrans as FormArray; }
 
  
-
   onAddField() {
     this.p.push(this.fb.group({
       sn:[''],
@@ -119,9 +155,7 @@ export class TransactionExecutionMainComponent implements OnInit {
   }
 
   onPreviewField(e:any) {
-    // if(this.function_type !="M-Modify"){
-    //   this.p.disable()
-    // } 
+
     this.p.push(this.fb.group({
       sn:[e.sn],
       acid: [e.acid,],
@@ -153,8 +187,6 @@ export class TransactionExecutionMainComponent implements OnInit {
       this.p.removeAt(i);
     }
   }
-
-
   transactionLookup() {
     const dialogRef = this.dialog.open(TransactionExecutionLookupComponent, {
       // height: '400px',
@@ -168,8 +200,7 @@ export class TransactionExecutionMainComponent implements OnInit {
       this.partTransForm .controls.acid.setValue(this.accountReference);
     });
   }
-  
-  accountLookup(i:any): void {
+  accountLookup(): void {
     const dialogRef = this.dialog.open(LoanAccountComponent, {
       // height: '400px',
     });
@@ -178,8 +209,8 @@ export class TransactionExecutionMainComponent implements OnInit {
       this.accountReference = this.accountlookupData.accountReference;
       this.description = this.accountlookupData.accountReference.description;
 
-      this.partTransForm = this.p.controls[i];
-      this.partTransForm .controls.acid.setValue(this.accountReference);
+      // this.partTransForm = this.p.controls[i];
+      // this.partTransForm .controls.acid.setValue(this.accountReference);
     });
   }
 
@@ -216,8 +247,7 @@ export class TransactionExecutionMainComponent implements OnInit {
             verifiedFlag: ['N'],
             verifiedTime: [new Date()],
             partTrans: new FormArray([]),
-          }),
-         this.initPartransForm();
+          })
         }
         
         else if(this.function_type == "I-Inquire"){
@@ -287,7 +317,6 @@ export class TransactionExecutionMainComponent implements OnInit {
               panelClass: ['red-snackbar', 'login-snackbar'],
             });
           })
-          
         }
         else if(this.function_type == "V-Verify"){
           // this.isDisable = true;
@@ -324,13 +353,73 @@ export class TransactionExecutionMainComponent implements OnInit {
               panelClass: ['red-snackbar', 'login-snackbar'],
             });
           })
-
         }
-
     });
   }
 
+  transactionArray = new Array();
+  initTransactionArray(){
+    this.transactionArray = new Array();
+  }
+  getTransactions(){
+    this.dataSource = new MatTableDataSource(this.transactionArray );
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  addToArray(){
+    if(this.transactionForm.valid){
+      this.p.push(this.fb.group(this.transactionForm.value));
+      this.transactionArray.push(this.transactionForm.value);
+     
+      this.partTranType = this.transactionForm.controls.partTranType.value
+      this.transactionAmount = this.transactionForm.controls.transactionAmount.value
+      console.log("hey form data", this.partTranType );
+      
+      if (this.partTranType == "Debit") {
+        this.debit_value = this.debit_value + this.transactionAmount
+      } else if (this.partTranType == "Credit") {
+        this.credit_value = this.credit_value + this.transactionAmount
+      }
+      this.total_value = this.debit_value - this.credit_value
+      if (this.total_value != 0) {
+      this.Valid = false;
+        this._snackBar.open("Transaction is not Valid! Balance Debit & Credit", "Try again!", {
+          horizontalPosition: "end",
+          verticalPosition: "top",
+          duration: 500,
+          panelClass: ['red-snackbar', 'login-snackbar'],
+        });
+      } else {
+      this.Valid = true;
+        this._snackBar.open("Transaction accepted!", "X", {
+          horizontalPosition: "end",
+          verticalPosition: "top",
+          duration: 500,
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
+      }
+      this.getTransactions();
+      this.initTransactionForm();
+      // for (var i = 0; i < this.transactionArray.length; i++) {
+      //   this.partTranType = this.transactionArray[i].partTranType;
+      //   this.transactionAmount = this.transactionArray[i].transactionAmount;
+      //   if (this.partTranType == "Debit") {
+      //     this.debit_value = this.debit_value + this.transactionAmount
+      //   } else if (this.partTranType == "Credit") {
+      //     this.credit_value = this.credit_value + this.transactionAmount
+      //   }
+      // }
+      // this.total_value = this.debit_value - this.credit_value
+    }
+  }
+
+
+
+
+
   onSubmit() {
+    console.log("Form Data", this.formData.value);
+    
     this.formData.controls.postedTime.setValue(
       this.datepipe.transform(
         this.f.postedTime.value,
@@ -343,30 +432,16 @@ export class TransactionExecutionMainComponent implements OnInit {
         'yyyy-MM-ddTHH:mm:ss'
       )
     );
-    console.log("Form Data", this.formData.value);
-    if (this.formData.valid) {
-      let debit_value = 0;
-      let credit_value = 0;
-      this.partTrans = this.f.partTrans.value
-      for (var i = 0; i < this.partTrans.length; i++) {
-        this.partTranType = this.partTrans[i].partTranType;
-        this.transactionAmount = this.partTrans[i].transactionAmount;
-        if (this.partTranType == "Debit") {
-          debit_value = debit_value + this.transactionAmount
-        } else if (this.partTranType == "Credit") {
-          credit_value = credit_value + this.transactionAmount
-        }
-      }
 
-      let total_value = debit_value - credit_value
-      if (total_value != 0) {
+    if (this.formData.valid) {
+
+      if (this.total_value != 0) {
         this._snackBar.open("Transaction is not Valid! Balance Debit & Credit", "Try again!", {
           horizontalPosition: "end",
           verticalPosition: "top",
           duration: 3000,
           panelClass: ['red-snackbar', 'login-snackbar'],
         });
-
       } else {
         this._snackBar.open("Transaction accepted!", "X", {
           horizontalPosition: "end",
@@ -393,40 +468,10 @@ export class TransactionExecutionMainComponent implements OnInit {
             });
           })
         }else if(this.function_type == "V-Verify"){
-          this.transactionAPI.verifyTransaction(this.formData.value).subscribe(res=>{
-            this._snackBar.open("Transaction Successful!", "X", {
-              horizontalPosition: "end",
-              verticalPosition: "top",
-              duration: 3000,
-              panelClass: ['green-snackbar', 'login-snackbar'],
-            });
-          }, err=>{
-            this.error = err;
-            this._snackBar.open(this.error, "Try again!", {
-              horizontalPosition: "end",
-              verticalPosition: "top",
-              duration: 3000,
-              panelClass: ['red-snackbar', 'login-snackbar'],
-            });
-          })
+         
         }
         else if(this.function_type == "M-Modify"){
-          this.transactionAPI.updateTransaction(this.formData.value).subscribe(res=>{
-            this._snackBar.open("Transaction Successful!", "X", {
-              horizontalPosition: "end",
-              verticalPosition: "top",
-              duration: 3000,
-              panelClass: ['green-snackbar', 'login-snackbar'],
-            });
-          }, err=>{
-            this.error = err;
-            this._snackBar.open(this.error, "Try again!", {
-              horizontalPosition: "end",
-              verticalPosition: "top",
-              duration: 3000,
-              panelClass: ['red-snackbar', 'login-snackbar'],
-            });
-          })
+         
         }
       }
       this.submitted = true;

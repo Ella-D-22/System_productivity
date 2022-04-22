@@ -123,7 +123,8 @@ form{
 // Tables CSS
 
 th{
-  text-align: left;
+background-color: rgb(243, 243, 243);
+
 }
 .search {
   width: 50%;
@@ -180,49 +181,15 @@ padding-right: 2px;
 .ng-container{
 font-size: 12px;
 }
-th{
-background-color: rgb(243, 243, 243);
-}
-.mat-column-index{
-word-wrap: break-word;
-white-space: unset;
-flex: 0 0 28%;
-width: 3%;
-overflow-wrap: break-word;
-word-wrap: break-word;
-word-break: break-word;
--ms-hyphens: auto;
--moz-hyphens: auto;
--webkit-hyphens: auto;
-hyphens: auto;
-}
-.mat-column-firstName,
-.mat-column-middleName,
-.mat-column-lastName,
-.mat-column-personalPhone,
-.mat-column-personalEmail,
-.mat-column-basic_salary
-{
-word-wrap: break-word;
-white-space: unset;
-flex: 0 0 28%;
-width:max-content;
-overflow-wrap: break-word;
-word-wrap: break-word;
-word-break: break-word;
--ms-hyphens: auto;
--moz-hyphens: auto;
--webkit-hyphens: auto;
-hyphens: auto;
-}
+
 .table-row{
 width: 100%;
 overflow-x: auto;
 padding: 0px;
 margin: 0px;
 }
-.y-scrollable-table{
-min-width: 1300px;
+table{
+  width: 100%;
 }
 tr:hover {
   background: whitesmoke;
@@ -245,9 +212,28 @@ input, textarea{
      // or simply zoom: 90%
   }
 }
-
 td{
   color: black;
 }
-
+.display-block{
+  display: block;
+  
+}
+.Success{
+  background-color: rgb(0, 255, 0);
+  font-weight: 600;
+  border-radius: 18px;
+  padding: 4px;
+  color: white;
+}
+.Fail{
+  background-color: rgb(250, 87, 87);
+  border-radius: 18px;
+  font-weight: 600;
+  width: 50px;
+  padding: 4px;
+  margin: 5px auto;
+  width: max-content;
+  color: rgb(0, 0, 0);
+}
 

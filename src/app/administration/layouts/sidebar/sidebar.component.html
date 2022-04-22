@@ -107,7 +107,24 @@
     <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/account/maintenance" skipLocationChange>
       <mat-icon>account_balance_wallet</mat-icon>
        Accounts Management</a> 
-       
+
+       <mat-accordion class="app-nav-accordion">
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="nav-title">
+              <mat-icon>account_balance_wallet</mat-icon>
+              Accounts Management
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/accounts/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Office Accounts</a>
+           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/accounts/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Current Accounts</a>
+           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/accounts/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Savings Accounts</a>
+           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/accounts/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Loan Accounts</a>
+           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/accounts/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Overdraft Accounts</a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
          <mat-accordion class="app-nav-accordion">
            <mat-expansion-panel class="mat-elevation-z0">
              <mat-expansion-panel-header>
@@ -119,7 +136,6 @@
              <mat-nav-list>
               <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/collateral-limits/Limits/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Limits</a>
               <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/collateral-limits/Collateral/maintenance" skipLocationChange matTooltip="Collaterals Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Collateral</a>
-
              </mat-nav-list>
            </mat-expansion-panel>
          </mat-accordion>
