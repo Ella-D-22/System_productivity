@@ -1034,10 +1034,6 @@ export class LoanAccountComponent implements OnInit {
           });
 
         },
-        error=>{
-
-        }
-
       )
       this.disabledFormControll();
     }
@@ -1048,13 +1044,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+        
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1092,16 +1082,10 @@ export class LoanAccountComponent implements OnInit {
             verifiedFlag:["Y"],
             verifiedTime:[new Date()]
 
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
 
         },
-        error=>{
-
-        }
-
+      
       )
       this.disabledFormControll();
     }
@@ -1131,13 +1115,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+      
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1177,14 +1155,11 @@ export class LoanAccountComponent implements OnInit {
             verifiedTime:[new Date()]
 
 
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
+          
           });
 
         },
-        error=>{
-
-        }
+      
 
       )
 
@@ -1196,13 +1171,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+          
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1243,9 +1212,7 @@ export class LoanAccountComponent implements OnInit {
           });
 
         },
-        error=>{
-
-        }
+       
 
       )
       this.disabledFormControll();
@@ -1291,8 +1258,7 @@ export class LoanAccountComponent implements OnInit {
             verifiedTime:[new Date()]
           });
         },
-        error=>{
-        }
+       
       )
       this.disabledFormControll();
     } else if (
@@ -1337,8 +1303,7 @@ export class LoanAccountComponent implements OnInit {
             verifiedTime:[new Date()]
           });
         },
-        error=>{
-        }
+       
 
       )
       this.disabledFormControll();
@@ -1393,10 +1358,7 @@ export class LoanAccountComponent implements OnInit {
           });
 
         },
-        error=>{
-
-        }
-
+    
       )
       this.disabledFormControll();
     }

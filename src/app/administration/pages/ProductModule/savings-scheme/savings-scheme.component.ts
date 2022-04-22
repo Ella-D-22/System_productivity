@@ -1277,7 +1277,7 @@ exceptionLookup(): void {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-                this.router.navigateByUrl('system/configurations/product/saving-scheme/maintenance');
+                this.router.navigate(['system/configurations/product/saving-scheme/maintenance'], {skipLocationChange:true})
 
             },err=>{
               this.error = err;
@@ -1297,7 +1297,7 @@ exceptionLookup(): void {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-                  this.router.navigateByUrl('system/configurations/product/saving-scheme/maintenance');
+                  this.router.navigate(['system/configurations/product/saving-scheme/maintenance'], {skipLocationChange:true})
 
               },err=>{
                 this.error = err;

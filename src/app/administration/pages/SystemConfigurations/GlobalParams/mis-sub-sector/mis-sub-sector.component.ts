@@ -73,7 +73,7 @@ isEnabled = false;
       message =>{
         this.message = message;
         if(this.message == 'default message'){
-          this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sector/maintenance"],{skipLocationChange:true})
         }else{
           null;
         }
@@ -82,8 +82,6 @@ isEnabled = false;
  
   }
 
-   // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
-  // auth_user = this.currentUser.username;
 
 getPage(){
   this.subscription = this.subSectorApi.currentMessage.subscribe(
@@ -143,7 +141,7 @@ getPage(){
            })
          },
          err =>{
-          this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"],{skipLocationChange:true})
           this.error =err;
           this._snackbar.open(this.error, "Try Again", {
             horizontalPosition:this.horizontalPosition,
@@ -178,7 +176,7 @@ getPage(){
             })
           },
           err =>{
-            this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+            this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"], {skipLocationChange:true})
             this.error =err;
             this._snackbar.open(this.error, "Try Again", {
               horizontalPosition:this.horizontalPosition,
@@ -218,7 +216,6 @@ getPage(){
 
           },
           err =>{          
-            this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
             this.error = err;
             this._snackbar.open(this.error, "Try Again", {
               horizontalPosition:this.horizontalPosition,
@@ -244,7 +241,7 @@ onSubmit(){
             duration:3000,
             panelClass:['green-snackbar', 'login-snackbar']
           });
-          this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"], {skipLocationChange:true})
          }, 
         err =>{
           this.error = err
@@ -267,7 +264,7 @@ onSubmit(){
             panelClass:['green-snackbar', 'login-snackbar']
 
           });
-          this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"], {skipLocationChange:true})
         }, 
         err =>{
           this.error = err
@@ -291,7 +288,7 @@ onSubmit(){
             panelClass:['green-snackbar', 'login-snackbar']
 
           });
-          this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"], {skipLocationChange:true})
         }, 
         err =>{
           this.error = err

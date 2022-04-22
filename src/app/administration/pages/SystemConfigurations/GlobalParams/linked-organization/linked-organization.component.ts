@@ -76,7 +76,7 @@ export class LinkedOrganizationComponent implements OnInit {
         this.message = message;
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/linked/organization/maintenance'));
+          this.router.navigate(['system/configurations/global/linked/organization/maintenance'], {skipLocationChange:true});
         }else{
           null;
         }
@@ -286,7 +286,7 @@ export class LinkedOrganizationComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
+            this.router.navigate(['system/event_id_module/maintenance'], {skipLocationChange:true});
           })
         }
         else if(this.function_type == "M-Modify"){
@@ -317,7 +317,6 @@ export class LinkedOrganizationComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -350,7 +349,7 @@ export class LinkedOrganizationComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/linked/organization/maintenance'));
+              this.router.navigate(['system/configurations/global/linked/organization/maintenance'], {skipLocationChange:true});
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -359,7 +358,6 @@ export class LinkedOrganizationComponent implements OnInit {
                 duration: 3000,
                 panelClass: ['red-snackbar','login-snackbar'],
               });
-              // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/linked/organization/maintenance'));
             })
             }else if(this.function_type == "M-Modify"){
               this.subscription = this.linkedOrganizationAPI.updateLinkedorganization(this.organization_id.id, this.formData.value).subscribe(res=>{
@@ -370,8 +368,7 @@ export class LinkedOrganizationComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/linked/organization/maintenance'));
-                  // system/configurations/global/linked/organization/maintenance system/configurations/global/linked/organization/maintenance
+                  this.router.navigate(['system/configurations/global/linked/organization/maintenance'], {skipLocationChange:true});
               },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {
@@ -380,7 +377,7 @@ export class LinkedOrganizationComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['red-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/linked/organization/maintenance'));
+                this.router.navigate(['system/configurations/global/linked/organization/maintenance'], {skipLocationChange:true});
               })  
             }
           }else{

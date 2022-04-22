@@ -51,10 +51,8 @@ export class LimitsMaintenanceComponent implements OnInit {
     if(event.target.value == "A-Add"){
        this.existingData = false;
        this.formData.controls.limitId.setValue("")
-      //  this.formData.controls.function_type.setValue("")
     }else if (event.target.value != "A-Add"){
        this.existingData = true;
-      //  this.formData.controls.function_type.setValue("")
        this.formData.controls.limitId.setValue("")
     }
 
@@ -78,7 +76,7 @@ export class LimitsMaintenanceComponent implements OnInit {
     this.submitted = true;
     if(this.formData.valid){
       this.NodesAPI.changeMessage(this.formData.value)
-      this.router.navigateByUrl("system/configurations/collateral-limits/Limits/data/view")
+      this.router.navigate(["system/configurations/collateral-limits/Limits/data/view"], {skipLocationChange:true})
     }else{
       this._snackbar.open("Invalid form data", "Try Again", {
         horizontalPosition: this.horizontalPosition,

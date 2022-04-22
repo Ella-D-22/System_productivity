@@ -1690,7 +1690,7 @@ ac_debit_balance_Lookup(): void {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-                this.router.navigateByUrl('system/configurations/product/loan-product/maintenance');
+                this.router.navigate(['system/configurations/product/loan-product/maintenance'], {skipLocationChange:true})
 
             },err=>{
               this.error = err;
@@ -1711,8 +1711,8 @@ ac_debit_balance_Lookup(): void {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-                  this.router.navigateByUrl('system/configurations/product/loan-product/maintenance');
-              },err=>{
+                  this.router.navigate(['system/configurations/product/loan-product/maintenance'], {skipLocationChange:true})
+                },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {
                   horizontalPosition: this.horizontalPosition,

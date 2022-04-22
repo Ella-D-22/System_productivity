@@ -44,11 +44,7 @@ export class SavingschemeMaintenanceComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private dialog: MatDialog,
     private tokenStorage: TokenStorageService,
-    private sbaAPI:SavingschemeService
-    // public dialogRef: MatDialogRef<EventIdMaintenanceComponent>,
-    // @Optional() @Inject(MAT_DIALOG_DATA) public data: any
-
-    ) { }
+    private sbaAPI:SavingschemeService ) { }
   ngOnInit(): void {
   }
   loading = false;
@@ -93,7 +89,6 @@ export class SavingschemeMaintenanceComponent implements OnInit {
 
   schemeTypeLookup(): void {
     const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-      // height: '400px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
@@ -101,22 +96,16 @@ export class SavingschemeMaintenanceComponent implements OnInit {
       this.formData.controls.scheme_type.setValue(this.scheme_type);
     });
   }
-        // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
         onSubmit(){
           console.log(this.formData.value)
           this.loading = true;
           this.submitted = true;
           if(this.formData.valid){
-            // this.int_tbl_code = this.f.int_tbl_code.value;
             this.function_type =  this.f.function_type.value;
        
             this.sbaAPI.changeMessage(this.formData.value)
-            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/saving-scheme/data/view'));
-      
-            // checkHitcm
-      
-            // check if adding 
+             this.router.navigate(['system/configurations/product/saving-scheme/data/view'], {skipLocationChange:true})
         }else{
           this.loading = false;
           this._snackBar.open("Invalid Form Data", "Try again!", {

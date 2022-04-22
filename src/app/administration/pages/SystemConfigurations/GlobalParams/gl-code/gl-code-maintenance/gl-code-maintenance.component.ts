@@ -121,8 +121,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
                 duration: 3000,
                 panelClass: ['green-snackbar','login-snackbar'],
               });
-          // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
-              // system/configurations/global/gl-code/maintenance
+      
           },err=>{
             this.error = err;
             this.loading = false;
@@ -176,8 +175,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
                           duration: 3000,
                           panelClass: ['green-snackbar','login-snackbar'],
                         });
-                    // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
-                        // system/configurations/global/gl-code/maintenance
+                    
                     },err=>{
                       this.error = err;
                       this.loading = false;
@@ -220,10 +218,9 @@ export class GlCodeMaintenanceComponent implements OnInit {
         
       }else{
         this.glcodeAPI.changeMessage(this.formData.value)
-        this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/data/view'));
+        this.router.navigate(['system/configurations/global/gl-code/data/view'], {skipLocationChange:true})
       }
   }else{
-    // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/data/view'));
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {
       horizontalPosition: this.horizontalPosition,

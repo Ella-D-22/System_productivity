@@ -74,7 +74,7 @@ export class SchemeTypeComponent implements OnInit {
         this.message = message;
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
+          this.router.navigate(['system/configurations/global/scheme-type/maintenance'], {skipLocationChange:true});
         }else{
           null;
         }
@@ -144,7 +144,6 @@ export class SchemeTypeComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
           })
         }
         else if(this.function_type == "M-Modify"){
@@ -164,7 +163,6 @@ export class SchemeTypeComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -190,7 +188,6 @@ export class SchemeTypeComponent implements OnInit {
               });
             }, err=>{
               this.error = err;
-                this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
                 this._snackBar.open(this.error, "Try again!", {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
@@ -216,7 +213,6 @@ export class SchemeTypeComponent implements OnInit {
               });
             }, err=>{
               this.error = err;
-                this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));
                 this._snackBar.open(this.error, "Try again!", {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
@@ -243,7 +239,7 @@ export class SchemeTypeComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));                
+              this.router.navigate(['system/configurations/global/scheme-type/maintenance'], {skipLocationChange:true});                
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -262,8 +258,8 @@ export class SchemeTypeComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });              
-                  this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/scheme-type/maintenance'));                
-              },err=>{
+                  this.router.navigate(['system/configurations/global/scheme-type/maintenance'], {skipLocationChange:true});                
+                },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {
                   horizontalPosition: this.horizontalPosition,
