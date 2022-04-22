@@ -113,7 +113,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
               this.subscription = this.currentSchemeAPI.checkExistence(this.params).subscribe(res=>{
                 // not available else proceed
               this.currentSchemeAPI.changeMessage(this.formData.value)
-             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/current-scheme/data/view'));
+             this.router.navigate(['system/configurations/product/current-scheme/data/view'], {skipLocationChange:true})
               }, err=>{
 
                 this.error = err;
@@ -128,7 +128,7 @@ export class CurrentSchemeMaintenanceComponent implements OnInit {
               })
             }else{
               this.currentSchemeAPI.changeMessage(this.formData.value)
-             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/current-scheme/data/view'));
+             this.router.navigate(['system/configurations/product/current-scheme/data/view'], {skipLocationChange:true})
             }
         }else{
           this.loading = false;

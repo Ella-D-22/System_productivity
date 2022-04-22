@@ -313,7 +313,6 @@ export class InterestComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.currency_name = result.data.ccy_name;
       this.currency = result.data.ccy;
-      //this.formData.controls.chrg_calc_crncy.setValue(result.data);
     });
   }
 }

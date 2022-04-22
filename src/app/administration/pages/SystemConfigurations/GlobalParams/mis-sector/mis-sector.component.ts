@@ -68,7 +68,7 @@ isDeleted = false;
      message =>{
        this.message = message;
        if(this.message == 'default message'){
-         this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
+         this.router.navigate(["system/configurations/global/mis-sector/maintenance"], {skipLocationChange:true})
        }else{
          null;
        }
@@ -133,7 +133,6 @@ getPage(){
             });
           }, 
           err =>{
-            this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
             this.error =err;
             this._snackbar.open(this.error, "Try Again", {
               horizontalPosition:this.horizontalPosition,
@@ -210,7 +209,6 @@ getPage(){
             });
           }, 
           err =>{
-            this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
             this.error =err;
             this._snackbar.open(this.error, "Try Again", {
               horizontalPosition:this.horizontalPosition,
@@ -240,7 +238,7 @@ onSubmit(){
              duration:3000,
              panelClass:['green-snackbar', 'login-snackbar']
            });
-           this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
+           this.router.navigate(["system/configurations/global/mis-sector/maintenance"], {skipLocationChange:true})
           }, 
          err =>{
            this.error = err
@@ -263,7 +261,7 @@ onSubmit(){
              panelClass:['green-snackbar', 'login-snackbar']
 
            });
-           this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
+           this.router.navigate(["system/configurations/global/mis-sector/maintenance"], {skipLocationChange:true})
          }, 
          err =>{
            this.error = err
@@ -287,7 +285,7 @@ onSubmit(){
             panelClass:['green-snackbar', 'login-snackbar']
 
           });
-          this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sector/maintenance"], {skipLocationChange:true})
         }, 
         err =>{
           this.error = err

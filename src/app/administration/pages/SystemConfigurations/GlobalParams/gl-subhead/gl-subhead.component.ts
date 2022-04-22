@@ -86,7 +86,7 @@ export class GlSubheadComponent implements OnInit {
         
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
+          this.router.navigate(['system/configurations/global/gl-subhead/maintenance'], {skipLocationChange:true})
         }else{
           null;
         }
@@ -175,7 +175,7 @@ export class GlSubheadComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
+            this.router.navigate(['system/configurations/global/gl-subhead/maintenance'], {skipLocationChange:true})
           })
         }
         else if(this.function_type == "M-Modify"){          
@@ -200,7 +200,6 @@ export class GlSubheadComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -233,7 +232,6 @@ export class GlSubheadComponent implements OnInit {
             // this.formData.controls.glCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -268,7 +266,6 @@ export class GlSubheadComponent implements OnInit {
             // this.formData.controls.glCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -293,8 +290,8 @@ export class GlSubheadComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
-            },err=>{
+                this.router.navigate(['system/configurations/global/gl-subhead/maintenance'], {skipLocationChange:true})
+              },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
@@ -314,7 +311,7 @@ export class GlSubheadComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
+                  this.router.navigate(['system/configurations/global/gl-subhead/maintenance'], {skipLocationChange:true})
                   // system/configurations/global/linked/organization/maintenance
               },err=>{
                 this.error = err;
@@ -337,7 +334,7 @@ export class GlSubheadComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/maintenance'));
+                  this.router.navigate(['system/configurations/global/gl-subhead/maintenance'], {skipLocationChange:true})
                   // system/configurations/global/linked/organization/maintenance
               },err=>{
                 this.error = err;

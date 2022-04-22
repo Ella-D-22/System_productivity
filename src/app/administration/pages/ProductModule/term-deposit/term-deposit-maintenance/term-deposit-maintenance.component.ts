@@ -83,17 +83,6 @@ export class TermDepositMaintenanceComponent implements OnInit {
       this.formData.controls.scheme_code.setValue(this.scheme_code);
     });
   }
-
-  // schemeTypeLookup(): void {
-  //   const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-  //     // height: '400px',
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.lookupData = result.data;
-  //     this.scheme_type = this.lookupData.scheme_type;
-  //     this.formData.controls.scheme_type.setValue(this.scheme_type);
-  //   });
-  // }
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
 
@@ -110,7 +99,7 @@ export class TermDepositMaintenanceComponent implements OnInit {
               this.subscription = this.tdaAPI.checkTermDeposit(this.params).subscribe(res=>{
                 // not available else proceed
               this.tdaAPI.changeMessage(this.formData.value)
-             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/term-deposit/data/view'));
+             this.router.navigate(['system/configurations/product/term-deposit/data/view'], {skipLocationChange:true})
               }, err=>{
 
               
@@ -126,7 +115,7 @@ export class TermDepositMaintenanceComponent implements OnInit {
               })
             }else{
               this.tdaAPI.changeMessage(this.formData.value)
-             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/term-deposit/data/view'));
+              this.router.navigate(['system/configurations/product/term-deposit/data/view'], {skipLocationChange:true})
             }
       
         

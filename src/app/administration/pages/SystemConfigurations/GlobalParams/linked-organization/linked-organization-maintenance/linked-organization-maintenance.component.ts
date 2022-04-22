@@ -76,7 +76,7 @@ export class LinkedOrganizationMaintenanceComponent implements OnInit {
     }
   }
   addEventId(){
-    this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
+    this.router.navigate(['system/event_id'], {skipLocationChange:true});
   }
       // convenience getter for easy access to form fields
       get f() { return this.formData.controls; }
@@ -85,7 +85,7 @@ export class LinkedOrganizationMaintenanceComponent implements OnInit {
     this.submitted = true;
     if(this.formData.valid){
     this.linkedOrganizationAPI.changeMessage(this.formData.value)
-    this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/linked/organization/data/view'));
+    this.router.navigate(['system/configurations/global/linked/organization/data/view'], {skipLocationChange:true});
   }else{
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {

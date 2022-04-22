@@ -1086,11 +1086,7 @@ onRemoveExceptions(i:any){
                       caa_interest_calc:[this.results.caa_interest_calc],
                       caa_insufficient_exception:[this.results.caa_insufficient_exception],
                       caa_backdate_transaction:[this.results.caa_backdate_transaction],
-
-                  // caa_fees: new FormArray([]),
-                  // caa_glsubheads: new FormArray([])
                 });
-                // this.disabledFormControll();
               },
               (err) => {
                 this.error = err;
@@ -1100,7 +1096,7 @@ onRemoveExceptions(i:any){
                   duration: 3000,
                   panelClass: ['red-snackbar', 'login-snackbar'],
                 });
-                // this.ngZone.run(() => this.router.navigateByUrl(''));
+               
               }
             );
         } else if (this.function_type == 'M-Modify') {
@@ -1125,46 +1121,24 @@ onRemoveExceptions(i:any){
                   // caa_scheme_type: [this.results.caa_scheme_type],
                   caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
                   //General Details
-                  caa_effective_from_date: [
-                    this.results.caa_effective_from_date,
-                  ],
+                  caa_effective_from_date: [this.results.caa_effective_from_date],
                   caa_effective_to_date: [this.results.caa_effective_to_date],
-                  caa_system_generated_no: [
-                    this.results.caa_system_generated_no,
-                  ],
-                  caa_principal_lossline_ac: [
-                    this.results.caa_principal_lossline_ac,
-                  ],
-                  caa_recovery_lossline_ac: [
-                    this.results.caa_recovery_lossline_ac,
-                  ],
+                  caa_system_generated_no: [this.results.caa_system_generated_no],
+                  caa_principal_lossline_ac: [this.results.caa_principal_lossline_ac],
+                  caa_recovery_lossline_ac: [this.results.caa_recovery_lossline_ac, ],
                   caa_charge_off_ac: [this.results.caa_charge_off_ac],
                   caa_number_generation: [this.results.caa_number_generation],
                   caa_system_gen_no: [this.results.caa_system_gen_no],
-                  caa_number_generation_code: [
-                    this.results.caa_number_generation_code,
-                  ],
+                  caa_number_generation_code: [this.results.caa_number_generation_code,],
                   //interest details
                   caa_pl_ac_ccy: [this.results.caa_pl_ac_ccy],
-                  caa_int_receivale_applicable: [
-                    this.results.caa_int_receivale_applicable,
-                  ],
-                  caa_normal_int_receivable_ac: [
-                    this.results.caa_normal_int_receivable_ac,
-                  ],
-                  caa_penal_int_receivable_ac: [
-                    this.results.caa_penal_int_receivable_ac,
-                  ],
-                  caa_normal_int_received_ac: [
-                    this.results.caa_normal_int_received_ac,
-                  ],
-                  caa_penal_int_received_ac: [
-                    this.results.caa_penal_int_received_ac,
-                  ],
+                  caa_int_receivale_applicable: [this.results.caa_int_receivale_applicable],
+                  caa_normal_int_receivable_ac: [this.results.caa_normal_int_receivable_ac ],
+                  caa_penal_int_receivable_ac: [ this.results.caa_penal_int_receivable_ac, ],
+                  caa_normal_int_received_ac: [ this.results.caa_normal_int_received_ac,],
+                  caa_penal_int_received_ac: [ this.results.caa_penal_int_received_ac],
                   caa_advance_int_ac: [this.results.caa_advance_int_ac],
-                  caa_dr_int_compounding_freq: [
-                    this.results.caa_dr_int_compounding_freq,
-                  ],
+                  caa_dr_int_compounding_freq: [ this.results.caa_dr_int_compounding_freq,],
                   caa_int_cal_freq_dr_week: [
                     this.results.caa_int_cal_freq_dr_week,
                   ],
@@ -1241,7 +1215,6 @@ onRemoveExceptions(i:any){
               },
               (err) => {
                 this.error = err;
-                // this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
                 this._snackBar.open(this.error, 'Try again!', {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
@@ -1399,7 +1372,6 @@ onRemoveExceptions(i:any){
                   duration: 3000,
                   panelClass: ['red-snackbar', 'login-snackbar'],
                 });
-                // this.ngZone.run(() => this.router.navigateByUrl(''));
               }
             );
         } else if (this.function_type == 'X-Delete') {
@@ -1547,7 +1519,6 @@ onRemoveExceptions(i:any){
                   duration: 3000,
                   panelClass: ['red-snackbar', 'login-snackbar'],
                 });
-                // this.ngZone.run(() => this.router.navigateByUrl(''));
               }
             );
         }
@@ -1607,7 +1578,7 @@ onRemoveExceptions(i:any){
                 duration: 3000,
                 panelClass: ['green-snackbar', 'login-snackbar'],
               });
-            this.router.navigateByUrl('system/configurations/product/current-scheme/maintenance')
+            this.router.navigate(['system/configurations/product/current-scheme/maintenance'], {skipLocationChange:true})
 
             },
 
@@ -1634,7 +1605,7 @@ onRemoveExceptions(i:any){
                 duration: 3000,
                 panelClass: ['green-snackbar', 'login-snackbar'],
               });
-              this.router.navigateByUrl('system/configurations/product/current-scheme/maintenance')
+              this.router.navigate(['system/configurations/product/current-scheme/maintenance'], {skipLocationChange:true})
 
             },
             (err) => {

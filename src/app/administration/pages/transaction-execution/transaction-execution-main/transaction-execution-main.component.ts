@@ -430,7 +430,7 @@ export class TransactionExecutionMainComponent implements OnInit {
         }
       }
       this.submitted = true;
-      this.router.navigate(['system/transactions/maintenance']);
+      this.router.navigate(['system/transactions/maintenance'], {skipLocationChange:true});
 
     }
     else {

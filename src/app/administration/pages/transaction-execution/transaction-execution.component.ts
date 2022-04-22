@@ -91,7 +91,7 @@ export class TransactionExecutionComponent implements OnInit {
    this.submitted = true;
    if(this.formData.valid){
     this.transactionAPI.changeMessage(this.formData.value)
-    this.router.navigate(['system/transactions/cash/data/view']);
+    this.router.navigate(['system/transactions/cash/data/view'], {skipLocationChange:true});
    }
 
   }

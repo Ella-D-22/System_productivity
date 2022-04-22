@@ -81,7 +81,7 @@ export class GlCodeComponent implements OnInit {
         this.message = message;
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+          this.router.navigate(['system/configurations/global/gl-code/maintenance'], {skipLocationChange:true})
         }else{
           null;
         }
@@ -160,7 +160,7 @@ export class GlCodeComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+            this.router.navigate(['system/configurations/global/gl-code/maintenance'], {skipLocationChange:true})
           })
         }
         else if(this.function_type == "M-Modify"){          
@@ -185,7 +185,6 @@ export class GlCodeComponent implements OnInit {
             // this.formData.controls.glCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -216,7 +215,6 @@ export class GlCodeComponent implements OnInit {
             // this.formData.controls.glCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -248,7 +246,7 @@ export class GlCodeComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+              this.router.navigate(['system/configurations/global/gl-code/maintenance'], {skipLocationChange:true})
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -268,9 +266,8 @@ export class GlCodeComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
-                  // system/configurations/global/gl-code/maintenance
-              },err=>{
+                  this.router.navigate(['system/configurations/global/gl-code/maintenance'], {skipLocationChange:true})
+                },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {
                   horizontalPosition: this.horizontalPosition,

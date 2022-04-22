@@ -31,7 +31,7 @@ export class InterestMaintainanceComponent implements OnInit {
   interestTabIndex: number = 1 ;
   interestCode: string;
 
-  constructor(private router: Router,private interestService: InterestService,private dialog: MatDialog,) { }
+  constructor(private router: Router,private dialog: MatDialog,) { }
 
   ngOnInit(): void {
   }
