@@ -3,15 +3,15 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { RetailCustomerLookupComponent } from '../retail-customer-lookup/retail-customer-lookup.component';
-import { RetailCustomerService } from '../retail-customer.service';
+import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
+import { AccountsService } from '../accounts.service';
 
 @Component({
-  selector: 'app-retail-customer-maintenance',
-  templateUrl: './retail-customer-maintenance.component.html',
-  styleUrls: ['./retail-customer-maintenance.component.scss']
+  selector: 'app-accounts-maintenance',
+  templateUrl: './accounts-maintenance.component.html',
+  styleUrls: ['./accounts-maintenance.component.scss']
 })
-export class RetailCustomerMaintenanceComponent implements OnInit {
+export class AccountsMaintenanceComponent implements OnInit {
   showGroupCode: any
   existingData = false
   submitted = false
@@ -21,7 +21,7 @@ export class RetailCustomerMaintenanceComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition
   verticalPosition :MatSnackBarVerticalPosition
   constructor(
-    private retailCustAPI: RetailCustomerService,
+    private accountsAPI: AccountsService,
     private fb:FormBuilder,
     private _snackbar:MatSnackBar,
     private router:Router,
@@ -37,7 +37,11 @@ export class RetailCustomerMaintenanceComponent implements OnInit {
   formData = this.fb.group({
     function_type:[''],
     customerCode:[''],
-    customer_info:['']
+    schemeCode:[''],
+    glsubhead:[''],
+    solcode:[''],
+    ccy:[''],
+    maintenanceData:['']
   })
   get f() {return this.formData.controls; }
 
@@ -70,7 +74,7 @@ export class RetailCustomerMaintenanceComponent implements OnInit {
       this.submitted = true;
       
       if(this.formData.valid){
-        this.retailCustAPI.changeMessage(this.formData.value)
+        this.accountsAPI.changeMessage(this.formData.value)
         console.log(this.formData.value);
         
         if(this.function_type == 'A-Add'){

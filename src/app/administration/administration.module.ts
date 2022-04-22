@@ -129,6 +129,9 @@ import { ReportMaintainanceComponent } from './pages/reports/report-maintainance
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SpecificReportComponent } from './pages/reports/specific-report/specific-report.component';
 import { ViewReportComponent } from './pages/reports/view-report/view-report.component';
+import { AccountsModuleComponent } from './pages/accounts-module/accounts-module.component';
+import { AccountsMaintenanceComponent } from './pages/accounts-module/accounts-maintenance/accounts-maintenance.component';
+import { AccountsLookupComponent } from './pages/accounts-module/accounts-lookup/accounts-lookup.component';
 import { MainClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classifications.component';
 import { MainClassificationLookupComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classification-lookup/main-classification-lookup.component';
 import { MainClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classification-maintenance/main-classification-maintenance.component';
@@ -263,6 +266,9 @@ import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurati
     ReportMaintainanceComponent,
     ViewReportComponent,
     SpecificReportComponent,
+    AccountsModuleComponent,
+    AccountsMaintenanceComponent,
+    AccountsLookupComponent
     MainClassificationsComponent,
     MainClassificationLookupComponent,
     MainClassificationMaintenanceComponent,
