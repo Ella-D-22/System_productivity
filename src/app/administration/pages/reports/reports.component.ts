@@ -82,7 +82,7 @@ modifiedTime: new Date()
 
 
   submitReport(){
-    this.reportdef.query =this.query
+    this.reportdef.query ="test"
     this.reportdef.postedTime= new Date()
     this.reportdef.reportName=this.reportName
     this.reportdef.jrxmlName=this.jrxmlfile.name
@@ -100,6 +100,7 @@ modifiedTime: new Date()
     this.reportService.addReport(this.reportdef, this.jrxmlfile).subscribe(
       data =>{
         console.log(data)
+        window.alert("UPLOAD SUCCESSFUL");
       }
       )
 

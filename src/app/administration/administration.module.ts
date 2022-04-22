@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministrationComponent } from './administration.component';
 import { RouterModule } from '@angular/router';
@@ -91,7 +90,6 @@ import { GuarantosMaintenanceComponent } from './pages/SystemConfigurations/Glob
 import { LimitsComponent } from './pages/collateral-limits/limits/limits.component';
 import { LimitsMaintenanceComponent } from './pages/collateral-limits/limits/limits-maintenance/limits-maintenance.component';
 import { LimitsLookupComponent } from './pages/collateral-limits/limits/limits-lookup/limits-lookup.component';
-
 import { MainGroupComponent } from './pages/GLS/main-group/main-group.component';
 import { MainGroupMaintenanceComponent } from './pages/GLS/main-group/main-group-maintenance/main-group-maintenance.component';
 import { SubGroupMaintenanceComponent } from './pages/GLS/sub-group/sub-group-maintenance/sub-group-maintenance.component';
@@ -107,11 +105,9 @@ import { CorporateCustomerMaintenanceComponent } from './pages/CustomersComponen
 import { TransactionExecutionLookupComponent } from './pages/transaction-execution/transaction-execution-lookup/transaction-execution-lookup.component';
 import { TransactionExecutionMainComponent } from './pages/transaction-execution/transaction-execution-main/transaction-execution-main.component';
 import { TransactionExecutionComponent } from './pages/transaction-execution/transaction-execution.component';
-
 import { ShareCapitalParamsComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params.component';
 import { ShareCapitalComponent } from './pages/share-capital/share-capital.component';
 import { ShareCapitalMaintenanceComponent } from './pages/share-capital/share-capital-maintenance/share-capital-maintenance.component';
-
 import { CountriesLookupComponent } from './pages/SystemConfigurations/GlobalParams/currency-config/countries-lookup/countries-lookup.component';
 import { ShareCapitalParamsMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params-maintenance/share-capital-params-maintenance.component';
 import { ShareCapitalParamsLookupComponent } from './pages/SystemConfigurations/GlobalParams/share-capital-params/share-capital-params-lookup/share-capital-params-lookup.component';
@@ -138,8 +134,6 @@ import { MainClassificationMaintenanceComponent } from './pages/SystemConfigurat
 import { SubClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classifications.component';
 import { SubClassificationLookupComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-lookup/sub-classification-lookup.component';
 import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
-
-
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -268,7 +262,8 @@ import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurati
     SpecificReportComponent,
     AccountsModuleComponent,
     AccountsMaintenanceComponent,
-    AccountsLookupComponent
+    AccountsLookupComponent,
+    AccountsLookupComponent,
     MainClassificationsComponent,
     MainClassificationLookupComponent,
     MainClassificationMaintenanceComponent,

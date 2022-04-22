@@ -1,5 +1,5 @@
 <div class="card">
-  <p class="text-center">{{ message.reportName }}</p>
+  <h2 class="text-center">{{ message.reportName }} REPORT</h2>
   <form class="container">
     <div class="row form-group containcer-fluid">
       <div class="col-md-6" *ngIf="startDateAvailable">
@@ -42,7 +42,12 @@
           </div>
 
           <div class="col-md-1">
-            <mat-icon>search</mat-icon>
+            <button
+              class="btn btn-sm col-sm-1 search text-center"
+              type="button"
+            >
+              <i class="fas fa-search"></i>
+            </button>
           </div>
 
         </div>
@@ -80,7 +85,12 @@
           </div>
 
           <div class="col-md-1">
-            <mat-icon>search</mat-icon>
+            <button
+              class="btn btn-sm col-sm-1 search text-center"
+              type="button"
+            >
+              <i class="fas fa-search"></i>
+            </button>
           </div>
 
         </div>
@@ -100,7 +110,7 @@
 
 
   <div class="container mt-8">
-    <iframe id="pdfViewer" [src]="pdfurl" style="width: 100%; height: 450px; margin-top: 30px;"
+    <iframe id="pdfViewer" [src]="sanitizer.bypassSecurityTrustResourceUrl(testurl)" style="width: 100%; height: 450px; margin-top: 30px;"
             zindex="100" ></iframe>
   </div>
 

@@ -23,16 +23,22 @@ export class ViewReportComponent implements OnInit {
   }
   specific(report: any){
     console.log(report);
+    // this.router.navigate(['specific-report'],
+    //   {
+    //     state:
+    //
+    //       {
+    //         message: report,
+    //
+    //        }
+    //
+    //   }
+    // )
     this.router.navigate(['specific-report'],
-    {state:
-
       {
-       message : report,
-
-     }
-
-  }
-);
+        state: {message: report}
+      }
+      )
 
   }
 
