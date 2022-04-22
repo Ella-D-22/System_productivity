@@ -132,6 +132,12 @@ import { ViewReportComponent } from './pages/reports/view-report/view-report.com
 import { AccountsModuleComponent } from './pages/accounts-module/accounts-module.component';
 import { AccountsMaintenanceComponent } from './pages/accounts-module/accounts-maintenance/accounts-maintenance.component';
 import { AccountsLookupComponent } from './pages/accounts-module/accounts-lookup/accounts-lookup.component';
+import { MainClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classifications.component';
+import { MainClassificationLookupComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classification-lookup/main-classification-lookup.component';
+import { MainClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classification-maintenance/main-classification-maintenance.component';
+import { SubClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classifications.component';
+import { SubClassificationLookupComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-lookup/sub-classification-lookup.component';
+import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
 
 
 @NgModule({
@@ -262,7 +268,13 @@ import { AccountsLookupComponent } from './pages/accounts-module/accounts-lookup
     SpecificReportComponent,
     AccountsModuleComponent,
     AccountsMaintenanceComponent,
-    AccountsLookupComponent
+    AccountsLookupComponent,
+    MainClassificationsComponent,
+    MainClassificationLookupComponent,
+    MainClassificationMaintenanceComponent,
+    SubClassificationsComponent,
+    SubClassificationLookupComponent,
+    SubClassificationMaintenanceComponent
 
   ],
   imports: [

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ReportDefination } from './interfaces/report-defination'
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable, Subject} from 'rxjs';
 import { DownloadRequest } from './interfaces/downloadRequest'
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({

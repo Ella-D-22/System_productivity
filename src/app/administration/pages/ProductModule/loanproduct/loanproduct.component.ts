@@ -15,6 +15,8 @@ import { EventTypeLookupComponent } from '../../SystemConfigurations/ChargesPara
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 import { ExceptionsCodesLookupComponent } from '../../SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-lookup/exceptions-codes-lookup.component';
 import { GlSubheadLookupComponent } from '../../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
+import { MainClassificationService } from '../../SystemConfigurations/GlobalParams/main-classifications/main-classification.service';
+import { SegmentsService } from '../../SystemConfigurations/GlobalParams/segments/segments.service';
 import { LoanproductService } from './loanproduct.service';
 
 @Component({
@@ -471,7 +473,8 @@ ac_debit_balance_Lookup(): void {
     private tokenStorage: TokenStorageService,
     private loanproductAPI:LoanproductService,
     private accountsAPI: LoanAccountService,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    private mainAPI:MainClassificationService,
 
     ) { }
         chronologicalOrderArray = new Array();
@@ -506,6 +509,7 @@ ac_debit_balance_Lookup(): void {
       ngOnInit() {
         this.iniChronologicalList();
         this.getPage();
+        this.getData()
       }
       feeArray= new Array();
       glSubheadArray = new Array();
@@ -593,20 +597,17 @@ ac_debit_balance_Lookup(): void {
         laa_equated_installment:[''],
         laa_equated_inst:[''],
         laa_ei_formula:[''],
-        laa_ei_round_off:[''],
         laa_int_comp_freq:[''],
-        laa_ei_payment_freq:[''],
         laa_int_rest_freq:[''],
-        laa_ei_rest_basis:[''],
         laa_outstanding_amt_aft_lst_inst:[''],
-        laa_ipr_based_apportioning:[''],
         laa_savings_home_loan:[''],
         laa_differential_rate_loans:[''],
         laa_shift_inst_for_holiday:[''],
         laa_maturity_date_if_hldy:[''],
         laa_upfront_int_based_on_int_coll:[''],
         laa_discounted_int:[''],
-        laa_dpd:[''],
+        laa_dpd_from:[''],
+        laa_dpd_to:[''],
         laa_class_main:[''],
         laa_class_sub:[''],
         laa_int_accrue:[''],
@@ -640,6 +641,35 @@ ac_debit_balance_Lookup(): void {
 
                });
               //  Form ends
+
+  //Getting the classifications
+
+  classficationData:any
+  subClassificationData:any
+  subClassifications:any
+  getData(){
+    this.subscription = this.mainAPI.getAllMainClassifications().subscribe(
+      res =>{
+        this.classficationData = res
+      }
+    )
+  }
+
+  onInputSelection(event:any){
+    let main_code = event.target.value
+    this.subscription = this.mainAPI.getMainClassificationByCode(main_code).subscribe(
+      res =>{
+        this.subClassificationData =res
+        console.log("data", this.subClassificationData);
+        
+        this.subClassifications = this.subClassificationData.subClassifications  
+      }
+    )
+    
+
+  }
+
+
 
          feeFormData = this.fb.group({
                   laa_fee_type:[''],
@@ -959,22 +989,19 @@ ac_debit_balance_Lookup(): void {
             laa_grace_prd_for_penal_int_ddd:[''],
             laa_equated_installment:[''],
             laa_equated_inst:[''],
-            laa_ei_formula:[''],
-            laa_ei_round_off:[''],
             laa_int_comp_freq:[''],
-            laa_ei_payment_freq:[''],
             laa_int_rest_freq:[''],
-            laa_ei_rest_basis:[''],
             laa_outstanding_amt_aft_lst_inst:[''],
-            laa_ipr_based_apportioning:[''],
             laa_savings_home_loan:[''],
             laa_differential_rate_loans:[''],
             laa_shift_inst_for_holiday:[''],
             laa_maturity_date_if_hldy:[''],
             laa_upfront_int_based_on_int_coll:[''],
             laa_discounted_int:[''],
-            laa_dpd:[''],
+            laa_dpd_from:[''],
+            laa_dpd_to:[''],  
             laa_class_main:[''],
+            laa_ei_formula:[''],
             laa_class_sub:[''],
             laa_int_accrue:[''],
             laa_int_book:[''],
@@ -1105,20 +1132,17 @@ ac_debit_balance_Lookup(): void {
               laa_equated_installment:[this.results.laa_equated_installment],
               laa_equated_inst:[this.results.laa_equated_inst],
               laa_ei_formula:[this.results.laa_ei_formula],
-              laa_ei_round_off:[this.results.laa_ei_round_off],
               laa_int_comp_freq:[this.results.laa_int_comp_freq],
-              laa_ei_payment_freq:[this.results.laa_ei_payment_freq],
               laa_int_rest_freq:[this.results.laa_int_rest_freq],
-              laa_ei_rest_basis:[this.results.laa_ei_rest_basis],
               laa_outstanding_amt_aft_lst_inst:[this.results.laa_outstanding_amt_aft_lst_inst],
-              laa_ipr_based_apportioning:[this.results.laa_ipr_based_apportioning],
               laa_savings_home_loan:[this.results.laa_savings_home_loan],
               laa_differential_rate_loans:[this.results.laa_differential_rate_loans],
               laa_shift_inst_for_holiday:[this.results.laa_shift_inst_for_holiday],
               laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
               laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
               laa_discounted_int:[this.results.laa_discounted_int],
-              laa_dpd:[this.results.laa_dpd],
+              laa_dpd_from:[this.results.laa_dpd_from],
+              laa_dpd_to:[this.results.laa_dpd_to],
               laa_class_main:[this.results.laa_class_main],
               laa_class_sub:[this.results.laa_class_sub],
               laa_int_accrue:[this.results.laa_int_accrue],
@@ -1255,20 +1279,17 @@ ac_debit_balance_Lookup(): void {
               laa_equated_installment:[this.results.laa_equated_installment],
               laa_equated_inst:[this.results.laa_equated_inst],
               laa_ei_formula:[this.results.laa_ei_formula],
-              laa_ei_round_off:[this.results.laa_ei_round_off],
               laa_int_comp_freq:[this.results.laa_int_comp_freq],
-              laa_ei_payment_freq:[this.results.laa_ei_payment_freq],
               laa_int_rest_freq:[this.results.laa_int_rest_freq],
-              laa_ei_rest_basis:[this.results.laa_ei_rest_basis],
               laa_outstanding_amt_aft_lst_inst:[this.results.laa_outstanding_amt_aft_lst_inst],
-              laa_ipr_based_apportioning:[this.results.laa_ipr_based_apportioning],
               laa_savings_home_loan:[this.results.laa_savings_home_loan],
               laa_differential_rate_loans:[this.results.laa_differential_rate_loans],
               laa_shift_inst_for_holiday:[this.results.laa_shift_inst_for_holiday],
               laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
               laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
               laa_discounted_int:[this.results.laa_discounted_int],
-              laa_dpd:[this.results.laa_dpd],
+              laa_dpd_from:[this.results.laa_dpd_from],
+              laa_dpd_to:[this.results.laa_dpd_to],
               laa_class_main:[this.results.laa_class_main],
               laa_class_sub:[this.results.laa_class_sub],
               laa_int_accrue:[this.results.laa_int_accrue],
@@ -1415,20 +1436,17 @@ ac_debit_balance_Lookup(): void {
               laa_equated_installment:[this.results.laa_equated_installment],
               laa_equated_inst:[this.results.laa_equated_inst],
               laa_ei_formula:[this.results.laa_ei_formula],
-              laa_ei_round_off:[this.results.laa_ei_round_off],
               laa_int_comp_freq:[this.results.laa_int_comp_freq],
-              laa_ei_payment_freq:[this.results.laa_ei_payment_freq],
               laa_int_rest_freq:[this.results.laa_int_rest_freq],
-              laa_ei_rest_basis:[this.results.laa_ei_rest_basis],
               laa_outstanding_amt_aft_lst_inst:[this.results.laa_outstanding_amt_aft_lst_inst],
-              laa_ipr_based_apportioning:[this.results.laa_ipr_based_apportioning],
               laa_savings_home_loan:[this.results.laa_savings_home_loan],
               laa_differential_rate_loans:[this.results.laa_differential_rate_loans],
               laa_shift_inst_for_holiday:[this.results.laa_shift_inst_for_holiday],
               laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
               laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
               laa_discounted_int:[this.results.laa_discounted_int],
-              laa_dpd:[this.results.laa_dpd],
+              laa_dpd_from:[this.results.laa_dpd_from],
+              laa_dpd_to:[this.results.laa_dpd_to],
               laa_class_main:[this.results.laa_class_main],
               laa_class_sub:[this.results.laa_class_sub],
               laa_int_accrue:[this.results.laa_int_accrue],
@@ -1573,20 +1591,18 @@ ac_debit_balance_Lookup(): void {
               laa_equated_installment:[this.results.laa_equated_installment],
               laa_equated_inst:[this.results.laa_equated_inst],
               laa_ei_formula:[this.results.laa_ei_formula],
-              laa_ei_round_off:[this.results.laa_ei_round_off],
+
               laa_int_comp_freq:[this.results.laa_int_comp_freq],
-              laa_ei_payment_freq:[this.results.laa_ei_payment_freq],
               laa_int_rest_freq:[this.results.laa_int_rest_freq],
-              laa_ei_rest_basis:[this.results.laa_ei_rest_basis],
               laa_outstanding_amt_aft_lst_inst:[this.results.laa_outstanding_amt_aft_lst_inst],
-              laa_ipr_based_apportioning:[this.results.laa_ipr_based_apportioning],
               laa_savings_home_loan:[this.results.laa_savings_home_loan],
               laa_differential_rate_loans:[this.results.laa_differential_rate_loans],
               laa_shift_inst_for_holiday:[this.results.laa_shift_inst_for_holiday],
               laa_maturity_date_if_hldy:[this.results.laa_maturity_date_if_hldy],
               laa_upfront_int_based_on_int_coll:[this.results.laa_upfront_inst_coll],
               laa_discounted_int:[this.results.laa_discounted_int],
-              laa_dpd:[this.results.laa_dpd],
+              laa_dpd_from:[this.results.laa_dpd_from],
+              laa_dpd_to:[this.results.laa_dpd_to],
               laa_class_main:[this.results.laa_class_main],
               laa_class_sub:[this.results.laa_class_sub],
               laa_int_accrue:[this.results.laa_int_accrue],

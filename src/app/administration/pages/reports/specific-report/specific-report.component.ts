@@ -15,6 +15,7 @@ export class SpecificReportComponent implements OnInit {
 
   request!: DownloadRequest;
   pdfurl!: any;
+  testurl!: any;
 
   params!: any;
 
@@ -38,7 +39,7 @@ export class SpecificReportComponent implements OnInit {
     "KIAMBU","THIKA","KERICHO","NAIROBI"
   ]
 
-  constructor(private router: Router, private reportservice:ReportService,protected sanitizer: DomSanitizer,) {
+  constructor(private router: Router, private reportservice:ReportService,public sanitizer: DomSanitizer,) {
     this.message = this.router.getCurrentNavigation()!.extras.state!['message']
     this.params={}
    }
@@ -106,12 +107,16 @@ console.log("chege", this.request)
   this.reportservice.downloadReport(this.request).subscribe(response => {
       console.log(response);
 
-      let url = window.URL.createObjectURL(response.data);
-      this.pdfurl=this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      this.testurl = window.URL.createObjectURL(response.data);
+      //this.pdfurl=this.sanitizer.bypassSecurityTrustResourceUrl(this.testurl);
     }, error => {
       console.log(error);
     }
   )
 }
+
+  pdfURL() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.testurl);
+  }
 
 }
