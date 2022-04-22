@@ -30,20 +30,19 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="row" *ngIf="showSubSegmentId">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <label for="" class="start pull-left">Sub Segment Code<span class="warning">*</span></label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" formControlName="subSegmentCode" class="form-control">
-                            <mat-icon (click)="subSegmentLookup()">search</mat-icon>
-                        </div>
+           <div class="row">
+            <div class="col-md-6 col-sm-12" *ngIf="showSubSegmentId">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <label for="" class="start pull-left">Sub Segment Code<span class="warning">*</span></label>
+                    </div>
+                    <div class="col-md-6 col-sm-12 form-column">
+                        <input type="text" formControlName="subSegmentCode" class="form-control">
+                        <mat-icon (click)="subSegmentLookup()">search</mat-icon>
                     </div>
                 </div>
             </div>
+           </div>
             <br>
             <button mat-raised-button color="primary" type="submit" class="pull-right">GO</button>
         </form>
