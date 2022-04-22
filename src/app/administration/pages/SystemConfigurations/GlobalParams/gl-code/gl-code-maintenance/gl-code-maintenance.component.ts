@@ -5,12 +5,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
-import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
-import { LinkedorganizationService } from '../../linked-organization/linkedorganization.service';
-import { LinkedOrganizationLookupComponent } from '../../linked-organization/linked-organization-lookup/linked-organization-lookup.component';
-import { SchemeTypeService } from '../../scheme-type/scheme-type.service';
-import { SchemeTypeLookupComponent } from '../../scheme-type/scheme-type-lookup/scheme-type-lookup.component';
 import { GlCodeLookupComponent } from '../gl-code-lookup/gl-code-lookup.component';
 import { GlCodeService } from '../gl-code.service';
 

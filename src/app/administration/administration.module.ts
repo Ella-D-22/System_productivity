@@ -268,7 +268,7 @@ import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurati
     SpecificReportComponent,
     AccountsModuleComponent,
     AccountsMaintenanceComponent,
-    AccountsLookupComponent
+    AccountsLookupComponent,
     MainClassificationsComponent,
     MainClassificationLookupComponent,
     MainClassificationMaintenanceComponent,

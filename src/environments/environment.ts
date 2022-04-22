@@ -8,7 +8,7 @@ export const environment = {
     // accountAPI: 'http://localhost:9091/account-service',
     // accountAPI: 'http://localhost:9099/account-service',
     // accountAPI: 'http://localhost:9099',
-    productAPI: 'http://localhost:9100',
+    // productAPI: 'http://localhost:9100',
     // collateralAPI: 'http://localhost:9091/collateral-service',
     // systemAPI: 'http://localhost:9091/system-service',
     // branchAPI: 'http://localhost:9091/branch-service',
@@ -26,7 +26,7 @@ export const environment = {
 
     userAPI: 'http://52.15.152.26:9091',
     accountAPI: 'http://52.15.152.26:9091/account-service',
-    // productAPI: 'http://52.15.152.26:9091/product-service',
+    productAPI: 'http://52.15.152.26:9091/product-service',
     collateralAPI: 'http://52.15.152.26:9091/collateral-service',
     systemAPI: 'http://52.15.152.26:9091/system-service',
     branchAPI: 'http://52.15.152.26:9091/branch-service',
