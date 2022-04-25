@@ -8,6 +8,7 @@ import { BranchesLookupComponent } from '../../branches/branches-lookup/branches
 import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
 import { MainGroupLookupComponent } from '../main-group/main-group-lookup/main-group-lookup.component';
 import { SubGroupService } from './sub-group.service';
+import { TransferMemberComponent } from './transfer-member/transfer-member.component';
 
 @Component({
   selector: 'app-sub-group',
@@ -15,6 +16,9 @@ import { SubGroupService } from './sub-group.service';
   styleUrls: ['./sub-group.component.scss']
 })
 export class SubGroupComponent implements OnInit {
+  operationArray:any = [
+    'Transfer Member', 'Exit Member', 'Reinstate Member'
+  ]
   isEnabled =  false
   subscription:Subscription
   horizontalPosition:MatSnackBarHorizontalPosition
@@ -160,6 +164,8 @@ export class SubGroupComponent implements OnInit {
       this.formData.controls.treasurer.setValue(this.dialogData.customer_code)
     })
   }
+
+
   getPage(){
     this.subscription = this.subService.currentMessage.subscribe(
       message =>{
@@ -439,6 +445,18 @@ export class SubGroupComponent implements OnInit {
         }
       }
     )
+  }
+
+  onSelectOperation(e:any){
+    
+  }
+  onTransferMember(e:any){
+    const dialogRef =  this.dialog.open(TransferMemberComponent,{
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.dialogData = results.data;
+      this.formData.controls.subGroupCode.setValue(results.data.subGroupCode)
+    })
   }
   onSubmit(){ 
     if(this.formData.valid){

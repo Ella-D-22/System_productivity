@@ -8,7 +8,7 @@ export const environment = {
     // accountAPI: 'http://localhost:9091/account-service',
     // accountAPI: 'http://localhost:9099/account-service',
     // accountAPI: 'http://localhost:9099',
-    productAPI: 'http://localhost:9100',
+    // productAPI: 'http://localhost:9100',
     // collateralAPI: 'http://localhost:9091/collateral-service',
     // systemAPI: 'http://localhost:9091/system-service',
     // branchAPI: 'http://localhost:9091/branch-service',
@@ -23,12 +23,11 @@ export const environment = {
     // menutreeAPI: 'http://localhost:9091/menutree-service',
     // reportAPI:'http://localhost:9091/report-service',
     // glsAPI: 'http://localhost:9910/group-service',
-    reportAPI:'http://localhost:9094',
-
+    // reportAPI:'https://localhost:9094',
 
     userAPI: 'http://52.15.152.26:9091',
     accountAPI: 'http://52.15.152.26:9091/account-service',
-    // productAPI: 'http://52.15.152.26:9091/product-service',
+    productAPI: 'http://52.15.152.26:9091/product-service',
     collateralAPI: 'http://52.15.152.26:9091/collateral-service',
     systemAPI: 'http://52.15.152.26:9091/system-service',
     branchAPI: 'http://52.15.152.26:9091/branch-service',
@@ -41,10 +40,9 @@ export const environment = {
     groupAPI: 'http://52.15.152.26:9091/group-service',
     interestCalculatorAPI: 'http://52.15.152.26:9091/interest-calculator-service',
     menutreeAPI: 'http://52.15.152.26:9091/menutree-service',
-    // reportAPI:'http://52.15.152.26:9091/report-service',
+    reportAPI:'http://52.15.152.26:9091/report-service',
     glsAPI: 'http://52.15.152.26:9091/group-service',
     countryAPI: 'https://restcountries.com/v3.1/all'
-    
 };
 
 /*

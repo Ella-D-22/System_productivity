@@ -1,0 +1,67 @@
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <div>Transfer Member</div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form action="" [formGroup]="formData" #resetRequestsForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left" for="">From Main Group Code<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" class="form-control" formControlName="subGroupCode" [attr.disabled]="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left" for="">From SubGroup Code<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" class="form-control" formControlName="subGroupCode" [attr.disabled]="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left" for="">To Main Group Code<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" class="form-control" formControlName="subGroupCode"
+                                oninput="this.value=this.value.toUpperCase()"
+                                [ngClass]="{'is-invalid': submitted && f.subgroup_code.errors}">
+                            <mat-icon (click)="mainGroupLookup()">search</mat-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left" for="">To SubGroup Code<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <select formControlName="function_type" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}"
+                            >
+                            <option disabled>--Choose A function--</option>
+                            <option *ngFor="let item of functionArray" [value]="item">{{item}}</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button mat-raised-button color="default" routerLink="../../maintenance" type="submit">Back</button>
+            <button mat-raised-button color="primary" type="submit" class="pull-right"
+               >Submit</button>
+        </form>
+    </div>
+</mat-card>
