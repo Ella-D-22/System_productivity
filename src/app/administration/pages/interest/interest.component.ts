@@ -27,13 +27,13 @@ export class InterestComponent implements OnInit {
   verticalPosition : MatSnackBarVerticalPosition = 'top';
   loading: any=false
 
-  
+
   code!: any;
 
   interest!: Interest;
 
   rinterest!: Interest;
-  
+
   sn!: number;
   interestCode!: string;
   currency!: string;
@@ -42,6 +42,8 @@ export class InterestComponent implements OnInit {
   fullDiff: string = 'F';
   dlength: number;
   clength: number;
+
+  penalInterest!: number;
 
   cfrom!: number;
   cto!: number;
@@ -77,7 +79,7 @@ export class InterestComponent implements OnInit {
         this.interestservice.retriveInterestDefinition(this.code.code).subscribe(
           (data)=>{
             this.rinterest=data
-    
+
             for (let csl of this.rinterest.amountSlabs) {
               if(csl.drCr=="D"){
                 this.rdSlabs.push(csl)
@@ -90,7 +92,7 @@ export class InterestComponent implements OnInit {
           },
           (error)=>{
      console.log("error");
-     
+
           }
         )
       }
@@ -99,10 +101,10 @@ export class InterestComponent implements OnInit {
       this.interest = { amountSlabs: [] };
       this.cslab = { fromAmount: 0, drCr: 'C' };
       this.dslab = { fromAmount: 0, drCr: 'D' };
-  
+
       this.dslabs.push(this.dslab);
       this.cslabs.push(this.cslab);
-  
+
       this.dlength = this.dslabs.length;
       this.clength = this.cslabs.length;
      }
@@ -154,6 +156,8 @@ export class InterestComponent implements OnInit {
     this.interest.fullDiff = this.fullDiff;
     this.interest.startDate = this.startDate;
     this.interest.endDate = this.endDate;
+
+    this.interest.penalInterest=this.penalInterest;
 
     this.interest.postedBy = 'KAMAU';
     this.interest.postedFlag = 'Y';
@@ -313,7 +317,6 @@ export class InterestComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.currency_name = result.data.ccy_name;
       this.currency = result.data.ccy;
-      //this.formData.controls.chrg_calc_crncy.setValue(result.data);
     });
   }
 }

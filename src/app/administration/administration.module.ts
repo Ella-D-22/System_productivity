@@ -264,7 +264,6 @@ import { TransferMemberComponent } from './pages/GLS/sub-group/transfer-member/t
     AccountsModuleComponent,
     AccountsMaintenanceComponent,
     AccountsLookupComponent,
-    AccountsLookupComponent,
     MainClassificationsComponent,
     MainClassificationLookupComponent,
     MainClassificationMaintenanceComponent,

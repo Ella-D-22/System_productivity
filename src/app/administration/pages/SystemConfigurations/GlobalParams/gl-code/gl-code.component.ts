@@ -52,6 +52,7 @@ export class GlCodeComponent implements OnInit {
   formn: any;
   formcontrOrg: any;
   infosecdes: any;
+  classification: any;
 
   prioritizationArray: any = [
     'Customer Level','Account Level','Charge Level','Contract Level'
@@ -74,14 +75,14 @@ export class GlCodeComponent implements OnInit {
       this.getPage();
     }
 
-    
-    
+
+
     redirectToMaintenancePage(){
       this.subscription = this.glcodeAPI.currentMessage.subscribe(message=>{
         this.message = message;
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
-          this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+          this.router.navigate(['system/configurations/global/gl-code/maintenance'], {skipLocationChange:true})
         }else{
           null;
         }
@@ -111,17 +112,19 @@ export class GlCodeComponent implements OnInit {
       }
       getPage(){
         this.subscription = this.glcodeAPI.currentMessage.subscribe(message =>{
-          this.messageData = message;      
+          this.messageData = message;
           this.function_type = this.messageData.function_type
           this.glCode = this.messageData.glCode
+          this.classification=this.messageData.classification
         if(this.function_type == "A-Add"){
-          
+
           // open empty forms
           this.formData.controls.glCode.setValue(this.glCode)
-          
+
           this.formData = this.fb.group({
             glCode:[this.glCode, [Validators.required]],
             glDescription:[''],
+            classification:[this.classification],
             modifiedBy:[''],
             modifiedTime:[''],
             postedBy:[this.auth_user],
@@ -142,15 +145,16 @@ export class GlCodeComponent implements OnInit {
           // hide Buttons
           this.isEnabled = false;
           console.log("this is the code", this.glCode);
-          
+
           this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res=>{
-            
+
             this.results = res;
             console.log("this is the res", res);
-            
+
             this.formData = this.fb.group({
               glCode:[this.glCode, [Validators.required]],
               glDescription:[this.results.entity.glDescription],
+              classification:[this.results.entity.classification],
             });
           }, err=>{
             this.error = err;
@@ -160,10 +164,10 @@ export class GlCodeComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+            this.router.navigate(['system/configurations/global/gl-code/maintenance'], {skipLocationChange:true})
           })
         }
-        else if(this.function_type == "M-Modify"){          
+        else if(this.function_type == "M-Modify"){
           this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res=>{
             this.results = res;
             this.formData = this.fb.group({
@@ -172,6 +176,7 @@ export class GlCodeComponent implements OnInit {
               deletedTime: [this.results.entity.deletedTime],
               glCode: [this.results.entity.glCode],
               glDescription: [this.results.entity.glDescription],
+              classification:[this.results.entity.classification],
               modifiedBy: [this.auth_user],
               modifiedTime: [this.results.entity.modifiedTime],
               postedBy: [this.results.entity.postedBy],
@@ -185,7 +190,6 @@ export class GlCodeComponent implements OnInit {
             // this.formData.controls.glCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -203,6 +207,7 @@ export class GlCodeComponent implements OnInit {
               deletedTime: [this.results.entity.deletedTime],
               glCode: [this.results.entity.glCode],
               glDescription: [this.results.entity.glDescription],
+              classification:[this.results.entity.classification],
               modifiedBy: [this.results.entity.modifiedBy],
               modifiedTime: [this.results.entity.modifiedTime],
               postedBy: [this.results.entity.postedBy],
@@ -216,7 +221,6 @@ export class GlCodeComponent implements OnInit {
             // this.formData.controls.glCode.disable();
           }, err=>{
             this.error = err;
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -227,7 +231,7 @@ export class GlCodeComponent implements OnInit {
         }
         else if(this.function_type == "C-Cancle"){
           // should open a page with data and show remove button
-        } 
+        }
       })
       }
       // convenience getter for easy access to form fields
@@ -241,14 +245,14 @@ export class GlCodeComponent implements OnInit {
             this.subscription = this.glcodeAPI.createGlcode(this.formData.value).subscribe(res=>{
               this.results = res;
               console.log("message respond",res);
-              
+
                 this._snackBar.open("Executed Successfully!", "X", {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
+              this.router.navigate(['system/configurations/global/gl-code/maintenance'], {skipLocationChange:true})
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -268,9 +272,8 @@ export class GlCodeComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-              this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
-                  // system/configurations/global/gl-code/maintenance
-              },err=>{
+                  this.router.navigate(['system/configurations/global/gl-code/maintenance'], {skipLocationChange:true})
+                },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {
                   horizontalPosition: this.horizontalPosition,
@@ -278,7 +281,7 @@ export class GlCodeComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['red-snackbar','login-snackbar'],
                 });
-              })  
+              })
             }
           }else{
             this._snackBar.open("Invalid Form Data", "Try again!", {
@@ -288,5 +291,5 @@ export class GlCodeComponent implements OnInit {
               panelClass: ['red-snackbar','login-snackbar'],
             });
           }
-      }  
+      }
   }

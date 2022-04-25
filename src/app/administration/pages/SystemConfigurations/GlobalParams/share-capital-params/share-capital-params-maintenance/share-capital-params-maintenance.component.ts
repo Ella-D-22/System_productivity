@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, NgZone, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router} from '@angular/router';
 import { ShareCapitalParamsService } from '../share-capital-params.service';
 
 @Component({
@@ -17,12 +15,8 @@ export class ShareCapitalParamsMaintenanceComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    private ngZone: NgZone,
     private _snackBar: MatSnackBar,
-    private http: HttpClient,
-    private actRoute: ActivatedRoute,
     private shareCapitalParams: ShareCapitalParamsService,
-    private dialog: MatDialog,
     ) { }
   ngOnInit(): void {
   }
@@ -49,7 +43,7 @@ export class ShareCapitalParamsMaintenanceComponent implements OnInit {
         this.submitted = true;
         if(this.formData.valid){
         this.shareCapitalParams.changeMessage(this.formData.value)
-        this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/share-capital/params'));
+        this.router.navigate(['system/configurations/global/share-capital/params'], {skipLocationChange:true});
       }else{
         this.loading = false;
         this._snackBar.open("Invalid Form Data", "Try again!", {

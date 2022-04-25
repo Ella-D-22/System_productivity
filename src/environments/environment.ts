@@ -24,6 +24,8 @@ export const environment = {
     // reportAPI:'http://localhost:9091/report-service',
     // glsAPI: 'http://localhost:9910/group-service',
     // reportAPI:'https://localhost:9094',
+    //reportAPI:'http://localhost:9094',
+
 
     userAPI: 'http://52.15.152.26:9091',
     accountAPI: 'http://52.15.152.26:9091/account-service',
@@ -35,7 +37,7 @@ export const environment = {
     transactionexecutorAPI:'http://52.15.152.26:9091/transaction-executor-service',
     alertAPI: 'http://52.15.152.26:9091/alert-service',
     chargeAPI: 'http://52.15.152.26:9091/charge-service',
-    customerAPI:'http://52.15.152.26:9091/customer-service', 
+    customerAPI:'http://52.15.152.26:9091/customer-service',
     eodAPI:'http://52.15.152.26:9091/eod-service',
     groupAPI: 'http://52.15.152.26:9091/group-service',
     interestCalculatorAPI: 'http://52.15.152.26:9091/interest-calculator-service',

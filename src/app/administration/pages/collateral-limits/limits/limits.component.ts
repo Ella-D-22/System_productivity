@@ -52,7 +52,7 @@ export class LimitsComponent implements OnInit {
       this.message = message;
       if( this.message == "default message"){
         // Redirect to maintenace if no action header
-        this.ngZone.run(() => this.router.navigateByUrl('system/configurations/collateral-limits/Limits/maintenance'));
+        this.router.navigate(['system/configurations/collateral-limits/Limits/maintenance'], {skipLocationChange:true});
       }else{
         null;
       }
@@ -236,7 +236,7 @@ export class LimitsComponent implements OnInit {
                 this.nonFundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Non Fundbased');
             
             },err =>{
-              this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
+              this.router.navigate(["system/configurations/collateral-limits/Limits/maintenance"], {skipLocationChange:true})
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
                 horizontalPosition:'end',
@@ -286,7 +286,6 @@ export class LimitsComponent implements OnInit {
               this.nonFundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Non Fundbased');
 
             }, err =>{
-              this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
                 horizontalPosition:'end',
@@ -336,7 +335,6 @@ export class LimitsComponent implements OnInit {
               this.nonFundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Non Fundbased');
             },
             err =>{
-              this.router.navigateByUrl("")
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
                 horizontalPosition:'end',
@@ -384,7 +382,6 @@ export class LimitsComponent implements OnInit {
               this.nonFundedLimitsArray =  this.results.limit_nodes.filter(d => d.limit_node_category === 'Non Fundbased');
             },
             err =>{
-              this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
                 horizontalPosition:'end',
@@ -513,7 +510,7 @@ export class LimitsComponent implements OnInit {
               duration:3000,
               panelClass:['green-snackbar', 'login-snackbar']
             });
-            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
+            this.router.navigate(["system/configurations/collateral-limits/Limits/maintenance"], {skipLocationChange:true})
           },
           err =>{
             this.error = err
@@ -541,7 +538,7 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
+            this.router.navigate(["system/configurations/collateral-limits/Limits/maintenance"], {skipLocationChange:true})
 
           },
           err =>{
@@ -568,7 +565,7 @@ export class LimitsComponent implements OnInit {
               panelClass:['green-snackbar', 'login-snackbar']
 
             });
-            this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
+            this.router.navigate(["system/configurations/collateral-limits/Limits/maintenance"],{skipLocationChange:true})
 
           },
           err =>{
@@ -588,7 +585,7 @@ export class LimitsComponent implements OnInit {
         this.isEnabled = true
       }
     }else{
-      this.router.navigateByUrl("system/configurations/collateral-limits/Limits/maintenance")
+      this.router.navigate(["system/configurations/collateral-limits/Limits/maintenance"], {skipLocationChange:true})
 
        this._snackbar.open("Invalid Form Data Value", "Try Again",{
          horizontalPosition:'end',

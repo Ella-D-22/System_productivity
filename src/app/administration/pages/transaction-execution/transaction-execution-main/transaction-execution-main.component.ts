@@ -475,6 +475,8 @@ export class TransactionExecutionMainComponent implements OnInit {
         }
       }
       this.submitted = true;
+      this.router.navigate(['system/transactions/maintenance'], {skipLocationChange:true});
+
     }
     else {
       this._snackBar.open("Invalid Form! Check your inputs", "Try again!", {

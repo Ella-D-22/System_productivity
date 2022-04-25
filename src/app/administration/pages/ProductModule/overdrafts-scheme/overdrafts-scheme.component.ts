@@ -1382,7 +1382,7 @@ oda_fee_cr_placeholderLookup(): void {
             duration: 3000,
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-        this.router.navigateByUrl('system/configurations/product/overdraft-scheme/maintenance');
+        this.router.navigate(['system/configurations/product/overdraft-scheme/maintenance'], {skipLocationChange:true})
 
         }, err => {
           this.error = err;
@@ -1403,7 +1403,7 @@ oda_fee_cr_placeholderLookup(): void {
             duration: 3000,
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-          this.router.navigateByUrl('system/configurations/product/overdraft-scheme/maintenance');
+          this.router.navigate(['system/configurations/product/overdraft-scheme/maintenance'], {skipLocationChange:true})
 
         }, err => {
           this.error = err;

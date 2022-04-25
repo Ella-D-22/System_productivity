@@ -931,7 +931,6 @@ onPreviewFees(){
             duration: 3000,
             panelClass: ['red-snackbar', 'login-snackbar'],
           });
-          this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
         })
       }
       else if (this.function_type == "M-Modify") {
@@ -1241,7 +1240,7 @@ onPreviewFees(){
             duration: 3000,
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-          this.router.navigateByUrl('system/configurations/product/term-deposit/maintenance');
+          this.router.navigate(['system/configurations/product/term-deposit/maintenance'], {skipLocationChange:true})
 
         }, err => {
           this.error = err;
@@ -1262,7 +1261,7 @@ onPreviewFees(){
             duration: 3000,
             panelClass: ['green-snackbar', 'login-snackbar'],
           });
-                    this.router.navigateByUrl('system/configurations/product/term-deposit/maintenance');
+          this.router.navigate(['system/configurations/product/term-deposit/maintenance'], {skipLocationChange:true})
 
         }, err => {
           this.error = err;

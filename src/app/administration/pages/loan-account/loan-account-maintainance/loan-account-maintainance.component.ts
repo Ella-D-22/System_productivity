@@ -62,22 +62,12 @@ export class LoanAccountMaintainanceComponent implements OnInit {
     customer_type: ['', [Validators.required]],
     account_code: ['',[Validators.required]],
   });
-
-
-
-  // onChange(event:any){
-  //   this.function_type = event.target.value;
-  // }
-
   onChange(event:any){
     this.function_type = event.target.value;
     if(event.target.value != "A-Add"){
     console.log(event.target.value)
-     // this.existingData = true;
-      //this.formData.controls.account_code.setValue("")
-      //this.f.account_code.setValidators([Validators.required])
+    
     }else if(event.target.value == "A-Add"){
-     // this.existingData = false;;
       this.formData.controls.account_code.setValidators([])
       this.formData.controls.account_code.setValue("");
     }
@@ -103,8 +93,7 @@ export class LoanAccountMaintainanceComponent implements OnInit {
             this.function_type =  this.f.function_type.value;
             this.account_code=this.f.account_code.value;
             if(this.function_type == "A-Add"){
-              this.router.navigate(['system/accounts/data/view'], {
-                state: this.formData.value
+              this.router.navigate(['system/accounts/data/view'], { state: this.formData.value
                   
                 
               });
@@ -152,8 +141,7 @@ export class LoanAccountMaintainanceComponent implements OnInit {
             console.log(result.data);
             // this.schemeCode = result.data.schemeCode;
             this.formData.controls.account_code.setValue(result.data.acid);
-            //this.account_code=result.data.accountCode
-            // this.schemeDescription=result.data.productDescription
+           
           });
         }
 
