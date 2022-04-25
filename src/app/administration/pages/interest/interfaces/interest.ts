@@ -7,7 +7,8 @@ export interface Interest {
     startDate?: Date,
     endDate?: Date,
     fullDiff?: string,
-    
+    penalInterest?: number;
+
     postedTime?: Date,
     postedBy?: string,
     verifiedTime?: Date,
@@ -19,5 +20,5 @@ export interface Interest {
     postedFlag?:string,
     modifiedBy?: string
     modifiedTime?: Date,
-    amountSlabs?: Slab[] 
+    amountSlabs?: Slab[]
 }

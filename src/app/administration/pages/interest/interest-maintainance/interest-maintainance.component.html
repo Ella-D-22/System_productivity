@@ -3,7 +3,7 @@
       <div>Interest Maintainance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
-  
+
     <div class="container-fluid mt-4">
       <form class="form" ngNativeValidate >
         <div class="row">
@@ -30,7 +30,7 @@
                 >
               </div>
               <div class="col-md-6 col-7 form-column">
-                <input type="text" class="form-control" oninput ="this.value=this.value.toUpperCase()"  [(ngModel)]="interestCode" name="interestCode" required/>
+                <input type="text" class="form-control" maxlength="6" oninput ="this.value=this.value.toUpperCase()"  [(ngModel)]="interestCode" name="interestCode" required/>
               </div>
               <div class="col-md-1 col-1" *ngIf="function_type!='A-Add'">
                 <mat-icon (click)="interestLookup()">search</mat-icon>
@@ -39,9 +39,9 @@
           </div>
         </div>
         <div class="row">
-          
 
-        <button class="pull-right" mat-raised-button color="primary" 
+
+        <button class="pull-right" mat-raised-button color="primary"
         (click)="navigate()" type="button">
           <span
             *ngIf="loading"
@@ -51,7 +51,7 @@
         </button>
 
         </div>
-  
+
         <br />
       </form>
     </div>
@@ -64,5 +64,4 @@
 
 
 
-  
-  
+

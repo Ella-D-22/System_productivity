@@ -23,7 +23,7 @@ export const environment = {
     // menutreeAPI: 'http://localhost:9091/menutree-service',
     // reportAPI:'http://localhost:9091/report-service',
     // glsAPI: 'http://localhost:9910/group-service',
-    reportAPI:'http://localhost:9094',
+    //reportAPI:'http://localhost:9094',
 
 
     userAPI: 'http://52.15.152.26:9091',
@@ -36,15 +36,15 @@ export const environment = {
     transactionexecutorAPI:'http://52.15.152.26:9091/transaction-executor-service',
     alertAPI: 'http://52.15.152.26:9091/alert-service',
     chargeAPI: 'http://52.15.152.26:9091/charge-service',
-    customerAPI:'http://52.15.152.26:9091/customer-service', 
+    customerAPI:'http://52.15.152.26:9091/customer-service',
     eodAPI:'http://52.15.152.26:9091/eod-service',
     groupAPI: 'http://52.15.152.26:9091/group-service',
     interestCalculatorAPI: 'http://52.15.152.26:9091/interest-calculator-service',
     menutreeAPI: 'http://52.15.152.26:9091/menutree-service',
-    // reportAPI:'http://52.15.152.26:9091/report-service',
+    reportAPI:'http://52.15.152.26:9091/report-service',
     glsAPI: 'http://52.15.152.26:9091/group-service',
     countryAPI: 'https://restcountries.com/v3.1/all'
-    
+
 };
 
 /*
