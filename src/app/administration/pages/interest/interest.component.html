@@ -13,7 +13,7 @@
       <p>{{code.code}}</p>
     </div>
   </div>
-  
+
     <mat-divider></mat-divider>
     <form class="form" (ngSubmit)="submitInterest()" >
       <div class="container-fluid mt-4">
@@ -92,12 +92,27 @@
               </div>
             </div>
           </div>
+
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                >Penal Interest<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input name="penalInterest"
+                       [(ngModel)]="penalInterest" type="number" class="form-control" />
+              </div>
+            </div>
+          </div>
+
         </div>
-  
+
         <mat-divider></mat-divider>
         <div>
           <h4 class="text-center">Credit Amount Slabs</h4>
-  
+
           <div class="row" class="row" *ngIf="fullDiff=='F'">
             <div class="col-md-3">
               <div class="form-group row mt-1">
@@ -112,7 +127,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -142,7 +157,7 @@
               </div>
             </div>
           </div>
-  
+
           <div *ngIf="fullDiff=='D'">
           <div *ngFor="let c of cslabs; let i=index">
           <div class="row">
@@ -159,7 +174,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -207,7 +222,7 @@
         <mat-divider></mat-divider>
         <div>
           <h4 class="text-center">Debit Amount Slabs</h4>
-  
+
           <div class="row" *ngIf="fullDiff=='F'">
             <div class="col-md-3">
               <div class="form-group row mt-1">
@@ -222,7 +237,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -268,7 +283,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -312,7 +327,7 @@
           </div>
           </div>
         </div>
-  
+
         <div class="row container-fluid mt-4">
           <div class="col-md-1 offset-md-10 col-4">
             <button
@@ -324,7 +339,7 @@
               Reset
             </button>
           </div>
-  
+
           <div class="col-md-1 col-4">
             <button
               mat-raised-button
@@ -338,10 +353,10 @@
       </div>
     </form>
   </mat-card>
-  
-  
+
+
   <!-- inquire -->
-  
+
   <mat-card class="container-fluid" *ngIf="code.type=='I-Inquire'" >
     <mat-card-header class="breadcrumb">
       <div>Home/Configuration/Accounts/Accounts/</div>
@@ -356,7 +371,7 @@
         <p>{{code.code}}</p>
       </div>
     </div>
-  
+
     <mat-divider></mat-divider>
     <form class="form">
       <div class="container-fluid mt-4">
@@ -397,7 +412,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input readonly name="startDate" 
+                <input readonly name="startDate"
                 type="date" class="form-control" [(ngModel)]="rinterest.startDate"/>
               </div>
             </div>
@@ -433,12 +448,25 @@
               </div>
             </div>
           </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                >Penal Interest<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input name="penalInterest" readonly
+                       [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
+              </div>
+            </div>
+          </div>
         </div>
-  
+
         <mat-divider></mat-divider>
         <div>
           <h4 class="text-center">Credit Amount Slabs</h4>
-  
+
           <div>
           <div *ngFor="let c of rcSlabs; let i=index">
           <div class="row">
@@ -455,7 +483,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -492,7 +520,7 @@
         <mat-divider></mat-divider>
         <div>
           <h4 class="text-center">Debit Amount Slabs</h4>
-  
+
           <div >
          <div *ngFor="let d of rdSlabs; let i=index">
           <div class="row">
@@ -510,7 +538,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -536,7 +564,7 @@
                     class="form-control"
                     name="drate{{i}}"
                     [(ngModel)]="d.rate"
-                    
+
                   />
                 </div>
               </div>
@@ -548,9 +576,9 @@
       </div>
     </form>
   </mat-card>
-  
+
   <!-- modify -->
-  
+
   <mat-card class="container-fluid" *ngIf="code.type=='M-Modify'">
     <mat-card-header class="breadcrumb">
       <div>Home/Configuration/Accounts/Accounts/</div>
@@ -565,7 +593,7 @@
         <p>{{code.code}}</p>
       </div>
     </div>
-  
+
     <mat-divider></mat-divider>
     <form class="form" (ngSubmit)="updateInterest()">
       <div class="container-fluid mt-4">
@@ -606,7 +634,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="startDate" 
+                <input name="startDate"
                 type="date" class="form-control" [(ngModel)]="rinterest.startDate"/>
               </div>
             </div>
@@ -642,12 +670,26 @@
               </div>
             </div>
           </div>
+
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                >Penal Interest<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input name="penalInterest"
+                       [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
+              </div>
+            </div>
+          </div>
         </div>
-  
+
         <mat-divider></mat-divider>
         <div>
           <h4 class="text-center">Credit Amount Slabs</h4>
-  
+
           <div>
           <div *ngFor="let c of rcSlabs; let i=index">
           <div class="row">
@@ -664,7 +706,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -683,7 +725,7 @@
                   >Rate</label
                 >
                 <div class="col-md-7">
-                  <input 
+                  <input
                     type="number"
                     step=".01"
                     required
@@ -707,7 +749,7 @@
     </div>
   </div>
 
-  
+
           </div>
           </div>
         </div>
@@ -715,7 +757,7 @@
         <mat-divider></mat-divider>
         <div>
           <h4 class="text-center">Debit Amount Slabs</h4>
-  
+
           <div >
          <div *ngFor="let d of rdSlabs; let i=index">
           <div class="row">
@@ -733,7 +775,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -752,14 +794,14 @@
                   >Rate</label
                 >
                 <div class="col-md-7">
-                  <input 
+                  <input
                     type="number"
                     step=".01"
                     required
                     class="form-control"
                     name="drate{{i}}"
                     [(ngModel)]="d.rate"
-                    
+
                   />
                 </div>
               </div>
@@ -774,17 +816,17 @@
                 </div>
               </div>
             </div>
-  
 
-  
+
+
           </div>
-  
-  
+
+
           </div>
           </div>
         </div>
-  
-        <div class="row container-fluid mt-4">   
+
+        <div class="row container-fluid mt-4">
             <div class="col-md-1 offset-md-11 col-4">
               <button
                 mat-raised-button
@@ -798,11 +840,11 @@
       </div>
     </form>
   </mat-card>
-  
-  
-  
+
+
+
   <!-- delete -->
-  
+
   <mat-card class="container-fluid" *ngIf="code.type=='X-Cancel'">
     <mat-card-header class="breadcrumb">
       <div>Home/Configuration/Accounts/Accounts/</div>
@@ -817,7 +859,7 @@
         <p>{{code.code}}</p>
       </div>
     </div>
-  
+
     <mat-divider></mat-divider>
     <form class="form" (ngSubmit)="deleteInterest()">
       <div class="container-fluid mt-4">
@@ -858,7 +900,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input readonly name="startDate" 
+                <input readonly name="startDate"
                 type="date" class="form-control" [(ngModel)]="rinterest.startDate"/>
               </div>
             </div>
@@ -894,12 +936,26 @@
               </div>
             </div>
           </div>
+
+          <div class="col-md-6">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-12 form-column">
+                <label class="form-label start pull-left"
+                >Penal Interest<span class="warning">*</span></label
+                >
+              </div>
+              <div class="col-md-6 col-8 form-column">
+                <input name="penalInterest" readonly
+                       [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
+              </div>
+            </div>
+          </div>
         </div>
-  
+
         <mat-divider></mat-divider>
         <div>
           <h4 class="text-center">Credit Amount Slabs</h4>
-  
+
           <div>
           <div *ngFor="let c of rcSlabs; let i=index">
           <div class="row">
@@ -916,7 +972,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -954,7 +1010,7 @@
         <mat-divider></mat-divider>
         <div>
           <h4 class="text-center">Debit Amount Slabs</h4>
-  
+
           <div >
          <div *ngFor="let d of rdSlabs; let i=index">
           <div class="row">
@@ -972,7 +1028,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="col-md-3">
               <div class="form-group row mt-1">
                 <label for="acname" class="col-md-5 col-form-label text-left"
@@ -998,7 +1054,7 @@
                     class="form-control"
                     name="drate{{i}}"
                     [(ngModel)]="d.rate"
-                    
+
                   />
                 </div>
               </div>
@@ -1007,8 +1063,8 @@
           </div>
           </div>
         </div>
-  
-        <div class="row container-fluid mt-4">   
+
+        <div class="row container-fluid mt-4">
             <div class="col-md-1 offset-md-11 col-4">
               <button
                 mat-raised-button
@@ -1022,12 +1078,11 @@
       </div>
     </form>
   </mat-card>
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
