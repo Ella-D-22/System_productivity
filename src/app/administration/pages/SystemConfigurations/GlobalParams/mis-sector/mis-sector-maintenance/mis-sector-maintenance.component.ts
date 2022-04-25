@@ -63,6 +63,8 @@ misSectorLookup():void{
     this.sectorId  = this.dialogData.id
     this.formData.controls.miscode.setValue(results.data.miscode)
     // this.formData.controls.sectorId.setValue(results.data.id)
+    console.log("Data", this.dialogData);
+    
   })
 }
   ngOnInit(): void {

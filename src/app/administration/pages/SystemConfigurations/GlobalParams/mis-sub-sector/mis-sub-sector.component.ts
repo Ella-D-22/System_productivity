@@ -18,6 +18,7 @@ error:any
 miscode:any
 missubcode:any;
 subSectorCode:any
+sectorID:any
 subscription:Subscription
 
 horizontalPosition:MatSnackBarHorizontalPosition
@@ -44,6 +45,7 @@ isEnabled = false;
     mis_sub_sector: [''],
     mis_sub_sector_desc: [''],
     missubcode:[''],
+    missector_id:[''],
     modifiedBy: [''],
     modifiedTime: [''],
     postedBy: [''],
@@ -87,12 +89,13 @@ getPage(){
   this.subscription = this.subSectorApi.currentMessage.subscribe(
     message =>{
       this.message = message
-      console.log(this.message);
+      console.log("results",this.message);
       
       this.function_type = this.message.function_type
       this.subSectorId = this.message.id
       this.missubcode = this.message.missubcode
       this.miscode = this.message.miscode
+      this.sectorID = this.message.missector_id
       if(this.function_type == "A-Add"){
         this.isEnabled = true;
         this.formData = this.fb.group({
@@ -102,6 +105,7 @@ getPage(){
           // id: [''],
           mis_sub_sector: [''],
           missubcode:[''],
+          missector_id:[this.sectorID],
           mis_sub_sector_desc: [''],
           modifiedBy: ['Nobody'],
           modifiedTime: [new Date()],
@@ -120,6 +124,8 @@ getPage(){
        this.subscription = this.subSectorApi.getSubSectorByCode(this.missubcode).subscribe(
          res =>{
            this.results = res
+           console.log("hello");
+           
            console.log("RESPOND", res);
            this.subSectorId = this.results.id
            this.formData = this.fb.group({
@@ -129,6 +135,7 @@ getPage(){
             id: [this.results.id],
             mis_sub_sector: [this.results.mis_sub_sector],
             missubcode:[this.results.missubcode],
+            missector_id:[this.sectorID],
             mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
             modifiedBy: [this.results.modifiedBy],
             modifiedTime: [this.results.modifiedTime],
@@ -164,6 +171,7 @@ getPage(){
               id: [this.results.id],
               mis_sub_sector: [this.results.mis_sub_sector],
               missubcode:[this.results.missubcode],
+              missector_id:[this.sectorID],
               mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
               modifiedBy: [this.auth_user],
               modifiedTime: [new Date()],
@@ -203,6 +211,7 @@ getPage(){
               id: [this.results.id],
               mis_sub_sector: [this.results.mis_sub_sector],
               missubcode:[this.results.missubcode],
+              missector_id:[this.sectorID],
               mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
               modifiedBy: [this.results.modifiedBy],
               modifiedTime: [this.results.modifiedTime],

@@ -166,6 +166,34 @@
               </div>
             </div>
           </div>
+          <div class="row mb-2">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                  <label for="" class="start pull-left">Sector Code<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <select formControlName="sectorCode" (change)="onInputSelection($event)" class="form-control">
+                    <option value="" disabled>-- Select MIS Sector Code --</option>
+                    <option *ngFor="let item of this.sectorData " [value]="item.mis_code">{{item.mis_sector}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                  <label for="" class="start pull-left">Sub Sector Code<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <select formControlName="subSectorCode" class="form-control">
+                    <option value="" disabled>--Select a MIS Sub Sector</option>
+                    <option *ngFor="let item of subSectors " [value]="item.missubcode">{{item.mis_sub_sector_desc}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row mb-2" *ngIf="message.account_type!='Loan'">
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -177,6 +205,65 @@
                     <mat-radio-button color="primary" value=True>Yes</mat-radio-button>
                     <mat-radio-button color="primary" value=False>No</mat-radio-button>
                   </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2" *ngIf="message.account_type != 'Loan'">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                  <label for="" class="start pull-left">Cash Exception Limit Dr.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" formControlName="cashExceptionLimitDr" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                  <label for="" class="start pull-left">Cash Exception Limit Cr.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" formControlName="cashExceptionLimitCr" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2" *ngIf="message.account_type != 'Loan'">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                  <label for="" class="start pull-left">Transfer Exception Limit Dr.<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" formControlName="transferExceptionLimitDr" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                  <label for="" class="start pull-left">Transfer Exception Limit Cr.</label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <input type="number" formControlName="transferExceptionLimitCr" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-12 form-column">
+                  <label for="" class="start pull-left">Statement Frequency<span class="warning">*</span></label>
+                </div>
+                <div class="col-md-6 col-sm-12 form-column">
+                  <select formControlName="statementFrequency" class="form-control">
+                    <option disabled>--Select Statement Frequency--</option>
+                    <option *ngFor="let item of statementFreq" [value]="item">{{item}}</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -198,12 +285,104 @@
             </div>
             <img [src]="signatureImage" class="col-md-6" />
           </div>
-        </mat-tab>
+        </mat-tab> 
+      
+        <mat-tab class="mat-tab" label="Nominees">
+          <br>
+          <div *ngFor=" let form of n.controls; let i = index">
+              <div [formGroup]="form">
+                  <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <div class="col-md-6 col-sm-12 form-column">
+                              <label for="" class="start pull-left">First Name<span class="warning">*</span></label>
+                          </div>
+                          <div class="col-md-6 col-sm-12 form-column">
+                              <input maxlength="20" type="text" formControlName="firstName" class="form-control">
+                          </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-sm-12">
+                         <div class="form-group">
+                             <div class="col-md-6 col-sm-12 form-column">
+                                 <label for="" class="start pull-left">Middle Name<span class="warning">*</span></label>
+                             </div>
+                             <div class="col-md-6 col-sm-12 form-column">
+                                 <input maxlength="20" type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                             </div>
+                         </div>
+                     </div> 
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <div class="col-md-6 col-sm-12 form-column">
+                              <label for="" class="start pull-left">Last Name<span class="warning">*</span></label>
+                          </div>
+                          <div class="col-md-6 col-sm-12 form-column">
+                              <input maxlength="20" type="text" formControlName="lastName" class="form-control">
+                          </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-sm-12">
+                         <div class="form-group">
+                             <div class="col-md-6 col-sm-12 form-column">
+                                 <label for="" class="start pull-left">National ID<span class="warning">*</span></label>
+                             </div>
+                             <div class="col-md-6 col-sm-12 form-column">
+                                 <input maxlength="8" type="text" formControlName="identificationNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                             </div>
+                         </div>
+                     </div> 
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <div class="col-md-6 col-sm-12 form-column">
+                              <label for="" class="start pull-left">Phone Number<span class="warning">*</span></label>
+                          </div>
+                          <div class="col-md-6 col-sm-12 form-column">
+                              <input maxlength="12" type="text" formControlName="phone" class="form-control">
+                          </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-sm-12">
+                         <div class="form-group">
+                             <div class="col-md-6 col-sm-12 form-column">
+                                 <label for="" class="start pull-left">Email Address<span class="warning">*</span></label>
+                             </div>
+                             <div class="col-md-6 col-sm-12 form-column">
+                                 <input maxlength="20" type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                             </div>
+                         </div>
+                     </div> 
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <div class="col-md-6 col-sm-12 form-column">
+                              <label for="" class="start pull-left">Date of Birth<span class="warning">*</span></label>
+                          </div>
+                          <div class="col-md-6 col-sm-12 form-column">
+                              <input [matDatepicker]="ppicker" formControlName="dob" class="form-control" />
+                              <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker"></mat-datepicker-toggle>
+                              <mat-datepicker #ppicker></mat-datepicker>
+                          </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-sm-12">
+                   
+                     </div> 
+                  </div>
+                  <br />
+                  <button class="pull-right btn-sm" *ngIf="newData" type="button">
+                    + Add
+                  </button>
+              </div>
+          </div>
+      </mat-tab>
         <mat-tab class="mat-tab" label="Guarantors" *ngIf="message.account_type == 'Loan'">
           <br>
-
-
-
           <form class="form" (ngSubmit)="onSubmitdata()" [formGroup]="addGurantorsFormData">
             <div class="row">
               <div class="col-md-6 col-sm-12">
