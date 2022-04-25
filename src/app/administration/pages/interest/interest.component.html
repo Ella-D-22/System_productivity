@@ -101,7 +101,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="penalInterest"
+                <input name="penalInterest" step=".01"
                        [(ngModel)]="penalInterest" type="number" class="form-control" />
               </div>
             </div>
@@ -122,7 +122,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input type="number" readonly class="form-control"  name="cfrom"
+                  <input type="number" step=".01" readonly class="form-control"  name="cfrom"
                   [(ngModel)]="cfrom"/>
                 </div>
               </div>
@@ -134,7 +134,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input type="number" readonly class="form-control" name="cto"
+                  <input type="number" step=".01" readonly class="form-control" name="cto"
                   [(ngModel)]="cto"/>
                 </div>
               </div>
@@ -169,7 +169,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input type="number" readonly class="form-control"  name="cfrom{{i}}"
+                  <input type="number" readonly step=".01" class="form-control"  name="cfrom{{i}}"
                   [(ngModel)]="c.fromAmount"/>
                 </div>
               </div>
@@ -181,7 +181,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input type="number" required class="form-control"  name="cto{{i}}"
+                  <input type="number" required step=".01" class="form-control"  name="cto{{i}}"
                   [(ngModel)]="c.toAmount"/>
                 </div>
               </div>
@@ -232,7 +232,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input type="number" readonly class="form-control" name="dfrom"
+                  <input type="number" readonly step=".01" class="form-control" name="dfrom"
                   [(ngModel)]="dfrom"/>
                 </div>
               </div>
@@ -244,7 +244,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input type="number" readonly class="form-control" name="dto"
+                  <input type="number" step=".01" readonly class="form-control" name="dto"
                   [(ngModel)]="dto"/>
                 </div>
               </div>
@@ -278,7 +278,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input type="number" readonly class="form-control"  name="dfrom{{i}}"
+                  <input type="number" readonly step=".01" class="form-control"  name="dfrom{{i}}"
                   [(ngModel)]="d.fromAmount"/>
                 </div>
               </div>
@@ -290,7 +290,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input type="number" required class="form-control"  name="dto{{i}}"
+                  <input type="number" required class="form-control" step=".01" name="dto{{i}}"
                   [(ngModel)]="d.toAmount"/>
                 </div>
               </div>
@@ -456,7 +456,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="penalInterest" readonly
+                <input name="penalInterest" readonly step=".01"
                        [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
               </div>
             </div>
@@ -478,7 +478,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input readonly type="number" readonly class="form-control"  name="cfrom{{i}}" [(ngModel)]="c.fromAmount"
+                  <input readonly type="number" step=".01" readonly class="form-control"  name="cfrom{{i}}" [(ngModel)]="c.fromAmount"
                   />
                 </div>
               </div>
@@ -490,7 +490,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input readonly type="number" required class="form-control"  name="cto{{i}}"
+                  <input readonly type="number" step=".01" required class="form-control"  name="cto{{i}}"
                   [(ngModel)]="c.toAmount"
                   />
                 </div>
@@ -532,7 +532,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input readonly type="number" readonly class="form-control"  name="dfrom{{i}}"
+                  <input readonly type="number" step=".01" readonly class="form-control"  name="dfrom{{i}}"
                   [(ngModel)]="d.fromAmount"
                  />
                 </div>
@@ -545,7 +545,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input readonly type="number" required class="form-control"  name="dto{{i}}"
+                  <input readonly type="number" step=".01" required class="form-control"  name="dto{{i}}"
                   [(ngModel)]="d.toAmount"
                   />
                 </div>
@@ -679,7 +679,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="penalInterest"
+                <input name="penalInterest" step=".01"
                        [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
               </div>
             </div>
@@ -701,7 +701,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input readonly type="number" readonly class="form-control"  name="cfrom{{i}}" [(ngModel)]="c.fromAmount"
+                  <input step=".01" readonly type="number" readonly class="form-control"  name="cfrom{{i}}" [(ngModel)]="c.fromAmount"
                   />
                 </div>
               </div>
@@ -713,7 +713,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input [readonly]="i!=clength-1" [required]="interest.fullDiff=='D'" [disabled]="rinterest.fullDiff=='F'" type="number" class="form-control"  name="cto{{i}}"
+                  <input step=".01" [readonly]="i!=clength-1" [required]="interest.fullDiff=='D'" [disabled]="rinterest.fullDiff=='F'" type="number" class="form-control"  name="cto{{i}}"
                   [(ngModel)]="c.toAmount"
                   />
                 </div>
@@ -769,7 +769,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input readonly type="number" readonly class="form-control"  name="dfrom{{i}}"
+                  <input readonly type="number" step=".01" readonly class="form-control"  name="dfrom{{i}}"
                   [(ngModel)]="d.fromAmount"
                  />
                 </div>
@@ -782,7 +782,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input [readonly]="i!=dlength-1" [required]="interest.fullDiff=='D'" [disabled]="interest.fullDiff=='F'" type="number" class="form-control"  name="dto{{i}}"
+                  <input step=".01" [readonly]="i!=dlength-1" [required]="interest.fullDiff=='D'" [disabled]="interest.fullDiff=='F'" type="number" class="form-control"  name="dto{{i}}"
                   [(ngModel)]="d.toAmount"
                   />
                 </div>
@@ -945,7 +945,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="penalInterest" readonly
+                <input name="penalInterest" readonly step=".01"
                        [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
               </div>
             </div>
@@ -1022,7 +1022,7 @@
                   >From</label
                 >
                 <div class="col-md-7">
-                  <input readonly type="number" readonly class="form-control"  name="dfrom{{i}}"
+                  <input readonly type="number" readonly class="form-control" step=".01" name="dfrom{{i}}"
                   [(ngModel)]="d.fromAmount"
                  />
                 </div>
@@ -1035,7 +1035,7 @@
                   >To</label
                 >
                 <div class="col-md-7">
-                  <input readonly type="number" required class="form-control"  name="dto{{i}}"
+                  <input readonly type="number" required class="form-control" step=".01" name="dto{{i}}"
                   [(ngModel)]="d.toAmount"
                   />
                 </div>
