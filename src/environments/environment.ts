@@ -23,6 +23,7 @@ export const environment = {
     // menutreeAPI: 'http://localhost:9091/menutree-service',
     // reportAPI:'http://localhost:9091/report-service',
     // glsAPI: 'http://localhost:9910/group-service',
+    // reportAPI:'https://localhost:9094',
     //reportAPI:'http://localhost:9094',
 
 
@@ -44,7 +45,6 @@ export const environment = {
     reportAPI:'http://52.15.152.26:9091/report-service',
     glsAPI: 'http://52.15.152.26:9091/group-service',
     countryAPI: 'https://restcountries.com/v3.1/all'
-
 };
 
 /*

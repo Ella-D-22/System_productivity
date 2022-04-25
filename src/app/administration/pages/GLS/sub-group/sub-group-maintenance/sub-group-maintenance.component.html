@@ -3,13 +3,9 @@
         <div>Home/System/GLS/SubGroup/Maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
-<br>
+    <br>
     <div class="container-fluid">
-        <form action=""
-        [formGroup]="formData"
-        #resetRequestsForm = "ngForm"
-        (ngSubmit)="onSubmit()"
-        novalidate>
+        <form action="" [formGroup]="formData" #resetRequestsForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
@@ -18,22 +14,23 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <select formControlName="function_type" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}" (change)="onSelectFunction($event)" >
+                                [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}"
+                                (change)="onSelectFunction($event)">
                                 <option disabled>--Choose A function--</option>
                                 <option *ngFor="let item of functionArray" [value]="item">{{item}}</option>
                             </select>
                         </div>
                     </div>
                 </div>
-
-                <div  class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
                             <label class="start pull-left" for="">SubGroup Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <input type="text" class="form-control" formControlName="subGroupCode"
-                             oninput="this.value=this.value.toUpperCase()" [ngClass]="{'is-invalid': submitted && f.subgroup_code.errors}">
+                                oninput="this.value=this.value.toUpperCase()"
+                                [ngClass]="{'is-invalid': submitted && f.subgroup_code.errors}">
                             <mat-icon *ngIf="showSubgroupCode" (click)="subGroupLookup()">search</mat-icon>
                         </div>
                     </div>
@@ -43,4 +40,3 @@
         </form>
     </div>
 </mat-card>
-
