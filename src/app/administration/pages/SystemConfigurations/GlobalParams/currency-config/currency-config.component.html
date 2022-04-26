@@ -40,8 +40,7 @@
      <label class="start pull-left">Country</label>
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-     <select class="form-control" formControlName="country"
-      [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
+     <select class="form-control" formControlName="country">
        <option value="" disabled>-- Select Country --</option>
        <option *ngFor="let flag of this.respData " [value]="flag">{{ flag.name.common }}</option>
      </select>
