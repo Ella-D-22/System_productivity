@@ -3,15 +3,14 @@ import { ReportDefination } from './interfaces/report-defination'
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, Subject} from 'rxjs';
 import { DownloadRequest } from './interfaces/downloadRequest'
-import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
-  // private baseUrl = 'https://localhost:9094/reports/';
-
+  // private baseUrl = 'http://localhost:9094/reports/';
   private baseUrl = `${environment.reportAPI}/reports/`;
 
 
