@@ -17,6 +17,9 @@ export class GlSubheadComponent implements OnInit {
   currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
   auth_user = this.currentUser.username;
 
+  number_of_accounts!: any
+  sum_of_balances!: any
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   loading = false;
@@ -76,6 +79,7 @@ export class GlSubheadComponent implements OnInit {
 
     ) { }
     ngOnInit() {
+
       this.redirectToMaintenancePage();
       this.getPage();
     }
@@ -83,7 +87,7 @@ export class GlSubheadComponent implements OnInit {
       this.subscription = this.glSubheadCodeAPI.currentMessage.subscribe(message=>{
         this.message = message;
         console.log(this.message);
-        
+
         if( this.message == "default message"){
           // Redirect to maintenace if no action header
           this.router.navigate(['system/configurations/global/gl-subhead/maintenance'], {skipLocationChange:true})
@@ -127,11 +131,30 @@ export class GlSubheadComponent implements OnInit {
         this.formData.controls.glSubheadDescription.disable();
         this.formData.controls.glCode.disable();
       }
+      getSummary(glsubhead: any){
+        this.glSubheadCodeAPI.getGLAccountInfo(glsubhead).subscribe(
+          data=>{
+            console.log(data)
+            this.sum_of_balances=data.entity.sumOfAccountBalances;
+            this.number_of_accounts=data.entity.numberOfAccounts;
+            if (this.sum_of_balances=="null"){
+              this.sum_of_balances=0;
+            }
+            console.log("balances",this.sum_of_balances)
+            console.log("accounts",this.number_of_accounts)
+          },
+          error1 => {
+
+          }
+        )
+      }
       getPage(){
+
         this.subscription = this.glSubheadCodeAPI.currentMessage.subscribe(message =>{
-          this.messageData = message;      
+          this.messageData = message;
           this.function_type = this.messageData.function_type
           this.glSubheadCode = this.messageData.glSubheadCode
+          this.getSummary(this.glSubheadCode);
         if(this.function_type == "A-Add"){
           // open empty forms
           this.formData.controls.glSubheadCode.setValue(this.glSubheadCode)
@@ -150,7 +173,7 @@ export class GlSubheadComponent implements OnInit {
             verifiedBy: ["P"],
             verifiedFlag: ["Y"],
             verifiedTime: [new Date()],
-            
+
           });
         }
         else if(this.function_type == "I-Inquire"){
@@ -178,7 +201,7 @@ export class GlSubheadComponent implements OnInit {
             this.router.navigate(['system/configurations/global/gl-subhead/maintenance'], {skipLocationChange:true})
           })
         }
-        else if(this.function_type == "M-Modify"){          
+        else if(this.function_type == "M-Modify"){
           this.subscription = this.glSubheadCodeAPI.getGlSubheadCodeByCode(this.glSubheadCode).subscribe(res=>{
             this.results = res;
             this.formData = this.fb.group({
@@ -273,7 +296,7 @@ export class GlSubheadComponent implements OnInit {
                 panelClass: ['red-snackbar','login-snackbar'],
               });
           })
-        } 
+        }
       })
       }
       // convenience getter for easy access to form fields
@@ -304,7 +327,7 @@ export class GlSubheadComponent implements OnInit {
               this.subscription = this.glSubheadCodeAPI.updateGlSubheadCode(this.formData.value).subscribe(res=>{
                 this.results = res;
                 console.log("The subscribe data", this.results);
-                
+
                   this._snackBar.open("Record Updated Successfully!", "X", {
                     horizontalPosition: this.horizontalPosition,
                     verticalPosition: this.verticalPosition,
@@ -321,13 +344,13 @@ export class GlSubheadComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['red-snackbar','login-snackbar'],
                 });
-              })  
+              })
             }
             else if(this.function_type == "X-Delete"){
               this.subscription = this.glSubheadCodeAPI.updateGlSubheadCode(this.formData.value).subscribe(res=>{
                 this.results = res;
                 console.log("The subscribe data", this.results);
-                
+
                   this._snackBar.open(" Record deleted Successfully!", "X", {
                     horizontalPosition: this.horizontalPosition,
                     verticalPosition: this.verticalPosition,
@@ -344,9 +367,9 @@ export class GlSubheadComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['red-snackbar','login-snackbar'],
                 });
-              })  
+              })
             }
-            
+
           }
           else{
             this._snackBar.open("Invalid Form Data", "Try again!", {
@@ -356,5 +379,5 @@ export class GlSubheadComponent implements OnInit {
               panelClass: ['red-snackbar','login-snackbar'],
             });
           }
-      }  
+      }
   }

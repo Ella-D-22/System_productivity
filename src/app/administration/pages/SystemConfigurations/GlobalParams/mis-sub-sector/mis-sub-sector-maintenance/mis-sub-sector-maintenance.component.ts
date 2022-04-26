@@ -38,6 +38,7 @@ verticalPosition:MatSnackBarVerticalPosition
     function_type:[''],
     miscode:[''],
     missubcode:[''],
+    missector_id:['']
 
   })
   functionArray:any = [
@@ -54,7 +55,10 @@ verticalPosition:MatSnackBarVerticalPosition
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
         this.miscode = this.dialogData.miscode
+        console.log("data",results);
+        
         this.formData.controls.miscode.setValue(results.data.miscode)
+        this.formData.controls.missector_id.setValue(results.data.id)
       })
     }
 

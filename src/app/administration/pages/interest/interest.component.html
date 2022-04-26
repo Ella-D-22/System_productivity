@@ -101,7 +101,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="penalInterest" step=".01"
+                <input name="penalInterest" min="0" max="100" step=".01"
                        [(ngModel)]="penalInterest" type="number" class="form-control" />
               </div>
             </div>
@@ -456,7 +456,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="penalInterest" readonly step=".01"
+                <input name="penalInterest" min="0" max="100" readonly step=".01"
                        [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
               </div>
             </div>
@@ -679,7 +679,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="penalInterest" step=".01"
+                <input name="penalInterest" min="0" max="100" step=".01"
                        [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
               </div>
             </div>
@@ -945,7 +945,7 @@
                 >
               </div>
               <div class="col-md-6 col-8 form-column">
-                <input name="penalInterest" readonly step=".01"
+                <input name="penalInterest" min="0" max="100" readonly step=".01"
                        [(ngModel)]="rinterest.penalInterest" type="number" class="form-control" />
               </div>
             </div>
