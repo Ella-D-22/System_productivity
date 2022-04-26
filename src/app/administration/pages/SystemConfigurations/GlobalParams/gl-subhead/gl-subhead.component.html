@@ -3,13 +3,22 @@
     <div>Home/Configuration/GL-Subhead</div>
 </mat-card-header>
 <div class="row">
-  <div class="col-md-6 col-sm-12">
+  <div class="col-md-3 col-sm-12">
       <h4>Function</h4>
       <p>{{this.function_type}}</p>
   </div>
-  <div class="col-md-6 col-sm-12">
+  <div class="col-md-3 col-sm-12">
       <h4>Gl-Subhead Code</h4>
-      <p>{{this.glSubheadCode}}</p> 
+      <p>{{this.glSubheadCode}}</p>
+  </div>
+
+  <div class="col-md-3 col-sm-12">
+    <h4>Number of Accounts</h4>
+    <p>{{this.number_of_accounts}}</p>
+  </div>
+  <div class="col-md-3 col-sm-12">
+    <h4>Sum of Balances</h4>
+    <p>{{this.sum_of_balances}}</p>
   </div>
 
 </div>
@@ -33,7 +42,7 @@
         <div class="col-md-6 col-sm-12 form-column">
           <input type="text" maxlength = "6" [value]="this.glSubheadCode" oninput ="this.value=this.value.toUpperCase()" disabled formControlName="glSubheadCode" class="pull-right form-control"/>
         </div>
-     </div>           
+     </div>
   </div>
   <div class="col-md-6 col-sm-12">
     <div class="form-group">
@@ -43,7 +52,7 @@
       <div class="col-md-6 col-sm-12 form-column">
         <textarea type="text" maxlength = "6" formControlName="glSubheadDescription" oninput ="this.value=this.value.toUpperCase()"  class="pull-right form-control"></textarea>
       </div>
-   </div>  
+   </div>
   </div>
   </div>
 <div class="row">
@@ -56,10 +65,10 @@
         <input type="text" maxlength = "6" [value]="this.glCode" formControlName="glCode" class="pull-right form-control"/>
         <mat-icon *ngIf="isEnabled"  (click)="refCodeLookup()">search</mat-icon><br>
       </div>
-   </div>           
+   </div>
 </div>
 <div class="col-md-6 col-sm-12">
-  
+
 </div>
 </div>
 <div class="row">
@@ -71,12 +80,14 @@
         <div class="col-md-6 col-sm-12 form-column">
           {{this.glDescription}}
         </div>
-     </div>           
+     </div>
   </div>
   <div class="col-md-6 col-sm-12">
-  
+
   </div>
   </div>
+
+
   <br />
   <button class="pull-left" routerLink="../../maintenance" skipLocationChange  mat-raised-button color="default" type="button">
     Back
