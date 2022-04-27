@@ -3,6 +3,8 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {  Message} from './interfaces/message';
+import {Response} from './interfaces/response';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export class GlSubheadService {
   createGlSubheadCode(data: any): Observable<any> {
     let API_URL = `${this.baseURL}/add`;
     console.log("server data", data);
-    
+
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
         return res || {}
       }),
@@ -40,6 +42,12 @@ export class GlSubheadService {
       catchError(this.errorMgmt)
     )
   }
+
+  getGLAccountInfo(glcode: string): Observable<Response> {
+    return this.http.get<Response>(this.baseURL+'/accountinfo/'+ glcode);
+    //subhead/accountinfo
+  }
+
   // Get by id
   getGlSubheadCodeId(id: any): Observable<any> {
     let API_URL = `${this.baseURL}/find/${id}`;

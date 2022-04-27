@@ -10,14 +10,10 @@ import { Observable } from "rxjs";
         const headers = new HttpHeaders({
             Authorization: `${'Bearer '+accessToken}`,
             // 'WEB-API-key': environment.webApiKey,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin':'*'
+            // 'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Origin':'*'
           });
           const cloneReq = request.clone({headers});
-      
-
-          console.log("Header Requests", cloneReq);
-          
           return next.handle(cloneReq);
     }
     return next.handle(request);

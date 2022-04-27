@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
@@ -19,6 +22,18 @@ export class SubGroupComponent implements OnInit {
   operationArray:any = [
     'Transfer Member', 'Exit Member', 'Reinstate Member'
   ]
+  subGroupMembersArrays = new Array();
+  displayedColumns : string[]= ['sn','Subgroup Code', 'Subgroup Name']
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  dataSource!: MatTableDataSource<any>;
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   isEnabled =  false
   subscription:Subscription
   horizontalPosition:MatSnackBarHorizontalPosition
@@ -44,6 +59,16 @@ export class SubGroupComponent implements OnInit {
   ngOnInit(): void {
     this.getPage()
     this.onAddField()
+  }
+  getMemebers(){
+      this.subService.getSubGroups().subscribe(
+        data =>{
+          this.results = data
+          this.dataSource = new MatTableDataSource(this.results)
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort; 
+        }
+      )
   }
   formData = this.fb.group({
     branch_name: [''],
@@ -446,7 +471,6 @@ export class SubGroupComponent implements OnInit {
       }
     )
   }
-
   onSelectOperation(e:any){
     
   }
@@ -458,6 +482,14 @@ export class SubGroupComponent implements OnInit {
       this.formData.controls.subGroupCode.setValue(results.data.subGroupCode)
     })
   }
+
+
+
+
+
+
+
+
   onSubmit(){ 
     if(this.formData.valid){
       if(this.function_type == "A-Add"){
