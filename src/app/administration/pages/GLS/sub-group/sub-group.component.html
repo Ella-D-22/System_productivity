@@ -9,13 +9,25 @@
         <div>Home/Sub Group Management</div>
     </mat-card-header>
     <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-2 col-sm-12">
             <h4>Function</h4>
             <p>{{this.function_type}}</p>
         </div>
-        <div class="col-md-6 col-sm-12">
-            <h4>Code</h4>
-            <p>{{this.subgroup_code}}</p>
+        <div class="col-md-2 col-sm-12">
+            <h4>Main Group Name</h4>
+            <p>{{this.mainGroupName}}</p>
+        </div>
+        <div class="col-md-2 col-sm-12">
+            <h4>Main Group Code</h4>
+            <p>{{this.mainGroupCode}}</p>
+        </div>
+        <div class="col-md-2 col-sm-12">
+            <h4>Sub Group Name</h4>
+            <p>{{this.subGroupName}}</p>
+        </div>
+        <div class="col-md-2 col-sm-12">
+            <h4>Sub Group Code</h4>
+            <p>{{this.subGroupCode}}</p>
         </div>
     </div>
     <mat-divider></mat-divider>
@@ -30,42 +42,10 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label class="start pull-left">Main Group Code<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Branch Code<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="maingroup_sn" class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f.group_code.errors}">
-                                    <mat-icon (click)="mainGroupLookup()">search</mat-icon>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <mat-hint>{{this.group_name}}</mat-hint>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label class="start pull-left">subGroup Name<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="subgroup_name" class="form-control"
-                                        oninput="this.value=this.value.toUpperCase()">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Sol ID<span class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="sol_id" class="form-control"
+                                    <input type="text" formControlName="subGroupSolCode" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
                                     <mat-icon (click)="branchLookup()">search</mat-icon>
                                 </div>
@@ -78,7 +58,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" class="form-control" formControlName="branch_name"
+                                    <input type="text" class="form-control" formControlName="subGroupBranchName"
                                         oninput="this.value=this.value.toUpperCase()" [value]="">
                                 </div>
                             </div>
@@ -92,7 +72,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input etype="text" formControlName="subgroupManager_ID" class="form-control"
+                                    <input etype="text" formControlName="subGroupManagerId" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
@@ -104,7 +84,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" class="form-control" formControlName="reg_no"
+                                    <input type="text" class="form-control" formControlName="subGroupRegNo"
                                         oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
@@ -118,7 +98,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="subgroup_location" class="form-control"
+                                    <input type="text" formControlName="subGroupLocation" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
                                 </div>
 
@@ -131,7 +111,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="number" formControlName="subgroup_phone" class="form-control">
+                                    <input type="number" formControlName="subGroupPhone" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -144,7 +124,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input [matDatepicker]="ppicker" formControlName="subgroup_formation_date"
+                                    <input [matDatepicker]="ppicker" formControlName="subGroupFormationDate"
                                         class="form-control" />
                                     <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker">
                                     </mat-datepicker-toggle>
@@ -159,7 +139,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="groupStatus"
+                                    <input type="text" formControlName="subGroupStatus"
                                         oninput="this.value=this.value.toUpperCase()" class="form-control">
                                 </div>
                             </div>
@@ -169,11 +149,11 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Start Meeting Date<span
+                                    <label for="" class="start pull-left">First Meeting Date<span
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input [matDatepicker]="mpicker" formControlName="first_meeting_date"
+                                    <input [matDatepicker]="mpicker" formControlName="subGroupFirstMeetingDate"
                                         class="form-control" />
                                     <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="mpicker">
                                     </mat-datepicker-toggle>
@@ -188,7 +168,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input [matDatepicker]="npicker" formControlName="next_meeting_date"
+                                    <input [matDatepicker]="npicker" formControlName="subGroupNextMeetingDate"
                                         class="form-control" />
                                     <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="npicker">
                                     </mat-datepicker-toggle>
@@ -199,7 +179,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <label for="" class="start pull-left">Max Allowed Members<span
                                             class="warning">*</span></label>
@@ -209,7 +189,7 @@
                                         oninput="this.value=this.value.toUpperCase()">
                                 </div>
 
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="row">
@@ -220,7 +200,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="chairperson" class="form-control"
+                                    <input type="text" formControlName="subGroupChairperson" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
                                     <mat-icon (click)="customerLookup()">search</mat-icon>
                                     <p></p>
@@ -234,7 +214,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="secretary" class="form-control">
+                                    <input type="text" formControlName="subGroupSecretary" class="form-control">
                                     <mat-icon (click)="customerLookup()">search</mat-icon>
                                 </div>
                             </div>
@@ -248,7 +228,7 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="treasurer" class="form-control"
+                                    <input type="text" formControlName="subGroupTreasurer" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
                                     <mat-icon (click)="customerLookup()">search</mat-icon>
                                 </div>
@@ -256,9 +236,82 @@
                         </div>
                     </div>
                 </mat-tab>
+                <mat-tab class="mat-tab" label="Financial Details">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Total Members</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="subGroupTotalMembers" class="form-control "
+                                        oninput="this.value=this.value.toUpperCase()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Meeting Frequency</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="subGroupMeetingFrequency" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Total Savings A/Cs<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="subGroupSavingsAc" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Total Savings Balance<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="subGroupTotalSavingBalance" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Total Loan A/Cs<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="subGroupLoanAc" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull left">Total Loan Balances</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="subGroupLoanBalance" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
                 <mat-tab class="mat-tab" label="Members Details">
                     <br>
-                    <div *ngFor=" let groupMember of g.controls; let i = index">
                         <div [formGroup]="groupMember">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -268,8 +321,15 @@
                                                     class="warning">*</span></label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="cust_code" class="form-control">
+                                            <input type="text" formControlName="customerCode" class="form-control">
                                             <mat-icon (click)="customerLookup()">search</mat-icon>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <mat-hint>{{this.customerName}}</mat-hint>
                                         </div>
                                     </div>
                                 </div>
@@ -279,22 +339,12 @@
                                             <label for="" class="start pull-left">Operations</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
-                                            <button mat-raised-button color="primary" type="btn" class="pull-right">+ Add</button>
-                                            <!-- <button type="button" mat-button [matMenuTriggerFor]="menu">Update</button>
-                                            <mat-menu #menu="matMenu">
-                                            <button type="button" mat-menu-item (click)="onTransferMember(e)">Transfer Member</button>
-                                            <button type="button" mat-menu-item>Exit Member</button>
-                                            <button type="button" mat-menu-item>Reinstate Member</button>
-                                            </mat-menu> -->
-                                            
-                                        <mat-icon class="pull-right" (click)="onAddField()" color="primary">add_circle</mat-icon>
-                                        <mat-icon class="pull-right" (click)="onRemoveField(i)" color="warn">remove_circle</mat-icon>
+                                            <button mat-raised-button color="primary" type="button" class="pull-right" (click)="addGroupMember()"  >+ Add</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
 <!--Sub Group Members -->
                     <div class="">
@@ -315,23 +365,29 @@
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
                             <td  mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
                           </ng-container>
-                          <ng-container matColumnDef="sn">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header>sn</th>
-                            <td  mat-cell *matCellDef="let group"> {{group.sn}} </td>
+                          <ng-container matColumnDef="customerCode">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer Code</th>
+                            <td  mat-cell *matCellDef="let group"> {{group.customerCode}} </td>
                           </ng-container>
                       
-                          <ng-container matColumnDef="Subgroup Code">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Subgroup Code</th>
-                            <td  mat-cell *matCellDef="let group"> {{group.subGroupCode}} </td>
+                          <ng-container matColumnDef="customerName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer Name</th>
+                            <td  mat-cell *matCellDef="let group"> {{group.customerCode}} </td>
                           </ng-container>
                     
-                          <ng-container matColumnDef="Subgroup Name">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Subgroup Name</th>
-                            <td  mat-cell *matCellDef="let group"> {{group.subgroup_name}} </td>
+                          <ng-container matColumnDef="Operations">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Operations</th>
+                            <td  mat-cell *matCellDef="let group"> 
+
+                                <button class="table-buttons btn btn-small pull-right"  mat-raised-button color="warn" type="button"  (click)="onRemoveGroupMember(i)">Remove</button>
+                                <button class="table-buttons btn btn-small pull-right"  mat-raised-button color="accent" type="button" (click)="onExitMember(group)">Exit</button>
+                                <button class="table-buttons btn btn-small pull-right" mat-raised-button color="primary" type="button" (click)="onTransferMember(group)">Transfer</button>
+
+                                               </td>
                           </ng-container>
                     
                           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                          <tr (click)="onSelect(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                       
                           <!-- Row shown when there is no matching data. -->
                           <tr class="mat-row" *matNoDataRow>
@@ -342,94 +398,13 @@
                         <mat-paginator [pageSizeOptions]="[7, 20, 30, 40, 50, 100]" aria-label="Select page of users"></mat-paginator>
                       </div>
 
-
-
-
-
-
-
-                </mat-tab>
-                <mat-tab class="mat-tab" label="Financial Details">
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Total Members</label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="total_members" class="form-control "
-                                        oninput="this.value=this.value.toUpperCase()">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Meeting Frequency</label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="text" formControlName="meeting_frequency" class="form-control"
-                                        oninput="this.value=this.value.toUpperCase()">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Total Savings A/Cs<span
-                                            class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="number" formControlName="total_savingsAccs" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Total Savings Balance<span
-                                            class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="number" formControlName="total_savingBalance" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Total Loan A/Cs<span
-                                            class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="number" formControlName="total_loanAccs" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull left">Total Loan Balances</label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <input type="number" formControlName="total_loanBalance" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </mat-tab>
             </mat-tab-group>
             <br>
 
             <button mat-raised-button color="default" routerLink="../../maintenance" type="submit">Back</button>
-            <button mat-raised-button color="primary" type="submit" class="pull-right"
-                *ngIf="isSubmitted">Submit</button>
-            <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
+            <button mat-raised-button color="primary" type="submit" class="pull-right">Submit</button>
+            <!-- <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button> -->
         </form>
     </div>
 </mat-card>

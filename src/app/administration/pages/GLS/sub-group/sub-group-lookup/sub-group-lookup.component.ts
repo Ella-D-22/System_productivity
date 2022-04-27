@@ -13,7 +13,7 @@ import { SubGroupService } from '../sub-group.service';
 })
 export class SubGroupLookupComponent implements OnInit {
    results:any
-   displayedColumns : string[]= ['sn','Subgroup Code', 'Subgroup Name']
+   displayedColumns : string[]= ['index','mainGroupCode','mainGroupName','subGroupCode','subGroupName']
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;

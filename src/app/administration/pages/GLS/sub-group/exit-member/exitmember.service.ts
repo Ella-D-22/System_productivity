@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SubGroupService {
+export class ExitmemberService {
 
-  baseURL = `${environment.glsAPI}api/v1/group/subgroup`
+  baseURL = `${environment.glsAPI}api/v1/group/member/exit/history`
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http:HttpClient) { }

@@ -12,10 +12,9 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class SpecificReportComponent implements OnInit {
   message!:ReportDefination2;
-
+  reportPresent = false;
   request!: DownloadRequest;
   pdfurl!: any;
-  testurl!: any;
 
   params!: any;
 
@@ -38,6 +37,7 @@ export class SpecificReportComponent implements OnInit {
   sols: string[]=[
     "KIAMBU","THIKA","KERICHO","NAIROBI"
   ]
+  testurl: string;
 
   constructor(private router: Router, private reportservice:ReportService,public sanitizer: DomSanitizer,) {
     this.message = this.router.getCurrentNavigation()!.extras.state!['message']
@@ -68,9 +68,6 @@ export class SpecificReportComponent implements OnInit {
   }
 
   parameters(){
-
-
-    console.log(this.params)
   }
 
 downloadReport() {
@@ -90,27 +87,18 @@ downloadReport() {
     if(param.parameterName=="sol_code"){
       this.params.sol_code=this.sol_code
     }
-
   }
-
-
-
-
     this.request= {
       sn: this.message.sn,
       download: true,
       type: "PDF",
       parameters: this.params
     }
-console.log("chege", this.request)
-
   this.reportservice.downloadReport(this.request).subscribe(response => {
-      console.log(response);
-
       this.testurl = window.URL.createObjectURL(response.data);
+      this.reportPresent = true;
       //this.pdfurl=this.sanitizer.bypassSecurityTrustResourceUrl(this.testurl);
     }, error => {
-      console.log(error);
     }
   )
 }

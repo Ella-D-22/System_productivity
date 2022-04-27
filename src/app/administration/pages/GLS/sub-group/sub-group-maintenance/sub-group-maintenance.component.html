@@ -29,9 +29,39 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <input type="text" class="form-control" formControlName="subGroupCode"
-                                oninput="this.value=this.value.toUpperCase()"
-                                [ngClass]="{'is-invalid': submitted && f.subgroup_code.errors}">
-                            <mat-icon *ngIf="showSubgroupCode" (click)="subGroupLookup()">search</mat-icon>
+                                oninput="this.value=this.value.toUpperCase()">
+                            <mat-icon *ngIf="dataExist" (click)="subGroupLookup()">search</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!dataExist" class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left">Main Group Code<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" formControlName="mainGroupCode" class="form-control">
+                            <mat-icon (click)="mainGroupLookup()">search</mat-icon>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <mat-hint>{{this.mainGroupName}}</mat-hint>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left">Sub Group Name<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" formControlName="subGroupName" class="form-control"
+                                oninput="this.value=this.value.toUpperCase()">
                         </div>
                     </div>
                 </div>

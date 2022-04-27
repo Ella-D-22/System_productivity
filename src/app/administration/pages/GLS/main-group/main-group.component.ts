@@ -1,177 +1,110 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BranchesLookupComponent } from '../../branches/branches-lookup/branches-lookup.component';
 import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
 import { MainGroupService } from './main-group.service';
-
 @Component({
   selector: 'app-main-group',
   templateUrl: './main-group.component.html',
   styleUrls: ['./main-group.component.scss']
 })
 export class MainGroupComponent implements OnInit {
-  isEnabled = false;
-  submitted = false;
+  displayedColumns : string[]= ['index','subGroupCode','subGroupName','subGroupFormationDate','totalMembers','totalSavingBalance','chairperson','subGroupPhone','groupStatus']
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  dataSource!: MatTableDataSource<any>;
+  dialogData: any;
+  function_type: any;
+  group_code: any;
+  isEnabled: boolean;
+  results: any;
+  dataExist = false;
+  error: any;
+  loading = false;
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
  subscription:Subscription
  message:any
- function_type:any
- loading = false
- group_code:any
- results:any
- error:any
- dialogData:any
- groupCode:any
- isSubmitted = false;
- isDeleted = false
-
-  horizontalPosition:MatSnackBarHorizontalPosition
-  verticalPosition:MatSnackBarVerticalPosition
-
   user = "Nobody"
   constructor(private fb:FormBuilder,
     private _snackbar:MatSnackBar,
     private dialog:MatDialog,
     private mainService:MainGroupService,
     private router:Router) { }
-
   ngOnInit(): void {
     this.getPage()
-    this.onAddField()
   }
-
-
+  getSubGroups(mainGroupCode:any){
+    this.subscription = this.mainService.getMainGroupByCode(mainGroupCode).subscribe(res=>{
+      this.dataSource = new MatTableDataSource(res)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort; 
+    })
+  }
   formData = this.fb.group({
-    branch_name: [''],
-    chairperson: [''],
-    deleteFlag: [''],
-    deletedBy: [''],
-    deletedTime: [''],
-    first_meeting_date: [''],
-    groupCode:[''],
-    groupManager_ID: [''],
-    groupStatus:[''],
-    group_formation_date:[''],
-    group_location:[''],
-    group_name:[''],
-    group_phone:[''],
-    maxAllowedMembers:[''],
-    maxAllowedSubGroups:[''],
-    meeting_frequency:[''],
-    modifiedBy:[''],
-    modifiedTime:[''],
-    next_meeting_date:[''],
-    postedBy:[''],
-    postedFlag:[''],
-    postedTime:[''],
-    reg_no:[''],
-    secretary:[''],
-    sn:[''],
-    sol_id:[''],
-    total_loanAccs:[''],
-    total_loanBalance:[''],
-    total_members:[''],
-    total_savingBalance:[''],
-    total_savingsAccs:[''],
-    treasurer:[''],
-    verifiedBy:[''],
-    verifiedFlag:[''],
-    verifiedTime: [''],
-    groupMembers: new FormArray([])
-
-  })
-
- 
-  get f() { 
-    return this.formData.controls; }
-
-  get g(){return this.f.groupMembers as FormArray}
-  
+    mainGroupCode:['',Validators.required],
+    mainGroupName:['',Validators.required],
+    mainGroupFormationDate:['',Validators.required],
+    mainGroupSolCode:['',Validators.required],
+    mainGroupBranchName:['',Validators.required],
+    mainGroupManagerID:['',Validators.required],
+    mainGroupRegNo:['',Validators.required],
+    mainGroupLocation:['',Validators.required],
+    mainGroupPhone:['',Validators.required],
+    mainGroupFirstMeetingDate:['',Validators.required],
+    mainGroupNextMeetingDate:['',Validators.required],
+    mainGroupMaxAllowedMembers:['',Validators.required],
+    mainGroupMaxAllowedSubGroups:['',Validators.required],
+    mainGroupChairperson:['',Validators.required],
+    mainGroupSecretary:['',Validators.required],
+    mainGroupTreasurer:['',Validators.required],
+    mainGroupStatus:['',Validators.required],
+    mainGroupTotalMembers:['',Validators.required],
+    mainGroupMeetingFrequency:['',Validators.required],
+    mainGroupSavingAc:['',Validators.required],
+    mainGroupTotalSavingsBalance:[''],
+    mainGroupTotalLoanAc:['',Validators.required],
+    mainGroupTotalLoanBalance:[''],
+    deletedBy:[this.user],
+    deletedFlag:['N'],
+    deletedTime: [new Date()],
+    modifiedBy:[this.user],
+    modifiedTime:[new Date()],
+    postedBy:[this.user],
+    postedFlag:['Y'],
+    postedTime:[new Date()],
+    verifiedBy:[this.user],
+    verifiedFlag:['N'],
+    verifiedTime:[new Date()],
+  }) 
+  get f() { return this.formData.controls; }
     branchLookup():void{
       const dialogRef =  this.dialog.open(BranchesLookupComponent,{
-
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
-        console.log(this.dialogData);
-        
         this.formData.controls.sol_id.setValue(results.data.solCode)
         this.formData.controls.branch_name.setValue(this.dialogData.solDescription)
-       
       })}
-
-
     customerLookup():void{
       const dialogRef =  this.dialog.open(RetailCustomerLookupComponent,{
-
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
-        console.log(this.dialogData);
-        
         this.formData.controls.cust_code.setValue(results.data.customer_code)
-        this.formData.controls.chairperson.setValue(this.dialogData.customer_code)
-        this.formData.controls.secretary.setValue(this.dialogData.customer_code)
-        this.formData.controls.treasurer.setValue(this.dialogData.customer_code)
-        this.formData.controls.groupMembers['cust_name'].setValue(this.dialogData.firstName)
-       
       }) }
-
-    onAddField(){
-
-      this.g.push(this.fb.group({
-        cust_code: [''],
-        cust_name: [''],
-        deletedBy:[''],
-        deletedFlag:['N'],
-        deletedTime:[new Date()],
-        // main_group_id:[this.groupCode],
-        modifiedBy:["user"],
-        modifiedTime:[new Date()],
-        postedBy:['You'],
-        postedFlag:['Y'],
-        postedTime:[new Date()],
-        present_on_mainGroup:['Y'],
-        present_on_subGroup:['N'],
-        sub_group_id:[''],
-        verifiedBy:["You"],
-        verifiedFlag:['Y'],
-        verifiedTime:[new Date()]
-      }))
-      
-    }
-
-    onReadField(e:any){
-      this.g.push(this.fb.group({
-        cust_code: [e.cust_code],
-        cust_name: [e.cust_name],
-        deletedBy:[e.deletedBy],
-        deletedFlag:[e.deletedFlag],
-        deletedTime:[e.deletedTime],
-        // main_group_id:[this.groupCode],
-        modifiedBy:[e.modifiedBy],
-        modifiedTime:[e.modifiedTime],
-        postedBy:[e.postedBy],
-        postedFlag:[e.postedFlag],
-        postedTime:[e.postedTime],
-        present_on_mainGroup:[e.present_on_mainGroup],
-        present_on_subGroup:[e.present_on_subGroup],
-        sub_group_id:[e.sub_group_id],
-        verifiedBy:[e.verifiedBy],
-        verifiedFlag:[e.verifiedFlag],
-        verifiedTime:[e.verifiedTime]
-
-      }))
-    }
-    onRemoveField(i:any){
-      this.g.removeAt(i)
-    }
-    disabledFormControl(){
-      this.formData.disable()
-    }
 
     getPage(){
       this.subscription = this.mainService.currentMessage.subscribe(
@@ -179,296 +112,238 @@ export class MainGroupComponent implements OnInit {
           this.message = message
           this.function_type = this.message.function_type
           this.group_code = this.message.groupCode
-           console.log(this.group_code);
-           console.log(this.message);
           if(this.function_type == "A-Add"){
+            this.dataExist = false;
             this.isEnabled =  true;
-            this.isSubmitted = true;
             this.formData = this.fb.group({
-              branch_name: [''],
-              chairperson: [''],
-              first_meeting_date: [''],
-              groupCode:[this.group_code],
-              groupManager_ID: [''],
-              groupStatus:[''],
-              group_formation_date:[''],
-              group_location:[''],
-              group_name:[''],
-              group_phone:[''],
-              maxAllowedMembers:[''],
-              maxAllowedSubGroups:[''],
-              meeting_frequency:[''],
+              mainGroupCode:[this.group_code],
+              mainGroupName:['',Validators.required],
+              mainGroupFormationDate:['',Validators.required],
+              mainGroupSolCode:['',Validators.required],
+              mainGroupBranchName:['',Validators.required],
+              mainGroupManagerID:['',Validators.required],
+              mainGroupRegNo:['',Validators.required],
+              mainGroupLocation:['',Validators.required],
+              mainGroupPhone:['',Validators.required],
+              mainGroupFirstMeetingDate:['',Validators.required],
+              mainGroupNextMeetingDate:['',Validators.required],
+              mainGroupMaxAllowedMembers:['',Validators.required],
+              mainGroupMaxAllowedSubGroups:['',Validators.required],
+              mainGroupChairperson:['',Validators.required],
+              mainGroupSecretary:['',Validators.required],
+              mainGroupTreasurer:['',Validators.required],
+              mainGroupStatus:['',Validators.required],
+              mainGroupTotalMembers:['',Validators.required],
+              mainGroupMeetingFrequency:['',Validators.required],
+              mainGroupSavingAc:['',Validators.required],
+              mainGroupTotalSavingsBalance:[''],
+              mainGroupTotalLoanAc:['',Validators.required],
+              mainGroupTotalLoanBalance:[''],
+              deletedBy:[this.user],
+              deletedFlag:['N'],
+              deletedTime: [new Date()],
               modifiedBy:[this.user],
               modifiedTime:[new Date()],
-              next_meeting_date:[''],
-             
-              reg_no:[''],
-              secretary:[''],
-              sol_id:[''],
-              total_loanAccs:[''],
-              total_loanBalance:[''],
-              total_members:[''],
-              total_savingBalance:[''],
-              total_savingsAccs:[''],
-              treasurer:[''],
               postedBy:[this.user],
               postedFlag:['Y'],
               postedTime:[new Date()],
-              deleteFlag: ['N'],
-              deletedBy: [this.user],
-              deletedTime: [new Date()],
-              verifiedBy:['N'],
+              verifiedBy:[this.user],
               verifiedFlag:['N'],
-              verifiedTime: [new Date()],
-              groupMembers: new FormArray([])
-
+              verifiedTime:[new Date()],
             });
           } else if(this.function_type == "I-Inquire"){
+            this.dataExist = true;
             this.loading = true
-            this.disabledFormControl()
+            this.formData.disable
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.loading = false
                 this.results = res
-                this.formData = this.fb.group({
-                  branch_name: [this.results.branch_name],
-                  chairperson: [this.results.chairperson],
-                  first_meeting_date: [this.results.first_meeting_date],
-                  groupCode:[this.results.group_code],
-                  groupManager_ID: [this.results.groupManager_ID],
-                  groupStatus:[this.results.groupStatus],
-                  group_formation_date:[this.results.group_formation_date],
-                  group_location:[this.results.group_location],
-                  group_name:[this.results.group_name],
-                  group_phone:[this.results.group_phone],
-                  maxAllowedMembers:[this.results.maxAllowedMembers],
-                  maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
-                  meeting_frequency:[this.results.meeting_frequency],
-                  next_meeting_date:[this.results.next_meeting_date],
-                  reg_no:[this.results.reg_no],
-                  secretary:[this.results.secretary],
-                  sn:[this.results.sn],
-                  sol_id:[this.results.sol_id],
-                  total_loanAccs:[this.results.total_loanAccs],
-                  total_loanBalance:[this.results.total_loanBalance],
-                  total_members:[this.results.total_members],
-                  total_savingBalance:[this.results.total_savingBalance],
-                  total_savingsAccs:[this.results.total_savingsAccs],
-                  treasurer:[this.results.treasurer],
-                  
-                  modifiedBy:[this.results.modifiedBy],
-                  modifiedTime:[this.results.modifiedTime],
-                  postedBy:[this.results.postedBy],
-                  postedFlag:[this.results.postedFlag],
-                  postedTime:[this.results.postedTime],
-                  deleteFlag: [this.results.deleteFlag],
-                  deletedBy: [this.results.deletedBy],
-                  deletedTime: [this.results.deletedTime],
-                  verifiedBy:[this.results.verifiedBy],
-                  verifiedFlag:[this.results.verifiedFlag],
-                  verifiedTime: [this.results.verifiedTime],
-                  groupMembers: new FormArray([])
-                });
-                for(let i = 0; i < this.results.groupMembers.length; i++){
-                  this.onReadField(this.results.groupMembers[i])
-                }
-    
-              }
+          this.formData = this.fb.group({
+              id:[this.results.id],
+              mainGroupCode:[this.results.group_code],
+              mainGroupName:[this.results.mainGroupName],
+              mainGroupFormationDate:[this.results.mainGroupFormationDate],
+              mainGroupSolCode:[this.results.mainGroupSolCode],
+              mainGroupBranchName:[this.results.mainGroupBranchName],
+              mainGroupManagerID:[this.results.mainGroupManagerID],
+              mainGroupRegNo:[this.results.mainGroupRegNo],
+              mainGroupLocation:[this.results.mainGroupLocation],
+              mainGroupPhone:[this.results.mainGroupPhone],
+              mainGroupFirstMeetingDate:[this.results.mainGroupFirstMeetingDate],
+              mainGroupNextMeetingDate:[this.results.mainGroupNextMeetingDate],
+              mainGroupMaxAllowedMembers:[this.results.mainGroupMaxAllowedMembers],
+              mainGroupMaxAllowedSubGroups:[this.results.mainGroupMaxAllowedSubGroups],
+              mainGroupChairperson:[this.results.mainGroupChairperson],
+              mainGroupSecretary:[this.results.mainGroupSecretary],
+              mainGroupTreasurer:[this.results.mainGroupTreasurer],
+              mainGroupStatus:[this.results.mainGroupStatus],
+              mainGroupTotalMembers:[this.results.mainGroupTotalMembers],
+              mainGroupMeetingFrequency:[this.results.mainGroupMeetingFrequency],
+              mainGroupSavingAc:[this.results.mainGroupSavingAc],
+              mainGroupTotalSavingsBalance:[this.results.mainGroupTotalSavingsBalance],
+              mainGroupTotalLoanAc:[this.results.mainGroupTotalLoanAc],
+              mainGroupTotalLoanBalance:[this.results.mainGroupTotalLoanBalance],
+              deletedBy:[this.results.deletedBy],
+              deletedFlag:[this.results.deletedFlag],
+              deletedTime: [this.results.deletedTime],
+              modifiedBy:[this.results.modifiedBy],
+              modifiedTime:[this.results.modifiedTime],
+              postedBy:[this.results.postedBy],
+              postedFlag:[this.results.postedFlag],
+              postedTime:[this.results.postedTime],
+              verifiedBy:[this.results.verifiedBy],
+              verifiedFlag:[this.results.verifiedFlag],
+              verifiedTime:[this.results.verifiedTime],
+                });         }
             )
           } else if(this.function_type == "M-Modify"){
+
+            this.formData.disable();
+            this.dataExist = true;
             this.loading = true
-            this.isSubmitted = true
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.loading = false
                 this.results = res
-                this.formData = this.fb.group({
-                  branch_name: [this.results.branch_name],
-                  chairperson: [this.results.chairperson],
-                  first_meeting_date: [this.results.first_meeting_date],
-                  groupCode:[this.results.groupCode],
-                  groupManager_ID: [this.results.groupManager_ID],
-                  groupStatus:[this.results.groupStatus],
-                  group_formation_date:[this.results.group_formation_date],
-                  group_location:[this.results.group_location],
-                  group_name:[this.results.group_name],
-                  group_phone:[this.results.group_phone],
-                  maxAllowedMembers:[this.results.maxAllowedMembers],
-                  maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
-                  meeting_frequency:[this.results.meeting_frequency],
-                  next_meeting_date:[this.results.next_meeting_date],
-                  reg_no:[this.results.reg_no],
-                  secretary:[this.results.secretary],
-                  sn:[this.results.sn],
-                  sol_id:[this.results.sol_id],
-                  total_loanAccs:[this.results.total_loanAccs],
-                  total_loanBalance:[this.results.total_loanBalance],
-                  total_members:[this.results.total_members],
-                  total_savingBalance:[this.results.total_savingBalance],
-                  total_savingsAccs:[this.results.total_savingsAccs],
-                  treasurer:[this.results.treasurer],
-                  
-                  modifiedBy:[this.user],
-                  modifiedTime:[new Date()],
-                  postedBy:[this.results.postedBy],
-                  postedFlag:[this.results.postedFlag],
-                  postedTime:[this.results.postedTime],
-                  deleteFlag: [this.results.deleteFlag],
-                  deletedBy: [this.results.deletedBy],
-                  deletedTime: [this.results.deletedTime],
-                  verifiedBy:[this.results.verifiedBy],
-                  verifiedFlag:[this.results.verifiedFlag],
-                  verifiedTime: [this.results.verifiedTime],
-                  groupMembers: new FormArray([])
-                });
-                for(let i = 0; i < this.results.groupMembers.length; i++){
-                  this.onReadField(this.results.groupMembers[i])
-                }
-              },
-              err =>{
-
-        this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
-
-                this.error = err
-                this._snackbar.open(this.error, "Try Again",{
-                  horizontalPosition:this.horizontalPosition,
-                  verticalPosition:this.verticalPosition,
-                  duration:3000,
-                  panelClass:['red-snackbar', 'login-snackbar']
-                })
-
-              }
+          this.formData = this.fb.group({
+              id:[this.results.id],
+              mainGroupCode:[this.results.group_code],
+              mainGroupName:[this.results.mainGroupName],
+              mainGroupFormationDate:[this.results.mainGroupFormationDate],
+              mainGroupSolCode:[this.results.mainGroupSolCode],
+              mainGroupBranchName:[this.results.mainGroupBranchName],
+              mainGroupManagerID:[this.results.mainGroupManagerID],
+              mainGroupRegNo:[this.results.mainGroupRegNo],
+              mainGroupLocation:[this.results.mainGroupLocation],
+              mainGroupPhone:[this.results.mainGroupPhone],
+              mainGroupFirstMeetingDate:[this.results.mainGroupFirstMeetingDate],
+              mainGroupNextMeetingDate:[this.results.mainGroupNextMeetingDate],
+              mainGroupMaxAllowedMembers:[this.results.mainGroupMaxAllowedMembers],
+              mainGroupMaxAllowedSubGroups:[this.results.mainGroupMaxAllowedSubGroups],
+              mainGroupChairperson:[this.results.mainGroupChairperson],
+              mainGroupSecretary:[this.results.mainGroupSecretary],
+              mainGroupTreasurer:[this.results.mainGroupTreasurer],
+              mainGroupStatus:[this.results.mainGroupStatus],
+              mainGroupTotalMembers:[this.results.mainGroupTotalMembers],
+              mainGroupMeetingFrequency:[this.results.mainGroupMeetingFrequency],
+              mainGroupSavingAc:[this.results.mainGroupSavingAc],
+              mainGroupTotalSavingsBalance:[this.results.mainGroupTotalSavingsBalance],
+              mainGroupTotalLoanAc:[this.results.mainGroupTotalLoanAc],
+              mainGroupTotalLoanBalance:[this.results.mainGroupTotalLoanBalance],
+              deletedBy:[this.results.deletedBy],
+              deletedFlag:[this.results.deletedFlag],
+              deletedTime: [this.results.deletedTime],
+              modifiedBy:[this.results.modifiedBy],
+              modifiedTime:[this.results.modifiedTime],
+              postedBy:[this.results.postedBy],
+              postedFlag:[this.results.postedFlag],
+              postedTime:[this.results.postedTime],
+              verifiedBy:[this.results.verifiedBy],
+              verifiedFlag:[this.results.verifiedFlag],
+              verifiedTime:[this.results.verifiedTime],
+                });         }
             )
           } else if(this.function_type == "X-Delete"){
+            this.dataExist = true;
             this.loading = true
-             this.disabledFormControl()
-            this.isDeleted = true
+            this.formData.disable
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
                 this.loading = false
                 this.results = res
-
-                this.formData = this.fb.group({
-                  branch_name: [this.results.branch_name],
-                  chairperson: [this.results.chairperson],
-                  first_meeting_date: [this.results.first_meeting_date],
-                  groupCode:[this.results.groupCode],
-                  groupManager_ID: [this.results.groupManager_ID],
-                  groupStatus:[this.results.groupStatus],
-                  group_formation_date:[this.results.group_formation_date],
-                  group_location:[this.results.group_location],
-                  group_name:[this.results.group_name],
-                  group_phone:[this.results.group_phone],
-                  maxAllowedMembers:[this.results.maxAllowedMembers],
-                  maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
-                  meeting_frequency:[this.results.meeting_frequency],
-                  next_meeting_date:[this.results.next_meeting_date],
-                  reg_no:[this.results.reg_no],
-                  secretary:[this.results.secretary],
-                  sn:[this.results.sn],
-                  sol_id:[this.results.sol_id],
-                  total_loanAccs:[this.results.total_loanAccs],
-                  total_loanBalance:[this.results.total_loanBalance],
-                  total_members:[this.results.total_members],
-                  total_savingBalance:[this.results.total_savingBalance],
-                  total_savingsAccs:[this.results.total_savingsAccs],
-                  treasurer:[this.results.treasurer],
-                  
-                  modifiedBy:[this.results.modifiedBy],
-                  modifiedTime:[this.results.modifiedTime],
-                  postedBy:[this.results.postedBy],
-                  postedFlag:[this.results.postedFlag],
-                  postedTime:[this.results.postedTime],
-                  deleteFlag: ["Y"],
-                  deletedBy: [this.user],
-                  deletedTime: [new Date()],
-                  verifiedBy:[this.results.verifiedBy],
-                  verifiedFlag:[this.results.verifiedFlag],
-                  verifiedTime: [this.results.verifiedTime],
-                  groupMembers: new FormArray([])
-                });
-                for(let i = 0; i < this.results.groupMembers.length; i++){
-                  this.onReadField(this.results.groupMembers[i])
-                }
-              },
-              err =>{
-               this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
-                this.error = err
-                this._snackbar.open(this.error, "Try Again",{
-                  horizontalPosition:this.horizontalPosition,
-                  verticalPosition:this.verticalPosition,
-                  duration:3000,
-                  panelClass:['red-snackbar', 'login-snackbar']
-                })
-              } )
+          this.formData = this.fb.group({
+              id:[this.results.id],
+              mainGroupCode:[this.results.group_code],
+              mainGroupName:[this.results.mainGroupName],
+              mainGroupFormationDate:[this.results.mainGroupFormationDate],
+              mainGroupSolCode:[this.results.mainGroupSolCode],
+              mainGroupBranchName:[this.results.mainGroupBranchName],
+              mainGroupManagerID:[this.results.mainGroupManagerID],
+              mainGroupRegNo:[this.results.mainGroupRegNo],
+              mainGroupLocation:[this.results.mainGroupLocation],
+              mainGroupPhone:[this.results.mainGroupPhone],
+              mainGroupFirstMeetingDate:[this.results.mainGroupFirstMeetingDate],
+              mainGroupNextMeetingDate:[this.results.mainGroupNextMeetingDate],
+              mainGroupMaxAllowedMembers:[this.results.mainGroupMaxAllowedMembers],
+              mainGroupMaxAllowedSubGroups:[this.results.mainGroupMaxAllowedSubGroups],
+              mainGroupChairperson:[this.results.mainGroupChairperson],
+              mainGroupSecretary:[this.results.mainGroupSecretary],
+              mainGroupTreasurer:[this.results.mainGroupTreasurer],
+              mainGroupStatus:[this.results.mainGroupStatus],
+              mainGroupTotalMembers:[this.results.mainGroupTotalMembers],
+              mainGroupMeetingFrequency:[this.results.mainGroupMeetingFrequency],
+              mainGroupSavingAc:[this.results.mainGroupSavingAc],
+              mainGroupTotalSavingsBalance:[this.results.mainGroupTotalSavingsBalance],
+              mainGroupTotalLoanAc:[this.results.mainGroupTotalLoanAc],
+              mainGroupTotalLoanBalance:[this.results.mainGroupTotalLoanBalance],
+              deletedBy:[this.results.deletedBy],
+              deletedFlag:[this.results.deletedFlag],
+              deletedTime: [this.results.deletedTime],
+              modifiedBy:[this.results.modifiedBy],
+              modifiedTime:[this.results.modifiedTime],
+              postedBy:[this.results.postedBy],
+              postedFlag:[this.results.postedFlag],
+              postedTime:[this.results.postedTime],
+              verifiedBy:[this.results.verifiedBy],
+              verifiedFlag:[this.results.verifiedFlag],
+              verifiedTime:[this.results.verifiedTime],
+                });         }
+            )
           }else if(this.function_type == "V-Verify"){
+            this.dataExist = true;
             this.loading = true
-            this.isSubmitted = true;
+            this.formData.disable
             this.subscription = this.mainService.getMainGroupByCode(this.group_code).subscribe(
               res =>{
-                this.loading = true
-                this.results = res;
-                this.formData = this.fb.group({
-                  branch_name: [this.results.branch_name],
-                  chairperson: [this.results.chairperson],
-                  first_meeting_date: [this.results.first_meeting_date],
-                  groupCode:[this.results.groupCode],
-                  groupManager_ID: [this.results.groupManager_ID],
-                  groupStatus:[this.results.groupStatus],
-                  group_formation_date:[this.results.group_formation_date],
-                  group_location:[this.results.group_location],
-                  group_name:[this.results.group_name],
-                  group_phone:[this.results.group_phone],
-                  maxAllowedMembers:[this.results.maxAllowedMembers],
-                  maxAllowedSubGroups:[this.results.maxAllowedSubGroups],
-                  meeting_frequency:[this.results.meeting_frequency],
-                  next_meeting_date:[this.results.next_meeting_date],
-                  reg_no:[this.results.reg_no],
-                  secretary:[this.results.secretary],
-                  sn:[this.results.sn],
-                  sol_id:[this.results.sol_id],
-                  total_loanAccs:[this.results.total_loanAccs],
-                  total_loanBalance:[this.results.total_loanBalance],
-                  total_members:[this.results.total_members],
-                  total_savingBalance:[this.results.total_savingBalance],
-                  total_savingsAccs:[this.results.total_savingsAccs],
-                  treasurer:[this.results.treasurer],
-                  
-                  modifiedBy:[this.results.modifiedBy],
-                  modifiedTime:[this.results.modifiedTime],
-                  postedBy:[this.results.postedBy],
-                  postedFlag:[this.results.postedFlag],
-                  postedTime:[this.results.postedTime],
-                  deleteFlag: [this.results.deletedFlag],
-                  deletedBy: [this.results.deletedBy],
-                  deletedTime: [this.results.deletedTime],
-                  verifiedBy:[this.user],
-                  verifiedFlag:[this.results.verifiedFlag],
-                  verifiedTime: [this.results.verifiedTime],
-                  groupMembers: new FormArray([])
-                });
-                for(let i = 0; i < this.results.groupMembers.length; i++){
-                  this.onReadField(this.results.groupMembers[i])
-                }
-
-              },
-              err =>{
-               this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
-                this.error = err
-                this._snackbar.open(this.error, "Try Again",{
-                  horizontalPosition:this.horizontalPosition,
-                  verticalPosition:this.verticalPosition,
-                  duration:3000,
-                  panelClass:['red-snackbar', 'login-snackbar']
-                })
-
-              } )
-
-            
+                this.loading = false
+                this.results = res
+          this.formData = this.fb.group({
+              id:[this.results.id],
+              mainGroupCode:[this.results.group_code],
+              mainGroupName:[this.results.mainGroupName],
+              mainGroupFormationDate:[this.results.mainGroupFormationDate],
+              mainGroupSolCode:[this.results.mainGroupSolCode],
+              mainGroupBranchName:[this.results.mainGroupBranchName],
+              mainGroupManagerID:[this.results.mainGroupManagerID],
+              mainGroupRegNo:[this.results.mainGroupRegNo],
+              mainGroupLocation:[this.results.mainGroupLocation],
+              mainGroupPhone:[this.results.mainGroupPhone],
+              mainGroupFirstMeetingDate:[this.results.mainGroupFirstMeetingDate],
+              mainGroupNextMeetingDate:[this.results.mainGroupNextMeetingDate],
+              mainGroupMaxAllowedMembers:[this.results.mainGroupMaxAllowedMembers],
+              mainGroupMaxAllowedSubGroups:[this.results.mainGroupMaxAllowedSubGroups],
+              mainGroupChairperson:[this.results.mainGroupChairperson],
+              mainGroupSecretary:[this.results.mainGroupSecretary],
+              mainGroupTreasurer:[this.results.mainGroupTreasurer],
+              mainGroupStatus:[this.results.mainGroupStatus],
+              mainGroupTotalMembers:[this.results.mainGroupTotalMembers],
+              mainGroupMeetingFrequency:[this.results.mainGroupMeetingFrequency],
+              mainGroupSavingAc:[this.results.mainGroupSavingAc],
+              mainGroupTotalSavingsBalance:[this.results.mainGroupTotalSavingsBalance],
+              mainGroupTotalLoanAc:[this.results.mainGroupTotalLoanAc],
+              mainGroupTotalLoanBalance:[this.results.mainGroupTotalLoanBalance],
+              deletedBy:[this.results.deletedBy],
+              deletedFlag:[this.results.deletedFlag],
+              deletedTime: [this.results.deletedTime],
+              modifiedBy:[this.results.modifiedBy],
+              modifiedTime:[this.results.modifiedTime],
+              postedBy:[this.results.postedBy],
+              postedFlag:[this.results.postedFlag],
+              postedTime:[this.results.postedTime],
+              verifiedBy:[this.results.verifiedBy],
+              verifiedFlag:[this.results.verifiedFlag],
+              verifiedTime:[this.results.verifiedTime],
+                });         }
+            )
           }
+
+
+
         }
       )
     }
+
     onSubmit(){
       if(this.formData.valid){
         if(this.function_type == "A-Add"){
@@ -476,9 +351,9 @@ export class MainGroupComponent implements OnInit {
           this.subscription = this.mainService.createMainGroup(this.formData.value).subscribe(
             res =>{
               this.results = res
-              this._snackbar.open("Executed Successfully", "X",{
-                horizontalPosition:this.horizontalPosition,
-                verticalPosition:this.verticalPosition,
+              this._snackbar.open("Successfull", "X",{
+                horizontalPosition:'end',
+                verticalPosition:'top',
                 duration:3000,
                 panelClass:['green-snackbar', 'login-snackbar']
               });
@@ -487,60 +362,37 @@ export class MainGroupComponent implements OnInit {
             err =>{
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
-                horizontalPosition:this.horizontalPosition,
-                verticalPosition:this.verticalPosition,
+                horizontalPosition:'end',
+                verticalPosition:'top',
                 duration:3000,
                 panelClass:['red-snackbar', 'login-snackbar']
               })
             }
           )
-        } else if(this.function_type == "M-Modify"){
+        } else if(this.function_type != "Add"){
           this.subscription = this.mainService.updateMainGroup(this.formData.value).subscribe(
             res =>{
               this.results = res
-              this._snackbar.open("Executed Successfully", "X",{
-                horizontalPosition:this.horizontalPosition,
-                verticalPosition:this.verticalPosition,
+              this._snackbar.open("Successfull", "X",{
+                horizontalPosition:'end',
+                verticalPosition:'top',
                 duration:3000,
                 panelClass:['green-snackbar', 'login-snackbar']
-  
               });
               this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
             },
             err =>{
               this.error = err
               this._snackbar.open(this.error, "Try Again",{
-                horizontalPosition:this.horizontalPosition,
-                verticalPosition:this.verticalPosition,
+                horizontalPosition:'end',
+                verticalPosition:'top',
                 duration:3000,
                 panelClass:['red-snackbar', 'login-snackbar']
               })
             }
           )
-        } else if(this.function_type == "X-Delete"){
-          this.subscription = this.mainService.updateMainGroup(this.formData.value).subscribe(
-            res =>{
-              this.results = res
-              this._snackbar.open("Executed Successfully", "X",{
-                horizontalPosition:this.horizontalPosition,
-                verticalPosition:this.verticalPosition,
-                duration:3000,
-                panelClass:['green-snackbar', 'login-snackbar']
-  
-              });
-              this.router.navigate([`/system/GLS/main-group/maintenance`], { skipLocationChange: true });
-            },
-            err =>{
-              this.error = err
-              this._snackbar.open(this.error, "Try Again",{
-                horizontalPosition:this.horizontalPosition,
-                verticalPosition:this.verticalPosition,
-                duration:3000,
-                panelClass:['red-snackbar', 'login-snackbar']
-              })
-            }
-          )
-        }
+        } 
+         
       }
     }
 }

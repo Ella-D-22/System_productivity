@@ -247,3 +247,20 @@ color: rgb(250, 87, 87);
 padding: 2px;
 margin: 2px;
 }
+.table-buttons{
+  min-width: unset !important;
+  height: 25px;
+  line-height: 25px;
+  padding: auto;
+  margin: 2px;
+
+  .mat-icon {
+    font-size: 25px;
+    height: 25px;
+    line-height: 25px;
+  }
+}
+
+
+
+
