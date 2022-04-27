@@ -75,6 +75,8 @@ import { MainClassificationMaintenanceComponent } from './pages/SystemConfigurat
 import { MainClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/main-classifications/main-classifications.component';
 import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
 import { SubClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classifications.component';
+import { AccountsMaintenanceComponent } from './pages/accounts-module/accounts-maintenance/accounts-maintenance.component';
+import { AccountsModuleComponent } from './pages/accounts-module/accounts-module.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -647,6 +649,18 @@ const routes: Routes = [{
       {
         path: 'configurations/global/sub-classification/data/view',
         component: SubClassificationsComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'accounts-new/maintenance',
+        component: AccountsMaintenanceComponent,
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true},
+      },
+      {
+        path: 'accounts-new/data/view',
+        component: AccountsModuleComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
       },
