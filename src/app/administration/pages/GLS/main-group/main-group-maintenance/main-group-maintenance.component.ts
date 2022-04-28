@@ -21,6 +21,8 @@ export class MainGroupMaintenanceComponent implements OnInit {
   groupCode:any
   horizontalPosition: MatSnackBarHorizontalPosition
   verticalPosition :MatSnackBarVerticalPosition
+  mainGroupCode: any;
+  mainGroupName: any;
   constructor(private mainService:MainGroupService,
     private fb:FormBuilder,
     private _snackbar:MatSnackBar,
@@ -68,13 +70,12 @@ export class MainGroupMaintenanceComponent implements OnInit {
     }
     mainGroupLookup():void{
       const dialogRef =  this.dialog.open(MainGroupLookupComponent,{
-
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
-      
-        this.formData.controls.groupCode.setValue(results.data.groupCode)
-       
+        this.mainGroupCode = this.dialogData.mainGroupCode 
+        this.mainGroupName = this.dialogData.mainGroupName
+        this.formData.controls.groupCode.setValue(this.mainGroupCode)
       })
     }
 

@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CanLoadModuleGuard } from 'src/@core/helpers/CanLoadModule.guard';
-import { Role } from 'src/@core/Models/role/role.model';
-
-
-
 const routes: Routes = [
   { path: '', loadChildren: () => import('./Auth/auth.module').then(m => m.AuthModule),  },
   { path: 'sso', loadChildren: () => import('./Auth/auth.module').then(m => m.AuthModule) },
@@ -22,7 +17,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{ useHash: true})],
+  imports: [RouterModule.forRoot(routes,{ useHash: false})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

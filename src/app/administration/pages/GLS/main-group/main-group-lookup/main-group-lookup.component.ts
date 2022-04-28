@@ -14,13 +14,10 @@ import { MainGroupService } from '../main-group.service';
 export class MainGroupLookupComponent implements OnInit {
 
   results:any
-  displayedColumns : string[]= ['sn','Group Code', 'Group Name']
-
-
+  displayedColumns : string[]= ['index','mainGroupCode','mainGroupName','mainGroupPhone','mainGroupChairperson','mainGroupFormationDate']
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;
-
   constructor(private mainService:MainGroupService,
     private dialogRef:MatDialogRef<MainGroupLookupComponent>,
     private fb:FormBuilder) { 
@@ -33,11 +30,8 @@ export class MainGroupLookupComponent implements OnInit {
         }
       )
     }
-
-
   ngOnInit(): void {
   }
-
   applyFilter(event:Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -45,9 +39,7 @@ export class MainGroupLookupComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
   onSelect(data:any){
     this.dialogRef.close({ event: 'close', data:data });
   }
-
 }

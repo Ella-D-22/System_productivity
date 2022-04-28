@@ -13,7 +13,7 @@ export class MainGroupService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   baseURL = `${environment.glsAPI}/api/v1/group/main`;
     constructor(private http: HttpClient) { }
-     // Message Medium
+     // Message Medium groupAPI
   private messageSource = new BehaviorSubject('default message');
   currentMessage = this.messageSource.asObservable();
   changeMessage(message: string) {
@@ -22,7 +22,6 @@ export class MainGroupService {
   // Add
   createMainGroup(data: any): Observable<any> {
     let API_URL = `${this.baseURL}/add`;
-    
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
         return res || {}
       }),
@@ -53,10 +52,14 @@ export class MainGroupService {
   }
     // Get by Code
     getMainGroupByCode(groupCode: any): Observable<any> {
+      console.log("Hey",groupCode);
+      
       let API_URL = `${this.baseURL}/find/${groupCode}`;
       return this.http.get(API_URL, { withCredentials: false })
         .pipe(
           map((res) => {
+      console.log(res);
+
             return res || {}
           }),
           catchError(this.errorMgmt)
