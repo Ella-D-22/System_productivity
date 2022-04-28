@@ -31,12 +31,12 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="accountName" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
-                                    <mat-icon (click)="customerLookup()">search</mat-icon>
+                                    <!-- <mat-icon (click)="customerLookup()">search</mat-icon> -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
@@ -50,20 +50,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Account Status<span
-                                            class="warning">*</span></label>
-                                </div>
-                                <div class="col-md-6 col-sm-12 form-column">
-                                    <select formControlName="accountStatus" class="form-control">
-                                        <option *ngFor="let item of accountStatusArray" [value]="item">{{item}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    </div> -->
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
@@ -255,6 +243,21 @@
                                         <mat-radio-button color="primary" value=True>Yes</mat-radio-button>
                                         <mat-radio-button color="primary" value=False>No</mat-radio-button>
                                     </mat-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Account Status<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <select formControlName="accountStatus" class="form-control">
+                                        <option *ngFor="let item of accountStatusArray" [value]="item">{{item}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -835,6 +838,8 @@
                 </mat-tab>
             </mat-tab-group>
             <br>
+            <button mat-raised-button type="submit" class="float-left" [routerLink]="">Back</button> 
+            <!-- <button mat-raised-button type="submit" color="warn" class=" start float-right">Reset</button> -->
             <button mat-raised-button type="submit" color="primary" class="float-right"
                 style="margin-bottom:20px ;">Submit</button>
         </form>

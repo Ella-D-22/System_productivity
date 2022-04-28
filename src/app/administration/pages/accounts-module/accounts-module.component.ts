@@ -54,19 +54,24 @@ export class AccountsModuleComponent implements OnInit {
   caa_schemeCode:any
   collateralData:any
   element:any
-  constructor(private accountAPI:AccountsService,
+  message:any
+  constructor(
     private fb:FormBuilder,
     private _snackBar:MatSnackBar,
     private router:Router,
     private dialog:MatDialog,
     private misSectorAPI:MisSectorService,
-    private accountservice:LoanAccountService ) { }
+    private accountservice:LoanAccountService,
+    private accountAPI:AccountsService ) { 
+      // this.message = this.router.getCurrentNavigation()?.extras.state;
+      // console.log(this.message);
+
+    }
 
   ngOnInit(): void {
     this.getPage();
     this.getMISData()
   }
-
 
   glSubheadArray = new Array()
   nomineeArray = new Array()
@@ -97,6 +102,7 @@ export class AccountsModuleComponent implements OnInit {
     transferExceptionLimitDr:[''] ,
     accountStatement: [''],
     statementFreq:[''],
+    dispatchMode:[''],
     withholdingTax: [''],
     postedBy: [''],
     postedFlag: [''],
@@ -109,7 +115,6 @@ export class AccountsModuleComponent implements OnInit {
     deleteFlag: [''],
     deleteTime: [''],
     deletedBy: [''],
-    
   })
 
   loanData = this.fb.group({
@@ -211,10 +216,7 @@ export class AccountsModuleComponent implements OnInit {
 
   get f(){return this.formData.controls}
   get l(){return this.f.loan as FormArray}
-  // get d(){return this.loanDocumentData.controls}
-  // get ld(){return this.loanDemandData.controls}
   get s(){return this.f.saving as FormArray}
-  // get n(){return this.nomineesFormData.controls}
   get t(){return this.f.termDeposit as FormArray}
   get oa(){return this.f.officeAccount as FormArray}
   // get g(){return this.guardianFormData.controls}
@@ -333,7 +335,7 @@ export class AccountsModuleComponent implements OnInit {
     this.customer_lookup = result.data;
     this.customer_code = this.customer_lookup.customerCode;
     this.customer_name = this.customer_lookup.firstName +" "+this.customer_lookup.middleName +" "+this.customer_lookup.surname
-    this.formData.controls.accountManager.setValue(this.customer_lookup.firstName)
+    this.formData.controls.accountManager.setValue(this.customer_lookup.firstName + " " + this.customer_lookup.middleName)
     this.formData.controls.customerCode.setValue(this.customer_lookup.customerCode)
   });
 }
@@ -504,13 +506,681 @@ dialogRef.afterClosed().subscribe(result => {
   this.formData.controls.solCode.setValue(result.data.solCode);
 });
 }
-
 getPage(){
+  this.subscription = this.accountAPI.currentMessage.subscribe(
+    message =>{
+      this.message = message
+      if(this.message.function_type == 'A-Add' && this.message.account_type == 'LAA'){
+         this.formData = this.fb.group({
+          accountBalance: [''],
+          accountManager: [''],
+          accountName: [''],
+          accountOwnership: [''],
+          accountStatus:[''],
+          accountType: [''],
+          acid: [''],
+          cashExceptionLimitCr: [''],
+          cashExceptionLimitDr: [''],
+          currency:[''],
+          customerCode: [''],
+          lienAmount: 0,
+          loan: new FormArray([]),
+          officeAccount: new FormArray([]),
+          openingDate: [''],
+          referredBy: [''],
+          saving: new FormArray([]),
+          sn: [''],
+          solCode: [''],
+          sectorCode:[''],
+          subSectorCode:[''],
+          termDeposit: new FormArray([]),
+          transferExceptionLimitCr:[''] ,
+          transferExceptionLimitDr:[''] ,
+          accountStatement: [''],
+          statementFreq:[''],
+          dispatchMode:[''],
+          withholdingTax: [''],
+          postedBy: ['user'],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['None'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['None'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deleteFlag: ['N'],
+          deleteTime: [new Date()],
+          deletedBy: ['None'],
+         })
+      }else if(this.message.function_type == 'A-Add' && this.message.account_type == 'SBA'){
+        this.formData = this.fb.group({
+          accountBalance: [''],
+          accountManager: [''],
+          accountName: [''],
+          accountOwnership: [''],
+          accountStatus:[''],
+          accountType: [''],
+          acid: [''],
+          cashExceptionLimitCr: [''],
+          cashExceptionLimitDr: [''],
+          currency:[''],
+          customerCode: [''],
+          lienAmount: 0,
+          loan: new FormArray([]),
+          officeAccount: new FormArray([]),
+          openingDate: [''],
+          referredBy: [''],
+          saving: new FormArray([]),
+          sn: [''],
+          solCode: [''],
+          sectorCode:[''],
+          subSectorCode:[''],
+          termDeposit: new FormArray([]),
+          transferExceptionLimitCr:[''] ,
+          transferExceptionLimitDr:[''] ,
+          accountStatement: [''],
+          statementFreq:[''],
+          dispatchMode:[''],
+          withholdingTax: [''],
+          postedBy: ['user'],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['None'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['None'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deleteFlag: ['N'],
+          deleteTime: [new Date()],
+          deletedBy: ['None'],
+        })
+      }else if(this.message.function_type == 'A-Add' && this.message.account_type == 'TDA'){
+        this.formData = this.fb.group({
+          accountBalance: [''],
+          accountManager: [''],
+          accountName: [''],
+          accountOwnership: [''],
+          accountStatus:[''],
+          accountType: [''],
+          acid: [''],
+          cashExceptionLimitCr: [''],
+          cashExceptionLimitDr: [''],
+          currency:[''],
+          customerCode: [''],
+          lienAmount: 0,
+          loan: new FormArray([]),
+          officeAccount: new FormArray([]),
+          openingDate: [''],
+          referredBy: [''],
+          saving: new FormArray([]),
+          sn: [''],
+          solCode: [''],
+          sectorCode:[''],
+          subSectorCode:[''],
+          termDeposit: new FormArray([]),
+          transferExceptionLimitCr:[''] ,
+          transferExceptionLimitDr:[''] ,
+          accountStatement: [''],
+          statementFreq:[''],
+          dispatchMode:[''],
+          withholdingTax: [''],
+          postedBy: ['user'],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['None'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['None'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deleteFlag: ['N'],
+          deleteTime: [new Date()],
+          deletedBy: ['None'],
+        })
+      }else if(this.message.function_type == 'A-Add' && this.message.account_type == 'TDA'){
+        this.formData = this.fb.group({
+          accountBalance: [''],
+          accountManager: [''],
+          accountName: [''],
+          accountOwnership: [''],
+          accountStatus:[''],
+          accountType: [''],
+          acid: [''],
+          cashExceptionLimitCr: [''],
+          cashExceptionLimitDr: [''],
+          currency:[''],
+          customerCode: [''],
+          lienAmount: 0,
+          loan: new FormArray([]),
+          officeAccount: new FormArray([]),
+          openingDate: [''],
+          referredBy: [''],
+          saving: new FormArray([]),
+          sn: [''],
+          solCode: [''],
+          sectorCode:[''],
+          subSectorCode:[''],
+          termDeposit: new FormArray([]),
+          transferExceptionLimitCr:[''] ,
+          transferExceptionLimitDr:[''] ,
+          accountStatement: [''],
+          statementFreq:[''],
+          dispatchMode:[''],
+          withholdingTax: [''],
+          postedBy: ['user'],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['None'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['None'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deleteFlag: ['N'],
+          deleteTime: [new Date()],
+          deletedBy: ['None'],
+        })
+      }else if(this.message.function_type == 'A-Add' && this.message.account_type){
+        this.formData = this.fb.group({
+          accountBalance: [''],
+          accountManager: [''],
+          accountName: [''],
+          accountOwnership: [''],
+          accountStatus:[''],
+          accountType: [''],
+          acid: [''],
+          cashExceptionLimitCr: [''],
+          cashExceptionLimitDr: [''],
+          currency:[''],
+          customerCode: [''],
+          lienAmount: 0,
+          loan: new FormArray([]),
+          officeAccount: new FormArray([]),
+          openingDate: [''],
+          referredBy: [''],
+          saving: new FormArray([]),
+          sn: [''],
+          solCode: [''],
+          sectorCode:[''],
+          subSectorCode:[''],
+          termDeposit: new FormArray([]),
+          transferExceptionLimitCr:[''] ,
+          transferExceptionLimitDr:[''] ,
+          accountStatement: [''],
+          statementFreq:[''],
+          dispatchMode:[''],
+          withholdingTax: [''],
+          postedBy: ['user'],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['None'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['None'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deleteFlag: ['N'],
+          deleteTime: [new Date()],
+          deletedBy: ['None'],
+        })
+      }else if( this.message.function_type == 'A-Add' && this.message.account_type == 'ODA'){
+        this.formData = this.fb.group({
+          accountBalance: [''],
+          accountManager: [''],
+          accountName: [''],
+          accountOwnership: [''],
+          accountStatus:[''],
+          accountType: [''],
+          acid: [''],
+          cashExceptionLimitCr: [''],
+          cashExceptionLimitDr: [''],
+          currency:[''],
+          customerCode: [''],
+          lienAmount: 0,
+          loan: new FormArray([]),
+          officeAccount: new FormArray([]),
+          openingDate: [''],
+          referredBy: [''],
+          saving: new FormArray([]),
+          sn: [''],
+          solCode: [''],
+          sectorCode:[''],
+          subSectorCode:[''],
+          termDeposit: new FormArray([]),
+          transferExceptionLimitCr:[''] ,
+          transferExceptionLimitDr:[''] ,
+          accountStatement: [''],
+          statementFreq:[''],
+          dispatchMode:[''],
+          withholdingTax: [''],
+          postedBy: ['user'],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['None'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['None'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deleteFlag: ['N'],
+          deleteTime: [new Date()],
+          deletedBy: ['None'],
+        })
+      }else if(this.message.function_type == 'A-Add' && this.message.account_type == 'CAA'){
+        this.formData = this.fb.group({
+          accountBalance: [''],
+          accountManager: [''],
+          accountName: [''],
+          accountOwnership: [''],
+          accountStatus:[''],
+          accountType: [''],
+          acid: [''],
+          cashExceptionLimitCr: [''],
+          cashExceptionLimitDr: [''],
+          currency:[''],
+          customerCode: [''],
+          lienAmount: 0,
+          loan: new FormArray([]),
+          officeAccount: new FormArray([]),
+          openingDate: [''],
+          referredBy: [''],
+          saving: new FormArray([]),
+          sn: [''],
+          solCode: [''],
+          sectorCode:[''],
+          subSectorCode:[''],
+          termDeposit: new FormArray([]),
+          transferExceptionLimitCr:[''] ,
+          transferExceptionLimitDr:[''] ,
+          accountStatement: [''],
+          statementFreq:[''],
+          dispatchMode:[''],
+          withholdingTax: [''],
+          postedBy: ['user'],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['None'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['None'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deleteFlag: ['N'],
+          deleteTime: [new Date()],
+          deletedBy: ['None'],
+        })
+      }else if(this.message.function_type == 'A-Add' && this.message.account_type == 'OAB'){
+        this.formData = this.fb.group({
+          accountBalance: [''],
+          accountManager: [''],
+          accountName: [''],
+          accountOwnership: [''],
+          accountStatus:[''],
+          accountType: [''],
+          acid: [''],
+          cashExceptionLimitCr: [''],
+          cashExceptionLimitDr: [''],
+          currency:[''],
+          customerCode: [''],
+          lienAmount: 0,
+          loan: new FormArray([]),
+          officeAccount: new FormArray([]),
+          openingDate: [''],
+          referredBy: [''],
+          saving: new FormArray([]),
+          sn: [''],
+          solCode: [''],
+          sectorCode:[''],
+          subSectorCode:[''],
+          termDeposit: new FormArray([]),
+          transferExceptionLimitCr:[''] ,
+          transferExceptionLimitDr:[''] ,
+          accountStatement: [''],
+          statementFreq:[''],
+          dispatchMode:[''],
+          withholdingTax: [''],
+          postedBy: ['user'],
+          postedFlag: ['Y'],
+          postedTime: [new Date()],
+          modifiedBy: ['None'],
+          modifiedTime: [new Date()],
+          verifiedBy: ['None'],
+          verifiedFlag: ['N'],
+          verifiedTime: [new Date()],
+          deleteFlag: ['N'],
+          deleteTime: [new Date()],
+          deletedBy: ['None'],
+        })
+      }else if(this.message.function_type == 'I-Inquire' && this.message.account_type == 'LAA'){
+        this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
+          data =>{
+            this.results = data.entity
+
+            if(this.results.withholdingTax == true){
+              this.results.withholdingTax == "True"
+            }else{
+              this.results.withholdingTax == "False"
+            }
+
+            this.formData = this.fb.group({
+              accountBalance: [this.results.accountBalance],
+              accountManager: [this.results.accountManager],
+              accountName: [this.results.accountName],
+              accountOwnership: [this.results.accountOwnership],
+              accountStatus:[this.results.accountStatus],
+              accountType: [this.message.account_type],
+              acid: [this.results.acid],
+              cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
+              cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
+              currency:[this.results.currency],
+              customerCode: [this.results.customerCode],
+              lienAmount: [this.results.lienAmount],
+              loan: new FormArray([]),
+              officeAccount: new FormArray([]),
+              openingDate: [this.results.openingDate],
+              referredBy: [this.results.referredBy],
+              saving: new FormArray([]),
+              sn: [this.results.sn],
+              solCode: [this.results.solCode],
+              sectorCode:[this.results.sectorCode],
+              subSectorCode:[this.results.subSectorCode],
+              termDeposit: new FormArray([]),
+              transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
+              transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+              accountStatement: [this.results.accountStatement],
+              statementFreq:[this.results.statementFreq],
+              dispatchMode:[this.results.dispatchMode],
+              withholdingTax: [this.results.withholdingTax],
+              postedBy: [this.results.postedBy],
+              postedFlag: [this.results.postedFlag],
+              postedTime: [this.results.postedTime],
+              modifiedBy: [this.results.modifiedBy],
+              modifiedTime: [this.results.modifiedTime],
+              verifiedBy: [this.results.verifiedBy],
+              verifiedFlag: [this.results.verifiedFlag],
+              verifiedTime: [this.results.verifiedTime],
+              deleteFlag: [this.results.deleteFlag],
+              deleteTime: [this.results.deleteTime],
+              deletedBy: [this.results.deletedBy],
+            })
+          }
+        )
+      }else if(this.message.function_type == 'I-Inquire' && this.message.account_type == 'SBA'){
+        this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
+          data =>{
+            this.results = data.entity
+            
+            if(this.results.withholdingTax == true){
+              this.results.withholdingTax == "True"
+            }else{
+              this.results.withholdingTax == "False"
+            }
+
+            this.formData = this.fb.group({
+              accountBalance: [this.results.accountBalance],
+              accountManager: [this.results.accountManager],
+              accountName: [this.results.accountName],
+              accountOwnership: [this.results.accountOwnership],
+              accountStatus:[this.results.accountStatus],
+              accountType: [this.message.account_type],
+              acid: [this.results.acid],
+              cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
+              cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
+              currency:[this.results.currency],
+              customerCode: [this.results.customerCode],
+              lienAmount: [this.results.lienAmount],
+              loan: new FormArray([]),
+              officeAccount: new FormArray([]),
+              openingDate: [this.results.openingDate],
+              referredBy: [this.results.referredBy],
+              saving: new FormArray([]),
+              sn: [this.results.sn],
+              solCode: [this.results.solCode],
+              sectorCode:[this.results.sectorCode],
+              subSectorCode:[this.results.subSectorCode],
+              termDeposit: new FormArray([]),
+              transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
+              transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+              accountStatement: [this.results.accountStatement],
+              statementFreq:[this.results.statementFreq],
+              dispatchMode:[this.results.dispatchMode],
+              withholdingTax: [this.results.withholdingTax],
+              postedBy: [this.results.postedBy],
+              postedFlag: [this.results.postedFlag],
+              postedTime: [this.results.postedTime],
+              modifiedBy: [this.results.modifiedBy],
+              modifiedTime: [this.results.modifiedTime],
+              verifiedBy: [this.results.verifiedBy],
+              verifiedFlag: [this.results.verifiedFlag],
+              verifiedTime: [this.results.verifiedTime],
+              deleteFlag: [this.results.deleteFlag],
+              deleteTime: [this.results.deleteTime],
+              deletedBy: [this.results.deletedBy],
+            })
+          }
+        )
+          }else if(this.message.function_type == 'I-Inquire' && this.message.account_type == 'TDA'){
+            this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
+              data =>{
+                this.results = data.entity
+                
+                if(this.results.withholdingTax == true){
+                  this.results.withholdingTax == "True"
+                }else{
+                  this.results.withholdingTax == "False"
+                }
+    
+                this.formData = this.fb.group({
+                  accountBalance: [this.results.accountBalance],
+                  accountManager: [this.results.accountManager],
+                  accountName: [this.results.accountName],
+                  accountOwnership: [this.results.accountOwnership],
+                  accountStatus:[this.results.accountStatus],
+                  accountType: [this.message.account_type],
+                  acid: [this.results.acid],
+                  cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
+                  cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
+                  currency:[this.results.currency],
+                  customerCode: [this.results.customerCode],
+                  lienAmount: [this.results.lienAmount],
+                  loan: new FormArray([]),
+                  officeAccount: new FormArray([]),
+                  openingDate: [this.results.openingDate],
+                  referredBy: [this.results.referredBy],
+                  saving: new FormArray([]),
+                  sn: [this.results.sn],
+                  solCode: [this.results.solCode],
+                  sectorCode:[this.results.sectorCode],
+                  subSectorCode:[this.results.subSectorCode],
+                  termDeposit: new FormArray([]),
+                  transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
+                  transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+                  accountStatement: [this.results.accountStatement],
+                  statementFreq:[this.results.statementFreq],
+                  dispatchMode:[this.results.dispatchMode],
+                  withholdingTax: [this.results.withholdingTax],
+                  postedBy: [this.results.postedBy],
+                  postedFlag: [this.results.postedFlag],
+                  postedTime: [this.results.postedTime],
+                  modifiedBy: [this.results.modifiedBy],
+                  modifiedTime: [this.results.modifiedTime],
+                  verifiedBy: [this.results.verifiedBy],
+                  verifiedFlag: [this.results.verifiedFlag],
+                  verifiedTime: [this.results.verifiedTime],
+                  deleteFlag: [this.results.deleteFlag],
+                  deleteTime: [this.results.deleteTime],
+                  deletedBy: [this.results.deletedBy],
+                })
+              }
+            )
+          }else if(this.message.function_type == 'I-Inquire' && this.message.account_type =='ODA'){
+            this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
+              data =>{
+                this.results = data.entity
+                
+                if(this.results.withholdingTax == true){
+                  this.results.withholdingTax == "True"
+                }else{
+                  this.results.withholdingTax == "False"
+                }
+    
+                this.formData = this.fb.group({
+                  accountBalance: [this.results.accountBalance],
+                  accountManager: [this.results.accountManager],
+                  accountName: [this.results.accountName],
+                  accountOwnership: [this.results.accountOwnership],
+                  accountStatus:[this.results.accountStatus],
+                  accountType: [this.message.account_type],
+                  acid: [this.results.acid],
+                  cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
+                  cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
+                  currency:[this.results.currency],
+                  customerCode: [this.results.customerCode],
+                  lienAmount: [this.results.lienAmount],
+                  loan: new FormArray([]),
+                  officeAccount: new FormArray([]),
+                  openingDate: [this.results.openingDate],
+                  referredBy: [this.results.referredBy],
+                  saving: new FormArray([]),
+                  sn: [this.results.sn],
+                  solCode: [this.results.solCode],
+                  sectorCode:[this.results.sectorCode],
+                  subSectorCode:[this.results.subSectorCode],
+                  termDeposit: new FormArray([]),
+                  transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
+                  transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+                  accountStatement: [this.results.accountStatement],
+                  statementFreq:[this.results.statementFreq],
+                  dispatchMode:[this.results.dispatchMode],
+                  withholdingTax: [this.results.withholdingTax],
+                  postedBy: [this.results.postedBy],
+                  postedFlag: [this.results.postedFlag],
+                  postedTime: [this.results.postedTime],
+                  modifiedBy: [this.results.modifiedBy],
+                  modifiedTime: [this.results.modifiedTime],
+                  verifiedBy: [this.results.verifiedBy],
+                  verifiedFlag: [this.results.verifiedFlag],
+                  verifiedTime: [this.results.verifiedTime],
+                  deleteFlag: [this.results.deleteFlag],
+                  deleteTime: [this.results.deleteTime],
+                  deletedBy: [this.results.deletedBy],
+                })
+              }
+            )
+          }else if(this.message.function_type == 'I-Inquire' && this.message.account_type == 'CAA'){
+            this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
+              data =>{
+                this.results = data.entity
+                
+                if(this.results.withholdingTax == true){
+                  this.results.withholdingTax == "True"
+                }else{
+                  this.results.withholdingTax == "False"
+                }
+    
+                this.formData = this.fb.group({
+                  accountBalance: [this.results.accountBalance],
+                  accountManager: [this.results.accountManager],
+                  accountName: [this.results.accountName],
+                  accountOwnership: [this.results.accountOwnership],
+                  accountStatus:[this.results.accountStatus],
+                  accountType: [this.message.account_type],
+                  acid: [this.results.acid],
+                  cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
+                  cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
+                  currency:[this.results.currency],
+                  customerCode: [this.results.customerCode],
+                  lienAmount: [this.results.lienAmount],
+                  loan: new FormArray([]),
+                  officeAccount: new FormArray([]),
+                  openingDate: [this.results.openingDate],
+                  referredBy: [this.results.referredBy],
+                  saving: new FormArray([]),
+                  sn: [this.results.sn],
+                  solCode: [this.results.solCode],
+                  sectorCode:[this.results.sectorCode],
+                  subSectorCode:[this.results.subSectorCode],
+                  termDeposit: new FormArray([]),
+                  transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
+                  transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+                  accountStatement: [this.results.accountStatement],
+                  statementFreq:[this.results.statementFreq],
+                  dispatchMode:[this.results.dispatchMode],
+                  withholdingTax: [this.results.withholdingTax],
+                  postedBy: [this.results.postedBy],
+                  postedFlag: [this.results.postedFlag],
+                  postedTime: [this.results.postedTime],
+                  modifiedBy: [this.results.modifiedBy],
+                  modifiedTime: [this.results.modifiedTime],
+                  verifiedBy: [this.results.verifiedBy],
+                  verifiedFlag: [this.results.verifiedFlag],
+                  verifiedTime: [this.results.verifiedTime],
+                  deleteFlag: [this.results.deleteFlag],
+                  deleteTime: [this.results.deleteTime],
+                  deletedBy: [this.results.deletedBy],
+                })
+              }
+            )
+          }else if(this.message.function_type == 'I-Inquire' && this.message.account_type == 'OAB'){
+            this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
+              data =>{
+                this.results = data.entity
+                
+                if(this.results.withholdingTax == true){
+                  this.results.withholdingTax == "True"
+                }else{
+                  this.results.withholdingTax == "False"
+                }
+    
+                this.formData = this.fb.group({
+                  accountBalance: [this.results.accountBalance],
+                  accountManager: [this.results.accountManager],
+                  accountName: [this.results.accountName],
+                  accountOwnership: [this.results.accountOwnership],
+                  accountStatus:[this.results.accountStatus],
+                  accountType: [this.message.account_type],
+                  acid: [this.results.acid],
+                  cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
+                  cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
+                  currency:[this.results.currency],
+                  customerCode: [this.results.customerCode],
+                  lienAmount: [this.results.lienAmount],
+                  loan: new FormArray([]),
+                  officeAccount: new FormArray([]),
+                  openingDate: [this.results.openingDate],
+                  referredBy: [this.results.referredBy],
+                  saving: new FormArray([]),
+                  sn: [this.results.sn],
+                  solCode: [this.results.solCode],
+                  sectorCode:[this.results.sectorCode],
+                  subSectorCode:[this.results.subSectorCode],
+                  termDeposit: new FormArray([]),
+                  transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
+                  transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+                  accountStatement: [this.results.accountStatement],
+                  statementFreq:[this.results.statementFreq],
+                  dispatchMode:[this.results.dispatchMode],
+                  withholdingTax: [this.results.withholdingTax],
+                  postedBy: [this.results.postedBy],
+                  postedFlag: [this.results.postedFlag],
+                  postedTime: [this.results.postedTime],
+                  modifiedBy: [this.results.modifiedBy],
+                  modifiedTime: [this.results.modifiedTime],
+                  verifiedBy: [this.results.verifiedBy],
+                  verifiedFlag: [this.results.verifiedFlag],
+                  verifiedTime: [this.results.verifiedTime],
+                  deleteFlag: [this.results.deleteFlag],
+                  deleteTime: [this.results.deleteTime],
+                  deletedBy: [this.results.deletedBy],
+                })
+              }
+            )
+          }else if(this.message.function_type == 'M-Modify' && this.message.account_type =='OAB'){}
+        
+      }
+    
+  )
+
+  
+  
 
 }
 
+onSubmit(){}
 
-onSubmit(){
-
-}
 }

@@ -2,19 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
-import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
-import { AccountsService } from '../accounts.service';
+import { AccountsService } from '../../../accounts-module/accounts.service';
+import { SavingsLookupComponent } from '../savings-lookup/savings-lookup.component';
 
 @Component({
-  selector: 'app-accounts-maintenance',
-  templateUrl: './accounts-maintenance.component.html',
-  styleUrls: ['./accounts-maintenance.component.scss']
+  selector: 'app-savings-maintenance',
+  templateUrl: './savings-maintenance.component.html',
+  styleUrls: ['./savings-maintenance.component.scss']
 })
-export class AccountsMaintenanceComponent implements OnInit {
+export class SavingsMaintenanceComponent implements OnInit {
+
   dtype!:string
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -118,11 +118,11 @@ export class AccountsMaintenanceComponent implements OnInit {
             this.account_code=this.f.account_code.value;
             this.accountAPI.changeMessage(this.formData.value)
             if(this.function_type == "A-Add"){
-              this.router.navigate(['system/accounts-new/data/view'], { state: this.formData.value
+              this.router.navigate(['system/savings-account/data/view'], { state: this.formData.value
                    });
            }
            else{
-            this.router.navigate(['system/accounts-new/data/view'], {
+            this.router.navigate(['system/savings-account/data/view'], {
               state: this.formData.value,
             });
             }
@@ -156,7 +156,7 @@ export class AccountsMaintenanceComponent implements OnInit {
           dconfig.data={
             type:this.dtype
           }
-          const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+          const cdialogRef = this.dialog.open(SavingsLookupComponent,dconfig);
           cdialogRef.afterClosed().subscribe((result) => {
             console.log(result.data);
             // this.schemeCode = result.data.schemeCode;
@@ -164,7 +164,5 @@ export class AccountsMaintenanceComponent implements OnInit {
            
           });
         }
-
-
 
 }

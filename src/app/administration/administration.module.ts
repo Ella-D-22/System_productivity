@@ -67,7 +67,7 @@ import { BranchesMaintenanceComponent } from './pages/branches/branches-maintena
 import { CashTransactionsComponent } from './pages/transactions/transactions/cash-transactions/cash-transactions.component';
 import { TransactionMaintainanceComponent } from './pages/transactions/transactions/transaction-maintainance/transaction-maintainance.component';
 import { AccountComponent } from './pages/transactions/lookup/account/account.component';
-import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
+// import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
 import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 import { LoanAccountLookupComponent } from './pages/loan-account/loan-account-lookup/loan-account-lookup.component';
 import { BranchComponent } from './pages/loan-account/lookup/branch/branch.component';
@@ -136,6 +136,22 @@ import { SubClassificationLookupComponent } from './pages/SystemConfigurations/G
 import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
 import { TransferMemberComponent } from './pages/GLS/sub-group/transfer-member/transfer-member.component';
 import { ExitMemberComponent } from './pages/GLS/sub-group/exit-member/exit-member.component';
+import { LoanAccountMaintenanceComponent } from './pages/Account-Component/loan-account/loan-account-maintenance/loan-account-maintenance.component';
+import { SavingsAccountComponent } from './pages/Account-Component/savings-account/savings-account.component';
+import { SavingsMaintenanceComponent } from './pages/Account-Component/savings-account/savings-maintenance/savings-maintenance.component';
+import { SavingsLookupComponent } from './pages/Account-Component/savings-account/savings-lookup/savings-lookup.component';
+import { OverdraftAccountComponent } from './pages/Account-Component/overdraft-account/overdraft-account.component';
+import { OfficeAccountComponent } from './pages/Account-Component/office-account/office-account.component';
+import { CurrentAccountComponent } from './pages/Account-Component/current-account/current-account.component';
+import { TermDepositAccountComponent } from './pages/Account-Component/term-deposit-account/term-deposit-account.component';
+import { TermDepositAccountMaintenanceComponent } from './pages/Account-Component/term-deposit-account/term-deposit-maintenance/term-deposit-maintenance.component';
+import { CurrentAccountMaintenanceComponent } from './pages/Account-Component/current-account/current-account-maintenance/current-account-maintenance.component';
+import { CurrentAccountLookupComponent } from './pages/Account-Component/current-account/current-account-lookup/current-account-lookup.component';
+import { OfficeAccountMaintenanceComponent } from './pages/Account-Component/office-account/office-account-maintenance/office-account-maintenance.component';
+import { OfficeAccountLookupComponent } from './pages/Account-Component/office-account/office-account-lookup/office-account-lookup.component';
+import { OverdraftAccountMaintenanceComponent } from './pages/Account-Component/overdraft-account/overdraft-account-maintenance/overdraft-account-maintenance.component';
+import { OverdraftAccountLookupComponent } from './pages/Account-Component/overdraft-account/overdraft-account-lookup/overdraft-account-lookup.component';
+import { LoanAccountComponent } from './pages/Account-Component/loan-account/loan-account/loan-account.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -198,7 +214,7 @@ import { ExitMemberComponent } from './pages/GLS/sub-group/exit-member/exit-memb
     CashTransactionsComponent,
     TransactionMaintainanceComponent,
     AccountComponent,
-    LoanAccountComponent,
+    // LoanAccountComponent,
     LoanAccountMaintainanceComponent,
     LoanAccountLookupComponent,
     BranchComponent,
@@ -272,7 +288,24 @@ import { ExitMemberComponent } from './pages/GLS/sub-group/exit-member/exit-memb
     SubClassificationLookupComponent,
     SubClassificationMaintenanceComponent,
     TransferMemberComponent,
-    ExitMemberComponent
+    ExitMemberComponent,
+    LoanAccountComponent,
+    LoanAccountMaintenanceComponent,
+    SavingsAccountComponent,
+    SavingsMaintenanceComponent,
+    SavingsLookupComponent,
+    OverdraftAccountComponent,
+    OfficeAccountComponent,
+    CurrentAccountComponent,
+    TermDepositAccountComponent,
+    TermDepositAccountMaintenanceComponent,
+    CurrentAccountMaintenanceComponent,
+    CurrentAccountLookupComponent,
+    OfficeAccountMaintenanceComponent,
+    OfficeAccountLookupComponent,
+    OverdraftAccountMaintenanceComponent,
+    OverdraftAccountLookupComponent,
+  
 
   ],
   imports: [
