@@ -48,7 +48,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch Location</th>
         <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.location}} </td>
       </ng-container>
-
+     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   

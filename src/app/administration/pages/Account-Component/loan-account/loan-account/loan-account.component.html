@@ -1,0 +1,450 @@
+<mat-card>
+    <mat-card-header class="breadcrumb"></mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container-fluid">
+        <form action="">
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab class="mat-tab container-fluid" label="General Details">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Account Manager<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="accountManager" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    <mat-icon (click)="customerLookup()">search</mat-icon>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Account Name<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="accountName" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    <!-- <mat-icon (click)="customerLookup()">search</mat-icon> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Account Ownership<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="accountOwnership" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    <mat-icon (click)="customerLookup()">search</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Branch Code<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="solCode" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    <mat-icon (click)="branchSubheadLookup()">search</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Currency(CCY)<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="currency" maxlength="3" class="form-control">
+                                    <mat-icon (click)="currencyLookup()">search</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Customer Code<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="customerCode" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    <mat-icon (click)="customerLookup()">search</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Opening Date<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input [matDatepicker]="opicker" formControlName="openingDate"
+                                        class="form-control" />
+                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="opicker">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #opicker></mat-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Sector Code<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <select formControlName="sectorCode" (change)="onInputSelection($event)"
+                                        class="form-control">
+                                        <option value="" disabled>-- Select MIS Sector Code --</option>
+                                        <option *ngFor="let item of this.sectorData " [value]="item.miscode">
+                                            {{item.mis_sector}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Sub Sector Code<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <select formControlName="subSectorCode" class="form-control">
+                                        <option value="" disabled>--Select a MIS Sub Sector</option>
+                                        <option *ngFor="let item of subSectors " [value]="item.missubcode">
+                                            {{item.mis_sub_sector_desc}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Cash Exception Limit Dr.<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="cashExceptionLimitDr" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Cash Exception Limit Cr.<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="cashExceptionLimitCr" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Transfer Exception Limit Dr.<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="transferExceptionLimitDr"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Transfer Exception Limit Cr.</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="number" formControlName="transferExceptionLimitCr"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Account Statement<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="accountStatement"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Statement Frequency<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <select formControlName="statementFreq" class="form-control">
+                                        <option *ngFor="let item of statementFreqArray" [value]="item">{{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Dispatch Mode<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <select formControlName="dispatchMode" class="form-control">
+                                        <option *ngFor="let item of despatch_mode_array" [value]="item">{{item}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column ">
+                                    <label class="start pull-left">Withholding Tax</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column ">
+                                    <mat-radio-group name="citizen" formControlName="withholdingTax">
+                                        <mat-radio-button color="primary" value=True>Yes</mat-radio-button>
+                                        <mat-radio-button color="primary" value=False>No</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Account Status<span
+                                            class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <select formControlName="accountStatus" class="form-control">
+                                        <option *ngFor="let item of accountStatusArray" [value]="item">{{item}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab class="mat-tab" label="Specific Details">
+                    <br>
+                    <div>
+                        <h4>Loan Account</h4>
+                        <br>
+                        <form action="" [formGroup]="loanData" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Amount Disbursed<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="number" readonly class="form-control"
+                                                formControlName="amountDisbursed">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Application Status<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <select formControlName="" form-control formControlName="applicationStatus" class="form-control">
+                                                <option *ngFor="let item of aaplicationStatusAr" [value]="item">{{item}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Collateral Code<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="collateralCode" class="form-control">
+                                            <mat-icon (click)="collateralLookup()">search</mat-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">OverFlow Amount<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="number" formControlName="overFlowAmount" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Principal Account<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="text" formControlName="principalAccount" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Principal Demand Account<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="number" formControlName="principalDemandAmount"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Interest Demand Amount<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="number" formControlName="interestDemandAmount"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Sum Principal Demand<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="number" formControlName="sumPrincipalDemand"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Repayment Period(MM)<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input type="number" formControlName="repaymentPeriod" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">Disbursement Date<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input [matDatepicker]="dpicker" formControlName="disbursementDate"
+                                                class="form-control" />
+                                            <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="dpicker">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #dpicker></mat-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <label for="" class="start pull-left">nextRepaymentDate<span
+                                                    class="warning">*</span></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-column">
+                                            <input [matDatepicker]="npicker" formControlName="nextRepaymentDate"
+                                                class="form-control" />
+                                            <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="npicker">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #npicker></mat-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-tab>
+                <mat-tab class="mat-tab" label="Loan Documents">
+                    <div class="container-fluid row mt-4">
+                        <div class="col-md-3">
+                            <input class="form-control" type="file" required (change)="onPhotoChange($event)">
+                            <p>Loan Application Form</p>
+                        </div>
+                        <img [src]="customerImage" class="col-md-6" />
+                    </div>
+                    <div class="container-fluid row mt-4">
+                        <div class="col-md-3">
+                            <input class="form-control" type="file" required (change)="onSignatureChange($event)">
+                            <p>Extra Document</p>
+                        </div>
+                        <img [src]="signatureImage" class="col-md-6" />
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+            <br>
+            <button mat-raised-button type="submit" class="float-left" [routerLink]="">Back</button> 
+            <!-- <button mat-raised-button type="submit" color="warn" class=" start float-right">Reset</button> -->
+            <button mat-raised-button type="submit" color="primary" class="float-right"
+                style="margin-bottom:20px ;">Submit</button>
+        </form>
+    </div>
+
+</mat-card>

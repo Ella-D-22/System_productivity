@@ -36,8 +36,6 @@ import { ExceptionsCodesComponent } from './pages/SystemConfigurations/GlobalPar
 import { ExceptionsCodesMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/exceptions-codes/exceptions-codes-maintenance/exceptions-codes-maintenance.component';
 import { BranchesMaintenanceComponent } from './pages/branches/branches-maintenance/branches-maintenance.component';
 import { BranchesComponent } from './pages/branches/branches.component';
-import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
-import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 import { InterestMaintainanceComponent } from './pages/interest/interest-maintainance/interest-maintainance.component';
 import { InterestComponent } from './pages/interest/interest.component';
 import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sector/mis-sector.component';
@@ -77,6 +75,18 @@ import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurati
 import { SubClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classifications.component';
 import { AccountsMaintenanceComponent } from './pages/accounts-module/accounts-maintenance/accounts-maintenance.component';
 import { AccountsModuleComponent } from './pages/accounts-module/accounts-module.component';
+import { LoanAccountMaintenanceComponent } from './pages/Account-Component/loan-account/loan-account-maintenance/loan-account-maintenance.component';
+import { LoanAccountComponent } from './pages/Account-Component/loan-account/loan-account/loan-account.component';
+import { SavingsMaintenanceComponent } from './pages/Account-Component/savings-account/savings-maintenance/savings-maintenance.component';
+import { SavingsAccountComponent } from './pages/Account-Component/savings-account/savings-account.component';
+import { TermDepositAccountComponent } from './pages/Account-Component/term-deposit-account/term-deposit-account.component';
+import { TermDepositAccountMaintenanceComponent } from './pages/Account-Component/term-deposit-account/term-deposit-maintenance/term-deposit-maintenance.component';
+import { CurrentAccountMaintenanceComponent } from './pages/Account-Component/current-account/current-account-maintenance/current-account-maintenance.component';
+import { CurrentAccountComponent } from './pages/Account-Component/current-account/current-account.component';
+import { OverdraftAccountMaintenanceComponent } from './pages/Account-Component/overdraft-account/overdraft-account-maintenance/overdraft-account-maintenance.component';
+import { OverdraftAccountComponent } from './pages/Account-Component/overdraft-account/overdraft-account.component';
+import { OfficeAccountMaintenanceComponent } from './pages/Account-Component/office-account/office-account-maintenance/office-account-maintenance.component';
+import { OfficeAccountComponent } from './pages/Account-Component/office-account/office-account.component';
 const routes: Routes = [{
   path: '',
   component: AdministrationComponent,
@@ -372,37 +382,93 @@ const routes: Routes = [{
      
      // *******************************************************************************************\
       //                                         Accounts Settings
-      // *******************************************************************************************
+      // *******************************************************************************************\
 
-      // // Loan Product
-      // {
-      //   path: 'accounts/maintenance',
-      //   component:AccountsMaintenanceComponent,
-      //   // canActivate: [CanActivateModuleGuard],
-      //   data: {preload:true },
-      // },
-      // {
-      //   path: 'accounts/data/view',
-      //   component:AccountsModuleComponent,
-      //   // canActivate: [CanActivateModuleGuard],
-      //   data: {preload:true },
-      // },
-
-
-            // Loan Product
+            // Loan Account
             {
-              path: 'account/maintenance',
-              component:LoanAccountMaintainanceComponent,
+              path: 'loan-account/maintenance',
+              component:LoanAccountMaintenanceComponent,
               // canActivate: [CanActivateModuleGuard],
               data: {preload:true },
             },
             {
-              path: 'accounts/data/view',
+              path: 'loan-account/data/view',
               component:LoanAccountComponent,
               // canActivate: [CanActivateModuleGuard],
+              // data: {preload:true },
+            },
+
+            // Savings Account
+            {
+              path: 'savings-account/maintenance',
+              component:SavingsMaintenanceComponent,
+              // canActivate: [CanActivateModuleGuard],
+              // data: {preload:true },
+            },
+            {
+              path: 'savings-account/data/view',
+              component:SavingsAccountComponent,
+              // canActivate: [CanActivateModuleGuard],
+              // data: {preload:true },
+            },
+
+            //Term Deposit
+            {
+              path: 'term-deposit-account/maintenance',
+              component:TermDepositAccountMaintenanceComponent,
+              // canActivate: [CanActivateModuleGuard],
+              data: {preload:true },
+            },
+            {
+              path: 'term-deposit-account/data/view',
+              component:TermDepositAccountComponent,
+              // canActivate: [CanActivateModuleGuard],
               data: {preload:true },
             },
 
+            //Current Account
+            {
+              path: 'current-account/maintenance',
+              component:CurrentAccountMaintenanceComponent,
+              // canActivate: [CanActivateModuleGuard],
+              data: {preload:true },
+            },
+            {
+              path: 'current-account/data/view',
+              component:CurrentAccountComponent,
+              // canActivate: [CanActivateModuleGuard],
+              data: {preload:true },
+            },
+
+            //overdraft Account
+            
+            {
+              path: 'overdraft-account/maintenance',
+              component:OverdraftAccountMaintenanceComponent,
+              // canActivate: [CanActivateModuleGuard],
+              data: {preload:true },
+            },
+            {
+              path: 'overdraft-account/data/view',
+              component:OverdraftAccountComponent,
+              // canActivate: [CanActivateModuleGuard],
+              data: {preload:true },
+            },
+            
+
+            //Office Account
+            {
+              path: 'office-account/maintenance',
+              component:OfficeAccountMaintenanceComponent,
+              // canActivate: [CanActivateModuleGuard],
+              data: {preload:true },
+            },
+            {
+              path: 'office-account/data/view',
+              component:OfficeAccountComponent,
+              // canActivate: [CanActivateModuleGuard],
+              data: {preload:true },
+            },
       
 
       
@@ -664,6 +730,8 @@ const routes: Routes = [{
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
       },
+
+      
 
 
   ],
