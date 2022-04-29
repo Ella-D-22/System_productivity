@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/System/GLS/SubGroup/Maintenance</div>
+        <div>Home/ Subgroup - Maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -28,7 +28,7 @@
                             <label class="start pull-left" for="">SubGroup Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" class="form-control" formControlName="subGroupCode"
+                            <input maxlength="6"  type="text" class="form-control" formControlName="subGroupCode"
                                 oninput="this.value=this.value.toUpperCase()">
                             <mat-icon *ngIf="dataExist" (click)="subGroupLookup()">search</mat-icon>
                         </div>
@@ -42,7 +42,7 @@
                             <label class="start pull-left">Main Group Code<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" formControlName="mainGroupCode" class="form-control">
+                            <input maxlength="6"  type="text" formControlName="mainGroupCode" class="form-control">
                             <mat-icon (click)="mainGroupLookup()">search</mat-icon>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             <label class="start pull-left">Sub Group Name<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" formControlName="subGroupName" class="form-control"
+                            <input maxlength="30"  type="text" formControlName="subGroupName" class="form-control"
                                 oninput="this.value=this.value.toUpperCase()">
                         </div>
                     </div>

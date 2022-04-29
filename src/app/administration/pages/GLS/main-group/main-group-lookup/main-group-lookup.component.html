@@ -38,7 +38,7 @@
 
       <ng-container matColumnDef="mainGroupFormationDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Group Created On</th>
-        <td  mat-cell *matCellDef="let row"> {{row.mainGroupFormationDate}} </td>
+        <td  mat-cell *matCellDef="let row"> {{row.mainGroupFormationDate | date}} </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr (click)="onSelect(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
