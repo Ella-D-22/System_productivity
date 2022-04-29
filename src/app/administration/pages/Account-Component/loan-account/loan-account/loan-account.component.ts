@@ -12,7 +12,7 @@ import { LoanproductLookupComponent } from '../../../ProductModule/loanproduct/l
 import { CurrencyLookupComponent } from '../../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 import { GlSubheadLookupComponent } from '../../../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
 import { MisSectorService } from '../../../SystemConfigurations/GlobalParams/mis-sector/mis-sector.service';
-
+ 
 @Component({
   selector: 'app-loan-account',
   templateUrl: './loan-account.component.html',
@@ -38,6 +38,7 @@ export class LoanAccountComponent implements OnInit {
   signatureImage:any
   isEnabled = false
   newData = false;
+  loading = false
   lookupdata:any
   glSubheads:any
   filteredArr:any
@@ -49,6 +50,9 @@ export class LoanAccountComponent implements OnInit {
   collateralData:any
   element:any
   message:any
+  function_type:any
+  account_code:any
+  customer_type:any
   constructor(
     private fb:FormBuilder,
     private _snackBar:MatSnackBar,
@@ -62,7 +66,8 @@ export class LoanAccountComponent implements OnInit {
 
     }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { this.getPage()
+  this.getMISData()}
 
   glSubheadArray = new Array
 
@@ -88,6 +93,8 @@ export class LoanAccountComponent implements OnInit {
       solCode: [''],
       sectorCode:[''],
       subSectorCode:[''],
+      schemeCode:[''],
+      glSubhead:[''],
       // termDeposit: new FormArray([]),
       transferExceptionLimitCr:[''] ,
       transferExceptionLimitDr:[''] ,
@@ -109,8 +116,8 @@ export class LoanAccountComponent implements OnInit {
     })
   
   loanData = this.fb.group({
-    laa_schemeCode:[''],
-    laa_glSubhead:[''],
+    // laa_schemeCode:[''],
+    // laa_glSubhead:[''],
     acid: [''],
     amountDisbursed: [0.000],
     applicationStatus:[''],
@@ -149,8 +156,11 @@ export class LoanAccountComponent implements OnInit {
   })
 
   addGurantorsFormData = this.fb.group({
+    customer_code: [''],
+    customer_name: [''],
+    customer_data: [''],
 
-  })
+  });
   glSubheadData = this.fb.group({
 
   })
@@ -159,6 +169,7 @@ export class LoanAccountComponent implements OnInit {
   get l(){return this.f.loan as FormArray}
   get ll(){return this.loanData.controls}
 
+  
   despatch_mode_array:any = [
     'Post & E-Mail', 'Collect By Person', 'E-Mail Only', 'Post', 'No-Despatch', 'Courier', 'Courier & E-Mail'
   ] 
@@ -269,6 +280,23 @@ eligibilityTest(){
 }
 
 
+onPhotoChange(event: any) {
+  this.imgfile = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+                  var reader = new FileReader();
+          reader.readAsDataURL(event.target.files[0]);
+reader.onload = () => {
+this.customerImage=reader.result;
+console.log(this.customerImage)
+}
+reader.onerror = function (error) {
+console.log('Error: ', error);
+};
+
+}
+
+}
+
 onSignatureChange(event: any) {
   this.signfile = event.target.files[0];
   
@@ -305,6 +333,9 @@ onSignatureChange(event: any) {
   });
   }
 
+  collateralLookup():void{
+
+  }
   getPage(){
     this.subscription = this.accountAPI.currentMessage.subscribe(
       message =>{
@@ -572,6 +603,9 @@ onSignatureChange(event: any) {
     )
   }
 
+  onSubmitdata(){
+
+  }
   onSubmit(){
 
     if(this.formData.valid){
@@ -618,6 +652,13 @@ onSignatureChange(event: any) {
           }
         )
       }
+    }else{
+      this._snackBar.open("Invalid FormData", "Try Again",{
+        horizontalPosition:this.horizontalPosition,
+        verticalPosition:this.verticalPosition,
+        duration:3000,
+        panelClass:['red-snackbar', 'green-snackbar']
+      })
     }
   }
 

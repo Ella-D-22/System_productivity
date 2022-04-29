@@ -83,7 +83,7 @@ export class SavingsMaintenanceComponent implements OnInit {
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
-    account_type: ['', [Validators.required]],
+    // account_type: ['', [Validators.required]],
     customer_type: ['', [Validators.required]],
     account_code: ['',[Validators.required]],
   });
