@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MainGroupLookupComponent } from '../../main-group/main-group-lookup/main-group-lookup.component';
 import { SubGroupLookupComponent } from '../sub-group-lookup/sub-group-lookup.component';
-import { SubGroupService } from '../sub-group.service';
 import { TransferMemberService } from './transfer-member.service';
 
 @Component({
@@ -30,6 +29,7 @@ export class TransferMemberComponent implements OnInit {
   error: string;
   customerCode: any;
   customerName: any;
+  subGroupId: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private transaferAPI:TransferMemberService,
@@ -48,11 +48,11 @@ export class TransferMemberComponent implements OnInit {
     fromSubGroupCode:['',[Validators.required]],
     toMainGroupCode:['',[Validators.required]],
     toSubGroupCode:['',[Validators.required]],
+    subGroupId:['',[Validators.required]],
     customerCode:['',[Validators.required]],
     customerName:['',[Validators.required]],
     transferedOn:[new Date()],
     transferReason:[''],
-
     verifiedBy:["user"],
     verifiedFlag:['N'],
     verifiedTime: [new Date()],
@@ -66,14 +66,13 @@ export class TransferMemberComponent implements OnInit {
     postedTime:[new Date()],
   })
   getData(){
-    console.log(this.customerData);
-    
     this.mainGroupCode = this.data.mainGroupCode,
     this.mainGroupName = this.data.mainGroupName,
     this.subGroupCode = this.data.subGroupCode,
     this.subGroupName = this.data.subGroupName,
     this.customerCode = this.data.customerData.customerCode
     this.customerName = this.data.customerData.customerName
+    this.formData.controls.toMainGroupCode.setValue(this.mainGroupCode);
     this.formData.controls.fromMainGroupCode.setValue(this.mainGroupCode);
     this.formData.controls.fromSubGroupCode.setValue(this.subGroupCode);
     this.formData.controls.customerCode.setValue(this.customerCode);
@@ -87,7 +86,7 @@ export class TransferMemberComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
-        this.formData.controls.groupCode.setValue(results.data.groupCode)
+        this.formData.controls.toMainGroupCode.setValue(results.data.groupCode)
       })
     }
     subGroupLookup():void{
@@ -95,7 +94,8 @@ export class TransferMemberComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
-        this.formData.controls.subGroupCode.setValue(results.data.subGroupCode)
+        this.formData.controls.toSubGroupCode.setValue(results.data.subGroupCode)
+        this.formData.controls.subGroupId.setValue(results.data.id)
       })
     }
 

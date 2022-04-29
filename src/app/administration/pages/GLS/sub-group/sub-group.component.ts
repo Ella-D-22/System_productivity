@@ -19,6 +19,8 @@ import { TransferMemberComponent } from './transfer-member/transfer-member.compo
   styleUrls: ['./sub-group.component.scss']
 })
 export class SubGroupComponent implements OnInit {
+  horizontalPosition:'end'
+  verticalPosition:'top'
   operationArray:any = [
     'Transfer Member', 'Exit Member', 'Reinstate Member'
   ]
@@ -48,8 +50,6 @@ export class SubGroupComponent implements OnInit {
   }
   isEnabled =  false
   subscription:Subscription
-  horizontalPosition:MatSnackBarHorizontalPosition
-  verticalPosition:MatSnackBarVerticalPosition
   results: any
   submitted = false
   constructor(private subService:SubGroupService,
@@ -113,15 +113,18 @@ export class SubGroupComponent implements OnInit {
   disabledFormControl(){
     this.formData.disable()
   }
-  branchLookup():void{
-    const dialogRef =  this.dialog.open(BranchesLookupComponent,{
+
+  branchLookup(): void {
+    const dialogRef = this.dialog.open(BranchesLookupComponent, {
     });
-    dialogRef.afterClosed().subscribe(results =>{
+    dialogRef.afterClosed().subscribe(results => {
       this.dialogData = results.data;
-      this.formData.controls.sol_id.setValue(results.data.sol_code)
-        this.formData.controls.branch_name.setValue(this.dialogData.sol_description)
+      this.formData.controls.subGroupSolCode.setValue(results.data.solCode)
+      this.formData.controls.subGroupBranchName.setValue(this.dialogData.solDescription)
     })
   }
+
+
   getPage(){
     this.subscription = this.subService.currentMessage.subscribe(
       message =>{
@@ -426,6 +429,29 @@ customerLookup():void{
     this.groupMember.controls.subGroupCode.setValue(this.subGroupCode);
   })
 }
+
+subGroupChairpersonLookup():void{
+  const dialogRef =  this.dialog.open(RetailCustomerLookupComponent,{
+  });
+  dialogRef.afterClosed().subscribe(results =>{
+    this.dialogData = results.data;
+    this.formData.controls.subGroupChairperson.setValue(results.data.customerCode)
+  }) }
+  subGroupSecretaryLookup():void{
+    const dialogRef =  this.dialog.open(RetailCustomerLookupComponent,{
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.dialogData = results.data;
+      this.formData.controls.subGroupSecretary.setValue(results.data.customerCode)
+    }) }
+    subGroupTreasurerLookup():void{
+      const dialogRef =  this.dialog.open(RetailCustomerLookupComponent,{
+      });
+      dialogRef.afterClosed().subscribe(results =>{
+        this.dialogData = results.data;
+        this.formData.controls.subGroupTreasurer.setValue(results.data.customerCode)
+      }) }
+
 addGroupMember(){
   if(this.groupMember.valid){
     if(this.subGroupMembersArrays.length>=5){
@@ -443,15 +469,12 @@ addGroupMember(){
     }
   }
 }
-
-
 onRemoveGroupMember(i:any){
   // const index: number = this.subGroupMembersArrays.indexOf(this.subGroupMembersArrays.values);
   this.subGroupMembersArrays.splice(this.subGroupMembersArrays[i]);
   this.subGroupMembersArrays = this.subGroupMembersArrays;
   this.getMembers(this.subGroupMembersArrays);
 }
-
 onTransferMember(rowData:any){
   const dialogRef =  this.dialog.open(TransferMemberComponent,{
     data:{
@@ -463,7 +486,6 @@ onTransferMember(rowData:any){
     }
   });
 }
-
 onExitMember(rowData:any){
   if (window.confirm('Are you sure you want to Exit This Member?')){
     const dialogRef =  this.dialog.open(ExitMemberComponent,{
@@ -473,18 +495,12 @@ onExitMember(rowData:any){
         subGroupCode:this.subGroupCode,
         subGroupName:this.subGroupName,
         customerData:rowData
-      
       }
     });
   }
-  
 }
-
-
-
   onSubmit(){ 
-    console.log("Data", this.formData.value);
-    
+    console.log("Data", this.formData.value)
     if(this.formData.valid){
       if(this.function_type == "A-Add"){
         this.isEnabled = true;
@@ -500,7 +516,7 @@ onExitMember(rowData:any){
             this.router.navigate([`/system/GLS/sub-group/maintenance`], { skipLocationChange: true });
           },
           err =>{
-            this.error = err
+            this.error = err.error.message
             this._snackbar.open(this.error, "Try Again",{
               horizontalPosition:this.horizontalPosition,
               verticalPosition:this.verticalPosition,
