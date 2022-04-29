@@ -136,6 +136,7 @@ import { SubClassificationLookupComponent } from './pages/SystemConfigurations/G
 import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
 import { TransferMemberComponent } from './pages/GLS/sub-group/transfer-member/transfer-member.component';
 import { ExitMemberComponent } from './pages/GLS/sub-group/exit-member/exit-member.component';
+import { AccountLookupComponent } from './pages/transaction-execution/account-lookup/account-lookup.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -272,7 +273,8 @@ import { ExitMemberComponent } from './pages/GLS/sub-group/exit-member/exit-memb
     SubClassificationLookupComponent,
     SubClassificationMaintenanceComponent,
     TransferMemberComponent,
-    ExitMemberComponent
+    ExitMemberComponent,
+    AccountLookupComponent
 
   ],
   imports: [
