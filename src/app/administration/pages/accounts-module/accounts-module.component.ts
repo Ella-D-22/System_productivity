@@ -166,10 +166,9 @@ export class AccountsModuleComponent implements OnInit {
   savingsFormData = this.fb.group({
     id: [''],
     sba_maturedValue:[''],
+    sba_maturedDate:[''],
     nominees: new FormArray([]),
     sba_savingPeriod: [''],
-    sba_schemeCode:[''],
-    sba_glSubhead:['']
 
   })
   
