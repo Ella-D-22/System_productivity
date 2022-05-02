@@ -37,7 +37,7 @@
         <div class="col-md-6 col-sm-12 form-column ">
           <select  (change)="onAccountChange($event)" class="form-control" formControlName="account_type" [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
             <option value="" disabled>-- Choose Type --</option>
-            <option *ngFor="let flag of AccountTypeArray" [value]="flag">{{ flag }}</option>
+            <option *ngFor="let flag of AccountTypeArray" [value]="flag.accountType">{{ flag.accountRef }}</option>
           </select>
         </div>
      </div>

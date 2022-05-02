@@ -39,6 +39,7 @@ export class AccountsMaintenanceComponent implements OnInit {
     private http: HttpClient,
     private actRoute: ActivatedRoute,
     private dialog: MatDialog,
+    private accountAPI:AccountsService
     ) { }
 
   ngOnInit(): void {}
@@ -113,29 +114,24 @@ export class AccountsMaintenanceComponent implements OnInit {
           this.loading = true;
           this.submitted = true;
           if(this.formData.valid){
-
             this.function_type =  this.f.function_type.value;
             this.account_code=this.f.account_code.value;
+            this.accountAPI.changeMessage(this.formData.value)
             if(this.function_type == "A-Add"){
-              this.router.navigate(['system/accounts/data/view'], { state: this.formData.value
-                  
-                
-              });
-            
+              this.router.navigate(['system/accounts-new/data/view'], { state: this.formData.value
+                   });
            }
            else{
-            this.router.navigate(['system/accounts/data/view'], {
-              state: this.formData.value   
-              ,
+            this.router.navigate(['system/accounts-new/data/view'], {
+              state: this.formData.value,
             });
             }
         }
         else{
           this.loading = false;
-          console.log("invalid form")
         
         }
-        }
+ }
 
         accountLookup(): void {
           if(this.account_type=="Loan"){
