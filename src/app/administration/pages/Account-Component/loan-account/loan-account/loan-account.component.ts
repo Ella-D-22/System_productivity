@@ -118,7 +118,7 @@ export class LoanAccountComponent implements OnInit {
   loanData = this.fb.group({
     // laa_schemeCode:[''],
     // laa_glSubhead:[''],
-    acid: [''],
+    // acid: [''],
     amountDisbursed: [0.000],
     applicationStatus:[''],
     collateralCode: [''],
@@ -129,7 +129,6 @@ export class LoanAccountComponent implements OnInit {
     principalAccount: [''],
     principalDemandAmount: [''],
     repaymentPeriod: [''],
-    sn: [''],
     sumPrincipalDemand: [''],
     interestDemandAmount: [''],
     loanDemands :new FormArray([]),
@@ -138,20 +137,17 @@ export class LoanAccountComponent implements OnInit {
   })
 
   loanDemandData = this.fb.group({
-    acid: [''],
     adjustmentAmount: [''],
     adjustmentDate:[''] ,
     demandAmount: [''],
     demandCode: [''],
     demandDate: [''],
     demandType:[''] ,
-    sn: ['']
   })
 
   loanDocumentData = this.fb.group({
     documentImage: [''],
     documentTitle: [''],
-    sn: [''],
     uploadTime:['']
   })
 
@@ -342,13 +338,11 @@ onSignatureChange(event: any) {
         this.message = message
         if(this.message.function_type == 'A-Add'){
           this.formData = this.fb.group({
-            accountBalance: [''],
             accountManager: [''],
             accountName: [''],
             accountOwnership: [''],
             accountStatus:[''],
             accountType: [''],
-            acid: [''],
             cashExceptionLimitCr: [''],
             cashExceptionLimitDr: [''],
             currency:[''],
@@ -359,7 +353,6 @@ onSignatureChange(event: any) {
             openingDate: [''],
             referredBy: [''],
             // saving: new FormArray([]),
-            sn: [''],
             solCode: [''],
             sectorCode:[''],
             subSectorCode:[''],
@@ -394,13 +387,13 @@ onSignatureChange(event: any) {
               }
   
               this.formData = this.fb.group({
-                accountBalance: [this.results.accountBalance],
+                // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus:[this.results.accountStatus],
                 accountType: [this.message.account_type],
-                acid: [this.results.acid],
+                // acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
                 currency:[this.results.currency],
@@ -411,7 +404,6 @@ onSignatureChange(event: any) {
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
                 // saving: new FormArray([]),
-                sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
@@ -448,13 +440,12 @@ onSignatureChange(event: any) {
               }
   
               this.formData = this.fb.group({
-                accountBalance: [this.results.accountBalance],
+                // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus:[this.results.accountStatus],
                 accountType: [this.message.account_type],
-                acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
                 currency:[this.results.currency],
@@ -465,7 +456,6 @@ onSignatureChange(event: any) {
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
                 // saving: new FormArray([]),
-                sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
@@ -502,13 +492,12 @@ onSignatureChange(event: any) {
               }
   
               this.formData = this.fb.group({
-                accountBalance: [this.results.accountBalance],
+                // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus:[this.results.accountStatus],
                 accountType: [this.message.account_type],
-                acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
                 currency:[this.results.currency],
@@ -519,7 +508,6 @@ onSignatureChange(event: any) {
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
                 // saving: new FormArray([]),
-                sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
@@ -556,13 +544,12 @@ onSignatureChange(event: any) {
               }
   
               this.formData = this.fb.group({
-                accountBalance: [this.results.accountBalance],
+                // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus:[this.results.accountStatus],
                 accountType: [this.message.account_type],
-                acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
                 currency:[this.results.currency],
@@ -573,7 +560,6 @@ onSignatureChange(event: any) {
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
                 // saving: new FormArray([]),
-                sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
