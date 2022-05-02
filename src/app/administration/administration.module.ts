@@ -136,6 +136,7 @@ import { SubClassificationLookupComponent } from './pages/SystemConfigurations/G
 import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
 import { TransferMemberComponent } from './pages/GLS/sub-group/transfer-member/transfer-member.component';
 import { ExitMemberComponent } from './pages/GLS/sub-group/exit-member/exit-member.component';
+import { AccountLookupComponent } from './pages/transaction-execution/account-lookup/account-lookup.component';
 import { LoanAccountMaintenanceComponent } from './pages/Account-Component/loan-account/loan-account-maintenance/loan-account-maintenance.component';
 import { SavingsAccountComponent } from './pages/Account-Component/savings-account/savings-account.component';
 import { SavingsMaintenanceComponent } from './pages/Account-Component/savings-account/savings-maintenance/savings-maintenance.component';
@@ -289,6 +290,7 @@ import { LoanAccountComponent } from './pages/Account-Component/loan-account/loa
     SubClassificationMaintenanceComponent,
     TransferMemberComponent,
     ExitMemberComponent,
+    AccountLookupComponent
     LoanAccountComponent,
     LoanAccountMaintenanceComponent,
     SavingsAccountComponent,

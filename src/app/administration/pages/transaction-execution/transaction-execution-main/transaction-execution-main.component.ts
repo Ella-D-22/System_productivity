@@ -12,6 +12,8 @@ import { LoanAccountComponent } from '../../loan-account/loan-account.component'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AccountLookupComponent } from '../account-lookup/account-lookup.component';
+import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 
 @Component({
   selector: 'app-transaction-execution-main',
@@ -29,6 +31,9 @@ export class TransactionExecutionMainComponent implements OnInit {
   debit_value = 0.00;
   credit_value = 0.00;
   total_value = 0.00;
+  dialogData: any;
+  ccy_name: any;
+  selectedCurrency: any;
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -139,7 +144,17 @@ export class TransactionExecutionMainComponent implements OnInit {
 
   get f() { return this.formData.controls; }
   get p() { return this.f.partTrans as FormArray; }
-
+  
+  currencyLookup(): void {
+    const dialogRef = this.dialog.open(CurrencyLookupComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.dialogData = result.data;
+      this.ccy_name = this.dialogData.ccy_name;
+      this.formData.controls.currency.setValue(result.data);
+      this.selectedCurrency =  this.dialogData.ccy_name;
+    });
+  }
  
   onAddField() {
     this.p.push(this.fb.group({
@@ -189,7 +204,6 @@ export class TransactionExecutionMainComponent implements OnInit {
   }
   transactionLookup() {
     const dialogRef = this.dialog.open(TransactionExecutionLookupComponent, {
-      // height: '400px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.accountlookupData = result.data;
@@ -201,8 +215,7 @@ export class TransactionExecutionMainComponent implements OnInit {
     });
   }
   accountLookup(): void {
-    const dialogRef = this.dialog.open(LoanAccountComponent, {
-      // height: '400px',
+    const dialogRef = this.dialog.open(AccountLookupComponent, {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.accountlookupData = result.data;
