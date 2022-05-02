@@ -60,13 +60,13 @@ export class SavingsAccountComponent implements OnInit {
 
   nomineeArray = new Array()
   formData = this.fb.group({
-    accountBalance: [''],
+    // accountBalance: [''],
     accountManager: [''],
     accountName: [''],
     accountOwnership: [''],
     accountStatus:[''],
     accountType: [''],
-    acid: [''],
+    // acid: [''],
     cashExceptionLimitCr: [''],
     cashExceptionLimitDr: [''],
     currency:[''],
@@ -77,7 +77,6 @@ export class SavingsAccountComponent implements OnInit {
     openingDate: [''],
     referredBy: [''],
     saving: new FormArray([]),
-    sn: [''],
     solCode: [''],
     sectorCode:[''],
     subSectorCode:[''],
@@ -284,13 +283,13 @@ branchSubheadLookup(): void {
         this.message = message
         if(this.message.function_type == 'A-Add'){
           this.formData = this.fb.group({
-            accountBalance: [''],
+            // accountBalance: [''],
             accountManager: [''],
             accountName: [''],
             accountOwnership: [''],
             accountStatus:[''],
             accountType: [''],
-            acid: [''],
+            // acid: [''],
             cashExceptionLimitCr: [''],
             cashExceptionLimitDr: [''],
             currency:[''],
@@ -301,7 +300,7 @@ branchSubheadLookup(): void {
             openingDate: [''],
             referredBy: [''],
             saving: new FormArray([]),
-            sn: [''],
+            // sn: [''],
             solCode: [''],
             sectorCode:[''],
             subSectorCode:[''],
@@ -336,13 +335,13 @@ branchSubheadLookup(): void {
               }
   
               this.formData = this.fb.group({
-                accountBalance: [this.results.accountBalance],
+                // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus:[this.results.accountStatus],
                 accountType: [this.message.account_type],
-                acid: [this.results.acid],
+                // acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
                 currency:[this.results.currency],
@@ -353,7 +352,7 @@ branchSubheadLookup(): void {
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
                 saving: new FormArray([]),
-                sn: [this.results.sn],
+                // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
@@ -390,13 +389,13 @@ branchSubheadLookup(): void {
               }
   
               this.formData = this.fb.group({
-                accountBalance: [this.results.accountBalance],
+                // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus:[this.results.accountStatus],
                 accountType: [this.message.account_type],
-                acid: [this.results.acid],
+                // acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
                 currency:[this.results.currency],
@@ -407,7 +406,7 @@ branchSubheadLookup(): void {
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
                 saving: new FormArray([]),
-                sn: [this.results.sn],
+                // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
@@ -444,13 +443,13 @@ branchSubheadLookup(): void {
               }
   
               this.formData = this.fb.group({
-                accountBalance: [this.results.accountBalance],
+                // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus:[this.results.accountStatus],
                 accountType: [this.message.account_type],
-                acid: [this.results.acid],
+                // acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
                 currency:[this.results.currency],
@@ -461,7 +460,7 @@ branchSubheadLookup(): void {
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
                 saving: new FormArray([]),
-                sn: [this.results.sn],
+                // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
@@ -498,13 +497,13 @@ branchSubheadLookup(): void {
               }
   
               this.formData = this.fb.group({
-                accountBalance: [this.results.accountBalance],
+                // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus:[this.results.accountStatus],
                 accountType: [this.message.account_type],
-                acid: [this.results.acid],
+                // acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
                 currency:[this.results.currency],
@@ -515,7 +514,7 @@ branchSubheadLookup(): void {
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
                 saving: new FormArray([]),
-                sn: [this.results.sn],
+                // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
