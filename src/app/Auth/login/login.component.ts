@@ -63,12 +63,8 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.authenticateUser(this.loginForm.value).subscribe(
       data => {
-
-        console.log("login user data",data);
-
 //      Send to Message Medium
         this.authService.changeMessage(data)
-
         this._snackBar.open("Verify OTP", "X", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,

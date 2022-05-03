@@ -1,191 +1,307 @@
 <mat-nav-list>
-    <div class="profile-card">
-        <img src="../../../../assets/avatar.png" alt="System Admin">
-        <div class="header">
-            <h4>{{this.email}}</h4>
-            <p><span class="online">Online</span></p>
-        </div>
+  <div class="profile-card">
+    <img src="../../../../assets/avatar.png" alt="System Admin" />
+    <div class="header">
+      <h4>{{ this.email }}</h4>
+      <p><span class="online">Online</span></p>
     </div>
-    <!-- <small>Logged at:</small>
+  </div>
+  <!-- <small>Logged at:</small>
     <small>IP address:</small> -->
-    <mat-divider></mat-divider>
-    <h2 matSubheader>Pages</h2>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/system" skipLocationChange>
-   <mat-icon>dashboard</mat-icon>
-    Dashboard</a> 
+  <mat-divider></mat-divider>
+  <h2 matSubheader>Pages</h2>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/system" skipLocationChange>
+    <mat-icon>dashboard</mat-icon>
+    Dashboard
+  </a>
 
-    <mat-accordion class="app-nav-accordion">
-      <mat-expansion-panel class="mat-elevation-z0">
-        <mat-expansion-panel-header>
-            <mat-panel-title class="nav-title">
-              <mat-icon>settings</mat-icon>Configurations </mat-panel-title>
-        </mat-expansion-panel-header> 
-        <mat-nav-list>
-         
-    <!-- Global Params -->
-    <mat-accordion class="app-nav-accordion">
-      <mat-expansion-panel class="mat-elevation-z0">
-        <mat-expansion-panel-header>
-            <mat-panel-title class="nav-title">
-              Global Params </mat-panel-title>
-        </mat-expansion-panel-header> 
-        <mat-nav-list>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/linked/organization/maintenance" skipLocationChange> <mat-icon>subdirectory_arrow_right</mat-icon> Organization</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/currency/maintenance" skipLocationChange> <mat-icon>subdirectory_arrow_right</mat-icon> Currency</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/gl-code/maintenance" skipLocationChange matTooltip="General Ledger Code Maintenance"> <mat-icon>subdirectory_arrow_right</mat-icon> GL Code M.</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/gl-subhead/maintenance" skipLocationChange matTooltip="General Ledger Subhead Maintenance"> <mat-icon>subdirectory_arrow_right</mat-icon> GL Subhead M.</a>
-          <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/scheme-type/maintenance" skipLocationChange matTooltip="Setting Various Scheme Types"> <mat-icon>subdirectory_arrow_right</mat-icon> Product Type</a> -->
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/exceptions-codes/maintenance" skipLocationChange matTooltip="Setting Various Scheme Types"> <mat-icon>subdirectory_arrow_right</mat-icon> Exceptions</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/mis-sector/maintenance" skipLocationChange matTooltip="Setting MIS Codes"><mat-icon>subdirectory_arrow_right</mat-icon>MIS-Sector</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/mis-sub-sector/maintenance" skipLocationChange matTooltip="Setting Sub MIS Codes"><mat-icon>subdirectory_arrow_right</mat-icon>MIS Sub Sector</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/segment/maintenance" skipLocationChange matTooltip="Setting Segments Codes"><mat-icon>subdirectory_arrow_right</mat-icon>Segmentation</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/sub-segment/maintenance" skipLocationChange matTooltip="Setting Sub Segments Codes"><mat-icon>subdirectory_arrow_right</mat-icon>Sub-Segmentation</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/guarantors/maintenance" skipLocationChange matTooltip="Guarantors Cofiguration"><mat-icon>subdirectory_arrow_right</mat-icon>Guarantors Configurations</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/share-capital/params/maintenance" skipLocationChange matTooltip="Share Capital Cofiguration"><mat-icon>subdirectory_arrow_right</mat-icon>Share Capital Configurations</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/main-classification/maintenance" skipLocationChange matTooltip="Assets Cofiguration"><mat-icon>subdirectory_arrow_right</mat-icon>Main Classification</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/sub-classification/maintenance" skipLocationChange matTooltip="Assets Cofiguration"><mat-icon>subdirectory_arrow_right</mat-icon>Sub Classification</a>
-
-        </mat-nav-list> 
-    </mat-expansion-panel>
-    </mat-accordion>
-    <!-- Charge Params -->
-    <mat-accordion class="app-nav-accordion">
-      <mat-expansion-panel class="mat-elevation-z0">
-        <mat-expansion-panel-header>
-            <mat-panel-title class="nav-title">
-              Charge Params </mat-panel-title>
-        </mat-expansion-panel-header> 
-        <mat-nav-list>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/charge/event-type/maintenance" skipLocationChange><mat-icon>subdirectory_arrow_right</mat-icon>Charge Type</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/charge/event-id/maintenance" skipLocationChange><mat-icon>subdirectory_arrow_right</mat-icon>Charge Definition</a>   
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/charge/preferentials/maintenance" skipLocationChange><mat-icon>subdirectory_arrow_right</mat-icon>Charge Preferentials</a>   
-        </mat-nav-list>
-    </mat-expansion-panel>
-    </mat-accordion> 
-        </mat-nav-list>
-    </mat-expansion-panel>
-    </mat-accordion>
-
-    <a mat-list-item class="nav-title main-link" routerLinkActive="list-item-active" routerLink="/system/interest/maintenance" skipLocationChange>
-      <mat-icon>home</mat-icon>
-       Interest Maintenance</a> 
-      <!-- Product -->
-
-    <mat-accordion class="app-nav-accordion">
-      <mat-expansion-panel class="mat-elevation-z0">
-        <mat-expansion-panel-header>
-            <mat-panel-title class="nav-title">
-              <mat-icon>shopping_cart</mat-icon>Products </mat-panel-title>
-        </mat-expansion-panel-header> 
-        <mat-nav-list>       
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/product/loan-product/maintenance" skipLocationChange matTooltip="General Interest Module Setup"> <mat-icon>subdirectory_arrow_right</mat-icon> Loan Product</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/product/saving-scheme/maintenance" skipLocationChange matTooltip="Interest Table Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Savings Scheme</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/product/overdraft-scheme/maintenance" skipLocationChange matTooltip="Interest Table Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Overdraft Scheme</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/product/current-scheme/maintenance" skipLocationChange matTooltip="Interest Table Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Current a/c Scheme</a>
-          <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/product/term-deposit/maintenance" skipLocationChange matTooltip="Interest Table Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Term Deposits</a>
-          <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/interest/hlvsm/maintenance" matTooltip="Loan Interest Version Slab Maintenance"> <mat-icon>subdirectory_arrow_right</mat-icon>Commercial Loans</a> -->
-        </mat-nav-list>
-    </mat-expansion-panel>
-    </mat-accordion>
-       <mat-accordion class="app-nav-accordion">
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            <mat-panel-title class="nav-title">
-              <mat-icon>supervised_user_circle</mat-icon>
-              Customers Management
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-nav-list>
-           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/customer/retail/maintenance" skipLocationChange matTooltip="Customer Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Retail Customer</a>
-           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/customers/corporate/maintenance" skipLocationChange matTooltip="Corporate Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Cooprate Customer</a>
-
-          </mat-nav-list>
-        </mat-expansion-panel>
-      </mat-accordion>
-
-
-    <!-- <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/account/maintenance" skipLocationChange>
-      <mat-icon>account_balance_wallet</mat-icon>
-       Accounts Management</a>  -->
-       <!-- <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/accounts-new/maintenance" skipLocationChange>
-        <mat-icon>account_balance_wallet</mat-icon>
-         Accounts Management New</a> -->
-
-       <mat-accordion class="app-nav-accordion">
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            <mat-panel-title class="nav-title">
-              <mat-icon>account_balance_wallet</mat-icon>
-              Accounts Management
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-nav-list>
-           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/loan-account/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Loan Accounts</a>
-           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/savings-account/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Savings Accounts</a>
-           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/term-deposit-account/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Term Deposit Accounts</a>
-           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/current-account/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Current Accounts</a>
-           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/overdraft/account/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Overdraft Accounts</a>
-           <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/office/account/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Office Accounts</a>
-
-          </mat-nav-list>
-        </mat-expansion-panel>
-      </mat-accordion>
-      
-         <mat-accordion class="app-nav-accordion">
-           <mat-expansion-panel class="mat-elevation-z0">
-             <mat-expansion-panel-header>
-               <mat-panel-title class="nav-title">
-                 <mat-icon>supervised_user_circle</mat-icon>
-                 Collaterals Management
-               </mat-panel-title>
-             </mat-expansion-panel-header>
-             <mat-nav-list>
-              <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/collateral-limits/Limits/maintenance" skipLocationChange matTooltip="Limits Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Limits</a>
-              <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/collateral-limits/Collateral/maintenance" skipLocationChange matTooltip="Collaterals Code Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Collateral</a>
-             </mat-nav-list>
-           </mat-expansion-panel>
-         </mat-accordion>
-           <!-- GLS -->
-         <mat-accordion class="app-nav-accordion">
+  <mat-accordion class="app-nav-accordion">
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="nav-title">
+          <mat-icon>settings</mat-icon>Configurations
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <!-- Global Params -->
+        <mat-accordion class="app-nav-accordion">
           <mat-expansion-panel class="mat-elevation-z0">
             <mat-expansion-panel-header>
               <mat-panel-title class="nav-title">
-                <mat-icon>supervised_user_circle</mat-icon>
-                Group Lending Management
+                Global Params
               </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-nav-list>
-             <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/GLS/main-group/maintenance" skipLocationChange matTooltip="Main Group Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Main Group</a>
-             <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/GLS/sub-group/maintenance" skipLocationChange matTooltip="Sub Group  Setup"> <mat-icon>subdirectory_arrow_right</mat-icon>Sub Groups</a>
-
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/linked/organization/maintenance" skipLocationChange>
+                <mat-icon>subdirectory_arrow_right</mat-icon> Organization
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/currency/maintenance" skipLocationChange>
+                <mat-icon>subdirectory_arrow_right</mat-icon> Currency
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/gl-code/maintenance" skipLocationChange
+                matTooltip="General Ledger Code Maintenance">
+                <mat-icon>subdirectory_arrow_right</mat-icon> GL Code M.
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/gl-subhead/maintenance" skipLocationChange
+                matTooltip="General Ledger Subhead Maintenance">
+                <mat-icon>subdirectory_arrow_right</mat-icon> GL Subhead M.
+              </a>
+              <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/global/scheme-type/maintenance" skipLocationChange matTooltip="Setting Various Scheme Types"> <mat-icon>subdirectory_arrow_right</mat-icon> Product Type</a> -->
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/exceptions-codes/maintenance" skipLocationChange
+                matTooltip="Setting Various Scheme Types">
+                <mat-icon>subdirectory_arrow_right</mat-icon> Exceptions
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/mis-sector/maintenance" skipLocationChange
+                matTooltip="Setting MIS Codes">
+                <mat-icon>subdirectory_arrow_right</mat-icon>MIS-Sector
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/mis-sub-sector/maintenance" skipLocationChange
+                matTooltip="Setting Sub MIS Codes">
+                <mat-icon>subdirectory_arrow_right</mat-icon>MIS Sub Sector
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/segment/maintenance" skipLocationChange
+                matTooltip="Setting Segments Codes">
+                <mat-icon>subdirectory_arrow_right</mat-icon>Segmentation
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/sub-segment/maintenance" skipLocationChange
+                matTooltip="Setting Sub Segments Codes">
+                <mat-icon>subdirectory_arrow_right</mat-icon>Sub-Segmentation
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/guarantors/maintenance" skipLocationChange
+                matTooltip="Guarantors Cofiguration">
+                <mat-icon>subdirectory_arrow_right</mat-icon>Guarantors
+                Configurations
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/share-capital/params/maintenance" skipLocationChange
+                matTooltip="Share Capital Cofiguration">
+                <mat-icon>subdirectory_arrow_right</mat-icon>Share Capital
+                Configurations
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/main-classification/maintenance" skipLocationChange
+                matTooltip="Assets Cofiguration">
+                <mat-icon>subdirectory_arrow_right</mat-icon>Main Classification
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/global/sub-classification/maintenance" skipLocationChange
+                matTooltip="Assets Cofiguration">
+                <mat-icon>subdirectory_arrow_right</mat-icon>Sub Classification
+              </a>
             </mat-nav-list>
           </mat-expansion-panel>
         </mat-accordion>
-         
-         <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/branches/maintenance" skipLocationChange>
-          <mat-icon>home</mat-icon>
-           Branches Management</a> 
-         
-           <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/transactions/maintenance" skipLocationChange>
-            <mat-icon>perm_data_setting</mat-icon>
-             Transaction Maintenance</a> 
+        <!-- Charge Params -->
+        <mat-accordion class="app-nav-accordion">
+          <mat-expansion-panel class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="nav-title">
+                Charge Params
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/charge/event-type/maintenance" skipLocationChange>
+                <mat-icon>subdirectory_arrow_right</mat-icon>Charge Type
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/charge/event-id/maintenance" skipLocationChange>
+                <mat-icon>subdirectory_arrow_right</mat-icon>Charge Definition
+              </a>
+              <a mat-list-item routerLinkActive="list-item-active"
+                routerLink="/system/configurations/charge/preferentials/maintenance" skipLocationChange>
+                <mat-icon>subdirectory_arrow_right</mat-icon>Charge
+                Preferentials
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-             <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/share-capital/maintenance" skipLocationChange>
-              <mat-icon>home</mat-icon>
-               Shares Capital Management</a> 
+  <a mat-list-item class="nav-title main-link" routerLinkActive="list-item-active"
+    routerLink="/system/interest/maintenance" skipLocationChange>
+    <mat-icon>home</mat-icon>
+    Interest Maintenance
+  </a>
+  <!-- Product -->
 
-            <mat-accordion class="app-nav-accordion">
-              <mat-expansion-panel class="mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <mat-panel-title class="nav-title">
-                      <mat-icon>library_books</mat-icon>Reports </mat-panel-title>
-                </mat-expansion-panel-header> 
-                <mat-nav-list>       
-                  <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/add-report" skipLocationChange> <mat-icon>subdirectory_arrow_right</mat-icon> Create Report</a>
-                  <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/view-report" skipLocationChangematTooltip="General Ledger Code Maintenance"> <mat-icon>subdirectory_arrow_right</mat-icon>Generate Report</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
-            </mat-accordion>
+  <mat-accordion class="app-nav-accordion">
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="nav-title">
+          <mat-icon>shopping_cart</mat-icon>Products
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLinkActive="list-item-active"
+          routerLink="/system/configurations/product/loan-product/maintenance" skipLocationChange
+          matTooltip="General Interest Module Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon> Loan Product
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active"
+          routerLink="/system/configurations/product/saving-scheme/maintenance" skipLocationChange
+          matTooltip="Interest Table Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Savings Scheme
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active"
+          routerLink="/system/configurations/product/overdraft-scheme/maintenance" skipLocationChange
+          matTooltip="Interest Table Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Overdraft Scheme
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active"
+          routerLink="/system/configurations/product/current-scheme/maintenance" skipLocationChange
+          matTooltip="Interest Table Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Current a/c Scheme
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active"
+          routerLink="/system/configurations/product/term-deposit/maintenance" skipLocationChange
+          matTooltip="Interest Table Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Term Deposits
+        </a>
+        <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/configurations/interest/hlvsm/maintenance" matTooltip="Loan Interest Version Slab Maintenance"> <mat-icon>subdirectory_arrow_right</mat-icon>Commercial Loans</a> -->
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion class="app-nav-accordion">
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="nav-title">
+          <mat-icon>supervised_user_circle</mat-icon>
+          Customers Management
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/customer/retail/maintenance"
+          skipLocationChange matTooltip="Customer Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Retail Customer
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/customers/corporate/maintenance"
+          skipLocationChange matTooltip="Corporate Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Cooprate Customer
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/account/maintenance" skipLocationChange>
+      <mat-icon>account_balance_wallet</mat-icon>
+       Accounts Management</a>  -->
+  <!-- <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/accounts-new/maintenance" skipLocationChange>
+        <mat-icon>account_balance_wallet</mat-icon>
+         Accounts Management New</a> -->
+
+  <mat-accordion class="app-nav-accordion">
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="nav-title">
+          <mat-icon>account_balance_wallet</mat-icon>
+          Accounts Management
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/loan-account/maintenance"
+          skipLocationChange matTooltip="Limits Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Loan Accounts
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/savings-account/maintenance"
+          skipLocationChange matTooltip="Limits Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Savings Accounts
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/term-deposit-account/maintenance"
+          skipLocationChange matTooltip="Limits Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Term Deposit Accounts
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/current-account/maintenance"
+          skipLocationChange matTooltip="Limits Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Current Accounts
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/overdraft/account/maintenance"
+          skipLocationChange matTooltip="Limits Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Overdraft Accounts
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/office/account/maintenance"
+          skipLocationChange matTooltip="Limits Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Office Accounts
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="app-nav-accordion">
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="nav-title">
+          <mat-icon>supervised_user_circle</mat-icon>
+          Collaterals Management
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLinkActive="list-item-active"
+          routerLink="/system/configurations/collateral-limits/Limits/maintenance" skipLocationChange
+          matTooltip="Limits Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Limits
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active"
+          routerLink="/system/configurations/collateral-limits/Collateral/maintenance" skipLocationChange
+          matTooltip="Collaterals Code Setup">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Collateral
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/group-lending/maintenance"
+    skipLocationChange>
+    <mat-icon>supervised_user_circle</mat-icon>
+    Group Lending Management
+  </a>
+
+  <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/branches/maintenance"
+    skipLocationChange>
+    <mat-icon>home</mat-icon>
+    Branches Management
+  </a>
+
+  <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/transactions/maintenance"
+    skipLocationChange>
+    <mat-icon>perm_data_setting</mat-icon>
+    Transaction Maintenance
+  </a>
+
+  <a mat-list-item class="nav-title" routerLinkActive="list-item-active" routerLink="/system/share-capital/maintenance"
+    skipLocationChange>
+    <mat-icon>home</mat-icon>
+    Shares Capital Management
+  </a>
+
+  <mat-accordion class="app-nav-accordion">
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="nav-title">
+          <mat-icon>library_books</mat-icon>Reports
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/add-report" skipLocationChange>
+          <mat-icon>subdirectory_arrow_right</mat-icon> Create Report
+        </a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/system/view-report"
+          skipLocationChangematTooltip="General Ledger Code Maintenance">
+          <mat-icon>subdirectory_arrow_right</mat-icon>Generate Report
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
 </mat-nav-list>
-
-

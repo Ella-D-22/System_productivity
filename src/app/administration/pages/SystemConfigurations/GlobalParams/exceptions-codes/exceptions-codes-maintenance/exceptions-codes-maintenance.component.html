@@ -1,10 +1,10 @@
 <mat-card>
     <mat-card-header  class="breadcrumb">
-      <div>Home/Configurations/Global/Exception-code/maintenance</div>
+      <div>Exception - Maintenance</div>
   </mat-card-header>
   <mat-divider></mat-divider>
   <br>
-  
+
   <div class="container-fluid">
     <form
     class="form"
@@ -25,7 +25,7 @@
             <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
           </select>
         </div>
-     </div> 
+     </div>
     </div>
     <div class="col-md-6 col-sm-12">
       <div class="form-group">
@@ -34,22 +34,22 @@
         </div>
         <div class="col-md-6 col-sm-12 form-column ">
           <input type="text" [value]="this.exception_code_value" maxlength="6"
-           oninput ="this.value=this.value.toUpperCase()" 
+           oninput ="this.value=this.value.toUpperCase()"
            formControlName="exception_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.exception_code.errors }" />
             <mat-icon *ngIf="this.newData" (click)="exception_codeLookup()">search</mat-icon>
         </div>
-     </div>  
+     </div>
      <div class="form-group">
       <div class="col-md-6 col-sm-12 form-column ">
       </div>
       <div class="col-md-6 col-sm-12 form-column ">
         <mat-hint>{{this.exce_description }}</mat-hint>
       </div>
-   </div>    
+   </div>
     </div>
   </div>
     <br />
-  
+
     <button class="pull-right" mat-raised-button color="primary" type="submit">
       <span
         *ngIf="loading"
@@ -61,8 +61,8 @@
   </form>
     </div>
   </mat-card>
-  
-  
-  
-  
-  
+
+
+
+
+

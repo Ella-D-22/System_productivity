@@ -64,9 +64,6 @@ import { CollateralLookupComponent } from './pages/collateral-limits/collateral/
 import { BranchesComponent } from './pages/branches/branches.component';
 import { BranchesLookupComponent } from './pages/branches/branches-lookup/branches-lookup.component';
 import { BranchesMaintenanceComponent } from './pages/branches/branches-maintenance/branches-maintenance.component';
-import { CashTransactionsComponent } from './pages/transactions/transactions/cash-transactions/cash-transactions.component';
-import { TransactionMaintainanceComponent } from './pages/transactions/transactions/transaction-maintainance/transaction-maintainance.component';
-import { AccountComponent } from './pages/transactions/lookup/account/account.component';
 // import { LoanAccountComponent } from './pages/loan-account/loan-account.component';
 import { LoanAccountMaintainanceComponent } from './pages/loan-account/loan-account-maintainance/loan-account-maintainance.component';
 import { LoanAccountLookupComponent } from './pages/loan-account/loan-account-lookup/loan-account-lookup.component';
@@ -85,17 +82,9 @@ import { MisSectorComponent } from './pages/SystemConfigurations/GlobalParams/mi
 import { MisSubSectorComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector.component';
 import { MisSubSectorMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-maintenance/mis-sub-sector-maintenance.component';
 import { MisSubSectorLookupComponent } from './pages/SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-lookup/mis-sub-sector-lookup.component';
-import { GuarantosComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos.component';
-import { GuarantosMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/guarantos/guarantos-maintenance/guarantos-maintenance.component';
 import { LimitsComponent } from './pages/collateral-limits/limits/limits.component';
 import { LimitsMaintenanceComponent } from './pages/collateral-limits/limits/limits-maintenance/limits-maintenance.component';
 import { LimitsLookupComponent } from './pages/collateral-limits/limits/limits-lookup/limits-lookup.component';
-import { MainGroupComponent } from './pages/GLS/main-group/main-group.component';
-import { MainGroupMaintenanceComponent } from './pages/GLS/main-group/main-group-maintenance/main-group-maintenance.component';
-import { SubGroupMaintenanceComponent } from './pages/GLS/sub-group/sub-group-maintenance/sub-group-maintenance.component';
-import { SubGroupComponent } from './pages/GLS/sub-group/sub-group.component';
-import { SubGroupLookupComponent } from './pages/GLS/sub-group/sub-group-lookup/sub-group-lookup.component';
-import { MainGroupLookupComponent } from './pages/GLS/main-group/main-group-lookup/main-group-lookup.component';
 import { RetailCustomerComponent } from './pages/CustomersComponent/retail-customer/retail-customer.component';
 import { RetailCustomerLookupComponent } from './pages/CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
 import { RetailCustomerMaintenanceComponent } from './pages/CustomersComponent/retail-customer/retail-customer-maintenance/retail-customer-maintenance.component';
@@ -134,8 +123,7 @@ import { MainClassificationMaintenanceComponent } from './pages/SystemConfigurat
 import { SubClassificationsComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classifications.component';
 import { SubClassificationLookupComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-lookup/sub-classification-lookup.component';
 import { SubClassificationMaintenanceComponent } from './pages/SystemConfigurations/GlobalParams/sub-classifications/sub-classification-maintenance/sub-classification-maintenance.component';
-import { TransferMemberComponent } from './pages/GLS/sub-group/transfer-member/transfer-member.component';
-import { ExitMemberComponent } from './pages/GLS/sub-group/exit-member/exit-member.component';
+import { ExitMemberComponent } from './pages/group-lending-component/exit-member/exit-member.component';
 import { AccountLookupComponent } from './pages/transaction-execution/account-lookup/account-lookup.component';
 import { LoanAccountMaintenanceComponent } from './pages/Account-Component/loan-account/loan-account-maintenance/loan-account-maintenance.component';
 import { SavingsAccountComponent } from './pages/Account-Component/savings-account/savings-account.component';
@@ -153,6 +141,10 @@ import { OfficeAccountLookupComponent } from './pages/Account-Component/office-a
 import { OverdraftAccountMaintenanceComponent } from './pages/Account-Component/overdraft-account/overdraft-account-maintenance/overdraft-account-maintenance.component';
 import { OverdraftAccountLookupComponent } from './pages/Account-Component/overdraft-account/overdraft-account-lookup/overdraft-account-lookup.component';
 import { LoanAccountComponent } from './pages/Account-Component/loan-account/loan-account/loan-account.component';
+import { TransferMemberComponent } from './pages/group-lending-component/transfer-member/transfer-member.component';
+import { GroupLendingComponentComponent } from './pages/group-lending-component/group-lending-component.component';
+import { GroupLendingLookupComponent } from './pages/group-lending-component/group-lending-lookup/group-lending-lookup.component';
+import { GroupLendingMaintenanceComponent } from './pages/group-lending-component/group-lending-maintenance/group-lending-maintenance.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -212,9 +204,6 @@ import { LoanAccountComponent } from './pages/Account-Component/loan-account/loa
     BranchesComponent,
     BranchesLookupComponent,
     BranchesMaintenanceComponent,
-    CashTransactionsComponent,
-    TransactionMaintainanceComponent,
-    AccountComponent,
     // LoanAccountComponent,
     LoanAccountMaintainanceComponent,
     LoanAccountLookupComponent,
@@ -234,18 +223,10 @@ import { LoanAccountComponent } from './pages/Account-Component/loan-account/loa
     MisSubSectorComponent,
     MisSubSectorMaintenanceComponent,
     MisSubSectorLookupComponent,
-    GuarantosComponent,
-    GuarantosMaintenanceComponent,
     LimitsComponent,
     LimitsMaintenanceComponent,
     LimitsLookupComponent,
     // Customers
-    MainGroupComponent,
-    MainGroupMaintenanceComponent,
-    SubGroupMaintenanceComponent,
-    SubGroupComponent,
-    SubGroupLookupComponent,
-    MainGroupLookupComponent,
     RetailCustomerComponent,
     RetailCustomerLookupComponent,
     RetailCustomerMaintenanceComponent,
@@ -255,26 +236,22 @@ import { LoanAccountComponent } from './pages/Account-Component/loan-account/loa
     TransactionExecutionComponent,
     TransactionExecutionLookupComponent,
     TransactionExecutionMainComponent,
-
     ShareCapitalParamsComponent,
     ShareCapitalComponent,
     ShareCapitalMaintenanceComponent,
-
     CountriesLookupComponent,
-     ShareCapitalParamsMaintenanceComponent,
-     ShareCapitalParamsLookupComponent,
-     GuarantorsParamsComponent,
-     GuarantorsParamsMaintenanceComponent,
-     GuarantorsParamsLookupComponent,
-     ShareCapitalInstallmentsComponent,
-     SegmentsComponent,
-     SegmentLookupComponent,
-     SegmentMaintenanceComponent,
-     SubSegmentLookupComponent,
-     SubSegmentMaintenanceComponent,
-     SubSegmentComponent,
- 
-
+    ShareCapitalParamsMaintenanceComponent,
+    ShareCapitalParamsLookupComponent,
+    GuarantorsParamsComponent,
+    GuarantorsParamsMaintenanceComponent,
+    GuarantorsParamsLookupComponent,
+    ShareCapitalInstallmentsComponent,
+    SegmentsComponent,
+    SegmentLookupComponent,
+    SegmentMaintenanceComponent,
+    SubSegmentLookupComponent,
+    SubSegmentMaintenanceComponent,
+    SubSegmentComponent,
     ReportsComponent,
     ReportMaintainanceComponent,
     ViewReportComponent,
@@ -290,7 +267,7 @@ import { LoanAccountComponent } from './pages/Account-Component/loan-account/loa
     SubClassificationMaintenanceComponent,
     TransferMemberComponent,
     ExitMemberComponent,
-    AccountLookupComponent
+    AccountLookupComponent,
     LoanAccountComponent,
     LoanAccountMaintenanceComponent,
     SavingsAccountComponent,
@@ -307,8 +284,9 @@ import { LoanAccountComponent } from './pages/Account-Component/loan-account/loa
     OfficeAccountLookupComponent,
     OverdraftAccountMaintenanceComponent,
     OverdraftAccountLookupComponent,
-  
-
+    GroupLendingComponentComponent,
+    GroupLendingLookupComponent,
+    GroupLendingMaintenanceComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header  class="breadcrumb">
-    <div>Home/Configuration/Charges/Term-Deposit-Scheme/Maintenenace</div>
+    <div>Term-Deposit ~ Product Type Maintenance</div>
 </mat-card-header>
 <mat-divider></mat-divider>
 <br>
@@ -37,7 +37,7 @@
            [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
           <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
         </div>
-     </div>            
+     </div>
 </div>
   <!-- <div class="col-md-6 col-sm-12">
     <div *ngIf="!this.existingData" class="form-group">
@@ -48,11 +48,11 @@
           <input type="text" [value]="this.scheme_type" formControlName="scheme_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_type.errors }" />
           <mat-icon (click)="schemeTypeLookup()">search</mat-icon>
         </div>
-     </div>            
+     </div>
 </div> -->
 </div>
 <div class="row">
- 
+
   <div class="col-md-6 col-sm-12">
       <div class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
@@ -62,7 +62,7 @@
              <textarea [value]="this.scheme_code_desc" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"
              oninput="this.value=this.value.toUpperCase()"></textarea>
           </div>
-       </div>            
+       </div>
   </div>
 </div>
   <br />
@@ -81,7 +81,7 @@
   </div>
 </mat-card>
 
-             
+
 
 
 

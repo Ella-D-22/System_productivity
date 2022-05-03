@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/Configurations/Global/MIS-Sector/maintenance</div>
+        <div>MIS-Sector Maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
   <br>
@@ -24,9 +24,9 @@
                             <option value="" disabled>-- Choose Function --</option>
                             <option *ngFor="let flag of functionArray" [value]="flag">{{flag}}</option>
                         </select>
-                        
+
                     </div>
-                </div>      
+                </div>
             </div>
             <div *ngIf="showMisCode" class="col-md-6 col-sm-12">
                 <div class="form-group">
@@ -44,7 +44,7 @@
         <br>
         <button class="pull-right" mat-raised-button color="primary" type="submit">
             <span
-            *ngFor="loading" 
+            *ngFor="loading"
             class="spinner-border spinner-border-sm mr-1"></span>
             GO
         </button>

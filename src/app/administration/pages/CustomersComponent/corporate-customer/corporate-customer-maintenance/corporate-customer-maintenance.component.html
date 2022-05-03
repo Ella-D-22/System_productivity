@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/Customer/Corporate/Maintenance</div>
+        <div>Corporate - Customer Maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -31,7 +31,7 @@
                         <label for="" class="start pull-left">Customer Code<span class="warning">*</span></label>
                     </div>
                     <div class="col-md-6 col-sm-12 form-column">
-                        <input type="text" formControlName="cust_code" class="form-control" 
+                        <input type="text" formControlName="cust_code" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.cust_code.errors}" oninput="this.value=this.value.toUpperCase()">
                         <mat-icon (click)="corporateCustomerLookup()" >search</mat-icon>
                     </div>

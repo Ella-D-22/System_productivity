@@ -3,9 +3,9 @@
     <p><small>Loading, please wait...</small></p>
     <p><mat-progress-bar mode="query"></mat-progress-bar></p>
   </div>
-  
+
     <mat-card-header class="breadcrumb">
-        <div>Customers/corporate/data/view</div>
+        <div>Corporate - Customer</div>
     </mat-card-header>
     <br>
     <mat-divider></mat-divider>
@@ -64,7 +64,7 @@
                                </div>
                            </div>
                         </div>
-                        
+
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
@@ -138,9 +138,9 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                     </div>
-                   
+
                 </mat-tab>
                 <mat-tab class="mat-tab" label="Contact Details">
                     <br>
@@ -176,16 +176,16 @@
                                 <input type="text" formControlName="region" oninput="this.value=this.value.toUpperCase()" class="form-control">
                             </div>
                         </div>
-        
+
                     </div>
                 </div>
                 </mat-tab>
             </mat-tab-group>
-    
+
 
         <button mat-raised-button color="default" routerLink="../../maintenance" skipLocationChange type="submit">Back</button>
         <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isSubmitted">Submit</button>
-        <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>   
+        <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
      </form>
     </div>
 </mat-card>

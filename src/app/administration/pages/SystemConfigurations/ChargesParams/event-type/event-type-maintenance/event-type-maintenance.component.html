@@ -1,10 +1,10 @@
 <mat-card>
     <mat-card-header  class="breadcrumb">
-      <div>Home/Configurations/Charges/Even/Type/maintenance</div>
+      <div>Charge Type Maintenance</div>
   </mat-card-header>
   <mat-divider></mat-divider>
   <br>
-  
+
   <div class="container-fluid">
     <form
     class="form"
@@ -25,7 +25,7 @@
             <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
           </select>
         </div>
-     </div> 
+     </div>
     </div>
     <div class="col-md-6 col-sm-12">
       <div *ngIf="showOrganizationId" class="form-group">
@@ -36,7 +36,7 @@
           <input type="text" maxlength="6" [value]="this.eventtype_code" oninput ="this.value=this.value.toUpperCase()" formControlName="eventtype_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.eventtype_code.errors }" />
             <mat-icon (click)="eventTypeLookup()">search</mat-icon>
         </div>
-     </div>  
+     </div>
      <div *ngIf="showOrganizationId" class="form-group">
       <div class="col-md-6 col-sm-12 form-column ">
        <!-- <label class="start pull-left">Event Type Id<span class="warning">*</span></label> -->
@@ -44,7 +44,7 @@
       <div class="col-md-6 col-sm-12 form-column ">
         <mat-hint>{{this.description}}</mat-hint>
       </div>
-   </div> 
+   </div>
 
     </div>
   </div>
@@ -60,8 +60,8 @@
   </form>
     </div>
   </mat-card>
-  
-  
-  
-  
-  
+
+
+
+
+

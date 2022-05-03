@@ -1,10 +1,10 @@
     <mat-card>
         <mat-card-header  class="breadcrumb">
-          <div>Home/Configuration/Interests-setup/Maintenenace</div>
+          <div>Charge Preferentials Maintenenace</div>
       </mat-card-header>
       <mat-divider></mat-divider>
       <br>
-      
+
       <div class="container-fluid">
         <form
         class="form"
@@ -25,7 +25,7 @@
                 <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
               </select>
             </div>
-         </div> 
+         </div>
         </div>
         <div  class="col-md-6 col-sm-12">
             <div class="form-group">
@@ -38,14 +38,14 @@
                     <option *ngFor="let flag of  chargePreferetialsArrays" [value]="flag">{{ flag }}</option>
                   </select>
                </div>
-             </div>   
+             </div>
         </div>
       </div>
-            
+
       <div  class="row">
         <div class="col-md-6 col-sm-12">
-           
-             
+
+
              <div *ngIf="this.showAccountInput" class="form-group">
                 <div class="col-md-6 col-sm-12 form-column ">
                  <label class="start pull-left">Account ID<span class="warning">*</span></label>
@@ -54,7 +54,7 @@
                   <input [required]="this.showAccountInput" type="text" [value]="this.account_id" formControlName="account_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.account_id.errors }" />
                 <mat-icon (click)="eventId()">search</mat-icon>
                 </div>
-             </div>  
+             </div>
              <div *ngIf="this.showCifInput" class="form-group">
                 <div class="col-md-6 col-sm-12 form-column ">
                  <label class="start pull-left">CIF ID<span class="warning">*</span></label>
@@ -72,13 +72,13 @@
                   <input [required]="this.showContractInput" type="text" [value]="this.organization_name" formControlName="organization_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_id.errors }" />
                 <mat-icon (click)="organizationIdLookup()">search</mat-icon>
                 </div>
-             </div> 
+             </div>
 
         </div>
-        <div class="col-md-6 col-sm-12">           
+        <div class="col-md-6 col-sm-12">
         </div>
       </div>
-      
+
       <div *ngIf="this.showChargeInput" class="row">
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -89,14 +89,14 @@
               <input [required]="this.showChargeInput" type="text" [value]="this.event_id" formControlName="event_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_id.errors }" />
             <mat-icon (click)="eventId()">search</mat-icon>
             </div>
-         </div>   
+         </div>
          <div class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
           </div>
           <div class="col-md-6 col-sm-12 form-column ">
             <mat-hint>{{this.event_id_desc}}</mat-hint>
           </div>
-       </div>    
+       </div>
         </div>
         <div class="col-md-6 col-sm-12">
              <div class="form-group">
@@ -107,14 +107,14 @@
                 <input type="text" [value]="this.event_type" formControlName="event_type" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
               <!-- <mat-icon *ngIf="this.showLokup"  (click)="eventType()">search</mat-icon> -->
               </div>
-           </div>  
+           </div>
            <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
             </div>
             <div class="col-md-6 col-sm-12 form-column ">
               <mat-hint>{{this.event_type_desc}}</mat-hint>
             </div>
-         </div>          
+         </div>
         </div>
       </div>
         <br />
@@ -129,9 +129,8 @@
       </form>
         </div>
       </mat-card>
-      
-      
-      
-      
-      
-  
+
+
+
+
+

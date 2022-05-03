@@ -142,6 +142,7 @@ mat-icon {
   font-size: 18px;
   height: 18px;
   line-height: 25px;
+  cursor: pointer;
 }
 .actionButton {
   min-width: unse;
@@ -207,7 +208,7 @@ input, textarea{
 
 @media screen and (max-width: 1440px) and (max-height: 810px) {
   html {
-    //  transform: scale(.9);   
+    //  transform: scale(.9);
     zoom: 80%;
      // or simply zoom: 90%
   }
@@ -217,7 +218,7 @@ td{
 }
 .display-block{
   display: block;
-  
+
 }
 .Success{
   background-color: rgb(0, 255, 0);
