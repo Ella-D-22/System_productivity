@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class GroupLendingService {
 
-  baseURL = `${environment.glsAPI}api/v1/group/Group`
+  baseURL = `${environment.glsAPI}api/v1/grouplending/`
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http:HttpClient) { }
