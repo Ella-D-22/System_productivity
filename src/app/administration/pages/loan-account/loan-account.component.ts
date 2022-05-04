@@ -318,7 +318,7 @@ export class LoanAccountComponent implements OnInit {
       this.glSubheads = this.lookupdata.laa_glsubheads
       
       this.filteredArr = this.glSubheads.filter(data => data.laa_gl_subhead_deafault == "Yes");
-      console.log(this.filteredArr);
+      console.log(this.filteredArr.data);
     });
   }
   caaSchemeCodeLookup():void{

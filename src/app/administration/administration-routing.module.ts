@@ -505,14 +505,14 @@ const routes: Routes = [{
       {
         path: 'branches/maintenance',
         component:BranchesMaintenanceComponent,
-        canActivate: [CanActivateModuleGuard],
-        data: {preload:true },
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
       },
       {
         path: 'branches/data/view',
         component:BranchesComponent,
-        canActivate: [CanActivateModuleGuard],
-        data: {preload:true },
+        // canActivate: [CanActivateModuleGuard],
+        // data: {preload:true },
       },
       
       {

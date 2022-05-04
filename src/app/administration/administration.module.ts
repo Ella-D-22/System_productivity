@@ -290,7 +290,7 @@ import { LoanAccountComponent } from './pages/Account-Component/loan-account/loa
     SubClassificationMaintenanceComponent,
     TransferMemberComponent,
     ExitMemberComponent,
-    AccountLookupComponent
+    AccountLookupComponent,
     LoanAccountComponent,
     LoanAccountMaintenanceComponent,
     SavingsAccountComponent,
