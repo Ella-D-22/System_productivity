@@ -5,6 +5,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AccountsService } from '../../../accounts-module/accounts.service';
+import { CollateralLookupComponent } from '../../../collateral-limits/collateral/collateral-lookup/collateral-lookup.component';
 import { RetailCustomerLookupComponent } from '../../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
 import { LoanAccountService } from '../../../loan-account/loan-account.service';
 import { BranchComponent } from '../../../loan-account/lookup/branch/branch.component';
@@ -53,6 +54,8 @@ export class LoanAccountComponent implements OnInit {
   function_type:any
   account_code:any
   customer_type:any
+  laa_gl_subhead_description:any
+  laa_scheme_code_desc:any
   constructor(
     private fb:FormBuilder,
     private _snackBar:MatSnackBar,
@@ -173,12 +176,15 @@ export class LoanAccountComponent implements OnInit {
     'Daily', 'Weekly', 'Montly', 'Yearly'
   ]
   accountStatusArray: any = [
-    'Active', 'Not-Active', 'Dormant'
+    'A', 'N', 'D'
   ]
   aaplicationStatusAr : any = [
     'Pending', 'Verified'
   ]
 
+  disabledFormControl(){
+    this.formData.disable()
+  }
    //setting up the mis sector codes
    getMISData(){
     this.subscription = this.misSectorAPI.getAllMissectors().subscribe(
@@ -228,9 +234,11 @@ laaSchemeCodeLookup(): void {
     this.formData.controls.schemeCode.setValue(this.lookupdata.laa_scheme_code);
     this.laa_schemeCode = this.lookupdata.laa_scheme_code
     this.glSubheads = this.lookupdata.laa_glsubheads
-    
+    this.laa_scheme_code_desc = this.lookupdata.laa_scheme_code_desc 
     this.filteredArr = this.glSubheads.filter(data => data.laa_gl_subhead_deafault == "Yes");
     console.log(this.filteredArr);
+    this.formData.controls.glSubhead.setValue(this.filteredArr[0].laa_gl_subhead)
+    this.laa_gl_subhead_description =  this.filteredArr[0].laa_gl_subhead_description
   });
 }
 
@@ -243,7 +251,7 @@ guarantorsCustomerLookup(): void {
     this.customer_name = this.customer_lookup.firstName +" "+this.customer_lookup.middleName +" "+this.customer_lookup.surname
     this.addGurantorsFormData.controls.customer_code.setValue(this.customer_code);
   });
-}
+} 
 
 //Checking for eligibility of a guarantors customer_code
 eligibilityTest(){
@@ -330,13 +338,25 @@ onSignatureChange(event: any) {
   }
 
   collateralLookup():void{
+    const dialogRef = this.dialog.open(CollateralLookupComponent,{
+
+    });
+    dialogRef.afterClosed().subscribe(result =>{
+      console.log("Data",result.data);
+      
+      this.loanData.controls.collateralCode.setValue(result.data.collateralCode)
+    })
 
   }
   getPage(){
     this.subscription = this.accountAPI.currentMessage.subscribe(
       message =>{
         this.message = message
+        this.function_type = this.message.function_type
+        this.customer_type = this.message.customer_type
+        
         if(this.message.function_type == 'A-Add'){
+          this.isEnabled = true;
           this.formData = this.fb.group({
             accountManager: [''],
             accountName: [''],
@@ -356,6 +376,8 @@ onSignatureChange(event: any) {
             solCode: [''],
             sectorCode:[''],
             subSectorCode:[''],
+            schemeCode:[''],
+            glSubhead:[''],
             // termDeposit: new FormArray([]),
             transferExceptionLimitCr:[''] ,
             transferExceptionLimitDr:[''] ,
@@ -407,6 +429,8 @@ onSignatureChange(event: any) {
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
+                schemeCode:[this.results.schemeCode],
+                glSubhead:[this.results.glSubhead],
                 // termDeposit: new FormArray([]),
                 transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
                 transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
@@ -429,6 +453,7 @@ onSignatureChange(event: any) {
             }
           )
         }else if(this.message.function_type == 'M-Modify'){
+          this.isEnabled = true;
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
             data =>{
               this.results = data.entity
@@ -459,6 +484,8 @@ onSignatureChange(event: any) {
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
+                schemeCode:[this.results.schemeCode],
+                glSubhead:[this.results.glSubhead],
                 // termDeposit: new FormArray([]),
                 transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
                 transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
@@ -511,6 +538,8 @@ onSignatureChange(event: any) {
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
+                schemeCode:[this.results.schemeCode],
+                glSubhead:[this.results.glSubhead],
                 // termDeposit: new FormArray([]),
                 transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
                 transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
@@ -563,6 +592,8 @@ onSignatureChange(event: any) {
                 solCode: [this.results.solCode],
                 sectorCode:[this.results.sectorCode],
                 subSectorCode:[this.results.subSectorCode],
+                schemeCode:[this.results.schemeCode],
+                glSubhead:[this.results.glSubhead],
                 // termDeposit: new FormArray([]),
                 transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
                 transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
