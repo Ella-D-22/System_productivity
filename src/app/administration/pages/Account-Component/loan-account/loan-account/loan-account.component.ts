@@ -70,7 +70,8 @@ export class LoanAccountComponent implements OnInit {
     }
 
   ngOnInit(): void { this.getPage()
-  this.getMISData()}
+  this.getMISData()
+}
 
   glSubheadArray = new Array
 
