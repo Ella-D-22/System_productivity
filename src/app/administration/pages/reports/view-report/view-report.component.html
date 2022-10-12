@@ -1,12 +1,52 @@
 <div class="card container-fluid">
   <div class="card-body text-center">
-    <h2 class="card-title ">REPORTS</h2>
+    <h2 class="card-title ">General Reports</h2>
     <div class="row">
-      <div  class="col-md-6" *ngFor="let report of reports; let i=index">
+      <ul>
+        <li>
+          <mat-card (click)="acct()" class="report-module">
+          ACCOUN STATEMENT
+          </mat-card></li>
+
+          <li>
+            <mat-card (click)="loanstatement()" class="report-module">
+            LOAN STATEMENT
+            </mat-card></li>
+
+            <li>
+              <mat-card (click)="loanrepayment()" class="report-module">
+              LOAN Repayment Reports
+              </mat-card></li>
+
+              <li>
+                <mat-card (click)="officeaccounts()" class="report-module">
+                OFFICE ACCOUNTS
+                </mat-card></li>
+
+              <li>
+                <mat-card (click)="loanrepayment()" class="report-module">
+                LOAN DEMANDS
+                </mat-card></li>
+
+                <li>
+                  <mat-card  (click)="loanrepayment()" class="report-module">
+                  ASSETS CLASSIFICATIONS
+                  </mat-card></li>
+
+                  <li>
+                    <mat-card (click)="arrearsgenstatement()" class="report-module">
+                    ARREARS GENERAL STATEMENT
+                    </mat-card></li>
+
+
+
+      </ul>
+
+      <!-- <div  class="col-md-6" *ngFor="let report of reports; let i=index">
         <div>
           <button class="btn btn-secondary" (click)="specific(report)">{{report.reportName}}</button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div></div>
 

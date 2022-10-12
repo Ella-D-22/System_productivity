@@ -145,6 +145,16 @@ import { TransferMemberComponent } from './pages/group-lending-component/transfe
 import { GroupLendingComponentComponent } from './pages/group-lending-component/group-lending-component.component';
 import { GroupLendingLookupComponent } from './pages/group-lending-component/group-lending-lookup/group-lending-lookup.component';
 import { GroupLendingMaintenanceComponent } from './pages/group-lending-component/group-lending-maintenance/group-lending-maintenance.component';
+import { WidgetMembershipComponent } from './pages/dashboard/widget-membership/widget-membership.component';
+import { WidgetLendingComponent } from './pages/dashboard/widget-lending/widget-lending.component';
+import { WidgetChargesComponent } from './pages/dashboard/widget-charges/widget-charges.component';
+import { WidgetShareCapitalComponent } from './pages/dashboard/widget-share-capital/widget-share-capital.component';
+import { LoanRepaymentComponent } from './pages/reports/view-report/loan-repayment/loan-repayment.component';
+import { AccountStatementComponent } from './pages/reports/view-report/account-statement/account-statement.component';
+import { LOanStatementComponent } from './pages/reports/view-report/loan-statement/loan-statement.component';
+import { OfficeAccountsComponent } from './pages/reports/view-report/office-accounts/office-accounts.component';
+import { ARREARSGENERALSTATEMENTComponent } from './pages/reports/view-report/arrearsgeneralstatement/arrearsgeneralstatement.component';
+import { ASSETSCLASSIFICATIONSComponent } from './pages/reports/view-report/assetsclassifications/assetsclassifications.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -286,7 +296,17 @@ import { GroupLendingMaintenanceComponent } from './pages/group-lending-componen
     OverdraftAccountLookupComponent,
     GroupLendingComponentComponent,
     GroupLendingLookupComponent,
-    GroupLendingMaintenanceComponent
+    GroupLendingMaintenanceComponent,
+    WidgetMembershipComponent,
+    WidgetLendingComponent,
+    WidgetChargesComponent,
+    WidgetShareCapitalComponent,
+    LoanRepaymentComponent,
+    AccountStatementComponent,
+    LOanStatementComponent,
+    OfficeAccountsComponent,
+    ARREARSGENERALSTATEMENTComponent,
+    ASSETSCLASSIFICATIONSComponent
   ],
   imports: [
     CommonModule,

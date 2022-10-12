@@ -56,7 +56,7 @@ export class CurrencyConfigComponent implements OnInit {
     ) {
 
     }
-  maintenance_url = this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
+  // maintenance_url = this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
 
     ngOnInit() {
       // this.redirectToMaintenancePage();
@@ -74,7 +74,7 @@ export class CurrencyConfigComponent implements OnInit {
     //     this.message = message;
     //     if( this.message == "default message"){
     //       // Redirect to maintenace if no action header
-    //       this.maintenance_url;
+    //
 
     //     }else{
     //       null;
@@ -163,7 +163,6 @@ export class CurrencyConfigComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-          this.maintenance_url;
           })
         }
         else if(this.function_type == "M-Modify"){
@@ -184,7 +183,6 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-          this.maintenance_url;
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -208,7 +206,6 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-          this.maintenance_url;
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -232,7 +229,6 @@ export class CurrencyConfigComponent implements OnInit {
             });
           }, err=>{
             this.error = err;
-          this.maintenance_url;
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -261,7 +257,6 @@ export class CurrencyConfigComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-          this.maintenance_url;
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -281,7 +276,6 @@ export class CurrencyConfigComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-          this.maintenance_url;
               },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {

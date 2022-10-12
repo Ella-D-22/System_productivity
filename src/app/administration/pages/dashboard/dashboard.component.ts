@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as Highcharts from 'highcharts';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +24,7 @@ is_Second_Level_prev =  false;
   Authorize(){
     let currentUser = JSON.parse(sessionStorage.getItem('auth-user') || '{}');
     this.role = currentUser.roles[0];
-  
+
     // First Level Authorization - Admin
     if(this.role == "ROLE_DIRECTOR"){
       this.is_Director = true;

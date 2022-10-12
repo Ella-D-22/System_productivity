@@ -228,7 +228,7 @@ export class CurrentSchemeComponent implements OnInit {
       this.event_id = result.data.event_id;
       this.event_id_desc = result.data.event_id_desc
       this.event_type = result.data.event_type
-      this.event_type_desc = result.data.event_type_desc 
+      this.event_type_desc = result.data.event_type_desc
       this.feeFormData.controls.caa_fee_event.setValue(this.event_id);
       this.feeFormData.controls.caa_fee_type.setValue(this.event_type_code);
     });
@@ -705,7 +705,7 @@ initExceptionForm(){
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       console.log(this.exception_lookupData);
-      
+
       this.exception_description =  this.exception_lookupData.exce_description;
       this.exception_code_value = this.exception_lookupData.exception_code
 
@@ -734,7 +734,7 @@ initExceptionForm(){
   onGlSubheadUpdate(){
     let i = this.element;
     this.glSubheadArray[i] = this.glSubheadData.value
- } 
+ }
  onGlSubheadClear(){
   this.initGlSubheadForm();
   this.glSubheadArray = new Array();
@@ -797,17 +797,17 @@ onRemoveExceptions(i:any){
   onPreviewExceptions(){
      if(this.exceptionsFormData.valid){
        console.log(this.exceptionsFormData.value);
-       
+
        this.e.push(this.fb.group(this.exceptionsFormData.value));
        this.exceptionsArray.push(this.exceptionsFormData.value);
        console.log("Array", this.exceptionsArray);
-       
+
        this.initExceptionForm();
      }
   }
 
   //Loan Fee Operations
-  onPreviewFees(){        
+  onPreviewFees(){
     if (this.feeFormData.valid) {
       this.t.push(this.fb.group(
         this.feeFormData.value
@@ -981,7 +981,7 @@ onRemoveExceptions(i:any){
           this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
-          
+
           let params = new HttpParams().set('scheme_code', this.scheme_code);
           this.subscription = this.currentSchemeAPI
             .getCurrentschemeByCurrentschemeCode(params)
@@ -1072,7 +1072,7 @@ onRemoveExceptions(i:any){
                   ],
                   caa_dormant_fee: [this.results.caa_dormant_fee],
                   caa_calc_freq_dr_week: [this.results.caa_calc_freq_dr_week],
-                  
+
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
                   ],
@@ -1096,7 +1096,7 @@ onRemoveExceptions(i:any){
                   duration: 3000,
                   panelClass: ['red-snackbar', 'login-snackbar'],
                 });
-               
+
               }
             );
         } else if (this.function_type == 'M-Modify') {
@@ -1182,7 +1182,7 @@ onRemoveExceptions(i:any){
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
                   ],
-         
+
 
                   caa_fees: [this.feeArray],
                   caa_glsubheads: [this.glSubheadArray],
@@ -1197,7 +1197,7 @@ onRemoveExceptions(i:any){
                   caa_interest_calc:[this.results.caa_interest_calc],
                   caa_insufficient_exception:[this.results.caa_insufficient_exception],
                   caa_backdate_transaction:[this.results.caa_backdate_transaction],
-                  
+
                   // Audits
                   postedBy: [this.results.postedBy],
                   postedFlag: [this.results.postedFlag],
@@ -1360,7 +1360,7 @@ onRemoveExceptions(i:any){
                   deletedBy: [this.results.deletedBy],
                   deletedFlag: [this.results.deletedFlag],
                   deletedTime: [this.results.deletedTime],
-                                    
+
                 });
                 // this.disabledFormControll();
               },
