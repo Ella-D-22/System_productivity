@@ -32,6 +32,7 @@ export const config: FileInputConfig = {
     MaterialModule,
     DataTablesModule,
     AdministrationModule,
+    
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

@@ -11,6 +11,10 @@ export const environment = {
     // productAPI: 'http://localhost:9100',
     // collateralAPI: 'http://localhost:9091/collateral-service',
     // systemAPI: 'http://localhost:9091/system-service',
+    accountAPI: 'http://localhost:9099',
+    productAPI: 'http://localhost:9100',
+    collateralAPI: 'http://localhost:9103',
+    // systemAPI: 'http://localhost:9093',
     // branchAPI: 'http://localhost:9091/branch-service',
     // transactionAPI: 'http://localhost:9091/transaction-service',
     // transactionexecutorAPI:'http://localhost:9091/transaction-executor-service',
@@ -29,9 +33,15 @@ export const environment = {
     //reportAPI:'http://localhost:9094',
 
     userAPI: 'http://52.15.152.26:9091',
+
     accountAPI: 'http://52.15.152.26:9091/account-service',
     productAPI: 'http://52.15.152.26:9091/product-service',
     collateralAPI: 'http://52.15.152.26:9091/collateral-service',
+
+    // accountAPI: 'http://52.15.152.26:9091/account-service',
+    // productAPI: 'http://52.15.152.26:9091/product-service',
+    // collateralAPI: 'http://52.15.152.26:9091/collateral-service',
+
     systemAPI: 'http://52.15.152.26:9091/system-service',
     branchAPI: 'http://52.15.152.26:9091/branch-service',
     transactionAPI: 'http://52.15.152.26:9091/transaction-service',

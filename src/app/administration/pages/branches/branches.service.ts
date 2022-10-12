@@ -21,9 +21,7 @@ export class BranchesService {
   }
   // Add
   createBranch(data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/add`;
-    console.log("server data", data);
-    
+    let API_URL = `${this.baseURL}/add`;    
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
         return res || {}
       }),

@@ -54,6 +54,8 @@ export class TermDepositAccountComponent implements OnInit {
   function_type:any
   account_code:any
   customer_type:any
+  tda_scheme_code_desc:any
+  tda_gl_subhead_description:any
   constructor(
     private fb:FormBuilder,
     private _snackBar:MatSnackBar,
@@ -267,11 +269,14 @@ tdaSchemeCodeLookup():void{
   dialogRef.afterClosed().subscribe(result =>{
     this.lookupdata = result.data;
     this.formData.controls.schemeCode.setValue(this.lookupdata.tda_scheme_code)
-
+     
     this.tda_schemeCode = this.lookupdata.tda_scheme_code
+    this.tda_scheme_code_desc = this.lookupdata.tda_scheme_code_desc
     this.glSubheads = this.lookupdata.tda_glsubheads
     
     this.filteredArr = this.glSubheads.filter(data => data.tda_gl_subhead_deafault == "Yes");
+    this.formData.controls.glSubhead.setValue(this.filteredArr[0].tda_gl_subhead)
+    this.tda_gl_subhead_description = this.filteredArr[0].tda_gl_subhead_description
   })
 }
 branchSubheadLookup(): void {
