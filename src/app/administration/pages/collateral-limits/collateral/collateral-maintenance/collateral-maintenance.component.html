@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header>
-        <div>Collateral/Maintenance</div>
+        <div>Collateral Maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -14,7 +14,7 @@
                             <label for="">Function<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <select name="" id="" class="form-control" formControlName="function_type" 
+                            <select name="" id="" class="form-control" formControlName="function_type"
                             [ngClass]="{'is-invalid':submitted && f['function_type'].errors}">
                                 <option value="" disabled>-- Choose Function --</option>
                                 <option *ngFor="let flag of functionArray" [value]="flag">{{flag}}</option>
@@ -31,15 +31,15 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <input type="text" oninput="this.value=this.value.toUpperCase()" [value]="this.collateralCode" formControlName="collateralCode" maxlength="6"
-                            class="pull-right form-control" 
+                            class="pull-right form-control"
                             [ngClass]="{'is-invalid':submitted && f['collateralCode'].errors}">
                             <mat-icon *ngIf="function_type!='A-Add'" (click)="collateralLookup()">search</mat-icon>
                             <br>
-                            <span *ngIf="this.show==true && this.function_type == 'A-Add'" style="color: red; font: size 6px;;">*Colletaral Code already exists!!</span> 
-                            <span *ngIf="this.showCode==true && this.function_type !='A-Add' " style="color: red; font: size 6px;">Collateral Code doesn't exists</span> 
+                            <span *ngIf="this.show==true && this.function_type == 'A-Add'" style="color: red; font: size 6px;;">*Colletaral Code already exists!!</span>
+                            <span *ngIf="this.showCode==true && this.function_type !='A-Add' " style="color: red; font: size 6px;">Collateral Code doesn't exists</span>
                         </div>
                     </div>
-                </div>              
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -66,9 +66,9 @@
                 <div class="col-md-6 col-sm-12">
                     <br>
                     <div class="col-md-1 offset-md-9">
-                        
+
                     </div>
-                </div>              
+                </div>
             </div>
             <button class="pull-right " mat-raised-button color="primary" type="submit">
                 <span

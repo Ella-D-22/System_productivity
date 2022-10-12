@@ -1,7 +1,7 @@
 
 <mat-card>
     <mat-card-header  class="breadcrumb">
-      <div>Home/Configuration/charge/preferentials</div>
+      <div>Charge Preferentials</div>
   </mat-card-header>
   <div class="row">
     <div class="col-md-4 col-sm-12">
@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-4 col-sm-12">
         <h4>Event Type</h4>
-        <p>{{this.event_type_description }}</p> 
+        <p>{{this.event_type_description }}</p>
     </div>
     <div class="col-md-4 col-sm-12">
         <h4>Event Id</h4>
@@ -21,7 +21,7 @@
 <div class="row">
   <div class="col-md-4 col-sm-12">
       <h4>Charge Preferential</h4>
-      <p>{{this.chrg_preferential}}</p> 
+      <p>{{this.chrg_preferential}}</p>
   </div>
   <div *ngIf="this.cif_id" class="col-md-4 col-sm-12">
     <h4>CIF Id</h4>
@@ -29,7 +29,7 @@
 </div>
 <div *ngIf="this.account_id" class="col-md-4 col-sm-12">
     <h4>Account Id</h4>
-    <p>{{this.account_id}}</p> 
+    <p>{{this.account_id}}</p>
 </div>
 <div *ngIf="this.organization_id" class="col-md-4 col-sm-12">
     <h4>Organization</h4>
@@ -47,7 +47,7 @@
     novalidate
   >
 <div class="row">
-  <div class="col-md-6 col-sm-12"> 
+  <div class="col-md-6 col-sm-12">
     <div class="form-group">
       <div class="col-md-6 col-sm-12 form-column ">
         <label class="start pull-left">Effective From</label>
@@ -85,7 +85,7 @@
                   <option *ngFor="let flag of  amtDerivationArrays" [value]="flag">{{ flag }}</option>
                 </select>
              </div>
-          </div>           
+          </div>
     </div>
     <div class="col-md-6 col-sm-12">
         <div *ngIf="showPercentageField" class="form-group">
@@ -95,7 +95,7 @@
           <div class="col-md-6 col-sm-12 form-column ">
            <input  type="text" formControlName="percentage_val" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.percentage_val.errors }" />
           </div>
-       </div> 
+       </div>
         <div *ngIf="showFixedAmtField" class="form-group">
           <div  class="col-md-6 col-sm-12 form-column ">
            <label class="start pull-left">Fixed Amount <span class="warning">*</span></label>
@@ -103,9 +103,9 @@
           <div class="col-md-6 col-sm-12 form-column ">
            <input  type="text" formControlName="fixed_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fixed_amt.errors }" />
           </div>
-       </div> 
+       </div>
     </div>
-</div>  
+</div>
 <div class="row">
     <div class="col-md-6 col-sm-12">
       <div class="form-group">
@@ -117,7 +117,7 @@
           <mat-icon *ngIf="isEnabled"  (click)="minAmtCurrencyLookup()">search</mat-icon>
           <input type="number" formControlName="min_amt" class="currency-value pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.min_amt.errors }" />
         </div>
-     </div>            
+     </div>
     </div>
     <div class="col-md-6 col-sm-12">
       <div class="form-group">
@@ -128,9 +128,9 @@
           <input type="text" [value]="this.max_amt_ccy" formControlName="max_amt_ccy" class="currency pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.max_amt_ccy.errors }" />
           <mat-icon *ngIf="isEnabled"  (click)="maxAmtCurrencyLookup()">search</mat-icon>
           <input type="number" formControlName="max_amt" class="currency-value pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.max_amt.errors }" />
-             
+
         </div>
-     </div>   
+     </div>
     </div>
   </div>
     <br/>
@@ -148,8 +148,7 @@
   </form>
     </div>
   </mat-card>
-  
-  
-  
-  
-  
+
+
+
+

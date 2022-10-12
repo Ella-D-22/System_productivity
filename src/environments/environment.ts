@@ -7,6 +7,10 @@ export const environment = {
     // userAPI: 'http://localhost:9091',
     // accountAPI: 'http://localhost:9091/account-service',
     // accountAPI: 'http://localhost:9099',
+    // accountAPI: 'http://localhost:9099',
+    // productAPI: 'http://localhost:9100',
+    // collateralAPI: 'http://localhost:9091/collateral-service',
+    // systemAPI: 'http://localhost:9091/system-service',
     accountAPI: 'http://localhost:9099',
     productAPI: 'http://localhost:9100',
     collateralAPI: 'http://localhost:9103',
@@ -29,9 +33,15 @@ export const environment = {
     //reportAPI:'http://localhost:9094',
 
     userAPI: 'http://52.15.152.26:9091',
+
+    accountAPI: 'http://52.15.152.26:9091/account-service',
+    productAPI: 'http://52.15.152.26:9091/product-service',
+    collateralAPI: 'http://52.15.152.26:9091/collateral-service',
+
     // accountAPI: 'http://52.15.152.26:9091/account-service',
     // productAPI: 'http://52.15.152.26:9091/product-service',
     // collateralAPI: 'http://52.15.152.26:9091/collateral-service',
+
     systemAPI: 'http://52.15.152.26:9091/system-service',
     branchAPI: 'http://52.15.152.26:9091/branch-service',
     transactionAPI: 'http://52.15.152.26:9091/transaction-service',
@@ -40,7 +50,7 @@ export const environment = {
     chargeAPI: 'http://52.15.152.26:9091/charge-service',
     customerAPI:'http://52.15.152.26:9091/customer-service',
     eodAPI:'http://52.15.152.26:9091/eod-service',
-    // groupAPI: 'http://52.15.152.26:9091/group-service',
+    groupAPI: 'http://52.15.152.26:9091/group-service',
     interestCalculatorAPI: 'http://52.15.152.26:9091/interest-calculator-service',
     menutreeAPI: 'http://52.15.152.26:9091/menutree-service',
     reportAPI:'http://52.15.152.26:9091/report-service',

@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header  class="breadcrumb">
-    <div>Home/Configurations/Global/GL-Subhead/maintenance</div>
+    <div>General Ledger Subhead Maintenance</div>
 </mat-card-header>
 <mat-divider></mat-divider>
 <br>
@@ -10,7 +10,7 @@
   class="form"
   [formGroup]="formData"
   (ngSubmit)="onSubmit()"
-  #resetRequestsForm="ngForm" 
+  #resetRequestsForm="ngForm"
   novalidate
 >
 <div class="row">
@@ -25,7 +25,7 @@
           <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
         </select>
       </div>
-   </div> 
+   </div>
   </div>
   <div class="col-md-6 col-sm-12">
     <div  class="form-group">
@@ -36,7 +36,7 @@
         <input type="text" maxlength = "6" [value]="this.glSubheadCode" maxlength="6" formControlName="glSubheadCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.glSubheadCode.errors }" />
         <mat-icon  *ngIf="existingData" (click)="refCodeLookup()">search</mat-icon><br>
       </div>
-   </div>   
+   </div>
    <div  class="form-group">
     <div class="col-md-6 col-sm-12 form-column ">
      <!-- <label class="start pull-left">GL.Ref.Code<span class="warning">*</span></label> -->
@@ -44,11 +44,11 @@
     <div class="col-md-6 col-sm-12 form-column">
       <mat-hint>{{this.glSubheadDescription}}</mat-hint>
     </div>
- </div>  
+ </div>
   </div>
 </div>
   <br />
- 
+
   <button class="pull-right" mat-raised-button color="primary" type="submit">
     <span
       *ngIf="loading"

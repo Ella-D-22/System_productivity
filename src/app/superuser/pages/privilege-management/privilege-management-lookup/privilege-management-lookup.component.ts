@@ -5,18 +5,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PrivilegeManagementService } from '../privilege-management.service';
-
 @Component({
   selector: 'app-privilege-management-lookup',
   templateUrl: './privilege-management-lookup.component.html',
   styleUrls: ['./privilege-management-lookup.component.scss']
 })
 export class PrivilegeManagementLookupComponent implements OnInit {
-
   results:any
   displayedColumns : string[]= ['sn','Group Code', 'Group Name']
-
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;
@@ -32,14 +28,14 @@ export class PrivilegeManagementLookupComponent implements OnInit {
   }
 
   getData(){
-    this.privilegeService.getPrivileges().subscribe(
-      data =>{
-          this.results = data
-          this.dataSource = new MatTableDataSource(this.results)
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort; 
-      }
-    )
+    // this.privilegeService.getPrivileges().subscribe(
+    //   data =>{
+    //       this.results = data
+    //       this.dataSource = new MatTableDataSource(this.results)
+    //       this.dataSource.paginator = this.paginator;
+    //       this.dataSource.sort = this.sort; 
+    //   }
+    // )
   }
 
   applyFilter(event:Event){

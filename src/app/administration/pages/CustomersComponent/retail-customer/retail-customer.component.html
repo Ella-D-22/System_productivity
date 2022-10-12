@@ -4,7 +4,7 @@
         <p><mat-progress-bar mode="query"></mat-progress-bar></p>
       </div>
     <mat-card-header class="breadcrumb">
-        <div>Home/Customers/Retail/data/view</div>
+        <div>Retail - Customer</div>
     </mat-card-header>
 
     <div class="row">
@@ -14,9 +14,9 @@
         </div>
         <div class="col-md-6 col-sm-12">
             <h4>Customer Code</h4>
-            <p>{{this.customerCode}}</p> 
+            <p>{{this.customerCode}}</p>
     </div>
-    
+
     </div>
     <mat-divider></mat-divider>
     <br>
@@ -43,7 +43,7 @@
                                     <label class="start pull-left">Middle Name<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input maxlength="20" type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">  
+                                    <input maxlength="20" type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="segment" (change)="onInputSelection($event)" class="form-control">
                                         <option value="" disabled>--Select a segment--</option>
-                                        <option *ngFor="let item of this.segmentData" [value]="item.segmentCode">{{item.segmentDescription}}</option>       
+                                        <option *ngFor="let item of this.segmentData" [value]="item.segmentCode">{{item.segmentDescription}}</option>
                                      </select>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="subSegment" class="form-control">
                                         <option value="" disabled>--Select a sub segment--</option>
-                                        <option *ngFor="let item of subSegments" [value]="item.subSegmentCode">{{item.subSegmentDescription}}</option>  
+                                        <option *ngFor="let item of subSegments" [value]="item.subSegmentCode">{{item.subSegmentDescription}}</option>
                                      </select>
                                 </div>
                             </div>
@@ -216,7 +216,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                  </mat-tab>
                 <mat-tab class="mat-tab" label="Contact Information">
@@ -243,7 +243,7 @@
                                            <input maxlength="20" type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
-                               </div> 
+                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -265,7 +265,7 @@
                                            <input maxlength="20" type="text" formControlName="residentialTown" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
-                               </div> 
+                               </div>
                             </div>
                         </div>
                     </div>
@@ -294,7 +294,7 @@
                                            <input maxlength="20" type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
-                               </div> 
+                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -316,7 +316,7 @@
                                            <input maxlength="20" type="text" formControlName="relationship" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
-                               </div> 
+                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -338,7 +338,7 @@
                                            <input maxlength="20" type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
-                               </div> 
+                               </div>
                             </div>
 
                             <div class="row">
@@ -355,8 +355,8 @@
                                   </div>
                                </div>
                                <div class="col-md-6 col-sm-12">
-                               
-                               </div> 
+
+                               </div>
                             </div>
                         </div>
                     </div>
@@ -385,7 +385,7 @@
                                            <input maxlength="20" type="text" formControlName="middleName" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
-                               </div> 
+                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -407,7 +407,7 @@
                                            <input maxlength="8" type="text" formControlName="identificationNo" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
-                               </div> 
+                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -429,7 +429,7 @@
                                            <input maxlength="20" type="text" formControlName="emailAddress" class="form-control" oninput="this.value=this.value.toUpperCase()">
                                        </div>
                                    </div>
-                               </div> 
+                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -445,8 +445,8 @@
                                   </div>
                                </div>
                                <div class="col-md-6 col-sm-12">
-                             
-                               </div> 
+
+                               </div>
                             </div>
                         </div>
                     </div>
@@ -481,11 +481,11 @@
                                    <div class="form-group">
                                         <img [src]="form.controls.image.value" class="col-md-6 img-preview"/>
                                 </div>
-                               </div> 
+                               </div>
                             </div>
                         </div>
                         <br>
-                        
+
                     </div>
 
                 </mat-tab>
@@ -500,4 +500,3 @@
 
 
 
-  

@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header  class="breadcrumb">
-      <div>Home/Configuration/Charge Type</div>
+      <div>Charge Type</div>
   </mat-card-header>
   <div class="row">
     <div class="col-md-6 col-sm-12">
@@ -9,13 +9,13 @@
     </div>
     <div class="col-md-6 col-sm-12">
         <h4>Charge Type</h4>
-        <p>{{this.event_description}}</p> 
+        <p>{{this.event_description}}</p>
     </div>
-  
+
   </div>
   <mat-divider></mat-divider>
   <br>
-  
+
   <div class="container-fluid">
     <form
     class="form"
@@ -33,7 +33,7 @@
       <div class="col-md-6 col-sm-12 form-column">
         <input maxlength="6" type="text" formControlName="code" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
       </div>
-   </div>            
+   </div>
   </div>
   <div class="col-md-6 col-sm-12">
     <div class="form-group">
@@ -43,7 +43,7 @@
       <div class="col-md-6 col-sm-12 form-column">
         <input maxlength="60" type="text" formControlName="description" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
       </div>
-   </div>   
+   </div>
   </div>
   </div>
     <br/>
@@ -68,7 +68,6 @@
   </form>
     </div>
   </mat-card>
-  
-  
-  
-  
+
+
+

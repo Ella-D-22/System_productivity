@@ -97,8 +97,12 @@ export class OtpComponent implements OnInit {
         duration: 3000,
         panelClass: ['green-snackbar','login-snackbar'],
       });
-      // redirect to system
-      this.ngZone.run(() => this.router.navigateByUrl('system'));
+      // redirect to  respective module system
+      if(this.message.roles[0]=="SUPER_ADMIN"){
+      this.ngZone.run(() => this.router.navigateByUrl('superuser'));
+      }else{
+        this.ngZone.run(() => this.router.navigateByUrl('system'));
+      }
       }
 
     })

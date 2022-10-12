@@ -1,16 +1,16 @@
 <mat-card>
     <mat-card-header  class="breadcrumb">
-      <div>Home/Configurations/Global/Guarantors-Params/maintenance</div>
+      <div>Guarantors Parameters Maintenance</div>
   </mat-card-header>
   <mat-divider></mat-divider>
   <br>
-  
+
   <div class="container-fluid">
     <form
     class="form"
     [formGroup]="formData"
     (ngSubmit)="onSubmit()"
-    #resetRequestsForm="ngForm" 
+    #resetRequestsForm="ngForm"
     novalidate
   >
   <div class="row">
@@ -25,7 +25,7 @@
             <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
           </select>
         </div>
-     </div> 
+     </div>
     </div>
     <div class="col-md-6 col-sm-12">
         <!-- <div  class="form-group">
@@ -50,8 +50,8 @@
   </form>
     </div>
   </mat-card>
-  
-  
-  
-  
-  
+
+
+
+
+
