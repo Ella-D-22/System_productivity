@@ -34,9 +34,9 @@ export const environment = {
 
     userAPI: 'http://52.15.152.26:9091',
 
-    accountAPI: 'http://52.15.152.26:9091/account-service',
-    productAPI: 'http://52.15.152.26:9091/product-service',
-    collateralAPI: 'http://52.15.152.26:9091/collateral-service',
+   // accountAPI: 'http://52.15.152.26:9091/account-service',
+    //productAPI: 'http://52.15.152.26:9091/product-service',
+    //collateralAPI: 'http://52.15.152.26:9091/collateral-service',
 
     // accountAPI: 'http://52.15.152.26:9091/account-service',
     // productAPI: 'http://52.15.152.26:9091/product-service',
