@@ -1,10 +1,26 @@
 <mat-card>
-     <mat-card-header class="breadcrumb">
-       <div>Dashboard</div>
-     </mat-card-header>
- 
+  <mat-card-header class="breadcrumb">
+    <div>Dashboard</div>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <app-widget-membership></app-widget-membership>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-widget-share-capital></app-widget-share-capital>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <app-widget-lending></app-widget-lending>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <app-widget-charges></app-widget-charges>
+      </div>
+    </div>
+  </div>
 
-     <mat-divider></mat-divider>
-     <br>
-   
-   </mat-card>
+</mat-card>

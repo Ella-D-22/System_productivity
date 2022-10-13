@@ -5,12 +5,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { EventIdService } from 'src/app/administration/pages/SystemConfigurations/ChargesParams/event-id/event-id.service';
-import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
-import { LinkedorganizationService } from '../../linked-organization/linkedorganization.service';
-import { LinkedOrganizationLookupComponent } from '../../linked-organization/linked-organization-lookup/linked-organization-lookup.component';
-import { SchemeTypeService } from '../../scheme-type/scheme-type.service';
-import { SchemeTypeLookupComponent } from '../../scheme-type/scheme-type-lookup/scheme-type-lookup.component';
 import { GlCodeLookupComponent } from '../gl-code-lookup/gl-code-lookup.component';
 import { GlCodeService } from '../gl-code.service';
 
@@ -23,6 +17,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   function_type: any;
+  classification: any;
   isRequired = false;
   function_type_data: any;
   subscription!:Subscription;
@@ -58,11 +53,15 @@ export class GlCodeMaintenanceComponent implements OnInit {
   functionArray: any = [
     'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
   ]
+  classificationArray: any = [
+    'ASSETS','LIABILITIES','INCOMES','EXPENSES'
+  ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
     glCode: [''],
+    classification: ['']
   });
-  
+
 
 
   refCodeLookup(): void {
@@ -82,16 +81,20 @@ export class GlCodeMaintenanceComponent implements OnInit {
       this.formData.controls.glCode.setValue("")
       this.formData.controls.glCode.setValidators([Validators.required])
     }else if(event.target.value == "A-Add"){
-      this.existingData = false;;
+      this.existingData = false;
       this.formData.controls.glCode.setValidators([])
       this.formData.controls.glCode.setValue("");
     }
+  }
+
+  onClassificationFunction(event:any){
+
   }
       // convenience getter for easy access to form fields
       get f() { return this.formData.controls; }
 
       onVerify(){
-        
+
         this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res=>{
           this.results = res;
           this.verifyformData = this.fb.group({
@@ -121,8 +124,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
                 duration: 3000,
                 panelClass: ['green-snackbar','login-snackbar'],
               });
-          // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
-              // system/configurations/global/gl-code/maintenance
+
           },err=>{
             this.error = err;
             this.loading = false;
@@ -132,7 +134,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-          }) 
+          })
 
         }, err=>{
           this.error = err;
@@ -169,15 +171,14 @@ export class GlCodeMaintenanceComponent implements OnInit {
                     this.subscription = this.glcodeAPI.updateGlcode(this.deleteformData.value).subscribe(res=>{
                       this.results = res;
                       this.loading = false;
-          
+
                         this._snackBar.open( this.results.message, "X", {
                           horizontalPosition: this.horizontalPosition,
                           verticalPosition: this.verticalPosition,
                           duration: 3000,
                           panelClass: ['green-snackbar','login-snackbar'],
                         });
-                    // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/maintenance'));
-                        // system/configurations/global/gl-code/maintenance
+
                     },err=>{
                       this.error = err;
                       this.loading = false;
@@ -189,7 +190,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
                       });
                     })
 
-          
+
         }, err=>{
           this.error = err;
             this._snackBar.open(this.error, "X", {
@@ -200,7 +201,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
             });
         })
       }
-      
+
   onSubmit(){
     this.loading = true;
     this.submitted = true;
@@ -211,19 +212,18 @@ export class GlCodeMaintenanceComponent implements OnInit {
         // call to update verify flag
         this.onVerify();
         // update
-        
+
       }
       if(this.function_type == "X-Delete"){
         // call to update delete flag
         this.onDelete()
         console.log("got called for delete");
-        
+
       }else{
         this.glcodeAPI.changeMessage(this.formData.value)
-        this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/data/view'));
+        this.router.navigate(['system/configurations/global/gl-code/data/view'], {skipLocationChange:true})
       }
   }else{
-    // this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-code/data/view'));
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {
       horizontalPosition: this.horizontalPosition,

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ReportDefination } from './interfaces/report-defination'
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable, Subject} from 'rxjs';
 import { DownloadRequest } from './interfaces/downloadRequest'
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
-  private baseUrl = 'https://localhost:9094/reports/';
+  // private baseUrl = 'http://localhost:9094/reports/';
+  private baseUrl = `${environment.reportAPI}/reports/`;
+
 
   constructor(private http: HttpClient) { }
 

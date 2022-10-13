@@ -180,7 +180,7 @@ getPage(){
             duration:3000,
             panelClass:['green-snackbar', 'login-snackbar']
           });
-          this.router.navigateByUrl("system/configurations/global/share-capital/params/maintenance")
+          this.router.navigate(["system/configurations/global/share-capital/params/maintenance"],{skipLocationChange:true})
         },
         err =>{
           this.error = err

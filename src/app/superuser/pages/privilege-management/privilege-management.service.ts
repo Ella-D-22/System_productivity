@@ -10,6 +10,8 @@ import { environment } from 'src/environments/environment';
 export class PrivilegeManagementService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   baseURL = `${environment.userAPI}/privileges`;
+  roleURL = `${environment.userAPI}/auth`;
+
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');
@@ -26,10 +28,22 @@ export class PrivilegeManagementService {
       catchError(this.errorMgmt)
     )
   }
+    // Get all Roles
+    getRoles() {
+      let API_URL = `${this.roleURL}/roles`;
+      return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
+    }
+
   // Get all
-  getPrivileges() {
-    let API_URL = `${this.baseURL}/all`;
-    return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
+  getPrivileges(params:any) {
+    let API_URL = `${this.baseURL}/module/access`;
+    return this.http.get(API_URL,{params:params, headers: this.headers, withCredentials: false })
     .pipe(
       map((res) => {
         return res || {}
@@ -37,6 +51,7 @@ export class PrivilegeManagementService {
       catchError(this.errorMgmt)
     )
   }
+
   // Get by id
   getPrivilegeId(id: any): Observable<any> {
     let API_URL = `${this.baseURL}/find/${id}`;

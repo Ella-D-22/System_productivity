@@ -1,10 +1,10 @@
 <mat-card>
     <mat-card-header  class="breadcrumb">
-      <div>Home/Configuration/Charges/Loan-Product/Maintenenace</div>
+      <div>Loan ~ Product Type Maintenenace</div>
   </mat-card-header>
   <mat-divider></mat-divider>
   <br>
-  
+
   <div class="container-fluid">
     <form
     class="form"
@@ -27,7 +27,7 @@
         </div>
      </div>
     </div>
-    
+
       <div class="col-md-6 col-sm-12">
         <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
@@ -37,8 +37,8 @@
               <input maxlength="6" type="text" [value]="this.scheme_code_desc" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code.errors }" />
               <mat-icon *ngIf="this.existingData" (click)="schemeCodeLookup()">search</mat-icon>
             </div>
-         </div>            
-    
+         </div>
+
       <!-- <div *ngIf="!this.existingData" class="form-group">
           <div class="col-md-6 col-sm-12 form-column ">
            <label class="start pull-left">Product Type</label>
@@ -51,7 +51,7 @@
   </div>
   </div>
   <div class="row">
-  
+
     <div class="col-md-6 col-sm-12">
         <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
@@ -60,7 +60,7 @@
             <div class="col-md-6 col-sm-12 form-column ">
                <textarea maxlength="100" [value]="this.laa_scheme_code_desc" oninput ="this.value=this.value.toUpperCase()" formControlName="scheme_code_desc" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.scheme_code_desc.errors }"></textarea>
             </div>
-         </div>            
+         </div>
     </div>
   </div>
     <br />
@@ -76,9 +76,9 @@
     </div>
   </mat-card>
 
-               
-  
-  
-  
-  
-  
+
+
+
+
+
+

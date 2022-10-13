@@ -228,7 +228,7 @@ export class CurrentSchemeComponent implements OnInit {
       this.event_id = result.data.event_id;
       this.event_id_desc = result.data.event_id_desc
       this.event_type = result.data.event_type
-      this.event_type_desc = result.data.event_type_desc 
+      this.event_type_desc = result.data.event_type_desc
       this.feeFormData.controls.caa_fee_event.setValue(this.event_id);
       this.feeFormData.controls.caa_fee_type.setValue(this.event_type_code);
     });
@@ -705,7 +705,7 @@ initExceptionForm(){
     dialogRef.afterClosed().subscribe(result => {
       this.exception_lookupData = result.data;
       console.log(this.exception_lookupData);
-      
+
       this.exception_description =  this.exception_lookupData.exce_description;
       this.exception_code_value = this.exception_lookupData.exception_code
 
@@ -734,7 +734,7 @@ initExceptionForm(){
   onGlSubheadUpdate(){
     let i = this.element;
     this.glSubheadArray[i] = this.glSubheadData.value
- } 
+ }
  onGlSubheadClear(){
   this.initGlSubheadForm();
   this.glSubheadArray = new Array();
@@ -797,17 +797,17 @@ onRemoveExceptions(i:any){
   onPreviewExceptions(){
      if(this.exceptionsFormData.valid){
        console.log(this.exceptionsFormData.value);
-       
+
        this.e.push(this.fb.group(this.exceptionsFormData.value));
        this.exceptionsArray.push(this.exceptionsFormData.value);
        console.log("Array", this.exceptionsArray);
-       
+
        this.initExceptionForm();
      }
   }
 
   //Loan Fee Operations
-  onPreviewFees(){        
+  onPreviewFees(){
     if (this.feeFormData.valid) {
       this.t.push(this.fb.group(
         this.feeFormData.value
@@ -981,7 +981,7 @@ onRemoveExceptions(i:any){
           this.disabledFormControll();
           // hide Buttons
           this.isEnabled = false;
-          
+
           let params = new HttpParams().set('scheme_code', this.scheme_code);
           this.subscription = this.currentSchemeAPI
             .getCurrentschemeByCurrentschemeCode(params)
@@ -1072,7 +1072,7 @@ onRemoveExceptions(i:any){
                   ],
                   caa_dormant_fee: [this.results.caa_dormant_fee],
                   caa_calc_freq_dr_week: [this.results.caa_calc_freq_dr_week],
-                  
+
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
                   ],
@@ -1086,11 +1086,7 @@ onRemoveExceptions(i:any){
                       caa_interest_calc:[this.results.caa_interest_calc],
                       caa_insufficient_exception:[this.results.caa_insufficient_exception],
                       caa_backdate_transaction:[this.results.caa_backdate_transaction],
-
-                  // caa_fees: new FormArray([]),
-                  // caa_glsubheads: new FormArray([])
                 });
-                // this.disabledFormControll();
               },
               (err) => {
                 this.error = err;
@@ -1100,7 +1096,7 @@ onRemoveExceptions(i:any){
                   duration: 3000,
                   panelClass: ['red-snackbar', 'login-snackbar'],
                 });
-                // this.ngZone.run(() => this.router.navigateByUrl(''));
+
               }
             );
         } else if (this.function_type == 'M-Modify') {
@@ -1125,46 +1121,24 @@ onRemoveExceptions(i:any){
                   // caa_scheme_type: [this.results.caa_scheme_type],
                   caa_scheme_code_desc: [this.results.caa_scheme_code_desc],
                   //General Details
-                  caa_effective_from_date: [
-                    this.results.caa_effective_from_date,
-                  ],
+                  caa_effective_from_date: [this.results.caa_effective_from_date],
                   caa_effective_to_date: [this.results.caa_effective_to_date],
-                  caa_system_generated_no: [
-                    this.results.caa_system_generated_no,
-                  ],
-                  caa_principal_lossline_ac: [
-                    this.results.caa_principal_lossline_ac,
-                  ],
-                  caa_recovery_lossline_ac: [
-                    this.results.caa_recovery_lossline_ac,
-                  ],
+                  caa_system_generated_no: [this.results.caa_system_generated_no],
+                  caa_principal_lossline_ac: [this.results.caa_principal_lossline_ac],
+                  caa_recovery_lossline_ac: [this.results.caa_recovery_lossline_ac, ],
                   caa_charge_off_ac: [this.results.caa_charge_off_ac],
                   caa_number_generation: [this.results.caa_number_generation],
                   caa_system_gen_no: [this.results.caa_system_gen_no],
-                  caa_number_generation_code: [
-                    this.results.caa_number_generation_code,
-                  ],
+                  caa_number_generation_code: [this.results.caa_number_generation_code,],
                   //interest details
                   caa_pl_ac_ccy: [this.results.caa_pl_ac_ccy],
-                  caa_int_receivale_applicable: [
-                    this.results.caa_int_receivale_applicable,
-                  ],
-                  caa_normal_int_receivable_ac: [
-                    this.results.caa_normal_int_receivable_ac,
-                  ],
-                  caa_penal_int_receivable_ac: [
-                    this.results.caa_penal_int_receivable_ac,
-                  ],
-                  caa_normal_int_received_ac: [
-                    this.results.caa_normal_int_received_ac,
-                  ],
-                  caa_penal_int_received_ac: [
-                    this.results.caa_penal_int_received_ac,
-                  ],
+                  caa_int_receivale_applicable: [this.results.caa_int_receivale_applicable],
+                  caa_normal_int_receivable_ac: [this.results.caa_normal_int_receivable_ac ],
+                  caa_penal_int_receivable_ac: [ this.results.caa_penal_int_receivable_ac, ],
+                  caa_normal_int_received_ac: [ this.results.caa_normal_int_received_ac,],
+                  caa_penal_int_received_ac: [ this.results.caa_penal_int_received_ac],
                   caa_advance_int_ac: [this.results.caa_advance_int_ac],
-                  caa_dr_int_compounding_freq: [
-                    this.results.caa_dr_int_compounding_freq,
-                  ],
+                  caa_dr_int_compounding_freq: [ this.results.caa_dr_int_compounding_freq,],
                   caa_int_cal_freq_dr_week: [
                     this.results.caa_int_cal_freq_dr_week,
                   ],
@@ -1208,7 +1182,7 @@ onRemoveExceptions(i:any){
                   caa_allow_debit_against_unclear_bal: [
                     this.results.caa_allow_debit_against_unclear_bal,
                   ],
-         
+
 
                   caa_fees: [this.feeArray],
                   caa_glsubheads: [this.glSubheadArray],
@@ -1223,7 +1197,7 @@ onRemoveExceptions(i:any){
                   caa_interest_calc:[this.results.caa_interest_calc],
                   caa_insufficient_exception:[this.results.caa_insufficient_exception],
                   caa_backdate_transaction:[this.results.caa_backdate_transaction],
-                  
+
                   // Audits
                   postedBy: [this.results.postedBy],
                   postedFlag: [this.results.postedFlag],
@@ -1241,7 +1215,6 @@ onRemoveExceptions(i:any){
               },
               (err) => {
                 this.error = err;
-                // this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/maintenance'));
                 this._snackBar.open(this.error, 'Try again!', {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
@@ -1387,7 +1360,7 @@ onRemoveExceptions(i:any){
                   deletedBy: [this.results.deletedBy],
                   deletedFlag: [this.results.deletedFlag],
                   deletedTime: [this.results.deletedTime],
-                                    
+
                 });
                 // this.disabledFormControll();
               },
@@ -1399,7 +1372,6 @@ onRemoveExceptions(i:any){
                   duration: 3000,
                   panelClass: ['red-snackbar', 'login-snackbar'],
                 });
-                // this.ngZone.run(() => this.router.navigateByUrl(''));
               }
             );
         } else if (this.function_type == 'X-Delete') {
@@ -1547,7 +1519,6 @@ onRemoveExceptions(i:any){
                   duration: 3000,
                   panelClass: ['red-snackbar', 'login-snackbar'],
                 });
-                // this.ngZone.run(() => this.router.navigateByUrl(''));
               }
             );
         }
@@ -1607,7 +1578,7 @@ onRemoveExceptions(i:any){
                 duration: 3000,
                 panelClass: ['green-snackbar', 'login-snackbar'],
               });
-            this.router.navigateByUrl('system/configurations/product/current-scheme/maintenance')
+            this.router.navigate(['system/configurations/product/current-scheme/maintenance'], {skipLocationChange:true})
 
             },
 
@@ -1634,7 +1605,7 @@ onRemoveExceptions(i:any){
                 duration: 3000,
                 panelClass: ['green-snackbar', 'login-snackbar'],
               });
-              this.router.navigateByUrl('system/configurations/product/current-scheme/maintenance')
+              this.router.navigate(['system/configurations/product/current-scheme/maintenance'], {skipLocationChange:true})
 
             },
             (err) => {

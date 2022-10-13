@@ -21,6 +21,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 
 import { PrivilegeManagementMaintenanceComponent } from './pages/privilege-management/privilege-management-maintenance/privilege-management-maintenance.component';
 import { PrivilegeManagementLookupComponent } from './pages/privilege-management/privilege-management-lookup/privilege-management-lookup.component';
+import { RolesLookupComponent } from './pages/privilege-management/roles-lookup/roles-lookup.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { PrivilegeManagementLookupComponent } from './pages/privilege-management
     UpdateRoleComponent,
     PrivilegeManagementMaintenanceComponent,
     PrivilegeManagementLookupComponent,
+    RolesLookupComponent,
   ],
   imports: [
     CommonModule,

@@ -76,18 +76,6 @@ export class OverdraftSchemeMaintenanceComponent implements OnInit {
     });
   }
   
-  // schemeTypeLookup(): void {
-  //   const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-  //     // height: '400px',
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.lookupData = result.data;
-  //     this.scheme_type = this.lookupData.scheme_type;
-  //     this.formData.controls.scheme_type.setValue(this.scheme_type);
-  //   });
-  // }
-
-
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.existingData = true;
@@ -98,8 +86,6 @@ export class OverdraftSchemeMaintenanceComponent implements OnInit {
     }
   }
 
-
- 
         // convenience getter for easy access to form fields
         get f() { return this.formData.controls; }
 
@@ -108,10 +94,9 @@ export class OverdraftSchemeMaintenanceComponent implements OnInit {
           this.loading = true;
           this.submitted = true;
           if(this.formData.valid){
-            // this.int_tbl_code = this.f.int_tbl_code.value;
             this.function_type =  this.f.function_type.value;
             this.odaAPI.changeMessage(this.formData.value)
-            this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/overdraft-scheme/data/view'));
+            this.router.navigate(['system/configurations/product/overdraft-scheme/data/view'], {skipLocationChange:true})
         }else{
           this.loading = false;
           this._snackBar.open("Invalid Form Data", "Try again!", {

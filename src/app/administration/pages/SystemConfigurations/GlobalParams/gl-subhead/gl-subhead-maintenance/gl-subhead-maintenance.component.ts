@@ -84,9 +84,9 @@ export class GlSubheadMaintenanceComponent implements OnInit {
     this.submitted = true;
     if(this.formData.valid){
     this.glSubheadCodeAPI.changeMessage(this.formData.value)
-    this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/data/view'));
+    this.router.navigate(['system/configurations/global/gl-subhead/data/view'], {skipLocationChange:true})
   }else{
-    this.ngZone.run(() => this.router.navigateByUrl('system/configurations/global/gl-subhead/data/view'));
+    this.router.navigate(['system/configurations/global/gl-subhead/data/view'], {skipLocationChange:true})
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {
       horizontalPosition: this.horizontalPosition,

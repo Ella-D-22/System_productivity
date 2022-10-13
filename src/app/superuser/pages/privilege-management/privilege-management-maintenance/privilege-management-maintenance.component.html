@@ -3,13 +3,9 @@
         <div>Home/Privileges/Maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
-<br>
+    <br>
     <div class="container-fluid">
-        <form action=""
-        [formGroup]="formData"
-        #resetRequestsForm = "ngForm"
-        (ngSubmit)="onSubmit()"
-        novalidate>
+        <form action="" [formGroup]="formData" #resetRequestsForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
@@ -18,7 +14,8 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
                             <select formControlName="function_type" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}" (change)="onSelectFunction($event)" >
+                                [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}"
+                                (change)="onSelectFunction($event)">
                                 <option disabled>--Choose A function--</option>
                                 <option *ngFor="let item of functionArray" [value]="item">{{item}}</option>
                             </select>
@@ -30,10 +27,15 @@
                         <div class="col-md-6 col-sm-12 form-column">
                             <label class="start pull-left" for="">Role<span class="warning">*</span></label>
                         </div>
-                        <div class="col-md-6 col-sm-12 form-column">
+                        <div *ngIf="!this.existingData" class="col-md-6 col-sm-12 form-column">
                             <input type="text" class="form-control" formControlName="names" maxlength="50"
-                             oninput="this.value=this.value.toUpperCase()">
-                            <mat-icon *ngIf="existingData"  (click)="mainGroupLookup()">search</mat-icon>
+                                oninput="this.value=this.value.toUpperCase()">
+                        </div>
+                        <div *ngIf="this.existingData" class="col-md-6 col-sm-12 form-column">
+                            <select formControlName="names" class="form-control">
+                                <!-- <option>--Select Role!--</option> -->
+                                <option *ngFor="let item of this.rolesArray" [value]="item.name">{{item.name}}</option>
+                            </select>
                         </div>
                     </div>
                 </div>

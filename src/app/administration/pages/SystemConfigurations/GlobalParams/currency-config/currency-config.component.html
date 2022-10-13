@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header  class="breadcrumb">
-    <div>Home/Configuration/Currency</div>
+    <div>Home/Currency</div>
 </mat-card-header>
 <div class="row">
   <div class="col-md-6 col-sm-12">
@@ -9,7 +9,7 @@
   </div>
   <div class="col-md-6 col-sm-12">
       <h4>Currency</h4>
-      <p>{{this.ccy_name}}</p> 
+      <p>{{this.ccy_name}}</p>
   </div>
 
 </div>
@@ -32,7 +32,7 @@
     <div class="col-md-6 col-sm-12 form-column">
       <input type="text" maxlength = "3" formControlName="ccy" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy.errors }" />
     </div>
- </div>            
+ </div>
 </div>
 <div class="col-md-6 col-sm-12">
   <div class="form-group">
@@ -40,13 +40,12 @@
      <label class="start pull-left">Country</label>
     </div>
     <div class="col-md-6 col-sm-12 form-column">
-     <select class="form-control" formControlName="country"
-      [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
+     <select class="form-control" formControlName="country">
        <option value="" disabled>-- Select Country --</option>
        <option *ngFor="let flag of this.respData " [value]="flag">{{ flag.name.common }}</option>
      </select>
     </div>
- </div>   
+ </div>
 </div>
 </div>
 <div class="row">
@@ -58,7 +57,7 @@
           <div class="col-md-6 col-sm-12 form-column">
             <input type="text" maxlength = "30" formControlName="ccy_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
           </div>
-       </div>           
+       </div>
   </div>
   <div class="col-md-6 col-sm-12">
     <div class="form-group">
@@ -67,9 +66,9 @@
       </div>
       <div class="col-md-6 col-sm-12 form-column">
         <input type="number" maxlength = "30" formControlName="ccy_name" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.ccy_name.errors }" />
-    
+
       </div>
-   </div> 
+   </div>
   </div>
 </div>
   <br />

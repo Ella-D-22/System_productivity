@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
-  elem: any; 
+  elem: any;
   isFullScreen!: boolean;
 
   constructor(
@@ -31,7 +31,7 @@ email: any;
     this.openFullscreen();
    }
 
-  
+
 
   toggleSideBar() {
     this.toggleSideBarForMe.emit();
@@ -43,10 +43,12 @@ email: any;
   }
 
   logout() {
+    console.log("Got Called");
+
+    this.router.navigate(['/sso']);
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-    this.tokenStorage.signOut();
-    return this.router.navigate(['/']);
+    // localStorage.removeItem('currentUser');
+    // this.tokenStorage.signOut();
 }
 
 

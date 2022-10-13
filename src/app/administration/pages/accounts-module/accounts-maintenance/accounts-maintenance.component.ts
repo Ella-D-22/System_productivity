@@ -1,9 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
+import { LoanAccountLookupComponent } from '../../loan-account/loan-account-lookup/loan-account-lookup.component';
 import { AccountsService } from '../accounts.service';
 
 @Component({
@@ -12,86 +15,156 @@ import { AccountsService } from '../accounts.service';
   styleUrls: ['./accounts-maintenance.component.scss']
 })
 export class AccountsMaintenanceComponent implements OnInit {
-  showGroupCode: any
-  existingData = false
-  submitted = false
-  function_type:any
-  dialogData:any
-  customerCode:any
-  horizontalPosition: MatSnackBarHorizontalPosition
-  verticalPosition :MatSnackBarVerticalPosition
-  constructor(
-    private accountsAPI: AccountsService,
-    private fb:FormBuilder,
-    private _snackbar:MatSnackBar,
-    private router:Router,
-    private dialog:MatDialog) { }
+  dtype!:string
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  function_type: any;
+  account_type: any;
+  customer_type: any;
+  isRequired = false;
+  function_type_data: any;
+  subscription!:Subscription;
+  event_type: any;
+  event_description: any;
+  error: any;
+  event_type_data: any;
+  params:any;
+  lookupdata: any;
+  lookupData: any;
+  //account_code: string
 
-  ngOnInit(): void {
-  }
+  constructor(   
+    public fb: FormBuilder,
+    private router: Router,
+    private http: HttpClient,
+    private actRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private accountAPI:AccountsService
+    ) { }
 
-  functionArray:any = [
-    'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
+  ngOnInit(): void {}
+
+
+  loading = false;
+  submitted = false;
+  account_code: any; 
+  functionArray: any = [
+    'A-Add','I-Inquire','M-Modify','V-Verify','X-Cancel'
   ]
 
+  AccountTypeArray: any = [
+    {
+      accountType:'LAA',
+      accountRef:'Loan'
+    },
+    {
+      accountType:'OAB',
+      accountRef:'Office'
+    },
+    {
+      accountType:'SBA',
+      accountRef:'Savings'
+    },
+    {
+      accountType:'TDA',
+      accountRef:'Term-Deposit'
+    },
+    {
+      accountType:'ODA',
+      accountRef:'OverDraft'
+    },
+    {
+      accountType:'CAA',
+      accountRef:'Current'
+    },
+  ]
+  CustomerTypeArray: any = [
+    'Retail','Corporate'
+  ]
   formData = this.fb.group({
-    function_type:[''],
-    customerCode:[''],
-    schemeCode:[''],
-    glsubhead:[''],
-    solcode:[''],
-    ccy:[''],
-    maintenanceData:['']
-  })
-  get f() {return this.formData.controls; }
-
-    onSelectFunction(event:any){
-      if(event.target.value == "A-Add"){
-         this.existingData = false
-         this.formData.controls.customerCode.setValue(this.customerCode)
-         this.formData.controls.customerCode.setValidators([Validators.required])
-      }else if (event.target.value != "A-Add"){
-        this.existingData = true;
-         this.showGroupCode = true;
-         this.formData.controls.customerCode.setValue("")
-         this.formData.controls.customerCode.setValidators([Validators.required])
-      }
+    function_type: ['', [Validators.required]],
+    account_type: ['', [Validators.required]],
+    customer_type: ['', [Validators.required]],
+    account_code: ['',[Validators.required]],
+  });
+  onChange(event:any){
+    this.function_type = event.target.value;
+    if(event.target.value != "A-Add"){
+    console.log(event.target.value)
+    
+    }else if(event.target.value == "A-Add"){
+      this.formData.controls.account_code.setValidators([])
+      this.formData.controls.account_code.setValue("");
     }
+  }
 
-    customerLookup():void{
-      const dialogRef =  this.dialog.open(RetailCustomerLookupComponent,{
-      });
-      dialogRef.afterClosed().subscribe(results =>{
-        this.dialogData = results.data;
-        console.log(this.dialogData);
-      
-        this.formData.controls.customerCode.setValue(results.data.customerCode)
-       
-      })
-    }
+    onAccountChange(event:any){
+    this.account_type = event.target.value;
+  }
+    onCustomerChange(event:any){
+    this.customer_type = event.target.value;
+  }
 
-    onSubmit(){
-      this.submitted = true;
-      
-      if(this.formData.valid){
-        this.accountsAPI.changeMessage(this.formData.value)
-        console.log(this.formData.value);
-        
-        if(this.function_type == 'A-Add'){
-        this.router.navigate([`/system/customer/retail/data/view`], { skipLocationChange: true });
+        // convenience getter for easy access to form fields
+        get f() { return this.formData.controls; }
 
-        }else if (this.function_type != 'A-Add'){
-        this.router.navigate([`/system/customer/retail/data/view`], { skipLocationChange: true });
+        onSubmit(){
+          
+          console.log(this.formData.value)
+          this.loading = true;
+          this.submitted = true;
+          if(this.formData.valid){
+            this.function_type =  this.f.function_type.value;
+            this.account_code=this.f.account_code.value;
+            this.accountAPI.changeMessage(this.formData.value)
+            if(this.function_type == "A-Add"){
+              this.router.navigate(['system/accounts-new/data/view'], { state: this.formData.value
+                   });
+           }
+           else{
+            this.router.navigate(['system/accounts-new/data/view'], {
+              state: this.formData.value,
+            });
+            }
         }
-      }else{
-        this._snackbar.open("Invalid form data", "Try Again", {
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-          duration: 3000,
-          panelClass: ['red-snackbar', 'login-snackbar']
-        })
-  
-      }
-    }
+        else{
+          this.loading = false;
+        
+        }
+ }
+
+        accountLookup(): void {
+          if(this.account_type=="Loan"){
+            this.dtype="la"
+          }
+          else if(this.account_type=="Office"){
+            this.dtype="oa"           
+          }
+          else if(this.account_type=="Savings"){   
+            this.dtype="sb"         
+          }
+          else if(this.account_type=="Overdraft"){
+            this.dtype="od"            
+          }
+          else if(this.account_type=="Current"){  
+            this.dtype="ca"         
+          }
+          else if(this.account_type=="Term-Deposit"){ 
+            this.dtype="td"          
+          }
+          const dconfig= new MatDialogConfig()
+          dconfig.data={
+            type:this.dtype
+          }
+          const cdialogRef = this.dialog.open(LoanAccountLookupComponent,dconfig);
+          cdialogRef.afterClosed().subscribe((result) => {
+            console.log(result.data);
+            // this.schemeCode = result.data.schemeCode;
+            this.formData.controls.account_code.setValue(result.data.acid);
+           
+          });
+        }
+
+
 
 }

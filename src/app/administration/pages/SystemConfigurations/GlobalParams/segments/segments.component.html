@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-      <div>Home/system/configurations/global/segments/data/view</div>
+      <div>Segments</div>
     </mat-card-header>
     <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -42,12 +42,12 @@
                         </div>
                     </div>
                 </div>
-            </div>     
-           
+            </div>
+
             <br>
-            <button class="pull-left" routerLink="../../maintenance"  mat-raised-button color="default" type="button">
+            <button class="pull-left" routerLink="../../maintenance" skipLocationChange  mat-raised-button color="default" type="button">
                 Back
-            </button>          
+            </button>
              <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isEnabled">Submit</button>
              <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
         </form>

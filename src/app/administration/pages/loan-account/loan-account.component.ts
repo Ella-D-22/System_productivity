@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {LoanAccountService} from './loan-account.service'
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, Validators,FormArray,FormGroup, FormControl } from '@angular/forms';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpParams} from '@angular/common/http';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import { BranchComponent } from './lookup/branch/branch.component';
 import { ProductComponent } from './lookup/product/product.component';
@@ -15,6 +15,10 @@ import { CurrentSchemeLookupComponent } from '../ProductModule/current-scheme/cu
 import { OverdraftSchemeLookupComponent } from '../ProductModule/overdrafts-scheme/overdraft-scheme-lookup/overdraft-scheme-lookup.component';
 import { SavingschemeLookupComponent } from '../ProductModule/savings-scheme/savingscheme-lookup/savingscheme-lookup.component';
 import { TermDepositLookupComponent } from '../ProductModule/term-deposit/term-deposit-lookup/term-deposit-lookup.component';
+import { MisSectorService } from '../SystemConfigurations/GlobalParams/mis-sector/mis-sector.service';
+import { LoanproductService } from '../ProductModule/loanproduct/loanproduct.service';
+import { CurrencyService } from '../SystemConfigurations/GlobalParams/currency-config/currency.service';
+import { CurrencyLookupComponent } from '../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
 
  
 @Component({
@@ -49,6 +53,21 @@ export class LoanAccountComponent implements OnInit {
   laa_scheme_code_desc: any;
   customer_name: string;
   customer_code: any;
+  sectorData:any
+  subSectorData:any
+  subSectors:any
+  newData = false;
+  isEnabled = false
+  element:any
+  loanData:any
+  laa_schemeCode:any
+  caa_schemeCode:any
+  sba_schemeCode:any
+  oda_schemeCode:any
+  tda_schemeCode:any
+  glSubheads:any
+  filteredArr: any
+  currencyData:any
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -56,18 +75,21 @@ export class LoanAccountComponent implements OnInit {
     private http: HttpClient,
     private actRoute: ActivatedRoute,
     private dialog: MatDialog,
-
-    private accountservice: LoanAccountService
+    private misSectorAPI:MisSectorService,
+    private accountservice: LoanAccountService,
+    private loanservice:LoanproductService,
+    private currencyService:CurrencyService
   ) {
     this.message = this.router.getCurrentNavigation()?.extras.state;
   }
 
   ngOnInit(): void {
     this.getPage();
+    this.getMISData()
   }
   loading = false;
   addGurantorsFormData = this.fb.group({
-    customer_code: ['',Validators.required],
+    customer_code: [''],
     customer_name: [''],
     customer_data: [''],
 
@@ -95,7 +117,114 @@ export class LoanAccountComponent implements OnInit {
     postedTime: [''],
     modifiedBy: [''],
     modifiedTime: [''],
+
+    //MIS CODES
+    sectorCode:[''],
+    subSectorCode:[''],
+    //addition details
+    cashExceptionLimitDr:[''],
+    cashExceptionLimitCr:[''],
+    transferExceptionLimitDr:[''],
+    transferExceptionLimitCr:[''],
+
+    //Related Party Details
+    statementFrequency:[''],
+
+
+    //revolving OD
+    billingFrequency:[''],
+    startDate:[''],
+    includeAccruedInt:[''],
+    operativeAccount:[''],
+    payByDays:[''],
+    graceDays:[''], 
+    despatchMode:[''],
+    paymentMode:[''],
+
+    // Accounts Limits
+    sanctionLimit:[''],
+    sanctionDate:[''],
+    sanctionLevel:[''],
+    limitPenalDays:[''],
+    LimitId:[''],
+    drawingPowerPerct:[''],
+    drawingPower:[''],
+
+    //nominees
+    nominees: new FormArray([]),
   });
+  nomineeArray = new Array()
+
+  nomineeData = this.fb.group({
+    dob:[''],
+    emailAddress:[''],
+    firstName:[''],
+    identificationNo:[''],
+    lastName:[''],
+    middleName:[''],
+    occupation:[''],
+    phone:['']
+  })
+  initNomineeData(){
+    this.newData = true;
+    this.nomineeData = this.fb.group({
+      dob:[''],
+      emailAddress:[''],
+      firstName:[''],
+      identificationNo:[''],
+      lastName:[''],
+      middleName:[''],
+      occupation:[''],
+      phone:['']
+    })
+  }
+
+  previewNominees(){
+    if(this.nomineeData.valid){
+      this.n.push(this.fb.group(
+        this.nomineeData.value
+      ));
+      this.nomineeArray.push(this.nomineeData.value);
+      this.initNomineeData();
+    }
+  }
+  onAddNomineesField(){
+    this.n.push(this.fb.group({
+      dob:[''],
+      emailAddress:[''],
+      firstName:[''],
+      identificationNo:[''],
+      lastName:[''],
+      middleName:[''],
+      occupation:[''],
+      phone:['']
+    }))
+  }
+  onNomineeClear(){
+    this.initNomineeData()
+    this.nomineeArray = new Array();
+  }
+  onUpdateNominee(){
+    let i = this.element
+    this.nomineeArray[i] = this.nomineeData.value
+  }
+  onRemove(i:any){
+    const index:number = this.nomineeArray.indexOf(this.nomineeArray.values);
+    this.nomineeArray.splice(index, i);
+    this.nomineeArray = this.nomineeArray
+
+  }
+ 
+  
+  get n(){ return this.f.nominees as FormArray}
+
+  despatch_mode_array:any = [
+    'Post & E-Mail', 'Collect By Person', 'E-Mail Only', 'Post', 'No-Despatch', 'Courier', 'Courier & E-Mail'
+  ] 
+  statementFreq : any = [
+    'Daily', 'Weekly', 'Montly', 'Yearly'
+  ]
+
   disabledFormControll() {
     this.formData.controls.accountManager.disable();
     this.formData.controls.customerCode.disable();
@@ -117,6 +246,34 @@ export class LoanAccountComponent implements OnInit {
     return this.glSubheadData.controls;
   }
 
+  //setting up the mis sector codes
+  getMISData(){
+    this.subscription = this.misSectorAPI.getAllMissectors().subscribe(
+      res =>{
+        this.sectorData = res
+      }
+    )
+  }
+  onInputSelection(event:any){
+  let miscode = event.target.value
+  console.log(miscode);
+  
+  this.subscription = this.misSectorAPI.getMissectorByCode(miscode).subscribe(
+    res =>{
+      this.subSectorData = res
+      this.subSectors = this.subSectorData.missubsectors
+    }
+  )
+  }
+
+  currencyLookup():void{
+     const dialogRef = this.dialog.open(CurrencyLookupComponent,{
+     });
+     dialogRef.afterClosed().subscribe(result =>{
+       this.currencyData = result.data;
+       this.formData.controls.currency.setValue(this.currencyData.ccy)
+     })
+  }
   glSubheadLookup(): void {
     const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
     });
@@ -155,9 +312,13 @@ export class LoanAccountComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupdata= result.data;
-      this.laa_scheme_code = this.lookupdata.laa_scheme_code;
-      this.laa_scheme_code_desc = this.lookupdata.laa_scheme_code_desc;
-      this.formData.controls.scheme_code.setValue(this.laa_scheme_code);
+      console.log("Loan Data", this.lookupdata);
+      this.formData.controls.schemeCode.setValue(this.lookupdata.laa_scheme_code);
+      this.laa_schemeCode = this.lookupdata.laa_scheme_code
+      this.glSubheads = this.lookupdata.laa_glsubheads
+      
+      this.filteredArr = this.glSubheads.filter(data => data.laa_gl_subhead_deafault == "Yes");
+      console.log(this.filteredArr);
     });
   }
   caaSchemeCodeLookup():void{
@@ -166,6 +327,12 @@ export class LoanAccountComponent implements OnInit {
    dialogRef.afterClosed().subscribe(result =>{
      this.lookupdata = result.data;
      this.formData.controls.schemeCode.setValue(this.lookupdata.caa_scheme_code)
+     this.caa_schemeCode = this.lookupdata.caa_scheme_code
+
+     this.glSubheads = this.lookupdata.caa_glsubheads
+      
+     this.filteredArr = this.glSubheads.filter(data => data.caa_gl_subhead_deafault == "Yes");
+     console.log(this.filteredArr);
    })
   }
   odaSchemeCodeLookup():void{
@@ -174,6 +341,10 @@ export class LoanAccountComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
       this.formData.controls.schemeCode.setValue(this.lookupdata.oda_scheme_code)
+      this.oda_schemeCode = this.lookupdata.oda_scheme_code
+      this.glSubheads = this.lookupdata.oda_glsubheads
+      
+      this.filteredArr = this.glSubheads.filter(data => data.oda_gl_subhead_deafault == "Yes");
     })
   }
   sbaSchemeCodeLookup():void{
@@ -182,6 +353,11 @@ export class LoanAccountComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
       this.formData.controls.schemeCode.setValue(this.lookupdata.sba_scheme_code)
+
+      this.sba_schemeCode = this.lookupdata.sba_scheme_code
+      this.glSubheads = this.lookupdata.sba_glsubheads
+      
+      this.filteredArr = this.glSubheads.filter(data => data.sba_gl_subhead_deafault == "Yes");
     })
   }
   tdaSchemeCodeLookup():void{
@@ -190,6 +366,11 @@ export class LoanAccountComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       this.lookupdata = result.data;
       this.formData.controls.schemeCode.setValue(this.lookupdata.tda_scheme_code)
+
+      this.tda_schemeCode = this.lookupdata.tda_scheme_code
+      this.glSubheads = this.lookupdata.tda_glsubheads
+      
+      this.filteredArr = this.glSubheads.filter(data => data.tda_gl_subhead_deafault == "Yes");
     })
   }
   getPage() {
@@ -221,12 +402,28 @@ export class LoanAccountComponent implements OnInit {
         accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
-        loan:['']
+        loan:[''],
+
+            //MIS CODES
+        sectorCode:[''],
+        subSectorCode:[''],
+        
+        statementFrequency:[''],
+
+        cashExceptionLimitDr:[''],
+        cashExceptionLimitCr:[''],
+        transferExceptionLimitDr:[''],
+        transferExceptionLimitCr:[''],
+
+       
+
+
       });
     } else if (
       this.message.function_type == 'A-Add' &&
       this.message.account_type == 'Savings'
     ) {
+      this.isEnabled = true
       this.formData = this.fb.group({
         accountManager: [''],
         customerCode: [''],
@@ -249,12 +446,23 @@ export class LoanAccountComponent implements OnInit {
         accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
-        loan:['']
-      });
+        loan:[''],
+        sectorCode:[''],
+        subSectorCode:[''],
+        statementFrequency:[''],
+
+        cashExceptionLimitDr:[''],
+        cashExceptionLimitCr:[''],
+        transferExceptionLimitDr:[''],
+        transferExceptionLimitCr:[''],
+        nominees: new FormArray([]),
+
+      })
     } else if (
       this.message.function_type == 'A-Add' &&
       this.message.account_type == 'Term-Deposit'
     ) {
+      this.isEnabled = true;
       this.formData = this.fb.group({
         accountManager: [''],
         customerCode: [''],
@@ -277,6 +485,16 @@ export class LoanAccountComponent implements OnInit {
         accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
+        sectorCode:[''],
+        subSectorCode:[''],
+        statementFrequency:[''],
+
+        cashExceptionLimitDr:[''],
+        cashExceptionLimitCr:[''],
+        transferExceptionLimitDr:[''],
+        transferExceptionLimitCr:[''],
+        nominees: new FormArray([]),
+
       });
     } else if (
       this.message.function_type == 'A-Add' &&
@@ -304,6 +522,14 @@ export class LoanAccountComponent implements OnInit {
         accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
+        sectorCode:[''],
+        subSectorCode:[''],
+        statementFrequency:[''],
+
+        cashExceptionLimitDr:[''],
+        cashExceptionLimitCr:[''],
+        transferExceptionLimitDr:[''],
+        transferExceptionLimitCr:[''],
       });
     } else if (
       this.message.function_type == 'A-Add' &&
@@ -331,6 +557,14 @@ export class LoanAccountComponent implements OnInit {
         accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
+        sectorCode:[''],
+        subSectorCode:[''],
+        statementFrequency:[''],
+
+        cashExceptionLimitDr:[''],
+        cashExceptionLimitCr:[''],
+        transferExceptionLimitDr:[''],
+        transferExceptionLimitCr:[''],
       });
     }
     else if (
@@ -358,6 +592,14 @@ export class LoanAccountComponent implements OnInit {
         accountName: [''],
         matured: ['N'],
         accountStatus: ['P'],
+        sectorCode:[''],
+        subSectorCode:[''],
+        // statementFrequency:[''],
+
+        cashExceptionLimitDr:[''],
+        cashExceptionLimitCr:[''],
+        transferExceptionLimitDr:[''],
+        transferExceptionLimitCr:[''],
       });
     }
     else if (
@@ -375,6 +617,14 @@ export class LoanAccountComponent implements OnInit {
         withholdingTax: [''],
         amountDisbursed: [''],
         repaymentPeriod: [''],
+        sectorCode:[''],
+        subSectorCode:[''],
+        statementFrequency:[''],
+
+        cashExceptionLimitDr:[''],
+        cashExceptionLimitCr:[''],
+        transferExceptionLimitDr:[''],
+        transferExceptionLimitCr:[''],
       });
       this.disabledFormControll();
     } else if (
@@ -389,6 +639,8 @@ export class LoanAccountComponent implements OnInit {
           }else{
             this.resData.withholdingTax="False"
           }
+          this.nomineeArray = this.resData.nominees
+
           this.formData = this.fb.group({
             accountManager: [data.entity.accountManager],
             customerCode: [data.entity.customerCode],
@@ -399,10 +651,22 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
+            sectorCode:[data.entity.sectorCode],
+            subSectorCode:[this.resData.subSectorCode],
+            statementFrequency:[this.resData.statementFrequency],
+
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
+            nominees: new FormArray([]),
+            
+            
+
           });
+        
         },
-        error=>{
-        }
+       
 
       )
       this.disabledFormControll();
@@ -428,10 +692,17 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
+            sectorCode:[''],
+            subSectorCode:[''],
+            statementFrequency:[''],
+
+            cashExceptionLimitDr:[''],
+            cashExceptionLimitCr:[''],
+            transferExceptionLimitDr:[''],
+            transferExceptionLimitCr:[''],
           });
         },
-        error=>{
-        }
+      
       )
       this.disabledFormControll();
     } else if (
@@ -456,10 +727,24 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
+            sectorCode:[data.entity.sectorCode],
+            subSectorCode:[this.resData.subSectorCode],
+            statementFrequency:[this.resData.statementFrequency],
+
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
+            nominees: new FormArray([]),
+
           });
+          let nominees = this.results.nominees
+
+          // for(let i=0; i<nominees.length; i++){
+          //   this.onReadNomineesField(nominees[i])
+          // }
         },
-        error=>{
-        }
+       
       )
       this.disabledFormControll();
     } else if (
@@ -485,10 +770,17 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
+
+           
+            statementFrequency:[this.resData.statementFrequency],
+
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
           });
         },
-        error=>{
-        }
+     
       )
       this.disabledFormControll();
     }
@@ -514,10 +806,14 @@ export class LoanAccountComponent implements OnInit {
             schemeCode: [data.entity.schemeCode],
             solCode: [data.entity.solCode],
             withholdingTax: [this.resData.withholdingTax],
+            statementFrequency:[this.resData.statementFrequency],
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
           });
         },
-        error=>{
-        }
+       
       )
       this.disabledFormControll();
     }
@@ -534,8 +830,14 @@ export class LoanAccountComponent implements OnInit {
         schemeCode: [''],
         solCode: [''],
         withholdingTax: [''],
-        amountDisbursed: ['40000'],
+        amountDisbursed: [''],
         repaymentPeriod: [''],
+        statementFrequency:[''],
+
+        cashExceptionLimitDr:[''],
+        cashExceptionLimitCr:[''],
+        transferExceptionLimitDr:[''],
+        transferExceptionLimitCr:[''],
       });
     } else if (
       this.message.function_type == 'M-Modify' &&
@@ -575,11 +877,18 @@ export class LoanAccountComponent implements OnInit {
             sn:[data.entity.sn],
             verifiedBy:["P"],
             verifiedFlag:["N"],
-            verifiedTime:[new Date()]
+            verifiedTime:[new Date()],
+            
+          
+            statementFrequency:[this.resData.statementFrequency],
+
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
           });
         },
-        error=>{
-        }
+        
       )
     } else if (
       this.message.function_type == 'M-Modify' &&
@@ -619,12 +928,17 @@ export class LoanAccountComponent implements OnInit {
             sn:[data.entity.sn],
             verifiedBy:["P"],
             verifiedFlag:["N"],
-            verifiedTime:[new Date()]
+            verifiedTime:[new Date()],
+          
+            statementFrequency:[this.resData.statementFrequency],
+
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
           });
         },
-        error=>{
-        }
-
+      
       )
     } else if (
       this.message.function_type == 'M-Modify' &&
@@ -632,14 +946,7 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+      
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -674,17 +981,16 @@ export class LoanAccountComponent implements OnInit {
 
             verifiedBy:["P"],
             verifiedFlag:["N"],
-            verifiedTime:[new Date()]
+            verifiedTime:[new Date()],
 
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
           });
 
         },
-        error=>{
-
-        }
+      
 
       )
     } else if (
@@ -693,14 +999,7 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
-           console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+        
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -736,17 +1035,17 @@ export class LoanAccountComponent implements OnInit {
 
             verifiedBy:["P"],
             verifiedFlag:["N"],
-            verifiedTime:[new Date()]
+            verifiedTime:[new Date()],
 
 
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
           });
 
         },
-        error=>{
-
-        }
+      
 
       )
     }
@@ -757,13 +1056,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+         
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -799,18 +1092,14 @@ export class LoanAccountComponent implements OnInit {
 
             verifiedBy:["P"],
             verifiedFlag:["N"],
-            verifiedTime:[new Date()]
-
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
+            verifiedTime:[new Date()],
+            cashExceptionLimitDr:[this.resData.cashExceptionLimitDr],
+            cashExceptionLimitCr:[this.resData.cashExceptionLimitCr],
+            transferExceptionLimitDr:[this.resData.transferExceptionLimitDr],
+            transferExceptionLimitCr:[this.resData.transferExceptionLimitCr],
           });
 
         },
-        error=>{
-
-        }
-
       )
     }
 
@@ -839,13 +1128,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+         
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -889,9 +1172,7 @@ export class LoanAccountComponent implements OnInit {
           });
 
         },
-        error=>{
-
-        }
+      
 
       )
       this.disabledFormControll();
@@ -921,13 +1202,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+       
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -971,10 +1246,7 @@ export class LoanAccountComponent implements OnInit {
           });
 
         },
-        error=>{
-
-        }
-
+      
       )
       this.disabledFormControll();
     } else if (
@@ -984,13 +1256,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+       
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1034,10 +1300,6 @@ export class LoanAccountComponent implements OnInit {
           });
 
         },
-        error=>{
-
-        }
-
       )
       this.disabledFormControll();
     }
@@ -1048,13 +1310,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+        
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1092,16 +1348,10 @@ export class LoanAccountComponent implements OnInit {
             verifiedFlag:["Y"],
             verifiedTime:[new Date()]
 
-
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
           });
 
         },
-        error=>{
-
-        }
-
+      
       )
       this.disabledFormControll();
     }
@@ -1112,7 +1362,7 @@ export class LoanAccountComponent implements OnInit {
     ) {
       this.formData = this.fb.group({
         accountManager: [''],
-        currency: ['KES'],
+        currency: [''],
         glSubhead: [''],
         lienAmount: [''],
         referredBy: [''],
@@ -1131,13 +1381,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+      
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1177,14 +1421,11 @@ export class LoanAccountComponent implements OnInit {
             verifiedTime:[new Date()]
 
 
-            // amountDisbursed: [data.entity],
-            // repaymentPeriod: [data.entity],
+          
           });
 
         },
-        error=>{
-
-        }
+      
 
       )
 
@@ -1196,13 +1437,7 @@ export class LoanAccountComponent implements OnInit {
       this.accountservice.retriveAccount(this.message.account_code).subscribe(
         data=>{
            console.log(data.entity)
-          // if(data.entity.withholdingTax==true){
-
-          // }
-          // else{
-
-
-          // 
+          
           this.resData =data.entity
           if(this.resData.withholdingTax==true){
             this.resData.withholdingTax="True"
@@ -1243,9 +1478,7 @@ export class LoanAccountComponent implements OnInit {
           });
 
         },
-        error=>{
-
-        }
+       
 
       )
       this.disabledFormControll();
@@ -1291,8 +1524,7 @@ export class LoanAccountComponent implements OnInit {
             verifiedTime:[new Date()]
           });
         },
-        error=>{
-        }
+       
       )
       this.disabledFormControll();
     } else if (
@@ -1337,8 +1569,7 @@ export class LoanAccountComponent implements OnInit {
             verifiedTime:[new Date()]
           });
         },
-        error=>{
-        }
+       
 
       )
       this.disabledFormControll();
@@ -1393,10 +1624,7 @@ export class LoanAccountComponent implements OnInit {
           });
 
         },
-        error=>{
-
-        }
-
+    
       )
       this.disabledFormControll();
     }

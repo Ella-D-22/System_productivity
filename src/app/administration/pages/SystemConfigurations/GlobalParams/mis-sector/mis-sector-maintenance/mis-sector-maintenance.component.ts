@@ -63,6 +63,8 @@ misSectorLookup():void{
     this.sectorId  = this.dialogData.id
     this.formData.controls.miscode.setValue(results.data.miscode)
     // this.formData.controls.sectorId.setValue(results.data.id)
+    console.log("Data", this.dialogData);
+    
   })
 }
   ngOnInit(): void {
@@ -76,9 +78,9 @@ misSectorLookup():void{
      this.misSectorService.changeMessage(this.formData.value)
      if(this.function_type == "A-Add"){
 
-      this.router.navigateByUrl('system/configurations/global/mis-sector/data/view')
+      this.router.navigate(['system/configurations/global/mis-sector/data/view'], {skipLocationChange:true})
      }else if(this.function_type != "A-Add"){
-      this.router.navigateByUrl('system/configurations/global/mis-sector/data/view')
+      this.router.navigate(['system/configurations/global/mis-sector/data/view'], {skipLocationChange:true})
 
      }
    }else{

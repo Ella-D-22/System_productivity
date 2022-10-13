@@ -18,6 +18,7 @@ error:any
 miscode:any
 missubcode:any;
 subSectorCode:any
+sectorID:any
 subscription:Subscription
 
 horizontalPosition:MatSnackBarHorizontalPosition
@@ -44,6 +45,7 @@ isEnabled = false;
     mis_sub_sector: [''],
     mis_sub_sector_desc: [''],
     missubcode:[''],
+    missector_id:[''],
     modifiedBy: [''],
     modifiedTime: [''],
     postedBy: [''],
@@ -73,7 +75,7 @@ isEnabled = false;
       message =>{
         this.message = message;
         if(this.message == 'default message'){
-          this.router.navigateByUrl("system/configurations/global/mis-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sector/maintenance"],{skipLocationChange:true})
         }else{
           null;
         }
@@ -82,19 +84,18 @@ isEnabled = false;
  
   }
 
-   // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
-  // auth_user = this.currentUser.username;
 
 getPage(){
   this.subscription = this.subSectorApi.currentMessage.subscribe(
     message =>{
       this.message = message
-      console.log(this.message);
+      console.log("results",this.message);
       
       this.function_type = this.message.function_type
       this.subSectorId = this.message.id
       this.missubcode = this.message.missubcode
       this.miscode = this.message.miscode
+      this.sectorID = this.message.missector_id
       if(this.function_type == "A-Add"){
         this.isEnabled = true;
         this.formData = this.fb.group({
@@ -104,6 +105,7 @@ getPage(){
           // id: [''],
           mis_sub_sector: [''],
           missubcode:[''],
+          missector_id:[this.sectorID],
           mis_sub_sector_desc: [''],
           modifiedBy: ['Nobody'],
           modifiedTime: [new Date()],
@@ -122,6 +124,8 @@ getPage(){
        this.subscription = this.subSectorApi.getSubSectorByCode(this.missubcode).subscribe(
          res =>{
            this.results = res
+           console.log("hello");
+           
            console.log("RESPOND", res);
            this.subSectorId = this.results.id
            this.formData = this.fb.group({
@@ -131,6 +135,7 @@ getPage(){
             id: [this.results.id],
             mis_sub_sector: [this.results.mis_sub_sector],
             missubcode:[this.results.missubcode],
+            missector_id:[this.sectorID],
             mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
             modifiedBy: [this.results.modifiedBy],
             modifiedTime: [this.results.modifiedTime],
@@ -143,7 +148,7 @@ getPage(){
            })
          },
          err =>{
-          this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"],{skipLocationChange:true})
           this.error =err;
           this._snackbar.open(this.error, "Try Again", {
             horizontalPosition:this.horizontalPosition,
@@ -166,6 +171,7 @@ getPage(){
               id: [this.results.id],
               mis_sub_sector: [this.results.mis_sub_sector],
               missubcode:[this.results.missubcode],
+              missector_id:[this.sectorID],
               mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
               modifiedBy: [this.auth_user],
               modifiedTime: [new Date()],
@@ -178,7 +184,7 @@ getPage(){
             })
           },
           err =>{
-            this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+            this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"], {skipLocationChange:true})
             this.error =err;
             this._snackbar.open(this.error, "Try Again", {
               horizontalPosition:this.horizontalPosition,
@@ -205,6 +211,7 @@ getPage(){
               id: [this.results.id],
               mis_sub_sector: [this.results.mis_sub_sector],
               missubcode:[this.results.missubcode],
+              missector_id:[this.sectorID],
               mis_sub_sector_desc: [this.results.mis_sub_sector_desc],
               modifiedBy: [this.results.modifiedBy],
               modifiedTime: [this.results.modifiedTime],
@@ -218,7 +225,6 @@ getPage(){
 
           },
           err =>{          
-            this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
             this.error = err;
             this._snackbar.open(this.error, "Try Again", {
               horizontalPosition:this.horizontalPosition,
@@ -244,7 +250,7 @@ onSubmit(){
             duration:3000,
             panelClass:['green-snackbar', 'login-snackbar']
           });
-          this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"], {skipLocationChange:true})
          }, 
         err =>{
           this.error = err
@@ -267,7 +273,7 @@ onSubmit(){
             panelClass:['green-snackbar', 'login-snackbar']
 
           });
-          this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"], {skipLocationChange:true})
         }, 
         err =>{
           this.error = err
@@ -291,7 +297,7 @@ onSubmit(){
             panelClass:['green-snackbar', 'login-snackbar']
 
           });
-          this.router.navigateByUrl("system/configurations/global/mis-sub-sector/maintenance")
+          this.router.navigate(["system/configurations/global/mis-sub-sector/maintenance"], {skipLocationChange:true})
         }, 
         err =>{
           this.error = err

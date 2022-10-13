@@ -1,12 +1,12 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/system/configurations/global/mis-sub-sector/data/view</div>
+        <div>MIS-Subsector</div>
     </mat-card-header>
     <br>
     <div class="row">
         <div class="col-md-6 col-sm-12">
-            <h4>Function</h4>   
-            <p>{{this.function_type}}</p> 
+            <h4>Function</h4>
+            <p>{{this.function_type}}</p>
         </div>
         <div class="col-md-6 col-sm-12">
             <h4>MIS Sector Code</h4>
@@ -27,7 +27,7 @@
         novalidate
         #resetRequestsForm = "ngForm"
         (submit)="onSubmit()">
-        
+
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
@@ -67,7 +67,7 @@
             </div>
         </div>
         <br>
-        <button class="pull-left" routerLink="../../maintenance"  mat-raised-button color="default" type="button">
+        <button class="pull-left" routerLink="../../maintenance" skipLocationChange  mat-raised-button color="default" type="button">
             Back
           </button>
           <br>

@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header  class="breadcrumb">
-        <div>Home/Configuration/Term-Deposit</div>
+        <div>Term-Deposit ~ Product Type</div>
     </mat-card-header>
     <div class="row">
       <div class="col-md-3 col-sm-12">
@@ -12,19 +12,16 @@
       </div>
       <div class="col-md-3 col-sm-12">
         <h4>Scheme Code</h4>
-        <p>{{this.scheme_code}}</p>      
+        <p>{{this.scheme_code}}</p>
       </div>
-      <!-- <div class="col-md-3 col-sm-12">
-        <h4>Scheme Type</h4>
-        <p>{{this.scheme_type}}</p>      
-      </div> -->
+
     </div>
     <div class="container-fluid">
     <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
       <mat-tab-group mat-align-tabs="center">
         <mat-tab class="mat-tab" label="General Details">
           <br>
-      
+
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -152,16 +149,7 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="col-md-6 col-sm-12">
-              <div class="form-group">
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <label class="start pull-left">Base Int Pcnt Cr<span class="warning">*</span></label>
-                  </div>
-                  <div class="col-md-6 col-sm-12 form-column ">
-                   <input type="text" formControlName="base_int_pcnt_cr" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.base_int_pcnt_cr.errors }" />
-                  </div>
-               </div>   
-            </div> -->
+
           </div>
           <div class="row">
             <div class="col-md-6 col-sm-12">
@@ -472,7 +460,7 @@
           </div>
           <div class="row">
             <div class="col-md-6 col-sm-12">
-            
+
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
@@ -485,13 +473,8 @@
               </div>
             </div>
           </div>
-
-
-
           <div class="row">
-            <div class="col-md-6 col-sm-12">
 
-            </div>
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
                 <div class="col-md-6 col-sm-12 form-column">
@@ -557,7 +540,7 @@
                 <th>No.</th>
                 <th>Exception Code</th>
                 <th>Exception Description</th>
-               
+
               </tr>
             </thead>
             <tbody>
@@ -571,8 +554,8 @@
               </tr>
             </tbody>
           </table>
-          
-        
+
+
         </mat-tab>
         <!-- GL Subhead -->
         <mat-tab class="mat-tab" label="GL-Subhead">
@@ -827,9 +810,9 @@
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
             <br />
-            
+
             <button class="pull-right btn-sm" *ngIf="newData" type="button" (click)="onPreviewFees()">
               + Add
             </button>
@@ -887,16 +870,16 @@
                 </tbody>
             </table>
           </mat-tab>
-   
+
   </mat-tab-group>
     <br />
-    <button mat-raised-button color="default" routerLink="../../maintenance"  type="submit">Back</button>
+    <button mat-raised-button color="default" routerLink="../../maintenance" skipLocationChange type="submit">Back</button>
     <button  class="pull-right" mat-raised-button color="primary" type="submit" *ngIf="isSubmitted">Submit</button>
     <button mat-raised-button color="warn" type="submit" *ngIf="isDeleted" class="pull-right">Delete</button>
     <br />
   </form>
     </div>
   </mat-card>
-  
-  
-  
+
+
+

@@ -26,48 +26,43 @@
         <form action="" class="form" [formGroup]="formData" novalidate (ngSubmit)="onSubmit()">
             <div *ngFor=" let groupMember of g.controls; let i = index">
                 <div [formGroup]="groupMember">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
+                    <div class="row">                  
+                       <div class="col-md-5 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <label for="">Module<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <select formControlName="name" class="form-control"
-                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors}">
-                                        <option disabled>--Select Module--</option>
+
+            <input type="text" maxlength="60" oninput ="this.value=this.value.toUpperCase()"
+            formControlName="name" class="form-control" />
+
+                                    <!-- <select formControlName="name" class="form-control form-select"  aria-label="Default select example">
+                                         <option [value]="defaultitem">{{defaultitem}}</option>
                                         <option *ngFor="let item of modulesArray" [value]="item">{{item}}</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                        </div>
                        <div class="col-md-6 col-sm-12">
                            <div class="form-group">
-                               <div class="col-md-4 col-sm-12 form-column">
+                               <div class="col-md-2 col-sm-12 form-column">
                                    <label for="" class="start pull-left">Previleges<span class="warning">*</span></label>
                                </div>
-                               <div class="col-md-8 col-sm-12 form-column">
-                                <mat-accordion>
-                                    <mat-expansion-panel (opened)="panelOpenState = true"
-                                                         (closed)="panelOpenState = false">
-                                      <mat-expansion-panel-header>
-                                        <mat-panel-title>
-                                         Attach Previleges
-                                        </mat-panel-title>
-                                      </mat-expansion-panel-header>
-                                      <form action="" class="formNew" [formGroup]="form" novalidate>
-                                        <div class="newforme row" *ngFor="let privilage of privilegesArray">
-                                            <input class="form-controll-data"  type="checkbox" formArrayName="previleges" [value]="privilage.value" (change)="onCheckboxChange(i, $event)"/>
-                                            {{ privilage.name}}
-                                        </div>
-                                    </form>
-                                    </mat-expansion-panel>
-                                  </mat-accordion>
-                    <mat-icon class="pull-right" (click)="onAddField()" color="primary">add_circle</mat-icon>
-                    <mat-icon class="pull-right" (click)="onRemoveField(i)" color="warn">remove_circle</mat-icon>
+                               <div class="col-md-10 col-sm-12 form-column">
+                                <form action="" class="formNew" [formGroup]="form" novalidate>
+                                    <div class="newforme" *ngFor="let privilage of privilegesArray">
+                                        <p><input class="form-controll-data"  type="checkbox" formArrayName="previleges" [checked]="checked" [value]="privilage" (change)="onCheckboxChange(i, $event)"/></p> 
+                                        <p>{{ privilage}}</p>
+                                    </div>
+                                </form>
                                </div>
                            </div>
                        </div> 
+                       <div class="col-md-1 col-sm-12">
+                        <mat-icon class="pull-right" (click)="onAddField()" color="primary">add_circle</mat-icon>
+                    <mat-icon class="pull-right" (click)="onRemoveField(i)" color="warn">remove_circle</mat-icon>
+                   </div>
                     </div>
                 </div>
             </div>

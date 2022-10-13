@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/@core/AuthService/token-storage.service';
 import { LoanproductService } from '../loanproduct.service';
 import { LoanproductLookupComponent } from '../loanproduct-lookup/loanproduct-lookup.component';
-import { SchemeTypeLookupComponent } from '../../../SystemConfigurations/GlobalParams/scheme-type/scheme-type-lookup/scheme-type-lookup.component';
 
 @Component({
   selector: 'app-loanproduct-maintenance',
@@ -46,8 +45,7 @@ export class LoanproductMaintenanceComponent implements OnInit {
     private dialog: MatDialog,
     private tokenStorage: TokenStorageService,
     private loanproductAPI:LoanproductService,
-    // public dialogRef: MatDialogRef<EventIdMaintenanceComponent>,
-    // @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+    
 
     ) { }
   ngOnInit(): void {
@@ -79,22 +77,7 @@ export class LoanproductMaintenanceComponent implements OnInit {
     });
   }
 
-  // schemeTypeLookup(): void {
-  //   const dialogRef = this.dialog.open(SchemeTypeLookupComponent, {
-  //     // height: '400px',
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.lookupData = result.data;
-      
-      
-  //     this.scheme_type = this.lookupData.scheme_type;
-  //     this.laa_scheme_type_id = this.lookupData.id;
-
-  //     this.formData.controls.scheme_type.setValue(this.scheme_id);
-  //     this.formData.controls.laa_scheme_type_id.setValue(this.laa_scheme_type_id);
-
-  //   });
-  // }
+ 
   onSelectFunction(event:any){
     if(event.target.value != "A-Add"){
       this.existingData = true;
@@ -124,7 +107,8 @@ export class LoanproductMaintenanceComponent implements OnInit {
               this.subscription = this.loanproductAPI.checkExistence(this.params).subscribe(res=>{
                 // not available else proceed
               this.loanproductAPI.changeMessage(this.formData.value)
-             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
+             this.router.navigate(['system/configurations/product/loan-product/data/view'], {skipLocationChange:true})
+
               }, err=>{
 
                 this.error = err;
@@ -140,7 +124,7 @@ export class LoanproductMaintenanceComponent implements OnInit {
             }else{
               this.newData = false;
               this.loanproductAPI.changeMessage(this.formData.value)
-             this.ngZone.run(() => this.router.navigateByUrl('system/configurations/product/loan-product/data/view'));
+              this.router.navigate(['system/configurations/product/loan-product/data/view'], {skipLocationChange:true})
               
             }
     

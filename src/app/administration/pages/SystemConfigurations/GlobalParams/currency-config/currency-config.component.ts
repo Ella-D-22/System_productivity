@@ -1,5 +1,5 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, Inject, NgZone, OnInit, Optional } from '@angular/core';
+import { HttpClient} from '@angular/common/http';
+import { Component,NgZone, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -14,7 +14,7 @@ import { CurrencyService } from './currency.service';
   templateUrl: './currency-config.component.html',
   styleUrls: ['./currency-config.component.scss']
 })
-export class CurrencyConfigComponent implements OnInit { 
+export class CurrencyConfigComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   loading = false;
@@ -45,49 +45,60 @@ export class CurrencyConfigComponent implements OnInit {
   message: any;
   ccy_id: any;
   ccy_name: any;
-  respData: Object;
+  respData: any;
+  countryName:any
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    private ngZone: NgZone,
     private _snackBar: MatSnackBar,
-    private http: HttpClient,
-    private actRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private tokenStorage: TokenStorageService,
     private currencyAPI: CurrencyService,
-    ) { }
+    ) {
+
+    }
+  // maintenance_url = this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
+
     ngOnInit() {
-      this.redirectToMaintenancePage();
+      // this.redirectToMaintenancePage();
       this.getPage();
       this.getData();
     }
+
     currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
-    auth_user = this.currentUser.username;
-    
-    redirectToMaintenancePage(){
-      this.subscription = this.currencyAPI.currentMessage.subscribe(message =>{
-        this.message = message;
-        if( this.message == "default message"){
-          // Redirect to maintenace if no action header
-          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
-        }else{
-          null;
-        }
-      })
+    if (currentUser) {
+       var auth_user = this.currentUser.username;
     }
+
+    // redirectToMaintenancePage(){
+    //   this.subscription = this.currencyAPI.currentMessage.subscribe(message =>{
+    //     this.message = message;
+    //     if( this.message == "default message"){
+    //       // Redirect to maintenace if no action header
+    //
+
+    //     }else{
+    //       null;
+    //     }
+    //   })
+    // }
+
     countryLookup(): void {
         const dialogRef = this.dialog.open(CountriesLookupComponent, {
         });
         dialogRef.afterClosed().subscribe(result => {
           this.dialogData = result.data;
           this.ccy_name = this.dialogData.ccy_name;
+          console.log("currency data",this.dialogData);
+
           this.formData.controls.currency_ccy.setValue(result.data);
         });
       }
       getData() {
         this.subscription = this.currencyAPI.getAllCountries().subscribe(res => {
          this.respData = res;
+         this.countryName = this.respData.continents
+
+
         })
       }
       ac_placeholder = "";
@@ -98,6 +109,7 @@ export class CurrencyConfigComponent implements OnInit {
         ccy: ['', [Validators.required]],
         country: ['', [Validators.required]],
         ccy_name: ['', [Validators.required]],
+        decimal_precision:[''],
         is_deleted: [''],
         is_verified: [''],
       });
@@ -110,7 +122,7 @@ export class CurrencyConfigComponent implements OnInit {
       }
       getPage(){
         this.subscription = this.currencyAPI.currentMessage.subscribe(message =>{
-          this.message = message;    
+          this.message = message;
         this.function_type = this.message.function_type;
         this.ccy_id = this.message.currency_ccy.id
         this.ccy_name = this.message.currency_ccy.ccy_name
@@ -119,10 +131,10 @@ export class CurrencyConfigComponent implements OnInit {
         if(this.function_type == "A-Add"){
           // open empty forms
           this.formData = this.fb.group({
-            id:[''],
             ccy: ['', [Validators.required]],
             country: ['', [Validators.required]],
             ccy_name: ['', [Validators.required]],
+            decimal_precision:[''],
             is_deleted: [false],
             is_verified: [false],
           });
@@ -139,6 +151,7 @@ export class CurrencyConfigComponent implements OnInit {
               ccy: [this.results.ccy, [Validators.required]],
               country: [this.results.country, [Validators.required]],
               ccy_name: [this.results.ccy_name, [Validators.required]],
+              decimal_precision:[this.results.decimal_precision],
               is_deleted: [this.results.is_deleted],
               is_verified: [this.results.is_verified],
             });
@@ -150,7 +163,6 @@ export class CurrencyConfigComponent implements OnInit {
               duration: 3000,
               panelClass: ['red-snackbar','login-snackbar'],
             });
-          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
           })
         }
         else if(this.function_type == "M-Modify"){
@@ -164,12 +176,13 @@ export class CurrencyConfigComponent implements OnInit {
               ccy: [this.results.ccy, [Validators.required]],
               country: [this.results.country, [Validators.required]],
               ccy_name: [this.results.ccy_name, [Validators.required]],
+              decimal_precision:[this.results.decimal_precision],
+
               is_deleted: [this.results.is_deleted],
               is_verified: [this.results.is_verified],
             });
           }, err=>{
             this.error = err;
-          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -187,12 +200,12 @@ export class CurrencyConfigComponent implements OnInit {
               ccy: [this.results.ccy, [Validators.required]],
               country: [this.results.country, [Validators.required]],
               ccy_name: [this.results.ccy_name, [Validators.required]],
+              decimal_precision:[this.results.decimal_precision],
               is_deleted: [this.results.is_deleted],
               is_verified: [true],
             });
           }, err=>{
             this.error = err;
-          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -210,12 +223,12 @@ export class CurrencyConfigComponent implements OnInit {
               ccy: [this.results.ccy, [Validators.required]],
               country: [this.results.country, [Validators.required]],
               ccy_name: [this.results.ccy_name, [Validators.required]],
+              decimal_precision:[this.results.decimal_precision],
               is_deleted: [true],
               is_verified: [this.results.is_verified],
             });
           }, err=>{
             this.error = err;
-          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
               this._snackBar.open(this.error, "Try again!", {
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
@@ -223,7 +236,7 @@ export class CurrencyConfigComponent implements OnInit {
                 panelClass: ['red-snackbar','login-snackbar'],
               });
           })
-        }    
+        }
       })
       }
       // convenience getter for easy access to form fields
@@ -231,7 +244,7 @@ export class CurrencyConfigComponent implements OnInit {
 
       onSubmit() {
         console.log(this.formData.value);
-        
+
           this.submitted = true;
           // stop here if form is invalid
           if (this.formData.valid) {
@@ -244,7 +257,6 @@ export class CurrencyConfigComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['green-snackbar','login-snackbar'],
                 });
-          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
             },err=>{
               this.error = err;
               this._snackBar.open(this.error, "Try again!", {
@@ -264,7 +276,6 @@ export class CurrencyConfigComponent implements OnInit {
                     duration: 3000,
                     panelClass: ['green-snackbar','login-snackbar'],
                   });
-          this.router.navigate([`/system/configurations/global/currency/maintenance`], { skipLocationChange: true });
               },err=>{
                 this.error = err;
                 this._snackBar.open(this.error, "Try again!", {
@@ -273,7 +284,7 @@ export class CurrencyConfigComponent implements OnInit {
                   duration: 3000,
                   panelClass: ['red-snackbar','login-snackbar'],
                 });
-              })  
+              })
             }
           }else{
             this._snackBar.open("Invalid Form Data", "Try again!", {
@@ -283,5 +294,5 @@ export class CurrencyConfigComponent implements OnInit {
               panelClass: ['red-snackbar','login-snackbar'],
             });
           }
-      }  
+      }
   }

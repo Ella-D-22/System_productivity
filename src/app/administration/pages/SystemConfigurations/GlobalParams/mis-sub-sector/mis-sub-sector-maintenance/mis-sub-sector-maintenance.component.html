@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Home/system/configurations/global/mis-sub-sector/maintenance</div>
+        <div>MIS-Subsector Maintenance</div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -22,8 +22,8 @@
                         [ngClass]="{ 'is-invalid': submitted && f.function_type.errors}" (change)="onFunctionSelection($event)">
                             <option value="" disabled>-- Choose Function --</option>
                             <option *ngFor="let flag of functionArray" [value]="flag" >{{flag}}</option>
-                        </select>    
-                    </div>   
+                        </select>
+                    </div>
                 </div>
             </div>
             <div *ngIf="showMisCode" class="col-md-6 col-sm-12">

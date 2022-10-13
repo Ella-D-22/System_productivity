@@ -1,17 +1,17 @@
 
   <mat-card>
     <mat-card-header  class="breadcrumb">
-      <div>Home/Transaction/Maintenance</div>
+      <div>Transaction Maintenance</div>
   </mat-card-header>
   <mat-divider></mat-divider>
   <br>
-  
+
   <div class="container-fluid">
     <form
     class="form"
     [formGroup]="formData"
     (ngSubmit)="onSubmit()"
-    #resetRequestsForm="ngForm" 
+    #resetRequestsForm="ngForm"
     novalidate
   >
     <div class="row">
@@ -26,7 +26,7 @@
               <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
             </select>
           </div>
-       </div> 
+       </div>
       </div>
       <div class="col-md-6">
         <div *ngIf="this.existingData" class="form-group">
@@ -38,7 +38,7 @@
             formControlName="transactionId" class="form-control"/>
             <mat-icon  *ngIf="existingData" (click)="transactionLookup()">search</mat-icon><br>
           </div>
-       </div> 
+       </div>
        <div *ngIf="this.existingData" class="form-group">
         <div class="col-md-6 col-sm-12 form-column ">
          <!-- <label class="start pull-left">Transaction ID<span class="warning">*</span></label> -->
@@ -46,7 +46,7 @@
         <div class="col-md-6 col-sm-12 form-column">
           <mat-hint>{{this.transactionType}}</mat-hint>
         </div>
-     </div> 
+     </div>
       </div>
     </div>
     <div class="row button-row">
@@ -59,16 +59,15 @@
           Submit
         </button>
       </div>
-   
+
   </div>
   </form>
     </div>
   </mat-card>
-  
-  
-  
-  
-  
 
-  
-  
+
+
+
+
+
+

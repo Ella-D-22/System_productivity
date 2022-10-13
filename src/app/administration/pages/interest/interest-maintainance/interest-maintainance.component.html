@@ -1,68 +1,49 @@
 <mat-card class="container-fluid">
-    <mat-card-header>
-      <div>Interest Maintainance</div>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-  
-    <div class="container-fluid mt-4">
-      <form class="form" ngNativeValidate >
-        <div class="row">
-          <div class="col-md-5">
-            <div class="form-group row">
-              <div class="col-md-6 col-12 form-column">
-                <label class="start pull-left"
-                  >Function<span class="warning">*</span></label
-                >
-              </div>
-              <div class="col-md-6 col-8 form-column">
-                <select  (change)="onTabClick($event)" class="form-control" required>
-                  <option value="" disabled>-- Choose Type --</option>
-                  <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
-                </select>
-              </div>
+  <mat-card-header class="breadcrumb">
+    <div>Interest Maintenance</div>
+</mat-card-header>
+<mat-divider></mat-divider>
+<br>
+  <mat-divider></mat-divider>
+  <div class="container-fluid mt-4">
+    <form class="form" ngNativeValidate>
+      <div class="row">
+        <div class="col-md-5">
+          <div class="form-group row">
+            <div class="col-md-6 col-12 form-column">
+              <label class="start pull-left">Function<span class="warning">*</span></label>
             </div>
-          </div>
-          <div class="col-md-5" >
-            <div class="form-group row">
-              <div class="col-md-5 col-12 form-column">
-                <label class="start pull-left"
-                  >Interest Code<span class="warning">*</span></label
-                >
-              </div>
-              <div class="col-md-6 col-7 form-column">
-                <input type="text" class="form-control" oninput ="this.value=this.value.toUpperCase()"  [(ngModel)]="interestCode" name="interestCode" required/>
-              </div>
-              <div class="col-md-1 col-1" *ngIf="function_type!='A-Add'">
-                <mat-icon (click)="interestLookup()">search</mat-icon>
-              </div>
+            <div class="col-md-6 col-8 form-column">
+              <select (change)="onTabClick($event)" class="form-control" required>
+                <option value="" disabled>-- Choose Type --</option>
+                <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
+              </select>
             </div>
           </div>
         </div>
-        <div class="row">
-          
-
-        <button class="pull-right" mat-raised-button color="primary" 
-        (click)="navigate()" type="button">
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
-          Submit
-        </button>
-
+        <div class="col-md-5">
+          <div class="form-group row">
+            <div class="col-md-5 col-12 form-column">
+              <label class="start pull-left">Interest Code<span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-7 form-column">
+              <input type="text" class="form-control" maxlength="6" oninput="this.value=this.value.toUpperCase()"
+                [(ngModel)]="interestCode" name="interestCode" required />
+            </div>
+            <div class="col-md-1 col-1" *ngIf="function_type!='A-Add'">
+              <mat-icon (click)="interestLookup()">search</mat-icon>
+            </div>
+          </div>
         </div>
-  
-        <br />
-      </form>
-    </div>
-  </mat-card>
+      </div>
+      <!-- <div class="row"> -->
+      <button class="pull-right" mat-raised-button color="primary" (click)="navigate()" type="button">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Submit
+      </button>
+      <!-- </div> -->
 
-
-
-
-
-
-
-
-  
-  
+      <br />
+    </form>
+  </div>
+</mat-card>

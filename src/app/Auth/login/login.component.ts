@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
     horizontalPosition: MatSnackBarHorizontalPosition = 'end';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
+  message: any;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -63,21 +64,36 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.authenticateUser(this.loginForm.value).subscribe(
       data => {
-
-        console.log("login user data",data);
+        this.message = data;
+        console.log("DATA", this.message);
 
 //      Send to Message Medium
-        this.authService.changeMessage(data)
-
-        this._snackBar.open("Verify OTP", "X", {
+        // this.authService.changeMessage(data)
+        this._snackBar.open("Successful Redirecting...", "X", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
           duration: 3000,
           panelClass: ['green-snackbar','login-snackbar'],
         });
+
+        this.tokenStorage.saveToken(this.message.accessToken);
+      this.tokenStorage.saveUser(this.message);
+
+        this.router.navigate(['/system']);
+
+                // Call function to set Data to local storage
+
+      // redirect to  respective module system
+      // if(this.message.roles[0]=="SUPER_ADMIN"){
+      // this.ngZone.run(() => this.router.navigate(['/superuser']));
+      // }else{
+      //   this.ngZone.run(() => this.router.navigate(['/system']));
+      // }
+      // this.router.navigate(['/', 'page-name']);
+
         this.loading = false;
         // To OTP Auth;
-        this.router.navigate(['/otp'], { skipLocationChange: true });
+        // this.router.navigate(['/otp'], { skipLocationChange: true });
       },
       err => {
         this.loading = false;

@@ -16,6 +16,7 @@ import { CanLoadModuleGuard } from 'src/@core/helpers/CanLoadModule.guard';
 import { CanActivateModuleGuard } from 'src/@core/helpers/CanActivateModule.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './http.interceptor';
+import { AuthenticatedModuleGuard } from 'src/@core/helpers/AuthenticatedModuleGuard.guard';
 export const config: FileInputConfig = {
   sizeUnit: 'Octet'
 };
@@ -50,6 +51,7 @@ export const config: FileInputConfig = {
     DatePipe,
     CanLoadModuleGuard,
     CanActivateModuleGuard,
+    AuthenticatedModuleGuard,
     { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
