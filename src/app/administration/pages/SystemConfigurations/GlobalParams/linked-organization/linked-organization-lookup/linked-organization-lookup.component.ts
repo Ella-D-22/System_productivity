@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/@core/AuthService/auth.service';
+import { OrganizationService } from 'src/app/administration/pages/Service/Configurations/Organisation/organization.service';
 import { GlCodeLookupComponent } from '../../gl-code/gl-code-lookup/gl-code-lookup.component';
 import { LinkedorganizationService } from '../linkedorganization.service';
 
@@ -37,7 +38,8 @@ export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private authAPI: AuthService,
     public fb: FormBuilder,
-    private linkedOrgAPI: LinkedorganizationService
+    private linkedOrgAPI: LinkedorganizationService,
+    private organizationService: OrganizationService,
 
     ) { }
     ngOnInit() {
@@ -54,12 +56,14 @@ export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
       }
     }
     getData() {
-      this.linkedOrgAPI.getLinkedorganizations().subscribe(res=>{
+      this.organizationService.read().subscribe(res=>{
        this.respData = res;
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.respData);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        console.log("Organization details", this.respData);
+        
       })
     }
 

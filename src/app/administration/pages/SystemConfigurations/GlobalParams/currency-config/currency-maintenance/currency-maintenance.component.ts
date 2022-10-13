@@ -28,6 +28,7 @@ export class CurrencyMaintenanceComponent implements OnInit {
   ccy_name: any;
   dialoData: any;
   dialogData: any;
+  loading: boolean = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -37,7 +38,6 @@ export class CurrencyMaintenanceComponent implements OnInit {
     ) { }
   ngOnInit(): void {
   }
-  loading = false;
   submitted = false;
   functionArray: any = [
     'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
@@ -49,6 +49,7 @@ export class CurrencyMaintenanceComponent implements OnInit {
   });
   currencyLookup(): void {
     const dialogRef = this.dialog.open(CurrencyLookupComponent, {
+      width: '35%'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.dialogData = result.data;

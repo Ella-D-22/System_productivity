@@ -9,6 +9,7 @@ import { TokenStorageService } from 'src/@core/AuthService/token-storage.service
 import { LinkedorganizationService } from './linkedorganization.service';
 import { CurrencyLookupComponent } from '../currency-config/currency-lookup/currency-lookup.component';
 import { EventIdLookupComponent } from '../../ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
+import { OrganizationService } from '../../../Service/Configurations/Organisation/organization.service';
 @Component({
   selector: 'app-linked-organization',
   templateUrl: './linked-organization.component.html',
@@ -61,6 +62,7 @@ export class LinkedOrganizationComponent implements OnInit {
     private http: HttpClient,
     private actRoute: ActivatedRoute,
     private dialog: MatDialog,
+    private organizationService: OrganizationService,
     private tokenStorage: TokenStorageService,
     private linkedOrganizationAPI: LinkedorganizationService,
   ) { }
@@ -321,7 +323,7 @@ export class LinkedOrganizationComponent implements OnInit {
     this.submitted = true;
     if (this.formData.valid) {
       if (this.function_type == "A-Add") {
-        this.subscription = this.linkedOrganizationAPI.createLinkedorganization(this.formData.value).subscribe(res => {
+        this.subscription = this.linkedOrganizationAPI.create(this.formData.value).subscribe(res => {
           this.results = res;
           this._snackBar.open("Executed Successfully!", "X", {
             horizontalPosition: this.horizontalPosition,
