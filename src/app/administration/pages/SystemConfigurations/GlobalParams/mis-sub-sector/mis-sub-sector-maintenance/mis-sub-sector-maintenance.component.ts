@@ -22,8 +22,8 @@ miscode:any;
 missubcode:any;
 subSectorId = false;
 showMisCode = false;
-horizontalPosition:MatSnackBarHorizontalPosition
-verticalPosition:MatSnackBarVerticalPosition
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor(private fb:FormBuilder,
     private SubSectorAPI:MisSubSectorService,
@@ -75,19 +75,15 @@ verticalPosition:MatSnackBarVerticalPosition
     }
 onFunctionSelection(event:any){
   if(event.target.value != "A-Add"){
-
   this.showSubSectorId = true;
   this.showMisCode = false;
-
   }else if (event.target.value == "A-Add"){
     this.showMisCode = true;
     this.showSubSectorId =  false;
-
   }
 }
   onSubmit(){
     console.log("Form Data", this.formData.value);
-    
     this.loading = true;
     this.submitted = true
     if(this.formData.valid){

@@ -75,9 +75,9 @@ width: '45%',
    if(this.formData.valid){
      this.misSectorService.changeMessage(this.formData.value)
      if(this.function_type == "A-Add"){
-      this.router.navigate(['system/configurations/global/mis-sector/add'], {skipLocationChange:true})
+      this.router.navigate(['system/configurations/global/mis-sector'], {skipLocationChange:true})
      }else if(this.function_type != "A-Add"){
-      this.router.navigate(['system/configurations/global/mis-sector/add'], {skipLocationChange:true})
+      this.router.navigate(['system/configurations/global/mis-sector'], {skipLocationChange:true})
      }
    }else{
      this.loading = false;
