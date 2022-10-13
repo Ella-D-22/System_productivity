@@ -1,259 +1,265 @@
 <mat-card>
-    <mat-card-header  class="breadcrumb">
-      <div>Home/Organization</div>
+  <mat-card-header class="breadcrumb">
+    <a routerLink="/system">Dashboard / </a> &nbsp; Organization
   </mat-card-header>
   <div class="row">
     <div class="col-md-6 col-sm-12">
-        <h4>Function</h4>
-        <p>{{this.function_type}}</p>
+      <h4>Function</h4>
+      <p>{{this.function_type}}</p>
     </div>
     <div class="col-md-6 col-sm-12">
-        <h4>Organization</h4>
-        <p>{{this.organization_name}}</p>
+      <h4>Organization</h4>
+      <p>{{this.organization_name}}</p>
     </div>
-</div>
+  </div>
   <mat-divider></mat-divider>
   <br>
 
   <div class="container-fluid">
-    <form
-    class="form"
-    [formGroup]="formData"
-    (ngSubmit)="onSubmit()"
-    #resetRequestsForm="ngForm"
-    novalidate
-  >
+    <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
 
-  <h5>Organization Detail</h5>
+      <h5>Organization Detail</h5>
 
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Organization Name</label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column">
-        <input type="text" formControlName="organization_name" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_name.errors }" />
-      </div>
-   </div>
-  </div>
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Organization Tel</label>
-      </div>
-      <div class="col-md-6 col-sm-12 form-column">
-        <input type="number" formControlName="organization_tel" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_tel.errors }" />
-      </div>
-   </div>
-  </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="form-group">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Organization Mail</label>
+              <label class="start pull-left">Organization Name</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <input type="text" formControlName="organization_mail" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_mail.errors }" />
+              <input type="text" formControlName="organization_name" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.organization_name.errors }" />
             </div>
-         </div>
-      <div class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Organization Website</label>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" formControlName="organization_website" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_website.errors }" />
-        </div>
-     </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="form-group">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
-             <label class="start pull-left">Organization Address</label>
+              <label class="start pull-left">Organization Tel</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <textarea formControlName="organization_address" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_address.errors }"></textarea>
+              <input type="number" formControlName="organization_tel" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.organization_tel.errors }" />
             </div>
-         </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <div class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Organization Country</label>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" formControlName="organization_country" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_country.errors }" />
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Organization Mail</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" formControlName="organization_mail" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.organization_mail.errors }" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Organization Website</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" formControlName="organization_website" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.organization_website.errors }" />
+            </div>
+          </div>
         </div>
-     </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-      <div class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Organization Main Office</label>
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Organization Address</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <textarea formControlName="organization_address" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.organization_address.errors }"></textarea>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" formControlName="organization_main_office" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_main_office.errors }" />
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Organization Country</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" formControlName="organization_country" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.organization_country.errors }" />
+            </div>
+          </div>
         </div>
-     </div>
-    </div>
-  </div>
-
-  <h5>Organization Charges </h5>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-         <div class="form-group">
-           <div class="col-md-6 col-sm-12 form-column ">
-            <label class="start pull-left">Charge Derivation <span class="warning">*</span></label>
-           </div>
-           <div class="col-md-6 col-sm-12 form-column">
-              <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="org_chrg_derivation" [ngClass]="{ 'is-invalid': submitted && f.org_chrg_derivation.errors }" >
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Organization Main Office</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" formControlName="organization_main_office" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.organization_main_office.errors }" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <h5>Organization Charges </h5>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Charge Derivation <span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="org_chrg_derivation"
+                >
                 <option value="" disabled>-- Choose Function --</option>
                 <option *ngFor="let flag of  amtDerivationArrays" [value]="flag">{{ flag }}</option>
               </select>
-           </div>
+            </div>
+          </div>
         </div>
-  </div>
-  <div class="col-md-6 col-sm-12">
-      <div *ngIf="showPercentageField" class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Percentage <span class="warning">*</span></label>
+        <div class="col-md-6 col-sm-12">
+          <div *ngIf="showPercentageField" class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Percentage <span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <input type="number" formControlName="org_percentage_val" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.org_percentage_val.errors }" />
+            </div>
+          </div>
+          <div *ngIf="showFixedAmtField" class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Fixed Amount <span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <input type="number" formControlName="org_fixed_amt" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.org_fixed_amt.errors }" />
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-12 form-column ">
-         <input  type="number" formControlName="org_percentage_val" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.org_percentage_val.errors }" />
-        </div>
-     </div>
-      <div *ngIf="showFixedAmtField" class="form-group">
-        <div  class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Fixed Amount <span class="warning">*</span></label>
-        </div>
-        <div class="col-md-6 col-sm-12 form-column ">
-         <input  type="number" formControlName="org_fixed_amt" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.org_fixed_amt.errors }" />
-        </div>
-     </div>
-  </div>
-</div>
-<div  class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Charge application </label> <span class="warning">*</span>
       </div>
-      <div class="col-md-6 col-sm-12 form-column">
-        <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="org_chrg_application" [ngClass]="{ 'is-invalid': submitted && f.org_chrg_application.errors }">
-          <mat-radio-button (change)="onAll($event)" value="All">All.</mat-radio-button>
-          <mat-radio-button (change)="onSpecific($event)" value="Specific">Specific.</mat-radio-button>
-        </mat-radio-group>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Charge application </label> <span class="warning">*</span>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <mat-radio-group class="pull-right" aria-label="Select an option" formControlName="org_chrg_application"
+                [ngClass]="{ 'is-invalid': submitted && f.org_chrg_application.errors }">
+                <mat-radio-button (change)="onAll($event)" value="All">All.</mat-radio-button>
+                <mat-radio-button (change)="onSpecific($event)" value="Specific">Specific.</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+        <!-- *ngIf="requireCif" -->
+        <div *ngIf="requireCif" class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <a class="btn btn-sm btn-block btn-info form-control" (click)="onAddField()">+ Add Fileds</a>
+            </div>
+          </div>
+        </div>
       </div>
-   </div>
-  </div>
-  <!-- *ngIf="requireCif" -->
-  <div *ngIf="requireCif" class="col-md-6 col-sm-12">
-              <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                </div>
-                <div class="col-md-6 col-sm-12 form-column ">
-                 <a class="btn btn-sm btn-block btn-info form-control" (click)="onAddField()">+ Add Fileds</a>
-                </div>
-         </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-  </div>
-  <!-- *ngIf="requireCif" -->
-  <div  *ngIf="requireCif" class="col-md-6 col-sm-12">
-    <div  *ngFor="let dyForm of t.controls; let i = index" class="list-group list-group-flush">
-      <div>
-          <div [formGroup]="dyForm">
-              <div class="form-group">
-                <div class="col-md-6 col-sm-12 form-column ">
-                  <label>{{i + 1}} - Event Id:</label>
-                </div>
-                <div class="col-md-6 col-sm-12 form-column ">
-                  <input [value]="this.infosecdes" type="text" formControlName="org_lnk_event_id" class="form-control" [ngClass]="{ 'is-invalid': submitted && dyForm.controls.org_lnk_event_id.errors }" />
-                  <mat-icon *ngIf="isEnabled"  (click)="eventId(i)">search</mat-icon>
-                  <mat-icon  class="warning" (click)="onRemoveField(i)">remove_circle</mat-icon>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+        </div>
+        <!-- *ngIf="requireCif" -->
+        <div *ngIf="requireCif" class="col-md-6 col-sm-12">
+          <div *ngFor="let dyForm of t.controls; let i = index" class="list-group list-group-flush">
+            <div>
+              <div [formGroup]="dyForm">
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <label>{{i + 1}} - Event Id:</label>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-column ">
+                    <input [value]="this.infosecdes" type="text" formControlName="org_lnk_event_id" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && dyForm.controls.org_lnk_event_id.errors }" />
+                    <mat-icon *ngIf="isEnabled" (click)="eventId(i)">search</mat-icon>
+                    <mat-icon class="warning" (click)="onRemoveField(i)">remove_circle</mat-icon>
 
+                  </div>
                 </div>
               </div>
+            </div>
           </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-<h5>Charge Prioritization</h5>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-         <div class="form-group">
-           <div class="col-md-6 col-sm-12 form-column ">
-            <label class="start pull-left">1st Priority <span class="warning">*</span></label>
-           </div>
-           <div class="col-md-6 col-sm-12 form-column">
-              <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="first_priority" [ngClass]="{ 'is-invalid': submitted && f.first_priority.errors }" >
+      <h5>Charge Prioritization</h5>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">1st Priority <span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="first_priority"
+                [ngClass]="{ 'is-invalid': submitted && f.first_priority.errors }">
                 <option value="" disabled>-- Select Priority --</option>
                 <option *ngFor="let flag of  prioritizationArray" [value]="flag">{{ flag }}</option>
               </select>
-           </div>
+            </div>
+          </div>
         </div>
-  </div>
-  <div class="col-md-6 col-sm-12">
-      <div class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">2nd Priority <span class="warning">*</span></label>
-        </div>
-        <div class="col-md-6 col-sm-12 form-column">
-           <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="second_priority" [ngClass]="{ 'is-invalid': submitted && f.second_priority.errors }" >
-             <option value="" disabled>-- Select Priority --</option>
-             <option *ngFor="let flag of  prioritizationArray" [value]="flag">{{ flag }}</option>
-           </select>
-        </div>
-     </div>
-</div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-         <div class="form-group">
-           <div class="col-md-6 col-sm-12 form-column ">
-            <label class="start pull-left">3rd Priority <span class="warning">*</span></label>
-           </div>
-           <div class="col-md-6 col-sm-12 form-column">
-              <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="third_priority" [ngClass]="{ 'is-invalid': submitted && f.third_priority.errors }" >
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">2nd Priority <span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="second_priority"
+                [ngClass]="{ 'is-invalid': submitted && f.second_priority.errors }">
                 <option value="" disabled>-- Select Priority --</option>
                 <option *ngFor="let flag of  prioritizationArray" [value]="flag">{{ flag }}</option>
               </select>
-           </div>
+            </div>
+          </div>
         </div>
-  </div>
-  <div class="col-md-6 col-sm-12">
-      <div class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">4th Priority <span class="warning">*</span></label>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">3rd Priority <span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="third_priority"
+                [ngClass]="{ 'is-invalid': submitted && f.third_priority.errors }">
+                <option value="" disabled>-- Select Priority --</option>
+                <option *ngFor="let flag of  prioritizationArray" [value]="flag">{{ flag }}</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-12 form-column">
-           <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="fourth_priority" [ngClass]="{ 'is-invalid': submitted && f.fourth_priority.errors }" >
-             <option value="" disabled>-- Select Priority --</option>
-             <option *ngFor="let flag of prioritizationArray" [value]="flag">{{ flag }}</option>
-           </select>
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">4th Priority <span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <select (change)="onSelectAmountDerv($event)" class="form-control" formControlName="fourth_priority"
+                [ngClass]="{ 'is-invalid': submitted && f.fourth_priority.errors }">
+                <option value="" disabled>-- Select Priority --</option>
+                <option *ngFor="let flag of prioritizationArray" [value]="flag">{{ flag }}</option>
+              </select>
+            </div>
+          </div>
         </div>
-     </div>
-</div>
-</div>
-    <br />
-    <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
-      <span
-        *ngIf="loading"
-        class="spinner-border spinner-border-sm mr-1"
-      ></span>
-      Submit
-    </button>
-    <br />
+      </div>
+      <br />
+      <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Submit
+      </button>
+      <br />
 
-  </form>
-    </div>
-  </mat-card>
+    </form>
+  </div>
+</mat-card>
 
 <!--
   <div class="col-md-6 col-sm-12">
@@ -269,7 +275,3 @@
       </div>
    </div>
 </div> -->
-
-
-
-

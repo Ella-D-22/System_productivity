@@ -11,7 +11,7 @@ export class LinkedorganizationService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
     // API endpoint
-  baseURL = `${environment.productAPI}/api/v1/organization`;
+  baseURL = `${environment.userAPI}/api/v1/organization`;
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');
@@ -21,7 +21,7 @@ export class LinkedorganizationService {
   }
   // Add
   createLinkedorganization(data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/add/`;
+    let API_URL = `${this.baseURL}/add`;
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
         return res || {}
       }),
