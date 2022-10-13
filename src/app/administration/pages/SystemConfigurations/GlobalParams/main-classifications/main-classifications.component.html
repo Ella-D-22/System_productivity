@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-      <div>Main-Classification</div>
+        <div>Main-Classification</div>
     </mat-card-header>
     <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -15,41 +15,41 @@
     <mat-divider></mat-divider>
     <br>
     <div class="container-fluid">
-        <form [formGroup]="formData"
-        class="form"
-        (ngSubmit)="onSubmit()"
-        #resetRequestsForm="ngForm"
-        novalidate>
+        <form [formGroup]="formData" class="form" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
-                            <label class="start pull-left">Main Classification Code<span class="warning">*</span></label>
+                            <label class="start pull-left">Main Classification Code<span
+                                    class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" maxlength="6" formControlName="mainClassificationCode" oninput="this.value=this.value.toUpperCase()"
-                            class="form-control">
+                            <input type="text" maxlength="6" formControlName="mainClassificationCode"
+                                oninput="this.value=this.value.toUpperCase()" class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
-                            <label class="start pull-left">Main Classification Description<span class="warning">*</span></label>
+                            <label class="start pull-left">Main Classification Description<span
+                                    class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <input type="text" formControlName="mainClassificationDescription" class="form-control" oninput="this.value=this.value.toUpperCase()">
+                            <input type="text" formControlName="mainClassificationDescription" class="form-control"
+                                oninput="this.value=this.value.toUpperCase()">
                         </div>
                     </div>
                 </div>
             </div>
 
             <br>
-            <button class="pull-left" routerLink="../../maintenance" skipLocationChange mat-raised-button color="default" type="button">
+            <button class="pull-left" routerLink="../../maintenance" skipLocationChange mat-raised-button
+                color="default" type="button">
                 Back
             </button>
-             <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isEnabled">Submit</button>
-             <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
+            <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isEnabled">Submit</button>
+            <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
         </form>
     </div>
 </mat-card>

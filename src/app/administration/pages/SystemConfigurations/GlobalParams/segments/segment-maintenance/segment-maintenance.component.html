@@ -1,6 +1,9 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Segments - Maintenance</div>
+        <div>
+            <a routerLink="/system">Dashboard / </a>
+            <a routerLink="/system">Segments / </a> &nbsp; Segements Maintenance
+        </div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -26,15 +29,16 @@
                         <div class="col-md-6 col-sm-12 form-column">
                             <label for="">Segment Code<span class="warning">*</span></label>
                         </div>
-                        <div class="col-md-6 col-sm-12 form-column">
+                        <div class="col-md-4 col-sm-12 form-column">
                             <input type="text" class="form-control" formControlName="segmentCode"
                             [ngClass]="{'is-invalid': submitted && f.miscode.errors}">
+                        </div>
+                        <div class="col-md-2 col-sm-12 form-column">
                             <mat-icon  (click)="segmentLookup()">search</mat-icon>
                         </div>
                     </div>
                 </div>
             </div>
-
             <br>
             <button mat-raised-button class="pull-right" type="submit" color="primary">GO</button>
         </form>
