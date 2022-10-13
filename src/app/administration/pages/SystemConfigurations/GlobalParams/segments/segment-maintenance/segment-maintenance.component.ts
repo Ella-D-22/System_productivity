@@ -59,7 +59,6 @@ export class SegmentMaintenanceComponent implements OnInit {
     segmentLookup(){
       const dialogRef = this.dialog.open(SegmentLookupComponent, {
         width: '35%'
-        
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
@@ -71,9 +70,9 @@ export class SegmentMaintenanceComponent implements OnInit {
       if(this.formData.valid){
         this.segService.changeMessage(this.formData.value)
         if(this.function_type == "A-Add"){
-          this.router.navigate(['system/configurations/global/segment/data/view'], {skipLocationChange:true})
+          this.router.navigate(['system/configurations/global/segment/add'], {skipLocationChange:true})
         }else if(this.function_type != "A-Add"){
-          this.router.navigate(['system/configurations/global/segment/data/view'], {skipLocationChange:true})
+          this.router.navigate(['system/configurations/global/segment/maintenance'], {skipLocationChange:true})
         }
       }else{
         // this.loading = false;

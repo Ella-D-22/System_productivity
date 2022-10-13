@@ -74,9 +74,6 @@ export class GlCodeComponent implements OnInit {
       this.redirectToMaintenancePage();
       this.getPage();
     }
-
-
-
     redirectToMaintenancePage(){
       this.subscription = this.glcodeAPI.currentMessage.subscribe(message=>{
         this.message = message;
