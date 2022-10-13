@@ -199,7 +199,6 @@ export class SubSegmentComponent implements OnInit {
 
   }
   onSubmit() {
-
     if (this.formData.valid) {
       if (this.function_type == "A-Add") {
         this.subscription = this.subSegmentService.createSubSegment(this.formData.value).subscribe(
@@ -222,7 +221,6 @@ export class SubSegmentComponent implements OnInit {
               panelClass: ['red-snackbar', 'login-snackbar']
             });
             this.router.navigate(['/system/configurations/global/sub-segment/maintenance'], { skipLocationChange: true })
-
           }
         )
       } else if (this.function_type != "A-Add") {

@@ -70,9 +70,9 @@ export class SegmentMaintenanceComponent implements OnInit {
       if(this.formData.valid){
         this.segService.changeMessage(this.formData.value)
         if(this.function_type == "A-Add"){
-          this.router.navigate(['system/configurations/global/segment/add'], {skipLocationChange:true})
+          this.router.navigate(['system/configurations/global/segment'], {skipLocationChange:true})
         }else if(this.function_type != "A-Add"){
-          this.router.navigate(['system/configurations/global/segment/maintenance'], {skipLocationChange:true})
+          this.router.navigate(['system/configurations/global/segment'], {skipLocationChange:true})
         }
       }else{
         // this.loading = false;

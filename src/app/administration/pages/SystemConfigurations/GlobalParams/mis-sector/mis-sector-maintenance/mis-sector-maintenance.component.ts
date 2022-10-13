@@ -13,8 +13,8 @@ import { MisSectorService } from '../mis-sector.service';
   styleUrls: ['./mis-sector-maintenance.component.scss']
 })
 export class MisSectorMaintenanceComponent implements OnInit {
-  horizontalPosition: MatSnackBarHorizontalPosition;
-  verticalPosition:MatSnackBarVerticalPosition
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   miscode:any;
   dialogData:any;
   function_type:any;
@@ -55,7 +55,7 @@ get f() {
 
 misSectorLookup():void{
   const dialogRef =  this.dialog.open(MisSectorLookupComponent,{
-
+width: '45%',
   });
   dialogRef.afterClosed().subscribe(results =>{
     this.dialogData = results.data;
@@ -64,12 +64,10 @@ misSectorLookup():void{
     this.formData.controls.miscode.setValue(results.data.miscode)
     // this.formData.controls.sectorId.setValue(results.data.id)
     console.log("Data", this.dialogData);
-    
   })
 }
   ngOnInit(): void {
   }
-
   onSubmit(){
    console.log("data", this.formData.value);
    this.loading = true;
@@ -77,11 +75,9 @@ misSectorLookup():void{
    if(this.formData.valid){
      this.misSectorService.changeMessage(this.formData.value)
      if(this.function_type == "A-Add"){
-
-      this.router.navigate(['system/configurations/global/mis-sector/data/view'], {skipLocationChange:true})
+      this.router.navigate(['system/configurations/global/mis-sector/add'], {skipLocationChange:true})
      }else if(this.function_type != "A-Add"){
-      this.router.navigate(['system/configurations/global/mis-sector/data/view'], {skipLocationChange:true})
-
+      this.router.navigate(['system/configurations/global/mis-sector/add'], {skipLocationChange:true})
      }
    }else{
      this.loading = false;
