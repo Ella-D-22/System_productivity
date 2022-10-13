@@ -1,71 +1,60 @@
 <mat-card>
-    <mat-card-header  class="breadcrumb">
-      <div>Home/General Ledger</div>
+  <mat-card-header class="breadcrumb">
+    <div>Home/General Ledger</div>
   </mat-card-header>
   <div class="row">
     <div class="col-md-4 col-sm-12">
-        <h4>Function</h4>
-        <p>{{this.function_type}}</p>
+      <h4>Function</h4>
+      <p>{{this.function_type}}</p>
     </div>
     <div class="col-md-4 col-sm-12">
-        <h4>Code</h4>
-        <p>{{this.glCode}}</p>
+      <h4>Code</h4>
+      <p>{{this.glCode}}</p>
     </div>
     <div class="col-md-4 col-sm-12">
       <h4>Classification</h4>
       <p>{{this.classification}}</p>
     </div>
-
-</div>
-
+  </div>
   <mat-divider></mat-divider>
   <br>
-
   <div class="container-fluid">
-    <form
-    class="form"
-    [formGroup]="formData"
-    (ngSubmit)="onSubmit()"
-    #resetRequestsForm="ngForm"
-    novalidate
-  >
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Gl Code</label>
+    <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Gl Code</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <input type="text" maxlength="6" [value]="this.glCode" oninput="this.value=this.value.toUpperCase()"
+                readonly formControlName="glCode" class="pull-right form-control" />
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-12 form-column">
-          <input type="text" maxlength = "6" [value]="this.glCode" oninput ="this.value=this.value.toUpperCase()" readonly formControlName="glCode" class="pull-right form-control"/>
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Description</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <textarea type="text" maxlength="40" formControlName="glDescription"
+                oninput="this.value=this.value.toUpperCase()" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.glDescription.errors }"></textarea>
+            </div>
+          </div>
         </div>
-     </div>
-</div>
-  <div class="col-md-6 col-sm-12">
-    <div class="form-group">
-      <div class="col-md-6 col-sm-12 form-column ">
-       <label class="start pull-left">Description</label>
       </div>
-      <div class="col-md-6 col-sm-12 form-column">
-        <textarea type="text" maxlength = "40" formControlName="glDescription" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.glDescription.errors }"></textarea>
-      </div>
-   </div>
+      <br />
+      <button class="pull-left" [routerLink]="['../../maintenance']" skipLocationChange mat-raised-button
+        color="default" type="button">
+        Back
+      </button>
+      <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Submit
+      </button>
+      <br />
+    </form>
   </div>
-</div>
-    <br />
-    <button class="pull-left" [routerLink]="['../../maintenance']" skipLocationChange  mat-raised-button color="default" type="button">
-      Back
-    </button>
-    <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
-      <span
-        *ngIf="loading"
-        class="spinner-border spinner-border-sm mr-1"
-      ></span>
-      Submit
-    </button>
-    <br/>
-  </form>
-    </div>
-  </mat-card>
-
-
-
+</mat-card>

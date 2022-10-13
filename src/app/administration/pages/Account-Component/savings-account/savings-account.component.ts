@@ -44,6 +44,8 @@ export class SavingsAccountComponent implements OnInit {
   error:any
   results:any
   sba_schemeCode:any
+  sba_gl_subhead_description:any
+  sba_scheme_code_desc:any
   constructor(
     private fb:FormBuilder,
     private _snackBar:MatSnackBar,
@@ -56,6 +58,8 @@ export class SavingsAccountComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getPage()
+    
   }
 
   nomineeArray = new Array()
@@ -256,11 +260,12 @@ sbaSchemeCodeLookup():void{
   dialogRef.afterClosed().subscribe(result =>{
     this.lookupdata = result.data;
     this.formData.controls.schemeCode.setValue(this.lookupdata.sba_scheme_code)
-
     this.sba_schemeCode = this.lookupdata.sba_scheme_code
+    this.sba_scheme_code_desc = this.lookupdata.sba_scheme_code_desc
     this.glSubheads = this.lookupdata.sba_glsubheads
-    
     this.filteredArr = this.glSubheads.filter(data => data.sba_gl_subhead_deafault == "Yes");
+    this.formData.controls.glSubhead.setValue(this.filteredArr[0].sba_gl_subhead)
+    this.sba_gl_subhead_description = this.filteredArr[0].sba_gl_subhead_description
   })
 }
 branchSubheadLookup(): void {

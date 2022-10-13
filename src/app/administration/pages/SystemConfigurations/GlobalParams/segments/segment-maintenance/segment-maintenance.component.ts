@@ -24,8 +24,8 @@ export class SegmentMaintenanceComponent implements OnInit {
   segmentDescription:any
   subSegmentData:any
   subscription:Subscription
-  horizontalPosition:MatSnackBarHorizontalPosition
-  verticalPosition:MatSnackBarVerticalPosition
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   dialogRef: any;
 
   constructor(private fb:FormBuilder,
@@ -37,14 +37,10 @@ export class SegmentMaintenanceComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   formData = this.fb.group({
     function_type:[''],
     segmentCode:[''],
-  
-
   })
-  
   functionArray:any = [
     'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
   ] 
@@ -58,28 +54,25 @@ export class SegmentMaintenanceComponent implements OnInit {
     }
   }
   get f() { 
-    return this.formData.controls; }
-
+    return this.formData.controls;
+  }
     segmentLookup(){
-      const dialogRef = this.dialog.open(SegmentLookupComponent,{
-
+      const dialogRef = this.dialog.open(SegmentLookupComponent, {
+        width: '35%'
       });
       dialogRef.afterClosed().subscribe(results =>{
         this.dialogData = results.data;
-        console.log(results.data);
-        
         this.formData.controls.segmentCode.setValue(this.dialogData.segmentCode)
       })
-
     }
     onSubmit(){
       this.submitted = true;
       if(this.formData.valid){
         this.segService.changeMessage(this.formData.value)
         if(this.function_type == "A-Add"){
-          this.router.navigate(['system/configurations/global/segment/data/view'], {skipLocationChange:true})
+          this.router.navigate(['system/configurations/global/segment'], {skipLocationChange:true})
         }else if(this.function_type != "A-Add"){
-          this.router.navigate(['system/configurations/global/segment/data/view'], {skipLocationChange:true})
+          this.router.navigate(['system/configurations/global/segment'], {skipLocationChange:true})
         }
       }else{
         // this.loading = false;
