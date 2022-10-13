@@ -84,9 +84,9 @@ subSegmentLookup():void{
    if(this.formData.valid){
      this.subSegmentService.changeMessage(this.formData.value)
      if(this.function_type == "A-Add"){
-      this.router.navigate(['system/configurations/global/sub-segment/add'],{skipLocationChange:true} )
+      this.router.navigate(['system/configurations/global/sub-segment'],{skipLocationChange:true} )
      }else if(this.function_type != "A-Add"){
-      this.router.navigate(['system/configurations/global/sub-segment/add'],{skipLocationChange:true} )
+      this.router.navigate(['system/configurations/global/sub-segment'],{skipLocationChange:true} )
 
      }
    }else{

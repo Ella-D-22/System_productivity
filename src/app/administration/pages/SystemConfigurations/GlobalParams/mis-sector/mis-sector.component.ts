@@ -17,8 +17,8 @@ message:any;
 miscode_id:any;
 results:any
 error:any;
-horizontalPosition:MatSnackBarHorizontalPosition;
-verticalPosition:MatSnackBarVerticalPosition
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor(private fb:FormBuilder,
     private SectorAPi:MisSectorService,

@@ -199,14 +199,12 @@ export class SegmentsComponent implements OnInit {
 
     }
   onSubmit() {
-      console.log("Add segment values", this.formData.value);
-      
       if(this.formData.valid){
         if(this.function_type == "A-Add"){
           this.subscription = this.segService.createSegment(this.formData.value).subscribe(
             res =>{
               this.results = res
-              this._snackbar.open("Executed Successfully!", "X",{
+              this._snackbar.open("Executed Successfully!", "OK",{
                 horizontalPosition:this.horizontalPosition,
                 verticalPosition:this.verticalPosition,
                 duration:3000,
