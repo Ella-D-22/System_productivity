@@ -199,7 +199,7 @@ const routes: Routes = [
         data: { preload: true },
       },
       {
-        path: 'configurations/global/gl-code/data/view',
+        path: 'configurations/global/gl-code/add',
         component: GlCodeComponent,
         // // canActivate: [CanActivateModuleGuard],
         data: { preload: true },
@@ -606,7 +606,7 @@ const routes: Routes = [
         // data: {preload:true},
       },
       {
-        path: 'configurations/global/segment/data/view',
+        path: 'configurations/global/segment/add',
         component: SegmentsComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},
@@ -618,7 +618,7 @@ const routes: Routes = [
         // data: {preload:true},
       },
       {
-        path: 'configurations/global/sub-segment/data/view',
+        path: 'configurations/global/sub-segment/add',
         component: SubSegmentComponent,
         // canActivate: [CanActivateModuleGuard],
         // data: {preload:true},

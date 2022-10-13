@@ -1,6 +1,7 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
         <a routerLink="/system">Dashboard / </a> &nbsp; Segements
+        <a routerLink="/system">Dashboard / </a> &nbsp; Add Segement
     </mat-card-header>
     <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -48,6 +49,7 @@
             </button>
             <button mat-raised-button color="primary" type="submit" class="pull-right" *ngIf="isEnabled">Submit</button>
             <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
+            <br>
         </form>
     </div>
 </mat-card>

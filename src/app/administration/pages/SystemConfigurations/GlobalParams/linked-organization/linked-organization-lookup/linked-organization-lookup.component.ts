@@ -27,7 +27,6 @@ export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  subscription!: Subscription;
   respData: any;
 
 
@@ -45,7 +44,7 @@ export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
       this.getData();
     }
     ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+      //this.subscription.unsubscribe();
     }
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
@@ -55,9 +54,8 @@ export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
       }
     }
     getData() {
-      this.subscription = this.linkedOrgAPI.getLinkedorganizations().subscribe(res=>{
+      this.linkedOrgAPI.getLinkedorganizations().subscribe(res=>{
        this.respData = res;
-        
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.respData);
         this.dataSource.paginator = this.paginator;

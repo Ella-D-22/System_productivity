@@ -20,7 +20,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
   classification: any;
   isRequired = false;
   function_type_data: any;
-  subscription!:Subscription;
+  subscription!: Subscription;
   showOrganizationId = true;
   organization_id: any;
   organization_name: any;
@@ -44,17 +44,17 @@ export class GlCodeMaintenanceComponent implements OnInit {
     private http: HttpClient,
     private actRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private glcodeAPI:GlCodeService,
-    ) { }
+    private glcodeAPI: GlCodeService,
+  ) { }
   ngOnInit(): void {
   }
   loading = false;
   submitted = false;
   functionArray: any = [
-    'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
+    'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
   ]
   classificationArray: any = [
-    'ASSETS','LIABILITIES','INCOMES','EXPENSES'
+    'ASSETS', 'LIABILITIES', 'INCOMES', 'EXPENSES'
   ]
   formData = this.fb.group({
     function_type: ['', [Validators.required]],
@@ -75,163 +75,162 @@ export class GlCodeMaintenanceComponent implements OnInit {
       this.formData.controls.glCode.setValue(this.glCode);
     });
   }
-  onSelectFunction(event:any){
-    if(event.target.value != "A-Add"){
+  onSelectFunction(event: any) {
+    if (event.target.value != "A-Add") {
       this.existingData = true;
       this.formData.controls.glCode.setValue("")
       this.formData.controls.glCode.setValidators([Validators.required])
-    }else if(event.target.value == "A-Add"){
+    } else if (event.target.value == "A-Add") {
       this.existingData = false;
       this.formData.controls.glCode.setValidators([])
       this.formData.controls.glCode.setValue("");
     }
   }
 
-  onClassificationFunction(event:any){
+  onClassificationFunction(event: any) {
 
   }
-      // convenience getter for easy access to form fields
-      get f() { return this.formData.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.formData.controls; }
 
-      onVerify(){
+  onVerify() {
 
-        this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res=>{
-          this.results = res;
-          this.verifyformData = this.fb.group({
-            deleteFlag: [this.results.entity.deleteFlag],
-            deletedBy: [this.results.entity.deletedBy],
-            deletedTime: [this.results.entity.deletedTime],
-            glCode: [this.results.entity.glCode],
-            glDescription: [this.results.entity.glDescription],
-            modifiedBy: [this.results.entity.modifiedBy],
-            modifiedTime: [this.results.entity.modifiedTime],
-            postedBy: [this.results.entity.postedBy],
-            postedFlag: [this.results.entity.postedFlag],
-            postedTime: [this.results.entity.postedTime],
-            sn: [this.results.entity.sn],
-            verifiedBy: [this.results.entity.verifiedBy],
-            verifiedFlag: ["Y"],
-            // verifiedTime: [this.results.entity.verifiedTime]
-          });
-          // call to update the data
-          this.subscription = this.glcodeAPI.updateGlcode(this.verifyformData.value).subscribe(res=>{
-            this.results = res;
-            this.loading = false;
+    this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res => {
+      this.results = res;
+      this.verifyformData = this.fb.group({
+        deleteFlag: [this.results.entity.deleteFlag],
+        deletedBy: [this.results.entity.deletedBy],
+        deletedTime: [this.results.entity.deletedTime],
+        glCode: [this.results.entity.glCode],
+        glDescription: [this.results.entity.glDescription],
+        modifiedBy: [this.results.entity.modifiedBy],
+        modifiedTime: [this.results.entity.modifiedTime],
+        postedBy: [this.results.entity.postedBy],
+        postedFlag: [this.results.entity.postedFlag],
+        postedTime: [this.results.entity.postedTime],
+        sn: [this.results.entity.sn],
+        verifiedBy: [this.results.entity.verifiedBy],
+        verifiedFlag: ["Y"],
+        // verifiedTime: [this.results.entity.verifiedTime]
+      });
+      // call to update the data
+      this.subscription = this.glcodeAPI.updateGlcode(this.verifyformData.value).subscribe(res => {
+        this.results = res;
+        this.loading = false;
 
-              this._snackBar.open( this.results.message, "X", {
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-                duration: 3000,
-                panelClass: ['green-snackbar','login-snackbar'],
-              });
+        this._snackBar.open(this.results.message, "X", {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 3000,
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
 
-          },err=>{
-            this.error = err;
-            this.loading = false;
-            this._snackBar.open(this.error, "Try again!", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: ['red-snackbar','login-snackbar'],
-            });
-          })
+      }, err => {
+        this.error = err;
+        this.loading = false;
+        this._snackBar.open(this.error, "Try again!", {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 3000,
+          panelClass: ['red-snackbar', 'login-snackbar'],
+        });
+      })
 
-        }, err=>{
-          this.error = err;
-            this._snackBar.open(this.error, "X", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: ['red-snackbar','login-snackbar'],
-            });
-        })
-      }
+    }, err => {
+      this.error = err;
+      this._snackBar.open(this.error, "X", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000,
+        panelClass: ['red-snackbar', 'login-snackbar'],
+      });
+    })
+  }
 
-      onDelete(){
-        this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res=>{
-          this.results = res;
-          this.deleteformData = this.fb.group({
-            deleteFlag: ["Y"],
-            deletedBy: [this.results.entity.deletedBy],
-            deletedTime: [this.results.entity.deletedTime],
-            glCode: [this.results.entity.glCode],
-            glDescription: [this.results.entity.glDescription],
-            modifiedBy: [this.results.entity.modifiedBy],
-            modifiedTime: [this.results.entity.modifiedTime],
-            postedBy: [this.results.entity.postedBy],
-            postedFlag: [this.results.entity.postedFlag],
-            postedTime: [this.results.entity.postedTime],
-            sn: [this.results.entity.sn],
-            verifiedBy: [this.results.entity.verifiedBy],
-            verifiedFlag: [this.results.entity.verifiedFlag],
-            // verifiedTime: [this.results.entity.verifiedTime]
-          });
-          // call to update the data
-                    // this.formData.controls.glCode.disable();
-                    this.subscription = this.glcodeAPI.updateGlcode(this.deleteformData.value).subscribe(res=>{
-                      this.results = res;
-                      this.loading = false;
+  onDelete() {
+    this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res => {
+      this.results = res;
+      this.deleteformData = this.fb.group({
+        deleteFlag: ["Y"],
+        deletedBy: [this.results.entity.deletedBy],
+        deletedTime: [this.results.entity.deletedTime],
+        glCode: [this.results.entity.glCode],
+        glDescription: [this.results.entity.glDescription],
+        modifiedBy: [this.results.entity.modifiedBy],
+        modifiedTime: [this.results.entity.modifiedTime],
+        postedBy: [this.results.entity.postedBy],
+        postedFlag: [this.results.entity.postedFlag],
+        postedTime: [this.results.entity.postedTime],
+        sn: [this.results.entity.sn],
+        verifiedBy: [this.results.entity.verifiedBy],
+        verifiedFlag: [this.results.entity.verifiedFlag],
+        // verifiedTime: [this.results.entity.verifiedTime]
+      });
+      // call to update the data
+      // this.formData.controls.glCode.disable();
+      this.subscription = this.glcodeAPI.updateGlcode(this.deleteformData.value).subscribe(res => {
+        this.results = res;
+        this.loading = false;
 
-                        this._snackBar.open( this.results.message, "X", {
-                          horizontalPosition: this.horizontalPosition,
-                          verticalPosition: this.verticalPosition,
-                          duration: 3000,
-                          panelClass: ['green-snackbar','login-snackbar'],
-                        });
+        this._snackBar.open(this.results.message, "X", {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 3000,
+          panelClass: ['green-snackbar', 'login-snackbar'],
+        });
 
-                    },err=>{
-                      this.error = err;
-                      this.loading = false;
-                      this._snackBar.open(this.error, "Try again!", {
-                        horizontalPosition: this.horizontalPosition,
-                        verticalPosition: this.verticalPosition,
-                        duration: 3000,
-                        panelClass: ['red-snackbar','login-snackbar'],
-                      });
-                    })
+      }, err => {
+        this.error = err;
+        this.loading = false;
+        this._snackBar.open(this.error, "Try again!", {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 3000,
+          panelClass: ['red-snackbar', 'login-snackbar'],
+        });
+      })
 
 
-        }, err=>{
-          this.error = err;
-            this._snackBar.open(this.error, "X", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: ['red-snackbar','login-snackbar'],
-            });
-        })
-      }
+    }, err => {
+      this.error = err;
+      this._snackBar.open(this.error, "X", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000,
+        panelClass: ['red-snackbar', 'login-snackbar'],
+      });
+    })
+  }
 
-  onSubmit(){
+  onSubmit() {
     this.loading = true;
     this.submitted = true;
     this.function_type = this.formData.controls.function_type.value
 
-    if(this.formData.valid){
-      if(this.function_type == "V-Verify"){
+    if (this.formData.valid) {
+      if (this.function_type == "V-Verify") {
         // call to update verify flag
         this.onVerify();
         // update
-
       }
-      if(this.function_type == "X-Delete"){
+      if (this.function_type == "X-Delete") {
         // call to update delete flag
         this.onDelete()
         console.log("got called for delete");
 
-      }else{
+      } else {
         this.glcodeAPI.changeMessage(this.formData.value)
-        this.router.navigate(['system/configurations/global/gl-code/data/view'], {skipLocationChange:true})
+        this.router.navigate(['system/configurations/global/gl-code/data/view'], { skipLocationChange: true })
       }
-  }else{
-    this.loading = false;
-    this._snackBar.open("Invalid Form Data", "Try again!", {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 3000,
-      panelClass: ['red-snackbar','login-snackbar'],
-    });
-  }
+    } else {
+      this.loading = false;
+      this._snackBar.open("Invalid Form Data", "Try again!", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000,
+        panelClass: ['red-snackbar', 'login-snackbar'],
+      });
+    }
   }
 
 }

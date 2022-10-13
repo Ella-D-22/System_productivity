@@ -1,6 +1,9 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Sub Segement Maintenance</div>
+        <div>
+            <a routerLink="/system">Dashboard / </a> &nbsp;
+            Sub Segement Maintenance
+        </div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -13,24 +16,30 @@
                             <label for="" class="start pull-left">Fuction<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <select class="form-control" (change)="onFunctionSelection($event)" formControlName="function_type">
+                            <select class="form-control" (change)="onFunctionSelection($event)"
+                                formControlName="function_type">
                                 <option value="" disabled>--Choose Function--</option>
                                 <option *ngFor="let item of functionArray" [value]="item">{{item}}</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12" *ngIf="showSegmentId">
+                <div class="col-md-6 col-sm-12" *ngIf="showSubSegmentId">
                     <div class="form-group">
                         <div class="col-md-6 col-sm-12 form-column">
                             <label for="" class="start pull-left">Segment Code<span class="warning">*</span></label>
                         </div>
-                        <input type="text" class="form-control" formControlName="segmentCode">
-                        <mat-icon (click)="segmentLookup()">search</mat-icon>
+                        <div class="col-md-4 col-sm-12 form-column">
+                            <input type="text" class="form-control" formControlName="segmentCode">
+                        </div>
+                        <div class="col-md-2 col-sm-12 form-column">
+                            <mat-icon (click)="subSegmentLookup()">search</mat-icon>
+                        </div>
+
                     </div>
                 </div>
             </div>
-           <div class="row">
+            <!-- <div class="row">
             <div class="col-md-6 col-sm-12" *ngIf="showSubSegmentId">
                 <div class="form-group">
                     <div class="col-md-6 col-sm-12 form-column">
@@ -42,9 +51,10 @@
                     </div>
                 </div>
             </div>
-           </div>
+           </div> -->
             <br>
             <button mat-raised-button color="primary" type="submit" class="pull-right">GO</button>
+            <br>
         </form>
     </div>
 

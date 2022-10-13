@@ -22,8 +22,8 @@ export class SubSegmentComponent implements OnInit {
   error: any
   message: any
   subscription: Subscription
-  horizontalPosition: MatSnackBarHorizontalPosition
-  verticalPosition: MatSnackBarVerticalPosition
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(private router: Router,
     private _snackbar: MatSnackBar,
     private fb: FormBuilder,
