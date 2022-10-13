@@ -156,7 +156,7 @@ const routes: Routes = [
       },
 
       {
-        path: 'configurations/global/mis-sector/add',
+        path: 'configurations/global/mis-sector',
         component: MisSectorComponent,
         // canActivate:[CanActivateModuleGuard],
         data: { preload: true },
@@ -186,7 +186,7 @@ const routes: Routes = [
       },
 
       {
-        path: 'configurations/global/mis-sub-sector/data/view',
+        path: 'configurations/global/mis-sub-sector',
         component: MisSubSectorComponent,
         // canActivate:[CanActivateModuleGuard],
         // data:{preload:true},

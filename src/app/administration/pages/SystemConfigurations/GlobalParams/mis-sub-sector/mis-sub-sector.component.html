@@ -1,5 +1,9 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
+        <div>
+            <a routerLink="/system">Dashboard / </a> &nbsp;
+            <a routerLink="/system">MIS-SubSector Maintenance / </a> &nbsp;MIS-SubSector
+        </div>
         <div>MIS-Subsector</div>
     </mat-card-header>
     <br>
@@ -22,58 +26,60 @@
     <mat-divider></mat-divider>
     <br>
     <div class="container-fluid">
-        <form class="form"
-        [formGroup]="formData"
-        novalidate
-        #resetRequestsForm = "ngForm"
-        (submit)="onSubmit()">
+        <form class="form" [formGroup]="formData" novalidate #resetRequestsForm="ngForm" (submit)="onSubmit()">
 
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column">
-                        <label class="start pull-left">MIS Sub Sector<span class="warning">*</span></label>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-left">MIS Sub Sector<span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" formControlName="mis_sub_sector" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.mis_sub_sector.errors }"
+                                oninput="this.value=this.value.toUpperCase()">
+                        </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                        <input type="text" formControlName="mis_sub_sector" class="form-control" [ngClass]="{'is-invalid': submitted && f.mis_sub_sector.errors }"
-                        oninput="this.value=this.value.toUpperCase()">
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-right">MIS CODE Sub Sector <span class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" formControlName="missubcode" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.missubcode.errors }"
+                                oninput="this.value=this.value.toUpperCase()">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column">
-                        <label class="start pull-right">MIS CODE Sub Sector <span class="warning">*</span></label>
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                        <input  type="text" formControlName="missubcode" class="form-control" [ngClass]="{'is-invalid': submitted && f.missubcode.errors }"
-                        oninput="this.value=this.value.toUpperCase()">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-12 form-column">
-                        <label class="start pull-right">MIS Sub Sector Description<span class="warning">*</span></label>
-                    </div>
-                    <div class="col-md-6 col-sm-12 form-column">
-                        <input  type="text" formControlName="mis_sub_sector_desc" class="form-control" [ngClass]="{'is-invalid': submitted && f.mis_sub_sector_desc.errors }"
-                        oninput="this.value=this.value.toUpperCase()">
+            <br>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <label class="start pull-right">MIS Sub Sector Description<span
+                                    class="warning">*</span></label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-column">
+                            <input type="text" formControlName="mis_sub_sector_desc" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.mis_sub_sector_desc.errors }"
+                                oninput="this.value=this.value.toUpperCase()">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <button class="pull-left" routerLink="../../maintenance" skipLocationChange  mat-raised-button color="default" type="button">
-            Back
-          </button>
-          <br>
-        <button mat-raised-button color="primary" type="submit" class="start pull-right" *ngIf="isEnabled">Submit</button>
-        <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
-
+            <br>
+            <button class="pull-left" routerLink="../../maintenance" skipLocationChange mat-raised-button
+                color="default" type="button">
+                Back
+            </button>
+            <br>
+            <button mat-raised-button color="primary" type="submit" class="start pull-right"
+                *ngIf="isEnabled">Submit</button>
+            <button mat-raised-button color="warn" type="submit" class="pull-right" *ngIf="isDeleted">Delete</button>
+            <br>
         </form>
     </div>
 </mat-card>
