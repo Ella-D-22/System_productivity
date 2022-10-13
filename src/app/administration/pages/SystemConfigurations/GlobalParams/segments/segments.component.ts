@@ -13,8 +13,8 @@ import { SegmentsService } from './segments.service';
 export class SegmentsComponent implements OnInit {
 
   subscription:Subscription
-  horizontalPosition:MatSnackBarHorizontalPosition
-  verticalPosition:MatSnackBarVerticalPosition
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   message: any;
   function_type:any
   segment_id:any
@@ -198,14 +198,13 @@ export class SegmentsComponent implements OnInit {
         } )
 
     }
-    onSubmit(){
-
+  onSubmit() {
       if(this.formData.valid){
         if(this.function_type == "A-Add"){
           this.subscription = this.segService.createSegment(this.formData.value).subscribe(
             res =>{
               this.results = res
-              this._snackbar.open("Executed Successfully!", "X",{
+              this._snackbar.open("Executed Successfully!", "OK",{
                 horizontalPosition:this.horizontalPosition,
                 verticalPosition:this.verticalPosition,
                 duration:3000,

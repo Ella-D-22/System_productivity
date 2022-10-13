@@ -54,19 +54,20 @@ onFunctionSelection(event:any){
 get f() { 
   return this.formData.controls; }
 
-segmentLookup():void{
-  const dialogRef =  this.dialog.open(SegmentLookupComponent,{
+// segmentLookup():void{
+//   const dialogRef =  this.dialog.open(SegmentLookupComponent,{
 
-  });
-  dialogRef.afterClosed().subscribe(results =>{
-    this.dialogData = results.data;
-    this.formData.controls.segmentCode.setValue(this.dialogData.segmentCode)
-    this.formData.controls.segment_id.setValue(this.dialogData.id)
-  })
-}
+//   });
+//   dialogRef.afterClosed().subscribe(results =>{
+//     this.dialogData = results.data;
+//     this.formData.controls.segmentCode.setValue(this.dialogData.segmentCode)
+//     this.formData.controls.segment_id.setValue(this.dialogData.id)
+//   })
+// }
 
 subSegmentLookup():void{
-  const dialogRef = this.dialog.open(SubSegmentLookupComponent,{
+  const dialogRef = this.dialog.open(SubSegmentLookupComponent, {
+    width: '35%'
   });
   dialogRef.afterClosed().subscribe(results =>{
     this.dialogData = results.data
@@ -83,10 +84,9 @@ subSegmentLookup():void{
    if(this.formData.valid){
      this.subSegmentService.changeMessage(this.formData.value)
      if(this.function_type == "A-Add"){
-
-      this.router.navigate(['system/configurations/global/sub-segment/data/view'],{skipLocationChange:true} )
+      this.router.navigate(['system/configurations/global/sub-segment'],{skipLocationChange:true} )
      }else if(this.function_type != "A-Add"){
-      this.router.navigate(['system/configurations/global/sub-segment/data/view'],{skipLocationChange:true} )
+      this.router.navigate(['system/configurations/global/sub-segment'],{skipLocationChange:true} )
 
      }
    }else{
