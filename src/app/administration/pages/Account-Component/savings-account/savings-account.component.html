@@ -39,11 +39,12 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="accountManager" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
-                                        &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search Account Manger" (click)="customerLookup()">search</mat-icon>
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Account Manger"
+                                        (click)="customerLookup()">search</mat-icon>
 
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
@@ -85,8 +86,9 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="solCode" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
-                                        &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search Brach Code" (click)="branchSubheadLookup()">search</mat-icon>
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Brach Code"
+                                        (click)="branchSubheadLookup()">search</mat-icon>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +101,8 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="currency" maxlength="3" class="form-control">
                                     &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search Currency" (click)="currencyLookup()">search</mat-icon>
+                                    <mat-icon color="primary" matTooltip="Search Currency" (click)="currencyLookup()">
+                                        search</mat-icon>
                                 </div>
                             </div>
                         </div>
@@ -114,8 +117,9 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="customerCode" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
-                                        &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search Customer Code" (click)="customerLookup()">search</mat-icon>
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Customer Code"
+                                        (click)="customerLookup()">search</mat-icon>
                                 </div>
                             </div>
                         </div>
@@ -126,11 +130,11 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <input [matDatepicker]="opicker" formControlName="openingDate"
-                                        class="form-control" />
-                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="opicker">
+                                    <input type="date" formControlName="openingDate" class="form-control" />
+                                    <!-- <input [matDatepicker]="opicker" formControlName="openingDate" class="form-control" />
+                                    <mat-datepicker-toggle  matSuffix [for]="opicker">
                                     </mat-datepicker-toggle>
-                                    <mat-datepicker #opicker></mat-datepicker>
+                                    <mat-datepicker #opicker></mat-datepicker> -->
                                 </div>
                             </div>
                         </div>
@@ -144,8 +148,9 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="schemeCode" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
-                                        &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search Scheme code" (click)="sbaSchemeCodeLookup()">search</mat-icon>
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Scheme code"
+                                        (click)="sbaSchemeCodeLookup()">search</mat-icon>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -164,6 +169,9 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="glSubhead" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search GL subhead"
+                                        (click)="glSubheadLookup()">search</mat-icon>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -183,12 +191,17 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <select formControlName="sectorCode" (change)="onInputSelection($event)"
+                                    <!-- <select formControlName="sectorCode" (change)="onInputSelection($event)"
                                         class="form-control">
                                         <option value="" disabled>-- Select MIS Sector Code --</option>
                                         <option *ngFor="let item of this.sectorData " [value]="item.miscode">
                                             {{item.mis_sector}}</option>
-                                    </select>
+                                    </select> -->
+                                    <input type="text" formControlName="sectorCode" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Sector Code"
+                                        (click)="sectorCodeLookup()">search</mat-icon>
                                 </div>
                             </div>
                         </div>
@@ -199,11 +212,17 @@
                                             class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <select formControlName="subSectorCode" class="form-control">
+                                    <!-- <select formControlName="subSectorCode" class="form-control">
                                         <option value="" disabled>--Select a MIS Sub Sector</option>
                                         <option *ngFor="let item of subSectors " [value]="item.missubcode">
                                             {{item.mis_sub_sector_desc}}</option>
-                                    </select>
+                                    </select> -->
+                                    <input type="text" formControlName="subSectorCode" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search sub Sector Code"
+                                        (click)="subSectorCodeLookup()">search</mat-icon>
+
                                 </div>
                             </div>
                         </div>
@@ -277,7 +296,9 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="statementFreq" class="form-control">
-                                        <option *ngFor="let item of statementFreqArray" [value]="item">{{item}}
+                                        <option value="" disabled>SELECT FREQUENCY</option>
+                                        <option oninput="this.value=this.value.toUpperCase()"
+                                            *ngFor="let item of statementFreqArray" [value]="item">{{item}}
                                         </option>
                                     </select>
                                 </div>
@@ -293,6 +314,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="dispatchMode" class="form-control">
+                                        <option value="" disabled>SELECT MODE</option>
                                         <option *ngFor="let item of despatch_mode_array" [value]="item">{{item}}
                                         </option>
                                     </select>
@@ -322,6 +344,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="accountStatus" class="form-control">
+                                        <option value="" disabled>SELECT STATUS</option>
                                         <option *ngFor="let item of accountStatusArray" [value]="item">{{item}}</option>
                                     </select>
                                 </div>
@@ -352,7 +375,7 @@
                                                 class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="number" formControlName="sba_maturedValue" class="form-control">
+                                        <input type="date" formControlName="sba_maturedValue" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -364,11 +387,12 @@
                                         <label for="" class="start pull-left"> Matured Date<span>*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input [matDatepicker]="mpicker" formControlName="sba_maturedDate"
+                                        <input type="date" formControlName="sba_maturedDate" class="form-control" />
+                                        <!-- <input [matDatepicker]="mpicker" formControlName="sba_maturedDate"
                                             class="form-control" />
                                         <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="mpicker">
                                         </mat-datepicker-toggle>
-                                        <mat-datepicker #mpicker></mat-datepicker>
+                                        <mat-datepicker #mpicker></mat-datepicker> -->
                                     </div>
                                 </div>
                             </div>
@@ -414,7 +438,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
                                         <input maxlength="20" type="text" formControlName="lastName"
-                                            class="form-control">
+                                            oninput="this.value=this.value.toUpperCase()" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -439,7 +463,8 @@
                                                 class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input maxlength="12" type="text" formControlName="phone" class="form-control">
+                                        <input minlength="10" maxlength="12" type="text" formControlName="phone"
+                                            class="form-control" oninput="this.value=this.value.toUpperCase()">
                                     </div>
                                 </div>
                             </div>
@@ -450,7 +475,7 @@
                                                 class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input maxlength="20" type="text" formControlName="emailAddress"
+                                        <input maxlength="20" type="email" formControlName="emailAddress"
                                             class="form-control" oninput="this.value=this.value.toUpperCase()">
                                     </div>
                                 </div>
@@ -464,10 +489,11 @@
                                                 class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input [matDatepicker]="ppicker" formControlName="dob" class="form-control" />
+                                        <input type="date" formControlName="dob" class="form-control" />
+                                        <!-- <input [matDatepicker]="ppicker" formControlName="dob" class="form-control" />
                                         <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker">
                                         </mat-datepicker-toggle>
-                                        <mat-datepicker #ppicker></mat-datepicker>
+                                        <mat-datepicker #ppicker></mat-datepicker> -->
                                     </div>
                                 </div>
                             </div>
@@ -479,7 +505,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
                                         <select formControlName="relationship" class="form-control">
-                                            <option value="" disabled>--select here--</option>
+                                            <option value="" disabled>RELATIONSHIP</option>
                                             <option *ngFor="let item of relationshipArray" [value]="item">{{item}}
                                             </option>
                                         </select>
@@ -520,6 +546,18 @@
                             </div>
                         </div>
                         <br />
+                        <hr>
+
+                        <h4><strong>GUARDIAN INFORMATION</strong> &nbsp; &nbsp;
+                            <button class="table-main-action-btn bg-primary text-white"
+                                (click)="addGuardian()" mat-raised-button>
+                                &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; ADD
+                            </button> &nbsp; &nbsp;
+                            <button class="table-main-action-btn bg-warning text-white"
+                                (click)="removeGuardian()" mat-raised-button>
+                                &nbsp; <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp; REMOVE
+                            </button>
+                        </h4>
                         <form action="" [formGroup]="guardianFormData">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -541,6 +579,7 @@
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-column">
                                             <select formControlName="guardianCode" class="form-control">
+                                                <option value="" disabled>SELECT GURADIAN</option>
                                                 <option *ngFor="let item of guardianArray" [value]="item">{{item}}
                                                 </option>
                                             </select>
@@ -572,16 +611,18 @@
                                     </div>
                                 </div>
                             </div>
-
                         </form>
-                        <button class="pull-right btn-sm" type="button" (click)="previewNominees()">
-                            + Add
+                        <button class=" pull-right table-main-action-btn" color="warn" (click)="onNomineeClear()"
+                            mat-raised-button>
+                            &nbsp; <i class="fa fa-times-rectangle" aria-hidden="true"></i>&nbsp; CLEAR
                         </button>
-                        <button class="pull-right btn-sm" type="button" (click)="initNomineeData()">
-                            Reset form
+                        <button class=" pull-right table-main-action-btn" color="accent" (click)="initNomineeData()"
+                            mat-raised-button>
+                            &nbsp; <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;RESET
                         </button>
-                        <button class="pull-right btn-sm" type="button" (click)="onNomineeClear()">
-                            Clear All
+                        <button class=" pull-right table-main-action-btn" color="primary" (click)="previewNominees()"
+                            mat-raised-button>
+                            &nbsp; <i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp; CREATE
                         </button>
                     </form>
                     <br>
@@ -609,13 +650,14 @@
                                 <td>{{item.phone}}</td>
                                 <td>{{item.emailAddress}}</td>
                                 <td>{{item.dob}}</td>
-                                <td><a class="update btn btn-sm" color="accent" (click)="onRemove(i)">X</a></td>
-
+                                <td>
+                                    <mat-icon (click)="onRemove(i)" color="warn" matTooltip="Sweep Record">delete_sweep
+                                    </mat-icon>
+                                    <!-- <a color="accent" (click)="onRemove(i)"><i class="fa fa-minus-square" aria-hidden="true"></i></a> -->
+                                </td>
                             </tr>
                         </tbody>
                     </table>
-
-
                 </mat-tab>
             </mat-tab-group>
             <br>
