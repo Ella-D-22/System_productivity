@@ -16,6 +16,7 @@ export interface  ApiData {
   scheme_abbreviation: String;
   scheme_category: String;
   scheme_description: String;
+
 }
 @Component({
   selector: 'app-scheme-type-lookup',
@@ -36,7 +37,8 @@ export class SchemeTypeLookupComponent implements OnInit, OnDestroy {
   employeeEmail: any;
   employee_id: any;
   creatingAccount = false;
-  formData:any;
+  formData: any;
+  loading: boolean = false;
 
   constructor(    
     public dialogRef: MatDialogRef<SchemeTypeLookupComponent>,
@@ -60,9 +62,11 @@ export class SchemeTypeLookupComponent implements OnInit, OnDestroy {
         this.dataSource.paginator.firstPage();
       }
     }
-    getData() {
+  getData() {
+    this.loading = true;
       this.subscription = this.schemeTypeApi.getSchemetypes().subscribe(res => {
-       this.data = res;
+        this.data = res;
+        this.loading = false;
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;

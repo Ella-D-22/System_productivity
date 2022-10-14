@@ -16,8 +16,8 @@ export class ShareCapitalParamsComponent implements OnInit {
  subscription:Subscription
  results:any
  error:any
- horizontalPosition:MatSnackBarHorizontalPosition
- verticalPosition:MatSnackBarVerticalPosition
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   message: any;
   function_type: any;
   scheme_id: any;
@@ -35,7 +35,6 @@ export class ShareCapitalParamsComponent implements OnInit {
   ngOnInit(){
     this.getPage()
   }
-
   officeAccountLookup(): void {
     this.dtype="oa"  
     const dconfig= new MatDialogConfig()
@@ -48,7 +47,6 @@ export class ShareCapitalParamsComponent implements OnInit {
       this.formData.controls.account_code.setValue(result.data.acid);
     });
   }
-  
   formData = this.fb.group({
     id: [''],
     share_capital_unit:[''],
@@ -169,12 +167,11 @@ getPage(){
   }
 
   onSubmit(){
-    
     if(this.formData.valid){
       this.subscription = this.ParamsService.createShareCapitalParams(this.formData.value).subscribe(
         res =>{
           this.results = res
-          this._snackbar.open("Executted Successfully","X",{
+          this._snackbar.open("Share capital params added successfully","OK",{
             horizontalPosition:this.horizontalPosition,
             verticalPosition:this.verticalPosition,
             duration:3000,

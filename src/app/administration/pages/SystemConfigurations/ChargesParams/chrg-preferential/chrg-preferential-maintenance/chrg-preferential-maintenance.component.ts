@@ -109,7 +109,7 @@ export class ChrgPreferentialMaintenanceComponent implements OnInit {
   }
   eventId(): void {
     const dialogRef = this.dialog.open(EventIdLookupComponent, {
-     
+   
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupdata = result.data;

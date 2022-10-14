@@ -23,7 +23,7 @@ import { LinkedorganizationService } from '../linkedorganization.service';
 export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  displayedColumns: string[] = [ 'index','organization_name','organization_mail','organization_address','organization_country','organization_main_office'];
+  displayedColumns: string[] = ['index', 'organization_name', 'organization_mail', 'organization_address', 'organization_country', 'organization_main_office'];
 
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,7 +31,7 @@ export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
   respData: any;
 
 
-  constructor(    
+  constructor(
     public dialogRef: MatDialogRef<GlCodeLookupComponent>,
     private router: Router,
     private ngZone: NgZone,
@@ -39,35 +39,32 @@ export class LinkedOrganizationLookupComponent implements OnInit, OnDestroy {
     private authAPI: AuthService,
     public fb: FormBuilder,
     private linkedOrgAPI: LinkedorganizationService,
-    private organizationService: OrganizationService,
+    private organizationService: OrganizationService) { }
+  ngOnInit() {
+    this.getData();
+  }
+  ngOnDestroy(): void {
+    //this.subscription.unsubscribe();
+  }
+  getData() {
+    this.organizationService.read().subscribe(res => {
+      this.respData = res;
+      // Binding with the datasource
+      this.dataSource = new MatTableDataSource(this.respData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      console.log("Organization details", this.respData);
 
-    ) { }
-    ngOnInit() {
-      this.getData();
+    })
+  }
+  onSelect(data: any) {
+    this.dialogRef.close({ event: 'close', data: data });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-    ngOnDestroy(): void {
-      //this.subscription.unsubscribe();
-    }
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-    }
-    getData() {
-      this.organizationService.read().subscribe(res=>{
-       this.respData = res;
-        // Binding with the datasource
-        this.dataSource = new MatTableDataSource(this.respData);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        console.log("Organization details", this.respData);
-        
-      })
-    }
-
-    onSelect(data:any){
-      this.dialogRef.close({ event: 'close', data:data });
-    } 
+  }
 }

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class GuarantorsParamsService {
 
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  headers = new HttpHeaders().set('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Access-Control-Allow-Origin: *', 'application/json');
   baseURL = `${environment.productAPI}//api/v1/customer/guarantors/config`;
     constructor(private http: HttpClient) { }
      // Message Medium

@@ -12,6 +12,9 @@ import { GuarantorsParamsService } from './guarantors-params.service';
   styleUrls: ['./guarantors-params.component.scss']
 })
 export class GuarantorsParamsComponent implements OnInit {
+   // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  // auth_user = this.currentUser.username;
+  auth_user = "kiprotich"
   subscription:Subscription
   results:any
   error:any
@@ -43,7 +46,7 @@ export class GuarantorsParamsComponent implements OnInit {
      modifiedBy: ['N'],
      modifiedFlag:['N'],
      modifiedTime: [new Date()],
-     postedBy: ['N'],
+     postedBy: [this.auth_user],
      postedFlag: ['Y'],
      postedTime:[new Date()],
      verifiedBy:['N'],
@@ -71,7 +74,7 @@ export class GuarantorsParamsComponent implements OnInit {
       modifiedFlag:['N'],
       modifiedBy: ['N'],
       modifiedTime: [new Date()],
-      postedBy: ['N'],
+      postedBy: [this.auth_user],
       postedFlag: ['Y'],
       postedTime:[new Date()],
       verifiedBy:['N'],
@@ -161,7 +164,9 @@ export class GuarantorsParamsComponent implements OnInit {
    disabledFormControll() {
      throw new Error('Method not implemented.');
    }
-   onSubmit(){  
+  onSubmit() {  
+     console.log("data",this.formData.value);
+     
      if(this.formData.valid){
        if(this.function_type == "A-Add"){
         this.subscription = this.guarantorsConfigAPI.createGuarantorsConfig(this.formData.value).subscribe(

@@ -1,6 +1,8 @@
     <mat-card>
         <mat-card-header  class="breadcrumb">
-          <div>Charge Preferentials Maintenenace</div>
+          <div>
+            <a routerLink="/system">Dashboard / </a>Charge Preferentials Maintenenace
+          </div>
       </mat-card-header>
       <mat-divider></mat-divider>
       <br>
@@ -44,14 +46,14 @@
 
       <div  class="row">
         <div class="col-md-6 col-sm-12">
-
-
              <div *ngIf="this.showAccountInput" class="form-group">
                 <div class="col-md-6 col-sm-12 form-column ">
                  <label class="start pull-left">Account ID<span class="warning">*</span></label>
                 </div>
-                <div class="col-md-6 col-sm-12 form-column ">
+                <div class="col-md-5 col-sm-12 form-column ">
                   <input [required]="this.showAccountInput" type="text" [value]="this.account_id" formControlName="account_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.account_id.errors }" />
+                </div>
+                <div class="col-md-1 col-sm-12 form-column ">
                 <mat-icon (click)="eventId()">search</mat-icon>
                 </div>
              </div>
@@ -59,8 +61,10 @@
                 <div class="col-md-6 col-sm-12 form-column ">
                  <label class="start pull-left">CIF ID<span class="warning">*</span></label>
                 </div>
-                <div class="col-md-6 col-sm-12 form-column ">
+                <div class="col-md-5 col-sm-12 form-column ">
                   <input [required]="this.showCifInput" type="text" [value]="this.cif_id" formControlName="cif_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.cif_id.errors }" />
+                </div>
+                <div class="col-md-1 col-sm-12 form-column ">
                 <mat-icon (click)="eventId()">search</mat-icon>
                 </div>
              </div>
@@ -68,8 +72,10 @@
                 <div class="col-md-6 col-sm-12 form-column ">
                  <label class="start pull-left">OrganizationID<span class="warning">*</span></label>
                 </div>
-                <div class="col-md-6 col-sm-12 form-column ">
+                <div class="col-md-5 col-sm-12 form-column ">
                   <input [required]="this.showContractInput" type="text" [value]="this.organization_name" formControlName="organization_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.organization_id.errors }" />
+                </div>
+                <div class="col-md-1 col-sm-12 form-column ">
                 <mat-icon (click)="organizationIdLookup()">search</mat-icon>
                 </div>
              </div>
@@ -85,8 +91,11 @@
             <div class="col-md-6 col-sm-12 form-column ">
              <label class="start pull-left">Charge Definition<span class="warning">*</span></label>
             </div>
-            <div class="col-md-6 col-sm-12 form-column ">
+            <div class="col-md-5 col-sm-12 form-column ">
               <input [required]="this.showChargeInput" type="text" [value]="this.event_id" formControlName="event_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_id.errors }" />
+           
+            </div>
+            <div class="col-md-1 col-sm-12 form-column ">
             <mat-icon (click)="eventId()">search</mat-icon>
             </div>
          </div>
@@ -123,7 +132,7 @@
             *ngIf="loading"
             class="spinner-border spinner-border-sm mr-1"
           ></span>
-          Submit
+          PROCEED
         </button>
         <br />
       </form>

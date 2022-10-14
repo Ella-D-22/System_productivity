@@ -28,7 +28,8 @@ export class ShareCapitalParamsLookupComponent  implements OnInit, OnDestroy {
   employeeEmail: any;
   employee_id: any;
   creatingAccount = false;
-  formData:any;
+  formData: any;
+  loading: boolean = false;
 
   constructor(    
     private router: Router,
@@ -44,16 +45,12 @@ export class ShareCapitalParamsLookupComponent  implements OnInit, OnDestroy {
     ngOnDestroy(): void {
       this.subscription.unsubscribe();
     }
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-    }
-    getData() {
+   
+  getData() {
+    this.loading = true;
       this.subscription = this.ParamsService.getAllShareCapitalParams().subscribe(res => {
-       this.data = res;
+        this.data = res;
+        this.loading = false;
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;
@@ -63,5 +60,11 @@ export class ShareCapitalParamsLookupComponent  implements OnInit, OnDestroy {
     onSelect(data:any){
       // this.dialogRef.close({ event: 'close', data:data });
     }
-  
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
 }

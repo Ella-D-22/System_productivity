@@ -1,7 +1,7 @@
 <mat-card>
 
   <mat-card-header class="breadcrumb">
-    <a routerLink="/system">Dashboard / </a> &nbsp; Organization Maintenance
+    <a routerLink="/system">Dashboard / </a> Organization Maintenance
   </mat-card-header>
   <mat-divider></mat-divider>
   <br>
@@ -28,21 +28,23 @@
             <div class="col-md-6 col-sm-12 form-column ">
               <label class="start pull-left">Organization Id<span class="warning">*</span></label>
             </div>
-            <div class="col-md-6 col-sm-12 form-column ">
+            <div class="col-md-5 col-sm-12 form-column ">
               <input type="text" [value]="this.organization_name" formControlName="organization_id" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.organization_id.errors }" />
-              <mat-icon (click)="organizationLookup()">search</mat-icon>
+            </div>
+            <div class="col-md-1 col-sm-12 form-column ">
+              <mat-icon (click)="organizationLookup()" matTooltip="Search Organization">search</mat-icon>
             </div>
           </div>
         </div>
       </div>
       <br />
-      <button class="pull-left" mat-raised-button color="default">
+      <!-- <button class="pull-left" mat-raised-button color="default">
         Close
-      </button>
+      </button> -->
       <button class="pull-right" mat-raised-button color="primary" type="submit">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Submit
+        PROCEED
       </button>
       <br />
     </form>
