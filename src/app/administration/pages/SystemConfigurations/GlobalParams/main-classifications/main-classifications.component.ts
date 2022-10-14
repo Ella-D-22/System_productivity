@@ -13,7 +13,9 @@ import { MainClassificationService } from './main-classification.service';
   styleUrls: ['./main-classifications.component.scss']
 })
 export class MainClassificationsComponent implements OnInit {
- 
+ // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  // auth_user = this.currentUser.username;
+  auth_user:String ='kiprotich';
 
   message:any
   results:any
@@ -24,8 +26,8 @@ export class MainClassificationsComponent implements OnInit {
   isDeleted = false
   submitted = false
   subscription:Subscription
-  horizontalPosition:MatSnackBarHorizontalPosition
-  verticalPosition:MatSnackBarVerticalPosition
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(private fb:FormBuilder,
     private mainService:MainClassificationService,
     private _snackbar:MatSnackBar,
@@ -45,7 +47,7 @@ export class MainClassificationsComponent implements OnInit {
     verifiedBy:[''],
     verifiedTime:[''],
     verifiedFlag:[''],
-    postedFlag:[''],
+    postedFlag:[this.auth_user],
     postedBy:[''],
     postedTime:[''],
     modifiedBy:[''],
@@ -77,7 +79,7 @@ export class MainClassificationsComponent implements OnInit {
             verifiedTime:[new Date()],
             verifiedFlag:['N'],
             postedFlag:['Y'],
-            postedBy:['User'],
+            postedBy:[this.auth_user],
             postedTime:[new Date()],
             modifiedBy:['None'],
             modifiedTime:[new Date()],
@@ -116,7 +118,6 @@ export class MainClassificationsComponent implements OnInit {
           this.subscription = this.mainService.getMainClassificationByCode(this.main_code).subscribe(
             res =>{
               this.results = res
-              
               this.formData = this.fb.group({
                 mainClassificationCode: [this.results.mainClassificationCode],
                 mainClassificationDescription: [this.results.mainClassificationDescription],
@@ -190,14 +191,14 @@ export class MainClassificationsComponent implements OnInit {
   }
 
   onSubmit(){
-
     this.submitted = true;
+    console.log("Main Classification data", this.formData.value);
     if(this.formData.valid){
       if(this.function_type == "A-Add"){
         this.subscription = this.mainService.createMainClassification(this.formData.value).subscribe(
           res =>{
             this.results = res
-            this._snackbar.open("Created Main Classification Successfully", "X",{
+            this._snackbar.open("Main Classification record created successfully", "OK",{
               horizontalPosition:this.horizontalPosition,
               verticalPosition:this.verticalPosition,
               duration:3000,

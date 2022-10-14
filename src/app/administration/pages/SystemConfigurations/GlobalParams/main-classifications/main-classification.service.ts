@@ -8,12 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MainClassificationService {
-
-  
   headers =  new HttpHeaders().set('Content-Type', 'application/json')
-
   constructor(private http:HttpClient) { }
-
   baseURL = `${environment.productAPI}/api/vi/main/classification`;
 
   //message medium

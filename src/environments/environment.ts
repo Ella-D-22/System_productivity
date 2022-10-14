@@ -7,7 +7,7 @@ export const environment = {
   sytemconfigA: 'http://52.15.152.26:9100',
   userAPI: 'http://52.15.152.26:9091',
     accountAPI: 'http://52.15.152.26:9091/account-service',
-    productAPI: 'http://52.15.152.26:9091/product-service',
+    productAPI: 'http://52.15.152.26:9100',
     collateralAPI: 'http://52.15.152.26:9091/collateral-service',
     systemAPI: 'http://52.15.152.26:9091/system-service',
     branchAPI: 'http://52.15.152.26:9091/branch-service',

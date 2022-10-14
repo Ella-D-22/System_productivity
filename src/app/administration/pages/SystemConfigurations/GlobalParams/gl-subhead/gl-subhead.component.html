@@ -1,9 +1,9 @@
 <mat-card>
   <mat-card-header class="breadcrumb">
     <div>
-      <a routerLink="/system">Dashboard / </a>General Ledger Subhead Maintenance
+      <a routerLink="/system">Dashboard / </a>
+      <a routerLink="/system/configurations/global/gl-subhead/maintenance">General Ledger Subhead Maintenance / </a>General Ledger Subhead Maintenance
     </div>
-    <div>Home/General Ledger Subhead</div>
   </mat-card-header>
   <div class="row">
     <div class="col-md-3 col-sm-12">
@@ -46,7 +46,7 @@
               <label class="start pull-left">Gl Subhead Description</label>
             </div>
             <div class="col-md-6 col-sm-12 form-column">
-              <textarea type="text" maxlength="6" formControlName="glSubheadDescription"
+              <textarea type="text"  formControlName="glSubheadDescription"
                 oninput="this.value=this.value.toUpperCase()" class="pull-right form-control"></textarea>
             </div>
           </div>
@@ -56,17 +56,16 @@
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
             <div class="col-md-6 col-sm-12 form-column ">
-              <label class="start pull-left">Gl Code</label>
+              <label class="start pull-left">GL Code</label>
             </div>
-            <div class="col-md-6 col-sm-12 form-column">
+            <div class="col-md-5 col-sm-12 form-column">
               <input type="text" maxlength="6" [value]="this.glCode" formControlName="glCode"
                 class="pull-right form-control" />
+            </div>
+            <div class="col-md-1 col-sm-12 form-column">
               <mat-icon *ngIf="isEnabled" (click)="refCodeLookup()">search</mat-icon><br>
             </div>
           </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-
         </div>
       </div>
       <div class="row">
@@ -80,24 +79,19 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-sm-12">
-
-        </div>
       </div>
-
-
       <br />
       <button class="pull-left" routerLink="../../maintenance" skipLocationChange mat-raised-button color="default"
         type="button">
-        Back
+        BACK
       </button>
       <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Submit
+        SUBMIT
       </button>
       <button *ngIf="isDeleting" class="pull-right" mat-raised-button color="warn" type="submit">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Delete
+        DELETE
       </button>
       <br />
     </form>

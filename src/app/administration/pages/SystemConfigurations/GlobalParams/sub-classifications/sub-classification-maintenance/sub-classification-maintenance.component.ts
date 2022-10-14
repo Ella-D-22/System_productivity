@@ -17,7 +17,7 @@ export class SubClassificationMaintenanceComponent implements OnInit {
  
    // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
   // auth_user = this.currentUser.username;
-  auth_user = "nobody"
+  auth_user = "kiprotich"
 
   dialogData:any
   function_type:any
@@ -34,7 +34,6 @@ export class SubClassificationMaintenanceComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   formData = this.fb.group({
     function_type :[''],
     sub_classification_code:[''],
@@ -45,7 +44,6 @@ export class SubClassificationMaintenanceComponent implements OnInit {
   functionArray:any = [
     'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
   ]
-
   onFunctionSelection(event:any){
     if(event.target.value == "A-Add"){
      this.showMainCode = true
@@ -55,29 +53,26 @@ export class SubClassificationMaintenanceComponent implements OnInit {
        this.formData.controls.sub_classification_code.setValue("")
     }
   }
-
   get f() { return this.formData.controls; }
-
   mainLookup():void{
-    const dialogRef = this.dialog.open(MainClassificationLookupComponent,{
-
+    const dialogRef = this.dialog.open(MainClassificationLookupComponent, {
+      width: '45%',
     })
     dialogRef.afterClosed().subscribe(results =>{
-      this.dialogData = results.data;
-      console.log(results.data);
-      
-      this.formData.controls.main_classification_code.setValue(this.dialogData.mainClassificationCode)
-      this.formData.controls.main_id.setValue(this.dialogData.id)
+      this.dialogData = results;
+      console.log(results);
+      // this.formData.controls.main_classification_code.setValue(this.dialogData.main_classification_code)
+      // this.formData.controls.main_id.setValue(this.dialogData.id)
     })
   }
   subLookup():void{
-    const dialogRef = this.dialog.open(SubClassificationLookupComponent,{
+    const dialogRef = this.dialog.open(SubClassificationLookupComponent, {
+      width:'45%',
 
     })
     dialogRef.afterClosed().subscribe(results =>{
-      this.dialogData = results.data;
-      console.log(results.data);
-      
+      this.dialogData = results;
+      console.log(results);
       this.formData.controls.sub_classification_code.setValue(this.dialogData.subClassificationCode)
     })
   }
