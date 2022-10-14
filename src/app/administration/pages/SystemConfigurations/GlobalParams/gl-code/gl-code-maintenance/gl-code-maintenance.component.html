@@ -1,8 +1,7 @@
 <mat-card>
   <mat-card-header class="breadcrumb">
     <div>
-      <a routerLink="/system">Dashboard / </a> &nbsp;
-      <a routerLink="/system">General Ledger / </a> &nbsp;General Ledger Maintenance
+      <a routerLink="/system">Dashboard / </a> General Ledger Maintenance
     </div>
   </mat-card-header>
   <mat-divider></mat-divider>
@@ -30,10 +29,12 @@
             <div class="col-md-6 col-sm-12 form-column ">
               <label class="start pull-left">GL.Ref.Code<span class="warning">*</span></label>
             </div>
-            <div class="col-md-6 col-sm-12 form-column">
+            <div class="col-md-4 col-sm-12 form-column">
               <input type="text" maxlength="6" [value]="this.code" maxlength="6" formControlName="glCode"
                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.glCode.errors }" />
-              <mat-icon *ngIf="existingData" (click)="refCodeLookup()">search</mat-icon><br>
+            </div>
+            <div class="col-md-2 col-sm-12 form-column">
+              <mat-icon *ngIf="existingData" (click)="refCodeLookup()" matTooltip="GL code search">search</mat-icon><br>
             </div>
           </div>
           <div class="form-group">
@@ -46,7 +47,6 @@
           </div>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -63,13 +63,11 @@
             </div>
           </div>
         </div>
-
       </div>
-
       <br />
       <button class="pull-right" mat-raised-button color="primary" type="submit">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Submit
+        PROCEED
       </button>
       <br />
     </form>

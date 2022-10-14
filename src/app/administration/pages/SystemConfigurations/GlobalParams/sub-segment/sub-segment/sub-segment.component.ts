@@ -34,7 +34,7 @@ export class SubSegmentComponent implements OnInit {
   }
 
   formData = this.fb.group({
-    segment_id:[''],
+    segment_id: [''],
     subSegmentCode: [''],
     subSegmentDescription: [''],
     deleteFlag: [''],
@@ -57,23 +57,19 @@ export class SubSegmentComponent implements OnInit {
   disabledFormControl() {
     this.formData.disable()
   }
-
   getPage() {
     this.subscription = this.subSegmentService.currentMessage.subscribe(
       message => {
         this.message = message
         console.log(this.message);
-        
         this.function_type = this.message.function_type
         this.subSegment_code = this.message.subSegmentCode
         this.segment_code = this.message.segmentCode
         this.segment_id = this.message.segment_id
-
         if (this.function_type == "A-Add") {
           this.isEnabled = true;
-
           this.formData = this.fb.group({
-            segment_id:[this.segment_id],
+            segment_id: [this.segment_id],
             subSegmentCode: [''],
             subSegmentDescription: [''],
             deleteFlag: ['N'],
@@ -96,7 +92,7 @@ export class SubSegmentComponent implements OnInit {
             res => {
               this.results = res
               this.formData = this.fb.group({
-                segment_id:[this.results.segment_id],
+                segment_id: [this.results.segment_id],
                 subSegmentCode: [this.results.subSegmentCode],
                 subSegmentDescription: [this.results.subSegmentDescription],
                 deleteFlag: [this.results.deleteFlag],
@@ -110,7 +106,7 @@ export class SubSegmentComponent implements OnInit {
                 postedTime: [this.results.postedTime],
                 modifiedBy: [this.results.modifiedBy],
                 modifiedTime: [this.results.modifiedTime],
-                modifiedFlag:[this.results.modifiedFlag],
+                modifiedFlag: [this.results.modifiedFlag],
                 id: [this.results.id]
               })
             }
@@ -121,7 +117,7 @@ export class SubSegmentComponent implements OnInit {
             res => {
               this.results = res
               this.formData = this.fb.group({
-                segment_id:[this.results.segment_id],
+                segment_id: [this.results.segment_id],
                 subSegmentCode: [this.results.subSegmentCode],
                 subSegmentDescription: [this.results.subSegmentDescription],
                 deleteFlag: [this.results.deleteFlag],
@@ -135,7 +131,7 @@ export class SubSegmentComponent implements OnInit {
                 postedTime: [this.results.postedTime],
                 modifiedBy: [this.results.modifiedBy],
                 modifiedTime: [new Date()],
-                modifiedFlag:["Y"],
+                modifiedFlag: ["Y"],
                 id: [this.results.id]
               })
             }
@@ -147,7 +143,7 @@ export class SubSegmentComponent implements OnInit {
             res => {
               this.results = res
               this.formData = this.fb.group({
-                segment_id:[this.results.segment_id],
+                segment_id: [this.results.segment_id],
                 subSegmentCode: [this.results.subSegmentCode],
                 subSegmentDescription: [this.results.subSegmentDescription],
                 deleteFlag: ["Y"],
@@ -161,7 +157,7 @@ export class SubSegmentComponent implements OnInit {
                 postedTime: [this.results.postedTime],
                 modifiedBy: [this.results.modifiedBy],
                 modifiedTime: [this.results.modifiedTime],
-                modifiedFlag:[this.results.modifiedFlag],
+                modifiedFlag: [this.results.modifiedFlag],
 
                 id: [this.results.id]
               })
@@ -174,7 +170,7 @@ export class SubSegmentComponent implements OnInit {
             res => {
               this.results = res
               this.formData = this.fb.group({
-                segment_id:[this.results.segment_id],
+                segment_id: [this.results.segment_id],
                 subSegmentCode: [this.results.subSegmentCode],
                 subSegmentDescription: [this.results.subSegmentDescription],
                 deleteFlag: [this.results.deleteFlag],
@@ -188,7 +184,7 @@ export class SubSegmentComponent implements OnInit {
                 postedTime: [this.results.postedTime],
                 modifiedBy: [this.results.modifiedBy],
                 modifiedTime: [this.results.modifiedTime],
-                modifiedFlag:[this.results.modifiedFlag],
+                modifiedFlag: [this.results.modifiedFlag],
                 id: [this.results.id]
               })
             }

@@ -32,7 +32,8 @@ export class ExceptionsCodesLookupComponent implements OnInit, OnDestroy {
   employeeEmail: any;
   employee_id: any;
   creatingAccount = false;
-  formData:any;
+  formData: any;
+  loading: boolean = false;
 
 
   constructor(    
@@ -50,6 +51,21 @@ export class ExceptionsCodesLookupComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
       this.subscription.unsubscribe();
     }
+   
+  getData() {
+    this.loading = true;
+      this.subscription = this.exceptionCodeAPI.getException_codes().subscribe(res => {
+       this.data = res;
+        // Binding with the datasource
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.loading = false;
+      })
+    }
+    onSelect(data:any){
+      this.dialogRef.close({ event: 'close', data:data });
+    }
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -57,17 +73,4 @@ export class ExceptionsCodesLookupComponent implements OnInit, OnDestroy {
         this.dataSource.paginator.firstPage();
       }
     }
-    getData() {
-      this.subscription = this.exceptionCodeAPI.getException_codes().subscribe(res => {
-       this.data = res;
-        // Binding with the datasource
-        this.dataSource = new MatTableDataSource(this.data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
-    }
-    onSelect(data:any){
-      this.dialogRef.close({ event: 'close', data:data });
-    }
-  
 }

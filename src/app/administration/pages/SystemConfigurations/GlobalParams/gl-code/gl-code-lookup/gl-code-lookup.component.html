@@ -1,26 +1,28 @@
 <div class="">
   <div class="row breadcrumb">
-    <div class="col-md-6 col-sm-12">
-      <h3>GL-CODE LOOKUP</h3>
+    <div >
+      GL-Code Lookup
       </div>
-    <div class="col-md-6 col-sm-12">
-    <mat-icon class="pull-right">search</mat-icon>
+    <div class="ml-auto">
     <input class="pull-right search form-control" (keyup)="applyFilter($event)" placeholder="Filter..." #input>
     </div>
   </div>
-    <br>  
+    <div *ngIf="loading">
+      <p><small>Loading, please wait...</small></p>
+      <p>
+        <mat-progress-bar mode="query"></mat-progress-bar>
+      </p>
+    </div>
     <div class="table-row">
       <table class="y-scrollable-table"mat-table matSort matTableExporter [dataSource] = "dataSource">
        <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
         <td (click)="onSelect(row)" mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
       </ng-container>
-
       <ng-container matColumnDef="glCode">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> GL Code</th>
         <td  (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.glCode}} </td>
       </ng-container>
-
       <ng-container matColumnDef="glDescription">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Description</th>
         <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> {{row.glDescription}} </td>
@@ -33,11 +35,8 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete</th>
         <td (click)="onSelect(row)" mat-cell *matCellDef="let row"> N </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-      <!-- Row shown when there is no matching data. -->
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
       </tr>

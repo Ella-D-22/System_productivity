@@ -55,7 +55,8 @@ export class ExceptionsCodesMaintenanceComponent implements OnInit {
     exception_code: ['', [Validators.required]],
   });
   exception_codeLookup(): void {
-    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent,{
+    const dialogRef = this.dialog.open(ExceptionsCodesLookupComponent, {
+      width: '60%'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;

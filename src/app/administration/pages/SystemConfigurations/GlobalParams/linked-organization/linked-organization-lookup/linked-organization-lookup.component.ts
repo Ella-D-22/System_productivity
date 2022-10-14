@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/@core/AuthService/auth.service';
-import { OrganizationService } from 'src/app/administration/pages/Service/Configurations/Organisation/organization.service';
+import { OrganizationService } from 'src/app/administration/Service/SystemConfigs/Organisation/organization.service';
 import { GlCodeLookupComponent } from '../../gl-code/gl-code-lookup/gl-code-lookup.component';
 import { LinkedorganizationService } from '../linkedorganization.service';
 

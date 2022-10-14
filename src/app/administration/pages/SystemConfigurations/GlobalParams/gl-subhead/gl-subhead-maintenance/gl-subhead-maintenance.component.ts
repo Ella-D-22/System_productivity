@@ -55,7 +55,7 @@ export class GlSubheadMaintenanceComponent implements OnInit {
   });
   refCodeLookup(): void {
     const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
-      // height: '400px',
+      width: '50%'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;

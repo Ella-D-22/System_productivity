@@ -9,7 +9,7 @@ import { TokenStorageService } from 'src/@core/AuthService/token-storage.service
 import { LinkedorganizationService } from './linkedorganization.service';
 import { CurrencyLookupComponent } from '../currency-config/currency-lookup/currency-lookup.component';
 import { EventIdLookupComponent } from '../../ChargesParams/event-id/event-id-lookup/event-id-lookup.component';
-import { OrganizationService } from '../../../Service/Configurations/Organisation/organization.service';
+import { OrganizationService } from '../../../../Service/SystemConfigs/Organisation/organization.service';
 @Component({
   selector: 'app-linked-organization',
   templateUrl: './linked-organization.component.html',

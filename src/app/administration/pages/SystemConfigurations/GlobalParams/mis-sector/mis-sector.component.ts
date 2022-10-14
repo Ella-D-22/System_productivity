@@ -225,7 +225,6 @@ getPage(){
    get f() { return this.formData.controls; }
 onSubmit(){
   console.log("Form Data", this.formData.value);
-  
    this.submitted = true;
    if(this.formData.valid){
      if(this.function_type == "A-Add"){

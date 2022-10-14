@@ -20,7 +20,6 @@ export class GlCodeMaintenanceComponent implements OnInit {
   classification: any;
   isRequired = false;
   function_type_data: any;
-  subscription!: Subscription;
   showOrganizationId = true;
   organization_id: any;
   organization_name: any;
@@ -61,12 +60,10 @@ export class GlCodeMaintenanceComponent implements OnInit {
     glCode: [''],
     classification: ['']
   });
-
-
-
   refCodeLookup(): void {
     const dialogRef = this.dialog.open(GlCodeLookupComponent, {
       // height: '400px',
+      width: '45%'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lookupData = result.data;
@@ -86,7 +83,6 @@ export class GlCodeMaintenanceComponent implements OnInit {
       this.formData.controls.glCode.setValue("");
     }
   }
-
   onClassificationFunction(event: any) {
 
   }
@@ -94,8 +90,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
   get f() { return this.formData.controls; }
 
   onVerify() {
-
-    this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res => {
+    this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res => {
       this.results = res;
       this.verifyformData = this.fb.group({
         deleteFlag: [this.results.entity.deleteFlag],
@@ -114,10 +109,9 @@ export class GlCodeMaintenanceComponent implements OnInit {
         // verifiedTime: [this.results.entity.verifiedTime]
       });
       // call to update the data
-      this.subscription = this.glcodeAPI.updateGlcode(this.verifyformData.value).subscribe(res => {
+      this.glcodeAPI.updateGlcode(this.verifyformData.value).subscribe(res => {
         this.results = res;
         this.loading = false;
-
         this._snackBar.open(this.results.message, "X", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
@@ -148,7 +142,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
   }
 
   onDelete() {
-    this.subscription = this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res => {
+    this.glcodeAPI.getGlcodeByCode(this.glCode).subscribe(res => {
       this.results = res;
       this.deleteformData = this.fb.group({
         deleteFlag: ["Y"],
@@ -168,17 +162,15 @@ export class GlCodeMaintenanceComponent implements OnInit {
       });
       // call to update the data
       // this.formData.controls.glCode.disable();
-      this.subscription = this.glcodeAPI.updateGlcode(this.deleteformData.value).subscribe(res => {
+      this.glcodeAPI.updateGlcode(this.deleteformData.value).subscribe(res => {
         this.results = res;
         this.loading = false;
-
         this._snackBar.open(this.results.message, "X", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
           duration: 3000,
           panelClass: ['green-snackbar', 'login-snackbar'],
         });
-
       }, err => {
         this.error = err;
         this.loading = false;
@@ -189,8 +181,6 @@ export class GlCodeMaintenanceComponent implements OnInit {
           panelClass: ['red-snackbar', 'login-snackbar'],
         });
       })
-
-
     }, err => {
       this.error = err;
       this._snackBar.open(this.error, "X", {
@@ -201,36 +191,57 @@ export class GlCodeMaintenanceComponent implements OnInit {
       });
     })
   }
-
-  onSubmit() {
+  onSubmit(){
+    console.log("data", this.formData.value);
     this.loading = true;
-    this.submitted = true;
-    this.function_type = this.formData.controls.function_type.value
-
-    if (this.formData.valid) {
-      if (this.function_type == "V-Verify") {
-        // call to update verify flag
-        this.onVerify();
-        // update
+     this.submitted = true;
+    if(this.formData.valid){
+      this.glcodeAPI.changeMessage(this.formData.value)
+      if(this.function_type == "A-Add"){
+       this.router.navigate(['system/configurations/global/gl-code'], {skipLocationChange:true})
+      }else if(this.function_type != "A-Add"){
+       this.router.navigate(['system/configurations/global/gl-code'], {skipLocationChange:true})
       }
-      if (this.function_type == "X-Delete") {
-        // call to update delete flag
-        this.onDelete()
-        console.log("got called for delete");
-
-      } else {
-        this.glcodeAPI.changeMessage(this.formData.value)
-        this.router.navigate(['system/configurations/global/gl-code/data/view'], { skipLocationChange: true })
-      }
-    } else {
+    }else{
       this.loading = false;
-      this._snackBar.open("Invalid Form Data", "Try again!", {
-        horizontalPosition: this.horizontalPosition,
+      this._snackBar.open("Invalid Form Data", "Try Again", {
+        horizontalPosition:this.horizontalPosition,
         verticalPosition: this.verticalPosition,
-        duration: 3000,
-        panelClass: ['red-snackbar', 'login-snackbar'],
-      });
+        duration : 3000,
+        panelClass:['red-snackbar', 'login-snackbar']
+ 
+      })
     }
-  }
+   }
+
+  // onSubmit() {
+  //   this.loading = true;
+  //   this.submitted = true;
+  //   this.function_type = this.formData.controls.function_type.value
+  //   if (this.formData.valid) {
+  //     if (this.function_type == "V-Verify") {
+  //       // call to update verify flag
+  //       this.onVerify();
+  //       // update
+  //     }
+  //     if (this.function_type == "X-Delete") {
+  //       // call to update delete flag
+  //       this.onDelete()
+  //       console.log("got called for delete");
+
+  //     } else {
+  //       this.glcodeAPI.changeMessage(this.formData.value)
+  //       this.router.navigate(['system/configurations/global/gl-code'], { skipLocationChange: true })
+  //     }
+  //   } else {
+  //     this.loading = false;
+  //     this._snackBar.open("Invalid Form Data", "Try again!", {
+  //       horizontalPosition: this.horizontalPosition,
+  //       verticalPosition: this.verticalPosition,
+  //       duration: 3000,
+  //       panelClass: ['red-snackbar', 'login-snackbar'],
+  //     });
+  //   }
+  // }
 
 }

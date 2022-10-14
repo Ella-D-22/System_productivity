@@ -29,10 +29,12 @@
             <div class="col-md-6 col-sm-12 form-column ">
               <label class="start pull-left">Currency Id<span class="warning">*</span></label>
             </div>
-            <div class="col-md-6 col-sm-12 form-column ">
+            <div class="col-md-4 col-sm-12 form-column ">
               <input type="text" maxlength="30" [value]="this.ccy_name" formControlName="currency_ccy"
                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.currency_ccy.errors }" />
-              <mat-icon (click)="currencyLookup()">search</mat-icon>
+            </div>
+            <div class="col-md-2 col-sm-12 form-column ">
+              <mat-icon (click)="currencyLookup()" matTooltip="Search Currency">search</mat-icon>
             </div>
           </div>
         </div>
@@ -43,7 +45,7 @@
       </button> -->
       <button class="pull-right" mat-raised-button color="primary" type="submit">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Proceed
+        PROCEED
       </button>
       <br />
     </form>

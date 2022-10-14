@@ -1,9 +1,8 @@
 <mat-card>
   <mat-card-header class="breadcrumb">
     <div>
-      <a routerLink="/system"a>Dashboard / </a>&nbsp; C
+      <a routerLink="/system" a>Dashboard / </a>&nbsp; Currency
     </div>
-    <div>Home/Currency</div>
   </mat-card-header>
   <div class="row">
     <div class="col-md-6 col-sm-12">
@@ -14,7 +13,6 @@
       <h4>Currency</h4>
       <p>{{this.ccy_name}}</p>
     </div>
-
   </div>
   <mat-divider></mat-divider>
   <br>
@@ -74,11 +72,11 @@
       </div>
       <br />
       <button class="pull-left" routerLink="../../maintenance" mat-raised-button color="default" type="button">
-        Back
+        BACK
       </button>
       <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Submit
+        SUBMIT
       </button>
       <br />
     </form>

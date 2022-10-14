@@ -1,6 +1,8 @@
 <mat-card>
     <mat-card-header class="breadcrumb">
-        <div>Main-Classification-Maintenance</div>
+        <div>
+            <a routerLink="/system">Dashboard / </a>&nbsp; Main Classification Maintenance
+        </div>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -13,8 +15,8 @@
                             <label for="" class="start pull-left">Function<span class="warning">*</span></label>
                         </div>
                         <div class="col-md-6 col-sm-12 form-column">
-                            <select formControlName="function_type" (change)="onFunctionSelection($event)" class="form-control"
-                            [ngClass]="{'is-invalid':submitted && f.function_type.errors}">
+                            <select formControlName="function_type" (change)="onFunctionSelection($event)"
+                                class="form-control" [ngClass]="{'is-invalid':submitted && f.function_type.errors}">
                                 <option value="" disabled>--Choose Function--</option>
                                 <option *ngFor="let item of functionArray" [value]="item">{{item}}</option>
                             </select>
@@ -26,17 +28,20 @@
                         <div class="col-md-6 col-sm-12 form-column">
                             <label for="">Main Classification Code<span class="warning">*</span></label>
                         </div>
-                        <div class="col-md-6 col-sm-12 form-column">
+                        <div class="col-md-4 col-sm-12 form-column">
                             <input type="text" class="form-control" formControlName="main_classification_code"
-                            [ngClass]="{'is-invalid': submitted && f.main_classification_code.errors}">
-                            <mat-icon  (click)="mainLookup()">search</mat-icon>
+                                [ngClass]="{'is-invalid': submitted && f.main_classification_code.errors}">
+                        </div>
+                        <div class="col-md-2 col-sm-12 form-column">
+                            <mat-icon (click)="mainLookup()" matTooltip="Search classification">search</mat-icon>
                         </div>
                     </div>
                 </div>
             </div>
-           
+
             <br>
-            <button mat-raised-button class="pull-right" type="submit" color="primary">GO</button>
+            <button mat-raised-button class="pull-right" type="submit" color="primary">PROCEED</button>
+            <br>
         </form>
     </div>
 </mat-card>
