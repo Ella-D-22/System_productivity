@@ -582,12 +582,13 @@ export class SavingsAccountComponent implements OnInit {
 
   onSubmit() {
     console.log("Savings", this.formData.value);
-    
-    if (this.formData.valid) {
+   
       if (this.message.function_type == 'A-Add') {
         this.accountAPI.createAccount(this.formData.value).subscribe(
           res => {
             this.results = res
+            console.log("API", this.results);
+            
             this._snackBar.open("Executed Successfully", "X", {
               horizontalPosition: this.horizontalPosition,
               verticalPosition: this.verticalPosition,
@@ -627,13 +628,7 @@ export class SavingsAccountComponent implements OnInit {
           }
         )
       }
-    } else {
-      this._snackBar.open("Invalid FormData", "Try Again", {
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-        duration: 3000,
-        panelClass: ['red-snackbar', 'green-snackbar']
-      })
-    }
   }
+   
+  
 }
