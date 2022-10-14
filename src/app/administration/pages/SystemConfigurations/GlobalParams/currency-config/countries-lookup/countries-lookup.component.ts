@@ -32,7 +32,7 @@ export class CountriesLookupComponent implements OnInit, OnDestroy {
   formData:any;
   respData: any;
   countryCode: any;
-
+  loading: boolean = false;
   constructor(    
     public dialogRef: MatDialogRef<CountriesLookupComponent>,
     private router: Router,
@@ -56,7 +56,8 @@ export class CountriesLookupComponent implements OnInit, OnDestroy {
         this.dataSource.paginator.firstPage();
       }
     }
-    getData() {
+  getData() {
+    this.loading = true;
       this.subscription = this.currencyAPI.getAllCountries().subscribe(res => {
        this.respData = res;
       for( let i=0; i<this.respData.length; i++){
@@ -82,6 +83,7 @@ export class CountriesLookupComponent implements OnInit, OnDestroy {
         this.dataSource = new MatTableDataSource(this.respData);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.loading = false;
       })
     }
     onSelect(data:any){

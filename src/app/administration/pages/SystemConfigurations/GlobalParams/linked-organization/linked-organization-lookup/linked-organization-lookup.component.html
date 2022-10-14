@@ -1,17 +1,13 @@
 
     <div class="">
         <div class="row breadcrumb">
-          <div class="col-md-6 col-sm-12">
-            <p><strong>Organization Lookup</strong></p>
+          <div>
+            Organization Lookup
             </div>
-          <div class="col-md-6 col-sm-12">
-          <mat-icon class="pull-right">search</mat-icon>
+          <div class="col-md-6 col-sm-12 ml-auto">
           <input class="pull-right search form-control" (keyup)="applyFilter($event)" placeholder="Filter..." #input>
           </div>
         </div>
-
-
-        <br>  
         <div class="table-row">
           <table class="y-scrollable-table"mat-table matSort matTableExporter [dataSource] = "dataSource">
            <ng-container matColumnDef="index">

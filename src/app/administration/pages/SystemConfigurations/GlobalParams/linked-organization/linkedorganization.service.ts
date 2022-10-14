@@ -9,10 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class LinkedorganizationService {
 
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  headers = new HttpHeaders().set('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Access-Control-Allow-Origin: *', 'application/json');
   // API endpoint
-  baseURL2:"http://52.15.152.26:9100/api/v1/organization/all";
-  baseURL = `${environment.sytemconfigA}/api/v1/organization`;
+  baseURL = `${environment.productAPI}/api/v1/organization`;
   constructor(private http: HttpClient) { }
   // Message Medium
   private messageSource = new BehaviorSubject('default message');
@@ -39,7 +38,7 @@ export class LinkedorganizationService {
   }
   //Fetch
   read(): Observable<any> {
-    let API_URL = `${this.baseURL2}`;
+    let API_URL = `${this.baseURL}`;
     console.log("Info", API_URL);
     
     return this.http.get(API_URL, {

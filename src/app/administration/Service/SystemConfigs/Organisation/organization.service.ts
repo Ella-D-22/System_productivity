@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
 export class OrganizationService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  baseURL2:"http://52.15.152.26:9100/api/v1/organization";
-  baseURL = `${environment.sytemconfigA}/api/v1/organization`;
+  baseURL2 = "http://52.15.152.26:9100/api/v1/organization";
+  baseURL = `${environment.productAPI}/api/v1/organization`;
 
   constructor(private http: HttpClient) { }
    //Add
@@ -25,23 +25,15 @@ export class OrganizationService {
   }
    //Fetch
    read(): Observable<any> {
-    let API_URL = `${this.baseURL}/all`;
+    let API_URL = `${this.baseURL2}/all`;
     return this.http.get(API_URL, {
       headers: this.headers, withCredentials: false
     }).pipe(map(res => res || {}),
       catchError(this.errorMgmt))
 }
-   //Fetch
-   readReports(data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/generalcompliancereport`;
-    return this.http.get(API_URL, {
-      headers: this.headers, withCredentials: false
-    }).pipe(map(res => res || {}),
-      catchError(this.errorMgmt))
-  }
    //Edit 
-  update(params) {
-    let API_URL = `${this.baseURL}/updatemaincompliancename`;
+  updateBYParams(params: any) {
+    let API_URL = `${this.baseURL}`;
     return this.http
       .put(API_URL, {}, {params,}
       ) .pipe(
@@ -58,24 +50,6 @@ export class OrganizationService {
       headers: this.headers, withCredentials: false
     }).pipe(map(res => res || {}),
       catchError(this.errorMgmt))
-  }
-   //Display Charts
-   readCharts(): Observable<any> {
-    let API_URL = `${this.baseURL}/maincompliancereviewstatusstatistics`;
-    return this.http.get(API_URL, {
-      headers: this.headers, withCredentials: false
-    }).pipe(map(res => res || {}),
-      catchError(this.errorMgmt))
-
-   }
-   //Fetch Compliance by Risk Level
-   readmainSections(): Observable<any> {
-    let API_URL = `${this.baseURL}/maincompliancerisklevelstatistics`;
-    return this.http.get(API_URL, {
-      headers: this.headers, withCredentials: false
-    }).pipe(map(res => res || {}),
-      catchError(this.errorMgmt))
-
   }
   // Error handling
   errorMgmt(error: HttpErrorResponse) {
