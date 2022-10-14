@@ -55,7 +55,8 @@ export class MainClassificationMaintenanceComponent implements OnInit {
   get f() { return this.formData.controls; }
 
   mainLookup():void{
-    const dialogRef = this.dialog.open(MainClassificationLookupComponent,{
+    const dialogRef = this.dialog.open(MainClassificationLookupComponent, {
+      width: '35%'
 
     })
     dialogRef.afterClosed().subscribe(results =>{

@@ -1,5 +1,5 @@
 <mat-card>
-    
+
     <mat-card-header class="breadcrumb">
         <div>
             <a routerLink="/system">Dashboard / </a>&nbsp; MIS-Sector Maintenance
@@ -9,7 +9,6 @@
     <br>
     <div class="container-fluid">
         <form class="form" novalidate (ngSubmit)="onSubmit()" [formGroup]="formData" #resetRequestsForm="ngForm">
-
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
@@ -44,7 +43,7 @@
             <br>
             <button class="pull-right" mat-raised-button color="primary" type="submit">
                 <span *ngFor="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                GO
+                PROCEED
             </button>
             <br>
         </form>

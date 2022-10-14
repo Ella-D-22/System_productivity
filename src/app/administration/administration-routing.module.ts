@@ -199,7 +199,7 @@ const routes: Routes = [
         data: { preload: true },
       },
       {
-        path: 'configurations/global/gl-code/add',
+        path: 'configurations/global/gl-code',
         component: GlCodeComponent,
         // // canActivate: [CanActivateModuleGuard],
         data: { preload: true },
@@ -212,7 +212,7 @@ const routes: Routes = [
         data: { preload: true },
       },
       {
-        path: 'configurations/global/gl-subhead/data/view',
+        path: 'configurations/global/gl-subhead',
         component: GlSubheadComponent,
         // canActivate: [CanActivateModuleGuard],
         data: { preload: true },

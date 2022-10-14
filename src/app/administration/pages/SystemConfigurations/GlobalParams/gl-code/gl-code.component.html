@@ -1,19 +1,22 @@
 <mat-card>
   <mat-card-header class="breadcrumb">
-    <div>Home/General Ledger</div>
+    <div>
+      <a routerLink="/system">Dashboard / </a> 
+      <a routerLink="/system/configurations/global/gl-code/maintenance">General Ledger Maintenance / </a> General Ledger
+    </div>
   </mat-card-header>
   <div class="row">
     <div class="col-md-4 col-sm-12">
       <h4>Function</h4>
-      <p>{{this.function_type}}</p>
+      <p><strong>{{this.function_type}}</strong> </p>
     </div>
     <div class="col-md-4 col-sm-12">
       <h4>Code</h4>
-      <p>{{this.glCode}}</p>
+      <p><strong>{{this.glCode}}</strong> </p>
     </div>
     <div class="col-md-4 col-sm-12">
       <h4>Classification</h4>
-      <p>{{this.classification}}</p>
+      <p><strong>{{this.classification}}</strong> </p>
     </div>
   </div>
   <mat-divider></mat-divider>
@@ -48,11 +51,11 @@
       <br />
       <button class="pull-left" [routerLink]="['../../maintenance']" skipLocationChange mat-raised-button
         color="default" type="button">
-        Back
+        BACK
       </button>
       <button *ngIf="isEnabled" class="pull-right" mat-raised-button color="primary" type="submit">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Submit
+        SUBMIT
       </button>
       <br />
     </form>

@@ -32,6 +32,7 @@ export class GlSubheadLookupComponent implements OnInit, OnDestroy {
   creatingAccount = false;
   formData:any;
   respData: any;
+  loading: boolean = false;
 
   constructor(    
     public dialogRef: MatDialogRef<GlCodeLookupComponent>,
@@ -58,15 +59,15 @@ export class GlSubheadLookupComponent implements OnInit, OnDestroy {
     }
 
     getData() {
-      
+      this.loading = true;
       this.subscription = this.glSubheadCodeAPI.getGlSubheadCodes().subscribe(res => {
        this.respData = res;
         console.log("Getting all data",this.respData);
-        
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.respData.entity);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.loading = false;
       })
     }
     onSelect(data:any){

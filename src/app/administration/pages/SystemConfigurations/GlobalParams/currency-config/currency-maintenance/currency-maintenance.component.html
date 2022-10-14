@@ -1,62 +1,53 @@
 <mat-card>
-    <mat-card-header  class="breadcrumb">
-      <div>Home/Currency-Maintenance</div>
+  <mat-card-header class="breadcrumb">
+    <div>
+      <a routerLink="/system">Dashboard / </a> &nbsp; Currency Maintenance
+    </div>
   </mat-card-header>
   <mat-divider></mat-divider>
   <br>
 
   <div class="container-fluid">
-    <form
-    class="form"
-    [formGroup]="formData"
-    (ngSubmit)="onSubmit()"
-    #resetRequestsForm="ngForm"
-    novalidate
-  >
-  <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <div class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Function<span class="warning">*</span></label>
+    <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Function<span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <select (change)="onSelectFunction($event)" class="form-control" formControlName="function_type"
+                [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }">
+                <option value="" disabled>-- Choose Function --</option>
+                <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-12 form-column ">
-          <select (change)="onSelectFunction($event)"   class="form-control" formControlName="function_type"
-           [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
-            <option value="" disabled>-- Choose Function --</option>
-            <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
-          </select>
+        <div class="col-md-6 col-sm-12">
+          <div *ngIf="showCurrencyId" class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Currency Id<span class="warning">*</span></label>
+            </div>
+            <div class="col-md-4 col-sm-12 form-column ">
+              <input type="text" maxlength="30" [value]="this.ccy_name" formControlName="currency_ccy"
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.currency_ccy.errors }" />
+            </div>
+            <div class="col-md-2 col-sm-12 form-column ">
+              <mat-icon (click)="currencyLookup()" matTooltip="Search Currency">search</mat-icon>
+            </div>
+          </div>
         </div>
-     </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-      <div *ngIf="showCurrencyId" class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-         <label class="start pull-left">Currency Id<span class="warning">*</span></label>
-        </div>
-        <div class="col-md-6 col-sm-12 form-column ">
-          <input type="text" maxlength = "30" [value]="this.ccy_name" formControlName="currency_ccy" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.currency_ccy.errors }" />
-            <mat-icon (click)="currencyLookup()">search</mat-icon>
-        </div>
-     </div>
-    </div>
-  </div>
-    <br />
-    <!-- <button class="pull-left" routerLink="../maintenance"  mat-raised-button color="default" type="button">
+      </div>
+      <br />
+      <!-- <button class="pull-left" routerLink="../maintenance"  mat-raised-button color="default" type="button">
         Close
       </button> -->
-    <button class="pull-right" mat-raised-button color="primary" type="submit">
-      <span
-        *ngIf="loading"
-        class="spinner-border spinner-border-sm mr-1"
-      ></span>
-      Submit
-    </button>
-    <br />
-  </form>
-    </div>
-  </mat-card>
-
-
-
-
-
+      <button class="pull-right" mat-raised-button color="primary" type="submit">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        PROCEED
+      </button>
+      <br />
+    </form>
+  </div>
+</mat-card>

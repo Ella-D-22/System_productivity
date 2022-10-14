@@ -17,8 +17,7 @@
         <p>
             Filtres by
         </p>
-        <form action="" [formGroup]="formData" novalidate class="form"
-            #resetRequestsForm="ngForm">
+        <form action="" [formGroup]="formData" novalidate class="form" #resetRequestsForm="ngForm">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
@@ -76,14 +75,16 @@
                     </div>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-2 offset-md-9">
                     <button class="pull-right " mat-raised-button color="primary" (click)="getFilteredCustomers()">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Submit
+                        SUBMIT
                     </button>
                 </div>
             </div>
+            <br>
 
         </form>
     </div>

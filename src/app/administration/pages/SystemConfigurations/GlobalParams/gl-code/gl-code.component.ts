@@ -15,8 +15,9 @@ import { GlCodeService } from './gl-code.service';
   styleUrls: ['./gl-code.component.scss']
 })
 export class GlCodeComponent implements OnInit {
-  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
-  auth_user = this.currentUser.username;
+  // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  // auth_user = this.currentUser.username;
+  auth_user: any;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -124,7 +125,7 @@ export class GlCodeComponent implements OnInit {
             classification:[this.classification],
             modifiedBy:[''],
             modifiedTime:[''],
-            postedBy:[this.auth_user],
+            postedBy:[''],
             postedTime:[new Date()],
             postedFlag:['Y'],
             verifiedBy:['P'],

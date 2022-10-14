@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,26 +21,26 @@ export class CurrencyMaintenanceComponent implements OnInit {
   function_type: any;
   isRequired = false;
   function_type_data: any;
-  subscription!:Subscription;
+  subscription!: Subscription;
   showOrganizationId = true;
   showCurrencyId: any;
   ccy: any;
   ccy_name: any;
   dialoData: any;
   dialogData: any;
+  loading: boolean = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
     private currencyAPI: CurrencyService,
-    ) { }
+  ) { }
   ngOnInit(): void {
   }
-  loading = false;
   submitted = false;
   functionArray: any = [
-    'A-Add','I-Inquire','M-Modify','V-Verify','X-Delete'
+    'A-Add', 'I-Inquire', 'M-Modify', 'V-Verify', 'X-Delete'
   ]
   currency_ccy: any;
   formData = this.fb.group({
@@ -49,6 +49,7 @@ export class CurrencyMaintenanceComponent implements OnInit {
   });
   currencyLookup(): void {
     const dialogRef = this.dialog.open(CurrencyLookupComponent, {
+      width: '45%'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.dialogData = result.data;
@@ -56,34 +57,34 @@ export class CurrencyMaintenanceComponent implements OnInit {
       this.formData.controls.currency_ccy.setValue(result.data);
     });
   }
-  onSelectFunction(event:any){
-    if(event.target.value != "A-Add"){
+  onSelectFunction(event: any) {
+    if (event.target.value != "A-Add") {
       this.showCurrencyId = true;
       this.formData.controls.currency_ccy.setValue("")
       this.formData.controls.currency_ccy.setValidators([Validators.required])
-    }else if(event.target.value == "A-Add"){
+    } else if (event.target.value == "A-Add") {
       this.formData.controls.currency_ccy.setValidators([])
       this.formData.controls.currency_ccy.setValue("");
-      this.showCurrencyId= false;
+      this.showCurrencyId = false;
     }
   }
-      // convenience getter for easy access to form fields
-      get f() { return this.formData.controls; }
-  onSubmit(){
+  // convenience getter for easy access to form fields
+  get f() { return this.formData.controls; }
+  onSubmit() {
     this.loading = true;
     this.submitted = true;
-    if(this.formData.valid){
-    this.currencyAPI.changeMessage(this.formData.value)
-    this.router.navigate([`/system/configurations/global/currency/data/view`], { skipLocationChange: true });
-  }else{
-    this.loading = false;
-    this._snackBar.open("Invalid Form Data", "Try again!", {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 3000,
-      panelClass: ['red-snackbar','login-snackbar'],
-    });
-  }
+    if (this.formData.valid) {
+      this.currencyAPI.changeMessage(this.formData.value)
+      this.router.navigate([`/system/configurations/global/currency/data/view`], { skipLocationChange: true });
+    } else {
+      this.loading = false;
+      this._snackBar.open("Invalid Form Data", "Try again!", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000,
+        panelClass: ['red-snackbar', 'login-snackbar'],
+      });
+    }
   }
 
 }

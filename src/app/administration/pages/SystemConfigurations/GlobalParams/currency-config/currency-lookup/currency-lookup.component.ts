@@ -30,6 +30,7 @@ export class CurrencyLookupComponent implements OnInit, OnDestroy {
   creatingAccount = false;
   formData:any;
   respData: any;
+  loading: boolean = false;
 
   constructor(    
     public dialogRef: MatDialogRef<CurrencyLookupComponent>,
@@ -54,9 +55,11 @@ export class CurrencyLookupComponent implements OnInit, OnDestroy {
         this.dataSource.paginator.firstPage();
       }
     }
-    getData() {
+  getData() {
+    this.loading = true;
       this.subscription = this.currencyAPI.getAllActiveCurrencys().subscribe(res => {
-       this.respData = res;
+        this.respData = res;
+        this.loading = false;
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.respData);
         this.dataSource.paginator = this.paginator;
