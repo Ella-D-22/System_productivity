@@ -82,7 +82,7 @@ export class SubSegmentMaintenanceComponent implements OnInit {
     console.log("data", this.formData.value);
     //  this.loading = true;
     this.submitted = true;
-    if (this.formData.valid) {
+    if (this.formData.valid) { 
       this.subSegmentService.changeMessage(this.formData.value)
       if (this.function_type == "A-Add") {
         this.router.navigate(['system/configurations/global/sub-segment'], { skipLocationChange: true })

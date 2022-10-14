@@ -21,53 +21,53 @@ import { TermDepositLookupComponent } from './term-deposit-lookup/term-deposit-l
 })
 export class TermDepositAccountComponent implements OnInit {
 
-  subscription:Subscription
-  horizontalPosition:MatSnackBarHorizontalPosition
-  verticalPosition:MatSnackBarVerticalPosition
-  sectorData:any
-  subSectorData:any
-  subSectors:any
-  currencyData:any
-  customer_lookup:any
-  customer_code:any
-  customer_name:any
-  imgfile:any
-  results:any
-  error:any
-  customerImage:any
-  signfile:any
-  signatureImage:any
+  subscription: Subscription
+  horizontalPosition: MatSnackBarHorizontalPosition
+  verticalPosition: MatSnackBarVerticalPosition
+  sectorData: any
+  subSectorData: any
+  subSectors: any
+  currencyData: any
+  customer_lookup: any
+  customer_code: any
+  customer_name: any
+  imgfile: any
+  results: any
+  error: any
+  customerImage: any
+  signfile: any
+  signatureImage: any
   isEnabled = false
   newData = false;
   loading = false
-  lookupdata:any
-  glSubheads:any
-  filteredArr:any
-  tda_schemeCode:any
-  laa_schemeCode:any
-  sba_schemeCode:any
-  oda_schemeCode:any
-  caa_schemeCode:any
-  collateralData:any
-  element:any
-  message:any
-  function_type:any
-  account_code:any
-  customer_type:any
-  tda_scheme_code_desc:any
-  tda_gl_subhead_description:any
+  lookupdata: any
+  glSubheads: any
+  filteredArr: any
+  tda_schemeCode: any
+  laa_schemeCode: any
+  sba_schemeCode: any
+  oda_schemeCode: any
+  caa_schemeCode: any
+  collateralData: any
+  element: any
+  message: any
+  function_type: any
+  account_code: any
+  customer_type: any
+  tda_scheme_code_desc: any
+  tda_gl_subhead_description: any
   constructor(
-    private fb:FormBuilder,
-    private _snackBar:MatSnackBar,
-    private router:Router,
-    private dialog:MatDialog,
-    private misSectorAPI:MisSectorService,
-    private accountAPI:AccountsService,
-    private accountService:LoanAccountService ) { 
-      // this.message = this.router.getCurrentNavigation()?.extras.state;
-      // console.log(this.message);
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private router: Router,
+    private dialog: MatDialog,
+    private misSectorAPI: MisSectorService,
+    private accountAPI: AccountsService,
+    private accountService: LoanAccountService) {
+    // this.message = this.router.getCurrentNavigation()?.extras.state;
+    // console.log(this.message);
 
-    }
+  }
 
   ngOnInit(): void {
   }
@@ -79,12 +79,12 @@ export class TermDepositAccountComponent implements OnInit {
     accountManager: [''],
     accountName: [''],
     accountOwnership: [''],
-    accountStatus:[''],
+    accountStatus: [''],
     accountType: [''],
     acid: [''],
     cashExceptionLimitCr: [''],
     cashExceptionLimitDr: [''],
-    currency:[''],
+    currency: [''],
     customerCode: [''],
     lienAmount: 0,
     // loan: new FormArray([]),
@@ -94,16 +94,16 @@ export class TermDepositAccountComponent implements OnInit {
     // saving: new FormArray([]),
     sn: [''],
     solCode: [''],
-    sectorCode:[''],
-    subSectorCode:[''],
-    schemeCode:[''],
-    glSubhead:[''],
+    sectorCode: [''],
+    subSectorCode: [''],
+    schemeCode: [''],
+    glSubhead: [''],
     termDeposit: new FormArray([]),
-    transferExceptionLimitCr:[''] ,
-    transferExceptionLimitDr:[''] ,
+    transferExceptionLimitCr: [''],
+    transferExceptionLimitDr: [''],
     accountStatement: [''],
-    statementFreq:[''],
-    dispatchMode:[''],
+    statementFreq: [''],
+    dispatchMode: [''],
     withholdingTax: [''],
     postedBy: [''],
     postedFlag: [''],
@@ -127,12 +127,12 @@ export class TermDepositAccountComponent implements OnInit {
 
   nomineesFormData = this.fb.group({
     dob: [''],
-    emailAddress:[''] ,
-    firstName:[''],
+    emailAddress: [''],
+    firstName: [''],
     identificationNo: [''],
     lastName: [''],
     middleName: [''],
-    nomineeMinor:[''] ,
+    nomineeMinor: [''],
     occupation: [''],
     phone: [''],
     relationship: [''],
@@ -140,45 +140,45 @@ export class TermDepositAccountComponent implements OnInit {
   })
   guardianFormData = this.fb.group({
     address: [''],
-    guardianCode:[''],
+    guardianCode: [''],
     guardianName: [''],
-    id:[''] ,
+    id: [''],
     residence: ['']
   })
-  get f(){return this.formData.controls}
-  get t(){return this.f.termDeposit as FormArray}
-  get tt(){return this.termDepositData.controls}
-  get n(){return this.tt.nominees as FormArray }
+  get f() { return this.formData.controls }
+  get t() { return this.f.termDeposit as FormArray }
+  get tt() { return this.termDepositData.controls }
+  get n() { return this.tt.nominees as FormArray }
 
-  despatch_mode_array:any = [
+  despatch_mode_array: any = [
     'Post & E-Mail', 'Collect By Person', 'E-Mail Only', 'Post', 'No-Despatch', 'Courier', 'Courier & E-Mail'
-  ] 
-  statementFreqArray : any = [
+  ]
+  statementFreqArray: any = [
     'Daily', 'Weekly', 'Montly', 'Yearly'
   ]
   accountStatusArray: any = [
     'Active', 'Not-Active', 'Dormant'
   ]
-  aaplicationStatusAr : any = [
+  aaplicationStatusAr: any = [
     'Pending', 'Verified'
   ]
-  relationshipArray:any = [
-    'FATHER', 'MOTHER', 'WIFE','HUSBAND', 'SIBLING', 'DAUGHTER', 'SON'
+  relationshipArray: any = [
+    'FATHER', 'MOTHER', 'WIFE', 'HUSBAND', 'SIBLING', 'DAUGHTER', 'SON'
   ]
-  guardianArray:any = [
+  guardianArray: any = [
     'Court Appointed', 'Natural Guardian'
   ]
-  initNomineeData(){
+  initNomineeData() {
     this.newData = true;
     this.nomineesFormData = this.fb.group({
       dob: [''],
-      emailAddress:[''] ,
-      firstName:[''],
-      id:[''] ,
+      emailAddress: [''],
+      firstName: [''],
+      id: [''],
       identificationNo: [''],
       lastName: [''],
       middleName: [''],
-      nomineeMinor:[''] ,
+      nomineeMinor: [''],
       occupation: [''],
       phone: [''],
       relationship: [''],
@@ -186,8 +186,8 @@ export class TermDepositAccountComponent implements OnInit {
     })
   }
 
-  previewNominees(){
-    if(this.nomineesFormData.valid){
+  previewNominees() {
+    if (this.nomineesFormData.valid) {
       this.n.push(this.fb.group(
         this.nomineesFormData.value
       ));
@@ -195,113 +195,113 @@ export class TermDepositAccountComponent implements OnInit {
       this.initNomineeData();
     }
   }
-  onAddNomineesField(){
+  onAddNomineesField() {
     this.n.push(this.fb.group({
-      dob:[''],
-      emailAddress:[''],
-      firstName:[''],
-      identificationNo:[''],
-      lastName:[''],
-      middleName:[''],
-      occupation:[''],
-      phone:['']
+      dob: [''],
+      emailAddress: [''],
+      firstName: [''],
+      identificationNo: [''],
+      lastName: [''],
+      middleName: [''],
+      occupation: [''],
+      phone: ['']
     }))
   }
-  onNomineeClear(){
+  onNomineeClear() {
     this.initNomineeData()
     this.nomineeArray = new Array();
   }
-  onUpdateNominee(){
+  onUpdateNominee() {
     let i = this.element
     this.nomineeArray[i] = this.nomineesFormData.value
   }
-  onRemove(i:any){
-    const index:number = this.nomineeArray.indexOf(this.nomineeArray.values);
+  onRemove(i: any) {
+    const index: number = this.nomineeArray.indexOf(this.nomineeArray.values);
     this.nomineeArray.splice(index, i);
     this.nomineeArray = this.nomineeArray
 
   }
- 
-  
-   //setting up the mis sector codes
-   getMISData(){
+
+
+  //setting up the mis sector codes
+  getMISData() {
     this.subscription = this.misSectorAPI.getAllMissectors().subscribe(
-      res =>{
+      res => {
         this.sectorData = res
       }
     )
   }
-  onInputSelection(event:any){
-  let miscode = event.target.value
-  console.log(miscode);
-  
-  this.subscription = this.misSectorAPI.getMissectorByCode(miscode).subscribe(
-    res =>{
-      this.subSectorData = res
-      this.subSectors = this.subSectorData.missubsectors
-    }
-  )
+  onInputSelection(event: any) {
+    let miscode = event.target.value
+    console.log(miscode);
+
+    this.subscription = this.misSectorAPI.getMissectorByCode(miscode).subscribe(
+      res => {
+        this.subSectorData = res
+        this.subSectors = this.subSectorData.missubsectors
+      }
+    )
   }
 
-  currencyLookup():void{
-    const dialogRef = this.dialog.open(CurrencyLookupComponent,{
+  currencyLookup(): void {
+    const dialogRef = this.dialog.open(CurrencyLookupComponent, {
     });
-    dialogRef.afterClosed().subscribe(result =>{
+    dialogRef.afterClosed().subscribe(result => {
       this.currencyData = result.data;
       this.formData.controls.currency.setValue(this.currencyData.ccy)
     })
- }
-
- customerLookup(): void {
-  const dialogRef = this.dialog.open(RetailCustomerLookupComponent, {
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.customer_lookup = result.data;
-    this.customer_code = this.customer_lookup.customerCode;
-    this.customer_name = this.customer_lookup.firstName +" "+this.customer_lookup.middleName +" "+this.customer_lookup.surname
-    this.formData.controls.accountManager.setValue(this.customer_lookup.firstName + " " + this.customer_lookup.middleName)
-    this.formData.controls.customerCode.setValue(this.customer_lookup.customerCode)
-  });
-}
-tdaSchemeCodeLookup():void{
-  const dialogRef = this.dialog.open(TermDepositLookupComponent,{
-  });
-  dialogRef.afterClosed().subscribe(result =>{
-    this.lookupdata = result.data;
-    this.formData.controls.schemeCode.setValue(this.lookupdata.tda_scheme_code)
-     
-    this.tda_schemeCode = this.lookupdata.tda_scheme_code
-    this.tda_scheme_code_desc = this.lookupdata.tda_scheme_code_desc
-    this.glSubheads = this.lookupdata.tda_glsubheads
-    
-    this.filteredArr = this.glSubheads.filter(data => data.tda_gl_subhead_deafault == "Yes");
-    this.formData.controls.glSubhead.setValue(this.filteredArr[0].tda_gl_subhead)
-    this.tda_gl_subhead_description = this.filteredArr[0].tda_gl_subhead_description
-  })
-}
-branchSubheadLookup(): void {
-  const dialogRef = this.dialog.open(BranchComponent, {
-  
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.formData.controls.solCode.setValue(result.data.solCode);
-  });
   }
 
-  getPage(){
+  customerLookup(): void {
+    const dialogRef = this.dialog.open(RetailCustomerLookupComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.customer_lookup = result.data;
+      this.customer_code = this.customer_lookup.customerCode;
+      this.customer_name = this.customer_lookup.firstName + " " + this.customer_lookup.middleName + " " + this.customer_lookup.surname
+      this.formData.controls.accountManager.setValue(this.customer_lookup.firstName + " " + this.customer_lookup.middleName)
+      this.formData.controls.customerCode.setValue(this.customer_lookup.customerCode)
+    });
+  }
+  tdaSchemeCodeLookup(): void {
+    const dialogRef = this.dialog.open(TermDepositLookupComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupdata = result.data;
+      this.formData.controls.schemeCode.setValue(this.lookupdata.tda_scheme_code)
+
+      this.tda_schemeCode = this.lookupdata.tda_scheme_code
+      this.tda_scheme_code_desc = this.lookupdata.tda_scheme_code_desc
+      this.glSubheads = this.lookupdata.tda_glsubheads
+
+      this.filteredArr = this.glSubheads.filter(data => data.tda_gl_subhead_deafault == "Yes");
+      this.formData.controls.glSubhead.setValue(this.filteredArr[0].tda_gl_subhead)
+      this.tda_gl_subhead_description = this.filteredArr[0].tda_gl_subhead_description
+    })
+  }
+  branchSubheadLookup(): void {
+    const dialogRef = this.dialog.open(BranchComponent, {
+
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.formData.controls.solCode.setValue(result.data.solCode);
+    });
+  }
+
+  getPage() {
     this.subscription = this.accountAPI.currentMessage.subscribe(
-      message =>{
+      message => {
         this.message = message
-        if(this.message.function_type == 'A-Add'){
+        if (this.message.function_type == 'A-Add') {
           this.formData = this.fb.group({
             accountManager: [''],
             accountName: [''],
             accountOwnership: [''],
-            accountStatus:[''],
+            accountStatus: [''],
             accountType: [''],
             cashExceptionLimitCr: [''],
             cashExceptionLimitDr: [''],
-            currency:[''],
+            currency: [''],
             customerCode: [''],
             lienAmount: 0,
             // loan: new FormArray([]),
@@ -310,14 +310,14 @@ branchSubheadLookup(): void {
             referredBy: [''],
             // saving: new FormArray([]),
             solCode: [''],
-            sectorCode:[''],
-            subSectorCode:[''],
+            sectorCode: [''],
+            subSectorCode: [''],
             termDeposit: new FormArray([]),
-            transferExceptionLimitCr:[''] ,
-            transferExceptionLimitDr:[''] ,
+            transferExceptionLimitCr: [''],
+            transferExceptionLimitDr: [''],
             accountStatement: [''],
-            statementFreq:[''],
-            dispatchMode:[''],
+            statementFreq: [''],
+            dispatchMode: [''],
             withholdingTax: [''],
             postedBy: ['user'],
             postedFlag: ['Y'],
@@ -331,28 +331,28 @@ branchSubheadLookup(): void {
             deleteTime: [new Date()],
             deletedBy: ['None'],
           })
-        }else if(this.message.function_type == 'I-Inquire'){
+        } else if (this.message.function_type == 'I-Inquire') {
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
-            data =>{
+            data => {
               this.results = data.entity
-  
-              if(this.results.withholdingTax == true){
+
+              if (this.results.withholdingTax == true) {
                 this.results.withholdingTax == "True"
-              }else{
+              } else {
                 this.results.withholdingTax == "False"
               }
-  
+
               this.formData = this.fb.group({
                 accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
-                accountStatus:[this.results.accountStatus],
+                accountStatus: [this.results.accountStatus],
                 accountType: [this.message.account_type],
                 acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
-                currency:[this.results.currency],
+                currency: [this.results.currency],
                 customerCode: [this.results.customerCode],
                 lienAmount: [this.results.lienAmount],
                 // loan: new FormArray([]),
@@ -362,14 +362,14 @@ branchSubheadLookup(): void {
                 // saving: new FormArray([]),
                 sn: [this.results.sn],
                 solCode: [this.results.solCode],
-                sectorCode:[this.results.sectorCode],
-                subSectorCode:[this.results.subSectorCode],
+                sectorCode: [this.results.sectorCode],
+                subSectorCode: [this.results.subSectorCode],
                 termDeposit: new FormArray([]),
-                transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
-                transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+                transferExceptionLimitCr: [this.results.transferExceptionLimitCr],
+                transferExceptionLimitDr: [this.results.transferExceptionLimitDr],
                 accountStatement: [this.results.accountStatement],
-                statementFreq:[this.results.statementFreq],
-                dispatchMode:[this.results.dispatchMode],
+                statementFreq: [this.results.statementFreq],
+                dispatchMode: [this.results.dispatchMode],
                 withholdingTax: [this.results.withholdingTax],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
@@ -385,28 +385,28 @@ branchSubheadLookup(): void {
               })
             }
           )
-        }else if(this.message.function_type == 'M-Modify'){
+        } else if (this.message.function_type == 'M-Modify') {
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
-            data =>{
+            data => {
               this.results = data.entity
-  
-              if(this.results.withholdingTax == true){
+
+              if (this.results.withholdingTax == true) {
                 this.results.withholdingTax == "True"
-              }else{
+              } else {
                 this.results.withholdingTax == "False"
               }
-  
+
               this.formData = this.fb.group({
                 accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
-                accountStatus:[this.results.accountStatus],
+                accountStatus: [this.results.accountStatus],
                 accountType: [this.message.account_type],
                 acid: [this.results.acid],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
-                currency:[this.results.currency],
+                currency: [this.results.currency],
                 customerCode: [this.results.customerCode],
                 lienAmount: [this.results.lienAmount],
                 // loan: new FormArray([]),
@@ -416,14 +416,14 @@ branchSubheadLookup(): void {
                 // saving: new FormArray([]),
                 sn: [this.results.sn],
                 solCode: [this.results.solCode],
-                sectorCode:[this.results.sectorCode],
-                subSectorCode:[this.results.subSectorCode],
+                sectorCode: [this.results.sectorCode],
+                subSectorCode: [this.results.subSectorCode],
                 termDeposit: new FormArray([]),
-                transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
-                transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+                transferExceptionLimitCr: [this.results.transferExceptionLimitCr],
+                transferExceptionLimitDr: [this.results.transferExceptionLimitDr],
                 accountStatement: [this.results.accountStatement],
-                statementFreq:[this.results.statementFreq],
-                dispatchMode:[this.results.dispatchMode],
+                statementFreq: [this.results.statementFreq],
+                dispatchMode: [this.results.dispatchMode],
                 withholdingTax: [this.results.withholdingTax],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
@@ -439,26 +439,26 @@ branchSubheadLookup(): void {
               })
             }
           )
-        }else if(this.message.function_type == 'V-Verify'){
+        } else if (this.message.function_type == 'V-Verify') {
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
-            data =>{
+            data => {
               this.results = data.entity
-  
-              if(this.results.withholdingTax == true){
+
+              if (this.results.withholdingTax == true) {
                 this.results.withholdingTax == "True"
-              }else{
+              } else {
                 this.results.withholdingTax == "False"
               }
-  
+
               this.formData = this.fb.group({
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
-                accountStatus:[this.results.accountStatus],
+                accountStatus: [this.results.accountStatus],
                 accountType: [this.message.account_type],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
-                currency:[this.results.currency],
+                currency: [this.results.currency],
                 customerCode: [this.results.customerCode],
                 lienAmount: [this.results.lienAmount],
                 // loan: new FormArray([]),
@@ -467,14 +467,14 @@ branchSubheadLookup(): void {
                 referredBy: [this.results.referredBy],
                 // saving: new FormArray([]),
                 solCode: [this.results.solCode],
-                sectorCode:[this.results.sectorCode],
-                subSectorCode:[this.results.subSectorCode],
+                sectorCode: [this.results.sectorCode],
+                subSectorCode: [this.results.subSectorCode],
                 termDeposit: new FormArray([]),
-                transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
-                transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+                transferExceptionLimitCr: [this.results.transferExceptionLimitCr],
+                transferExceptionLimitDr: [this.results.transferExceptionLimitDr],
                 accountStatement: [this.results.accountStatement],
-                statementFreq:[this.results.statementFreq],
-                dispatchMode:[this.results.dispatchMode],
+                statementFreq: [this.results.statementFreq],
+                dispatchMode: [this.results.dispatchMode],
                 withholdingTax: [this.results.withholdingTax],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
@@ -490,26 +490,26 @@ branchSubheadLookup(): void {
               })
             }
           )
-        }else if(this.message.function_type == 'X-Delete'){
+        } else if (this.message.function_type == 'X-Delete') {
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
-            data =>{
+            data => {
               this.results = data.entity
-  
-              if(this.results.withholdingTax == true){
+
+              if (this.results.withholdingTax == true) {
                 this.results.withholdingTax == "True"
-              }else{
+              } else {
                 this.results.withholdingTax == "False"
               }
-  
+
               this.formData = this.fb.group({
                 accountManager: [this.results.accountManager],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
-                accountStatus:[this.results.accountStatus],
+                accountStatus: [this.results.accountStatus],
                 accountType: [this.message.account_type],
                 cashExceptionLimitCr: [this.results.cashExceptionLimitCr],
                 cashExceptionLimitDr: [this.results.cashExceptionLimitDr],
-                currency:[this.results.currency],
+                currency: [this.results.currency],
                 customerCode: [this.results.customerCode],
                 lienAmount: [this.results.lienAmount],
                 // loan: new FormArray([]),
@@ -518,14 +518,14 @@ branchSubheadLookup(): void {
                 referredBy: [this.results.referredBy],
                 // saving: new FormArray([]),
                 solCode: [this.results.solCode],
-                sectorCode:[this.results.sectorCode],
-                subSectorCode:[this.results.subSectorCode],
+                sectorCode: [this.results.sectorCode],
+                subSectorCode: [this.results.subSectorCode],
                 termDeposit: new FormArray([]),
-                transferExceptionLimitCr:[this.results.transferExceptionLimitCr] ,
-                transferExceptionLimitDr:[this.results.transferExceptionLimitDr] ,
+                transferExceptionLimitCr: [this.results.transferExceptionLimitCr],
+                transferExceptionLimitDr: [this.results.transferExceptionLimitDr],
                 accountStatement: [this.results.accountStatement],
-                statementFreq:[this.results.statementFreq],
-                dispatchMode:[this.results.dispatchMode],
+                statementFreq: [this.results.statementFreq],
+                dispatchMode: [this.results.dispatchMode],
                 withholdingTax: [this.results.withholdingTax],
                 postedBy: [this.results.postedBy],
                 postedFlag: [this.results.postedFlag],
@@ -546,57 +546,57 @@ branchSubheadLookup(): void {
     )
   }
 
-  onSubmit(){
-    if(this.formData.valid){
-      if(this.message.function_type == 'A-Add'){
+  onSubmit() {
+    if (this.formData.valid) {
+      if (this.message.function_type == 'A-Add') {
         this.accountAPI.createAccount(this.formData.value).subscribe(
-          res =>{
+          res => {
             this.results = res
             this._snackBar.open("Executed Successfully", "X", {
-              horizontalPosition:this.horizontalPosition,
-              verticalPosition:this.verticalPosition,
-              duration:3000,
-              panelClass:(['green-snackbar', 'login-snackbar'])
-         })
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000,
+              panelClass: (['green-snackbar', 'login-snackbar'])
+            })
           },
-          err =>{
+          err => {
             this.error = err;
-            this._snackBar.open("Invalid FormData", "Try Again",{
-              horizontalPosition:this.horizontalPosition,
-              verticalPosition:this.verticalPosition,
-              duration:3000,
-              panelClass:['red-snackbar', 'green-snackbar']
+            this._snackBar.open("Invalid FormData", "Try Again", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000,
+              panelClass: ['red-snackbar', 'green-snackbar']
             })
           }
         )
-      }else if(this.message.function_type != 'A-Add'){
+      } else if (this.message.function_type != 'A-Add') {
         this.subscription = this.accountAPI.updateAccounts(this.formData.value).subscribe(
-          res =>{
+          res => {
             this.results = res
             this._snackBar.open("Executed Successfully", "X", {
-                 horizontalPosition:this.horizontalPosition,
-                 verticalPosition:this.verticalPosition,
-                 duration:3000,
-                 panelClass:(['green-snackbar', 'login-snackbar'])
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000,
+              panelClass: (['green-snackbar', 'login-snackbar'])
             })
           },
-          err =>{
+          err => {
             this.error = err;
-            this._snackBar.open("Invalid FormData", "Try Again",{
-              horizontalPosition:this.horizontalPosition,
-              verticalPosition:this.verticalPosition,
-              duration:3000,
-              panelClass:['red-snackbar', 'green-snackbar']
+            this._snackBar.open("Invalid FormData", "Try Again", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000,
+              panelClass: ['red-snackbar', 'green-snackbar']
             })
           }
         )
       }
-    }else{
-      this._snackBar.open("Invalid FormData", "Try Again",{
-        horizontalPosition:this.horizontalPosition,
-        verticalPosition:this.verticalPosition,
-        duration:3000,
-        panelClass:['red-snackbar', 'green-snackbar']
+    } else {
+      this._snackBar.open("Invalid FormData", "Try Again", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000,
+        panelClass: ['red-snackbar', 'green-snackbar']
       })
     }
   }

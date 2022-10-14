@@ -1,89 +1,82 @@
-    <mat-card>
-      <mat-card-header  class="breadcrumb">
-        <div>Charge Definition Maintenance</div>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-    <br>
-
-    <div class="container-fluid">
-      <form
-      class="form"
-      [formGroup]="formData"
-      (ngSubmit)="onSubmit()"
-      #resetRequestsForm="ngForm"
-      novalidate
-    >
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
-        <div class="form-group">
-          <div class="col-md-6 col-sm-12 form-column ">
-           <label class="start pull-left">Function<span class="warning">*</span></label>
-          </div>
-          <div class="col-md-6 col-sm-12 form-column ">
-            <select (change)="onSelectFunction($event)"  class="form-control" formControlName="function_type" [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }" >
-              <option value="" disabled>-- Choose Function --</option>
-              <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
-            </select>
-          </div>
-       </div>
-      </div>
-      <div class="col-md-6 col-sm-12">
-        <div *ngIf="!this.existingData" class="form-group">
-          <div class="col-md-6 col-sm-12 form-column ">
-           <label class="start pull-left">Event Type<span class="warning">*</span></label>
-          </div>
-          <div class="col-md-6 col-sm-12 form-column ">
-            <input type="text" [value]="this.event_type_code" oninput ="this.value=this.value.toUpperCase()" formControlName="event_type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
-              <mat-icon (click)="eventType()">search</mat-icon>
-          </div>
-       </div>
-       <div class="form-group">
-        <div class="col-md-6 col-sm-12 form-column ">
-        </div>
-        <div class="col-md-6 col-sm-12 form-column ">
-          <mat-hint>{{this.event_description}}</mat-hint>
-        </div>
-     </div>
-      </div>
+<mat-card>
+  <mat-card-header class="breadcrumb">
+    <div>
+      <a routerLink="/system">Dashboard / </a> Charge Definition Maintenance
     </div>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <br>
 
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
+  <div class="container-fluid">
+    <form class="form" [formGroup]="formData" (ngSubmit)="onSubmit()" #resetRequestsForm="ngForm" novalidate>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
           <div class="form-group">
-              <div class="col-md-6 col-sm-12 form-column ">
-               <label class="start pull-left">Event ID<span class="warning">*</span></label>
-              </div>
-              <div class="col-md-6 col-sm-12 form-column ">
-                <input type="text" [value]="this.event_id" formControlName="event_id" class="pull-right form-control" [ngClass]="{ 'is-invalid': submitted && f.event_id.errors }" />
-              <mat-icon *ngIf="this.existingData" (click)="eventId()">search</mat-icon>
-              </div>
-           </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Function<span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <select (change)="onSelectFunction($event)" class="form-control" formControlName="function_type"
+                [ngClass]="{ 'is-invalid': submitted && f.function_type.errors }">
+                <option value="" disabled>-- Choose Function --</option>
+                <option *ngFor="let flag of functionArray" [value]="flag">{{ flag }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div *ngIf="!this.existingData" class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Event Type<span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <input type="text" [value]="this.event_type_code" oninput="this.value=this.value.toUpperCase()"
+                formControlName="event_type" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.event_type.errors }" />
+              <mat-icon (click)="eventType()">search</mat-icon>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <mat-hint>{{this.event_description}}</mat-hint>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-6 col-sm-12">
-        <div class="form-group">
-          <div class="col-md-6 col-sm-12 form-column ">
-           <label class="start pull-left">Charge Description</label>
+
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Event ID<span class="warning">*</span></label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column ">
+              <input type="text" [value]="this.event_id" formControlName="event_id" class="pull-right form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.event_id.errors }" />
+              <mat-icon *ngIf="this.existingData" (click)="eventId()">search</mat-icon>
+            </div>
           </div>
-          <div class="col-md-6 col-sm-12 form-column">
-            <textarea [value]="this.event_id_desc" type="text" maxlength = "40" formControlName="event_id_desc" oninput ="this.value=this.value.toUpperCase()" class="pull-right form-control"></textarea>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-12 form-column ">
+              <label class="start pull-left">Charge Description</label>
+            </div>
+            <div class="col-md-6 col-sm-12 form-column">
+              <textarea [value]="this.event_id_desc" type="text" maxlength="40" formControlName="event_id_desc"
+                oninput="this.value=this.value.toUpperCase()" class="pull-right form-control"></textarea>
+            </div>
           </div>
-       </div>
-    </div>
-    </div>
+        </div>
+      </div>
       <br />
       <button class="pull-right" mat-raised-button color="primary" type="submit">
-        <span
-          *ngIf="loading"
-          class="spinner-border spinner-border-sm mr-1"
-        ></span>
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Submit
       </button>
       <br />
     </form>
-      </div>
-    </mat-card>
-
-
-
-
-
+  </div>
+</mat-card>

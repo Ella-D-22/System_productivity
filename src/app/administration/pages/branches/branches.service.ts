@@ -12,8 +12,8 @@ export class BranchesService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   baseURL = `${environment.systemAPI}/branch`;
-    constructor(private http: HttpClient) { }
-     // Message Medium
+  constructor(private http: HttpClient) { }
+  // Message Medium
   private messageSource = new BehaviorSubject('default message');
   currentMessage = this.messageSource.asObservable();
   changeMessage(message: string) {
@@ -21,10 +21,10 @@ export class BranchesService {
   }
   // Add
   createBranch(data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/add`;    
+    let API_URL = `${this.baseURL}/add`;
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
-        return res || {}
-      }),
+      return res || {}
+    }),
       catchError(this.errorMgmt)
     )
   }
@@ -32,12 +32,12 @@ export class BranchesService {
   getBranchs() {
     let API_URL = `${this.baseURL}/all`;
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
-    .pipe(
-      map((res) => {
-        return res || {}
-      }),
-      catchError(this.errorMgmt)
-    )
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
   }
   // Get by id
   getBranchId(id: any): Observable<any> {
@@ -50,20 +50,20 @@ export class BranchesService {
         catchError(this.errorMgmt)
       )
   }
-    // Get by Code
-    getBranchBySolCode(code: any): Observable<any> {
-      let API_URL = `${this.baseURL}/${code}`;
-      return this.http.get(API_URL, { withCredentials: false })
-        .pipe(
-          map((res) => {
-            return res || {}
-          }),
-          catchError(this.errorMgmt)
-        )
-    }
-  updateBranch(data:any): Observable<any> {
+  // Get by Code
+  getBranchBySolCode(code: any): Observable<any> {
+    let API_URL = `${this.baseURL}/${code}`;
+    return this.http.get(API_URL, { withCredentials: false })
+      .pipe(
+        map((res) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      )
+  }
+  updateBranch(data: any): Observable<any> {
     let API_URL = `${this.baseURL}/update/`;
-    return this.http.put(API_URL, data, {headers: this.headers, withCredentials: false})
+    return this.http.put(API_URL, data, { headers: this.headers, withCredentials: false })
       .pipe(
         catchError(this.errorMgmt)
       )

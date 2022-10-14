@@ -74,6 +74,9 @@ getYearWiseData(year:any){
             overflow: 'justify'
         }
     },
+    credits: {
+      enabled: false
+  },
     tooltip: {
         valueSuffix: ' Members'
     },

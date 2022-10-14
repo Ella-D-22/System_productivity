@@ -52,8 +52,17 @@ export class RetailCustomerLookupComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
       this.subscription.unsubscribe();
     }
-    customer_type_array: any = [
-      'Retail Customer','Coorporate Customer'
+  customer_type_array: any = [
+    {
+      id: 1,
+      value: 'retail', 
+      name: 'Retail Customer'
+    },
+    {
+      id: 2,
+      value: 'corporate',
+      name: 'Coorporate Customer'
+    }
     ]
     // customer_branch_array: any = [
     //   ,'001- Main Office','049- Machakos Branch','072-Makueni Branch','078-Thika Branch'
@@ -76,13 +85,12 @@ export class RetailCustomerLookupComponent implements OnInit, OnDestroy {
   
     getFilteredCustomers(){
       console.log("form Data", this.formData.value);
-    
      let customer_type: any = this.formData.controls.cust_type.value;
      let branch_code: any = this.formData.controls.branch_code.value;
     
      let params = new HttpParams()
      .set('solCode',branch_code);
-      if(customer_type = 'Retail Customer'){
+      if(customer_type = 'retail'){
         this.loading = true;
         this.subscription = this.retailCustAPI.getRetailCustomerPerSolCode(params).subscribe(res=>{
           this.loading = false;
@@ -94,7 +102,7 @@ export class RetailCustomerLookupComponent implements OnInit, OnDestroy {
           this.loading = false;
   
         });
-      }else if(customer_type = 'Coorporate Customer'){
+      }else if(customer_type = 'corporate'){
         this.loading = true;
         this.subscription = this.retailCustAPI.getRetailCustomerPerSolCode(params).subscribe(res=>{
           this.loading = false;
@@ -109,7 +117,8 @@ export class RetailCustomerLookupComponent implements OnInit, OnDestroy {
       } 
     }
 
-    onSubmit(){
+  onSubmit() {
+      
     }
     
     applyFilter(event: Event) {

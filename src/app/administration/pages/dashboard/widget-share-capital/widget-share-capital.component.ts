@@ -69,6 +69,9 @@ getYearWiseData(year:any){
         text: 'Total Paid',
       },
     },
+    credits: {
+      enabled: false
+  },
     tooltip: {
       headerFormat:
         '<span style = "font-size:10px">{point.key}</span><table>',
