@@ -14,8 +14,9 @@ import { GlSubheadService } from './gl-subhead.service';
   styleUrls: ['./gl-subhead.component.scss']
 })
 export class GlSubheadComponent implements OnInit {
-  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
-  auth_user = this.currentUser.username;
+  // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  // auth_user = this.currentUser.username;
+  auth_user:String ='kiprotich';
 
   number_of_accounts!: any
   sum_of_balances!: any
@@ -99,9 +100,10 @@ export class GlSubheadComponent implements OnInit {
     refCodeLookup(): void {
       const dialogRef = this.dialog.open(GlCodeLookupComponent, {
         // height: '400px',
+        width:'45%'
       });
       dialogRef.afterClosed().subscribe(result => {
-        this.lookupData = result.data;
+        this.lookupData = result;
         this.glCode = this.lookupData.glCode;
         this.glDescription = this.lookupData.glDescription;
         this.formData.controls.glCode.setValue(this.glCode);
@@ -116,7 +118,7 @@ export class GlSubheadComponent implements OnInit {
         glSubheadDescription: [""],
         modifiedBy: [""],
         modifiedTime: [""],
-        postedBy: [""],
+        postedBy: [this.auth_user],
         postedFlag:[""],
         postedTime: [""],
         verifiedBy: [""],
@@ -149,7 +151,6 @@ export class GlSubheadComponent implements OnInit {
         )
       }
       getPage(){
-
         this.subscription = this.glSubheadCodeAPI.currentMessage.subscribe(message =>{
           this.messageData = message;
           this.function_type = this.messageData.function_type
@@ -173,7 +174,6 @@ export class GlSubheadComponent implements OnInit {
             verifiedBy: ["P"],
             verifiedFlag: ["Y"],
             verifiedTime: [new Date()],
-
           });
         }
         else if(this.function_type == "I-Inquire"){
@@ -303,11 +303,12 @@ export class GlSubheadComponent implements OnInit {
       onSubmit() {
           this.submitted = true;
           // stop here if form is invalid
+        console.log("data for sub gl", this.formData.value);
           if (this.formData.valid) {
             if(this.function_type == "A-Add"){
             this.subscription = this.glSubheadCodeAPI.createGlSubheadCode(this.formData.value).subscribe(res=>{
               this.results = res;
-                this._snackBar.open("Executed Successfully!", "X", {
+                this._snackBar.open("General Ledger added successfully", "OK", {
                   horizontalPosition: this.horizontalPosition,
                   verticalPosition: this.verticalPosition,
                   duration: 3000,
@@ -327,8 +328,7 @@ export class GlSubheadComponent implements OnInit {
               this.subscription = this.glSubheadCodeAPI.updateGlSubheadCode(this.formData.value).subscribe(res=>{
                 this.results = res;
                 console.log("The subscribe data", this.results);
-
-                  this._snackBar.open("Record Updated Successfully!", "X", {
+                  this._snackBar.open("General Ledger Record Updated Successfully", "OK", {
                     horizontalPosition: this.horizontalPosition,
                     verticalPosition: this.verticalPosition,
                     duration: 3000,
@@ -351,7 +351,7 @@ export class GlSubheadComponent implements OnInit {
                 this.results = res;
                 console.log("The subscribe data", this.results);
 
-                  this._snackBar.open(" Record deleted Successfully!", "X", {
+                  this._snackBar.open("General Ledger Record deleted Successfully", "OK", {
                     horizontalPosition: this.horizontalPosition,
                     verticalPosition: this.verticalPosition,
                     duration: 3000,
@@ -372,7 +372,7 @@ export class GlSubheadComponent implements OnInit {
 
           }
           else{
-            this._snackBar.open("Invalid Form Data", "Try again!", {
+            this._snackBar.open("Error, General Ledger Form Data is invalid!!", "TRY AGAIN", {
               horizontalPosition: this.horizontalPosition,
               verticalPosition: this.verticalPosition,
               duration: 3000,

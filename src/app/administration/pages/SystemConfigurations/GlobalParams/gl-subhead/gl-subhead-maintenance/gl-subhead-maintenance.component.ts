@@ -58,7 +58,7 @@ export class GlSubheadMaintenanceComponent implements OnInit {
       width: '50%'
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.lookupData = result.data;
+      this.lookupData = result;
       this.glSubheadCode = this.lookupData.glSubheadCode;
       this.glSubheadDescription = this.lookupData.glSubheadDescription;
       this.formData.controls.glSubheadCode.setValue(this.glSubheadCode);
@@ -79,14 +79,13 @@ export class GlSubheadMaintenanceComponent implements OnInit {
       get f() { return this.formData.controls; }
   onSubmit(){
     console.log(this.formData.value);
-    
     this.loading = true;
     this.submitted = true;
     if(this.formData.valid){
     this.glSubheadCodeAPI.changeMessage(this.formData.value)
-    this.router.navigate(['system/configurations/global/gl-subhead/data/view'], {skipLocationChange:true})
+    this.router.navigate(['system/configurations/global/gl-subhead'], {skipLocationChange:true})
   }else{
-    this.router.navigate(['system/configurations/global/gl-subhead/data/view'], {skipLocationChange:true})
+    this.router.navigate(['system/configurations/global/gl-subhead'], {skipLocationChange:true})
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {
       horizontalPosition: this.horizontalPosition,

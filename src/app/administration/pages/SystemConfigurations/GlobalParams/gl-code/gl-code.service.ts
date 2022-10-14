@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class GlCodeService {
-
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   baseURL = `${environment.accountAPI}/gl`;
     constructor(private http: HttpClient) { }

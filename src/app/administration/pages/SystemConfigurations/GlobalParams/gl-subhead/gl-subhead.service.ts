@@ -10,7 +10,6 @@ import {Response} from './interfaces/response';
   providedIn: 'root'
 })
 export class GlSubheadService {
-
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   baseURL = `${environment.accountAPI}/subhead`;
     constructor(private http: HttpClient) { }
@@ -24,7 +23,6 @@ export class GlSubheadService {
   createGlSubheadCode(data: any): Observable<any> {
     let API_URL = `${this.baseURL}/add`;
     console.log("server data", data);
-
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
         return res || {}
       }),
