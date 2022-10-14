@@ -56,12 +56,12 @@ export class RetailCustomerLookupComponent implements OnInit, OnDestroy {
     {
       id: 1,
       value: 'retail', 
-      name: 'Retail Customer'
+      name: 'RETAIL CUSTOMER'
     },
     {
       id: 2,
       value: 'corporate',
-      name: 'Coorporate Customer'
+      name: 'CORPORATE CUSTOMER'
     }
     ]
     // customer_branch_array: any = [
