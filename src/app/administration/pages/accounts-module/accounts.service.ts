@@ -11,7 +11,7 @@ export class AccountsService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  baseURL = `${environment.accountAPI}/accounts`;
+  baseURL = `${environment.accoutOpening}/accounts`;
     constructor(private http: HttpClient) { }
      // Message Medium
   private messageSource = new BehaviorSubject('default message');
