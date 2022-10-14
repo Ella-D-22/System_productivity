@@ -69,7 +69,7 @@ width: '45%',
   ngOnInit(): void {
   }
   onSubmit(){
-   console.log("data", this.formData.value);
+   //console.log("data", this.formData.value);
    this.loading = true;
     this.submitted = true;
    if(this.formData.valid){

@@ -244,7 +244,8 @@ export class SavingsAccountComponent implements OnInit {
  }
 
  customerLookup(): void {
-  const dialogRef = this.dialog.open(RetailCustomerLookupComponent, {
+   const dialogRef = this.dialog.open(RetailCustomerLookupComponent, {
+    width: '60%'
   });
   dialogRef.afterClosed().subscribe(result => {
     this.customer_lookup = result.data;
@@ -276,16 +277,15 @@ branchSubheadLookup(): void {
     this.formData.controls.solCode.setValue(result.data.solCode);
   });
   }
-
   collateralLookup():void{
-
   }
-
-
   getPage(){
     this.subscription = this.accountAPI.currentMessage.subscribe(
       message =>{
         this.message = message
+        this.function_type = this.message.function_type;
+        this.account_code = this.message.account_code;
+        this.customer_type = this.message.customer_type;
         if(this.message.function_type == 'A-Add'){
           this.formData = this.fb.group({
             // accountBalance: [''],
@@ -299,6 +299,8 @@ branchSubheadLookup(): void {
             cashExceptionLimitDr: [''],
             currency:[''],
             customerCode: [''],
+            schemeCode: [''],
+            glSubhead: [''],
             lienAmount: 0,
             // loan: new FormArray([]),
             // officeAccount: new FormArray([]),

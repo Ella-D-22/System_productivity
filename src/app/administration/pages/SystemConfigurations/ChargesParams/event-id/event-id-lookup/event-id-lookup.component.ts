@@ -29,7 +29,8 @@ export class EventIdLookupComponent implements OnInit, OnDestroy {
   employeeEmail: any;
   employee_id: any;
   creatingAccount = false;
-  formData:any;
+  formData: any;
+  loading: boolean = false;
   
   constructor(    
     public dialogRef: MatDialogRef<EventIdLookupComponent>,
@@ -53,9 +54,11 @@ export class EventIdLookupComponent implements OnInit, OnDestroy {
         this.dataSource.paginator.firstPage();
       }
     }
-    getData() {
+  getData() {
+    this.loading = true;
       this.subscription = this.eventIdAPI.getEventIds().subscribe(res => {
-       this.data = res;
+        this.data = res;
+        this.loading = false;
         // Binding with the datasource
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;
