@@ -354,55 +354,76 @@
                 </mat-tab>
                 <mat-tab class="mat-tab" label="Specific Details">
                     <br>
-                    <form action="" [formGroup]="savingsFormData">
-
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Saving Period<span
-                                                class="warning">*</span></label>
+                    <h4><strong>SAVINGS INFORMATION</strong> &nbsp; &nbsp;
+                        <button class="table-main-action-btn bg-primary text-white" (click)="addSaving()"
+                            mat-raised-button>
+                            &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; ADD
+                        </button> &nbsp; &nbsp;
+                        <button class="table-main-action-btn bg-warning text-white" mat-raised-button
+                            (click)="removeSaving(i)">
+                            &nbsp; <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp; REMOVE
+                        </button>
+                    </h4>
+                    <form [formGroup]="formData">
+                        <ng-container formArrayName="saving">
+                            <ng-container *ngFor="let savingsFormData of saving.controls; let i = index">
+                                <div class="lesson-form-row" [formGroup]="savingsFormData">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <label for="" class="start pull-left">Saving Period<span
+                                                            class="warning">*</span></label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <input type="number" formControlName="sba_savingPeriod"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <label for="" class="start pull-left">Matured Value<span
+                                                            class="warning">*</span></label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <input type="date" formControlName="sba_maturedValue"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="number" formControlName="sba_savingPeriod" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left">Matured Value<span
-                                                class="warning">*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="date" formControlName="sba_maturedValue" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <label for="" class="start pull-left"> Matured Date<span>*</span></label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 form-column">
-                                        <input type="date" formControlName="sba_maturedDate" class="form-control" />
-                                        <!-- <input [matDatepicker]="mpicker" formControlName="sba_maturedDate"
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <label for="" class="start pull-left"> Matured
+                                                        Date<span>*</span></label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <input type="date" formControlName="sba_maturedDate"
+                                                        class="form-control" />
+                                                    <!-- <input [matDatepicker]="mpicker" formControlName="sba_maturedDate"
                                             class="form-control" />
                                         <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="mpicker">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #mpicker></mat-datepicker> -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </ng-container>
+                        </ng-container>
                     </form>
                 </mat-tab>
                 <mat-tab class="mat-tab" label="Nominations">
                     <br>
-                    <form action="" [formGroup]="nomineesFormData" novalidate (ngSubmit)="onSubmit()">
-
+                    <form [formGroup]="savingsFormData">
+                        <ng-container formArrayName="nominees">
+                            <ng-container *ngFor="let nomineesFormData of nominees.controls; let i = index">
+                                <div class="lesson-form-row" [formGroup]="nomineesFormData">
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
@@ -511,7 +532,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="row">
@@ -541,91 +561,101 @@
                                             <mat-radio-button color="primary" value=False>No</mat-radio-button>
                                         </mat-radio-group>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                         <br />
                         <hr>
-
                         <h4><strong>GUARDIAN INFORMATION</strong> &nbsp; &nbsp;
-                            <button class="table-main-action-btn bg-primary text-white"
-                                (click)="addGuardian()" mat-raised-button>
+                            <button class="table-main-action-btn bg-primary text-white" (click)="addGuardian()"
+                                mat-raised-button>
                                 &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; ADD
                             </button> &nbsp; &nbsp;
-                            <button class="table-main-action-btn bg-warning text-white"
-                                (click)="removeGuardian()" mat-raised-button>
+                            <button class="table-main-action-btn bg-warning text-white" mat-raised-button
+                                (click)="removeGuardian(i)">
                                 &nbsp; <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp; REMOVE
                             </button>
                         </h4>
-                        <form action="" [formGroup]="guardianFormData">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-sm-12 form-column">
-                                            <label for="" class="start pull-left">Guardian Name<span
-                                                    class="warning">*</span></label>
+                        <form action="" [formGroup]="nomineesFormData">
+                            <ng-container formArrayName="guadian">
+                                <ng-container *ngFor="let guardianFormData of guadian.controls; let i = index">
+                                    <div class="lesson-form-row" [formGroup]="guardianFormData">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-sm-12 form-column">
+                                                        <label for="" class="start pull-left">Guardian Name<span
+                                                                class="warning">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 form-column">
+                                                        <input type="text" formControlName="guardianName"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-sm-12 form-column">
+                                                        <label for="" class="start pull-left">Guardian Code <span
+                                                                class="warning">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 form-column">
+                                                        <select formControlName="guardianCode" class="form-control">
+                                                            <option value="" disabled>SELECT GURADIAN</option>
+                                                            <option *ngFor="let item of guardianArray" [value]="item">
+                                                                {{item}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="guardianName" class="form-control">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-sm-12 form-column">
+                                                        <label for="" class="start pull-left">Guardian Address<span
+                                                                class="warning">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 form-column">
+                                                        <input type="text" formControlName="address"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-sm-12 form-column">
+                                                        <label for="" class="start pull-left">Residence<span
+                                                                class="warning">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 form-column">
+                                                        <input type="text" formControlName="residence"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-sm-12 form-column">
-                                            <label for="" class="start pull-left">Guardian Code <span
-                                                    class="warning">*</span></label>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12 form-column">
-                                            <select formControlName="guardianCode" class="form-control">
-                                                <option value="" disabled>SELECT GURADIAN</option>
-                                                <option *ngFor="let item of guardianArray" [value]="item">{{item}}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-sm-12 form-column">
-                                            <label for="" class="start pull-left">Guardian Address<span
-                                                    class="warning">*</span></label>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="address" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-sm-12 form-column">
-                                            <label for="" class="start pull-left">Residence<span
-                                                    class="warning">*</span></label>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12 form-column">
-                                            <input type="text" formControlName="residence" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                </ng-container>
+                            </ng-container>
                         </form>
-                        <button class=" pull-right table-main-action-btn" color="warn" (click)="onNomineeClear()"
+                        <button class=" pull-right table-main-action-btn" color="warn" (click)="removeNominee(i)"
                             mat-raised-button>
                             &nbsp; <i class="fa fa-times-rectangle" aria-hidden="true"></i>&nbsp; CLEAR
                         </button>
-                        <button class=" pull-right table-main-action-btn" color="accent" (click)="initNomineeData()"
+                        <!-- <button class=" pull-right table-main-action-btn" color="accent" (click)="initNomineeData()"
                             mat-raised-button>
                             &nbsp; <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;RESET
-                        </button>
+                        </button> -->
                         <button class=" pull-right table-main-action-btn" color="primary" (click)="previewNominees()"
                             mat-raised-button>
                             &nbsp; <i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp; CREATE
                         </button>
+                        </div>
+                        </ng-container>
+                        </ng-container>
                     </form>
-                    <br>
                     <br>
                     <table class="table table-striped table-bordered table-sm row-border hover" style="width: 100%;">
                         <thead>
@@ -641,7 +671,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of this.nomineeArray ,let i = index">
+                            <tr *ngFor="let item of this.nomineesFormData ,let i = index">
                                 <td>{{i + 1}}</td>
                                 <td>{{item.firstName}}</td>
                                 <td>{{item.middleName}}</td>
