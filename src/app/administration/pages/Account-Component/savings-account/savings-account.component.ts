@@ -21,31 +21,32 @@ export class SavingsAccountComponent implements OnInit {
   subscription: Subscription
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  sectorData: any
-  subSectorData: any
-  subSectors: any
-  currencyData: any
-  customer_lookup: any
-  customer_code: any
-  customer_name: any
-  element: any
-  message: any
-  function_type: any
-  account_code: any
-  customer_type: any
-  collateralData: any
-  signatureImage: any
-  isEnabled = false
-  newData = false;
-  loading = false
-  lookupdata: any
-  glSubheads: any
-  filteredArr: any
-  error: any
-  results: any
-  sba_schemeCode: any
-  sba_gl_subhead_description: any
-  sba_scheme_code_desc: any
+  sectorData: any;
+  subSectorData: any;
+  subSectors: any;
+  currencyData: any;
+  customer_lookup: any;
+  customer_code: any;
+  customer_name: any;
+  element: any;
+  message: any;
+  function_type: any;
+  account_code: any;
+  customer_type: any;
+  collateralData: any;
+  signatureImage: any;
+  isEnabled: boolean = false;
+  newData: boolean = false;
+  loading: boolean = false;
+  lookupdata: any;
+  glSubheads: any;
+  filteredArr: any;
+  error: any;
+  results: any;
+  sba_schemeCode: any;
+  sba_gl_subhead_description: any;
+  sba_scheme_code_desc: any;
+  i: number;
   constructor(
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -62,8 +63,7 @@ export class SavingsAccountComponent implements OnInit {
 
   }
 
-  nomineeArray = new Array();
-  guardiansArray = new Array();
+  //nomineeArray = new Array();
   formData = this.fb.group({
     // accountBalance: [''],
     accountManager: [''],
@@ -81,7 +81,8 @@ export class SavingsAccountComponent implements OnInit {
     // officeAccount: new FormArray([]),
     openingDate: [''],
     referredBy: [''],
-    saving: new FormArray([]),
+    saving: this.fb.array([]),
+    //saving: new FormArray([]),
     solCode: [''],
     sectorCode: [''],
     subSectorCode: [''],
@@ -111,9 +112,11 @@ export class SavingsAccountComponent implements OnInit {
     id: [''],
     sba_maturedValue: ['0'],
     sba_maturedDate: [''],
-    nominees: new FormArray([]),
-    sba_savingPeriod: ['0'],
-  })
+    nominees: this.fb.array([]),
+    // nominees: new FormArray([]),
+    sba_savingPeriod: ['0']
+  });
+
   nomineesFormData = this.fb.group({
     dob: [''],
     emailAddress: [''],
@@ -126,21 +129,24 @@ export class SavingsAccountComponent implements OnInit {
     occupation: [''],
     phone: [''],
     relationship: [''],
-    guardian: new FormArray([])
+    guadian: this.fb.array([])
+    // guardian: new FormArray([])
   })
 
-  guardianFormData = this.fb.group({
-    address: [''],
-    guardianCode: [''],
-    guardianName: [''],
-    id: [''],
-    residence: ['']
-  })
 
-  get f() { return this.formData.controls }
-  get s() { return this.f.saving as FormArray }
-  get ss() { return this.savingsFormData.controls }
-  get n() { return this.ss.nominees as FormArray }
+
+  // get f() {
+  //   return this.formData.controls;
+  // }
+  // get s() {
+  //   return this.f.saving as FormArray;
+  // }
+  // get ss() {
+  //   return this.savingsFormData.controls;
+  // }
+  // get n() {
+  //   return this.ss.nominees as FormArray;
+  // }
 
 
   despatch_mode_array: any = [
@@ -163,9 +169,32 @@ export class SavingsAccountComponent implements OnInit {
   ];
 
 
-  initNomineeData() {
-    this.newData = true;
-    this.nomineesFormData = this.fb.group({
+ 
+  get saving() {
+    return this.formData.controls['saving'] as FormArray;
+  }
+  addSaving() {
+    const savingsFormData = this.fb.group({
+      id: [''],
+      sba_maturedValue: ['0'],
+      sba_maturedDate: [''],
+      nominees: this.fb.array([]),
+      // nominees: new FormArray([]),
+      sba_savingPeriod: ['0']
+    });
+    this.saving.push(savingsFormData);
+    console.log("savings data", savingsFormData);
+  }
+  removeSaving(index: number) {
+    this.saving.removeAt(index);
+  }
+
+  get nominees() {
+    return this.savingsFormData.controls['nominees'] as FormArray;
+  }
+  previewNominees() {
+      this.newData = true;
+    const nomineesFormData = this.fb.group({
       dob: [''],
       emailAddress: [''],
       firstName: [''],
@@ -177,64 +206,64 @@ export class SavingsAccountComponent implements OnInit {
       occupation: [''],
       phone: [''],
       relationship: [''],
-      guardian: new FormArray([])
-    })
+      guadian: this.fb.array([])
+      //guardian: new FormArray([])
+    });
+    this.nominees.push(nomineesFormData);
+    console.log("Nominees data", nomineesFormData);
+    
   }
-  previewNominees() {
-    if (this.nomineesFormData.valid) {
-      this.n.push(this.fb.group(
-        this.nomineesFormData.value
-      ));
-      this.nomineeArray.push(this.nomineesFormData.value);
-      this.initNomineeData();
-    }
+  removeNominee(index: number) {
+    this.nominees.removeAt(index);
   }
-  onAddNomineesField() {
-    this.n.push(this.fb.group({
-      dob: [''],
-      emailAddress: [''],
-      firstName: [''],
-      identificationNo: [''],
-      lastName: [''],
-      middleName: [''],
-      occupation: [''],
-      phone: ['']
-    }))
-  }
-  onNomineeClear() {
-    this.initNomineeData()
-    this.nomineeArray = new Array();
-  }
-  onUpdateNominee() {
-    let i = this.element
-    this.nomineeArray[i] = this.nomineesFormData.value
-  }
-  onRemove(i: any) {
-    const index: number = this.nomineeArray.indexOf(this.nomineeArray.values);
-    this.nomineeArray.splice(index, i);
-    this.nomineeArray = this.nomineeArray
+
+
+  get guadian() {
+    return this.nomineesFormData.controls['guadian'] as FormArray;
   }
   addGuardian() {
-    if (this.guardianFormData.valid) {
-      this.n.push(this.fb.group(
-        this.guardianFormData.value
-      ));
-      this.guardiansArray.push(this.guardianFormData.value);
-      this.initNomineeData();
-    }
-  }
-  onAddGuardianField() {
-    this.n.push(this.fb.group({
+    const guardianFormData = this.fb.group({
       address: [''],
       guardianCode: [''],
       guardianName: [''],
       id: [''],
       residence: ['']
-    }))
+    });
+    this.guadian.push(guardianFormData);
+    console.log("guadian data", guardianFormData);
   }
-  removeGuardian() {
 
+  removeGuardian(index: number) {
+    this.guadian.removeAt(index);
   }
+
+ 
+  // onAddNomineesField() {
+  //   this.n.push(this.fb.group({
+  //     dob: [''],
+  //     emailAddress: [''],
+  //     firstName: [''],
+  //     identificationNo: [''],
+  //     lastName: [''],
+  //     middleName: [''],
+  //     occupation: [''],
+  //     phone: ['']
+  //   }))
+  // }
+  // onNomineeClear() {
+  //    this.initNomineeData()
+  //   this.nomineeArray = new Array();
+  // }
+  // onUpdateNominee() {
+  //   let i = this.element
+  //   this.nomineeArray[i] = this.nomineesFormData.value
+  // }
+  // onRemove(i: any) {
+  //   const index: number = this.nomineeArray.indexOf(this.nomineeArray.values);
+  //   this.nomineeArray.splice(index, i);
+  //   this.nomineeArray = this.nomineeArray
+  // }
+
   //setting up the mis sector codes
   getMISData() {
     this.subscription = this.misSectorAPI.getAllMissectors().subscribe(
@@ -335,7 +364,8 @@ export class SavingsAccountComponent implements OnInit {
             // officeAccount: new FormArray([]),
             openingDate: [''],
             referredBy: [''],
-            saving: new FormArray([]),
+            saving: this.fb.array([]),
+            // saving: new FormArray([]),
             // sn: [''],
             solCode: [''],
             sectorCode: [''],
@@ -387,7 +417,8 @@ export class SavingsAccountComponent implements OnInit {
                 // officeAccount: new FormArray([]),
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
-                saving: new FormArray([]),
+                saving: this.fb.array([]),
+                // saving: new FormArray([]),
                 // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode: [this.results.sectorCode],
@@ -423,7 +454,6 @@ export class SavingsAccountComponent implements OnInit {
               } else {
                 this.results.withholdingTax == "False"
               }
-
               this.formData = this.fb.group({
                 // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
@@ -441,7 +471,8 @@ export class SavingsAccountComponent implements OnInit {
                 // officeAccount: new FormArray([]),
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
-                saving: new FormArray([]),
+                saving: this.fb.array([]),
+                // saving: new FormArray([]),
                 // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode: [this.results.sectorCode],
@@ -495,7 +526,8 @@ export class SavingsAccountComponent implements OnInit {
                 // officeAccount: new FormArray([]),
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
-                saving: new FormArray([]),
+                saving: this.fb.array([]),
+                // saving: new FormArray([]),
                 // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode: [this.results.sectorCode],
@@ -549,7 +581,8 @@ export class SavingsAccountComponent implements OnInit {
                 // officeAccount: new FormArray([]),
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
-                saving: new FormArray([]),
+                saving: this.fb.array([]),
+                // saving: new FormArray([]),
                 // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 sectorCode: [this.results.sectorCode],
@@ -581,54 +614,58 @@ export class SavingsAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("Savings", this.formData.value);
-   
-      if (this.message.function_type == 'A-Add') {
-        this.accountAPI.createAccount(this.formData.value).subscribe(
-          res => {
-            this.results = res
-            console.log("API", this.results);
-            
-            this._snackBar.open("Executed Successfully", "X", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: (['green-snackbar', 'login-snackbar'])
-            })
-          },
-          err => {
-            this.error = err;
-            this._snackBar.open("Invalid FormData", "Try Again", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: ['red-snackbar', 'green-snackbar']
-            })
-          }
-        )
-      } else if (this.message.function_type != 'A-Add') {
-        this.subscription = this.accountAPI.updateAccounts(this.formData.value).subscribe(
-          res => {
-            this.results = res
-            this._snackBar.open("Executed Successfully", "X", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: (['green-snackbar', 'login-snackbar'])
-            })
-          },
-          err => {
-            this.error = err;
-            this._snackBar.open("Invalid FormData", "Try Again", {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-              duration: 3000,
-              panelClass: ['red-snackbar', 'green-snackbar']
-            })
-          }
-        )
-      }
+    console.log("Total Savings information-form", this.formData.value);
+    console.log("savings info-Tab", this.saving.value);
+    console.log("Nominees info-Tab", this.nominees.value);
+    console.log("Guardian info-tab", this.guadian.value);
+
+
+    if (this.message.function_type == 'A-Add') {
+      this.accountAPI.createAccount(this.formData.value).subscribe(
+        res => {
+          this.results = res
+          console.log("API", this.results);
+
+          this._snackBar.open("Executed Successfully", "X", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 3000,
+            panelClass: (['green-snackbar', 'login-snackbar'])
+          })
+        },
+        err => {
+          this.error = err;
+          this._snackBar.open("Invalid FormData", "Try Again", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 3000,
+            panelClass: ['red-snackbar', 'green-snackbar']
+          })
+        }
+      )
+    } else if (this.message.function_type != 'A-Add') {
+      this.subscription = this.accountAPI.updateAccounts(this.formData.value).subscribe(
+        res => {
+          this.results = res
+          this._snackBar.open("Executed Successfully", "X", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 3000,
+            panelClass: (['green-snackbar', 'login-snackbar'])
+          })
+        },
+        err => {
+          this.error = err;
+          this._snackBar.open("Invalid FormData", "Try Again", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 3000,
+            panelClass: ['red-snackbar', 'green-snackbar']
+          })
+        }
+      )
+    }
   }
-   
-  
+
+
 }
