@@ -113,7 +113,9 @@ export class RetailCustomerComponent implements OnInit {
   get cinfol() { return this.f.contactInformationList as FormArray }
   get cimgl() { return this.f.customerImageList as FormArray }
   get k() { return this.f.kins as FormArray }
-  get n() { return this.f.nominees as FormArray }
+  get n() {
+    return this.f.nominees as FormArray
+  }
 
 
   //Getting the segments

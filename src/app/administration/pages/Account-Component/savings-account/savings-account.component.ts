@@ -40,6 +40,7 @@ export class SavingsAccountComponent implements OnInit {
   loading: boolean = false;
   lookupdata: any;
   glSubheads: any;
+  glCode: any;
   filteredArr: any;
   error: any;
   results: any;
@@ -47,6 +48,9 @@ export class SavingsAccountComponent implements OnInit {
   sba_gl_subhead_description: any;
   sba_scheme_code_desc: any;
   i: number;
+  showGuadian: boolean = false;
+  showNominees: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -56,14 +60,13 @@ export class SavingsAccountComponent implements OnInit {
     private accountAPI: AccountsService,
     private accountService: LoanAccountService
   ) { }
-
-
   ngOnInit(): void {
     this.getPage()
-
   }
+  savingsArray = new Array();
+  nomineeArray = new Array();
+  guardiansArray = new Array();
 
-  //nomineeArray = new Array();
   formData = this.fb.group({
     // accountBalance: [''],
     accountManager: [''],
@@ -81,12 +84,14 @@ export class SavingsAccountComponent implements OnInit {
     // officeAccount: new FormArray([]),
     openingDate: [''],
     referredBy: [''],
-    saving: this.fb.array([]),
+    guadian: this.fb.array([]),
     //saving: new FormArray([]),
     solCode: [''],
     sectorCode: [''],
     subSectorCode: [''],
     schemeCode: [''],
+    schemeType: ['1'],
+    glCode: ['1'],
     glSubhead: [''],
     // termDeposit: new FormArray([]),
     transferExceptionLimitCr: [''],
@@ -107,16 +112,15 @@ export class SavingsAccountComponent implements OnInit {
     deleteTime: [''],
     deletedBy: [''],
   })
-
   savingsFormData = this.fb.group({
-    id: [''],
-    sba_maturedValue: ['0'],
+    sba_monthlyValue: [''],
+    sba_maturedValue: [''],
+    sba_savingPeriod: [''],
+    sba_startDate: [''],
     sba_maturedDate: [''],
-    nominees: this.fb.array([]),
-    // nominees: new FormArray([]),
-    sba_savingPeriod: ['0']
-  });
-
+    nominees: new FormArray([]),
+    guadian: this.fb.array([])
+  })
   nomineesFormData = this.fb.group({
     dob: [''],
     emailAddress: [''],
@@ -129,26 +133,16 @@ export class SavingsAccountComponent implements OnInit {
     occupation: [''],
     phone: [''],
     relationship: [''],
-    guadian: this.fb.array([])
-    // guardian: new FormArray([])
+
+    //guardian: new FormArray([])
   })
-
-
-
-  // get f() {
-  //   return this.formData.controls;
-  // }
-  // get s() {
-  //   return this.f.saving as FormArray;
-  // }
-  // get ss() {
-  //   return this.savingsFormData.controls;
-  // }
-  // get n() {
-  //   return this.ss.nominees as FormArray;
-  // }
-
-
+  guardianFormData = this.fb.group({
+    address: [''],
+    guardianCode: [''],
+    guardianName: [''],
+    id: [''],
+    residence: ['']
+  })
   despatch_mode_array: any = [
     'POST', 'COURIER', 'POST & MAIL', 'COLLECT IN PERSON', 'E-MAIL ONLY', 'NO DISPATCH', 'COURIER & MAIL'
   ];
@@ -167,20 +161,30 @@ export class SavingsAccountComponent implements OnInit {
   guardianArray: any = [
     'COURT APPOINTED', 'NATURAL GUARDIAN'
   ];
-
-
- 
+  nominations: any = [
+    {
+      id: 1,
+      value: 'nomination',
+      name: 'NOMINEES'
+    },
+    {
+      id: 2,
+      value: 'guardian',
+      name: 'GUARDIAN'
+    }
+  ];
   get saving() {
     return this.formData.controls['saving'] as FormArray;
   }
   addSaving() {
     const savingsFormData = this.fb.group({
-      id: [''],
-      sba_maturedValue: ['0'],
+      sba_monthlyValue: [''],
+      sba_maturedValue: [''],
+      sba_savingPeriod: [''],
+      sba_startDate: [''],
       sba_maturedDate: [''],
-      nominees: this.fb.array([]),
-      // nominees: new FormArray([]),
-      sba_savingPeriod: ['0']
+      nominees: new FormArray([]),
+      guadian: this.fb.array([])
     });
     this.saving.push(savingsFormData);
     console.log("savings data", savingsFormData);
@@ -189,12 +193,80 @@ export class SavingsAccountComponent implements OnInit {
     this.saving.removeAt(index);
   }
 
-  get nominees() {
-    return this.savingsFormData.controls['nominees'] as FormArray;
+
+  // get nominees() {
+  //   return this.savingsFormData.controls['nominees'] as FormArray;
+  // }
+  // addNominees() {
+  //  const nomineesFormData = this.fb.group({
+  //     dob: [''],
+  //     emailAddress:[''] ,
+  //     firstName:[''],
+  //     id:[''] ,
+  //     identificationNo: [''],
+  //     lastName: [''],
+  //     middleName: [''],
+  //     nomineeMinor:[''] ,
+  //     occupation: [''],
+  //     phone: [''],
+  //     relationship: [''],
+  //     //guadian: this.fb.array([])
+  //     guardian: new FormArray([])
+  //   })
+  //   this.nominees.push(nomineesFormData);
+  //   console.log("savings data", nomineesFormData);
+  // }
+  // removeNominees(index: number) {
+  //   this.saving.removeAt(index);
+  // }
+
+  selectedNomination(e: any) {
+    if (e.target.value == 'nomination') {
+      this.showNominees = true;
+      this.showGuadian = false;
+    }
+    if (e.value == 'guardian') {
+      this.showGuadian = true;
+      this.showNominees = false;
+    }
+
   }
-  previewNominees() {
-      this.newData = true;
-    const nomineesFormData = this.fb.group({
+  //forms
+  get dataForm() {
+    return this.formData.controls;
+  }
+  get savings() {
+    return this.dataForm.saving as FormArray;
+  }
+  get savingData() {
+    return this.savingsFormData.controls;
+  }
+  get nominees() {
+    return this.savingData.nominees as FormArray;
+  }
+  get nomineesData() {
+    return this.nomineesFormData.controls;
+  }
+  get guardian() {
+    return this.nomineesData.guardian as FormArray;
+  }
+
+  // get f() {
+  //   return this.formData.controls;
+  // }
+  // get s() {
+  //   return this.f.saving as FormArray;
+  // }
+  // get ss() {
+  //   return this.savingsFormData.controls;
+  // }
+  // get n() {
+  //   return this.ss.nominees as FormArray;
+  // }
+
+  initNomineeData() {
+    this.newData = true;
+    this.nomineesFormData = this.fb.group({
       dob: [''],
       emailAddress: [''],
       firstName: [''],
@@ -207,26 +279,52 @@ export class SavingsAccountComponent implements OnInit {
       phone: [''],
       relationship: [''],
       guadian: this.fb.array([])
-      //guardian: new FormArray([])
+      // guardian: new FormArray([])
     });
-    this.nominees.push(nomineesFormData);
-    console.log("Nominees data", nomineesFormData);
-    
   }
-  removeNominee(index: number) {
-    this.nominees.removeAt(index);
+  //Nominees
+  previewNominees() {
+    if (this.nomineesFormData.valid) {
+      this.nominees.push(this.fb.group(
+        this.nomineesFormData.value
+      ));
+      this.nomineeArray.push(this.nomineesFormData.value);
+      this.initNomineeData();
+    }
   }
-
-
+  onAddNomineesField() {
+    this.nominees.push(this.fb.group({
+      dob: [''],
+      emailAddress: [''],
+      firstName: [''],
+      identificationNo: [''],
+      lastName: [''],
+      middleName: [''],
+      occupation: [''],
+      phone: ['']
+    }));
+  }
+  onNomineeClear() {
+    this.initNomineeData()
+    this.nomineeArray = new Array();
+  }
+  onUpdateNominee() {
+    let i = this.element
+    this.nomineeArray[i] = this.nomineesFormData.value
+  }
+  onRemove(i: any) {
+    const index: number = this.nomineeArray.indexOf(this.nomineeArray.values);
+    this.nomineeArray.splice(index, i);
+    this.nomineeArray = this.nomineeArray
+  }
   get guadian() {
-    return this.nomineesFormData.controls['guadian'] as FormArray;
+    return this.savingsFormData.controls['guadian'] as FormArray;
   }
   addGuardian() {
     const guardianFormData = this.fb.group({
       address: [''],
       guardianCode: [''],
       guardianName: [''],
-      id: [''],
       residence: ['']
     });
     this.guadian.push(guardianFormData);
@@ -236,33 +334,6 @@ export class SavingsAccountComponent implements OnInit {
   removeGuardian(index: number) {
     this.guadian.removeAt(index);
   }
-
- 
-  // onAddNomineesField() {
-  //   this.n.push(this.fb.group({
-  //     dob: [''],
-  //     emailAddress: [''],
-  //     firstName: [''],
-  //     identificationNo: [''],
-  //     lastName: [''],
-  //     middleName: [''],
-  //     occupation: [''],
-  //     phone: ['']
-  //   }))
-  // }
-  // onNomineeClear() {
-  //    this.initNomineeData()
-  //   this.nomineeArray = new Array();
-  // }
-  // onUpdateNominee() {
-  //   let i = this.element
-  //   this.nomineeArray[i] = this.nomineesFormData.value
-  // }
-  // onRemove(i: any) {
-  //   const index: number = this.nomineeArray.indexOf(this.nomineeArray.values);
-  //   this.nomineeArray.splice(index, i);
-  //   this.nomineeArray = this.nomineeArray
-  // }
 
   //setting up the mis sector codes
   getMISData() {
@@ -358,14 +429,16 @@ export class SavingsAccountComponent implements OnInit {
             currency: [''],
             customerCode: [''],
             schemeCode: [''],
+            schemeType: ['1'],
+            glCode: ['1'],
             glSubhead: [''],
             lienAmount: 0,
             // loan: new FormArray([]),
             // officeAccount: new FormArray([]),
             openingDate: [''],
             referredBy: [''],
-            saving: this.fb.array([]),
-            // saving: new FormArray([]),
+            //saving: this.fb.array([]),
+            saving: new FormArray([]),
             // sn: [''],
             solCode: [''],
             sectorCode: [''],
@@ -399,7 +472,6 @@ export class SavingsAccountComponent implements OnInit {
               } else {
                 this.results.withholdingTax == "False"
               }
-
               this.formData = this.fb.group({
                 // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
@@ -417,9 +489,10 @@ export class SavingsAccountComponent implements OnInit {
                 // officeAccount: new FormArray([]),
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
-                saving: this.fb.array([]),
-                // saving: new FormArray([]),
+                //saving: this.fb.array([]),
+                saving: new FormArray([]),
                 // sn: [this.results.sn],
+                glCode: [this.results.glCode],
                 solCode: [this.results.solCode],
                 sectorCode: [this.results.sectorCode],
                 subSectorCode: [this.results.subSectorCode],
@@ -475,7 +548,9 @@ export class SavingsAccountComponent implements OnInit {
                 // saving: new FormArray([]),
                 // sn: [this.results.sn],
                 solCode: [this.results.solCode],
+                glCode: [this.results.glCode],
                 sectorCode: [this.results.sectorCode],
+                schemeType: [this.results.schemeType],
                 subSectorCode: [this.results.subSectorCode],
                 // termDeposit: new FormArray([]),
                 transferExceptionLimitCr: [this.results.transferExceptionLimitCr],
@@ -502,13 +577,11 @@ export class SavingsAccountComponent implements OnInit {
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
             data => {
               this.results = data.entity
-
               if (this.results.withholdingTax == true) {
                 this.results.withholdingTax == "True"
               } else {
                 this.results.withholdingTax == "False"
               }
-
               this.formData = this.fb.group({
                 // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
@@ -530,7 +603,9 @@ export class SavingsAccountComponent implements OnInit {
                 // saving: new FormArray([]),
                 // sn: [this.results.sn],
                 solCode: [this.results.solCode],
+                glCode: [this.results.glCode],
                 sectorCode: [this.results.sectorCode],
+                schemeType: [this.results.schemeType],
                 subSectorCode: [this.results.subSectorCode],
                 // termDeposit: new FormArray([]),
                 transferExceptionLimitCr: [this.results.transferExceptionLimitCr],
@@ -585,6 +660,8 @@ export class SavingsAccountComponent implements OnInit {
                 // saving: new FormArray([]),
                 // sn: [this.results.sn],
                 solCode: [this.results.solCode],
+                glCode: [this.results.glCode],
+                schemeType: [this.results.schemeType],
                 sectorCode: [this.results.sectorCode],
                 subSectorCode: [this.results.subSectorCode],
                 // termDeposit: new FormArray([]),
@@ -615,10 +692,9 @@ export class SavingsAccountComponent implements OnInit {
 
   onSubmit() {
     console.log("Total Savings information-form", this.formData.value);
-    console.log("savings info-Tab", this.saving.value);
-    console.log("Nominees info-Tab", this.nominees.value);
-    console.log("Guardian info-tab", this.guadian.value);
-
+    console.log("Guardian Details", this.guardianFormData.value);
+    console.log("Nominees Details", this.nomineesFormData.value);
+    console.log('Savings Data', this.savingsFormData.value);
 
     if (this.message.function_type == 'A-Add') {
       this.accountAPI.createAccount(this.formData.value).subscribe(
@@ -631,7 +707,7 @@ export class SavingsAccountComponent implements OnInit {
             verticalPosition: this.verticalPosition,
             duration: 3000,
             panelClass: (['green-snackbar', 'login-snackbar'])
-          })
+          });
         },
         err => {
           this.error = err;
@@ -640,7 +716,7 @@ export class SavingsAccountComponent implements OnInit {
             verticalPosition: this.verticalPosition,
             duration: 3000,
             panelClass: ['red-snackbar', 'green-snackbar']
-          })
+          });
         }
       )
     } else if (this.message.function_type != 'A-Add') {
@@ -661,7 +737,7 @@ export class SavingsAccountComponent implements OnInit {
             verticalPosition: this.verticalPosition,
             duration: 3000,
             panelClass: ['red-snackbar', 'green-snackbar']
-          })
+          });
         }
       )
     }

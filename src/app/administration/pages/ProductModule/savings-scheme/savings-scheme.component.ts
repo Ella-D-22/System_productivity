@@ -22,9 +22,9 @@ import { SavingschemeService } from './savingscheme.service';
   styleUrls: ['./savings-scheme.component.scss']
 })
 export class SavingsSchemeComponent implements OnInit {
-  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
-  auth_user = this.currentUser.username;
-
+  // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  // auth_user = this.currentUser.username;
+  auth_user = 'Collins';
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   loading = false;
