@@ -21,8 +21,9 @@ import { CurrentSchemeService } from './current-scheme.service';
   styleUrls: ['./current-scheme.component.scss'],
 })
 export class CurrentSchemeComponent implements OnInit {
-  currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
-  auth_user = this.currentUser.username;
+  // currentUser = JSON.parse(sessionStorage.getItem('auth-user'));
+  // auth_user = this.currentUser.username;
+  auth_user='Collins';
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
