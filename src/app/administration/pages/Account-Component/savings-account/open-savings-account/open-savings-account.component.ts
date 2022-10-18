@@ -4,20 +4,21 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AccountsService } from '../../accounts-module/accounts.service';
-import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
-import { LoanAccountService } from '../../loan-account/loan-account.service';
-import { BranchComponent } from '../../loan-account/lookup/branch/branch.component';
-import { SavingschemeLookupComponent } from '../../ProductModule/savings-scheme/savingscheme-lookup/savingscheme-lookup.component';
-import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
-import { MisSectorService } from '../../SystemConfigurations/GlobalParams/mis-sector/mis-sector.service';
+import { AccountsService } from '../../../accounts-module/accounts.service';
+import { RetailCustomerLookupComponent } from '../../../CustomersComponent/retail-customer/retail-customer-lookup/retail-customer-lookup.component';
+import { LoanAccountService } from '../../../loan-account/loan-account.service';
+import { BranchComponent } from '../../../loan-account/lookup/branch/branch.component';
+import { SavingschemeLookupComponent } from '../../../ProductModule/savings-scheme/savingscheme-lookup/savingscheme-lookup.component';
+import { CurrencyLookupComponent } from '../../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
+import { MisSectorService } from '../../../SystemConfigurations/GlobalParams/mis-sector/mis-sector.service';
 
 @Component({
-  selector: 'app-savings-account',
-  templateUrl: './savings-account.component.html',
-  styleUrls: ['./savings-account.component.scss']
+  selector: 'app-open-savings-account',
+  templateUrl: './open-savings-account.component.html',
+  styleUrls: ['./open-savings-account.component.scss']
 })
-export class SavingsAccountComponent implements OnInit {
+export class OpenSavingsAccountComponent implements OnInit {
+
   subscription: Subscription
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -60,28 +61,11 @@ export class SavingsAccountComponent implements OnInit {
     private accountAPI: AccountsService,
     private accountService: LoanAccountService
   ) { }
-  empForm: FormGroup;
+
   ngOnInit(): void {
     this.getPage()
-
-    this.empForm = this.fb.group({
-      id: [''],
-      employees: this.fb.array([])
-    });
   }
 
-  employees(): FormArray {
-    return this.empForm.get('employees') as FormArray;
-  }
-
-  newEmployee(): FormGroup {
-    return this.fb.group({
-      id: [''],
-      firstName: '',
-      lastName: '',
-      skills: this.fb.array([])
-    });
-  }
   saving(): FormArray {
     return this.formData.get('saving') as FormArray;
   }
@@ -93,32 +77,18 @@ export class SavingsAccountComponent implements OnInit {
       sba_startDate: [''],
       sba_maturedDate: [''],
       nominees: this.fb.array([]),
-      //guadian: this.fb.array([])
+      guadian: this.fb.array([])
 
     })
-  } 
+  }
   addNewSavings() {
     this.saving().push(this.newSavings());
   }
-
-
-  onSubmitNewSavings() {
-    console.log("Form Values", this.formData.value);
-      
+  removeSaving(savingIndex: number) {
+    this.saving().removeAt(savingIndex);
+    
   }
 
-
-  addEmployee() {
-    this.employees().push(this.newEmployee());
-  }
-
-  removeEmployee(empIndex: number) {
-    this.employees().removeAt(empIndex);
-  }
-
-  employeeSkills(empIndex: number): FormArray {
-    return this.employees().at(empIndex).get('skills') as FormArray;
-  }
 
   newnominees(savingIndex: number): FormArray {
     return this.saving().at(savingIndex).get('nominees') as FormArray;
@@ -141,38 +111,13 @@ export class SavingsAccountComponent implements OnInit {
   addnominee(savingIndex: number) {
     this.newnominees(savingIndex).push(this.nomineeData());
   }
-
-
-  newSkill(): FormGroup {
-    return this.fb.group({
-      skill: '',
-      exp: '',
-      languages: this.fb.array([])
-    });
+  removeNominee(savingIndex: number, nomineeIndex:number ) {
+    this.newnominees(savingIndex).removeAt(nomineeIndex);
   }
-
-  addEmployeeSkill(empIndex: number) {
-    this.employeeSkills(empIndex).push(this.newSkill());
-  }
-
-  removeEmployeeSkill(empIndex: number, skillIndex: number) {
-    this.employeeSkills(empIndex).removeAt(skillIndex);
-  }
-  //Languages
-
-
-
-  onSubmitDemo() {
-    console.log(this.empForm.value);
-  }
-
-
-
-
+  
   savingsArray = new Array();
   nomineeArray = new Array();
   guardiansArray = new Array();
-
   formData = this.fb.group({
     // accountBalance: [''],
     accountManager: [''],
@@ -280,64 +225,6 @@ export class SavingsAccountComponent implements OnInit {
       name: 'GUARDIAN'
     }
   ];
-  // get saving() {
-  //   return this.formData.controls['saving'] as FormArray;
-  // }
-  // addSaving() {
-  //   const savingsFormData = this.fb.group({
-  //     sba_monthlyValue: [''],
-  //     sba_maturedValue: [''],
-  //     sba_savingPeriod: [''],
-  //     sba_startDate: [''],
-  //     sba_maturedDate: [''],
-  //     nominees: new FormArray([]),
-  //     guadian: this.fb.array([])
-  //   });
-  //   this.saving.push(savingsFormData);
-  //   console.log("savings data", savingsFormData);
-  // }
-  // removeSaving(index: number) {
-  //   this.saving.removeAt(index);
-  // }
-
-
-  // get nominees() {
-  //   return this.savingsFormData.controls['nominees'] as FormArray;
-  // }
-  // addNominees() {
-  //  const nomineesFormData = this.fb.group({
-  //     dob: [''],
-  //     emailAddress:[''] ,
-  //     firstName:[''],
-  //     id:[''] ,
-  //     identificationNo: [''],
-  //     lastName: [''],
-  //     middleName: [''],
-  //     nomineeMinor:[''] ,
-  //     occupation: [''],
-  //     phone: [''],
-  //     relationship: [''],
-  //     //guadian: this.fb.array([])
-  //     guardian: new FormArray([])
-  //   })
-  //   this.nominees.push(nomineesFormData);
-  //   console.log("savings data", nomineesFormData);
-  // }
-  // removeNominees(index: number) {
-  //   this.saving.removeAt(index);
-  // }
-
-  selectedNomination(e: any) {
-    if (e.target.value == 'nomination') {
-      this.showNominees = true;
-      this.showGuadian = false;
-    }
-    if (e.value == 'guardian') {
-      this.showGuadian = true;
-      this.showNominees = false;
-    }
-
-  }
   //forms
   get dataForm() {
     return this.formData.controls;
@@ -357,20 +244,6 @@ export class SavingsAccountComponent implements OnInit {
   get guardian() {
     return this.nomineesData.guardian as FormArray;
   }
-
-  // get f() {
-  //   return this.formData.controls;
-  // }
-  // get s() {
-  //   return this.f.saving as FormArray;
-  // }
-  // get ss() {
-  //   return this.savingsFormData.controls;
-  // }
-  // get n() {
-  //   return this.ss.nominees as FormArray;
-  // }
-
   initNomineeData() {
     this.newData = true;
     this.nomineesFormData = this.fb.group({
@@ -469,7 +342,6 @@ export class SavingsAccountComponent implements OnInit {
       this.formData.controls.currency.setValue(this.currencyData.ccy)
     })
   }
-
   customerLookup(): void {
     const dialogRef = this.dialog.open(RetailCustomerLookupComponent, {
       width: '60%'
@@ -516,12 +388,14 @@ export class SavingsAccountComponent implements OnInit {
   collateralLookup(): void {
   }
   getPage() {
+    this.loading = true;
     this.subscription = this.accountAPI.currentMessage.subscribe(
       message => {
         this.message = message
         this.function_type = this.message.function_type;
         this.account_code = this.message.account_code;
         this.customer_type = this.message.customer_type;
+        this.loading = false;
         if (this.message.function_type == 'A-Add') {
           this.formData = this.fb.group({
             // accountBalance: [''],
@@ -544,8 +418,8 @@ export class SavingsAccountComponent implements OnInit {
             // officeAccount: new FormArray([]),
             openingDate: [''],
             referredBy: [''],
-            //saving: this.fb.array([]),
-            saving: new FormArray([]),
+            saving: this.fb.array([]),
+            //saving: new FormArray([]),
             // sn: [''],
             solCode: [''],
             sectorCode: [''],
@@ -570,15 +444,17 @@ export class SavingsAccountComponent implements OnInit {
             deletedBy: ['None'],
           })
         } else if (this.message.function_type == 'I-Inquire') {
+          this.loading = true;
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
             data => {
               this.results = data.entity
+              this.loading = false;
 
-              if (this.results.withholdingTax == true) {
-                this.results.withholdingTax == "True"
-              } else {
-                this.results.withholdingTax == "False"
-              }
+              // if (this.results.withholdingTax == true) {
+              //   this.results.withholdingTax == "True"
+              // } else {
+              //   this.results.withholdingTax == "False"
+              // }
               this.formData = this.fb.group({
                 // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
@@ -596,8 +472,8 @@ export class SavingsAccountComponent implements OnInit {
                 // officeAccount: new FormArray([]),
                 openingDate: [this.results.openingDate],
                 referredBy: [this.results.referredBy],
-                //saving: this.fb.array([]),
-                saving: new FormArray([]),
+                saving: this.fb.array([]),
+                //saving: new FormArray([]),
                 // sn: [this.results.sn],
                 glCode: [this.results.glCode],
                 solCode: [this.results.solCode],
@@ -625,18 +501,20 @@ export class SavingsAccountComponent implements OnInit {
             }
           )
         } else if (this.message.function_type == 'M-Modify') {
+          this.loading = true;
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
             data => {
               this.results = data.entity
-
-              if (this.results.withholdingTax == true) {
-                this.results.withholdingTax == "True"
-              } else {
-                this.results.withholdingTax == "False"
-              }
+              this.loading = false;
+              console.log("Account Details", this.results);
+              // if (this.results.withholdingTax == true) {
+              //   this.results.withholdingTax == "True"
+              // } else {
+              //   this.results.withholdingTax == "False"
+              // }  
               this.formData = this.fb.group({
                 // accountBalance: [this.results.accountBalance],
-                accountManager: [this.results.accountManager],
+                accountManager: [this.results.acid],
                 accountName: [this.results.accountName],
                 accountOwnership: [this.results.accountOwnership],
                 accountStatus: [this.results.accountStatus],
@@ -656,7 +534,9 @@ export class SavingsAccountComponent implements OnInit {
                 // sn: [this.results.sn],
                 solCode: [this.results.solCode],
                 glCode: [this.results.glCode],
+                glSubhead: [this.results.glSubhead],
                 sectorCode: [this.results.sectorCode],
+                schemeCode: [this.results.schemeCode],
                 schemeType: [this.results.schemeType],
                 subSectorCode: [this.results.subSectorCode],
                 // termDeposit: new FormArray([]),
@@ -681,14 +561,17 @@ export class SavingsAccountComponent implements OnInit {
             }
           )
         } else if (this.message.function_type == 'V-Verify') {
+          this.loading = true;
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
             data => {
               this.results = data.entity
-              if (this.results.withholdingTax == true) {
-                this.results.withholdingTax == "True"
-              } else {
-                this.results.withholdingTax == "False"
-              }
+              this.loading = false;
+
+              // if (this.results.withholdingTax == true) {
+              //   this.results.withholdingTax == "True"
+              // } else {
+              //   this.results.withholdingTax == "False"
+              // }
               this.formData = this.fb.group({
                 // accountBalance: [this.results.accountBalance],
                 accountManager: [this.results.accountManager],
@@ -736,15 +619,16 @@ export class SavingsAccountComponent implements OnInit {
             }
           )
         } else if (this.message.function_type == 'X-Delete') {
+          this.loading = true;
           this.accountAPI.retrieveAccount(this.message.account_code).subscribe(
             data => {
               this.results = data.entity
-
-              if (this.results.withholdingTax == true) {
-                this.results.withholdingTax == "True"
-              } else {
-                this.results.withholdingTax == "False"
-              }
+              this.loading = false;
+              // if (this.results.withholdingTax == true) {
+              //   this.results.withholdingTax == "True"
+              // } else {
+              //   this.results.withholdingTax == "False"
+              // }
 
               this.formData = this.fb.group({
                 // accountBalance: [this.results.accountBalance],
@@ -796,20 +680,17 @@ export class SavingsAccountComponent implements OnInit {
       }
     )
   }
-
-  onSubmit() {
-    console.log("Total Savings information-form", this.formData.value);
-    console.log("Guardian Details", this.guardianFormData.value);
-    console.log("Nominees Details", this.nomineesFormData.value);
-    console.log('Savings Data', this.savingsFormData.value);
+  onSubmitNewSavings() {
+    console.log("Saving account data", this.formData.value);
 
     if (this.message.function_type == 'A-Add') {
+      this.loading = true;
       this.accountAPI.createAccount(this.formData.value).subscribe(
         res => {
           this.results = res
           console.log("API", this.results);
-
-          this._snackBar.open("Executed Successfully", "X", {
+          this.loading = false;
+          this._snackBar.open("Savings account Details saved successfully", "X", {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
             duration: 3000,
@@ -818,7 +699,7 @@ export class SavingsAccountComponent implements OnInit {
         },
         err => {
           this.error = err;
-          this._snackBar.open("Invalid FormData", "Try Again", {
+          this._snackBar.open("Savings account Details Invalid", "TRY AGAIN", {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
             duration: 3000,
@@ -827,19 +708,21 @@ export class SavingsAccountComponent implements OnInit {
         }
       )
     } else if (this.message.function_type != 'A-Add') {
+      this.loading = true;
       this.subscription = this.accountAPI.updateAccounts(this.formData.value).subscribe(
         res => {
           this.results = res
-          this._snackBar.open("Executed Successfully", "X", {
+          this.loading = false;
+          this._snackBar.open("Savings account Details Updated Successfully", "X", {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
             duration: 3000,
             panelClass: (['green-snackbar', 'login-snackbar'])
-          })
+          });
         },
         err => {
           this.error = err;
-          this._snackBar.open("Invalid FormData", "Try Again", {
+          this._snackBar.open("Savings account Details Invalid", "TRY AGAIN", {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
             duration: 3000,
@@ -849,6 +732,5 @@ export class SavingsAccountComponent implements OnInit {
       )
     }
   }
-
 
 }
