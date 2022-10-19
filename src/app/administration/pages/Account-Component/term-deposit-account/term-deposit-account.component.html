@@ -2,13 +2,14 @@
     <mat-card-header class="breadcrumb">
         <div>
             <a routerLink="/system">Dashboard / </a>
-            <a routerLink="/system">Account Maintenenace / </a>Accounts Term Deposit
+            <a routerLink="/system/">Term Deposit Account Maintenenace / </a>Term Deposit Account
+            <!-- <a routerLink="/system">Dashboard / </a>
+            <a routerLink="/system">  / </a>Accounts Term Deposit -->
         </div>
     </mat-card-header>
     <div class="row">
         <div class="col-md-6 col-sm-12">
-            <h4>Function</h4>
-            <p>{{this.function_type}}</p>
+            Function: 
         </div>
         <div class="col-md-6 col-sm-12">
             <h4>Account Code</h4>
@@ -42,15 +43,17 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="accountManager" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
-                                        &nbsp; &nbsp;
-                                        <mat-icon color="primary" (click)="customerLookup()" matTooltip="Search Account Manager">search</mat-icon>
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" (click)="customerLookup()"
+                                        matTooltip="Search Account Manager">search</mat-icon>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Account Name<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Account Name<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="accountName" class="form-control"
@@ -80,13 +83,15 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Branch Code<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Branch Code<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="solCode" class="form-control"
-                                    oninput="this.value=this.value.toUpperCase()">
+                                        oninput="this.value=this.value.toUpperCase()">
                                     &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search branch code" (click)="branchSubheadLookup()">search</mat-icon>
+                                    <mat-icon color="primary" matTooltip="Search branch code"
+                                        (click)="branchSubheadLookup()">search</mat-icon>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +104,8 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="currency" maxlength="3" class="form-control">
                                     &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search currency" (click)="currencyLookup()">search</mat-icon>
+                                    <mat-icon color="primary" matTooltip="Search currency" (click)="currencyLookup()">
+                                        search</mat-icon>
                                 </div>
                             </div>
                         </div>
@@ -108,25 +114,28 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Customer Code<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Customer Code<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="customerCode" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
-                                        &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search Customer Code" (click)="customerLookup()">search</mat-icon>
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Customer Code"
+                                        (click)="customerLookup()">search</mat-icon>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Opening Date<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Opening Date<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input [matDatepicker]="opicker" formControlName="openingDate"
                                         class="form-control" />
-                                    <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="opicker">
+                                    <mat-datepicker-toggle  matSuffix [for]="opicker">
                                     </mat-datepicker-toggle>
                                     <mat-datepicker #opicker></mat-datepicker>
                                 </div>
@@ -142,13 +151,13 @@
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="schemeCode" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
-                                        &nbsp; &nbsp;
-                                    <mat-icon color="primary" matTooltip="Search Scheme code" (click)="tdaSchemeCodeLookup()">search</mat-icon>
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Scheme code"
+                                        (click)="tdaSchemeCodeLookup()">search</mat-icon>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <mat-hint>{{this.tda_scheme_code_desc}}</mat-hint>
@@ -158,11 +167,46 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Gl Subhead<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Scheme Type<span></span>*</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="schemeType" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Scheme Type"
+                                        (click)="sbaSchemeTypeLookup()">
+                                        search</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">GL CODE<span class="warning">*</span></label>
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <input type="text" formControlName="glCode" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search GL Code" (click)="glCodeLookup()">
+                                        search
+                                    </mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-12 form-column">
+                                    <label for="" class="start pull-left">Gl Subhead<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="text" formControlName="glSubhead" class="form-control"
                                         oninput="this.value=this.value.toUpperCase()">
+                                        &nbsp; &nbsp;
+                                        <mat-icon color="primary" matTooltip="Search GL Code" (click)="glSubHeadLookup()">
+                                            search
+                                        </mat-icon>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -180,26 +224,27 @@
                                     <label for="" class="start pull-left">Sector Code<span class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <select formControlName="sectorCode" (change)="onInputSelection($event)"
-                                        class="form-control">
-                                        <option value="" disabled>-- Select MIS Sector Code --</option>
-                                        <option *ngFor="let item of this.sectorData " [value]="item.miscode">
-                                            {{item.mis_sector}}</option>
-                                    </select>
+                                    <input type="text" formControlName="sectorCode" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search Sector Code" (click)="sectorCodeLookup()">
+                                        search</mat-icon>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Sub Sector Code<span  class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Sub Sector Code<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <select formControlName="subSectorCode" class="form-control">
-                                        <option value="" disabled>--Select a MIS Sub Sector</option>
-                                        <option *ngFor="let item of subSectors " [value]="item.missubcode">
-                                            {{item.mis_sub_sector_desc}}</option>
-                                    </select>
+                                    <input type="text" formControlName="subSectorCode" class="form-control"
+                                        oninput="this.value=this.value.toUpperCase()">
+                                    &nbsp; &nbsp;
+                                    <mat-icon color="primary" matTooltip="Search sub Sector Code"
+                                        (click)="subSectorCodeLookup()">search</mat-icon>
+    
                                 </div>
                             </div>
                         </div>
@@ -208,7 +253,8 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-12 form-column">
-                                    <label for="" class="start pull-left">Cash Exception Limit Dr.<span class="warning">*</span></label>
+                                    <label for="" class="start pull-left">Cash Exception Limit Dr.<span
+                                            class="warning">*</span></label>
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <input type="number" formControlName="cashExceptionLimitDr" class="form-control">
@@ -272,6 +318,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="statementFreq" class="form-control">
+                                        <option value="" disabled>--FREQUENCY--</option>
                                         <option *ngFor="let item of statementFreqArray" [value]="item">{{item}}
                                         </option>
                                     </select>
@@ -288,6 +335,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="dispatchMode" class="form-control">
+                                        <option value="" disabled>--MODE--</option>
                                         <option *ngFor="let item of despatch_mode_array" [value]="item">{{item}}
                                         </option>
                                     </select>
@@ -317,6 +365,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 form-column">
                                     <select formControlName="accountStatus" class="form-control">
+                                        <option value="">STATUS</option>
                                         <option *ngFor="let item of accountStatusArray" [value]="item">{{item}}</option>
                                     </select>
                                 </div>
@@ -382,7 +431,6 @@
                 <mat-tab class="mat-tab" label="Nominations">
                     <br>
                     <form action="" [formGroup]="nomineesFormData" novalidate (ngSubmit)="onSubmit()">
-
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
@@ -443,7 +491,7 @@
                                                 class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input maxlength="12" type="text" formControlName="phone" class="form-control">
+                                        <input maxlength="12" type="phone" formControlName="phone" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -454,7 +502,7 @@
                                                 class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input maxlength="20" type="text" formControlName="emailAddress"
+                                        <input maxlength="20" type="email" formControlName="emailAddress"
                                             class="form-control" oninput="this.value=this.value.toUpperCase()">
                                     </div>
                                 </div>
@@ -468,10 +516,11 @@
                                                 class="warning">*</span></label>
                                     </div>
                                     <div class="col-md-6 col-sm-12 form-column">
-                                        <input [matDatepicker]="ppicker" formControlName="dob" class="form-control" />
+                                        <input type="date" formControlName="dob" class="form-control" />
+                                        <!-- <input [matDatepicker]="ppicker" formControlName="dob" class="form-control" />
                                         <mat-datepicker-toggle *ngIf="isEnabled" matSuffix [for]="ppicker">
                                         </mat-datepicker-toggle>
-                                        <mat-datepicker #ppicker></mat-datepicker>
+                                        <mat-datepicker #ppicker></mat-datepicker> -->
                                     </div>
                                 </div>
                             </div>
@@ -489,7 +538,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="row">
@@ -614,7 +662,6 @@
                                 <td>{{item.emailAddress}}</td>
                                 <td>{{item.dob}}</td>
                                 <td><a class="update btn btn-sm" color="accent" (click)="onRemove(i)">X</a></td>
-
                             </tr>
                         </tbody>
                     </table>
@@ -623,10 +670,10 @@
                 </mat-tab>
             </mat-tab-group>
             <br>
-            <button mat-raised-button type="submit" class="float-left" [routerLink]="">Back</button>
+            <button mat-raised-button type="submit" class="float-left" [routerLink]="">BACK</button>
             <!-- <button mat-raised-button type="submit" color="warn" class=" start float-right">Reset</button> -->
             <button mat-raised-button type="submit" color="primary" class="float-right"
-                style="margin-bottom:20px ;">Submit</button>
+                style="margin-bottom:20px ;">SUBMIT</button>
         </form>
     </div>
 </mat-card>

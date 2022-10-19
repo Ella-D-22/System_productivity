@@ -10,7 +10,11 @@ import { RetailCustomerLookupComponent } from '../../CustomersComponent/retail-c
 import { LoanAccountService } from '../../loan-account/loan-account.service';
 import { BranchComponent } from '../../loan-account/lookup/branch/branch.component';
 import { CurrencyLookupComponent } from '../../SystemConfigurations/GlobalParams/currency-config/currency-lookup/currency-lookup.component';
+import { GlCodeLookupComponent } from '../../SystemConfigurations/GlobalParams/gl-code/gl-code-lookup/gl-code-lookup.component';
+import { GlSubheadLookupComponent } from '../../SystemConfigurations/GlobalParams/gl-subhead/gl-subhead-lookup/gl-subhead-lookup.component';
+import { MisSectorLookupComponent } from '../../SystemConfigurations/GlobalParams/mis-sector/mis-sector-lookup/mis-sector-lookup.component';
 import { MisSectorService } from '../../SystemConfigurations/GlobalParams/mis-sector/mis-sector.service';
+import { MisSubSectorLookupComponent } from '../../SystemConfigurations/GlobalParams/mis-sub-sector/mis-sub-sector-lookup/mis-sub-sector-lookup.component';
 import { TermDepositLookupComponent } from './term-deposit-lookup/term-deposit-lookup.component';
 
 
@@ -56,6 +60,12 @@ export class TermDepositAccountComponent implements OnInit {
   customer_type: any
   tda_scheme_code_desc: any
   tda_gl_subhead_description: any
+  glCode: any;
+  glDescription: any;
+  glSubheadCode: any;
+  glSubheadDescription: any;
+  miscode: any;
+  sectorId: any;
   constructor(
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -93,6 +103,8 @@ export class TermDepositAccountComponent implements OnInit {
     referredBy: [''],
     // saving: new FormArray([]),
     sn: [''],
+    schemeType: ['1'],
+    glCode: ['1'],
     solCode: [''],
     sectorCode: [''],
     subSectorCode: [''],
@@ -287,11 +299,64 @@ export class TermDepositAccountComponent implements OnInit {
       this.formData.controls.solCode.setValue(result.data.solCode);
     });
   }
+  sectorCodeLookup():void{
+    const dialogRef =  this.dialog.open(MisSectorLookupComponent,{
+  width: '45%',
+    });
+    dialogRef.afterClosed().subscribe(results =>{
+      this.lookupdata = results;
+      this.miscode = this.results.miscode
+      this.sectorId  = this.results.id
+      this.formData.controls.miscode.setValue(results.data.miscode)
+      // this.formData.controls.sectorId.setValue(results.data.id)
+      console.log("Data", this.results);
+    })
+  }
+  subSectorCodeLookup(): void {
+    const dialogRef = this.dialog.open(MisSubSectorLookupComponent, {
+      width: '35%'
+
+    });
+    dialogRef.afterClosed().subscribe(results => {
+      this.lookupdata = results;
+      // this.subSectorId = this.dialogData.id
+      // this.missubcode = this.dialogData.missubcode
+      // this.formData.controls.missubcode.setValue(results.missubcode)
+    })
+  }
+  sbaSchemeTypeLookup() {
+    
+  }
+  glCodeLookup(): void {
+    const dialogRef = this.dialog.open(GlCodeLookupComponent, {
+      // height: '400px',
+      width: '45%'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupdata = result.data;
+      this.glCode = this.lookupdata.glCode;
+      this.glDescription = this.lookupdata.glDescription;
+      this.formData.controls.glCode.setValue(this.glCode);
+    });
+  }
+  glSubHeadLookup(): void {
+    const dialogRef = this.dialog.open(GlSubheadLookupComponent, {
+      width: '50%'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.lookupdata = result;
+      this.glSubheadCode = this.lookupdata.glSubheadCode;
+      this.glSubheadDescription = this.lookupdata.glSubheadDescription;
+      this.formData.controls.glSubheadCode.setValue(this.glSubheadCode);
+    });
+  }
 
   getPage() {
     this.subscription = this.accountAPI.currentMessage.subscribe(
       message => {
         this.message = message
+        this.message = message
+        this.function_type = this.message.function_type;
         if (this.message.function_type == 'A-Add') {
           this.formData = this.fb.group({
             accountManager: [''],
@@ -310,6 +375,8 @@ export class TermDepositAccountComponent implements OnInit {
             referredBy: [''],
             // saving: new FormArray([]),
             solCode: [''],
+            schemeType: ['1'],
+            glCode: ['1'],
             sectorCode: [''],
             subSectorCode: [''],
             termDeposit: new FormArray([]),

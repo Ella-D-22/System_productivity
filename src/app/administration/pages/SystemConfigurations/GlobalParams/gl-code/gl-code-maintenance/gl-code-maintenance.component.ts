@@ -60,6 +60,7 @@ export class GlCodeMaintenanceComponent implements OnInit {
     glCode: [''],
     classification: ['']
   });
+  
   refCodeLookup(): void {
     const dialogRef = this.dialog.open(GlCodeLookupComponent, {
       // height: '400px',
