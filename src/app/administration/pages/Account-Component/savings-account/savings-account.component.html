@@ -28,6 +28,289 @@
         <form action="" [formGroup]="formData" novalidate class="form" (ngSubmit)="onSubmit()">
             <mat-tab-group mat-align-tabs="center">
                 <mat-tab class="mat-tab container-fluid" label="General Details">
+                    <form [formGroup]="formData">
+                        <div formArrayName="saving">
+                            <div *ngFor="let savings of saving().controls; let savingIndex=index">
+                                <div [formGroupName]="savingIndex">
+                                    {{savingIndex}}
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <label for="" class="start pull-left">Monthly Value<span
+                                                            class="warning">*</span></label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <input type="number" formControlName="sba_monthlyValue"
+                                                        placeholder="e.g 2,000" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <label for="" class="start pull-left">Saving Period<span
+                                                            class="warning">*</span></label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <input type="number" formControlName="sba_savingPeriod"
+                                                        placeholder="18 (months)" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <label for="" class="start pull-left">Matured Value<span
+                                                            class="warning">*</span></label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <input type="number" formControlName="sba_maturedValue"
+                                                        placeholder="e.g 100,000" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <label for="" class="start pull-left"> Start Date
+                                                        Date<span>*</span></label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <input type="date" formControlName="sba_startDate"
+                                                        class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <label for="" class="start pull-left"> Matured
+                                                        Date<span>*</span></label>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 form-column">
+                                                    <input type="date" formControlName="sba_maturedDate"
+                                                        class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <div formArrayName="nominees">
+                                        <div *ngFor="let nominees of newnominees(savingIndex).controls; let nomineeIndex=index">
+                                            <div [formGroupName]="nomineeIndex">
+                                                {{nomineeIndex}}
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">First Name<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <input maxlength="20" type="text" formControlName="firstName"
+                                                                    class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">Middle Name<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <input maxlength="20" type="text" formControlName="middleName"
+                                                                    class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">Last Name<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <input maxlength="20" type="text" formControlName="lastName"
+                                                                    oninput="this.value=this.value.toUpperCase()" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">National ID<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <input maxlength="8" type="text" formControlName="identificationNo"
+                                                                    class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">Phone Number<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <input minlength="10" maxlength="12" type="text" formControlName="phone"
+                                                                    class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">Email Address<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <input maxlength="20" type="email" formControlName="emailAddress"
+                                                                    class="form-control" oninput="this.value=this.value.toUpperCase()">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">Date of Birth<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <input type="date" formControlName="dob" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">Relationship<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <select formControlName="relationship" class="form-control">
+                                                                    <option value="" disabled>RELATIONSHIP</option>
+                                                                    <option *ngFor="let item of relationshipArray" [value]="item">
+                                                                        {{item}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">Occupation<span></span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <input type="text" formControlName="occupation"
+                                                                    oninput="this.value=this.value.toUpperCase()" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <label for="" class="start pull-left">Nominee Minor<span
+                                                                        class="warning">*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 form-column">
+                                                                <mat-radio-group name="minor" formControlName="nomineeMinor">
+                                                                    <mat-radio-button color="primary" value=True>Yes
+                                                                    </mat-radio-button>
+                                                                    <mat-radio-button color="accent" value=False>No
+                                                                    </mat-radio-button>
+                                                                </mat-radio-group>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" (click)="addnominee(savingIndex)">
+                                        Add Nominee
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" (click)="addNewSavings()">Add Savings</button>
+                        </div>
+                        <button type="button" (click)="onSubmitNewSavings()">Get Values</button>
+                    </form>
+                    {{this.formData.value | json}}
+                    <br>
+                    <hr>
+                    <br>
+                    <h1>Angular Nested FormArray / Dynamic FormArray</h1>
+
+                    <!-- <form [formGroup]="empForm" (ngSubmit)="onSubmitDemo()">
+                        <div formArrayName="employees">
+                            <div *ngFor="let employee of employees().controls; let empIndex=index">
+                                <div [formGroupName]="empIndex"
+                                    style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
+                                    {{empIndex}}
+                                    ID:
+                                    <input type="text" formControlName="id" />
+                                    First Name :
+                                    <input type="text" formControlName="firstName" />
+                                    Last Name:
+                                    <input type="text" formControlName="lastName" />
+
+                                    <button (click)="removeEmployee(empIndex)">Remove</button>
+
+                                    <div formArrayName="skills">
+                                        <div
+                                            *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
+                                            <div [formGroupName]="skillIndex"
+                                                style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
+                                                {{skillIndex}} Skill :
+                                                <input type="text" formControlName="skill" />
+                                                Exp:
+                                                <input type="text" formControlName="exp" />
+
+                                                <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
+                                                    Remove
+                                                </button>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <button type="button" (click)="addEmployeeSkill(empIndex)">
+                                        Add Skill
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" (click)="addEmployee()">Add Employee</button>
+                        </div>
+                    </form> -->
+
+                    {{this.empForm.value | json}}
+
+                    <br /><br />
+                    <a
+                        href="https://www.tektutorialshub.com/angular/nested-formarray-example-add-form-fields-dynamically/">Nested
+                        FormArray / Dynamic FormArray</a>
+                </mat-tab>
+                <mat-tab class="mat-tab container-fluid" label="General Details">
                     <br>
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
@@ -344,15 +627,14 @@
                 <mat-tab class="mat-tab" label="Specific Details">
                     <br>
                     <h4><strong>SPECIAL DETAILS</strong> &nbsp;
-                        <button class="table-main-action-btn bg-primary text-white" (click)="addSaving()"
-                        mat-raised-button>
-                        &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; ADD
-                    </button> &nbsp; &nbsp;
-                    <button class="table-main-action-btn bg-warning text-white" mat-raised-button
-                        (click)="removeSaving(i)">
-                        &nbsp; <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp; REMOVE
-                    </button></h4>
-                    <form [formGroup]="formData">
+                        <button class="table-main-action-btn bg-primary text-white" mat-raised-button>
+                            &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; ADD
+                        </button> &nbsp; &nbsp;
+                        <button class="table-main-action-btn bg-warning text-white" mat-raised-button>
+                            &nbsp; <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp; REMOVE
+                        </button>
+                    </h4>
+                    <!-- <form [formGroup]="formData">
                         <ng-container formArrayName="saving">
                             <ng-container *ngFor="let savingsFormData of saving.controls; let i = index">
                                 <div class="lesson-form-row" [formGroup]="savingsFormData">
@@ -422,9 +704,7 @@
                                 </div>
                             </ng-container>
                         </ng-container>
-                    </form>
-
-
+                    </form> -->
                 </mat-tab>
                 <mat-tab class="mat-tab" label="Nominations">
                     <br>

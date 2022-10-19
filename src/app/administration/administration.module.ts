@@ -155,6 +155,7 @@ import { LOanStatementComponent } from './pages/reports/view-report/loan-stateme
 import { OfficeAccountsComponent } from './pages/reports/view-report/office-accounts/office-accounts.component';
 import { ARREARSGENERALSTATEMENTComponent } from './pages/reports/view-report/arrearsgeneralstatement/arrearsgeneralstatement.component';
 import { ASSETSCLASSIFICATIONSComponent } from './pages/reports/view-report/assetsclassifications/assetsclassifications.component';
+import { OpenSavingsAccountComponent } from './pages/Account-Component/savings-account/open-savings-account/open-savings-account.component';
 @NgModule({
   declarations: [
     AdministrationComponent,
@@ -306,7 +307,8 @@ import { ASSETSCLASSIFICATIONSComponent } from './pages/reports/view-report/asse
     LOanStatementComponent,
     OfficeAccountsComponent,
     ARREARSGENERALSTATEMENTComponent,
-    ASSETSCLASSIFICATIONSComponent
+    ASSETSCLASSIFICATIONSComponent,
+    OpenSavingsAccountComponent
   ],
   imports: [
     CommonModule,

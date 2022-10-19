@@ -122,9 +122,9 @@ export class SavingsMaintenanceComponent implements OnInit {
       if (this.formData.valid) { 
         this.accountAPI.changeMessage(this.formData.value)
         if (this.function_type == "A-Add") {
-          this.router.navigate(['system/savings-account/data/view'], { skipLocationChange: true })
+          this.router.navigate(['system/savings-account/open'], { skipLocationChange: true })
         } else if (this.function_type != "A-Add") {
-          this.router.navigate(['system/savings-account/data/view'], { skipLocationChange: true })
+          this.router.navigate(['system/savings-account/open'], { skipLocationChange: true })
 
         }
       }

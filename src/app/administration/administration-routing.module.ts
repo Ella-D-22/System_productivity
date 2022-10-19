@@ -85,6 +85,7 @@ import { OfficeAccountMaintenanceComponent } from './pages/Account-Component/off
 import { OfficeAccountComponent } from './pages/Account-Component/office-account/office-account.component';
 import { GroupLendingComponentComponent } from './pages/group-lending-component/group-lending-component.component';
 import { GroupLendingMaintenanceComponent } from './pages/group-lending-component/group-lending-maintenance/group-lending-maintenance.component';
+import { OpenSavingsAccountComponent } from './pages/Account-Component/savings-account/open-savings-account/open-savings-account.component';
 const routes: Routes = [
   {
     path: '',
@@ -397,6 +398,12 @@ const routes: Routes = [
       {
         path: 'savings-account/data/view',
         component: SavingsAccountComponent,
+        // canActivate: [CanActivateModuleGuard],
+        data: { preload: true },
+      },
+      {
+        path: 'savings-account/open',
+        component: OpenSavingsAccountComponent,
         // canActivate: [CanActivateModuleGuard],
         data: { preload: true },
       },

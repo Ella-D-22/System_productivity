@@ -48,9 +48,8 @@
                         <div class="col-md-5 col-sm-12 form-column ">
                             <input type="text" formControlName="account_code" class="pull-right form-control"
                                 oninput="this.value=this.value.toUpperCase()" />
-                        </div>
-                        <div class="col-md-1 col-sm-12 form-column ">
-                            <mat-icon (click)="accountLookup()">search</mat-icon>
+                                &nbsp; &nbsp;
+                                <mat-icon matTooltip="Search Account" color="priary" (click)="accountLookup()">search</mat-icon>
                         </div>
                     </div>
                 </div>
