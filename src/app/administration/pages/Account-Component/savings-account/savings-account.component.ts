@@ -513,7 +513,7 @@ export class SavingsAccountComponent implements OnInit {
   sectorCodeLookup() {
 
   }
-  collateralLookup(): void {
+  collateralLookup(): void { 
   }
   getPage() {
     this.subscription = this.accountAPI.currentMessage.subscribe(
