@@ -80,6 +80,7 @@ export class TermDepositAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getPage();
   }
 
   nomineeArray = new Array()
@@ -233,8 +234,6 @@ export class TermDepositAccountComponent implements OnInit {
     this.nomineeArray = this.nomineeArray
 
   }
-
-
   //setting up the mis sector codes
   getMISData() {
     this.subscription = this.misSectorAPI.getAllMissectors().subscribe(
@@ -254,7 +253,6 @@ export class TermDepositAccountComponent implements OnInit {
       }
     )
   }
-
   currencyLookup(): void {
     const dialogRef = this.dialog.open(CurrencyLookupComponent, {
     });
@@ -299,14 +297,14 @@ export class TermDepositAccountComponent implements OnInit {
       this.formData.controls.solCode.setValue(result.data.solCode);
     });
   }
-  sectorCodeLookup():void{
-    const dialogRef =  this.dialog.open(MisSectorLookupComponent,{
-  width: '45%',
+  sectorCodeLookup(): void {
+    const dialogRef = this.dialog.open(MisSectorLookupComponent, {
+      width: '45%',
     });
-    dialogRef.afterClosed().subscribe(results =>{
+    dialogRef.afterClosed().subscribe(results => {
       this.lookupdata = results;
       this.miscode = this.results.miscode
-      this.sectorId  = this.results.id
+      this.sectorId = this.results.id
       this.formData.controls.miscode.setValue(results.data.miscode)
       // this.formData.controls.sectorId.setValue(results.data.id)
       console.log("Data", this.results);
@@ -325,7 +323,7 @@ export class TermDepositAccountComponent implements OnInit {
     })
   }
   sbaSchemeTypeLookup() {
-    
+
   }
   glCodeLookup(): void {
     const dialogRef = this.dialog.open(GlCodeLookupComponent, {
@@ -355,8 +353,9 @@ export class TermDepositAccountComponent implements OnInit {
     this.subscription = this.accountAPI.currentMessage.subscribe(
       message => {
         this.message = message
-        this.message = message
         this.function_type = this.message.function_type;
+        this.account_code = this.message.account_code;
+        this.customer_type = this.message.customer_type;
         if (this.message.function_type == 'A-Add') {
           this.formData = this.fb.group({
             accountManager: [''],

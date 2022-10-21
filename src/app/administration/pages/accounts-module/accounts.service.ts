@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
 export class AccountsService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-
   baseURL = `${environment.accoutOpening}/accounts`;
   constructor(private http: HttpClient) { }
   // Message Medium
@@ -19,18 +18,7 @@ export class AccountsService {
   changeMessage(message: string) {
     this.messageSource.next(message)
   }
-  // Error handling
-  errorMgmt(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `${error.error.message}`;
-    }
-    return throwError(errorMessage);
-  }
+
   // Add
   createAccount(data: any): Observable<any> {
     let API_URL = `${this.baseURL}/open`;
@@ -62,7 +50,6 @@ export class AccountsService {
         catchError(this.errorMgmt)
       )
   }
-
   getCurrentAccountByCustCode(customerCode: any): Observable<any> {
     let API_URL = `${this.baseURL}/ca/customer/${customerCode}`;
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false }).pipe(
@@ -72,7 +59,6 @@ export class AccountsService {
       catchError(this.errorMgmt)
     )
   }
-
   //Savings Accounts
   getSavingAccounts() {
     let API_URL = `${this.baseURL}/sb/all`;
@@ -86,7 +72,6 @@ export class AccountsService {
   }
   getSavingsAccountByCustCode(customerCode: any): Observable<any> {
     let API_URL = `${this.baseURL}/customer/${customerCode}`;
-
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false }).pipe(
       map(res => {
         return res || {}
@@ -94,10 +79,7 @@ export class AccountsService {
       catchError(this.errorMgmt)
     )
   }
-
-
   //Loan Accounts
-
   getLoanAccounts() {
     let API_URL = `${this.baseURL}/la/all`;
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false })
@@ -108,10 +90,8 @@ export class AccountsService {
         catchError(this.errorMgmt)
       )
   }
-
   getLoanAccountByCustCode(customerCode: any): Observable<any> {
     let API_URL = `${this.baseURL}/la/customer/${customerCode}`;
-
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false }).pipe(
       map(res => {
         return res || {}
@@ -119,7 +99,6 @@ export class AccountsService {
       catchError(this.errorMgmt)
     )
   }
-
   //Overdraft 
   getODAccounts() {
     let API_URL = `${this.baseURL}/od/all`;
@@ -131,8 +110,6 @@ export class AccountsService {
         catchError(this.errorMgmt)
       )
   }
-
-
   //Office Accounts
   getOfficeAccounts() {
     let API_URL = `${this.baseURL}/oa/all`;
@@ -144,9 +121,7 @@ export class AccountsService {
         catchError(this.errorMgmt)
       )
   }
-
   //Getting Sol accounts
-
   getSolAccount(solCode: any): Observable<any> {
     let API_URL = `${this.baseURL}/sol/${solCode}`;
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false }).pipe(
@@ -157,7 +132,6 @@ export class AccountsService {
     )
 
   }
-
   //Updating Accounts
   updateAccounts(data: any): Observable<any> {
     let API_URL = `${this.baseURL}/update`
@@ -167,7 +141,6 @@ export class AccountsService {
       })
     )
   }
-
   sumCustomerAccountBalance() {
     let API_URL = `${this.baseURL}/sum/customer/account/balance`
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false }).pipe(
@@ -177,9 +150,7 @@ export class AccountsService {
       catchError(this.errorMgmt)
     )
   }
-
   //Retrieving an Account
-
   retrieveAccount(acid: any): Observable<any> {
     let API_URL = `${this.baseURL}/${acid}`
     return this.http.get(API_URL, { withCredentials: false }).pipe(map(
@@ -187,5 +158,17 @@ export class AccountsService {
         return res || {}
       }
     ))
+  }
+  // Error handling
+  errorMgmt(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `${error.error.message}`;
+    }
+    return throwError(errorMessage);
   }
 }
