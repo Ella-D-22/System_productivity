@@ -11,11 +11,7 @@ const routes: Routes = [
     // canLoad: [AuthenticatedModuleGuard],
     // data: { roles: [Role.SUPER_ADMIN], preload: true },
   },
-  {
-    path: 'superuser', loadChildren: () => import('./superuser/superuser.module').then(m => m.SuperuserModule),
-    // canLoad:[CanLoadModuleGuard],
-    // data: { roles: [Role.SUPER_ADMIN], preload: true },
-  }
+  
 ];
 
 @NgModule({

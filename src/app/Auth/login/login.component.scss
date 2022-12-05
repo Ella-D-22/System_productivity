@@ -1,105 +1,117 @@
-.container{
+.container {
     padding-top: 10% !important;
     overflow: auto;
 }
 
-.card-footer{
+.card-footer {
     font-family: monospace;
     font-size: 10px;
 }
-.profile-card{
-    text-align: center;
 
-  }
-  .profile-card img{
+.profile-card {
+    text-align: center;
+}
+
+.profile-card img {
     width: 70px;
-    height:70px;
+    height: 70px;
     object-fit: cover;
     border-radius: 100%;
-  }
-  .pull-right{
+}
+
+.pull-right {
     float: right;
-  }
-  .pull-left{
+}
+
+.pull-left {
     float: left;
-  }
-  h1{
+}
+
+h1 {
     text-align: center;
     color: blue;
     font-weight: 600;
     font-family: 'Times New Roman', Times, serif;
 }
-.loginImage img{
+
+.loginImage img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     background-repeat: no-repeat;
 }
-  .registerWrapper{
+
+.registerWrapper {
     height: 100% !important;
     width: 100% !important;
     overflow: hidden !important;
-  }
-  mat-card{
+}
+
+mat-card {
     margin: 0px !important;
     padding: 0px !important;
-  }
-  .form-group{
+}
+
+.form-group {
     display: block !important;
     padding-bottom: 0px;
     padding-top: 0px;
     margin-bottom: 0px;
     margin-top: 0px;
     font-size: 12px;
-  }
-
-  .form-column {
-  display: block !important;
-  padding-bottom: 0px;
-  padding-top: 0px;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  font-size: 18px !important
-}
-.form-control{
-  width: 100% !important;
-  height: 40px !important;
-  font-size: 16px !important;
-  font-weight: 500 !important;
-  border-radius: 100px !important;
-  display: block !important;
-  padding: 5px !important;
-}
-.row{
-  width: 100% !important;
-  padding: 0px !important;
-  margin: 0px !important;
 }
 
-  h3{
+.form-column {
+    display: block !important;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 18px !important
+}
+
+.form-control {
+    width: 100% !important;
+    height: 40px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    border-radius: 100px !important;
+    display: block !important;
+    padding: 5px !important;
+}
+
+.row {
+    width: 100% !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+h3 {
     font-family: Aerial;
     font-size: 12px;
     color: green;
 }
-  table{
+
+table {
     width: 100%;
     padding: 5px;
-  }
-  th{
-  font-size: 12px;
-  font-weight: 400;
-  text-decoration: underline;
-  color: blue;
+}
 
-  }
-  mat-icon{
+th {
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: underline;
+    color: blue;
+}
+
+mat-icon {
     font-size: 16px !important;
     width: 16px !important;
-  }
+}
 
-.search-form-field{
-  color: blue !important;
-  font-weight: 300 !important;
+.search-form-field {
+    color: blue !important;
+    font-weight: 300 !important;
 }
 
 .actionButton {
@@ -109,73 +121,76 @@
     line-height: 25px;
     padding: auto;
     margin: 2px;
-
     .mat-icon {
-      font-size: 25px;
-      width: 25px;
-      height: 25px;
-      line-height: 25px;
+        font-size: 25px;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
     }
-  }
-
-  td{
-  font-size: 10px;
 }
 
-  .container-fluid{
-      margin: 0px;
-  }
+td {
+    font-size: 10px;
+}
 
-  .table-head{
+.container-fluid {
+    margin: 0px;
+}
+
+.table-head {
     background-color: white;
-  }
-  .table-head button{
-    float: left;
-  }
- mat-form-field {
-    float: right;
-  }
-  mat-raised-button{
-    padding: 0px !important;
-  }
-
-
-.formSection{
-    margin: auto !important;
-
 }
-mat-form-field{
+
+.table-head button {
+    float: left;
+}
+
+mat-form-field {
+    float: right;
+}
+
+mat-raised-button {
+    padding: 0px !important;
+}
+
+.formSection {
+    margin: auto !important;
+}
+
+mat-form-field {
     margin: 5px;
     padding: 5px;
     color: black;
     width: 90%;
-
 }
-button{
+
+button {
     float: right;
     margin: 5px;
-
 }
-mat-raised-button{
+
+mat-raised-button {
     padding: 10px;
-
 }
-.infoSection{
 
+.infoSection {
     font-family: monospace;
     font-size: 10px;
     color: blue;
 }
-.mat-h1{
-  height: 5px;
+
+.mat-h1 {
+    height: 5px;
 }
-.left-info{
-  background-color: rgb(0, 60, 255) !important;
-  margin: 0px !important;
-  padding: 0px !important;
+
+.left-info {
+    background-color: rgb(0, 60, 255) !important;
+    margin: 0px !important;
+    padding: 0px !important;
 }
-.right-info{
-  background-color: whitesmoke !important;
-  margin: 0px !important;
-  padding: 0px !important;
+
+.right-info {
+    background-color: whitesmoke !important;
+    margin: 0px !important;
+    padding: 0px !important;
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EventIdMaintenanceComponent } from '../../pages/SystemConfigurations/ChargesParams/event-id/event-id-maintenance/event-id-maintenance.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -27,18 +26,7 @@ email: any;
   ngOnInit() {
     // this.Authorize();
   }
-  eventIdMaintenance(): void {
-    const dialogRef = this.dialog.open(EventIdMaintenanceComponent, {
 
-      width: '600px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      // route based on selected  routerLink="/system/event_id"
-
-      // this.min_amt_ccy = result.data;
-      // this.formData.controls.min_amt_ccy.setValue(result.data);
-    });
-  }
 
   // Authorize(){
   // let currentUser = JSON.parse(sessionStorage.getItem('auth-user') || '{}');

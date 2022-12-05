@@ -1,0 +1,135 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+    <span>Productivity System</span>
+    <span class="example-spacer"></span>
+    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button> -->
+
+    <button mat-raised-button color="accent" (click)="addEmployee()">Add Employee</button>
+</mat-toolbar>
+
+
+<!-- <mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value"> -->
+<!-- <mat-drawer #drawer [mode]="mode.value">I'm a drawer</mat-drawer>
+  
+  <mat-drawer-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Sidenav mode</mat-label>
+      <mat-select #mode value="side">
+        <mat-option value="side">Side</mat-option>
+        <mat-option value="over">Over</mat-option>
+        <mat-option value="push">Push</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Has backdrop</mat-label>
+      <mat-select #hasBackdrop>
+        <mat-option>Unset</mat-option>
+        <mat-option [value]="true">True</mat-option>
+        <mat-option [value]="false">False</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-drawer-content>
+</mat-drawer-container> -->
+
+
+<div class="container">
+    <div style="margin-top: 10px; ">
+        <mat-form-field appearance="standard">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Joshua" #input>
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name</th>
+                    <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+                </ng-container>
+
+                <!-- Progress Column -->
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.lastName}}</td>
+                </ng-container>
+
+                <!--Email column-->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                    <td mat-cell *matCellDef="let row" placeholder="123@gmail.com"> {{row.email}}</td>
+                </ng-container>
+
+                <!--Role column-->
+                <ng-container matColumnDef="appUserRole">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+                    <td mat-cell *matCellDef="let row"> {{row.appUserRole}}</td>
+                </ng-container>
+
+                <!--Designation Column-->
+                <ng-container matColumnDef="designation">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Designation </th>
+                    <td mat-cell *matCellDef="let row"> {{row.designation}}</td>
+                </ng-container>
+
+                <!-- password Column -->
+                <ng-container matColumnDef="password">
+                    <th style="display: none;" mat-header-cell *matHeaderCellDef mat-sort-header> Password </th>
+                    <td style="display: none;" mat-cell *matCellDef="let row"> {{row.password}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <!-- <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
+        </ng-container> -->
+
+                <!-- Fruit Column -->
+                <!-- <ng-container matColumnDef="experience">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Experience </th>
+          <td mat-cell *matCellDef="let row"> {{row.experience}} </td>
+        </ng-container> -->
+                <!-- Fruit Column -->
+                <!-- <ng-container matColumnDef="salary">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Salary </th>
+          <td mat-cell *matCellDef="let row"> {{row.salary | currency}} </td>
+        </ng-container> -->
+                <!-- Fruit Column -->
+                <!-- <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+        </ng-container> -->
+                <!-- Fruit Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button color="primary" (click)="editEmployee(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+                        <button mat-icon-button color="warn" (click)="deleteEmployee(row.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+                    </td>
+
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+    </div>
+</div>

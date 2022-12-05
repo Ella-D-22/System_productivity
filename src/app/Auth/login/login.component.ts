@@ -62,49 +62,52 @@ export class LoginComponent implements OnInit {
 
     onSubmit(): void {
     this.loading = true;
-    this.authService.authenticateUser(this.loginForm.value).subscribe(
-      data => {
-        this.message = data;
-        console.log("DATA", this.message);
+    this.router.navigate(['/system']);
 
-//      Send to Message Medium
-        // this.authService.changeMessage(data)
-        this._snackBar.open("Successful Redirecting...", "X", {
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-          duration: 3000,
-          panelClass: ['green-snackbar','login-snackbar'],
-        });
 
-        this.tokenStorage.saveToken(this.message.accessToken);
-      this.tokenStorage.saveUser(this.message);
+//     this.authService.authenticateUser(this.loginForm.value).subscribe(
+//       data => {
+//         this.message = data;
+//         console.log("DATA", this.message);
 
-        this.router.navigate(['/system']);
+// //      Send to Message Medium
+//         // this.authService.changeMessage(data)
+//         this._snackBar.open("Successful Redirecting...", "X", {
+//           horizontalPosition: this.horizontalPosition,
+//           verticalPosition: this.verticalPosition,
+//           duration: 3000,
+//           panelClass: ['green-snackbar','login-snackbar'],
+//         });
 
-                // Call function to set Data to local storage
+//         this.tokenStorage.saveToken(this.message.accessToken);
+//       this.tokenStorage.saveUser(this.message);
 
-      // redirect to  respective module system
-      // if(this.message.roles[0]=="SUPER_ADMIN"){
-      // this.ngZone.run(() => this.router.navigate(['/superuser']));
-      // }else{
-      //   this.ngZone.run(() => this.router.navigate(['/system']));
-      // }
-      // this.router.navigate(['/', 'page-name']);
+//         this.router.navigate(['/system']);
 
-        this.loading = false;
-        // To OTP Auth;
-        // this.router.navigate(['/otp'], { skipLocationChange: true });
-      },
-      err => {
-        this.loading = false;
-        this._snackBar.open("Check your Credentials", "X", {
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-          duration: 3000,
-          panelClass: ['red-snackbar','login-snackbar'],
-        });
-      }
-    );
+//                 // Call function to set Data to local storage
+
+//       // redirect to  respective module system
+//       // if(this.message.roles[0]=="SUPER_ADMIN"){
+//       // this.ngZone.run(() => this.router.navigate(['/superuser']));
+//       // }else{
+//       //   this.ngZone.run(() => this.router.navigate(['/system']));
+//       // }
+//       // this.router.navigate(['/', 'page-name']);
+
+//         this.loading = false;
+//         // To OTP Auth;
+//         // this.router.navigate(['/otp'], { skipLocationChange: true });
+//       },
+//       err => {
+//         this.loading = false;
+//         this._snackBar.open("Check your Credentials", "X", {
+//           horizontalPosition: this.horizontalPosition,
+//           verticalPosition: this.verticalPosition,
+//           duration: 3000,
+//           panelClass: ['red-snackbar','login-snackbar'],
+//         });
+//       }
+//     );
   }
 
 

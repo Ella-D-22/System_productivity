@@ -1,40 +1,42 @@
 <div class="container">
     <mat-card>
-            <div class="row">
-                <div class="left-info col-md-6 col-sm-12">
-                    <div class="loginImage">
-                        <img src="../../../../assets/authimage.png" class="
+        <div class="row">
+            <div class="left-info col-md-6 col-sm-12">
+                <div class="loginImage">
+                    <img src="../../../../assets/authimage.png" class="
                         img-responsive">
-                      </div><!--end of header-->
-
                 </div>
-                <div class="right-info col-md-6 col-sm-12">
-                    <span *ngIf="loading" ><mat-progress-bar mode="indeterminate"></mat-progress-bar></span>
-            <div class="card-header">
-                <div class="">
-                    <span><h1>Verify Your OTP</h1></span>
-                  </div>
-                <div class="profile-card">
-                    <img src="../../../../assets/Images/user-avatar.jpg">
-                  </div><!--end of header-->
+                <!--end of header-->
+
             </div>
-            <div class="card-body">
-                <form [formGroup]="formData" (ngSubmit)="onSubmit()">
-                    <div class="form-group">
-                        <label for="otp">OPT CODE</label>
-                        <input maxlength="4" type="number" formControlName="otp" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.otp.errors }" />
-                        <div *ngIf="submitted && f.otp.errors" class="invalid-feedback">
-                            <div *ngIf="f.otp.errors.required">otp</div>
-                        </div>
+            <div class="right-info col-md-6 col-sm-12">
+                <span *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></span>
+                <div class="card-header">
+                    <div class="">
+                        <span><h1>Verify Your OTP</h1></span>
                     </div>
-                    <button [disabled]="loading" class="btn btn-primary" type="submit" >
+                    <div class="profile-card">
+                        <img src="../../../../assets/Images/user-avatar.jpg">
+                    </div>
+                    <!--end of header-->
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="otp">OPT CODE</label>
+                            <input maxlength="4" type="number" formControlName="otp" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.otp.errors }" />
+                            <div *ngIf="submitted && f.otp.errors" class="invalid-feedback">
+                                <div *ngIf="f.otp.errors.required">otp</div>
+                            </div>
+                        </div>
+                        <button [disabled]="loading" class="btn btn-primary" type="submit">
                         Verify
                     </button>
-                    <br>
-                </form>
-            </div>
+                        <br>
+                    </form>
                 </div>
-
             </div>
-        </mat-card>
+
+        </div>
+    </mat-card>
 </div>

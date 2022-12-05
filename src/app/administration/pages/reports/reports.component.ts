@@ -1,136 +1,116 @@
-import { Component, OnInit } from '@angular/core';
-import { ReportDefination } from './interfaces/report-defination'
-import { Parameter } from './interfaces/parameter'
-import {ReportService} from './report.service'
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { OrganizationService } from '../../Service/SystemConfigs/Organisation/organization.service';
+
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']
 })
-export class ReportsComponent implements OnInit {
 
-  reportdef!: ReportDefination
-  query!: string;
-  rcre!: Date
-  postedBy!:string
-  postedTime!: Date
-  modifiedBy!: string
-  modifiedtime!: Date
-  jrxmlName!: string
-  reportName!: string;
-  jrxmlfile!: File  // Variable to store file
-  size!: number
+export class ReportsComponent implements OnInit {date = formatDate(new Date(), 'hh:mm a', 'en-US');
+  
+actionButton: String = 'View Reports';
+reportForm!: FormGroup;
+editData: any;
+fmData = {};
 
-  parameters!: Parameter[]
-  params: Parameter[]=[]
+constructor(
+  private router: Router,
+  private formBuilder: FormBuilder,
+  private Api:OrganizationService) { }
 
-  constructor(private reportService: ReportService) {this.reportdef={},
-  this.parameters=[
-{
-parameterName: 'sol_code',
-rcre: new Date(),
-postedBy: 'kamau',
-postedTime: new Date(),
-modifiedBy: 'kamau',
-modifiedTime: new Date()
-},
-    {
-parameterName: 'manager',
-rcre: new Date(),
-postedBy: 'kamau',
-postedTime: new Date(),
-modifiedBy: 'kamau',
-modifiedTime: new Date()
-},
-    {
-parameterName: 'start_date',
-rcre: new Date(),
-postedBy: 'kamau',
-postedTime: new Date(),
-modifiedBy: 'kamau',
-modifiedTime: new Date()
-},
-    {
-parameterName: 'end_date',
-rcre: new Date(),
-postedBy: 'kamau',
-postedTime: new Date(),
-modifiedBy: 'kamau',
-modifiedTime: new Date()
-},
-    {
-parameterName: 'customer_code',
-rcre: new Date(),
-postedBy: 'kamau',
-postedTime: new Date(),
-modifiedBy: 'kamau',
-modifiedTime: new Date()
-},
-    {
-      parameterName: 'account_no',
-      rcre: new Date(),
-      postedBy: 'kamau',
-      postedTime: new Date(),
-      modifiedBy: 'kamau',
-      modifiedTime: new Date()
-    }
-]
-  }
   ngOnInit(): void {
+    this.reportForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      creationDate: ['', Validators.required],
+      departmentEnum: ['', Validators.required],
+      reportCategory: ['', Validators.required],
+      ticketId: ['', Validators.required],
+      timeTaken: this.date,
+      clientNameEnum: ['', Validators.required],
+      productNameEnum: ['', Validators.required],
+      report_description: ['', Validators.required],
+    });
+    if (this.editData) {
+      this.actionButton = 'Update';
+      this.reportForm.controls['email'].setValue(this.editData.email);
+      this.reportForm.controls['creationDate'].setValue(
+        this.editData.creationDate
+      );
+      this.reportForm.controls['departmentEnum'].setValue(
+        this.editData.departmentEnum
+      );
+      this.reportForm.controls['reportCategory'].setValue(
+        this.editData.reportCategory
+      );
+      this.reportForm.controls['ticketId'].setValue(this.editData.ticketId);
+      this.reportForm.controls['timeTaken'].setValue(this.editData.timeTaken);
+      this.reportForm.controls['clientNameEnum'].setValue(
+        this.editData.clientNameEnum
+      );
+      this.reportForm.controls['productNameEnum'].setValue(
+        this.editData.productNameEnum
+      );
+      this.reportForm.controls['report_Description'].setValue(
+        this.editData.report_Description
+      );
+    }
   }
 
+  onSubmit() {
+    console.log(this.reportForm.value);
 
-  submitReport(){
-    this.reportdef.query ="test"
-    this.reportdef.postedTime= new Date()
-    this.reportdef.reportName=this.reportName
-    this.reportdef.jrxmlName=this.jrxmlfile.name
-    this.reportdef.postedBy="kamau"
-    this.reportdef.modifiedTime=new Date()
-    this.reportdef.modifiedBy="kamau"
-    this.reportdef.rcre=new Date()
-    this.reportdef.parameters=this.params
+    this.fmData = this.reportForm.value;
+    if (this.reportForm.valid) {
+      this.Api.create(this.reportForm.value).subscribe({
+        next: (res) => {
+          this.router.navigate([`/dash`], {
 
-    console.log("query", this.query)
-    console.log("name", this.reportName)
-    console.log("para", this.params)
-    console.log(this.jrxmlfile.name);
+            queryParams: {
+              formData: this.fmData,
 
-    this.reportService.addReport(this.reportdef, this.jrxmlfile).subscribe(
-      data =>{
-        console.log(data)
-        window.alert("UPLOAD SUCCESSFUL");
-      }
-      )
+            },
+          });
+          alert('Report added successsfully!');
+          // this.matDialogRef.close('save');
+          // this.matDialogRef.close('Update');
+          this.reportForm.reset();
+        },
+        error: () => {
+          alert('Error occurred!');
+        },
+      });
+    }else{
+      console.log("form not valid")
+    }
+
 
 
   }
-
-          jrxmlChange(event: any) {
-        this.jrxmlfile = event.target.files[0];
-        console.log(this.jrxmlfile.name);
-        this.size= this.jrxmlfile.size/1024/1024
-        console.log(this.size);
-    }
-add(param: Parameter){
-  this.params.push(param)
-}
-remove(param: Parameter){
-  //this.params.splice(index,1);
-  this.params = this.params.filter( obj => obj.parameterName !== param.parameterName);
-
-}
-
-containsObject(obj: Parameter, list: Parameter[]) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i] === obj) {
-            return true;
-        }
-    }
-
-    return false;
-}
+  updateReport() {
+    this.Api.update(this.reportForm.value, this.editData.id).subscribe({
+      next: (res) => {
+        alert('Report updated successfully!');
+        console.log(this.reportForm.value);
+        // this.matDialogRef.close('Update');
+        this.reportForm.reset();
+      },
+      error: () => {
+        alert('Error in updating records!');
+      },
+    });
+  }
 
 }
+
+
