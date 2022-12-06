@@ -11,12 +11,12 @@ export class OrganizationService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   // baseURL2 = "http://52.15.152.26:9100/api/v1/organization";
-   baseURL = `${environment.productAPI}/api/v1/organization`;
+   baseURL = `${environment.empAPI}`;
 
   constructor(private http: HttpClient) { }
    //Add
    create(data: any): Observable<any> {
-    let API_URL = `${this.baseURL}/create/report/{appUser}`;
+    let API_URL = `${this.baseURL}/employee/add`;
     return this.http.post(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
       return res || {}
     }),
@@ -25,7 +25,7 @@ export class OrganizationService {
   }
    //Fetch
    get(): Observable<any> {
-    let API_URL = `${this.baseURL}/report/all`;
+    let API_URL = `${this.baseURL}/employee/all`;
     return this.http.get(API_URL, { headers: this.headers, withCredentials: false }).pipe(map(res => {
       return res || {}
     }),
@@ -34,7 +34,7 @@ export class OrganizationService {
   }
    //Edit 
    update(data: any, id: number): Observable<any> {
-    let API_URL = `${this.baseURL}/updateReport/${id}`;
+    let API_URL = `${this.baseURL}/update/${id}`;
     return this.http.put(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
       return res || {}
     }),

@@ -1,8 +1,9 @@
 export const environment = {
   production: true,  
-  prodAPI: "https://localhost:8080/api/v1/registration"
-
-    // userAPI: 'http://52.15.152.26:9091',
+  // prodAPI: "https://localhost:8080/api/v1/registration",
+  // logAPI: "http://127.0.0.1:8080/login",
+  empAPI: "http://127.0.0.1:8080/api/v1/registration",
+     userAPI: 'http://52.15.152.26:9091',
     // accountAPI: 'http://52.15.152.26:9091/account-service',
     // productAPI: 'http://52.15.152.26:9091/product-service',
     // collateralAPI: 'http://52.15.152.26:9091/collateral-service',
