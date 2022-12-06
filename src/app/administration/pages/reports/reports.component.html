@@ -1,110 +1,111 @@
 <div class="container">
     <mat-card>
+
         <form class="card-body cardbody-color p-lg-5">
-        <div>
-            <mat-card-title>
-                Daily Reports
-            </mat-card-title>
-        </div>
-        <mat-card class="items align-items-center">
-            <form [formGroup]="reportForm">
-                <div class="content-container align-items-center">
-                    <div class="form-row">
-                        <div class="col-m-3 my-1">
-                            <mat-form-field appearance="fill">
-                                <mat-label>eg.John Doe</mat-label>
-                                <input matInput formControlName="email" required>
-                            </mat-form-field>
+            <div>
+                <mat-card-title>
+                    Daily Reports
+                </mat-card-title>
+            </div>
+            <mat-card class="items align-items-center">
+                <form [formGroup]="reportForm">
+                    <div class="content-container align-items-center">
+                        <div class="form-row">
+                            <div class="col-m-3 my-1">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>eg.John Doe</mat-label>
+                                    <input matInput formControlName="email" required>
+                                </mat-form-field>
+                            </div>
+                            <br>
+                            <div class="col-5">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Date</mat-label>
+                                    <input matInput formControlName="creationDate">
+                                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                                    <!-- <mat-datepicker-toggle matIconSuffix [for]="dp2" disabled></mat-datepicker-toggle> -->
+                                    <mat-datepicker #dp2></mat-datepicker>
+                                </mat-form-field>
+                            </div>
                         </div>
                         <br>
-                        <div class="col-5">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Date</mat-label>
-                                <input matInput formControlName="creationDate">
-                                <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-                                <!-- <mat-datepicker-toggle matIconSuffix [for]="dp2" disabled></mat-datepicker-toggle> -->
-                                <mat-datepicker #dp2></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-row">
-                        <div class="col-m-3 my-1">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Select Department</mat-label>
-                                <mat-select formControlName="departmentEnum" placeholder="Department">
-                                    <mat-option value="SOFTWARE">SOFTWARE</mat-option>
-                                    <mat-option value="ACCOUNTING">ACCOUNTING</mat-option>
-                                    <mat-option value=" MANAGEMENT"> MANAGEMENT</mat-option>
-                                    <mat-option value="BANKING">BANKING</mat-option>
+                        <div class="form-row">
+                            <div class="col-m-3 my-1">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Select Department</mat-label>
+                                    <mat-select formControlName="departmentEnum" placeholder="Department">
+                                        <mat-option value="SOFTWARE">SOFTWARE</mat-option>
+                                        <mat-option value="ACCOUNTING">ACCOUNTING</mat-option>
+                                        <mat-option value=" MANAGEMENT"> MANAGEMENT</mat-option>
+                                        <mat-option value="BANKING">BANKING</mat-option>
 
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-5">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Select Category</mat-label>
-                                <mat-select formControlName="reportCategory" placeholder="Category">
-                                    <mat-option value="AAAAAA">AAAAAA</mat-option>
-                                    <mat-option value="BBBBB">BBBBB</mat-option>
-                                    <mat-option value="CCCCCC"> CCCCCC</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-5">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Select Category</mat-label>
+                                    <mat-select formControlName="reportCategory" placeholder="Category">
+                                        <mat-option value="AAAAAA">AAAAAA</mat-option>
+                                        <mat-option value="BBBBB">BBBBB</mat-option>
+                                        <mat-option value="CCCCCC"> CCCCCC</mat-option>
 
-                                </mat-select>
-                            </mat-form-field>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="form-row">
-                        <div class="col-m-3 my-1">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Ticket ID</mat-label>
-                                <input matInput placeholder="Ticket Id" formControlName="ticketId" required>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-5">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Time </mat-label>
-                                <input matInput placeholder="Time taken (hr)" formControlName="timeTaken" required>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-row">
-                        <div class="col-m-3 my-1">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Select Client Name</mat-label>
-                                <mat-select formControlName="clientNameEnum">
-                                    <mat-option value="POST_BANK">POST BANK</mat-option>
-                                    <mat-option value="EQUITY_BANK">EQUITY BANK</mat-option>
-                                    <mat-option value="NORTHWEST"> NORTHWEST</mat-option>
-                                    <mat-option value=" KINGDOM_BANK"> KINGDOM BANK</mat-option>
-
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-5">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Select Product Name</mat-label>
-                                <mat-select formControlName="productNameEnum">
-                                    <mat-option value="PRODUCT_A">PRODUCT A</mat-option>
-                                    <mat-option value="PRODUCT_B">PRODUCT B</mat-option>
-                                    <mat-option value="PRODUCT_C">PRODUCT C</mat-option>
-                                    <mat-option value="PRODUCT_D">PRODUCT D</mat-option>
-
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div><br>
-
-                    <br>
-                    <div class="form-group">
-                        <label>Report Description</label>
                         <br>
-                        <textarea class="form-control" formControlName="report_description" rows="3"></textarea>
+                        <div class="form-row">
+                            <div class="col-m-3 my-1">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Ticket ID</mat-label>
+                                    <input matInput placeholder="Ticket Id" formControlName="ticketId" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-5">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Time </mat-label>
+                                    <input matInput placeholder="Time taken (hr)" formControlName="timeTaken" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="col-m-3 my-1">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Select Client Name</mat-label>
+                                    <mat-select formControlName="clientNameEnum">
+                                        <mat-option value="POST_BANK">POST BANK</mat-option>
+                                        <mat-option value="EQUITY_BANK">EQUITY BANK</mat-option>
+                                        <mat-option value="NORTHWEST"> NORTHWEST</mat-option>
+                                        <mat-option value=" KINGDOM_BANK"> KINGDOM BANK</mat-option>
+
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-5">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Select Product Name</mat-label>
+                                    <mat-select formControlName="productNameEnum">
+                                        <mat-option value="PRODUCT_A">PRODUCT A</mat-option>
+                                        <mat-option value="PRODUCT_B">PRODUCT B</mat-option>
+                                        <mat-option value="PRODUCT_C">PRODUCT C</mat-option>
+                                        <mat-option value="PRODUCT_D">PRODUCT D</mat-option>
+
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+
+                        <br>
+                        <div class="form-group">
+                            <label>Report Description</label>
+                            <br>
+                            <textarea class="form-control" formControlName="report_description" rows="3"></textarea>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </mat-card>
+                </form>
+            </mat-card>
         </form>
         <div [align]="'end'">
             <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit Form</button>

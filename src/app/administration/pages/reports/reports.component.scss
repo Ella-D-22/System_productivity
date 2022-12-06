@@ -1,31 +1,33 @@
 mat-form-field {
     margin-right: 200px;
-  }
-  .items{
-    justify-content:center;
-    display:flex;
-  }
-  mat-card {
+}
+
+.items {
+    justify-content: center;
+    display: flex;
+}
+
+mat-card {
     margin-top: 25px;
     // background-color: aliceblue;
     font-weight: bolder;
     justify-content: center;
     align-items: center;
-    width:auto;
-  }
-  
-  button {
+    width: auto;
+}
+
+button {
     margin: 8px 8px 8px 0;
-  }
-  
-  mat-card-title {
+}
+
+mat-card-title {
     font-weight: bolder;
     justify-content: center;
     display: flex;
     margin-bottom: 40px;
-  }
-  
-  .container {
+}
+
+.container {
     justify-content: center;
-    display: inline;
-  }
+    display: flex;
+}

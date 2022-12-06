@@ -1,39 +1,41 @@
-<h1 mat-dialog-title>Add Employee</h1>
-<div mat-dialog-content>
-    <form [formGroup]="employeeForm">
+<mat-card>
+    <mat-card>
+        <h1 mat-dialog-title>Add Employee</h1>
+        <div mat-dialog-content>
+            <form [formGroup]="employeeForm">
 
-        <mat-form-field appearance="outline">
-            <mat-label>First Name</mat-label>
-            <input formControlName="firstName" matInput placeholder="First Name" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Last Name</mat-label>
-            <input formControlName="lastName" matInput placeholder="Last Name" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input formControlName="email" matInput placeholder="123@gmail.com" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="appUserRole" placeholder="Logged in as">
-                <mat-option value="ADMIN">ADMIN</mat-option>
-                <mat-option value="USER">USER</mat-option>
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input formControlName="firstName" matInput placeholder="First Name" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="lastName" matInput placeholder="Last Name" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" matInput placeholder="123@gmail.com" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="appUserRole" placeholder="Logged in as">
+                        <mat-option value="ADMIN">ADMIN</mat-option>
+                        <mat-option value="USER">USER</mat-option>
 
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Designation</mat-label>
-            <input formControlName="designation" matInput placeholder="Employee Designation" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Password</mat-label>
-            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Designation</mat-label>
+                    <input formControlName="designation" matInput placeholder="Employee Designation" />
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-        </mat-form-field>
-        <!-- <mat-form-field appearance="outline">
+                </mat-form-field>
+                <!-- <mat-form-field appearance="outline">
             <mat-label>Employee Category</mat-label>
             <mat-select formControlName="category" placeholder="Employee category">
                 <mat-option value="Springboot">Springboot Developers</mat-option>
@@ -42,7 +44,7 @@
                 <mat-option value="Java">Java Developers</mat-option>
             </mat-select>
         </mat-form-field> -->
-        <!-- <mat-form-field color="primary" appearance="outline">
+                <!-- <mat-form-field color="primary" appearance="outline">
             <mat-label>Employment Date</mat-label>
             <input formControlName="date" matInput [matDatepicker]="picker2">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -63,9 +65,11 @@
         <textarea formControlName="description" matInput></textarea>
     </mat-form-field> -->
 
-    </form>
-    <div mat-dialog-action [align]="'end'" class="example-button-row">
-        <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
-        <button mat-raised-button color="primary" (click)="addEmployee()">{{actionButton}}</button>
-    </div>
-</div>
+            </form>
+            <div mat-dialog-action [align]="'end'" class="example-button-row">
+                <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+                <button mat-raised-button color="primary" (click)="addEmployee()">{{actionButton}}</button>
+            </div>
+        </div>
+    </mat-card>
+</mat-card>
