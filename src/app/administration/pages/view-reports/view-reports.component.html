@@ -1,91 +1,103 @@
-<div class="container">
-    <div style="margin-top: 10px; ">
-        <mat-form-field appearance="standard">
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Joshua" #input>
-        </mat-form-field>
+<mat-card>
+    <mat-card-header class="breadcrumb">
+        <!-- <ol class="breadcrumb"> -->
+        <div class="breadcrumb-item"><a href="/system">Dashboard</a></div>
+        <div class="breadcrumb-item">
+            <a href="/add-reports">ADD REPORT</a></div>
+        <div class="breadcrumb-item active" aria-current="page">REPORT MANAGEMENT
+        </div>
+        <!-- </ol> -->
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="container">
+        <div style="margin-top: 10px; ">
+            <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Joshua" #input>
+            </mat-form-field>
 
-        <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
 
-                <!--Email column-->
-                <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
-                    <td mat-cell *matCellDef="let row" placeholder="123@gmail.com"> {{row.email}}</td>
-                </ng-container>
+                    <!--Email column-->
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+                        <td mat-cell *matCellDef="let row" placeholder="123@gmail.com"> {{row.email}}</td>
+                    </ng-container>
 
-                <!-- Progress Column -->
-                <ng-container matColumnDef="creationDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date </th>
-                    <td mat-cell *matCellDef=" let row "> {{row.creationDate| date}}</td>
-                </ng-container>
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="creationDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date </th>
+                        <td mat-cell *matCellDef=" let row "> {{row.creationDate| date}}</td>
+                    </ng-container>
 
 
-                <!--Role column-->
-                <ng-container matColumnDef="departmentEnum">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
-                    <td mat-cell *matCellDef=" let row "> {{row.departmentEnum}}</td>
-                </ng-container>
+                    <!--Role column-->
+                    <ng-container matColumnDef="departmentEnum">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+                        <td mat-cell *matCellDef=" let row "> {{row.departmentEnum}}</td>
+                    </ng-container>
 
-                <!--Designation Column-->
-                <ng-container matColumnDef="reportCategory">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-                    <td mat-cell *matCellDef="let row "> {{row.reportCategory}}</td>
-                </ng-container>
+                    <!--Designation Column-->
+                    <ng-container matColumnDef="reportCategory">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                        <td mat-cell *matCellDef="let row "> {{row.reportCategory}}</td>
+                    </ng-container>
 
-                <!-- id Column -->
-                <ng-container matColumnDef="ticketId">
-                    <th style="display: none; " mat-header-cell *matHeaderCellDef mat-sort-header> ticketId </th>
-                    <td style="display: none; " mat-cell *matCellDef="let row "> {{row.ticketId}} </td>
-                </ng-container>
+                    <!-- id Column -->
+                    <ng-container matColumnDef="ticketId">
+                        <th style="display: none; " mat-header-cell *matHeaderCellDef mat-sort-header> ticketId </th>
+                        <td style="display: none; " mat-cell *matCellDef="let row "> {{row.ticketId}} </td>
+                    </ng-container>
 
-                <!--Designation Column-->
-                <ng-container matColumnDef="timeTaken">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
-                    <td mat-cell *matCellDef=" let row "> {{row.timeTaken | date}}</td>
-                </ng-container>
+                    <!--Designation Column-->
+                    <ng-container matColumnDef="timeTaken">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+                        <td mat-cell *matCellDef=" let row "> {{row.timeTaken | date}}</td>
+                    </ng-container>
 
-                <!--Designation Column-->
-                <ng-container matColumnDef="clientNameEnum">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Client Name</th>
-                    <td mat-cell *matCellDef="let row "> {{row.clientNameEnum}}</td>
-                </ng-container>
+                    <!--Designation Column-->
+                    <ng-container matColumnDef="clientNameEnum">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Client Name</th>
+                        <td mat-cell *matCellDef="let row "> {{row.clientNameEnum}}</td>
+                    </ng-container>
 
-                <!--Designation Column-->
-                <ng-container matColumnDef="productNameEnum">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
-                    <td mat-cell *matCellDef="let row "> {{row.productNameEnum}}</td>
-                </ng-container>
+                    <!--Designation Column-->
+                    <ng-container matColumnDef="productNameEnum">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                        <td mat-cell *matCellDef="let row "> {{row.productNameEnum}}</td>
+                    </ng-container>
 
-                <!--Designation Column-->
-                <ng-container matColumnDef="report_description">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Report Description </th>
-                    <td mat-cell *matCellDef="let row "> {{row.report_description}}</td>
-                </ng-container>
+                    <!--Designation Column-->
+                    <ng-container matColumnDef="report_description">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Report Description </th>
+                        <td mat-cell *matCellDef="let row "> {{row.report_description}}</td>
+                    </ng-container>
 
-                <!-- Name Column -->
-                <!-- <ng-container matColumnDef="date ">
+                    <!-- Name Column -->
+                    <!-- <ng-container matColumnDef="date ">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
           <td mat-cell *matCellDef="let row "> {{row.date | date}} </td>
         </ng-container> -->
 
-                <!-- Fruit Column -->
-                <!-- <ng-container matColumnDef="experience ">
+                    <!-- Fruit Column -->
+                    <!-- <ng-container matColumnDef="experience ">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Experience </th>
           <td mat-cell *matCellDef="let row "> {{row.experience}} </td>
         </ng-container> -->
-                <!-- Fruit Column -->
-                <!-- <ng-container matColumnDef="salary ">
+                    <!-- Fruit Column -->
+                    <!-- <ng-container matColumnDef="salary ">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Salary </th>
           <td mat-cell *matCellDef="let row "> {{row.salary | currency}} </td>
         </ng-container> -->
-                <!-- Fruit Column -->
-                <!-- <ng-container matColumnDef="description ">
+                    <!-- Fruit Column -->
+                    <!-- <ng-container matColumnDef="description ">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
           <td mat-cell *matCellDef="let row "> {{row.description}} </td>
         </ng-container> -->
-                <!-- Fruit Column -->
-                <!-- <ng-container matColumnDef="action ">
+                    <!-- Fruit Column -->
+                    <!-- <ng-container matColumnDef="action ">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let row ">
                         <button mat-icon-button color="primary " (click)="editEmployee(row) ">
@@ -98,16 +110,17 @@
 
                 </ng-container> -->
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
 
-                <!-- Row shown when there is no matching data. -->
-                <tr class="mat-row " *matNoDataRow>
-                    <td class="mat-cell " colspan="4 ">No data matching the filter "{{input.value}} "</td>
-                </tr>
-            </table>
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row " *matNoDataRow>
+                        <td class="mat-cell " colspan="4 ">No data matching the filter "{{input.value}} "</td>
+                    </tr>
+                </table>
 
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100] " aria-label="Select page of users "></mat-paginator>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100] " aria-label="Select page of users "></mat-paginator>
+            </div>
         </div>
     </div>
-</div>
+</mat-card>

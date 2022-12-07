@@ -1,5 +1,5 @@
 mat-form-field {
-    margin-right: 200px;
+    margin-right: 150px;
 }
 
 .items {
@@ -8,26 +8,38 @@ mat-form-field {
 }
 
 mat-card {
-    margin-top: 25px;
+    margin-top: 3px;
     // background-color: aliceblue;
-    font-weight: bolder;
+    // font-weight: bolder;
     justify-content: center;
     align-items: center;
-    width: auto;
+    width: 960px;
+    height: fit-content;
+}
+
+.breadcrumb-item {
+    justify-content: center;
+    align-items: center;
 }
 
 button {
-    margin: 8px 8px 8px 0;
+    margin: 5px 5px 5px 0;
 }
 
-mat-card-title {
-    font-weight: bolder;
-    justify-content: center;
+// mat-card-title {
+//     // font-weight: bolder;
+//     justify-content: center;
+//     display: flex;
+//     margin-bottom: 5px;
+// }
+.container-fluid {
+    // justify-content: center;
     display: flex;
-    margin-bottom: 40px;
 }
 
-.container {
-    justify-content: center;
-    display: flex;
+.content-container {
+    justify-content: left;
+    // margin-right: 30%;
+    margin-left: 10%;
+    // display: inline;
 }
