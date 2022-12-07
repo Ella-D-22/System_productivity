@@ -23,6 +23,7 @@ export class ViewReportsComponent implements OnInit {
     'creationDate',
     'departmentEnum',
     'reportCategory',
+    'ticketId',
     'timeTaken',
     'clientNameEnum',
     'productNameEnum',

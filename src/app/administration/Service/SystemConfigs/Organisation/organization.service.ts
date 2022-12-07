@@ -62,4 +62,35 @@ export class OrganizationService {
     }
     return throwError(errorMessage);
   }
+
+
+  //create report
+  createReport(data: any, userId: any): Observable<any> {
+    let API_URL = `${this.baseURL}/create/report/${userId}`;
+    return this.http.post(API_URL,data, { headers: this.headers, withCredentials: false }).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
+   //Fetch
+   getReport(): Observable<any> {
+    let API_URL = `${this.baseURL}/report/all`;
+    return this.http.get(API_URL, { headers: this.headers, withCredentials: false }).pipe(map(res => {
+      return res || {}
+    }),
+      catchError(this.errorMgmt)
+    )
+  }
+   //Edit 
+   updateReport(data: any, id: number): Observable<any> {
+    let API_URL = `${this.baseURL}/updateReport/${id}`;
+    return this.http.put(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
+      return res || {}
+    }),
+      catchError(this.errorMgmt)
+    )
+  }
+  
 }

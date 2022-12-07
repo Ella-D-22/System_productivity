@@ -7,14 +7,26 @@
                     Daily Reports
                 </mat-card-title>
             </div>
+            <!-- <div class="col-md-6 col-sm-12 form-column ">
+                <select class="form-control" formControlName="transactionType" [ngClass]="{ 'is-invalid': submitted && f.transactionType.errors }">
+                    <option value="">-- Choose Function --</option>
+                    <option *ngFor="let item of transactionTypeArray" [value]="item.name">{{ item.name }}</option>
+                </select>
+            </div> -->
+
             <mat-card class="items align-items-center">
                 <form [formGroup]="reportForm">
                     <div class="content-container align-items-center">
                         <div class="form-row">
                             <div class="col-m-3 my-1">
                                 <mat-form-field appearance="fill">
-                                    <mat-label>eg.John Doe</mat-label>
-                                    <input matInput formControlName="email" required>
+                                    <mat-label>Username</mat-label>
+                                    <!-- <input matInput formControlName="email" required> -->
+                                    <mat-select formControlName="email" placeholder="Category">
+                                        <mat-option *ngFor="let item of userNameArray" [value]="item.id">{{item.firstName}}-{{item.lastName}}</mat-option>
+
+
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <br>
@@ -22,7 +34,7 @@
                                 <mat-form-field appearance="fill">
                                     <mat-label>Date</mat-label>
                                     <input matInput formControlName="creationDate">
-                                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                                    <mat-hint>YYYY/MM/DD</mat-hint>
                                     <!-- <mat-datepicker-toggle matIconSuffix [for]="dp2" disabled></mat-datepicker-toggle> -->
                                     <mat-datepicker #dp2></mat-datepicker>
                                 </mat-form-field>
@@ -36,7 +48,7 @@
                                     <mat-select formControlName="departmentEnum" placeholder="Department">
                                         <mat-option value="SOFTWARE">SOFTWARE</mat-option>
                                         <mat-option value="ACCOUNTING">ACCOUNTING</mat-option>
-                                        <mat-option value=" MANAGEMENT"> MANAGEMENT</mat-option>
+                                        <mat-option value="MANAGEMENT">MANAGEMENT</mat-option>
                                         <mat-option value="BANKING">BANKING</mat-option>
 
                                     </mat-select>
@@ -46,10 +58,10 @@
                                 <mat-form-field appearance="fill">
                                     <mat-label>Select Category</mat-label>
                                     <mat-select formControlName="reportCategory" placeholder="Category">
-                                        <mat-option value="AAAAAA">AAAAAA</mat-option>
+                                        <mat-option value="AAAAA">AAAAA</mat-option>
                                         <mat-option value="BBBBB">BBBBB</mat-option>
-                                        <mat-option value="CCCCCC"> CCCCCC</mat-option>
-
+                                        <mat-option value="CCCCC">CCCCC</mat-option>
+                                        <mat-option value="DDDDD">DDDDD</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -64,7 +76,7 @@
                             </div>
                             <div class="col-5">
                                 <mat-form-field appearance="fill">
-                                    <mat-label>Time </mat-label>
+                                    <mat-label>Time</mat-label>
                                     <input matInput placeholder="Time taken (hr)" formControlName="timeTaken" required>
                                 </mat-form-field>
                             </div>
@@ -75,10 +87,10 @@
                                 <mat-form-field appearance="fill">
                                     <mat-label>Select Client Name</mat-label>
                                     <mat-select formControlName="clientNameEnum">
-                                        <mat-option value="POST_BANK">POST BANK</mat-option>
-                                        <mat-option value="EQUITY_BANK">EQUITY BANK</mat-option>
-                                        <mat-option value="NORTHWEST"> NORTHWEST</mat-option>
-                                        <mat-option value=" KINGDOM_BANK"> KINGDOM BANK</mat-option>
+                                        <mat-option value="POST_BANK">POST_BANK</mat-option>
+                                        <mat-option value="EQUITY_BANK">EQUITY_BANK</mat-option>
+                                        <mat-option value="NORTHWEST">NORTHWEST</mat-option>
+                                        <mat-option value=" KINGDOM_BANK">KINGDOM_BANK</mat-option>
 
                                     </mat-select>
                                 </mat-form-field>
@@ -87,10 +99,10 @@
                                 <mat-form-field appearance="fill">
                                     <mat-label>Select Product Name</mat-label>
                                     <mat-select formControlName="productNameEnum">
-                                        <mat-option value="PRODUCT_A">PRODUCT A</mat-option>
-                                        <mat-option value="PRODUCT_B">PRODUCT B</mat-option>
-                                        <mat-option value="PRODUCT_C">PRODUCT C</mat-option>
-                                        <mat-option value="PRODUCT_D">PRODUCT D</mat-option>
+                                        <mat-option value="PRODUCT_A">PRODUCT_A</mat-option>
+                                        <mat-option value="PRODUCT_B">PRODUCT_B</mat-option>
+                                        <mat-option value="PRODUCT_C">PRODUCT_C</mat-option>
+                                        <mat-option value="PRODUCT_D">PRODUCT_D</mat-option>
 
                                     </mat-select>
                                 </mat-form-field>
@@ -99,16 +111,15 @@
 
                         <br>
                         <div class="form-group">
-                            <label>Report Description</label>
-                            <br>
-                            <textarea class="form-control" formControlName="report_description" rows="3"></textarea>
+                            <textarea class="form-control" formControlName="report_description" cols="50" placeholder="Report Description..." rows="3"></textarea>
                         </div>
                     </div>
                 </form>
             </mat-card>
         </form>
         <div [align]="'end'">
-            <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit Form</button>
+            <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()">{{submitButton}}</button>
         </div>
     </mat-card>
 </div>

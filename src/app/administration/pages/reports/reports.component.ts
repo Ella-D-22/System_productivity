@@ -18,11 +18,12 @@ import { OrganizationService } from '../../Service/SystemConfigs/Organisation/or
 })
 
 export class ReportsComponent implements OnInit {date = formatDate(new Date(), 'hh:mm a', 'en-US');
-  
+  submitButton: String= 'Submit';
 actionButton: String = 'View Reports';
 reportForm!: FormGroup;
 editData: any;
 fmData = {};
+userNameArray:any[]= [] ;
 
 constructor(
   private router: Router,
@@ -30,6 +31,7 @@ constructor(
   private Api:OrganizationService) { }
 
   ngOnInit(): void {
+    this.getAllEmployees()
     this.reportForm = this.formBuilder.group({
       email: ['', Validators.required],
       creationDate: ['', Validators.required],
@@ -72,7 +74,7 @@ constructor(
 
     this.fmData = this.reportForm.value;
     if (this.reportForm.valid) {
-      this.Api.create(this.reportForm.value).subscribe({
+      this.Api.createReport(this.reportForm.value, this.reportForm.value.email).subscribe({
         next: (res) => {
           this.router.navigate([`/dash`], {
 
@@ -86,9 +88,9 @@ constructor(
           // this.matDialogRef.close('Update');
           this.reportForm.reset();
         },
-        error: () => {
-          alert('Error occurred!');
-        },
+        // error: () => {
+        //   alert('Error occurred!');
+        // },
       });
     }else{
       console.log("form not valid")
@@ -111,6 +113,23 @@ constructor(
     });
   }
 
+  getAllEmployees(){
+    this.Api.get()
+  
+      this.Api.get()
+      .subscribe({
+        next : (res)=>{
+          this.userNameArray = res;
+          // 
+          console.log("this.userNameArray ", this.userNameArray);
+          
+          
+        },
+        // error: (err)=>{
+        //   alert("Could not fetch Data");
+        // }
+      })
+      }
 }
 
 
