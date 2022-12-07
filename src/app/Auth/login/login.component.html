@@ -1,22 +1,23 @@
 <div class="container">
     <mat-card>
         <div class="row">
-            <div class="left-info col-md-6 col-sm-12>">
+            <div class="left-info col-md-6 col-sm-12>"> -
                 <div class="loginImage">
-                    <img src="../../../../assets/authimage.png" class="
+                    <img src="../../../assets/mceclip03.jpg" width="550vw" height="450vh" class="
                         img-responsive">
                 </div>
                 <!--end of header-->
 
             </div>
-            <div class="right-info col-md-6 col-sm-12">
+
+            <div class="right-info col-md-6 ">
                 <span *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></span>
                 <div class="card-header">
                     <div class="">
                         <span><h1>Sign-in</h1></span>
                     </div>
                     <div class="profile-card">
-                        <img src="../../../../assets/Images/user-avatar.jpg">
+                        <img src="../../../assets/EMtech.jpeg">
                     </div>
                     <!--end of header-->
                 </div>
@@ -29,6 +30,7 @@
                                 <div *ngIf="f.username.errors.required">Username is required</div>
                             </div>
                         </div>
+                        <br>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
@@ -36,6 +38,7 @@
                                 <div *ngIf="f.password.errors.required">Password is required</div>
                             </div>
                         </div>
+                        <br>
                         <button [disabled]="loading" class="btn btn-primary" type="submit">
                         Login
                     </button>

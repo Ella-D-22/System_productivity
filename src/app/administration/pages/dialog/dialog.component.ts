@@ -70,8 +70,8 @@ export class DialogComponent implements OnInit {
           {
         next: (res)=>{
         alert("Employee Added Successfuly!");
-        this.matDialogRef.close('Save');
-        this.matDialogRef.close('Update');
+        // this.matDialogRef.close('Save');
+        // this.matDialogRef.close('Update');
         this.employeeForm.reset();
         },
         // error: ()=>{

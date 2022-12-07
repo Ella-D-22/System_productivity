@@ -64,6 +64,8 @@ export class OrganizationService {
   }
 
 
+
+//CRUD operations for Report 
   //create report
   createReport(data: any, userId: any): Observable<any> {
     let API_URL = `${this.baseURL}/create/report/${userId}`;
@@ -85,12 +87,20 @@ export class OrganizationService {
   }
    //Edit 
    updateReport(data: any, id: number): Observable<any> {
-    let API_URL = `${this.baseURL}/updateReport/${id}`;
+    let API_URL = `${this.baseURL}/update/${id}`;
     return this.http.put(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
       return res || {}
     }),
       catchError(this.errorMgmt)
     )
   }
-  
+   //Delete 
+   deleteReport(id: number): Observable<any> {
+    let API_URL = `${this.baseURL}/delete/${id}`;
+    return this.http.delete(API_URL, { headers: this.headers, withCredentials: false }).pipe(map(res => {
+      return res || {}
+    }),
+      catchError(this.errorMgmt)
+    )
+  }
 }

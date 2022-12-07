@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,17 +17,25 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class AdminComponent implements OnInit {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'appUserRole', 'designation', 'password', 'action'];
+  displayedColumns: string[] = [
+    'firstName', 
+    'lastName', 
+    'email', 
+    'appUserRole', 
+    'designation', 
+    'password', 
+    'action'
+  ];
 
   dataSource !: MatTableDataSource<any>;
-
-
 
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
 
 
-  constructor(public dialog: MatDialog, private api : OrganizationService) { }
+  constructor(public dialog: MatDialog, 
+    private api : OrganizationService
+    ) { }
 
   ngOnInit(): void {
     this.getAllEmployees();

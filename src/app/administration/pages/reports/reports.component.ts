@@ -31,7 +31,7 @@ constructor(
   private Api:OrganizationService) { }
 
   ngOnInit(): void {
-    this.getAllEmployees()
+    this.getAllReports();
     this.reportForm = this.formBuilder.group({
       email: ['', Validators.required],
       creationDate: ['', Validators.required],
@@ -44,7 +44,7 @@ constructor(
       report_description: ['', Validators.required],
     });
     if (this.editData) {
-      this.actionButton = 'Update';
+      this.actionButton = "Update";
       this.reportForm.controls['email'].setValue(this.editData.email);
       this.reportForm.controls['creationDate'].setValue(
         this.editData.creationDate
@@ -66,6 +66,7 @@ constructor(
       this.reportForm.controls['report_Description'].setValue(
         this.editData.report_Description
       );
+      console.log(this.reportForm.value)
     }
   }
 
@@ -73,10 +74,11 @@ constructor(
     console.log(this.reportForm.value);
 
     this.fmData = this.reportForm.value;
+    if(!this.editData){
     if (this.reportForm.valid) {
       this.Api.createReport(this.reportForm.value, this.reportForm.value.email).subscribe({
         next: (res) => {
-          this.router.navigate([`/dash`], {
+          this.router.navigate([`../view-reports`], {
 
             queryParams: {
               formData: this.fmData,
@@ -91,9 +93,12 @@ constructor(
         // error: () => {
         //   alert('Error occurred!');
         // },
-      });
-    }else{
-      console.log("form not valid")
+      }
+      )
+    }
+  }else{
+      // console.log("form not valid")
+      this.updateReport()
     }
 
 
@@ -113,7 +118,7 @@ constructor(
     });
   }
 
-  getAllEmployees(){
+  getAllReports(){
     this.Api.get()
   
       this.Api.get()
