@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   empAPI: "http://127.0.0.1:8080/api/v1/registration",
   // prodAPI: "https://localhost:8080/api/v1/registration",
-  // logAPI: "http://127.0.0.1:8080/login",
+  logAPI: "http://127.0.0.1:8080/login",
 
   // sytemconfigA: 'http://52.15.152.26:9100',
    userAPI: 'http://52.15.152.26:9091',

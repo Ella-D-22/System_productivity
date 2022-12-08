@@ -1,23 +1,23 @@
 <div class="container">
     <mat-card>
         <div class="row">
-            <div class="left-info col-md-6 col-sm-12>"> -
+            <div class="left-info col-md-6 col-sm-12>">
+                -
                 <div class="loginImage">
-                    <img src="../../../assets/mceclip03.jpg" width="550vw" height="450vh" class="
-                        img-responsive">
+                    <img src="../../../assets/mceclip03.jpg" width="550vw" height="450vh" class="img-responsive" />
                 </div>
                 <!--end of header-->
-
             </div>
 
-            <div class="right-info col-md-6 ">
-                <span *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></span>
+            <div class="right-info col-md-6">
+                <span *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar
+        ></span>
                 <div class="card-header">
                     <div class="">
                         <span><h1>Sign-in</h1></span>
                     </div>
                     <div class="profile-card">
-                        <img src="../../../assets/EMtech.jpeg">
+                        <img src="../../../assets/EMtech.jpeg" />
                     </div>
                     <!--end of header-->
                 </div>
@@ -27,28 +27,32 @@
                             <label for="username">Username</label>
                             <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                                <div *ngIf="f.username.errors.required">Username is required</div>
+                                <div *ngIf="f.username.errors.required">
+                                    Username is required
+                                </div>
                             </div>
                         </div>
-                        <br>
+                        <br />
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.required">
+                                    Password is required
+                                </div>
                             </div>
                         </div>
-                        <br>
+                        <br />
                         <button [disabled]="loading" class="btn btn-primary" type="submit">
-                        Login
-                    </button>
-                        <br>
-                        <br>
-                        <a class="pull-left" routerLink="/Auth/Reset_Password">Forgot  Password?</a>
-                    </form>
-                </div>
-            </div>
-
+              Login
+            </button>
+                        <br />
+                        <br />
+                        <a class="pull-left" routerLink="Reset_Password">Forgot Password?</a
+            >
+          </form>
         </div>
-    </mat-card>
+      </div>
+    </div>
+  </mat-card>
 </div>

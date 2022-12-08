@@ -18,7 +18,7 @@ export class WidgetChargesComponent implements OnInit {
          plotShadow: false
       },
       title : {
-         text: 'Charges Collected per product'
+         text: 'Productivity Schedule'
       },
       tooltip : {
          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -44,10 +44,10 @@ export class WidgetChargesComponent implements OnInit {
          type: 'pie',
          name: 'Browser share',
          data: [
-            ['Shortterm Loans',   45.0],
-            ['Longterm Loans',    8.5],
-            ['Deposit',     6.2],
-            ['Savings',      0.7]
+            ['Working days',   25.0],
+            ['Non-working days',    9.5],
+            ['Off days',     7.2],
+            ['Field days',      1.7]
          ]
       }]
    };
