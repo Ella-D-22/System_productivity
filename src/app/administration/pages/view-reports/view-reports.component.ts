@@ -1,51 +1,55 @@
-import { Component, OnInit,ViewChild,
+import {
+  Component,
+  OnInit,
+  ViewChild,
   AfterViewInit,
-  NgModule} from '@angular/core';
-  import { MatPaginator } from '@angular/material/paginator';
-  import { MatSort } from '@angular/material/sort';
-  import { MatTableDataSource } from '@angular/material/table';
-  import { MatToolbar } from '@angular/material/toolbar';
-  import { MatIcon } from '@angular/material/icon';
-  import { Router } from '@angular/router';
-  import { OrganizationService } from '../../Service/SystemConfigs/Organisation/organization.service';
-  import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-
+  NgModule,
+} from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatIcon } from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { OrganizationService } from '../../Service/SystemConfigs/Organisation/organization.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-view-reports',
   templateUrl: './view-reports.component.html',
-  styleUrls: ['./view-reports.component.scss']
+  styleUrls: ['./view-reports.component.scss'],
 })
 export class ViewReportsComponent implements OnInit {
-
   displayedColumns: string[] = [
-    'creationDate',
-    'departmentEnum',
-    'reportCategory',
-    'ticketId',
-    'timeTaken',
-    'clientNameEnum',
-    'productNameEnum',
-    'report_description',
+    'firstName',
+    'lastName',
+    'email',
+    'appUserRole',
+    'designation',
+    'password',
+    'enabled',
+    'action',
   ];
   fmData: any;
-    dataSource!: MatTableDataSource<any>;
-  
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
-    @ViewChild(MatSort) sort!: MatSort;
-  
-  constructor(public dialog: MatDialog,
-    private api: OrganizationService,
+  userNameArray: any[] = [];
+  dataSource!: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(
+    public dialog: MatDialog,
+    private Api: OrganizationService,
     private router: Router
   ) {
     if (this.router.getCurrentNavigation() != null) {
       this.fmData = this.router.getCurrentNavigation()?.extras.queryParams;
     }
-  } 
+  }
 
   ngOnInit(): void {
-    console.log("this.fmData: ", this.fmData)
+    console.log('this.fmData: ', this.fmData);
+    this.getAllReports();
   }
 
   applyFilter(event: Event) {
@@ -56,5 +60,21 @@ export class ViewReportsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  getAllReports() {
+    // this.Api.get()
 
+    this.Api.get().subscribe({
+      next: (res) => {
+        this.userNameArray = res;
+        //
+        console.log('this.userNameArray ', this.userNameArray);
+        this.dataSource = new MatTableDataSource(this.userNameArray);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      // error: (err)=>{
+      //   alert("Could not fetch Data");
+      // }
+    });
+  }
 }

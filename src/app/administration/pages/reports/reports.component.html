@@ -6,9 +6,8 @@
         <!-- </ol> -->
     </mat-card-header>
     <mat-divider></mat-divider>
-    <br>
+    <br />
     <div class="container-fluid">
-
         <!-- <div class="col-md-6 col-sm-12 form-column ">
             <select class="form-control" formControlName="transactionType" [ngClass]="{ 'is-invalid': submitted && f.transactionType.errors }">
                     <option value="">-- Choose Function --</option>
@@ -18,24 +17,22 @@
         <!-- 
         <div class="items align-items-center"> -->
         <form [formGroup]="reportForm">
-            <div class="content-container ">
+            <div class="content-container">
                 <div class="form-row mb-0">
                     <div class="col-m-3 my-1">
                         <mat-form-field appearance="fill">
                             <mat-label>Username</mat-label>
                             <!-- <input matInput formControlName="email" required> -->
                             <mat-select formControlName="email" placeholder="Category">
-                                <mat-option *ngFor="let item of userNameArray" [value]="item.id">{{item.firstName}}-{{item.lastName}}</mat-option>
-
-
+                                <mat-option *ngFor="let item of userNameArray" [value]="item.id">{{ item.firstName }}-{{ item.lastName }}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
                     <!-- <br> -->
-                    <div class="col-5 ">
+                    <div class="col-5">
                         <mat-form-field appearance="fill">
                             <mat-label>Date</mat-label>
-                            <input matInput formControlName="creationDate">
+                            <input matInput formControlName="creationDate" />
                             <mat-hint>YYYY/MM/DD</mat-hint>
                             <!-- <mat-datepicker-toggle matIconSuffix [for]="dp2" disabled></mat-datepicker-toggle> -->
                             <mat-datepicker #dp2></mat-datepicker>
@@ -52,7 +49,6 @@
                                 <mat-option value="ACCOUNTING">ACCOUNTING</mat-option>
                                 <mat-option value="MANAGEMENT">MANAGEMENT</mat-option>
                                 <mat-option value="BANKING">BANKING</mat-option>
-
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -72,13 +68,13 @@
                     <div class="col-m-3 my-1">
                         <mat-form-field appearance="fill">
                             <mat-label>Ticket ID</mat-label>
-                            <input matInput placeholder="Ticket Id" formControlName="ticketId" required>
+                            <input matInput placeholder="Ticket Id" formControlName="ticketId" required />
                         </mat-form-field>
                     </div>
                     <div class="col-5">
                         <mat-form-field appearance="fill">
                             <mat-label>Time</mat-label>
-                            <input matInput placeholder="Time taken (hr)" formControlName="timeTaken" required>
+                            <input matInput placeholder="Time taken (hr)" formControlName="timeTaken" required />
                         </mat-form-field>
                     </div>
                 </div>
@@ -92,7 +88,6 @@
                                 <mat-option value="EQUITY_BANK">EQUITY_BANK</mat-option>
                                 <mat-option value="NORTHWEST">NORTHWEST</mat-option>
                                 <mat-option value=" KINGDOM_BANK">KINGDOM_BANK</mat-option>
-
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -104,7 +99,6 @@
                                 <mat-option value="PRODUCT_B">PRODUCT_B</mat-option>
                                 <mat-option value="PRODUCT_C">PRODUCT_C</mat-option>
                                 <mat-option value="PRODUCT_D">PRODUCT_D</mat-option>
-
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -119,11 +113,12 @@
     </div>
     <div [align]="'center'">
         <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
-        <button mat-raised-button color="primary" (click)="onSubmit()">{{submitButton}}</button>
+        <button mat-raised-button color="primary" (click)="addReport()">
+      {{ submitButton }}
+    </button>
     </div>
 
     <!-- </form> -->
-
 
     <!-- </div> -->
 </mat-card>

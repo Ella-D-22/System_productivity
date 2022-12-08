@@ -10,25 +10,25 @@ import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OrganizationService } from '../../Service/SystemConfigs/Organisation/organization.service';
 
-
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.scss']
+  styleUrls: ['./reports.component.scss'],
 })
+export class ReportsComponent implements OnInit {
+  date = formatDate(new Date(), 'hh:mm a', 'en-US');
+  submitButton: String = 'Submit';
+  actionButton: String = 'View Reports';
+  reportForm!: FormGroup;
+  editData: any;
+  fmData = {};
+  userNameArray: any[] = [];
 
-export class ReportsComponent implements OnInit {date = formatDate(new Date(), 'hh:mm a', 'en-US');
-  submitButton: String= 'Submit';
-actionButton: String = 'View Reports';
-reportForm!: FormGroup;
-editData: any;
-fmData = {};
-userNameArray:any[]= [] ;
-
-constructor(
-  private router: Router,
-  private formBuilder: FormBuilder,
-  private Api:OrganizationService) { }
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private Api: OrganizationService
+  ) {}
 
   ngOnInit(): void {
     this.getAllReports();
@@ -44,7 +44,7 @@ constructor(
       report_description: ['', Validators.required],
     });
     if (this.editData) {
-      this.actionButton = "Update";
+      this.actionButton = 'Update';
       this.reportForm.controls['email'].setValue(this.editData.email);
       this.reportForm.controls['creationDate'].setValue(
         this.editData.creationDate
@@ -66,43 +66,41 @@ constructor(
       this.reportForm.controls['report_Description'].setValue(
         this.editData.report_Description
       );
-      console.log(this.reportForm.value)
+      console.log(this.reportForm.value);
     }
   }
 
-  onSubmit() {
+  addReport() {
     console.log(this.reportForm.value);
 
     this.fmData = this.reportForm.value;
-    if(!this.editData){
-    if (this.reportForm.valid) {
-      this.Api.createReport(this.reportForm.value, this.reportForm.value.email).subscribe({
-        next: (res) => {
-          this.router.navigate([`../view-reports`], {
-
-            queryParams: {
-              formData: this.fmData,
-
-            },
-          });
-          alert('Report added successsfully!');
-          // this.matDialogRef.close('save');
-          // this.matDialogRef.close('Update');
-          this.reportForm.reset();
-        },
-        // error: () => {
-        //   alert('Error occurred!');
-        // },
+    if (!this.editData) {
+      if (this.reportForm.valid) {
+        this.Api.createReport(
+          this.reportForm.value,
+          this.reportForm.value.email
+        ).subscribe({
+          next: (res) => {
+            this.router.navigate([`../view-reports`], {
+              queryParams: {
+                formData: this.fmData,
+                // this.updateReport(this.reportForm.value)
+              },
+            });
+            alert('Report added successsfully!');
+            // this.matDialogRef.close('save');
+            // this.matDialogRef.close('Update');
+            this.reportForm.reset();
+          },
+          // error: () => {
+          //   alert('Error occurred!');
+          // },
+        });
       }
-      )
-    }
-  }else{
+    } else {
       // console.log("form not valid")
-      this.updateReport()
+      this.updateReport();
     }
-
-
-
   }
   updateReport() {
     this.Api.update(this.reportForm.value, this.editData.id).subscribe({
@@ -118,23 +116,18 @@ constructor(
     });
   }
 
-  getAllReports(){
-    this.Api.get()
-  
-      this.Api.get()
-      .subscribe({
-        next : (res)=>{
-          this.userNameArray = res;
-          // 
-          console.log("this.userNameArray ", this.userNameArray);
-          
-          
-        },
-        // error: (err)=>{
-        //   alert("Could not fetch Data");
-        // }
-      })
-      }
+  getAllReports() {
+    // this.Api.get()
+
+    this.Api.get().subscribe({
+      next: (res) => {
+        this.userNameArray = res;
+        //
+        console.log('this.userNameArray ', this.userNameArray);
+      },
+      // error: (err)=>{
+      //   alert("Could not fetch Data");
+      // }
+    });
+  }
 }
-
-

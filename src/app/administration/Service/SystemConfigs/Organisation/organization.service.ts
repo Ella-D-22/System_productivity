@@ -87,7 +87,7 @@ export class OrganizationService {
   }
    //Edit 
    updateReport(data: any, id: number): Observable<any> {
-    let API_URL = `${this.baseURL}/update/${id}`;
+    let API_URL = `${this.baseURL}/updateReport/${id}`;
     return this.http.put(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
       return res || {}
     }),
