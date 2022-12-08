@@ -28,7 +28,9 @@ export class ReportsComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private Api: OrganizationService
-  ) {}
+  ) {
+    console.log("Edit Report", this.editData);
+  }
 
   ngOnInit(): void {
     this.getAllReports();
@@ -103,7 +105,7 @@ export class ReportsComponent implements OnInit {
     }
   }
   updateReport() {
-    this.Api.update(this.reportForm.value, this.editData.id).subscribe({
+    this.Api.updateReport(this.reportForm.value, this.editData.id).subscribe({
       next: (res) => {
         alert('Report updated successfully!');
         console.log(this.reportForm.value);

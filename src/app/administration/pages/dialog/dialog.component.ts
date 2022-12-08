@@ -90,7 +90,7 @@ export class DialogComponent implements OnInit {
       next: (res)=>{
         alert("Employee Records Updated Successfully");
         console.log(this.employeeForm.value);
-        this.matDialogRef.close();
+        // this.matDialogRef.close();
         this.employeeForm.reset();
       },
       error: ()=>{

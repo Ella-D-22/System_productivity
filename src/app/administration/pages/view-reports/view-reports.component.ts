@@ -13,6 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { OrganizationService } from '../../Service/SystemConfigs/Organisation/organization.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ReportsComponent } from '../reports/reports.component';
 
 @Component({
   selector: 'app-view-reports',
@@ -51,6 +52,30 @@ export class ViewReportsComponent implements OnInit {
     console.log('this.fmData: ', this.fmData);
     this.getAllReports();
   }
+
+editReport(row: any){
+  this.dialog.open(ReportsComponent,{
+    data: row
+  }).afterClosed().subscribe(val=>{
+    if(val==='update'){
+      this.getAllReports();
+    }
+  })
+}
+deleteReport(id: number){
+  this.Api.deleteReport(id)
+  .subscribe({
+    next: (res) => {
+      alert(" Report deleted successfully!");
+      this.getAllReports();
+    },
+    error: (res) => {
+      alert(" Error deleting record!");
+      this.getAllReports();
+    }
+  })
+}
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
