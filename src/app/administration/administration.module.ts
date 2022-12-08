@@ -12,6 +12,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
+import { MatTableExporterModule } from 'mat-table-exporter';
 import { MenuOptionBarComponent } from './layouts/menu-option-bar/menu-option-bar.component';
 
 import { WidgetMembershipComponent } from './pages/dashboard/widget-membership/widget-membership.component';
@@ -48,6 +49,7 @@ import { AdminComponent } from './pages/admin/admin.component';
     DataTablesModule,
     RouterModule,
     HighchartsChartModule,
+    MatTableExporterModule,
     MaterialModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
