@@ -29,7 +29,7 @@ export class ViewReportsComponent implements OnInit {
     'designation',
     'password',
     'enabled',
-    'action',
+    // 'action',
   ];
   fmData: any;
   userNameArray: any[] = [];

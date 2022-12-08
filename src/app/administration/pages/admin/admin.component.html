@@ -22,10 +22,10 @@
             <button mat-raised-button color="accent" (click)="addEmployee()">
       Add Employee
     </button>
-            <button class="table-main-action-btn" color="accent" mat-raised-button color="primary" (click)="exporter.exportTable('csv',{fileName:'Exported Data'})"><i class="fas fa-file-csv"></i> - CSV</button>
-            <button class="table-main-action-btn" color="primary" mat-raised-button color="primary" (click)="exporter.exportTable('xlsx',{fileName:'Exported Data'})"><i class="fas fa-file-excel"></i> - Excel</button>
-            <button class="table-main-action-btn" color="warn" mat-raised-button color="primary" (click)="exporter.exportTable('json',{fileName:'Exported Data'})"><i class="fas fa-file-code"></i> - JSON</button>
-            <button class="table-main-action-btn" mat-raised-button color="primary" (click)="exporter.exportTable('txt',{fileName:'Exported Data'})"><i class="fas fa-file-alt"></i> - TEXT</button>
+            <button mat-raised-button color="primary" (click)="exporter.exportTable('csv',{fileName:'Exported Data'})"><i class="fas fa-file-csv"></i> - CSV</button>
+            <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx',{fileName:'Exported Data'})"><i class="fas fa-file-excel"></i> - Excel</button>
+            <button mat-raised-button color="primary" (click)="exporter.exportTable('json',{fileName:'Exported Data'})"><i class="fas fa-file-code"></i> - JSON</button>
+            <button mat-raised-button color="primary" (click)="exporter.exportTable('txt',{fileName:'Exported Data'})"><i class="fas fa-file-alt"></i> - TEXT</button>
 
         </div>
     </mat-toolbar>

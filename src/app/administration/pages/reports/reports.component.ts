@@ -9,6 +9,7 @@ import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OrganizationService } from '../../Service/SystemConfigs/Organisation/organization.service';
+import { locale } from 'moment';
 
 @Component({
   selector: 'app-reports',
@@ -17,6 +18,7 @@ import { OrganizationService } from '../../Service/SystemConfigs/Organisation/or
 })
 export class ReportsComponent implements OnInit {
   date = formatDate(new Date(), 'hh:mm a', 'en-US');
+  Date = formatDate(new Date(), 'EEEE, MM dd, yyyy', 'en-US');
   submitButton: String = 'Submit';
   actionButton: String = 'View Reports';
   reportForm!: FormGroup;
@@ -36,7 +38,7 @@ export class ReportsComponent implements OnInit {
     this.getAllReports();
     this.reportForm = this.formBuilder.group({
       email: ['', Validators.required],
-      creationDate: ['', Validators.required],
+      creationDate: this.Date,
       departmentEnum: ['', Validators.required],
       reportCategory: ['', Validators.required],
       ticketId: ['', Validators.required],
