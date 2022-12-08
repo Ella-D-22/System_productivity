@@ -27,7 +27,7 @@ export class ViewReportsComponent implements OnInit {
     'email',
     'appUserRole',
     'designation',
-    'password',
+    // 'password',
     'enabled',
     // 'action',
   ];
@@ -37,6 +37,7 @@ export class ViewReportsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+reportForm: any;
 
   constructor(
     public dialog: MatDialog,

@@ -17,8 +17,8 @@ import { locale } from 'moment';
   styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit {
-  date = formatDate(new Date(), 'hh:mm a', 'en-US');
-  Date = formatDate(new Date(), 'EEEE, MM dd, yyyy', 'en-US');
+  // date = formatDate(new Date(), 'hh:mm a', 'en-US');
+  Date = formatDate(new Date(), 'EEEE,  yyyy-MM-dd ', 'en-US');
   submitButton: String = 'Submit';
   actionButton: String = 'View Reports';
   reportForm!: FormGroup;
@@ -42,7 +42,7 @@ export class ReportsComponent implements OnInit {
       departmentEnum: ['', Validators.required],
       reportCategory: ['', Validators.required],
       ticketId: ['', Validators.required],
-      timeTaken: this.date,
+      timeTaken: ['', Validators.required],
       clientNameEnum: ['', Validators.required],
       productNameEnum: ['', Validators.required],
       report_description: ['', Validators.required],
