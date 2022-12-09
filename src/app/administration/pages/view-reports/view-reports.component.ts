@@ -22,6 +22,7 @@ import { ReportsComponent } from '../reports/reports.component';
 })
 export class ViewReportsComponent implements OnInit {
   displayedColumns: string[] = [
+    'position',
     'firstName',
     'lastName',
     'email',
@@ -29,7 +30,8 @@ export class ViewReportsComponent implements OnInit {
     'designation',
     // 'password',
     'enabled',
-    // 'action',
+     'action',
+    
   ];
   fmData: any;
   userNameArray: any[] = [];
@@ -50,32 +52,53 @@ reportForm: any;
   }
 
   ngOnInit(): void {
-    console.log('this.fmData: ', this.fmData);
+    // console.log('this.fmData: ', this.fmData);
     this.getAllReports();
   }
 
-editReport(row: any){
+    getAllReports() {
+    this.Api.get()
+
+    this.Api.get()
+    .subscribe({
+      next: (res) => {
+        this.userNameArray = res;
+        //
+        console.log('this.userNameArray ', this.userNameArray);
+        // console.log('this.userNameArray ', this.userNameArray);
+              this.dataSource = new MatTableDataSource(this.userNameArray);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+      },
+      // error: (err)=>{
+      //   alert("Could not fetch Data");
+      // }
+    });
+  }
+
+viewReport(row: any){
   this.dialog.open(ReportsComponent,{
-    data: row
+    width:'65%',
+     data: row
   }).afterClosed().subscribe(val=>{
     if(val==='update'){
       this.getAllReports();
     }
   })
 }
-deleteReport(id: number){
-  this.Api.deleteReport(id)
-  .subscribe({
-    next: (res) => {
-      alert(" Report deleted successfully!");
-      this.getAllReports();
-    },
-    error: (res) => {
-      alert(" Error deleting record!");
-      this.getAllReports();
-    }
-  })
-}
+// deleteReport(id: number){
+//   this.Api.deleteReport(id)
+//   .subscribe({
+//     next: (res) => {
+//       alert(" Report deleted successfully!");
+//       this.getAllReports();
+//     },
+//     error: (res) => {
+//       alert(" Error deleting record!");
+//       this.getAllReports();
+//     }
+//   })
+// }
 
 
   applyFilter(event: Event) {
@@ -86,21 +109,21 @@ deleteReport(id: number){
       this.dataSource.paginator.firstPage();
     }
   }
-  getAllReports() {
-    // this.Api.get()
+  // getAllReports() {
+  //   // this.Api.get()
 
-    this.Api.get().subscribe({
-      next: (res) => {
-        this.userNameArray = res;
-        //
-        console.log('this.userNameArray ', this.userNameArray);
-        this.dataSource = new MatTableDataSource(this.userNameArray);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
+  //   this.Api.get().subscribe({
+  //     next: (res) => {
+  //       this.userNameArray = res;
+  //       //
+  //       console.log('this.userNameArray ', this.userNameArray);
+  //       this.dataSource = new MatTableDataSource(this.userNameArray);
+  //       this.dataSource.paginator = this.paginator;
+  //       this.dataSource.sort = this.sort;
+  //     },
       // error: (err)=>{
       //   alert("Could not fetch Data");
       // }
-    });
-  }
+  //   });
+  // }
 }

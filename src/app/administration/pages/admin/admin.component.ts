@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 export class AdminComponent implements OnInit {
 
   displayedColumns: string[] = [
+    'position',
     'firstName', 
     'lastName', 
     'email', 

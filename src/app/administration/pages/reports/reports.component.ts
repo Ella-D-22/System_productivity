@@ -18,16 +18,17 @@ import { locale } from 'moment';
 })
 export class ReportsComponent implements OnInit {
   // date = formatDate(new Date(), 'hh:mm a', 'en-US');
-  Date = formatDate(new Date(), 'EEEE,  yyyy-MM-dd ', 'en-US');
+  Date = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
   submitButton: String = 'Submit';
   actionButton: String = 'View Reports';
   reportForm!: FormGroup;
-  editData: any;
-  fmData = {};
+    fmData = {};
   userNameArray: any[] = [];
 
   constructor(
-    private router: Router,
+    private router: Router,   
+     @Inject(MAT_DIALOG_DATA) 
+    public editData: any,
     private formBuilder: FormBuilder,
     private Api: OrganizationService
   ) {
@@ -36,6 +37,7 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllReports();
+    console.log("In git init");
     this.reportForm = this.formBuilder.group({
       email: ['', Validators.required],
       creationDate: this.Date,
@@ -47,30 +49,20 @@ export class ReportsComponent implements OnInit {
       productNameEnum: ['', Validators.required],
       report_description: ['', Validators.required],
     });
-    if (this.editData) {
-      this.actionButton = 'Update';
+     {
+      this.actionButton = "Update";
+      console.log("Edit Report", this.editData);
       this.reportForm.controls['email'].setValue(this.editData.email);
-      this.reportForm.controls['creationDate'].setValue(
-        this.editData.creationDate
-      );
-      this.reportForm.controls['departmentEnum'].setValue(
-        this.editData.departmentEnum
-      );
-      this.reportForm.controls['reportCategory'].setValue(
-        this.editData.reportCategory
-      );
+      this.reportForm.controls['creationDate'].setValue(this.editData.creationDate);
+      this.reportForm.controls['departmentEnum'].setValue(this.editData.departmentEnum);
+      this.reportForm.controls['reportCategory'].setValue(this.editData.reportCategory);
       this.reportForm.controls['ticketId'].setValue(this.editData.ticketId);
       this.reportForm.controls['timeTaken'].setValue(this.editData.timeTaken);
-      this.reportForm.controls['clientNameEnum'].setValue(
-        this.editData.clientNameEnum
-      );
-      this.reportForm.controls['productNameEnum'].setValue(
-        this.editData.productNameEnum
-      );
-      this.reportForm.controls['report_Description'].setValue(
-        this.editData.report_Description
-      );
-      console.log(this.reportForm.value);
+      this.reportForm.controls['clientNameEnum'].setValue(this.editData.clientNameEnum);
+      this.reportForm.controls['productNameEnum'].setValue(this.editData.productNameEnum);
+      this.reportForm.controls['report_Description'].setValue(this.editData.report_Description)
+
+      console.log("isjj jbjs -", this.reportForm.value);
     }
   }
 

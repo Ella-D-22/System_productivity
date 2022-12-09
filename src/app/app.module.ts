@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { MatSortModule } from '@angular/material/sort';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,7 @@ import { CanLoadModuleGuard } from 'src/@core/helpers/CanLoadModule.guard';
 import { CanActivateModuleGuard } from 'src/@core/helpers/CanActivateModule.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './http.interceptor';
+import { MatSortHeader } from '@angular/material/sort';
 import { AuthenticatedModuleGuard } from 'src/@core/helpers/AuthenticatedModuleGuard.guard';
 export const config: FileInputConfig = {
   sizeUnit: 'Octet'
@@ -32,6 +33,8 @@ export const config: FileInputConfig = {
     MaterialModule,
     DataTablesModule,
     AdministrationModule,
+    MatSortModule,
+    
     
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
