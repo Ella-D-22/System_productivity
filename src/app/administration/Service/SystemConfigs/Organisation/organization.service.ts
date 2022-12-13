@@ -66,6 +66,7 @@ export class OrganizationService {
 
 
 //CRUD operations for Report 
+
   //create report
   createReport(data: any, userId: any): Observable<any> {
     let API_URL = `${this.baseURL}/create/report/${userId}`;
@@ -85,6 +86,8 @@ export class OrganizationService {
       catchError(this.errorMgmt)
     )
   }
+  
+
    //Edit 
    updateReport(data: any, id: number): Observable<any> {
     let API_URL = `${this.baseURL}/updateReport/${id}`;

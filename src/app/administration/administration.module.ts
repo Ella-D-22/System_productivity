@@ -24,7 +24,8 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { ViewReportsComponent } from './pages/view-reports/view-reports.component';
 import { DialogComponent } from './pages/dialog/dialog.component';
 import { AdminComponent } from './pages/admin/admin.component';
-import { ReportLookupComponent } from './pages/report-lookup/report-lookup.component';
+import { AddReportComponent } from './pages/view-reports/dialogs/add-report/add-report.component';
+import { EditReportComponent } from './pages/view-reports/dialogs/edit-report/edit-report.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ReportLookupComponent } from './pages/report-lookup/report-lookup.compo
     ViewReportsComponent,
     DialogComponent,
     AdminComponent,
-    ReportLookupComponent
+    AddReportComponent,
+    EditReportComponent
   ],
   imports: [
     CommonModule,

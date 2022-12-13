@@ -12,8 +12,14 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { OrganizationService } from '../../Service/SystemConfigs/Organisation/organization.service';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { ReportsComponent } from '../reports/reports.component';
+import { AddReportComponent } from './dialogs/add-report/add-report.component';
+import { EditReportComponent } from './dialogs/edit-report/edit-report.component';
 
 @Component({
   selector: 'app-view-reports',
@@ -23,15 +29,14 @@ import { ReportsComponent } from '../reports/reports.component';
 export class ViewReportsComponent implements OnInit {
   displayedColumns: string[] = [
     'position',
-    'firstName',
-    'lastName',
-    'email',
-    'appUserRole',
-    'designation',
-    // 'password',
-    'enabled',
-     'action',
-    
+    'creationDate',
+    'departmentEnum',
+    'reportCategory',
+    'ticketId',
+    'timeTaken',
+    'clientNameEnum',
+    'productNameEnum',
+    'action',
   ];
   fmData: any;
   userNameArray: any[] = [];
@@ -39,7 +44,8 @@ export class ViewReportsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-reportForm: any;
+  reportForm: any;
+  reportDetails: any;
 
   constructor(
     public dialog: MatDialog,
@@ -56,19 +62,16 @@ reportForm: any;
     this.getAllReports();
   }
 
-    getAllReports() {
-    this.Api.get()
-
-    this.Api.get()
-    .subscribe({
+  getAllReports() {
+    this.Api.getReport().subscribe({
       next: (res) => {
-        this.userNameArray = res;
+        this.reportDetails = res;
         //
-        console.log('this.userNameArray ', this.userNameArray);
+        console.log('this.reportDetails ', this.reportDetails);
         // console.log('this.userNameArray ', this.userNameArray);
-              this.dataSource = new MatTableDataSource(this.userNameArray);
-              this.dataSource.paginator = this.paginator;
-              this.dataSource.sort = this.sort;
+        this.dataSource = new MatTableDataSource(this.reportDetails);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       // error: (err)=>{
       //   alert("Could not fetch Data");
@@ -76,30 +79,39 @@ reportForm: any;
     });
   }
 
-viewReport(row: any){
-  this.dialog.open(ReportsComponent,{
-    width:'65%',
-     data: row
-  }).afterClosed().subscribe(val=>{
-    if(val==='update'){
-      this.getAllReports();
-    }
-  })
-}
-// deleteReport(id: number){
-//   this.Api.deleteReport(id)
-//   .subscribe({
-//     next: (res) => {
-//       alert(" Report deleted successfully!");
-//       this.getAllReports();
-//     },
-//     error: (res) => {
-//       alert(" Error deleting record!");
-//       this.getAllReports();
-//     }
-//   })
-// }
+  addReport() {
+    this.dialog
+      .open(AddReportComponent, {
+        width: '40%',
+        
+      })
+      .afterClosed()
+      .subscribe((val) => {});
+  }
 
+  viewReport(row: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      data: row,
+    };
+    const dialogRef = this.dialog.open(EditReportComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+  // deleteReport(id: number){
+  //   this.Api.deleteReport(id)
+  //   .subscribe({
+  //     next: (res) => {
+  //       alert(" Report deleted successfully!");
+  //       this.getAllReports();
+  //     },
+  //     error: (res) => {
+  //       alert(" Error deleting record!");
+  //       this.getAllReports();
+  //     }
+  //   })
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -121,9 +133,9 @@ viewReport(row: any){
   //       this.dataSource.paginator = this.paginator;
   //       this.dataSource.sort = this.sort;
   //     },
-      // error: (err)=>{
-      //   alert("Could not fetch Data");
-      // }
+  // error: (err)=>{
+  //   alert("Could not fetch Data");
+  // }
   //   });
   // }
 }

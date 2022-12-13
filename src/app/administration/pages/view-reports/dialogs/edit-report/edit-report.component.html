@@ -1,0 +1,124 @@
+<mat-card>
+
+    <div>
+        <h1 mat-dialog-title>Edit Report</h1>
+        <div mat-dialog-content>
+            <form [formGroup]="reportForm">
+                <div class="content-container">
+                    <div class="form-row mb-0">
+                        <div class="col-m-3 my-1">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <!-- <input matInput formControlName="email" required> -->
+                                <mat-select formControlName="email" placeholder="Category">
+                                    <mat-option *ngFor="let item of userNameArray" [value]="item.email">{{ item.email }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- <br> -->
+                        <div class="col-5">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Date</mat-label>
+                                <input matInput formControlName="creationDate">
+                                <!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
+                                <!-- <mat-datepicker-toggle matIconSuffix [for]="dp2" disabled></mat-datepicker-toggle> -->
+                                <!-- <mat-datepicker #dp2></mat-datepicker> -->
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!-- <br> -->
+                    <div class="form-row">
+                        <div class="col-m-3 my-1">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Select Department</mat-label>
+                                <mat-select formControlName="departmentEnum" placeholder="Department">
+                                    <mat-option value="SOFTWARE">SOFTWARE</mat-option>
+                                    <mat-option value="ACCOUNTING">ACCOUNTING</mat-option>
+                                    <mat-option value="MANAGEMENT">MANAGEMENT</mat-option>
+                                    <mat-option value="BANKING">BANKING</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Select Category</mat-label>
+                                <mat-select formControlName="reportCategory" placeholder="Category">
+                                    <mat-option value="AAAAAA">AAAAAA</mat-option>
+                                    <mat-option value="BBBBB">BBBBB</mat-option>
+                                    <mat-option value="CCCCCC">CCCCCC</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!-- <br> -->
+                    <div class="form-row">
+
+                        <div class="col-m-3 my-1">
+                            <!-- <mat-form-field> -->
+                            <!-- <mat-label>Time</mat-label> -->
+                            <!-- <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td> -->
+                            <mat-form-field appearance="fill">
+                                <mat-label>Start Time</mat-label>
+                                <input matInput placeholder="Time taken (in hr)" formControlName="timeTaken" required>
+                            </mat-form-field>
+                            <!-- </td>
+                        <td> -->
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="fill">
+                                <mat-label>End Time</mat-label>
+                                <input matInput placeholder="Time taken (in hr)" formControlName="timeTaken" required>
+                            </mat-form-field>
+                            <!-- </td>
+                        </tr>
+                        </table> -->
+                            <!-- <input matInput placeholder="Time taken (hr)" formControlName="timeTaken" required /> -->
+                            <!-- </mat-form-field> -->
+                        </div>
+                    </div>
+                    <!-- <br> -->
+                    <div class="form-row">
+                        <div class="col-m-3 my-1">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Select Client Name</mat-label>
+                                <mat-select formControlName="clientNameEnum">
+                                    <mat-option value="POST_BANK">POST_BANK</mat-option>
+                                    <mat-option value="EQUITY_BANK">EQUITY_BANK</mat-option>
+                                    <mat-option value="NORTHWEST">NORTHWEST</mat-option>
+                                    <mat-option value=" KINGDOM_BANK">KINGDOM_BANK</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Select Product Name</mat-label>
+                                <mat-select formControlName="productNameEnum">
+                                    <mat-option value="PRODUCT_A">PRODUCT_A</mat-option>
+                                    <mat-option value="PRODUCT_B">PRODUCT_B</mat-option>
+                                    <mat-option value="PRODUCT_C">PRODUCT_C</mat-option>
+                                    <mat-option value="PRODUCT_D">PRODUCT_D</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!-- <br> -->
+                    <div class="col-m-3 my-1">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Ticket ID</mat-label>
+                            <input matInput placeholder="Ticket Id" formControlName="ticketId" required />
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" formControlName="report_description" cols="50" placeholder="Report Description..." rows="5"></textarea>
+                    </div>
+                </div>
+            </form>
+            <div mat-dialog-action [align]="'end'" class="example-button-row">
+                <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+                <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</mat-card>

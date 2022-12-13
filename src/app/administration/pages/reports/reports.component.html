@@ -1,142 +1,146 @@
-<mat-card>
+<!-- <mat-card>
     <mat-card-header class="breadcrumb">
-        <!-- <ol class="breadcrumb"> -->
-        <div class="breadcrumb-item"><a href="/system">Dashboard</a></div>
-        <div class="breadcrumb-item active" aria-current="page">ADD REPORT</div>
-        <!-- </ol> -->
-    </mat-card-header>
+        <ol class="breadcrumb"> -->
+<!-- <div class="breadcrumb-item"><a href="/system">Dashboard</a></div>
+<div class="breadcrumb-item active" aria-current="page">ADD REPORT</div> -->
+<!-- </ol> -->
+<!-- </mat-card-header>
     <mat-divider></mat-divider>
     <br />
     <div class="container-fluid">
-        <!-- <div class="col-md-6 col-sm-12 form-column ">
-            <select class="form-control" formControlName="transactionType" [ngClass]="{ 'is-invalid': submitted && f.transactionType.errors }">
+         <div class="col-md-6 col-sm-12 form-column "> -->
+<!-- <select class="form-control" formControlName="transactionType" [ngClass]="{ 'is-invalid': submitted && f.transactionType.errors }">
                     <option value="">-- Choose Function --</option>
                     <option *ngFor="let item of transactionTypeArray" [value]="item.name">{{ item.name }}</option>
                 </select>
-    </div> -->
-        <!-- 
+        </div> -->
+<!-- 
         <div class="items align-items-center"> -->
-        <form [formGroup]="reportForm">
-            <div class="content-container">
-                <div class="form-row mb-0">
-                    <div class="col-m-3 my-1">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Username</mat-label>
-                            <!-- <input matInput formControlName="email" required> -->
-                            <mat-select formControlName="email" placeholder="Category">
-                                <mat-option *ngFor="let item of userNameArray" [value]="item.id">{{ item.firstName }}-{{ item.lastName }}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <!-- <br> -->
-                    <div class="col-5">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Date</mat-label>
-                            <input matInput formControlName="creationDate">
-                            <!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
-                            <!-- <mat-datepicker-toggle matIconSuffix [for]="dp2" disabled></mat-datepicker-toggle> -->
-                            <!-- <mat-datepicker #dp2></mat-datepicker> -->
-                        </mat-form-field>
-                    </div>
-                </div>
-                <!-- <br> -->
-                <div class="form-row">
-                    <div class="col-m-3 my-1">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select Department</mat-label>
-                            <mat-select formControlName="departmentEnum" placeholder="Department">
-                                <mat-option value="SOFTWARE">SOFTWARE</mat-option>
-                                <mat-option value="ACCOUNTING">ACCOUNTING</mat-option>
-                                <mat-option value="MANAGEMENT">MANAGEMENT</mat-option>
-                                <mat-option value="BANKING">BANKING</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-5">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select Category</mat-label>
-                            <mat-select formControlName="reportCategory" placeholder="Category">
-                                <mat-option value="AAAAAA">AAAAAA</mat-option>
-                                <mat-option value="BBBBB">BBBBB</mat-option>
-                                <mat-option value="CCCCCC">CCCCCC</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <!-- <br> -->
-                <div class="form-row">
+<!-- <h1 mat-dialog-title>Add Report</h1>
+        <div mat-dialog-content>
+            <form [formGroup]="reportForm">
+                <div class="content-container">
+                    <div class="form-row mb-0">
+                        <div class="col-m-3 my-1">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Username</mat-label> -->
+<!-- <input matInput formControlName="email" required> -->
+<!-- <mat-select formControlName="email" placeholder="Category">
+                                    <mat-option *ngFor="let item of userNameArray" [value]="item.id">{{ item.firstName }}-{{ item.lastName }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> -->
+<!-- <br> -->
+<!-- <div class="col-5">
+            <mat-form-field appearance="fill">
+                <mat-label>Date</mat-label>
+                <input matInput formControlName="creationDate"> -->
+<!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
+<!-- <mat-datepicker-toggle matIconSuffix [for]="dp2" disabled></mat-datepicker-toggle> -->
+<!-- <mat-datepicker #dp2></mat-datepicker> -->
+<!-- </mat-form-field>
+    </div>
+    </div> -->
+<!-- <br> -->
+<!-- <div class="form-row">
+            <div class="col-m-3 my-1">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Department</mat-label>
+                    <mat-select formControlName="departmentEnum" placeholder="Department">
+                        <mat-option value="SOFTWARE">SOFTWARE</mat-option>
+                        <mat-option value="ACCOUNTING">ACCOUNTING</mat-option>
+                        <mat-option value="MANAGEMENT">MANAGEMENT</mat-option>
+                        <mat-option value="BANKING">BANKING</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Category</mat-label>
+                    <mat-select formControlName="reportCategory" placeholder="Category">
+                        <mat-option value="AAAAAA">AAAAAA</mat-option>
+                        <mat-option value="BBBBB">BBBBB</mat-option>
+                        <mat-option value="CCCCCC">CCCCCC</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div> -->
+<!-- <br> -->
+<!-- <div class="form-row">
 
-                    <div class="col-m-3 my-1">
-                        <!-- <mat-form-field> -->
-                        <!-- <mat-label>Time</mat-label> -->
-                        <!-- <table class="example-full-width" cellspacing="0">
+            <div class="col-m-3 my-1"> -->
+<!-- <mat-form-field> -->
+<!-- <mat-label>Time</mat-label> -->
+<!-- <table class="example-full-width" cellspacing="0">
                             <tr>
                                 <td> -->
-                        <mat-form-field appearance="fill">
-                            <mat-label>Start Time</mat-label>
-                            <input matInput placeholder="Time taken (in hr)" formControlName="timeTaken" required>
-                        </mat-form-field>
-                        <!-- </td>
+<!-- <mat-form-field appearance="fill">
+            <mat-label>Start Time</mat-label>
+            <input matInput placeholder="Time taken (in hr)" formControlName="timeTaken" required>
+        </mat-form-field> -->
+<!-- </td>
                         <td> -->
-                    </div>
-                    <div class="col-5">
-                        <mat-form-field appearance="fill">
-                            <mat-label>End Time</mat-label>
-                            <input matInput placeholder="Time taken (in hr)" formControlName="timeTaken" required>
-                        </mat-form-field>
-                        <!-- </td>
+<!-- </div>
+    <div class="col-5">
+        <mat-form-field appearance="fill">
+            <mat-label>End Time</mat-label>
+            <input matInput placeholder="Time taken (in hr)" formControlName="timeTaken" required>
+        </mat-form-field> -->
+<!-- </td>
                         </tr>
                         </table> -->
-                        <!-- <input matInput placeholder="Time taken (hr)" formControlName="timeTaken" required /> -->
-                        <!-- </mat-form-field> -->
-                    </div>
-                </div>
-                <!-- <br> -->
-                <div class="form-row">
-                    <div class="col-m-3 my-1">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select Client Name</mat-label>
-                            <mat-select formControlName="clientNameEnum">
-                                <mat-option value="POST_BANK">POST_BANK</mat-option>
-                                <mat-option value="EQUITY_BANK">EQUITY_BANK</mat-option>
-                                <mat-option value="NORTHWEST">NORTHWEST</mat-option>
-                                <mat-option value=" KINGDOM_BANK">KINGDOM_BANK</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-5">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select Product Name</mat-label>
-                            <mat-select formControlName="productNameEnum">
-                                <mat-option value="PRODUCT_A">PRODUCT_A</mat-option>
-                                <mat-option value="PRODUCT_B">PRODUCT_B</mat-option>
-                                <mat-option value="PRODUCT_C">PRODUCT_C</mat-option>
-                                <mat-option value="PRODUCT_D">PRODUCT_D</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <!-- <br> -->
-                <div class="col-m-3 my-1">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Ticket ID</mat-label>
-                        <input matInput placeholder="Ticket Id" formControlName="ticketId" required />
-                    </mat-form-field>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" formControlName="report_description" cols="50" placeholder="Report Description..." rows="5"></textarea>
-                </div>
+<!-- <input matInput placeholder="Time taken (hr)" formControlName="timeTaken" required /> -->
+<!-- </mat-form-field> -->
+<!-- </div>
+    </div> -->
+<!-- <br> -->
+<!-- <div class="form-row">
+            <div class="col-m-3 my-1">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Client Name</mat-label>
+                    <mat-select formControlName="clientNameEnum">
+                        <mat-option value="POST_BANK">POST_BANK</mat-option>
+                        <mat-option value="EQUITY_BANK">EQUITY_BANK</mat-option>
+                        <mat-option value="NORTHWEST">NORTHWEST</mat-option>
+                        <mat-option value=" KINGDOM_BANK">KINGDOM_BANK</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-        </form>
+            <div class="col-5">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Product Name</mat-label>
+                    <mat-select formControlName="productNameEnum">
+                        <mat-option value="PRODUCT_A">PRODUCT_A</mat-option>
+                        <mat-option value="PRODUCT_B">PRODUCT_B</mat-option>
+                        <mat-option value="PRODUCT_C">PRODUCT_C</mat-option>
+                        <mat-option value="PRODUCT_D">PRODUCT_D</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div> -->
+<!-- <br> -->
+<!-- <div class="col-m-3 my-1">
+            <mat-form-field appearance="fill">
+                <mat-label>Ticket ID</mat-label>
+                <input matInput placeholder="Ticket Id" formControlName="ticketId" required />
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" formControlName="report_description" cols="50" placeholder="Report Description..." rows="5"></textarea>
+        </div>
     </div>
-    <div [align]="'center'">
-        <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
-        <button mat-raised-button color="primary" (click)="addReport()">
-      {{ submitButton }}
-    </button>
+    </form> -->
+
+<!-- <div [align]="'center'">
+            <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+            <button mat-raised-button color="primary" (click)="addReport()">
+                    {{ submitButton }}
+                 </button>
+        </div> -->
+
+<!-- </form> -->
+
+<!-- </div> -->
+<!-- </div>
     </div>
-
-    <!-- </form> -->
-
-    <!-- </div> -->
-</mat-card>
+</mat-card> -->

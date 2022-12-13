@@ -1,12 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OrganizationService } from '../../Service/SystemConfigs/Organisation/organization.service';
 import { locale } from 'moment';
@@ -17,27 +12,29 @@ import { locale } from 'moment';
   styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit {
+  @Inject(MAT_DIALOG_DATA)
   // date = formatDate(new Date(), 'hh:mm a', 'en-US');
   Date = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
-  submitButton: String = 'Submit';
-  actionButton: String = 'View Reports';
+  submitButton: String = 'Save';
+  //actionButton: String = 'View Reports';
   reportForm!: FormGroup;
-    fmData = {};
+  fmData = {};
   userNameArray: any[] = [];
 
   constructor(
-    private router: Router,   
-     @Inject(MAT_DIALOG_DATA) 
+   // private router: Router,
+    @Inject(MAT_DIALOG_DATA)
     public editData: any,
     private formBuilder: FormBuilder,
     private Api: OrganizationService
   ) {
-    console.log("Edit Report", this.editData);
+    console.log('Edit Report', this.editData);
   }
 
   ngOnInit(): void {
-    this.getAllReports();
-    console.log("In git init");
+    //this.getAllReports();
+    // console.log("In git init");
+
     this.reportForm = this.formBuilder.group({
       email: ['', Validators.required],
       creationDate: this.Date,
@@ -49,20 +46,30 @@ export class ReportsComponent implements OnInit {
       productNameEnum: ['', Validators.required],
       report_description: ['', Validators.required],
     });
-     {
-      this.actionButton = "Update";
-      console.log("Edit Report", this.editData);
+
+    if (this.editData) {
+      this.submitButton = 'Update';
       this.reportForm.controls['email'].setValue(this.editData.email);
-      this.reportForm.controls['creationDate'].setValue(this.editData.creationDate);
-      this.reportForm.controls['departmentEnum'].setValue(this.editData.departmentEnum);
-      this.reportForm.controls['reportCategory'].setValue(this.editData.reportCategory);
+      this.reportForm.controls['creationDate'].setValue(
+        this.editData.creationDate
+      );
+      this.reportForm.controls['departmentEnum'].setValue(
+        this.editData.departmentEnum
+      );
+      this.reportForm.controls['reportCategory'].setValue(
+        this.editData.reportCategory
+      );
       this.reportForm.controls['ticketId'].setValue(this.editData.ticketId);
       this.reportForm.controls['timeTaken'].setValue(this.editData.timeTaken);
-      this.reportForm.controls['clientNameEnum'].setValue(this.editData.clientNameEnum);
-      this.reportForm.controls['productNameEnum'].setValue(this.editData.productNameEnum);
-      this.reportForm.controls['report_Description'].setValue(this.editData.report_Description)
+      this.reportForm.controls['clientNameEnum'].setValue(
+        this.editData.clientNameEnum
+      );
+      this.reportForm.controls['productNameEnum'].setValue(
+        this.editData.productNameEnum
+      );
+      // this.reportForm.controls['report_Description'].setValue(this.editData.report_Description)
 
-      console.log("isjj jbjs -", this.reportForm.value);
+      // console.log( this.reportForm.value);
     }
   }
 
@@ -70,19 +77,19 @@ export class ReportsComponent implements OnInit {
     console.log(this.reportForm.value);
 
     this.fmData = this.reportForm.value;
-    if (!this.editData) {
+    if (this.editData) {
       if (this.reportForm.valid) {
         this.Api.createReport(
           this.reportForm.value,
           this.reportForm.value.email
         ).subscribe({
           next: (res) => {
-            this.router.navigate([`../view-reports`], {
-              queryParams: {
-                formData: this.fmData,
-                // this.updateReport(this.reportForm.value)
-              },
-            });
+            // this.router.navigate([`../view-reports`], {
+            //   queryParams: {
+            //     formData: this.fmData,
+            //     // this.updateReport(this.reportForm.value)
+            //   },
+            // });
             alert('Report added successsfully!');
             // this.matDialogRef.close('save');
             // this.matDialogRef.close('Update');
@@ -95,7 +102,7 @@ export class ReportsComponent implements OnInit {
       }
     } else {
       // console.log("form not valid")
-      this.updateReport();
+      this.updateReport()
     }
   }
   updateReport() {
@@ -112,18 +119,18 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  getAllReports() {
-    // this.Api.get()
+  // getAllReports() {
+  //   // this.Api.get()
 
-    this.Api.get().subscribe({
-      next: (res) => {
-        this.userNameArray = res;
-        //
-        console.log('this.userNameArray ', this.userNameArray);
-      },
-      // error: (err)=>{
-      //   alert("Could not fetch Data");
-      // }
-    });
-  }
+  //   this.Api.get().subscribe({
+  //     next: (res) => {
+  //       this.userNameArray = res;
+  //       //
+  //       console.log('this.userNameArray ', this.userNameArray);
+  //     },
+  //     // error: (err)=>{
+  //     //   alert("Could not fetch Data");
+  //     // }
+  //   });
+  // }
 }
