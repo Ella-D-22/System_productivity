@@ -11,7 +11,7 @@
                                 <mat-label>Email</mat-label>
                                 <!-- <input matInput formControlName="email" required> -->
                                 <mat-select formControlName="email" placeholder="Category">
-                                    <mat-option *ngFor="let item of userNameArray" [value]="item.email">{{ item.email }}</mat-option>
+                                    <mat-option *ngFor="let item of userNameArray" [value]="item.id">{{ item.email }}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>

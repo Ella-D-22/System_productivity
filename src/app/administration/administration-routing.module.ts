@@ -18,11 +18,11 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
       },
-      {
-        path: 'add-reports',
-        component: ReportsComponent,
+      // {
+      //   path: 'add-reports',
+      //   component: ReportsComponent,
        
-      },
+      // },
       {
         path: 'view-reports',
         component: ViewReportsComponent,
