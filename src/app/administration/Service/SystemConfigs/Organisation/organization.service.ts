@@ -32,8 +32,8 @@ export class OrganizationService {
       catchError(this.errorMgmt)
     )
   }
-   //Edit 
-   update(data: any, id: number): Observable<any> {
+
+  update(data: any, id: number): Observable<any> {
     let API_URL = `${this.baseURL}/update/${id}`;
     return this.http.put(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
       return res || {}
@@ -41,6 +41,15 @@ export class OrganizationService {
       catchError(this.errorMgmt)
     )
   }
+   //Edit 
+  //  update(data: any, id: number): Observable<any> {
+  //   let API_URL = `${this.baseURL}/update/${id}`;
+  //   return this.http.put(API_URL, data, { headers: this.headers, withCredentials: false }).pipe(map(res => {
+  //     return res || {}
+  //   }),
+  //     catchError(this.errorMgmt)
+  //   )
+  // }
   //Delete 
   delete(id: number): Observable<any> {
     let API_URL = `${this.baseURL}/delete/${id}`;

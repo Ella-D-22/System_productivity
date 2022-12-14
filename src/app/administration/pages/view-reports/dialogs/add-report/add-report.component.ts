@@ -54,9 +54,9 @@ export class AddReportComponent implements OnInit {
     if (this.reportForm.valid) {
       this.Api.createReport(
         this.reportForm.value,
-        this.reportForm.value.email
-      ).subscribe({
-        next: (res) => {
+        this.reportForm.value.email)
+        .subscribe({
+         next: (res) => {
           // this.router.navigate([`../view-reports`], {
           //   queryParams: {
           //     formData: this.fmData,

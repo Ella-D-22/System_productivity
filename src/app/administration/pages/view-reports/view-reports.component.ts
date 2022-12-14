@@ -82,7 +82,7 @@ export class ViewReportsComponent implements OnInit {
   addReport() {
     this.dialog
       .open(AddReportComponent, {
-        width: '40%',
+        width: '800px',
         
       })
       .afterClosed()

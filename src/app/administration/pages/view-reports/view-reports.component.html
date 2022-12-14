@@ -56,15 +56,15 @@
                     <!--Email column-->
 
                     <ng-container matColumnDef="creationDate">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>creationDate</th>
-                        <td mat-cell *matCellDef="let row" placeholder="123@gmail.com ">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                        <td mat-cell *matCellDef="let row">
                             {{ row.creationDate }}
                         </td>
                     </ng-container>
 
                     <!-- Progress Column -->
                     <ng-container matColumnDef="departmentEnum">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>departmentEnum</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
                         <td mat-cell *matCellDef="let row">
                             {{ row.departmentEnum }}
                         </td>
@@ -72,14 +72,14 @@
 
                     <!--Role column-->
                     <ng-container matColumnDef="reportCategory">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>reportCategory</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
                         <td mat-cell *matCellDef="let row">{{ row.reportCategory }}</td>
                     </ng-container>
 
                     <!--Designation Column-->
                     <ng-container matColumnDef="ticketId">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            ticketId
+                            Ticket Id
                         </th>
                         <td mat-cell *matCellDef="let row">{{ row.ticketId }}</td>
                     </ng-container>
@@ -97,7 +97,7 @@
                     <!--Designation Column-->
                     <ng-container matColumnDef="timeTaken">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            timeTaken
+                            Time Taken
                         </th>
                         <td mat-cell *matCellDef="let row">{{ row.timeTaken }}</td>
                     </ng-container>
@@ -110,7 +110,7 @@
 
                     <!--Designation Column-->
                     <ng-container matColumnDef="clientNameEnum">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>clientNameEnum</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Client Name</th>
                         <td mat-cell *matCellDef=" let row ">{{ row.clientNameEnum }}</td>
                     </ng-container>
 
@@ -140,7 +140,7 @@
         </ng-container> -->
                     <!-- Fruit Column -->
                     <ng-container matColumnDef="productNameEnum">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> productNameEnum </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
                         <td mat-cell *matCellDef="let row"> {{row.productNameEnum}} </td>
                     </ng-container>
                     <!-- Fruit Column -->
@@ -150,7 +150,7 @@
                         </th>
                         <td mat-cell *matCellDef="let row">
                             <button mat-icon-button color="primary" (click)="viewReport(row) ">
-                <mat-icon>watch_later</mat-icon>
+                <mat-icon>visibility</mat-icon>
               </button>
                             <!-- <button mat-icon-button color="warn " (click)="deleteReport(row.id) ">
                 <mat-icon>delete</mat-icon>

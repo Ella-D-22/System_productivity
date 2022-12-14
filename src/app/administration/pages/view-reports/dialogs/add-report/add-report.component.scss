@@ -1,7 +1,6 @@
-.example-spacer {
-    flex: 1 1 auto;
-}
-
+// .example-spacer {
+//     flex: 1 1 auto;
+// }
 button {
     margin-left: 9px;
 }
@@ -12,10 +11,15 @@ table {
 
 .mat-form-field {
     font-size: 14px;
-    width: 100%;
+    width: 90%;
+    padding: 10px;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
 }
+
+// .form-control {
+//     padding: 10px;
+// }
