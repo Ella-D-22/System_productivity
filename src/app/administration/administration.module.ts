@@ -26,6 +26,8 @@ import { DialogComponent } from './pages/dialog/dialog.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AddReportComponent } from './pages/view-reports/dialogs/add-report/add-report.component';
 import { EditReportComponent } from './pages/view-reports/dialogs/edit-report/edit-report.component';
+import { AddEmployeeComponent } from './pages/admin/collage/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './pages/admin/collage/edit-employee/edit-employee.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { EditReportComponent } from './pages/view-reports/dialogs/edit-report/ed
     DialogComponent,
     AdminComponent,
     AddReportComponent,
-    EditReportComponent
+    EditReportComponent,
+    AddEmployeeComponent,
+    EditEmployeeComponent
   ],
   imports: [
     CommonModule,
@@ -66,5 +70,10 @@ import { EditReportComponent } from './pages/view-reports/dialogs/edit-report/ed
     MenuOptionBarComponent
   ],
   providers: [authInterceptorProviders, ],
+  entryComponents:[
+    EditEmployeeComponent,
+  AddEmployeeComponent,
+ViewReportsComponent,
+AddReportComponent]
 })
 export class AdministrationModule { }

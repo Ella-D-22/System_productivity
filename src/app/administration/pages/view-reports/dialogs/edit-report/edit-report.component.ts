@@ -7,10 +7,9 @@ import { ViewReportsComponent } from '../../view-reports.component';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
-  styleUrls: ['./edit-report.component.scss']
+  styleUrls: ['./edit-report.component.scss'],
 })
 export class EditReportComponent implements OnInit {
-
   reportForm: FormGroup;
   userNameArray: any[] = [];
   reportData: any;
@@ -27,7 +26,7 @@ export class EditReportComponent implements OnInit {
   ngOnInit(): void {
     this.createReportForm();
     this.getAllUsernames();
-    console.log("reportData: ", this.reportData.email)
+    console.log('reportData: ', this.reportData.email);
   }
   createReportForm() {
     this.reportForm = this.formBuilder.group({
@@ -40,7 +39,10 @@ export class EditReportComponent implements OnInit {
       timeTaken: [this.reportData.timeTaken, Validators.required],
       clientNameEnum: [this.reportData.clientNameEnum, Validators.required],
       productNameEnum: [this.reportData.productNameEnum, Validators.required],
-      report_description: [this.reportData.report_description, Validators.required],
+      report_description: [
+        this.reportData.report_description,
+        Validators.required,
+      ],
     });
   }
 
@@ -60,19 +62,23 @@ export class EditReportComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.reportForm.valid){
-      this.Api.updateReport(this.reportForm.value, this.reportForm.value.id).subscribe({
-        next: (res) => {
-          alert('Report updated successfully!');
-          console.log(this.reportForm.value);
-          // this.matDialogRef.close('Update');
-          this.reportForm.reset();
-        },
-        error: () => {
-          alert('Error in updating records!');
-        },
-      });
-    }
-   
+    console.log(this.reportForm.value);
+
+    this.Api.updateReport(
+      this.reportForm.value,
+      this.reportForm.value.id
+    ).subscribe({
+      next: (res) => {
+        alert('Report updated successfully!');
+        this.dialogRef.close('update');
+        this.reportForm.reset();
+        
+      },
+      error: () => {
+        alert('Error in updating records!');
+      },
+    });
+    //   if (this.reportForm.valid){
+    // }
   }
 }

@@ -20,7 +20,7 @@ export class DialogComponent implements OnInit {
     private Api: OrganizationService,
     private matDialogRef: MatDialogRef<DialogComponent>
   ) {
-    console.log('Edit Data', editData);
+   // console.log('Edit Data', editData);
   }
 
   ngOnInit(): void {
@@ -62,16 +62,17 @@ export class DialogComponent implements OnInit {
   }
 
   addEmployee() {
-    // console.log(this.employeeForm.value);
+   
 
     if (!this.editData) {
       if (this.employeeForm.valid) {
         this.Api.create(this.employeeForm.value).subscribe({
           next: (res) => {
             alert('Employee Added Successfuly!');
-            // this.matDialogRef.close();
+            this.matDialogRef.close();
             // this.matDialogRef.close('Update');
             this.employeeForm.reset();
+            console.log(this.employeeForm.value);
           },
           // error: ()=>{
           //   alert("Error Occurred!")
@@ -84,12 +85,15 @@ export class DialogComponent implements OnInit {
   }
   updateEmployee() {
     console.log('employeeForm: ', this.employeeForm.value);
-    this.Api.update(this.employeeForm.value, this.employeeForm.value.id).subscribe({
+    this.Api.update(
+      this.employeeForm.value,
+      this.employeeForm.value.id
+    ).subscribe({
       next: (res) => {
-        alert('Employee Records Updated Successfully');
-        
-        // this.matDialogRef.close();
-       // this.employeeForm.reset();
+        alert('Updated Successfully');
+
+        this.matDialogRef.close();
+        this.employeeForm.reset();
       },
       error: (error) => {
         // alert('Error in Updating the Details');

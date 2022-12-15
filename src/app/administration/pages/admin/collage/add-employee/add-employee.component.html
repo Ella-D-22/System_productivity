@@ -1,4 +1,4 @@
-<!-- <mat-card>
+<mat-card>
 
     <div>
         <h1 mat-dialog-title>Add Employee</h1>
@@ -36,7 +36,7 @@
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
                 </mat-form-field>
-               <mat-form-field appearance="outline">
+                <!-- <mat-form-field appearance="outline">
             <mat-label>Employee Category</mat-label>
             <mat-select formControlName="category" placeholder="Employee category">
                 <mat-option value="Springboot">Springboot Developers</mat-option>
@@ -45,7 +45,7 @@
                 <mat-option value="Java">Java Developers</mat-option>
             </mat-select>
          </mat-form-field> -->
-<!-- <mat-form-field color="primary" appearance="outline">
+                <!-- <mat-form-field color="primary" appearance="outline">
             <mat-label>Employment Date</mat-label>
             <input formControlName="date" matInput [matDatepicker]="picker2">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -66,11 +66,11 @@
         <textarea formControlName="description" matInput></textarea>
      </mat-form-field> -->
 
-<!-- </form>
-<div mat-dialog-action [align]="'end'" class="example-button-row">
-    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
-    <button mat-raised-button color="primary" (click)="addEmployee()">{{actionButton}}</button>
-</div>
-</div>
-</div>
-</mat-card> -->
+            </form>
+            <div mat-dialog-action [align]="'end'" class="example-button-row">
+                <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+                <button mat-raised-button color="primary" (click)="addEmployee()">Save</button>
+            </div>
+        </div>
+    </div>
+</mat-card>

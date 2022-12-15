@@ -25,10 +25,11 @@
                                 <!-- <mat-datepicker #dp2></mat-datepicker> -->
                             </mat-form-field>
                         </div>
+
                     </div>
                     <!-- <br> -->
                     <div class="form-row ml-10 mb-1">
-                        <div class="col-6">
+                        <div class="col-4">
                             <mat-form-field appearance="fill">
                                 <mat-label> Department</mat-label>
                                 <mat-select formControlName="departmentEnum" placeholder="Department">
@@ -39,7 +40,18 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="col-6 mr-0">
+                        <div class="col-4">
+                            <mat-form-field appearance="fill">
+                                <mat-label> Product Name</mat-label>
+                                <mat-select formControlName="productNameEnum">
+                                    <mat-option value="PRODUCT_A">PRODUCT_A</mat-option>
+                                    <mat-option value="PRODUCT_B">PRODUCT_B</mat-option>
+                                    <mat-option value="PRODUCT_C">PRODUCT_C</mat-option>
+                                    <mat-option value="PRODUCT_D">PRODUCT_D</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
                             <mat-form-field appearance="fill">
                                 <mat-label>Category</mat-label>
                                 <mat-select formControlName="reportCategory" placeholder="Category">
@@ -108,12 +120,12 @@
                                 <input matInput placeholder="Description" formControlName="report_description" required />
                             </mat-form-field>
                         </div>
-                        <div class="col-10-auto">
+                        <!-- <div class="col-10-auto">
                             <mat-form-field appearance="fill">
                                 <mat-label>Updated by</mat-label>
                                 <input matInput placeholder="Updated By" formControlName="updatedBy" required />
                             </mat-form-field>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </form>

@@ -86,18 +86,27 @@ export class ViewReportsComponent implements OnInit {
         
       })
       .afterClosed()
-      .subscribe((val) => {});
+      .subscribe(val => {
+        console.log('close add-dialog');
+        this.reportForm = val;
+      });
   }
 
   viewReport(row: any) {
+    
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       data: row,
     };
     const dialogRef = this.dialog.open(EditReportComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed()
+    .subscribe(result => {
+      console.log('closed dialog');
+      this.reportForm = result;
+    });
+    
   }
   // deleteReport(id: number){
   //   this.Api.deleteReport(id)

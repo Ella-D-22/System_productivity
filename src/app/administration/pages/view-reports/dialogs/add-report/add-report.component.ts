@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrganizationService } from 'src/app/administration/Service/SystemConfigs/Organisation/organization.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ViewReportsComponent } from '../../view-reports.component';
 
 
 @Component({
@@ -11,10 +13,13 @@ import { OrganizationService } from 'src/app/administration/Service/SystemConfig
 export class AddReportComponent implements OnInit {
   reportForm: FormGroup;
   userNameArray: any[] = [];
+  
 
   constructor(
     private formBuilder: FormBuilder,
-    private Api: OrganizationService
+    private Api: OrganizationService,
+    public dialogRef: MatDialogRef<ViewReportsComponent>,
+    @Inject(MAT_DIALOG_DATA) data
   ) {}
 
   ngOnInit(): void {
@@ -23,14 +28,14 @@ export class AddReportComponent implements OnInit {
   }
   createReportForm() {
     this.reportForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: [''],
       creationDate: [new Date, Validators.required],
       departmentEnum: ['', Validators.required],
       reportCategory: ['', Validators.required],
       ticketId: ['', Validators.required],
       timeTaken: ['', Validators.required],
       clientNameEnum: ['', Validators.required],
-      productNameEnum: ['', Validators.required],
+       productNameEnum: ['', Validators.required],
       report_description: ['', Validators.required],
     });
   }
@@ -51,27 +56,22 @@ export class AddReportComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.reportForm.valid) {
-      this.Api.createReport(
-        this.reportForm.value,
-        this.reportForm.value.email)
-        .subscribe({
-         next: (res) => {
-          // this.router.navigate([`../view-reports`], {
-          //   queryParams: {
-          //     formData: this.fmData,
-          //     // this.updateReport(this.reportForm.value)
-          //   },
-          // });
-          alert('Report added successsfully!');
-          // this.matDialogRef.close('save');
-          // this.matDialogRef.close('Update');
-          this.reportForm.reset();
-        },
-        // error: () => {
-        //   alert('Error occurred!');
-        // },
-      });
-    }
+    console.log("this.reportForm.value: ",this.reportForm.value)
+
+    this.Api.createReport(
+      this.reportForm.value,
+      this.reportForm.value.email
+    ).subscribe({
+      next: (res) => {
+        
+        alert('Report added successsfully!');
+        this.dialogRef.close();
+        this.reportForm.reset();
+
+      }
+    });
+    // if (this.reportForm.valid) {
+     
+    // }
   }
 }
