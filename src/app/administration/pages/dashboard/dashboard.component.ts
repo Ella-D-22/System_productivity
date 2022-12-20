@@ -8,10 +8,10 @@ import * as Highcharts from 'highcharts';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  is_Director = false;
-is_Second_Level_prev =  false;
+  is_ADMIN = false;
+is_USER =  false;
   role: any;
-  is_Supervisor: any;
+  //is_Supervisor: any;
 
   constructor() { }
 
@@ -23,20 +23,20 @@ is_Second_Level_prev =  false;
 
   Authorize(){
     let currentUser = JSON.parse(sessionStorage.getItem('auth-user') || '{}');
-    this.role = currentUser.roles[0];
+    this.role = currentUser.roles[1];
 
     // First Level Authorization - Admin
-    if(this.role == "ROLE_DIRECTOR"){
-      this.is_Director = true;
+    if(this.role == "ADMIN_ROLE"){
+      this.is_ADMIN = true;
     }
     // Second Level AUthorization - Admin/HR
-    if(this.role == "ROLE_DIRECTOR" || this.role == "ROLE_HR"){
-      this.is_Second_Level_prev = true;
+    if(this.role == "USER_ROLE" || this.role == "ADMIN_ROLE"){
+      this.is_USER = true;
     }
     // Third Level AUthorization - Admin/HR/Supervisor
-    if(this.role == "ROLE_SUPERVISOR"){
-      this.is_Supervisor = true;
-    }
+    // if(this.role == "ROLE_SUPERVISOR"){
+    //   this.is_Supervisor = true;
+    // }
     }
 
 

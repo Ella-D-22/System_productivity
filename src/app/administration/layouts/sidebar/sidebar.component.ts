@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,15 +8,16 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-is_Director = true;
-is_Second_Level_prev =  true;
+  is_ADMIN = true;
+  is_USER =  true;
   role: any;
 
   constructor(
     private dialog: MatDialog) {
 
     let currentUser = JSON.parse(sessionStorage.getItem('auth-user') || '{}');
-    console.log("user", currentUser)
+    //console.log(ProfileComponent)
+    
     this.username = currentUser.username
     this.email = currentUser.email
   }
@@ -33,15 +35,15 @@ email: any;
   //this.role = currentUser.roles[0];
 
   // First Level Authorization - Admin
-  if(this.role == "ROLE_DIRECTOR"){
-    this.is_Director = true;
+  if(this.role == "ADMIN_ROLE"){
+    this.is_ADMIN = true;
   }
   // Second Level AUthorization - Admin/HR
-  if(this.role == "ROLE_DIRECTOR" || this.role == "ROLE_HR"){
-    this.is_Second_Level_prev = true;
+  if(this.role == "USER_ROLE" || this.role == "ADMIN_ROLE"){
+    this.is_USER = true;
   }
-  if(this.role == "ROLE_ADMIN"){
-    this.is_Second_Level_prev = true;
+  if(this.role == "ADMIN_ROLE"){
+    this.is_USER = true;
   }
   // Third Level AUthorization - Admin/HR/Supervisor
 

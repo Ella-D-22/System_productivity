@@ -11,7 +11,7 @@ export class CanActivateModuleGuard implements CanActivate {
     constructor(
         private router: Router,
         private _snackBar: MatSnackBar,
-        private authServie: AuthService
+        private authService: AuthService
     ) { }
 
     canActivate(){

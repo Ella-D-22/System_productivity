@@ -58,7 +58,7 @@ emData: any;
   }
 
   getAllEmployees() {
-    this.api.get();
+    //this.api.get();
 
     this.api.get().subscribe({
       next: (res) => {

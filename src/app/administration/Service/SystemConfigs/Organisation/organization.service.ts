@@ -10,8 +10,9 @@ import { environment } from 'src/environments/environment';
 export class OrganizationService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  // baseURL2 = "http://52.15.152.26:9100/api/v1/organization";
+  //baseURL2 = `${environment.logAPI}`;
    baseURL = `${environment.empAPI}`;
+   //baseURL3 = `${environment.signAPI}`;
 
   constructor(private http: HttpClient) { }
 
@@ -117,3 +118,15 @@ export class OrganizationService {
     )
   }
 }
+
+//login and sign up
+//create-account
+// createAccount(data: any, userId: any): Observable<any> {
+//   let API_URL = `${this.baseURL2}`;
+//   return this.http.post(API_URL,data, { headers: this.headers, withCredentials: false }).pipe(
+//     map((res) => {
+//       return res || {};
+//     }),
+//     catchError(this.errorMgmt)
+//   );
+// }

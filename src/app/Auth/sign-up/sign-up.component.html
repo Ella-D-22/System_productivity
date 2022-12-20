@@ -10,11 +10,12 @@
             </div>
 
             <div class="right-info col-md-6">
-                <span *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar
-        ></span>
+                <span *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></span>
                 <div class="card-header">
                     <div class="">
-                        <span><h1>Sign-in</h1></span>
+                        <span>
+                            <h1>Sign-up</h1>
+                        </span>
                     </div>
                     <div class="profile-card">
                         <img src="../../../assets/EMtech.jpeg" />
@@ -22,13 +23,25 @@
                     <!--end of header-->
                 </div>
                 <div class="card-body">
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="signForm" (ngSubmit)="onSubmit()">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                                 <div *ngIf="f.username.errors.required">
                                     Username is required
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">
+                                    Email is required
                                 </div>
                             </div>
                         </div>
@@ -43,19 +56,18 @@
                             </div>
                         </div>
                         <br />
+
+
                         <button [disabled]="loading" class="btn btn-primary" type="submit">
-              Login
-            </button>
+                            Submit
+                        </button>
                         <br />
+
                         <br />
-                        <a class="pull-left" href="Reset_Password">Forgot Password?</a
-            ><br />
-            <br />
-                        <a class="pull-left" href="sign-up">Create an Account?</a
-            >
-          </form>
+                        <a class="pull-left" (click)="gotoLogIn()" href="login">Already have an Account?</a>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </mat-card>
+    </mat-card>
 </div>

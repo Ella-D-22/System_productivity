@@ -18,7 +18,7 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   static getToken() {
-      throw new Error("Method not implemented.");
+      //throw new Error("Method not implemented.");
   }
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;

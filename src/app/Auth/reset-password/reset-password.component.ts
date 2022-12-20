@@ -69,7 +69,7 @@ this.params = new HttpParams()
 .set('email', this.f.email.value)
 .set('password', password);
 
-let API_URL = `${environment.userAPI}/api/auth/password/reset/`;
+let API_URL = `${environment.empAPI}/api/auth/password/reset/`;
 return this.http.put(API_URL,{},{params: this.params, headers: this.headers, withCredentials: false }).subscribe(results  => {
 this.loading = false;
             this._snackBar.open("Password Reset Successfully  Check your submited Email!", "X", {

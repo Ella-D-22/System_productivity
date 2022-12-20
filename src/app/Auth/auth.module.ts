@@ -13,6 +13,7 @@ import { NewPasswordComponent } from './new-password/new-password.component';
 import { AuthenticatedComponent } from './authenticated/authenticated.component';
 import { MaterialModule } from '../material.module';
 import { OtpComponent } from './otp/otp.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { OtpComponent } from './otp/otp.component';
     ResetPasswordComponent,
     NewPasswordComponent,
     AuthenticatedComponent,
-    OtpComponent],
+    OtpComponent,
+    SignUpComponent],
   imports: [
     CommonModule,
     FormsModule,

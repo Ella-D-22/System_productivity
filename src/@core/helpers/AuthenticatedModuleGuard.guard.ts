@@ -2,6 +2,7 @@ import { CanLoad, Route, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { AuthService } from '../AuthService/auth.service';
+import { User } from '../Models/user/user.model';
 @Injectable()
 export class AuthenticatedModuleGuard implements CanLoad {
   routeRole: any;

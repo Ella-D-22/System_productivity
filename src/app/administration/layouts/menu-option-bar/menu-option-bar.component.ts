@@ -79,7 +79,7 @@ export class MenuOptionBarComponent implements OnInit {
     this.event_type =  this.f.event_type.value;
     this.event_id =  this.f.event_id.value;
     // this.dialogRef.close({ event: 'close', data:this.formData.value });
-    this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/'+this.function_type_data+'/'+this.event_type+'/'+this.event_id));
+    //this.ngZone.run(() => this.router.navigateByUrl('system/event_id_module/'+this.function_type_data+'/'+this.event_type+'/'+this.event_id));
 
     // event_id_module/:function_type/:event_type/:event_id
     // console.log("function_type Type", function_type_type)
@@ -102,7 +102,8 @@ export class MenuOptionBarComponent implements OnInit {
     //   this.ngZone.run(() => this.router.navigateByUrl('system/event_id'));
 
     // }
-  }else{
+  }
+  else{
     this.loading = false;
     this._snackBar.open("Invalid Form Data", "Try again!", {
       horizontalPosition: this.horizontalPosition,
